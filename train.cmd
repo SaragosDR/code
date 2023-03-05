@@ -25,7 +25,7 @@ var undead3 shambling frostcrone|skeletal kobold headhunter|skeletal kobold sava
 var undead4 tress|spirit|ur hhrki'izh|telga orek|wir dinego|zombie(?!\s)|zombie (head-splitter|mauler|nomad|stomper)
 
 var skinnablemonsters1 angiswaerd hatchling|antelope|arbelog|armadillo|armored warklin|arzumo|asaren celpeze|badger|barghest|basilisk|\bbear\b|beisswurm|bison|black ape|blademaster
-var skinnablemonsters2 blight ogre|blood warrior|\bboa\b|\bboar\b|bobcat|boobrie|brocket deer|burrower|caiman|caracal|carcal|cave troll
+var skinnablemonsters2 blight ogre|blood warrior|bloodfish|\bboa\b|\bboar\b|bobcat|boobrie|brocket deer|burrower|caiman|caracal|carcal|cave troll
 var skinnablemonsters3 cinder beast|cougar|\bcrab\b|crayfish|crocodile|\bdeer\b|dobek moruryn|faenrae stalker|firecat|\bfrog\b|giant blight bat
 var skinnablemonsters4 goblin|grass eel|\bgrub\b|gryphon|Isundjen conjurer|jackal|kartais|kashika serpent|kobold|la'heke|larva|la'tami|leucro
 var skinnablemonsters5 marbled angiswaerd|merrows|\bmoda\b|\bmoth\b|mottled westanuryn|musk hog|\bpard\b|peccary|piruati serpent|pivuh|poloh'izh|pothanit|prereni|\bram\b
@@ -57,7 +57,7 @@ var critters %skinnablecritters|%nonskinnablecritters|%invasioncritters|%allcons
 ##LOOT Variables
 var scrolls scroll|ostracon|roll|leaf|vellum|tablet|parchment|bark|papyrus
 var treasuremaps \bmap\b
-var gems1 agate|alexandrite|amber|amethyst|andalusite|aquamarine|bead|beryl|bloodgem|bloodstone|carnelian|chrysoberyl|carnelian|chalcedony
+var gems1 agate|alexandrite|amber|ambergris|amethyst|andalusite|aquamarine|bead|beryl|bloodgem|bloodstone|carnelian|chrysoberyl|carnelian|chalcedony
 var gems2 chrysoberyl|chrysoprase|citrine|coral|crystal|diamond|diopside|emerald|egg|eggcase|garnet|gem|goldstone|glossy malachite
 var gems3 (chunk of|some|piece of).*granite|hematite|iolite|ivory|jade|jasper|kunzite|lapis lazuli|malachite stone|minerals|moonstone|morganite|onyx
 var gems4 opal|pearl|pebble|peridot|quartz|ruby|sapphire|spinel|star-stone|(waermodi|lasmodi|sjatmal|lantholite) stones|sunstone|talon|tanzanite|tooth|topaz|tourmaline|tsavorite|turquoise|zircon
@@ -403,7 +403,7 @@ ALERTINIT:
     action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: Announcement when (^System Announcement:.*)
     
   }
-  if %scriptalerts = "YES" then
+  if %paranoiatalerts = "YES" then
   {
     action put #beep;put #echo %alertwindow Yellow Alarm: Script when (([^\Wa-z0-9]\s){2,})
     action put #beep;put #echo %alertwindow Yellow Alarm: Script when (\b[^\Wa-z0-9]{2,}\b)(?<!(TO|PIRP|SKILL|EXP|HELP|STOP|PULL|LISTENING|BANNGG|STOW|HR|INVENTORY|APPRAISE|POP|FACE))
@@ -488,7 +488,7 @@ ALERTINIT:
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Spell failed due to backlash. when The spell pattern resists the influx of .* mana and fails completely\.
     #The spell pattern resists the influx of Life mana, and a strange burning sensation backwashes from the spell pattern into your body.
   }  
-  if $guild = "Thief" then
+  if "$guild" = "Thief" then
   {
     if ((%bugout = "YES") && (%scriptmode = 1)) then
     {
@@ -534,16 +534,17 @@ ALERTINIT:
 
 
 GUILDVARLOAD:
-  if $guild = "Barbarian" then gosub BARBARIANONLY
-  if $guild = "Bard" then gosub BARDONLY
-  if $guild = "Cleric" then gosub CLERICONLY
-  if $guild = "Empath" then gosub EMPATHONLY
-  if $guild = "Thief" then gosub THIEFONLY
-  if $guild = "Moon Mage" then gosub MOONMAGEONLY
-  if $guild = "Necromancer" then gosub NECROONLY
-  if $guild = "Paladin" then gosub PALADINONLY
-  if $guild = "Ranger" then gosub RANGERONLY
-  if $guild = "Warrior Mage" then gosub WARMAGEONLY
+  if "$guild" = "Barbarian" then gosub BARBARIANONLY
+  if "$guild" = "Bard" then gosub BARDONLY
+  if "$guild" = "Cleric" then gosub CLERICONLY
+  if "$guild" = "Empath" then gosub EMPATHONLY
+  if "$guild" = "Thief" then gosub THIEFONLY
+  if "$guild" = "Moon Mage" then gosub MOONMAGEONLY
+  if "$guild" = "Necromancer" then gosub NECROONLY
+  if "$guild" = "Paladin" then gosub PALADINONLY
+  if "$guild" = "Ranger" then gosub RANGERONLY
+  if "$guild" = "Trader" then gosub TRADERONLY
+  if "$guild" = "Warrior Mage" then gosub WARMAGEONLY
   return
 
 COMMANDPARSE:
@@ -1398,7 +1399,7 @@ NECROONLY:
   var siphonvitaddmana $m%varsetsiphonvitaddmana
   var siphonvitnum $m%varsetsiphonvitnum
   
-  if $guild = "Necromancer" then
+  if "$guild" = "Necromancer" then
   {
     if %necrosafety = "YES" then
     {
@@ -1421,9 +1422,12 @@ PALADINONLY:
   return
 
 RANGERONLY:
+  var pounce $m%varsetpounce
   var snipe $m%varsetsnipe
   var dualload $m%varsetdualload
   var ritstype $m%varsetritstype
+  
+  var nextpounce 0
   return
 
 THIEFONLY: 
@@ -1466,6 +1470,10 @@ THIEFONLY:
   var burglekhrislight $m%varsetburglekhrislight
   return
 
+TRADERONLY:
+  var invest $m%varsetinvest
+  return
+
 WARMAGEONLY:
   var ignitebackup $m%varsetignitebackup
   var summoning $m%varsetsummoning
@@ -1499,15 +1507,15 @@ WARMAGEONLY:
   return
 
 MAGICVARLOAD:
-  if (($guild = "Thief") || ($guild = "Barbarian")) then
+  if (("$guild" = "Thief") || ("$guild" = "Barbarian")) then
   {
     #NMU_SETUP
-    if $guild = "Thief" then
+    if "$guild" = "Thief" then
     {
       if %scriptmode != 2 then gosub KHRIVARRESET
       gosub KHRIVARS
     }
-    if $guild = "Barbarian" then gosub BARBVARRESET  
+    if "$guild" = "Barbarian" then gosub BARBVARRESET  
   }
   else
   {
@@ -1616,11 +1624,11 @@ MAINHELP:
 	echo TRAIN CLIMB <object> - Trains climb practice as well as any set noncombat skills.
 	echo TRAIN RESEARCH <research type> - Performs spell research.  If a modifier is used, it will research only that type.  If not, it will go by variables.
 	echo TRAIN FOCUS - Performs an appraisal focus and trains skills that can be done at the same time.
-	if $guild = "Cleric" then echo TRAIN DEVOTION - Builds devotion.
+	if "$guild" = "Cleric" then echo TRAIN DEVOTION - Builds devotion.
 	echo
 	echo TRAIN BUFF <minutes> - Casting personal buffs only.  Spells with durations remaining below <minutes> will be recast.
   echo TRAIN GBUFF	- Casting group buffs only.
-  #if $guild = "Cleric" then echo TRAIN OMBUFF - Casts OM and casts buffs inside it.
+  #if "$guild" = "Cleric" then echo TRAIN OMBUFF - Casts OM and casts buffs inside it.
 	echo
   echo TRAIN UPKEEPTEST - Runs the AutoUpkeep route for testing purposes.
   echo TRAIN BUGOUTTEST - Runs the Bugout route for testing purposes.
@@ -1696,6 +1704,7 @@ STATUSVARLOAD:
   var nextejournal 0
   var nexthealcheck 0
   var nexthunt 0
+  var nextinvest 0
   var nextlockbox 0
   var nextlootcyc 0
   var nextlootmanip 0
@@ -1831,7 +1840,6 @@ STATUSVARLOAD:
   var firstawake 1
   var firstclean 0
   var firstcommsense 1
-  var firstfindroom 1
   var firstlocksmith 1
   var firstperc 1
   var firstmanip 1
@@ -1935,17 +1943,17 @@ MAINVARLOAD:
   var bugoutonbleed $m%varsetbugoutonbleed
   var bugoutroom $m%varsetbugoutroom
   var autoupkeep $m%varsetautoupkeep
-  var aumoveclenchshard $m%varsetaumoveclenchshard
-  var aumovewhistle $m%varsetaumovewhistle
+  var moveclenchshard $m%varsetmoveclenchshard
+  var movewhistle $m%varsetmovewhistle
   var movescream $m%varsetmovescream
-  var aumovevanish $m%varsetaumovevanish
-  var aupreset $m%varsetaupreset
-  var auzone $m%varsetauzone
-  var autravel $m%varsetautravel 
-  var autraveldest $m%varsetautraveldest
-  var aumove $m%varsetaumove
-  var aumovelist $m%varsetaumovelist
-  var autargetroom $m%varsetautargetroom
+  var movevanish $m%varsetmovevanish
+  var upkeeppreset $m%varsetupkeeppreset
+  var upkeepzone $m%varsetupkeepzone
+  var upkeeptravel $m%varsetupkeeptravel 
+  var upkeeptraveldest $m%varsetupkeeptraveldest
+  var upkeepmove $m%varsetupkeepmove
+  var upkeepmovelist $m%varsetupkeepmovelist
+  var upkeeptargetroom $m%varsetupkeeptargetroom
   var premiumring $m%varsetpremiumring
   var premiumringitem $m%varsetpremiumringitem
   
@@ -2544,7 +2552,7 @@ MAINVARLOAD:
   var pvpalerts $pvpalerts
   var pvpstealthalerts $pvpstealthalerts
   var inventoryalerts $inventoryalerts
-  var scriptalerts $scriptalerts
+  var paranoiaalerts $paranoiaalerts
   return
 
 MULTIVARLOAD:
@@ -2606,6 +2614,7 @@ SPELLIDENT:
   if %spellname = "bg" then var spellvar SpellTimer.BlufmorGaraen
   if %spellname = "blur" then var spellvar SpellTimer.Blur
   if %spellname = "bue" then var spellvar SpellTimer.ButchersEye
+  if %spellname = "care" then var spellvar SpellTimer.CaressoftheSun
   if %spellname = "centering" then var spellvar SpellTimer.Centering
   if %spellname = "ch" then var spellvar SpellTimer.CalcifiedHide
   if %spellname = "clarity" then var spellvar SpellTimer.Clarity
@@ -2747,7 +2756,6 @@ CYCTMDBVARS:
   if %spellctm = "sa" then var spellc4var SpellTimer.SoulAttrition
   if %spellctm = "sls" then var spellc4var SpellTimer.StarlightSphere
   if %spellctm = "usol" then var spellc4var SpellTimer.UniversalSolvent
-  if %spellcdb = "aewo" then var spellc5var SpellTimer.AetherWolves
   if %spellcdb = "alb" then var spellc5var SpellTimer.AlbredasBalm
   if %spellcdb = "dalu" then var spellc5var SpellTimer.DamarisLullaby
   if %spellcdb = "dema" then var spellc5var SpellTimer.DesertsMaelstrom
@@ -2805,7 +2813,7 @@ COMBATLOOP:
   }
   if %firstperc = 1 then
   {
-    if $guild = "Moon Mage" then
+    if "$guild" = "Moon Mage" then
     {
       var mmnextperc %t
       math mmnextperc add 300
@@ -2813,10 +2821,10 @@ COMBATLOOP:
     var firstperc 0
     gosub PERCSELF
   }
-  
+  #RELEASE_MANA_SPELLS
   if %firstrel = 1 then
   {
-    if (($guild = "Thief") || ($guild = "Barbarian")) then
+    if (("$guild" = "Thief") || ("$guild" = "Barbarian")) then
     else
     {  
       if %spell = "YES" then
@@ -2839,6 +2847,7 @@ COMBATLOOP:
     }
     var firstrel 0
   }
+  #AWAKE_AND_RPAS
   if %firstawake = 1 then
   {
     gosub AWAKE
@@ -2849,12 +2858,11 @@ COMBATLOOP:
     action (rpa) off
   }
   #LOCATION_VERIFICATION
-  if %firstfindroom = 1 then
-  { 
+  if (("$zoneid" != "%zone") || (!contains("|%findroomlist|", "|$roomid|"))) then
+  {
     gosub ROOMTRAVELCOMBAT
-    var firstfindroom 0
+    gosub STATUSCHECK
   }
-  gosub STATUSCHECK
   #MOVETRAIN
   if %noncombat = "YES" then
   {
@@ -2918,7 +2926,7 @@ COMBATLOOP:
     gosub STATUSCHECK
   }
   #DOMAIN
-  if (($guild = "Warrior Mage") && (%domain = "YES")) then
+  if (("$guild" = "Warrior Mage") && (%domain = "YES")) then
   {
     echo DomainActive: %domainactive
     if %domainactive = 1 then echo DomainActiveType: %domainactivetype
@@ -2932,7 +2940,7 @@ COMBATLOOP:
   #MANIPULATE
   if %manipulate = "YES" then
   {
-    if $guild = "Empath" then
+    if "$guild" = "Empath" then
     {
       gosub MANIPLOGIC
       gosub STATUSCHECK
@@ -2968,19 +2976,22 @@ COMBATLOOP:
       gosub STATUSCHECK
     }
   }
-  if (($guild = "Paladin") && (%stealth = "YES")) then
+  if (("$guild" = "Paladin") && (%stealth = "YES")) then
   {
     gosub NVSTEALTHLOGIC
     gosub STATUSCHECK
   }
+  ######
+  ##GUILD_SKILLS
+  ######
   #PERCEIVE_HEALTH
-  if %perchealth = "YES" then
+  if (("$guild" = "Empath") && ("%perchealth" = "YES")) then
   {
     gosub PERCHEALTHLOGIC
     gosub STATUSCHECK
   }
   #ASTROLOGY
-  if %astro = YES then
+  if (("$guild" = "Moon Mage") && ("%astro" = "YES")) then
   {
     gosub ASTROLOGIC
     gosub STATUSCHECK
@@ -2997,7 +3008,7 @@ COMBATLOOP:
       math nextwarhorn add 240
     }
   }
- 	if $guild = "Paladin" then
+ 	if ("$guild" = "Paladin") then
   {
  	  #PILGRIMBADGE
     if %pilgrimbadge = YES then
@@ -3012,7 +3023,7 @@ COMBATLOOP:
       gosub STATUSCHECK
     }
  	}
- 	if (($guild = "Cleric") && (%theurgy = "YES")) then
+ 	if (("$guild" = "Cleric") && ("%theurgy" = "YES")) then
  	{
  	  #COMMUNE_DETECTION
  	  if ((%meraudcommune = "YES") || (%elunedcommune = "YES") || (%tamsinecommune = "YES")) then
@@ -3079,40 +3090,38 @@ COMBATLOOP:
       gosub STATUSCHECK
     }
   }
-  #BARDIC_LORE
-  if %whistlepiercing = "YES" then
+  #TRADING
+  if (($guild = "Ranger") && ("%pounce" = "YES")) then
   {
-    if $guild = "Bard" then gosub WHISTLELOGIC
+    gosub POUNCELOGIC
+  }
+  #TRADING
+  if (($guild = "Trader") && ("%invest" = "YES")) then
+  {
+    gosub INVESTLOGIC
+  }
+  #BARDIC_LORE
+  if (($guild = "Bard") && ("%whistlepiercing" = "YES")) then
+  {
+    gosub WHISTLELOGIC
     gosub STATUSCHECK
   }
   #HUNTING
 	if %hunting = "YES" then
 	{
-	  if ((%usingtactics != 1) && (%usingexpert != 1)) then
-	  {
-	    gosub HUNTLOGIC
-	  }
+	  gosub HUNTLOGIC
 	  gosub STATUSCHECK
   }
   #RECALL
   if %recall = "YES" then
   {
-    if ((%usingtactics != 1) && (%usingexpert != 1)) then
-	  {
-	    gosub RECALLLOGIC
-	    gosub STATUSCHECK
-	  }
+    gosub RECALLLOGIC
+    gosub STATUSCHECK
   }
   #APPRAISAL
 	if %appraise = "YES" then
 	{
-	  if %buffing = 0 then
-    {
-      if ((%usingtactics != 1) && (%usingexpert != 1)) then
-      {
-        gosub APPLOGIC
-      }
-	  }
+    gosub APPLOGIC
 	  gosub STATUSCHECK
   }
   #WINDBOARD
@@ -3550,7 +3559,7 @@ UPKEEPLOGIC:
   #GEMPOUCH_SELLING
   if ("%gemsell" = "YES") then
   {
-    if ("$guild" = "Trader") then
+    if ($guild = "Trader") then
     {
       if (%appraiser != "none") then
       {
@@ -3714,7 +3723,7 @@ UPKEEPLOGIC:
   }
   if ((%exchange = "YES") && (%hasbank = 1)) then var outputtext %outputtext, exchanged extra cash
   if ((%minmoney > 0) && (%hasbank = 1)) then var outputtext %outputtext, deposited cash, kept MinMoney
-  if (($guild = "Paladin") && (%tithe = "YES") && (%almsbox = 1)) then
+  if (("$guild" = "Paladin") && (%tithe = "YES") && (%almsbox = 1)) then
   {
     if %tithesuccess = 1 then var outputtext %outputtext, successfully tithed
     else var outputtext %outputtext, unable to tithe
@@ -4078,7 +4087,9 @@ UPKEEPSET:
 
 AUTOUPKEEPLOGIC:
   var goupkeep 0
+  var upkeepactive 1
   #MESSAGING
+  put #echo Yellow AUType: %autype
   if ("%autype" = "health") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to low health.
   if ("%autype" = "burden") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to burden of %encumbrance.
   if ("%autype" = "bleed") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to bleeding.
@@ -4150,16 +4161,17 @@ AUTOUPKEEPLOGIC:
   put #echo %alertwindow [UPKEEP]: Returned to combat from AutoUpkeep.
   gosub AWAKE
   if %rpastatus = 0 then gosub RPATOGGLE
+  var upkeepactive 0
   return
 
 AUGO:
   gosub LEAVEROOM
-  var rtzone %auzone
-  var rttravel %autravel
-  var rttraveldest %autraveldest
-  var rtmove %aumove
-  var rtmovelist %aumovelist
-  var rttargetroom %autargetroom
+  var rtzone %upkeepzone
+  var rttravel %upkeeptravel
+  var rttraveldest %upkeeptraveldest
+  var rtmove %upkeepmove
+  var rtmovelist %upkeepmovelist
+  var rttargetroom %upkeeptargetroom
   var rtfindroom NO
   gosub ROOMTRAVEL
   return
@@ -5107,8 +5119,8 @@ PERFORMLOOP:
   {
     if ((%needscleaning = 1) || (%firstclean = 0)) then
     {
-      put #echo Yellow needscleaning: %needscleaning    firstclean: %firstclean
-      put #echo Yellow Playing: %playing
+      #put #echo Yellow needscleaning: %needscleaning    firstclean: %firstclean
+      #put #echo Yellow Playing: %playing
       if %playing = 0 then
       {
         gosub INSTMAINTAIN
@@ -5355,6 +5367,8 @@ APPFOCUSBAD:
 
 
 APPLOGIC:
+  if (%buffing = 1) then return
+  if ((%usingtactics = 1) || (%usingexpert = 1)) then return
   if (%noncomdelay = "YES") then
   {
     if %evenleastnum < 7 then return
@@ -5404,7 +5418,7 @@ ASSESSLOGIC:
   return
 
 ASTROLOGIC:
-  if $guild != "Moon Mage" then return
+  if "$guild" != "Moon Mage" then return
   if %t < %nextastro then return
   if $Astrology.Ranks = 1750 then return
   if (($SpellTimer.PiercingGaze.active != 1) || ($SpellTimer.PiercingGaze.duration < 3)) then return
@@ -5458,7 +5472,7 @@ ATTUNELOGIC:
   #echo t: %t
   if %t >= %nextperc then
   {
-    if $guild = "Moon Mage" then 
+    if "$guild" = "Moon Mage" then 
     {
       #if %t > %mmnextperc then
       #{
@@ -5524,9 +5538,9 @@ BURGLELOGIC:
   if %justice != 1 then goto BURGLEEND
   gosub STOWALL
   gosub STOWFEET
-  if $guild = "Thief" then gosub BURGLEKHRI
-  if $guild = "Moon Mage" then gosub BURGLERFCAST
-  if $guild = "Necromancer" then gosub BURGLEEOTBCAST
+  if "$guild" = "Thief" then gosub BURGLEKHRI
+  if "$guild" = "Moon Mage" then gosub BURGLERFCAST
+  if "$guild" = "Necromancer" then gosub BURGLEEOTBCAST
   gosub BURGLETOOLGET
   gosub BURGLEGUARDCHECK
   if %scriptmode = 4 then gosub UPKEEPSET
@@ -5567,7 +5581,7 @@ BURGLEPAWN:
   else return
   
 BURGLEEND:
-	if $guild = "Thief" then gosub BURGLEKHRISTOP
+	if "$guild" = "Thief" then gosub BURGLEKHRISTOP
   if %justice != 1 then
   {
     put #echo %alertwindow [Burgle]: Unable to burgle, not in a justice zone.
@@ -6189,6 +6203,7 @@ TARANTULALOGIC:
 
   
 HUNTLOGIC:
+  if ((%usingtactics = 1) || (%usingexpert = 1)) then return
   if $Perception.LearningRate > 32 then var perclock 1
   if $Perception.LearningRate < 20 then var perclock 0
   if $Perception.Ranks = 1750 then var perclock 1
@@ -6435,7 +6450,7 @@ PERFORMLOGIC:
   return
 
 DEVOTIONLOGIC:
-  if (($guild = "Cleric") && (%theurgy = "YES")) then
+  if (("$guild" = "Cleric") && (%theurgy = "YES")) then
  	{
  	  #COMMUNE_DETECTION
  	  if ((%meraudcommune = "YES") || (%elunedcommune = "YES") || (%tamsinecommune = "YES")) then
@@ -6506,7 +6521,7 @@ PRAYLOGIC:
   return
   
 BADGELOGIC:
-  if (($guild = "Cleric") || ($guild = "Paladin")) then
+  if (("$guild" = "Cleric") || ("$guild" = "Paladin")) then
   {
     if %t >= %nextbadge then
     {
@@ -6516,8 +6531,8 @@ BADGELOGIC:
         gosub PRAYBADGE
         gosub STOWITEM %pilgrimbadgeitem
         var nextbadge %t
-        if $guild = "Paladin" then math nextbadge add 1900
-        if $guild = "Cleric" then math nextbadge add 3660
+        if "$guild" = "Paladin" then math nextbadge add 1900
+        if "$guild" = "Cleric" then math nextbadge add 3660
         put #echo %alertwindow Used pilgrim badge.
       }
     }
@@ -6525,7 +6540,7 @@ BADGELOGIC:
   return
 
 PINLOGIC:
-  if (($guild = "Cleric") || ($guild = "Paladin")) then
+  if (("$guild" = "Cleric") || ("$guild" = "Paladin")) then
   {
     if %t > %nextpin then
     {
@@ -6808,6 +6823,7 @@ DANCELOGIC:
   return
 
 RECALLLOGIC:
+  if ((%usingtactics = 1) || (%usingexpert = 1)) then return
   if (%t >= %nextrecall) then
   {
     if $Scholarship.LearningRate > 33 then var scholarlock 1
@@ -6819,6 +6835,28 @@ RECALLLOGIC:
       math nextrecall set %t
 	    math nextrecall add 1510
     }
+  }
+  return
+
+POUNCELOGIC:
+  if (%t >= %nextpounce) then
+  {
+    gosub MONSTERARRAY
+    if !matchre("%monsterarray", "%critters") then return
+    gosub POUNCE
+    var nextpounce %t
+    math nextpounce add 120
+  }
+  return
+
+INVESTLOGIC:
+  if (%t >= %nextinvest) then
+  {
+    gosub GETITEM tessera
+    gosub INVEST
+    gosub STOWITEM tessera
+    var nextinvest %t
+    math nextinvest add 1200
   }
   return
 
@@ -7040,10 +7078,11 @@ RESEARCHING:
 	matchwait
 	
 MAINSPELLLOGIC:
+  if (("$guild" = "Barbarian") || ("$guild" = "Thief")) then return
   if %playing = 1 then return
   if %t < %nextcast then return
   if %combatperforming = 1 then return
-  if ((%necrosafety = "YES") && ($guild = "Necromancer")) then
+  if ((%necrosafety = "YES") && ("$guild" = "Necromancer")) then
   {
     gosub NSAFETYCHECK
     if %necrogood != 1 then return
@@ -7112,7 +7151,7 @@ MAINSPELLLOGIC:
   if %casting != 1 then
   {
     #SELF_HEALING
-    if $guild = "Empath" then
+    if "$guild" = "Empath" then
     {
       if %curedisease = "YES" then
       {
@@ -7188,7 +7227,7 @@ MAINSPELLLOGIC:
       }
     }
     #SIPHON_VITALITY
-    if ((%siphonvit = "YES" && ($guild = "Necromancer") && (%buffingonly != 1) && ($monstercount > 0)) then
+    if ((%siphonvit = "YES" && ("$guild" = "Necromancer") && (%buffingonly != 1) && ($monstercount > 0)) then
     {
       if %necrostate != "redeemed" then
       {
@@ -7227,7 +7266,7 @@ MAINSPELLLOGIC:
       if %casting = 1 then return
     }
     #REDEEMED_SV
-    if ((%siphonvit = "YES" && ($guild = "Necromancer") && (%buffingonly != 1) && ($monstercount > 0)) then
+    if ((%siphonvit = "YES" && ("$guild" = "Necromancer") && (%buffingonly != 1) && ($monstercount > 0)) then
     {
       if %necrostate = "redeemed" then
       {
@@ -7276,7 +7315,7 @@ MAINSPELLLOGIC:
       }
     }
     #ICUTU_ZAHARENLA
-    if ((%iztouch = "YES") && ($guild = "Empath") && (%buffingonly != 1) && ($monstercount > 0)) then
+    if ((%iztouch = "YES") && ("$guild" = "Empath") && (%buffingonly != 1) && ($monstercount > 0)) then
     {
       if $SpellTimer.IcutuZaharenela.active != 1 then
       {
@@ -8095,7 +8134,7 @@ SPELLVARRESET:
     var resetcount 1
     gosub SPELLVARRESETLOOP
     #OTHER_SPELLS_THAT_MIGHT_NEED_RESETTING
-    if $guild = "Bard" then
+    if "$guild" = "Bard" then
     {
       if %eilliescry = "YES" then
       {
@@ -8108,7 +8147,7 @@ SPELLVARRESET:
         put #var SpellTimer.Misdirection.duration 0
       }
     } 
-    if $guild = "Cleric" then
+    if "$guild" = "Cleric" then
     {
       if %osrelmeraud = "YES" then
       {
@@ -8116,7 +8155,7 @@ SPELLVARRESET:
         put #var SpellTimer.OsrelMeraud.duration 0
       }
     }
-    if $guild = "Empath" then
+    if "$guild" = "Empath" then
     {
       if %absolution = "YES" then
       {
@@ -8139,12 +8178,12 @@ SPELLVARRESET:
         put #var SpellTimer.IcutuZaharenela.duration 0
       }
     }
-    if $guild = "Moon Mage" then
+    if "$guild" = "Moon Mage" then
     {
       put #var SpellTimer.PiercingGaze.active 0
       put #var SpellTimer.PiercingGaze.duration 0
     }
-    if $guild = "Necromancer" then
+    if "$guild" = "Necromancer" then
     {
       if %riteofgrace = "YES" then
       {
@@ -8260,7 +8299,7 @@ SUMMWEAPONLOGIC:
 
 
 PATHWAYLOGIC:  
-  if $guild != "Warrior Mage" then return
+  if "$guild" != "Warrior Mage" then return
   if %elecharge = -1 then
   {
     gosub PATHSENSE
@@ -8336,16 +8375,19 @@ NONCOMBATLOGIC:
 			var movetrainactive 1
 			if (%killbeforeleave = -1) then
 			{
-				var killbeforeleave 0
-				put #echo %alertwindow Waiting for kill before leaving for NonCombat.
+			  gosub MONSTERARRAY
+        if !matchre("%monsterarray", "%critters") then var killbeforeleave 1
+        else
+        {
+				  var killbeforeleave 0
+				  put #echo %alertwindow Waiting for kill before leaving for NonCombat.
+			  }
 			}
 			var movetrainperformactive 1
 		}
 	}
 	if %burgle = "YES" then
 	{
-		#echo t: %t
-		#echo nextburgle: %nextburgle
 		if %t >= %nextburgle then
 		{
 			gosub BURGLERECALL
@@ -8354,8 +8396,13 @@ NONCOMBATLOGIC:
 				var movetrainactive 1
 				if (%killbeforeleave = -1) then
 				{
-				  var killbeforeleave 0
-				  put #echo %alertwindow Waiting for kill before leaving for NonCombat.
+				  gosub MONSTERARRAY
+          if !matchre("%monsterarray", "%critters") then var killbeforeleave 1
+          else
+          {
+				    var killbeforeleave 0
+				    put #echo %alertwindow Waiting for kill before leaving for NonCombat.
+				  }
 				}
 				var movetrainburgleactive 1
 			}
@@ -8366,7 +8413,7 @@ NONCOMBATLOGIC:
 	{
 	  ##KILL_NEXT
 		if %killbeforeleave != 1 then return
-		else var killbeforeleave -1
+		var killbeforeleave -1
 		#STARTING_MOVETRAIN
 		put #echo %alertwindow [NonCombat]: Leaving combat to train.
 		if (%movetrainburgleactive) = 1 then
@@ -8897,7 +8944,6 @@ MODETRANSITION:
   gosub LEAVEROOM
   var varset %multimode
   gosub SETUP
-  var firstfindroom 1
   var modestart %t
   return
 
@@ -8963,7 +9009,6 @@ SKILLGET:
   
   
 ROOMTRAVELCOMBAT:
-  #put #echo Yellow Roomtravelcombat
   var rtzone %zone
   var rttravel %travel
   var rttraveldest %traveldest
@@ -8989,25 +9034,25 @@ ROOMTRAVELUPKEEP:
   }
   else
   {
-		var rtzone %auzone
-		var rttravel %autravel
-		var rttraveldest %autraveldest
-		var rtmove %aumove
-		var rtmovelist %aumovelist
-		var rttargetroom %autargetroom
+		var rtzone %upkeepzone
+		var rttravel %upkeeptravel
+		var rttraveldest %upkeeptraveldest
+		var rtmove %upkeepmove
+		var rtmovelist %upkeepmovelist
+		var rttargetroom %upkeeptargetroom
 		var rtfindroom NO
   }
   gosub ROOMTRAVEL
   return
 
 ROOMTRAVEL:
-  #echo rtzone: %rtzone
-  #echo rttravel: %rttravel
-  #echo rttraveldest: %rttraveldest
-  #echo rtmove: %rtmove
-  #echo rtmovelist: %rtmovelist
-  #echo rttargetroom: %rttargetroom
-  #echo rtfindroom: %rtfindroom
+  #put #echo Yellow rtzone: %rtzone
+  #put #echo Yellow rttravel: %rttravel
+  #put #echo Yellow rttraveldest: %rttraveldest
+  #put #echo Yellow rtmove: %rtmove
+  #put #echo Yellow rtmovelist: %rtmovelist
+  #put #echo Yellow rttargetroom: %rttargetroom
+  #put #echo Yellow rtfindroom: %rtfindroom
   if ("$zoneid" != "%rtzone") then
   {
     if (%rtzone != 0) then
@@ -9025,9 +9070,9 @@ ROOMTRAVEL:
 			}
 		}
   }
-  if ("$roomid" != "%rttargetroom") then
+  if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then
   {
-    if ("%rttargetroom" != "0") then gosub MOVE %rttargetroom
+    gosub MOVE %rttargetroom
   }
   if %rtfindroom = "YES" then gosub FINDROOMLOGIC
   return
@@ -9037,7 +9082,7 @@ FINDROOMLOGIC:
   #TESTING_EXISTING_ROOM
   #put #echo Yellow roomid: $roomid
   #put #echo Yellow findroomlist: %findroomlist
-  if contains("|%findroomlisttemp|", "|$roomid|") then
+  if contains("|%findroomlist|", "|$roomid|") then
   {
     eval roomplayerslength length("$roomplayers")
     #echo roomplayerslength: %roomplayerslength
@@ -9079,9 +9124,9 @@ FINDROOMLOGIC:
   if %findroomselect = -1 then
   {
     put #echo Yellow No acceptable rooms first pass.
-    put #echo Yellow froomempty: %froomempty
-    put #echo Yellow froomally: %froomally
-    put #echo Yellow froomblack: %froomblack
+    #put #echo Yellow froomempty: %froomempty
+    #put #echo Yellow froomally: %froomally
+    #put #echo Yellow froomblack: %froomblack
     var findroomcount 0
     gosub FINDROOMLOOP2
     if %findroomselect = -1 then
@@ -9107,8 +9152,8 @@ FINDROOMLOGIC:
   }
   else
   {
-    put #echo Yellow froomempty: %froomempty
-    put #echo Yellow froomally: %froomally
+    #put #echo Yellow froomempty: %froomempty
+    #put #echo Yellow froomally: %froomally
     if %frprefergroup = "YES" then put #echo Yellow Found a room with an ally!
     else put #echo Yellow Found an empty room!
   } 
@@ -10073,7 +10118,7 @@ BUFFLOGIC:
   if %casting != 1 then
   {
     #SYMBIOSIS
-    if %symbiosisbuff = "YES" then
+    if ((%symbiosisbuff = "YES") && ("$guild" != "Thief") && ("$guild" != "Barbarian")) then
     {
       if ((($%symbiosisvar.active = 1) && ($%symbiosisvar.duration < %buffbuffer)) || ($%symbiosisvar.active != 1)) then
       {
@@ -11195,10 +11240,14 @@ WEAPONGET:
   		gosub PLATRING
 	  	if %hand = "left" then gosub SWAP
 		}
-		else gosub WIELD %hand %weaponname
+		else
+		{
+		  gosub WIELD %hand %weaponname
+			if matchre ("$%otherhandhand", "%weaponname") then gosub SWAP
+		}
 		if !matchre ("$%handhand", "%weaponname") then
 		{
-		  put #echo %alertwindow Yellow [Weapons] Unable to wield the desired weapon in the desired hand when switching weapons!  Please investigate!
+		  put #echo %alertwindow Yellow [Weapons] Unable to wield the %weaponname in the desired %hand hand when switching weapons!  Please investigate!  
 		  put #flash
     }
 		if ((%weaponname = "%bastardsworditem") || (%%handhand = "%bastardsworditem")) then gosub SWAPSWORD %weaponname
@@ -11261,7 +11310,7 @@ STEALTHCHECK:
     if $Stealth.Ranks = 1750 then var stealthlock 1
     if %stealthlock = 1 then var usingstealth 0
     else var usingstealth 1
-    if (($guild = "Thief") && (%backstab = "YES")) then
+    if (("$guild" = "Thief") && (%backstab = "YES")) then
     {
       if $Backstab.LearningRate > 33 then var backstablock 1
       if $Backstab.LearningRate < 20 then var backstablock 0
@@ -11327,7 +11376,7 @@ TACTICSEXPERTHANDCHECK:
 		if (matchre("%weapontype", "%tacticsweapons")) then
 		{
 		  var usingtactics 1
-			if (($guild = "Thief") && (%backstab = "YES") && (%backstablock = 0))  then
+			if (("$guild" = "Thief") && (%backstab = "YES") && (%backstablock = 0))  then
 			{
 			  if ((%weapontype = "se") || (%weapontype = "sb")) then var usingtactics 0
 			}
@@ -11446,7 +11495,7 @@ MOVECHOOSE:
   if ((%usingtactics != 1) && (%usingexpert != 1)) then
   {
     #BACKSTAB
-		if ((%backstab = "YES") && ($guild = "Thief") && (%usingstealth = 1)) then
+		if ((%backstab = "YES") && ("$guild" = "Thief") && (%usingstealth = 1)) then
 		{
 			if ((%weapontype = "se") || (%weapontype = "sb")) then 
 			{
@@ -11459,7 +11508,7 @@ MOVECHOOSE:
       gosub ACMLOGIC
     }
     #WHIRLWIND
-		if ((%whirlwind = "YES") && ($guild = "Barbarian")) then
+		if ((%whirlwind = "YES") && ("$guild" = "Barbarian")) then
 		{
 			if ((%usingstealth = 0) && (%usingexpert = 0) && (%usingtactics = 0) && (%weapontype != "brawl") && (%usingacm != 1)) then 
 			{
@@ -11524,7 +11573,7 @@ MOVECHOOSE:
 		}
 		var att %lowattack
 		#SMITE
-    if ((%smite = "YES") && ($guild = "Paladin")) then gosub SMITECHECK
+    if ((%smite = "YES") && ("$guild" = "Paladin")) then gosub SMITECHECK
     if %usingsmite = 1 then
     {
       var att smite %att
@@ -11657,7 +11706,7 @@ OFFHANDCHOOSE:
 		{
 		  if ((%staveweapon != "%bastardsworditem") && (%staveweapon != "%barmaceitem") && (%staveweapon != "%holyiconitem") && (%staveweapon != "%risteitem") && (%staveweapon != "%hhristeitem")) then var offhandlist %offhandlist|stave  
 		}
-		if ($guild = "Barbarian") then
+		if ("$guild" = "Barbarian") then
 		{
 			if ((%weapontype != "le") && (%leoffhand = "YES")) then
 			{
@@ -11816,7 +11865,7 @@ MONTEST:
     var deadcheck 0
     if matchre ("$roomobjs", "(%ritualcritters) ((which|that) appears dead|\(dead\))") then
     {
-      if $guild = "Necromancer" then gosub NRITUAL
+      if "$guild" = "Necromancer" then gosub NRITUAL
       else
       {
         if %dissect = "YES" then
@@ -11983,12 +12032,13 @@ BUNDLELOGIC:
   
 LEAVEROOM:
   gosub DEFSTANCE
-  #if %aumoveshard = "YES" then
-  if %movescream = "YES" then gosub SCREAMDEFIANCE
-  if %aumovewhistle = "YES" then gosub WHISTLEPIERCE
-  if %aumovevanish = "YES" then
+  gosub MONSTERARRAY
+  if !matchre("%monsterarray", "%critters") then  
   {
-    gosub KHRI %vanish
+    #if %aumoveshard = "YES" then
+    if %movescream = "YES" then gosub SCREAMDEFIANCE
+    if %movewhistle = "YES" then gosub WHISTLEPIERCE
+    if %movevanish = "YES" then gosub KHRI vanish
   }
   if $sitting = 1 then gosub STAND
   if $kneeling = 1 then gosub STAND

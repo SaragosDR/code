@@ -95,7 +95,7 @@ SET:
     if tolower("%1") = "emotealerts" then goto REGYESNOSET
     if tolower("%1") = "arrivalalerts" then goto REGYESNOSET
     if tolower("%1") = "gmalerts" then goto REGYESNOSET
-    if tolower("%1") = "scriptalerts" then goto REGYESNOSET
+    if tolower("%1") = "paranoiaalerts" then goto REGYESNOSET
     if tolower("%1") = "pvpalerts" then goto REGYESNOSET
     if tolower("%1") = "pvpstealthalerts" then goto REGYESNOSET
     if tolower("%1") = "inventoryalerts" then goto REGYESNOSET
@@ -467,7 +467,7 @@ SET:
         goto END
       }
     }
-    if tolower("%1") = "aumovevanish" then goto YESNOSET
+    if tolower("%1") = "movevanish" then goto YESNOSET
     if tolower("%1") = "harvest" then goto YESNOSET
     if tolower("%1") = "harveststore" then goto YESNOSET
     if tolower("%1") = "harveststorenum" then goto TEXTSET
@@ -595,6 +595,7 @@ SET:
     if tolower("%1") = "expertise" then goto YESNOSET
     if tolower("%1") = "whirlwind" then goto YESNOSET
     if tolower("%1") = "dualload" then goto YESNOSET
+    if tolower("%1") = "pounce" then goto YESNOSET
     if tolower("%1") = "ritstype" then
     {
       if matchre("%2", "\b(any|low|mid|high)\b") then
@@ -805,6 +806,7 @@ SET:
     }
     if tolower("%1") = "tktitem" then goto TEXTSET
     if tolower("%1") = "shadowlingnoun" then goto TEXTSET
+    if tolower("%1") = "invest" then goto YESNOSET
     if tolower("%1") = "summoning" then goto YESNOSET
     if tolower("%1") = "summonweapon" then goto YESNOSET
     if tolower("%1") = "summonweapontimer" then goto TEXTSET
@@ -902,14 +904,10 @@ SET:
     if tolower("%1") = "tarantulaitem" then goto TEXTSET
     if tolower("%1") = "tarantulaskill1" then goto TEXTSET
     if tolower("%1") = "tarantulaskill2" then goto TEXTSET
-    if tolower("%1") = "findroom" then goto YESNOSET
-    if tolower("%1") = "findroomlist" then goto LISTSET
-    if tolower("%1") = "frwhitelist" then goto LISTSET
-    if tolower("%1") = "frblacklist" then goto LISTSET
-    if tolower("%1") = "frprefergroup" then goto YESNOSET
+    if tolower("%1") = "custommovement" then goto YESNOSET
     if tolower("%1") = "combatpreset" then
     {
-      echo combatpresetp1: %combatpresetp1
+      #echo combatpresetp1: %combatpresetp1
       if matchre("%2", "\b(%combatpresetlist)\b") then
       {  
         var setvar combatpreset
@@ -940,6 +938,11 @@ SET:
         goto END
       }
     }
+    if tolower("%1") = "findroom" then goto YESNOSET
+    if tolower("%1") = "findroomlist" then goto LISTSET
+    if tolower("%1") = "frwhitelist" then goto LISTSET
+    if tolower("%1") = "frblacklist" then goto LISTSET
+    if tolower("%1") = "frprefergroup" then goto YESNOSET
     if tolower("%1") = "zone" then goto TEXTSET
     if tolower("%1") = "travel" then goto YESNOSET
     if tolower("%1") = "traveldest" then goto TEXTSET
@@ -947,11 +950,11 @@ SET:
     if tolower("%1") = "movelist" then goto LISTSET
     if tolower("%1") = "targetroom" then goto TEXTSET
      
-    if tolower("%1") = "aupreset" then
+    if tolower("%1") = "upkeeppreset" then
     {
       if (matchre("%2", "\b(%townpresetlist)\b")) then
       {  
-        var setvar aupreset
+        var setvar upkeeppreset
         eval input tolower(%2)  
         put #var m$varset%setvar %input
         put #var save
@@ -963,12 +966,12 @@ SET:
         goto END
       }
     }
-    if tolower("%1") = "auzone" then goto TEXTSET
-    if tolower("%1") = "autravel" then goto YESNOSET
-    if tolower("%1") = "autraveldest" then goto TEXTSET
-    if tolower("%1") = "aumove" then goto YESNOSET
-    if tolower("%1") = "aumovelist" then goto LISTSET
-    if tolower("%1") = "autargetroom" then goto TEXTSET
+    if tolower("%1") = "upkeepzone" then goto TEXTSET
+    if tolower("%1") = "upkeeptravel" then goto YESNOSET
+    if tolower("%1") = "upkeeptraveldest" then goto TEXTSET
+    if tolower("%1") = "upkeepmove" then goto YESNOSET
+    if tolower("%1") = "upkeepmovelist" then goto LISTSET
+    if tolower("%1") = "upkeeptargetroom" then goto TEXTSET
     
     if tolower("%1") = "ammopreset" then
     {
@@ -1965,15 +1968,15 @@ DISPLAYGENERAL:
 	gosub REGOUTPUT PvPStealthAlerts
 	gosub REGOUTPUT ArrivalAlerts
 	put #echo
-  gosub REGOUTPUT ScriptAlerts
+  gosub REGOUTPUT ParanoiaAlerts
   put #echo
-  put #echo mono -----MultiTrain-----
-  put #echo mono *** NOTE: MULTITRAIN CURRENTLY ONLY WORKS WITH MODES 1 AND 2! ***
-  put #echo mono Valid weapon skills to trigger off of: brawl, se, le, the, sb, lb, thb, stave, pole, lt, ht, bow, xbow, sling, parry
-  put #echo mono Valid magic skills to trigger off of: debil, tm, sorcery
-  put #echo mono Valid lore skills to trigger off of:  empathy, tactics
-  put #echo mono Valid survival skills to trigger off of: backstab, evasion, stealth, thanatology, skinning, firstaid
-  put #echo mono Valid armor skills to trigger off of: brigandine, chain, defending, light, plate, shield
+  put #echo Gray mono -----MultiTrain - Training different variable set sin multiple combat areas-----
+  put #echo Gray mono *** NOTE: MULTITRAIN CURRENTLY ONLY WORKS WITH MODES 1 AND 2! ***
+  put #echo Gray mono Valid weapon skills to trigger off of: brawl, se, le, the, sb, lb, thb, stave, pole, lt, ht, bow, xbow, sling, parry
+  put #echo Gray mono Valid magic skills to trigger off of: debil, tm, sorcery
+  put #echo Gray mono Valid lore skills to trigger off of:  empathy, tactics
+  put #echo Gray mono Valid survival skills to trigger off of: backstab, evasion, stealth, thanatology, skinning, firstaid
+  put #echo Gray mono Valid armor skills to trigger off of: brigandine, chain, defending, light, plate, shield
   put #echo
   put #echo mono Mode1List: $mode1list     (the list of skills checked, separated by |)
   put #echo mono Mode1Step: $mode1step     (the number of mindstates to increase before moving to the other mode)
@@ -1991,7 +1994,7 @@ DISPLAYUPKEEP:
   put #echo mono =================== Mode: $varset ===================
 	put #echo mono ===============================================
   put #echo
-  #put #echo mono AUMoveClenchShard: $m$varsetaumoveclenchshard
+  #put #echo mono MoveClenchShard: $m$varsetmoveclenchshard
   #put #echo mono ShardItem: $m$varsetsharditem
   gosub OUTPUT Bugout
   gosub OUTPUT BugoutNum
@@ -2121,24 +2124,29 @@ DISPLAYCOMBAT:
 	gosub OUTPUT SlingWeapon SlingAmmo
 	gosub OUTPUT Collectammo
 	put #echo
-	if $guild = "Warrior Mage" then gosub OUTPUT PlatRing
-	if $guild = "Warrior Mage" then gosub OUTPUT PlatRingItem
-	if $guild = "Warrior Mage" then put #echo
-	put #echo mono ---ArmorSwap---
-	put #echo (Name variable is the text used to refer to armor in "get item")
-	put #echo (Description variable is the description listed in "inv armor")
+	if $guild = "Warrior Mage" then
+	{
+	  gosub OUTPUT PlatRing
+	  gosub OUTPUT PlatRingItem
+	}
 	put #echo
-	gosub OUTPUT Armorswap
-  gosub OUTPUT ArmorNum
-  gosub OUTPUT ShieldName ShieldDesc
-  gosub OUTPUT Armor1Name Armor1Desc
-  gosub OUTPUT A1StealthRem
-  gosub OUTPUT Armor2Name Armor2Desc
-  gosub OUTPUT A2StealthRem
-  gosub OUTPUT Armor3Name Armor3Desc
-  gosub OUTPUT A3StealthRem
-  gosub OUTPUT Armor4Name Armor4Desc
-  gosub OUTPUT A4StealthRem
+	put #echo Mono ArmorSwap: $m$varsetarmorswap     (Only used for low level characters who need to remove armor for stealth training in combat.)
+  if ("$m$varsetarmorswap" = "YES") then
+  {
+    put #echo Gray mono (Name variable is the text used to refer to armor in "get item")
+    put #echo Gray mono (Description variable is the description listed in "inv armor")
+    gosub OUTPUT ArmorNum
+    gosub OUTPUT ShieldName ShieldDesc
+    gosub OUTPUT Armor1Name Armor1Desc
+    gosub OUTPUT A1StealthRem
+    gosub OUTPUT Armor2Name Armor2Desc
+    gosub OUTPUT A2StealthRem
+    gosub OUTPUT Armor3Name Armor3Desc
+    gosub OUTPUT A3StealthRem
+    gosub OUTPUT Armor4Name Armor4Desc
+    gosub OUTPUT A4StealthRem
+  }
+  put #echo
 	return
 
 DISPLAYCOMBAT2:
@@ -2609,6 +2617,7 @@ DISPLAYGUILD:
     }
     if $guild = "Ranger" then
     {
+      put #echo mono Pounce: $m$varsetpounce 
       put #echo mono Snipe: $m$varsetsnipe
       put #echo mono DualLoad: $m$varsetdualload
       put #echo mono RITSType: $m$varsetritstype
@@ -2650,12 +2659,16 @@ DISPLAYGUILD:
       put #echo mono KhriDebil $khridebil
       put #echo mono KhriDebilType: $m$varsetkhridebiltype
       put #echo 
-      put #echo mono AUMoveVanish: $m$varsetaumovevanish
+      gosub OUTPUT MoveVanish
       put #echo
       put #echo mono BurgleKhriHasten: $m$varsetburglekhrihasten
       put #echo mono BurgleKhriPlunder: $m$varsetburglekhriplunder
       put #echo mono BurgleKhriSilence: $m$varsetburglekhrisilence
       put #echo mono BurgleKhriSlight: $m$varsetburglekhrislight
+    }
+    if $guild = "Trader" then
+    {
+      gosub OUTPUT Invest
     }
     if $guild = "Warrior Mage" then
     {
@@ -2760,36 +2773,42 @@ DISPLAYMOVEMENT:
   put #echo
   put #echo mono =================== Combat Movement ===================
   put #echo
+  gosub OUTPUT CustomMovement
+  put #echo
   gosub OUTPUT CombatPreset
   put #echo mono Options: 
-  put #echo #708090 --P1: %combatpresetp1
-  put #echo #708090 --P2: %combatpresetp2
-  put #echo #708090 --P3: %combatpresetp3
-  put #echo #708090 --P4: %combatpresetp4
-  put #echo #708090 --P5: %combatpresetp5
+  #708090
+  put #echo Gray --P1: %combatpresetp1
+  put #echo Gray --P2: %combatpresetp2
+  put #echo Gray --P3: %combatpresetp3
+  put #echo Gray --P4: %combatpresetp4
+  put #echo Gray --P5: %combatpresetp5
   put #echo mono PresetPremium: $m$varsetpresetpremium    (YES, NO, or ONLY if you wish to select only from Premium rooms.)
-  if ($m$varsetcombatpreset = "none") then
+  if ("$m$varsetcustommovement" = "YES") then
   {
-    gosub OUTPUT Zone
-    gosub OUTPUT Travel
-    put #echo mono TravelDest: $m$varsettraveldest    (a valid destination for the travel.cmd script included with the automapper repository)
-    gosub OUTPUT Move
-    put #echo mono MoveList: $m$varsetmovelist    (a list of valid #goto locations for the automapper, separated by the | character)
-    gosub OUTPUT TargetRoom
-    gosub OUTPUT FindRoom
-    gosub OUTPUT FindRoomList
-  }
-  else
-  {
-    gosub OUTPUTGRAY Zone
-    gosub OUTPUTGRAY Travel
-    put #echo Gray mono TravelDest: $m$varsettraveldest    (a valid destination for the travel.cmd script included with the automapper repository)
-    gosub OUTPUTGRAY Move
-    put #echo Gray mono MoveList: $m$varsetmovelist    (a list of valid #goto locations for the automapper, separated by the | character)
-    gosub OUTPUTGRAY TargetRoom
-    put #echo
-    gosub OUTPUTGRAY FindRoom
-    gosub OUTPUTGRAY FindRoomList
+    if ($m$varsetcombatpreset = "none") then
+    {
+      gosub OUTPUT Zone
+      gosub OUTPUT Travel
+      put #echo mono TravelDest: $m$varsettraveldest    (a valid destination for the travel.cmd script included with the automapper repository)
+      gosub OUTPUT Move
+      put #echo mono MoveList: $m$varsetmovelist    (a list of valid #goto locations for the automapper, separated by the | character)
+      gosub OUTPUT TargetRoom
+      gosub OUTPUT FindRoom
+      gosub OUTPUT FindRoomList
+    }
+    else
+    {
+      gosub OUTPUTGRAY Zone
+      gosub OUTPUTGRAY Travel
+      put #echo Gray mono TravelDest: $m$varsettraveldest    (a valid destination for the travel.cmd script included with the automapper repository)
+      gosub OUTPUTGRAY Move
+      put #echo Gray mono MoveList: $m$varsetmovelist    (a list of valid #goto locations for the automapper, separated by the | character)
+      gosub OUTPUTGRAY TargetRoom
+      put #echo
+      gosub OUTPUTGRAY FindRoom
+      gosub OUTPUTGRAY FindRoomList
+    }
   }
   put #echo
   gosub OUTPUT FRWhitelist
@@ -2801,87 +2820,102 @@ DISPLAYMOVEMENT:
 	gosub OUTPUT PremiumRing
 	gosub OUTPUT PremiumRingItem
 	put #echo
-	gosub OUTPUT AUPreset
-	put #echo mono (Options: %townpresetlist)
-	if ($m$varsetaupreset = "none") then
+	gosub OUTPUT UpkeepPreset
+	put #echo Gray mono Options: %townpresetlist
+	if ("$m$varsetcustommovement" = "YES") then
 	{
-		gosub OUTPUT AUZone
-		gosub OUTPUT AUTravel AUTravelDest
-		gosub OUTPUT AUMove AUMoveList
-		gosub OUTPUT AUTargetRoom
+    if ($m$varsetupkeeppreset = "none") then
+    {
+      gosub OUTPUT UpkeepZone
+      gosub OUTPUT UpkeepTravel UpkeepTravelDest
+      gosub OUTPUT UpkeepMove UpkeepMoveList
+      gosub OUTPUT UpkeepTargetRoom
+    }
+    else
+    {
+      gosub OUTPUTGRAY UpkeepZone
+      gosub OUTPUTGRAY UpkeepTravel UpkeepTravelDest
+      gosub OUTPUTGRAY UpkeepMove UpkeepMoveList
+      gosub OUTPUTGRAY UpkeepTargetRoom
+    }
+    put #echo
   }
-  else
-  {
-    gosub OUTPUTGRAY AUZone
-		gosub OUTPUTGRAY AUTravel AUTravelDest
-		gosub OUTPUTGRAY AUMove AUMoveList
-		gosub OUTPUTGRAY AUTargetRoom
-  }
-  put #echo
 	gosub OUTPUT AmmoPreset
-	put #echo mono (Options: %ammopresetlist)
-	if ($m$varsetammopreset = "none") then
+	put #echo Gray mono Options: %ammopresetlist
+	if ("$m$varsetcustommovement" = "YES") then
 	{
-		gosub OUTPUT AmmoZone
-		gosub OUTPUT AmmoTravel AmmoTravelDest
-		gosub OUTPUT AmmoMove AmmoMoveList
-		gosub OUTPUT AmmoTargetRoom
-  }
-  else
-  {
-    gosub OUTPUTGRAY AmmoZone
-		gosub OUTPUTGRAY AmmoTravel AmmoTravelDest
-		gosub OUTPUTGRAY AmmoMove AmmoMoveList
-    gosub OUTPUTGRAY AmmoTargetRoom
+    if ($m$varsetammopreset = "none") then
+    {
+      gosub OUTPUT AmmoZone
+      gosub OUTPUT AmmoTravel AmmoTravelDest
+      gosub OUTPUT AmmoMove AmmoMoveList
+      gosub OUTPUT AmmoTargetRoom
+    }
+    else
+    {
+      gosub OUTPUTGRAY AmmoZone
+      gosub OUTPUTGRAY AmmoTravel AmmoTravelDest
+      gosub OUTPUTGRAY AmmoMove AmmoMoveList
+      gosub OUTPUTGRAY AmmoTargetRoom
+    }
   }
   put #echo
   put #echo mono =================== NonCombat Movement ===================
   put #echo
   gosub OUTPUT BurglePreset
-  if ($m$varsetburglepreset = "none") then
-	{
-		gosub OUTPUT BurgleZone
-		gosub OUTPUT BurgleTravel BurgleTravelDest
-		gosub OUTPUT BurgleMove BurgleMoveList
-		gosub OUTPUT BurgleTargetRoom
-	}
-	else
-	{
-	  gosub OUTPUTGRAY BurgleZone
-		gosub OUTPUTGRAY BurgleTravel BurgleTravelDest
-		gosub OUTPUTGRAY BurgleMove BurgleMoveList 
-	  gosub OUTPUTGRAY BurgleTargetRoom
-	}
-	put #echo
+  if ("$m$varsetcustommovement" = "YES") then
+  {
+    if ($m$varsetburglepreset = "none") then
+    {
+      gosub OUTPUT BurgleZone
+      gosub OUTPUT BurgleTravel BurgleTravelDest
+      gosub OUTPUT BurgleMove BurgleMoveList
+      gosub OUTPUT BurgleTargetRoom
+    }
+    else
+    {
+      gosub OUTPUTGRAY BurgleZone
+      gosub OUTPUTGRAY BurgleTravel BurgleTravelDest
+      gosub OUTPUTGRAY BurgleMove BurgleMoveList 
+      gosub OUTPUTGRAY BurgleTargetRoom
+    }
+    put #echo
+  }
 	gosub OUTPUT PawnPreset
-	if ($m$varsetpawnpreset = "none") then
+	if ("$m$varsetcustommovement" = "YES") then
 	{
-		gosub OUTPUT PawnZone
-		gosub OUTPUT PawnTravel PawnTravelDest
-		gosub OUTPUT PawnMove PawnMoveList
+    if ($m$varsetpawnpreset = "none") then
+    {
+      gosub OUTPUT PawnZone
+      gosub OUTPUT PawnTravel PawnTravelDest
+      gosub OUTPUT PawnMove PawnMoveList
+    }
+    else
+    {
+      gosub OUTPUTGRAY PawnZone
+      gosub OUTPUTGRAY PawnTravel PawnTravelDest
+      gosub OUTPUTGRAY PawnMove PawnMoveList
+    }
+    put #echo
   }
-  else
-  {
-		gosub OUTPUTGRAY PawnZone
-		gosub OUTPUTGRAY PawnTravel PawnTravelDest
-		gosub OUTPUTGRAY PawnMove PawnMoveList
-  }
-  put #echo
   gosub OUTPUT PerformPreset
-  if ($m$varsetperformpreset = "none") then
-	{
-    gosub OUTPUT PerformZone
-    gosub OUTPUT PerformTravel PerformTravelDest
-    gosub OUTPUT PerformMove PerformMoveList
-    gosub OUTPUT PerformTargetRoom
-  }
-  else
+  if ("$m$varsetcustommovement" = "YES") then
   {
-    gosub OUTPUTGRAY PerformZone
-    gosub OUTPUTGRAY PerformTravel PerformTravelDest
-    gosub OUTPUTGRAY PerformMove PerformMoveList
-    gosub OUTPUTGRAY PerformTargetRoom
-  }  
+    if ($m$varsetperformpreset = "none") then
+    {
+      gosub OUTPUT PerformZone
+      gosub OUTPUT PerformTravel PerformTravelDest
+      gosub OUTPUT PerformMove PerformMoveList
+      gosub OUTPUT PerformTargetRoom
+    }
+    else
+    {
+      gosub OUTPUTGRAY PerformZone
+      gosub OUTPUTGRAY PerformTravel PerformTravelDest
+      gosub OUTPUTGRAY PerformMove PerformMoveList
+      gosub OUTPUTGRAY PerformTargetRoom
+    }  
+  }
   put #echo
   return
 
@@ -3001,10 +3035,10 @@ VARCOPYUPKEEP:
   put #var m%destbugoutonbleed $m%sourcebugoutonbleed
   put #var m%destbugoutroom $m%sourcebugoutroom
   put #var m%destautoupkeep $m%sourceautoupkeep
-  put #var m%destaumoveclenchshard $m%sourceaumoveclenchshard
-  put #var m%destaumovewhistle $m%sourceaumovewhistle
+  put #var m%destmoveclenchshard $m%sourcemoveclenchshard
+  put #var m%destmovewhistle $m%sourcemovewhistle
   put #var m%destmovescream $m%sourcemovescream
-  put #var m%destaumovevanish $m%sourceaumovevanish
+  put #var m%destmovevanish $m%sourcemovevanish
   put #var m%destauonhealth $m%sourceauonhealth
   put #var m%destauhealthnum $m%sourceauhealthnum
   put #var m%destauonbleed $m%sourceauonbleed
@@ -3148,6 +3182,7 @@ VARCOPYGENERAL:
   return
   
 VARCOPYMOVEMENT:
+  put #var m%destcustommovement $m%sourcecustommovement
   put #var m%destcombatpreset $m%sourcecombatpreset
   put #var m%destpresetpremium $m%sourcepresetpremium
   put #var m%destzone $m%sourcezone
@@ -3163,13 +3198,13 @@ VARCOPYMOVEMENT:
   put #var m%destfrblacklist $m%sourcefrblacklist
   put #var m%destfrprefergroup $m%sourcefrprefergroup
   
-  put #var m%destaupreset $m%sourceaupreset
-  put #var m%destauzone $m%sourceauzone
-  put #var m%destautravel $m%sourceautravel
-  put #var m%destautraveldest $m%sourceautraveldest
-  put #var m%destaumove $m%sourceaumove
-  put #var m%destaumovelist $m%sourceaumovelist
-  put #var m%destautargetroom $m%sourceautargetroom
+  put #var m%destupkeeppreset $m%sourceupkeeppreset
+  put #var m%destupkeepzone $m%sourceupkeepzone
+  put #var m%destupkeeptravel $m%sourceupkeeptravel
+  put #var m%destupkeeptraveldest $m%sourceupkeeptraveldest
+  put #var m%destupkeepmove $m%sourceupkeepmove
+  put #var m%destupkeepmovelist $m%sourceupkeepmovelist
+  put #var m%destupkeeptargetroom $m%sourceupkeeptargetroom
   put #var m%destpremiumring $m%sourcepremiumring
   put #var m%destpremiumringitem $m%sourcepremiumringitem
   
@@ -3525,7 +3560,7 @@ VARCOPYSPELL:
   put #var m%destmisdirection $m%sourcemisdirection
   put #var m%destmisdirectionprepmana $m%sourcemisdirectionprepmana
   put #var m%destmisdirectionaddmana $m%sourcemisdirectionaddmana
-  put #var m%destsymbiosisbuff $m%sourcetattoobuff
+  put #var m%destsymbiosisbuff $m%sourcesymbiosisbuff
   put #var m%destsymbiosisspell $m%sourcesymbiosisspell
   put #var m%destsymbiosisprepmana $m%sourcesymbiosisprepmana
   put #var m%destsymbiosisaddmana $m%sourcesymbiosisaddmana
@@ -3745,6 +3780,7 @@ VARCOPYGUILD:
   put #var m%destsmite $m%sourcesmite
   put #var m%desttithe $m%sourcetithe
   
+  put #var m%destpounce $m%sourcepounce
   put #var m%destsnipe $m%sourcesnipe
   put #var m%destdualload $m%sourcedualload
   put #var m%destritstype $m%sourceritstype
@@ -3782,6 +3818,8 @@ VARCOPYGUILD:
   put #var m%destburglekhriplunder $m%sourceburglekhriplunder
   put #var m%destburglekhrisilence $m%sourceburglekhrisilence
   put #var m%destburglekhrislight $m%sourceburglekhrislight
+  
+  put #var m%destinvest $m%sourceinvest
   
   put #var m%destignitebackup $m%sourceignitebackup
   put #var m%destsummoning $m%sourcesummoning

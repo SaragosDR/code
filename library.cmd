@@ -1,9 +1,9 @@
-var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|centering|ch|clarity|cv|col|cotc|courage|da|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rw|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
+var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rw|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
 var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mapp|mpp|mf|pfe|pom|sl|sol|
 var abuffs |etf|nexus|rm|
 var cyctms |aban|ars|fr|gs|iz|pyre|rim|ros|sa|sls|usol|
-var cycdbs |aewo|alb|dalu|dema|ee|hyh|shw|
-var cyclics |ac|ad|af|bes|botf|care|cs|eye|fae|ghs|gj|hodi|how|mg|mom|regenerate|rev|roc|rog|sanctuary|sov|tr|
+var cycdbs |alb|dalu|dema|ee|hyh|shw|
+var cyclics |ac|ad|af|bes|botf|cs|eye|fae|ghs|gj|hodi|how|mg|mom|regenerate|rev|roc|rog|sanctuary|sov|tr|
 var allcyclics %cyclics-%cyctms-%cycdbs
 var rituals |abs|aeg|all|ag|bc|bloodthorns|cos|dc|echo|eli|mf|mof|mon|iots|mf|mon|pom|pop|rtr|soul|vos|will|word|
 var heavytm ms
@@ -11,14 +11,14 @@ var transnecro |ivm|ks|bue|worm|ch|php|
 var aimweapons bow|xbow|sling
 var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|field|plane|planes|road|spell|symbiosis strengthen|symbiosis endure|symbiosis avoid|symbiosis spring|symbiosis remember|symbiosis resolve|symbiosis impress|symbiosis discern|symbiosis explore|symbiosis watch|symbiosis harvest|symbiosis heal|symbiosis learn|symbiosis examine|symbiosis perform|symbiosis cast|symbiosis harness|symbiosis activate
 
-var combatpresetp1 p1-shiprats|p1-muskhogs|p1-badgers|p1-pothanits|p1-trollkin|p1-cougarsgrendels|p1-woodtrolls|p1-grasseels|p1-beisswurms|p1-copperheads|p1-endrusserpents|p1-snowbeasts|p1-vipers|p1-leucros|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
+var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-woodtrolls|p1-grasseels|p1-beisswurms|p1-copperheads|p1-endrusserpents|p1-snowbeasts|p1-vipers|p1-leucros|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
 var combatpresetp2 p2-seordmaors
 var combatpresetp3 p3-prereniyoung|p3-prereni|p3-prerenielder|p3-gryphons|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-adanfsorcs|p3-adanfblades
-var combatpresetp4 none
+var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2
 var combatpresetp5 p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-blackapes|p5-fuliginmoths|p5-voidmoths
-var combatpresetlist none|%combatpresetp1|%combatpresetp2|%combatpresetp3|%combatpresetp5
+var combatpresetlist none|%combatpresetp1|%combatpresetp2|%combatpresetp3|%combatpresetp4|%combatpresetp5
 
-var townpresetlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|shard|fangcove|hibarnhvidar|boarclan|ratha
+var townpresetlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|shard|fangcove|hibarnhvidar|boarclan|ratha|merkresh
 #|aesry|merkresh|jeihrem
 var townvaultpresetlist none|muspari|theren|riverhaven|dirge|crossing|leth|shard|fangcove|hibarnhvidar|boarclan|ratha|aesry|merkresh|jeihrem
 var pawnpresetlist none|crossing|riverhaven|shard|hibarnhvidar
@@ -109,6 +109,7 @@ VARCHECKS:
   if !def(m%checkmodetarantulaskill2) then put #var m%checkmodetarantulaskill2 shield
   
   #MOVEMENT
+  if !matchre("$m%checkmodecustommovement", "\b(YES|NO)\b") then put #var m%checkmodecustommovement NO
   if !matchre("$m%checkmodecombatpreset", "\b(%combatpresetlist)\b") then put #var m%checkmodecombatpreset none
   if !matchre("$m%checkmodepresetpremium", "\b(YES|NO|ONLY)\b") then put #var m%checkmodepresetpremium NO
   if ("$m%checkmodecombatpreset" != "none") then
@@ -121,9 +122,19 @@ VARCHECKS:
       put #var m%checkmodemove NO
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 237|238|239|240|245|243|244|765|241|242|246|247
+      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 238|239|240|245|243|244|765|241|242|246|247
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 237|238|239|240|245|243|244|765|241|242|246|247|441|442|443|444|445|446|447|448|449|450|451|452|453
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 441|442|443|444|445|446|447|448|449|450|451|452|453
+    }
+    if ("$m%checkmodecombatpreset" = "p1-deathsquirrels") then
+    {
+      put #var m%checkmodezone 7
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest arthe
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 515|516|517|518|519|520|521|522|523|524|525|526|527|528|529|530|531|532|533|534
     }
     if ("$m%checkmodecombatpreset" = "p1-muskhogs") then
     {
@@ -134,6 +145,26 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 18|43|44|45|46|47|73|74|75|76
+    }
+    if ("$m%checkmodecombatpreset" = "p1-goblins") then
+    {
+      put #var m%checkmodezone 4
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest wolf
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 52|68|69|70|71|72|55|65|66|67|56|57|58|59
+    }
+    if ("$m%checkmodecombatpreset" = "p1-fellhogs") then
+    {
+      put #var m%checkmodezone 4
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest wolf
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 60|61|62|63|64
     }
     if ("$m%checkmodecombatpreset" = "p1-badgers") then
     {
@@ -160,6 +191,16 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 291|274|275|44|276|277|290|279
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 291|274|275|44|276|277|290|279|278|48|49
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 278|48|49
+    }
+    if ("$m%checkmodecombatpreset" = "p1-giantwasps") then
+    {
+      put #var m%checkmodezone 4
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest wolf
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 24|25|26|27|28|29|30|31|32
     }
     if ("$m%checkmodecombatpreset" = "p1-trollkin") then
     {
@@ -478,6 +519,26 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 163|164|165|166|167|168|169|170|171|172|173|174|175|176
     }
+    if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze1") then
+    {
+      put #var m%checkmodezone 107
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest merkresh
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152
+    }
+    if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze2") then
+    {
+      put #var m%checkmodezone 107
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest merkresh
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 156|157|158|159|160|161|162|163|164|165|166|167|168
+    }
     if ("$m%checkmodecombatpreset" = "p5-fuliginmoths") then
     {
       put #var m%checkmodezone 127
@@ -609,19 +670,19 @@ VARCHECKS:
   if !matchre("$m%checkmodepremiumring", "\b(YES|NO)\b") then put #var m%checkmodepremiumring NO
   if !def(m%checkmodepremiumringitem) then put #var m%checkmodepremiumringitem band
   
-  if !matchre("$m%checkmodeaupreset", "\b(%townpresetlist)\b") then put #var m%checkmodeaupreset none
-  if ("$m%checkmodeaupreset" != "none") then
+  if !matchre("$m%checkmodeupkeeppreset", "\b(%townpresetlist)\b") then put #var m%checkmodeupkeeppreset crossing
+  if ("$m%checkmodeupkeeppreset" != "none") then
   {
-    gosub TOWNPRESET au
+    gosub TOWNPRESET upkeep
   }
-  if $m%checkmodeauzone > -1 then
-  else put #var m%checkmodeauzone 0 
-  if !matchre("$m%checkmodeautravel", "\b(YES|NO)\b") then put #var m%checkmodeautravel NO
-  if !def(m%checkmodeautraveldest) then put #var m%checkmodeautraveldest crossing
-  if !matchre("$m%checkmodeaumove", "\b(YES|NO)\b") then put #var m%checkmodeaumove NO
-  if !def(m%checkmodeaumovelist) then put #var m%checkmodeaumovelist 1|42
-  if ($m%checkmodeautargetroom > -1) then 
-  else put #var m%checkmodeautargetroom 0
+  if $m%checkmodeupkeepzone > -1 then
+  else put #var m%checkmodeupkeepzone 0 
+  if !matchre("$m%checkmodeupkeeptravel", "\b(YES|NO)\b") then put #var m%checkmodeupkeeptravel NO
+  if !def(m%checkmodeupkeeptraveldest) then put #var m%checkmodeupkeeptraveldest crossing
+  if !matchre("$m%checkmodeupkeepmove", "\b(YES|NO)\b") then put #var m%checkmodeupkeepmove NO
+  if !def(m%checkmodeupkeepmovelist) then put #var m%checkmodeupkeepmovelist 1|42
+  if ($m%checkmodeupkeeptargetroom > -1) then 
+  else put #var m%checkmodeupkeeptargetroom 0
   
   if !matchre("$m%checkmodeammopreset", "\b(%ammopresetlist)\b") then put #var m%checkmodeammopreset none
   if ("$m%checkmodeammopreset" != "none") then
@@ -690,7 +751,7 @@ VARCHECKS:
   if !matchre("$pvpalerts", "\b(YES|NO)\b") then put #var pvpalerts YES
   if !matchre("$pvpstealthalerts", "\b(YES|NO)\b") then put #var pvpstealthalerts NO
   if !matchre("$inventoryalerts", "\b(YES|NO)\b") then put #var inventoryalerts YES
-  if !matchre("$scriptalerts", "\b(YES|NO)\b") then put #var scriptalerts NO
+  if !matchre("$paranoiaalerts", "\b(YES|NO)\b") then put #var paranoiaalerts NO
   
   #UPKEEP
   #if !matchre("$m%checkmodeaumoveclenchshard", "\b(YES|NO)\b") then put #var m%checkmodeaumoveclenchshard NO
@@ -773,9 +834,9 @@ VARCHECKS:
     if !def(m%checkmodestanceset) then put #var m%checkmodestancemain custom
     else put #var m%checkmodestancemain $m%checkmodestanceset
   }
-  if !matchre("$m%checkmodelowestfirst", "\b(YES|NO)\b") then put #var m%checkmodelowestfirst NO
+  if !matchre("$m%checkmodelowestfirst", "\b(YES|NO)\b") then put #var m%checkmodelowestfirst YES
   if (($m%checkmodeweaponnum >= 1) && ($m%checkmodeweaponnum <= 14)) then
-  else put #var m%checkmodeweaponnum 1
+  else put #var m%checkmodeweaponnum 14
   if !matchre("$m%checkmodekillafterlock", "\b(YES|NO)\b") then put #var m%checkmodekillafterlock NO
   if !matchre("$m%checkmodeweapon1", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon1 SE
   if !matchre("$m%checkmodeweapon2", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon2 LE
@@ -791,24 +852,24 @@ VARCHECKS:
   if !matchre("$m%checkmodeweapon12", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon12 STAVE
   if !matchre("$m%checkmodeweapon13", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon13 POLE
   if !matchre("$m%checkmodeweapon14", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon14 BRAWL
-  if !matchre("$m%checkmodeoffhand", "\b(YES|NO)\b") then put #var m%checkmodeoffhand NO
+  if !matchre("$m%checkmodeoffhand", "\b(YES|NO)\b") then put #var m%checkmodeoffhand YES
   if !matchre("$m%checkmodeacms", "\b(YES|NO)\b") then put #var m%checkmodeacms NO
-  if !matchre("$m%checkmodecleave", "\b(YES|NO)\b") then put #var m%checkmodecleave NO
-  if !matchre("$m%checkmodecrash", "\b(YES|NO)\b") then put #var m%checkmodecrash NO
-  if !matchre("$m%checkmodedoublestrike", "\b(YES|NO)\b") then put #var m%checkmodedoublestrike NO
-  if !matchre("$m%checkmodeimpale", "\b(YES|NO)\b") then put #var m%checkmodeimpale NO
-  if !matchre("$m%checkmodepalmstrike", "\b(YES|NO)\b") then put #var m%checkmodepalmstrike NO
-  if !matchre("$m%checkmodepowershot", "\b(YES|NO)\b") then put #var m%checkmodepowershot NO
-  if !matchre("$m%checkmodetwirl", "\b(YES|NO)\b") then put #var m%checkmodetwirl NO
+  if !matchre("$m%checkmodecleave", "\b(YES|NO)\b") then put #var m%checkmodecleave YES
+  if !matchre("$m%checkmodecrash", "\b(YES|NO)\b") then put #var m%checkmodecrash YES
+  if !matchre("$m%checkmodedoublestrike", "\b(YES|NO)\b") then put #var m%checkmodedoublestrike YES
+  if !matchre("$m%checkmodeimpale", "\b(YES|NO)\b") then put #var m%checkmodeimpale YES
+  if !matchre("$m%checkmodepalmstrike", "\b(YES|NO)\b") then put #var m%checkmodepalmstrike YES
+  if !matchre("$m%checkmodepowershot", "\b(YES|NO)\b") then put #var m%checkmodepowershot YES
+  if !matchre("$m%checkmodetwirl", "\b(YES|NO)\b") then put #var m%checkmodetwirl YES
   
   if !def(m%checkmodeseweapon) then put #var m%checkmodeseweapon scimitar
-  if !matchre("$m%checkmodeseoffhand", "\b(YES|NO)\b") then put #var m%checkmodeseoffhand NO
+  if !matchre("$m%checkmodeseoffhand", "\b(YES|NO)\b") then put #var m%checkmodeseoffhand YES
   if !matchre("$m%checkmodesecombo", "\b(slice|puncture)\b") then put #var m%checkmodesecombo slice
   if !def(m%checkmodeleweapon) then put #var m%checkmodeleweapon broadsword
   if !matchre("$m%checkmodeleoffhand", "\b(YES|NO)\b") then put #var m%checkmodeleoffhand NO
   if !def(m%checkmodetheweapon) then put #var m%checkmodetheweapon claymore
   if !def(m%checkmodesbweapon) then put #var m%checkmodesbweapon mace
-  if !matchre("$m%checkmodesboffhand", "\b(YES|NO)\b") then put #var m%checkmodesboffhand NO
+  if !matchre("$m%checkmodesboffhand", "\b(YES|NO)\b") then put #var m%checkmodesboffhand YES
   if !def(m%checkmodelbweapon) then put #var m%checkmodelbweapon hammer
   if !matchre("$m%checkmodelboffhand", "\b(YES|NO)\b") then put #var m%checkmodelboffhand NO
   if !def(m%checkmodethbweapon) then put #var m%checkmodethbweapon maul
@@ -839,13 +900,13 @@ VARCHECKS:
   if !matchre("$m%checkmodehtbond", "\b(YES|NO|SPECIAL)\b") then put #var m%checkmodehtbond NO
   if !matchre("$m%checkmodehtverb", "\b(lob|throw|hurl)\b") then put #var m%checkmodehtverb lob
   if !def(m%checkmodexbowweapon) then put #var m%checkmodexbowweapon crossbow
-  if !def(m%checkmodexbowammo) then put #var m%checkmodexbowammo bolt
+  if !def(m%checkmodexbowammo) then put #var m%checkmodexbowammo crossbow bolt
   if !matchre("$m%checkmodexbowworn", "\b(YES|NO)\b") then put #var m%checkmodexbowworn NO
   if !def(m%checkmodebowweapon) then put #var m%checkmodebowweapon bow
-  if !def(m%checkmodebowammo) then put #var m%checkmodebowammo arrow
+  if !def(m%checkmodebowammo) then put #var m%checkmodebowammo boar-tusk arrow
   if !matchre("$m%checkmodebowworn", "\b(YES|NO)\b") then put #var m%checkmodebowworn NO
   if !def(m%checkmodeslingweapon) then put #var m%checkmodeslingweapon sling
-  if !def(m%checkmodeslingammo) then put #var m%checkmodeslingammo stone
+  if !def(m%checkmodeslingammo) then put #var m%checkmodeslingammo small rock
   if !matchre("$m%checkmodecollectammo", "\b(YES|NO)\b") then put #var m%checkmodecollectammo YES
   if !matchre("$m%checkmodeplatring", "\b(YES|NO)\b") then put #var m%checkmodeplatring NO
   if !def(m%checkmodeplatringitem) then put #var m%checkmodeplatringitem scimitar
@@ -868,8 +929,8 @@ VARCHECKS:
   
   #NONCOMBAT
   if !matchre("$m%checkmodenoncomdelay", "\b(YES|NO)\b") then put #var m%checkmodenoncomdelay NO
-  if !matchre("$m%checkmodeappraise", "\b(YES|NO)\b") then put #var m%checkmodeappraise NO
-  if !matchre("$m%checkmodeappraisetarget", "\b(bundle|creature)\b") then put #var m%checkmodeappraisetarget bundle
+  if !matchre("$m%checkmodeappraise", "\b(YES|NO)\b") then put #var m%checkmodeappraise YES
+  if !matchre("$m%checkmodeappraisetarget", "\b(bundle|creature)\b") then put #var m%checkmodeappraisetarget creature
   if $m%checkmodeappraisetimer >= 75 then
   else put #var m%checkmodeappraisetimer 75
   if !matchre("$m%checkmodeappsaveitem", "\b(none|tight|lumpy)\b") then put #var m%checkmodeappsaveitem none
@@ -919,10 +980,9 @@ VARCHECKS:
   
   #NONCOMBAT
   if !matchre("$m%checkmodenoncombat", "\b(YES|NO)\b") then put #var m%checkmodenoncombat NO
-  
   if !matchre("$m%checkmodeburgle", "\b(YES|NO)\b") then put #var m%checkmodeburgle NO
   if !def(m%checkmodeburglestorage) then put #var m%checkmodeburglestorage haversack
-  if !matchre("$m%checkmodeburgletool", "\b(pick|rope|both)\b") then put #var m%checkmodeburgletool rope
+  if !matchre("$m%checkmodeburgletool", "\b(pick|rope|both)\b") then put #var m%checkmodeburgletool both
   if !def(m%checkmodeburglepickitem) then put #var m%checkmodeburglepickitem lockpick
   if !matchre("$m%checkmodeburglepickworn", "\b(YES|NO)\b") then put #var m%checkmodeburglepickworn NO
   if !def(m%checkmodeburgleropeitem) then put #var m%checkmodeburgleropeitem heavy rope
@@ -964,7 +1024,7 @@ VARCHECKS:
   if $m%checkmodecastingthrottle >= 0 then
   else put #var m%checkmodecastingthrottle 1
   if !matchre("$m%checkmodestraightcast", "\b(YES|NO)\b") then put #var m%checkmodestraightcast NO
-  if !matchre("$m%checkmodeharnessing", "\b(YES|NO)\b") then put #var m%checkmodeharnessing NO
+  if !matchre("$m%checkmodeharnessing", "\b(YES|NO)\b") then put #var m%checkmodeharnessing YES
   if $m%checkmodeharnessmax >= 5 then
   else put #var m%checkmodeharnessmax 20
   if !matchre("$m%checkmodecambrinth", "\b(YES|NO)\b") then put #var m%checkmodecambrinth NO
@@ -1524,6 +1584,7 @@ VARCHECKS:
   if !matchre("$m%checkmodesmite", "\b(YES|NO)\b") then put #var m%checkmodesmite NO
   if !matchre("$m%checkmodetithe", "\b(YES|NO)\b") then put #var m%checkmodetithe NO
   #GUILD-RANGER
+  if !matchre("$m%checkmodepounce", "\b(YES|NO)\b") then put #var m%checkmodepounce NO
   if !matchre("$m%checkmoderitstype", "\b(any|low|mid|high)\b") then put #var m%checkmoderitstype mid
   #GUILD-THIEF
   if !matchre("$m%checkmodebackstab", "\b(YES|NO)\b") then put #var m%checkmodebackstab NO
@@ -1558,6 +1619,8 @@ VARCHECKS:
   if !matchre("$m%checkmodekhridebil", "\b(YES|NO)\b") then put #var m%checkmodekhridebil NO
   if !matchre("$m%checkmodekhridebiltype", "\b(prowess|guile|credence|terrify|intimidate|eliminate)\b") then put #var m%checkmodekhridebiltype prowess
   if !matchre("$m%checkmodemovevanish", "\b(YES|NO)\b") then put #var m%checkmodemovevanish NO
+  #GUILD-TRADER
+  if !matchre("$m%checkmodeinvest", "\b(YES|NO)\b") then put #var m%checkmodeinvest NO
   #GUILD-WM
   if !matchre("$m%checkmodesummoning", "\b(YES|NO)\b") then put #var m%checkmodesummoning NO
   if !matchre("$m%checkmodesummonweapon", "\b(YES|NO)\b") then put #var m%checkmodesummonweapon NO
@@ -1824,8 +1887,8 @@ TOWNPRESET:
 		put #var m%checkmode$0travel YES
 		put #var m%checkmode$0traveldest merkresh
 		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 170
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 292
+		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 19
+		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 300
 	}
   if ("$m%checkmode$0preset" = "jeihrem") then
 	{
@@ -1948,7 +2011,7 @@ STATUSCHECK:
     {
       if %goupkeep = 1 then
       {
-        if (%movetrainactive != 1) then gosub AUTOUPKEEPLOGIC
+        if ((%upkeepactive != 1) && (%movetrainactive != 1)) then gosub AUTOUPKEEPLOGIC
       }
     }
     #COLLECTAMMO
@@ -2151,6 +2214,7 @@ TIMEOUT:
 	goto %timeoutsub
 
 DEADWAIT:
+  put quit
   put #flash
   put #play JustArrived
   pause 4
@@ -2435,17 +2499,15 @@ GETITEM:
 GETITEMP:
   pause
 GETITEMMAIN:
-  matchre GETITEMP %waitstring|You don't seem to be able to moveYou grab hold
+  matchre GETITEMP %waitstring|You don't seem to be able to moveYou grab hold|You try to grab your
   matchre GETUNTIE You pull at it, but the ties prevent you.  Maybe if you untie it, first?|You should untie the
   matchre RETURN You get|You're already holding|You are already holding that.|You pick up|What were you referring to?|You stop as you realize|You must unload|You fade in for a moment|You remove|You pull|What were you referring to?|You try to grab your|Please rephrase that command\.|You are already holding that\.
   match RETURN Get what?
-  matchre GETITEMP You try to grab your
   matchre GETITEMBAD You need a free hand to pick that up.
   matchre GETCLIMBPRACBAD You should stop practicing 
   matchre GETITEMADV Sheesh, it's still alive! 
   match GETITEMREM But that is already in your inventory.
-  match GETITEMPLAYSTOP You should stop playing before you do that.
-  match GETITEMPLAYSTOP You are a bit too busy performing to do that.
+  matchre GETITEMPLAYSTOP You should stop playing before you do that\.|You are a bit too busy performing to do that\.
   put get %getitemstring
   matchwait 5
   var timeoutsub GETITEMMAIN
@@ -2621,7 +2683,10 @@ STOREMAIN:
 	match RETURN You will now store gems in your gem pouch.
   match RETURN I could not find that container.
   put store %storestring
-  matchwait
+  matchwait 5
+  var timeoutsub STOREMAIN
+  var timeoutcommand store %storestring
+	goto TIMEOUT
 
 STOW:
   var stowhandstring $0
@@ -3469,7 +3534,8 @@ ANALYZE:
   match ANAFACENEXT Analyze what?
   matchre ANALYZE ^You fail to find any
   matchre ANALYZEP %waitstring
-  matchre ANAFLYING is flying too high for you to attack.
+  matchre ANAFLYING is flying too high for you to attack.|is flying far too high to hit with your fists\.
+
   matchre ANAPRONE You should stand up first.
   matchre RETURN Face what?
   put analyze
@@ -3612,7 +3678,7 @@ ATTACKMELEE:
 	match ATTACKGOODHIT lands a
   matchre RETURN already in a position|But you are already dodging|pointlessly hack|There is nothing else to face!|Blindsiding is much more effective when you use a melee weapon.
   matchre ATTACKRETURN You move into a position to|Roundtime|You slip out of concealment
-  matchre ATTMELEEFLYING is flying too high for you to attack.
+  matchre ATTMELEEFLYING is flying too high for you to attack\.|is flying far too high to hit with your
 	matchre ATTACKBADBACKSTAB You can't backstab that.
 	matchre ATTACKBACKSTABHIDE You must be hidden to blindside.
   #HAND
@@ -3807,6 +3873,7 @@ BOWLOAD:
 	matchre BOWLOADGETITEM You don't have the proper ammunition
 	match BOWDLBAD You are not skilled enough to dual-load
 	match BOWNOEAGLE You focus on the image of an eagle but are unable to draw upon its majesty.
+	match BOWNOSTW Such a feat would be impossible without the winds to guide you\.
 	match BOWNOSTEADY Such a feat would be impossible without steadier hands.
 	match BOWNOAMMO What weapon are you trying to load?
 	if %usingdualload = 1 then put load my %ubowammos
@@ -3835,6 +3902,10 @@ BOWDLBAD:
   return
 
 BOWNOEAGLE:
+  var usingdualload 0
+  goto BOWLOAD
+  
+BOWNOSTW:
   var usingdualload 0
   goto BOWLOAD
   
@@ -4125,7 +4196,7 @@ FLEEP:
   pause
 FLEE:
   matchre FLEEP %waitstring
-  matchre FLEECONT You foresee the situation deteriorating rapidly.|You realize you're out of your element!|Either you're looking really tasty|You feel the wrenching pain of dejection as you|Hoping the gods will come to your rescue, you mutter|You suddenly realize that you may be completely outclassed in this match.|You suddenly realize that the hunter may be the hunted\.
+  matchre FLEECONT You foresee the situation deteriorating rapidly.|You realize you're out of your element!|Either you're looking really tasty|You feel the wrenching pain of dejection as you|Hoping the gods will come to your rescue, you mutter|You suddenly realize that you may be completely outclassed in this match.|You suddenly realize that the hunter may be the hunted\.|For some inexplicable reason, you can't flee from this area\.  You frantically attempt to disengage from combat\.
   match RETURN You assess your combat situation and realize you don't see anything engaged with you.
   put flee
   matchwait 5
@@ -4326,7 +4397,7 @@ TRAVELMAIN:
   match RETURN REACHED YOUR DESTINATION
   put .travel %traveltarget
   matchwait 180
-  goto MOVEMAIN
+  goto TRAVELMAIN
 
 OLDMOVE:
   var roomtarget $0
@@ -4746,7 +4817,10 @@ MEDITATION:
   match MEDITATIONTRAIN You have not been trained in that type of meditation.
   match MEDITATIONRETURN Roundtime
   put meditate %meditationtype
-  matchwait
+  matchwait 5
+  var timeoutsub MEDITATION
+  var timeoutcommand meditate %meditationtype
+	goto TIMEOUT
 
 MEDITATIONRETURN:
   gosub STAND
@@ -4777,7 +4851,10 @@ MEDITATIONSTOP:
   matchre MEDITATIONSTOPP %waitstring
   match RETURN You take a deep breath and exhale, releasing the beneficial flames burning deep within your mind.
   put meditation stop %medittype
-  matchwait
+  matchwait 5
+  var timeoutsub MEDITATIONSTOP
+  var timeoutcommand meditation stop %medittype
+	goto TIMEOUT
 
 ROARP:
   pause
@@ -4787,8 +4864,12 @@ ROAR:
   matchre ROARP %waitstring
   matchre ROARFACE You are not facing an enemy to roar at!
   matchre RETURN Roundtime|Strain though you might, you cannot muster|You have not been trained in that roar.
+  match RETURN You strain but are unable to muster the voice necessary to intimidate your foe!
   put roar quiet %roartype
-  matchwait
+  matchwait 5
+  var timeoutsub ROAR
+  var timeoutcommand roar quiet %roartype
+	goto TIMEOUT
 
 ROARFACE:
   gosub FACE
@@ -4805,7 +4886,10 @@ WARHORN:
   matchre WARHORNP %waitstring
   matchre RETURN Roundtime
   put exhale %warhornitem lure
-  matchwait
+  matchwait 5
+  var timeoutsub WARHORN
+  var timeoutcommand exhale %warhornitem lure
+	goto TIMEOUT
 
 
 
@@ -5709,6 +5793,7 @@ PREPSPELL:
 	matchre RETURN You begin to hum|You begin your enchante|The first gentle notes|With a sharp cut to your voice|Low, hummed tones form|You begin to chant a mesmerizing|With a resounding "POP"|You begin to sing, a gentle|Wrapped in winter|You weave a soft|Slow, rich tones|Though softly humming|In a low tone you|The wailing of lost souls|Turning your focus solemnly inward|You hear the slow, rich tones of|as you trace your finger along mana|Images of streaking stars falling from the heavens flash across your vision|With great force, you slap your hands together|You direct your attention toward the heavens|You whistle an intricate sequence|A radiant glow wreathes your hands|A strong wind swirls around you|Glowing geometric patterns arc between|Light withdraws from around you|Calmly reaching out with one hand,|In one fluid motion, you bring your palms|You start frantically flailing your hands|Shadow and light collide wildly around|You gaze skyward and trace the planetary|You spin about wildly, whirling around with a feral|Throwing your head back, you release a savage roar|You gaze at your hands, touching your thumb to each|Accompanied with a flash of light, you clap your hands|Droplets of water coalesce around your fingertips|Turning your head slightly and gazing directly|Inhaling deeply, you adopt a cyclical rhythm in your breaths|You clasp your silvery-white flame shrouded hands together|Focusing intently, you slice seven straight lines through|You exhale softly, your breath flowing into a shimmering cloud|You inhale sharply, invoking the
 	matchre PREPREL you're already preparing|You have already fully prepared|You are already preparing
 	match PREPPLAYING You should stop playing before you do that.
+	match PREPBADUNKNOWN You have no idea how to cast that spell.
 	if %prepmana != 0 then var prepstring %spellprepping %prepmana
 	else var prepstring %spellprepping
 	put prep %prepstring
@@ -5729,6 +5814,30 @@ PREPBADHEAVYTM:
   gosub RELSPELL
   gosub CASTRESET
   return
+
+PREPBADUNKNOWN:
+  if %bugout = "YES" then
+  {
+    put #echo %alertwindow [Magic] Tried to prep a spell you don't know!  Bugging out.
+    put #flash
+    put #play JustArrived
+    goto BUGOUT
+  }
+  else
+  {
+    put #echo %alertwindow [Magic] Tried to prep a spell you don't know!
+    put #flash
+    put #play JustArrived
+    goto PREPBADUNKNOWN2
+  }
+
+PREPBADUNKNOWN2:
+  echo ===PREPPING A SPELL YOU DON'T KNOW===
+  put #flash
+  put #play Advance
+  pause 5
+  goto PREPBADUNKNOWN2
+  
 
 INVOKETATTOOP:
   pause
@@ -5771,7 +5880,7 @@ PREPTATTOOUNHIDE:
   goto PREPTATTOO
 
 PREPTATTOOBAD:
-  put #echo %alertwindow Tried to invoke a tattoo, but did not have one!  Turning off variable.
+  put #echo %alertwindow [Magic] Tried to invoke a tattoo, but did not have one!  Turning off variable.
   var tattoobuff NO
   put #var tattoobuff NO
   return
@@ -6139,9 +6248,13 @@ GEMPOUCHASK:
         if matchre("$roomobjs" "gembuyer") then var actualappraiser gembuyer
         else
         {
-          echo Waiting for Wickett or the gemsmith.
-          pause 60
-          goto GEMPOUCHASK
+         if matchre("$roomobjs" "clerk") then var actualappraiser clerk
+          else
+          {
+            echo Waiting for Wickett or the gemsmith.
+            pause 60
+            goto GEMPOUCHASK
+          }
         }
       }
     }
@@ -6151,7 +6264,10 @@ GEMPOUCHASK:
   matchre GEMPOUCHASKGOOD hands you (a|an) (\S+) gem pouch\.
   matchre RETURN Usage: ASK|"All I know about are skins 
   put ask %actualappraiser for gem pouch
-  matchwait
+  matchwait 5
+  var timeoutsub GEMPOUCHASK
+  var timeoutcommand var actualappraiser %appraiser
+	goto TIMEOUT
   
 GEMPOUCHASKGOOD:
   var didgetpouch 1
@@ -6405,6 +6521,8 @@ DISSECT:
   matchre DISSECTP %waitstring
   matchre RETURN Roundtime:|What exactly are you trying to dissect\?|The corpse has been defiled already\.|Perhaps the \w+ \w+ should be left alone\.
   match DISSECTSTOW You need at least one free hand for that!
+  match DISSECTBADU That'd be a waste of time.  The rotted remains of the unliving are a poor study of how a body functions when alive.
+  match DISSECTBAD You do not yet possess the knowledge required to perform this task.
   put dissect
   matchwait 5
 	var timeoutsub DISSECT
@@ -6415,6 +6533,17 @@ DISSECTSTOW:
   gosub STOW left
   goto DISSECT
 
+DISSECTBADU:
+  put #echo >$alertwindow Yellow Attempted to dissect an undead creature.  Dissect should not be turned on in this hunting area!  Turning it off.
+  var dissect NO
+  put #var dissect NO
+  put #var save
+  return
+
+DISSECTBAD:
+  put #echo >$alertwindow Yellow You're not skilled enough to dissect!  Turning it off.
+  var dissect NO
+  return
 
 COUNTITEM:
   var countitemstring $0
@@ -6427,7 +6556,10 @@ COUNTITEMMAIN:
   matchre COUNTITEMGOOD You count .* and see there (?:are|is) (.*) left\. 
   match COUNTITEMBAD I could not find what you were referring to.
   put count %countitemstring
-  matchwait
+  matchwait 5
+	var timeoutsub COUNTITEMMAIN
+  var timeoutcommand count %countitemstring
+	goto TIMEOUT
 
 COUNTITEMGOOD:
   #echo 0: $0
@@ -6606,7 +6738,10 @@ GEMPOUCHLOOK:
   matchre GEMPOUCHLOOKEMPTY You sort through the contents of the gem pouch and find (([1-9]|[1-9][0-9]|[1-4][0-9][0-9])) (gems|gem) in it\.
   match GEMPOUCHLOOKEMPTY The gem pouch is empty.
   put count %pouchnum gem pouch in %storage
-  matchwait
+  matchwait 5
+	var timeoutsub GEMPOUCHLOOK
+  var timeoutcommand count %pouchnum gem pouch in %storage
+	goto TIMEOUT
 
 GEMPOUCHLOOKNONE:
   var pouchfull -1
@@ -6649,7 +6784,10 @@ GEMGET:
   matchre GEMPOUCHFULL ^You think the .*gem pouch is too full|^You put your
   matchre TIEPOUCH You've already got a wealth of gems in there! 
   put stow gem
-  matchwait
+  matchwait 5
+	var timeoutsub GEMGET
+  var timeoutcommand stow gem
+	goto TIMEOUT
 
 GEMGETBAD:
   gosub STOW left
@@ -7074,7 +7212,36 @@ PRESERVE:
   var timeoutcommand perform preserve on %ritualmonster
 	goto TIMEOUT
 
+#####RANGER_SUBS#####
+POUNCEP:
+  pause
+POUNCE:
+  matchre POUNCEP %waitstring
+  match RETURN Roundtime
+  match RETURN You're too tired from the last time you pounced on some prey.
+  put pounce
+  matchwait 5
+  var timeoutsub POUNCE
+  var timeoutcommand pounce
+	goto TIMEOUT
 
+#####TRADER_SUBS#####
+
+INVESTP:
+  pause
+INVEST:
+  matchre INVESTP %waitstring
+  match INVESTRETREAT You cannot do that while focusing on combat!
+	matchre RETURN Roundtime|The frosty tessera begins to frost over, but quickly returns to normal\.|The clear tessera attempts to tap into your starlight aura, but finds it depleted\.
+	put ask tessera about invest
+  matchwait 5
+	var timeoutsub INVEST
+  var timeoutcommand ask tessera about invest
+	goto TIMEOUT
+  
+INVESTRETREAT:
+  gosub RETREAT
+  goto INVEST
 
 #####WM_SUBS#####
 
@@ -7321,17 +7488,6 @@ SUMMONWEAPONSTOW:
   gosub STOW left
   goto SUMMONWEAPON
 
- 
-
-
-
-
-
-
-
-
-
-
 
 COMMANDWARRIORP:
   pause
@@ -7362,7 +7518,10 @@ PERCHEALTH:
   matchre PERCHEALTHP %waitstring
   matchre RETURN Roundtime|You fail to sense anything, however.|You close your eyes, drawing all your thoughts inward
   put perceive health
-  matchwait
+  matchwait 5
+	var timeoutsub PERCHEALTH
+  var timeoutcommand perceive health
+	goto TIMEOUT
 
 ICUTUTOUCHINGP:
   pause
@@ -7377,7 +7536,10 @@ ICUTUTOUCHING:
   #The spell pattern collapses at the last moment due to the undead state of a sinuous ice adder.
   put touch
   put yes
-  matchwait
+  matchwait 5
+	var timeoutsub ICUTUTOUCHING
+  var timeoutcommand touch
+	goto TIMEOUT
 
 ICUTUADv:
   gosub ADV
@@ -7390,7 +7552,10 @@ GAZESANOWRET:
   matchre GAZESANOWRETP %waitstring
   matchre RETURN You gaze intently into your|You need to be wearing or holding that first.
   put gaze %sanowretitem
-  matchwait
+  matchwait 5
+	var timeoutsub GAZESANOWRET
+  var timeoutcommand gaze %sanowretitem
+	goto TIMEOUT
 
 #ARMOR	
 ARMORSET:
@@ -7434,7 +7599,10 @@ NEWARMORFIND:
 INVARMOR:
   matchre RETURN [Type INVENTORY HELP for more options]|You aren't wearing anything like that.
   put inv armor
-  matchwait
+  matchwait 5
+	var timeoutsub INVARMOR
+  var timeoutcommand inv armor
+	goto TIMEOUT
 
 
 ###HEALTH###
@@ -7445,7 +7613,10 @@ INFOCHECK:
   matchre RETURN A good positive attitude never hurts.
   put info
   put yes
-  matchwait
+  matchwait 5
+	var timeoutsub INFOCHECK
+  var timeoutcommand info
+	goto TIMEOUT
 
 BURDENCHECKP:
   pause
@@ -7453,7 +7624,10 @@ BURDENCHECK:
   matchre BURDENCHECKP %waitstring
   match RETURN Encumbrance :
   put encumbrance
-  matchwait
+  matchwait 5
+	var timeoutsub BURDENCHECK
+  var timeoutcommand encumbrance
+	goto TIMEOUT
 
 HEALTHCHECKP:
   pause
@@ -7464,7 +7638,10 @@ HEALTHCHECK:
   matchre RETURN A good positive attitude never hurts.
   put health
   put yes
-  matchwait
+  matchwait 5
+	var timeoutsub HEALTHCHECK
+  var timeoutcommand yes
+	goto TIMEOUT
 
 HEALTHCHECKCLEAN:
   var healthcheckgood 1
@@ -7481,7 +7658,10 @@ BLEEDCHECK:
   matchre RETURN A good positive attitude never hurts.
   put health
   put yes
-  matchwait
+  matchwait 5
+	var timeoutsub BLEEDCHECK
+  var timeoutcommand yes
+	goto TIMEOUT
   
 BLEEDING:
   if %head = 1 then gosub tend head
@@ -7500,18 +7680,23 @@ BLEEDING:
   if %lefteye = 1 then gosub tend left eye
   return
 
+TEND:
+  var tendlocation $0
 TENDP:
   pause
-TEND:
-  if $0 = "stunned" then
+TENDMAIN:
+  if ("%tendlocation" = "stunned") then
   {
     var nextbleed %t
     return
   }
   matchre TENDP %waitstring
   matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove
-  put tend my $0
-  matchwait
+  put tend my %tendlocation
+  matchwait 5
+	var timeoutsub TENDMAIN
+  var timeoutcommand tend my %tendlocation
+	goto TIMEOUT
   
 BLEEDCLEAN:
   var head 0
@@ -7746,7 +7931,10 @@ COLLECT:
 	match BADCOLLECT You survey the area and realize that any collecting efforts would be futile.
 	match FULLHANDS You really need to have at least one hand free to properly collect something.
 	put collect %collectitem
-	matchwait
+	matchwait 5
+	var timeoutsub COLLECT
+  var timeoutcommand collect %collectitem
+	goto TIMEOUT
 
 FULLHANDS:
   gosub STOWALL
@@ -7764,25 +7952,17 @@ KICKP:
 	pause
 KICK:
   if $standing != 1 then gosub STAND
-  if matchre ("$roomobjs", "a pile of rocks") then
-  {
-	  matchre KICKP %waitstring
-	  match KICK You take a step back
-    matchre KICKS You can't do that from your position.|You can't quite manage
-	  matchre RETURN I could not find|Now what did the|You lean back and kick your feet|Now THAT would be a trick!
-	  put kick rock
-	  matchwait
-	}
-	if matchre ("$roomobjs", "a pile of dust bunnies") then
-  {
-	  matchre KICKP %waitstring
-	  match KICK You take a step back
-    matchre KICKS You can't do that from your position.|You can't quite manage
-	  matchre RETURN I could not find|Now what did the|You lean back and kick your feet|Now THAT would be a trick!
-	  put kick bunnies
-	  matchwait
-	}
-	return
+  if matchre ("$roomobjs", "a pile of rocks") then var kickitem rock
+  if matchre ("$roomobjs", "a pile of dust bunnies") then var kickitem bunnies
+  matchre KICKP %waitstring
+  match KICK You take a step back
+  matchre KICKS You can't do that from your position.|You can't quite manage
+  matchre RETURN I could not find|Now what did the|You lean back and kick your feet|Now THAT would be a trick!
+  put kick rock
+  matchwait 5
+  var timeoutsub KICK
+  var timeoutcommand kick %kickitem
+  goto TIMEOUT
 
 KICKS:
   gosub STAND
@@ -7796,7 +7976,10 @@ HUNT:
 	match RETURN Roundtime:
 	matchre HUNTP %waitstring
 	put hunt
-	matchwait
+  matchwait 5
+  var timeoutsub HUNT
+  var timeoutcommand hunt
+  goto TIMEOUT
 
 NOHUNT:
   var %hunt NO
@@ -7808,7 +7991,10 @@ JUSTICECHECK:
   matchre JUSTICECHECKP %waitstring
   matchre RETURN You're fairly certain this area is lawless and unsafe.|After assessing the area, you think local law enforcement keeps an eye on what's going on here.|After assessing the area, you believe there is some kind of unusual law enforcement in this area.
   put justice
-  matchwait
+  matchwait 5
+  var timeoutsub JUSTICECHECK
+  var timeoutcommand justice
+  goto TIMEOUT
 
 ###MUSIC###
 ASSESSINSTRUMENTP:
@@ -7818,7 +8004,10 @@ ASSESSINSTRUMENT:
   match RETURN Roundtime:
   matchre RETURN You cannot assess the .* properly while in combat\!
   put assess my %instrument
-  matchwait
+  matchwait 5
+  var timeoutsub ASSESSINSTRUMENT
+  var timeoutcommand assess my %instrument
+  goto TIMEOUT
 
 PLAYP:
   pause
@@ -7827,7 +8016,10 @@ PLAY:
   matchre PLAYSUCCESS You're already playing a song!|You begin a|You effortlessly begin|You fumble slightly|You struggle to begin
   match PLAYUNHIDE That would give away your hiding place!
   put play %songtype on %instrument
-  matchwait
+  matchwait 5
+  var timeoutsub PLAY
+  var timeoutcommand play %songtype on %instrument
+  goto TIMEOUT
 
 PLAYUNHIDE:
   gosub UNHIDE
@@ -7846,7 +8038,10 @@ PLAYSTOP:
   matchre PLAYSTOPP %waitstring
   matchre RETURN You stop playing your song.|In the name of love?|But you're not performing anything\!
   put stop play
-  matchwait
+  matchwait 5
+  var timeoutsub PLAYSTOP
+  var timeoutcommand stop play
+  goto TIMEOUT
 
 HUMP:
   pause
@@ -7854,7 +8049,10 @@ HUM:
   matchre HUMP %waitstring
   matchre HUMSUCCESS You're already humming a song!|You begin a|You effortlessly begin|You fumble slightly|You struggle to begin
   put hum %humsong
-  matchwait
+  matchwait 5
+  var timeoutsub HUM
+  var timeoutcommand hum %humsong
+  goto TIMEOUT
 
 HUMSUCCESS:
   var playing 1
@@ -7887,7 +8085,10 @@ INSTCLEAN:
   matchre INSTCLEANGET You must be holding
   matchre INSTDRY Maybe you should dry (it|them) off before attempting to clean (it|them).
   put clean %instrument with %instcleancloth
-  matchwait
+  matchwait 5
+  var timeoutsub INSTCLEAN
+  var timeoutcommand clean %instrument with %instcleancloth
+  goto TIMEOUT
   
 INSTCLEANGET:
   gosub STOW right
@@ -7902,7 +8103,10 @@ INSTDRY:
   match INSTDRYNONE You must be holding
   matchre INSTWRING Your cloth absorbs the water without too much trouble, but remains very wet afterwards.|Using your cloth, you expertly drain|You stare at your
   put wipe my %instrument with %instcleancloth
-  matchwait
+  matchwait 5
+  var timeoutsub INSTDRY
+  var timeoutcommand wipe my %instrument with %instcleancloth
+  goto TIMEOUT
 
 INSTDRYNONE:
   gosub GETITEM %instrument
@@ -7915,7 +8119,10 @@ INSTWRING:
   matchre INSTCLEAN squeezing out the last bit of water.
   matchre INSTWRING water dribbling down your hands to splash at your feet.|water pouring out to splash at your feet.
   put wring my %instcleancloth
-  matchwait 
+  matchwait 5
+  var timeoutsub INSTWRING
+  var timeoutcommand wring my %instcleancloth
+  goto TIMEOUT 
 
 AWAKEP:
   pause
@@ -7923,7 +8130,10 @@ AWAKE:
   matchre AWAKEP %waitstring
   matchre RETURN You awaken from your reverie and begin to take in the world around you|But you are not sleeping!
   put awake
-  matchwait
+  matchwait 5
+  var timeoutsub AWAKE
+  var timeoutcommand awake
+  goto TIMEOUT
 
 DEEPSLEEPP:
   pause
@@ -7932,7 +8142,10 @@ DEEPSLEEP:
   matchre DEEPSLEEP You relax and allow your mind to enter a state of rest.|You stir yourself from the depths of relaxation and prepare for another night.|You stir yourself from the depths of relaxation and prepare for another day.
   matchre RETURN You draw deeper into rest, trying to destress from a hard (day's|night's) adventuring.
   put sleep
-  matchwait
+  matchwait 5
+  var timeoutsub DEEPSLEEP
+  var timeoutcommand sleep
+  goto TIMEOUT
 
 RPATOGGLEP:
   pause
@@ -7943,7 +8156,10 @@ RPATOGGLE:
   matchre RPATIMER You need to wait a few minutes before doing that again.
   matchre RPABAD But you don't have an active roleplaying award to pause!
   put rpa toggle
-  matchwait
+  matchwait 5
+  var timeoutsub RPATOGGLE
+  var timeoutcommand rpa toggle
+  goto TIMEOUT
 
 RPATIMER:
   return
@@ -7966,8 +8182,12 @@ STUDYALMANAC:
   matchre STUDYALMANACP %waitstring
   matchre ALMANACRETURN Roundtime:
   matchre BADALMANAC You've gleaned all the insight you can from
+  match RETURN Study what?
   put study my %almanacitem
-  matchwait
+  matchwait 5
+  var timeoutsub STUDYALMANAC
+  var timeoutcommand study my %almanacitem
+  goto TIMEOUT
   
 ALMANACRETURN:
   var nextalmanac %t
@@ -7986,7 +8206,10 @@ WRITEJOURNAL:
   matchre WRITEJOURNALGOOD Flipping to a blank page, you pluck the|As you open your
   matchre WRITEJOURNALBAD Having recently written in
   put write %ejournalitem
-  matchwait
+  matchwait 5
+  var timeoutsub WRITEJOURNAL
+  var timeoutcommand write %ejournalitem
+  goto TIMEOUT
 
 WRITEJOURNALGOOD:
   var ejournalused 1
@@ -8005,7 +8228,10 @@ TARANTULATURN:
   match RETURN However, your changes fail to lock into place.
   match TARANTULATURNBAD What skill did you want to attune
   put turn %tarantulaitem to %tarantulaskill%tskill
-  matchwait
+  matchwait 5
+  var timeoutsub TARANTULATURN
+  var timeoutcommand turn %tarantulaitem to %tarantulaskill%tskill
+  goto TIMEOUT
 
 TTURNGOOD:
   var turngood 1
@@ -8023,7 +8249,10 @@ TARANTULARUB:
   match TRUBGOOD It is mere moments afterward that you feel an itching, tingling, and crawling sensation all across the inside of your skull.
   matchre RETURN You try, but the|But you currently aren't learning any
   put rub %tarantulaitem
-  matchwait
+  matchwait 5
+  var timeoutsub TARANTULARUB
+  var timeoutcommand rub %tarantulaitem
+  goto TIMEOUT
   
 TRUBGOOD:
   #put #echo %alertwindow Used tarantula on %tarantulaskill%tskill.
@@ -8037,7 +8266,10 @@ STUDY:
   match RETURN You need to be holding your compendium to study it.
   matchre STUDYP %waitstring
   put study my compendium
-  matchwait  
+  matchwait 5
+  var timeoutsub STUDY
+  var timeoutcommand study my compendium
+  goto TIMEOUT
 
 STUDYTEXTP:
 	pause
@@ -8047,7 +8279,10 @@ STUDYTEXT:
   matchre RETURN /Roundtime: \d+/
   matchre STUDYTEXTP %waitstring
   put study my %textbookitem
-  matchwait
+  matchwait 5
+  var timeoutsub STUDYTEXT
+  var timeoutcommand study my %textbookitem
+  goto TIMEOUT
   
 TEXTNEXTBAD:
   var textlist%textpositionnext %t
@@ -8069,7 +8304,10 @@ TURNTEXT:
   matchre RETURN You turn to the section on
   matchre BADTEXT That section does not exist within your
   put turn my %textbookitem to %textmonster
-  matchwait
+  matchwait 5
+  var timeoutsub TURNTEXT
+  var timeoutcommand turn my %textbookitem to %textmonster
+  goto TIMEOUT
 
 BADTEXT:
   var badtextturn 1
@@ -8087,7 +8325,10 @@ TEACH:
     matchre TEACHP %waitstring
     matchre RETURN You begin to lecture|I don't understand which skill you wish to teach.|is already listening to you|I don't understand which skill you wish to teach.|You have already offered|I could not find who you were referring to.|That person is too busy teaching their own students to listen to your lesson.
     put teach %teachskill to %teachtarget 
-    matchwait
+    matchwait 5
+    var timeoutsub TEACH
+    var timeoutcommand teach %teachskill to %teachtarget
+    goto TIMEOUT
   }
   else return
 
@@ -8097,7 +8338,10 @@ TEACHSTOP:
   matchre TEACHSTOPP %waitstring
   matchre RETURN But you aren't teaching anyone.|You stop teaching.
   put stop teach
-  matchwait
+  matchwait 5
+  var timeoutsub TEACHSTOP
+  var timeoutcommand stop teach
+  goto TIMEOUT
 
 TEACHASSESSP:
   pause
@@ -8105,8 +8349,11 @@ TEACHASSESS:
   matchre TEACHASSESSP %waitstring
   matchre RETURN Roundtime: 
   put assess teach
-  matchwait
-  return
+  matchwait 5
+  var timeoutsub TEACHASSESS
+  var timeoutcommand assess teach
+  goto TIMEOUT
+
 
 TURNP:
   pause
@@ -8117,7 +8364,10 @@ TURN:
     put turn compendium
     match STUDY You turn to the section
     matchre TURNP %waitstring
-    matchwait
+    matchwait 5
+    var timeoutsub TURN
+    var timeoutcommand turn compendium
+    goto TIMEOUT
   }
   else
   {
@@ -8134,7 +8384,10 @@ PICKBOX:
   matchre RETURN You set about picking the training box, but it quickly becomes apparent you are not making any progress.|Pick what?
   matchre BADLOCK The lock feels warm, as if worked too often recently, so you stop your attempt to pick it.
   put pick my %locksmithboxitem
-  matchwait
+  matchwait 5
+  var timeoutsub PICKBOX  
+  var timeoutcommand pick my %locksmithboxitem
+  goto TIMEOUT
 
 BADLOCK:
   var picksleft 0
@@ -8146,7 +8399,10 @@ LOCKBOX:
   matchre LOCKBOXP %waitstring
   matchre RETURN You quickly lock the training box and pocket the key.|The training box is already locked.
   put lock my %locksmithboxitem
-  matchwait
+  matchwait 5
+  var timeoutsub LOCKBOX
+  var timeoutcommand lock my %locksmithboxitem
+  goto TIMEOUT
 
 SKINTRAINERP:
   pause
@@ -8155,7 +8411,10 @@ SKINTRAINER:
   matchre REPAIRSKINTRAINER You skillfully peel back the leather from the frame underneath\.|A .* has already been sliced open\.  Maybe you should REPAIR it\.
   matchre BADSKINTRAIN The leather looks frayed, as if worked too often recently, so you stop your attempt to skin it\.
   put skin %skinfatraineritem
-  matchwait
+  matchwait 5
+  var timeoutsub SKINTRAINER
+  var timeoutcommand skin %skinfatraineritem
+  goto TIMEOUT
 
 BADSKINTRAIN:
   var skinsleft 0
@@ -8167,7 +8426,10 @@ REPAIRSKINTRAINER:
   matchre REPAIRSKINTRAINERP %waitstring
   matchre RETURN With some needle and thread, you quickly stitch .* back together\.|A .* isn't in need of repair\.
   put repair my %skinfatraineritem
-  matchwait
+  matchwait 5
+  var timeoutsub REPAIRSKINTRAINER
+  var timeoutcommand repair my %skinfatraineritem
+  goto TIMEOUT
 
   
 WINDCHECKP:
@@ -8177,7 +8439,10 @@ WINDCHECK:
   matchre YESWIND You're already riding on something.
   matchre NOWIND You need to be holding the|You cannot really do anything on
   put mount windboard
-  matchwait
+  matchwait 5
+  var timeoutsub WINDCHECK
+  var timeoutcommand mount windboard
+  goto TIMEOUT
 
 YESWIND:
   var windmounted 1
@@ -8282,6 +8547,7 @@ APPRAISECREATURE:
   match RETURN Perhaps that's not such a wise thing to do.
   match RETURN I could not find what you were referring to.
   match RETURN It's hard to appraise the
+  match RETURN You can't determine anything about this creature.
   put appraise %appraisemon quick
   matchwait 
  
@@ -8326,6 +8592,7 @@ FORAGE:
 	matchre FORAGEP %waitstring
 	match RETURN You manage to find
 	match FORAGEFULL You really need to have at least one hand free to forage properly.
+	match FORAGEDUMP The room is too cluttered to find anything here!
 	match FORAGE Roundtime:
 	put forage %forageitem
 	matchwait
@@ -8342,6 +8609,22 @@ FORAGEFULL:
     gosub STOW left
   }
   goto FORAGE
+  
+FORAGEDUMP:
+  gosub DUMPJUNK
+  pause 20
+  goto FORAGE
+  
+  
+DUMPJUNKP:
+  pause
+DUMPJUNK:
+  matchre DUMPJUNKP %waistring
+  match RETURN You should just kick yourself in the shin.  There is no junk here.
+  match RETURN [You have marked this room to be cleaned by the janitor.  It should arrive shortly.]
+  match RETURN The janitor was recently summoned to this room.
+  put dump junk
+  matchwait
   
 BRAID:
   if matchre ("$righthand", "%braidobjects") then gosub BRAIDING
@@ -8810,10 +9093,10 @@ VARCONVERT:
   put #var m1bugoutonbleed $bugoutonbleed
   put #var m1bugoutroom $bugoutroom
   put #var m1autoupkeep $autoupkeep
-  put #var m1aumoveclenchshard $aumoveclenchshard
-  put #var m1aumovewhistle $aumovewhistle
+  put #var m1moveclenchshard $moveclenchshard
+  put #var m1movewhistle $movewhistle
   put #var m1movescream $movescream
-  put #var m1aumovevanish $aumovevanish
+  put #var m1movevanish $movevanish
   put #var m1autravel $autravel 
   put #var m1autraveldest $autraveldest
   put #var m1aumove $aumove
