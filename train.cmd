@@ -9672,7 +9672,7 @@ KHRILOGIC:
   if %combatperforming = 1 then return
   var khrilist
   var badkhrilist
-  var khritype avoidance
+  var khritype adaptation
   if %khriadaptation = "YES" then
   {
     if $SpellTimer.KhriAdaptation.active != 1 then var khrilist %khrilist|%khritype
