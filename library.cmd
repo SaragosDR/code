@@ -11,11 +11,11 @@ var transnecro |ivm|ks|bue|worm|ch|php|
 var aimweapons bow|xbow|sling
 var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|field|plane|planes|road|spell|symbiosis strengthen|symbiosis endure|symbiosis avoid|symbiosis spring|symbiosis remember|symbiosis resolve|symbiosis impress|symbiosis discern|symbiosis explore|symbiosis watch|symbiosis harvest|symbiosis heal|symbiosis learn|symbiosis examine|symbiosis perform|symbiosis cast|symbiosis harness|symbiosis activate
 
-var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-woodtrolls|p1-grasseels|p1-beisswurms|p1-copperheads|p1-endrusserpents|p1-snowbeasts|p1-vipers|p1-leucros|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
-var combatpresetp2 p2-seordmaors
-var combatpresetp3 p3-prereniyoung|p3-prereni|p3-prerenielder|p3-gryphons|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-adanfsorcs|p3-adanfblades
+var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-vipers|p1-leucros|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
+var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-brocketdeer|p2-brocketdeerelder|p2-seordmaors
+var combatpresetp3 p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-prereniyoung|p3-prereni|p3-prerenielder|p3-gryphons|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-adanfsorcs|p3-adanfblades
 var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2
-var combatpresetp5 p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-blackapes|p5-fuliginmoths|p5-voidmoths
+var combatpresetp5 p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-blackapes|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
 var combatpresetlist none|%combatpresetp1|%combatpresetp2|%combatpresetp3|%combatpresetp4|%combatpresetp5
 
 var townpresetlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|shard|fangcove|hibarnhvidar|boarclan|ratha|merkresh
@@ -109,7 +109,19 @@ VARCHECKS:
   if !def(m%checkmodetarantulaskill2) then put #var m%checkmodetarantulaskill2 shield
   
   #MOVEMENT
+  #if !matchre("$m%checkmodeaumoveclenchshard", "\b(YES|NO)\b") then put #var m%checkmodeaumoveclenchshard NO
+  if !matchre("$m%checkmodemovewhistle", "\b(YES|NO)\b") then put #var m%checkmodemovewhistle NO
+  if !matchre("$m%checkmodemovescream", "\b(YES|NO)\b") then put #var m%checkmodemovescream NO
+  if !matchre("$m%checkmodemovevanish", "\b(YES|NO)\b") then put #var m%checkmodemovevanish NO
+  if !matchre("$m%checkmodebugout", "\b(YES|NO)\b") then put #var m%checkmodebugout NO
+  if $m%checkmodebugoutnum > 0 then
+  else put #var m%checkmodebugoutnum 1
+  if !matchre("$m%checkmodebugoutonbleed", "\b(YES|NO)\b") then put #var m%checkmodebugoutonbleed NO
+  if $m%checkmodebugoutroom > 0 then
+  else put #var m%checkmodebugoutroom 1
+  
   if !matchre("$m%checkmodecustommovement", "\b(YES|NO)\b") then put #var m%checkmodecustommovement NO
+  if !matchre("$m%checkmodekillbeforemove", "\b(YES|NO)\b") then put #var m%checkmodekillbeforemove YES
   if !matchre("$m%checkmodecombatpreset", "\b(%combatpresetlist)\b") then put #var m%checkmodecombatpreset none
   if !matchre("$m%checkmodepresetpremium", "\b(YES|NO|ONLY)\b") then put #var m%checkmodepresetpremium NO
   if ("$m%checkmodecombatpreset" != "none") then
@@ -179,6 +191,22 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 297|296|26|27|28|29|30|31|32|33|34|35|269|270|272|38|40
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 270|272|38|40
     }
+    #4
+    if ("$m%checkmodecombatpreset" = "p1-origami") then
+    {
+      put #var m%checkmodezone 7
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest kaerna
+      put #var m%checkmodemove NO
+      put #var m%checkmodemovelist 0
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 256|257|258|259|260|261|262|263|264|265|266
+      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 256|257|258|259|260|261|262|263|264|265|266|788|789|790|791
+      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 788|789|790|791
+      put #var m%checkmodefindroomlist 
+    }
+    #4
     if ("$m%checkmodecombatpreset" = "p1-pothanits") then
     {
       put #var m%checkmodezone 6
@@ -255,9 +283,19 @@ VARCHECKS:
       put #var m%checkmodetravel YES
       put #var m%checkmodetraveldest stone
       put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
+      put #var m%checkmodetargetroom 07
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 31|32|33|34|36|36|37
+    }
+    if ("$m%checkmodecombatpreset" = "p1-cavebears") then
+    {
+      put #var m%checkmodezone 10
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest stone
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 50|48|49|52|53|52|51|53|55|56|54|57|59|58
     }
     if ("$m%checkmodecombatpreset" = "p1-copperheads") then
     {
@@ -269,16 +307,26 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 131|132|133|134
     }
+    if ("$m%checkmodecombatpreset" = "p1-rocktrolls") then
+    {
+      put #var m%checkmodezone 7
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest kaerna
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 441|442|443|444|445|446|447|448|449|450|451|452|453|454|455|456|457|458|459|460
+    }
     if ("$m%checkmodecombatpreset" = "p1-endrusserpents") then
     {
-      put #var m%checkmodezone 9b
+      put #var m%checkmodezone 60
       put #var m%checkmodetravel YES
       put #var m%checkmodetraveldest leth
       put #var m%checkmodemove YES
       put #var m%checkmodemovelist str1
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 131|132|133|134
+      put #var m%checkmodefindroomlist 147|148|149|150|151|152|153|154|155
     }
     if ("$m%checkmodecombatpreset" = "p1-snowbeasts") then
     {
@@ -356,6 +404,49 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 189|190|191|192|193|194|195|300|301|302|303|304|305
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 300|301|302|303|304|305
     }
+    if ("$m%checkmodecombatpreset" = "p2-brocketdeeryoung") then
+    {
+      put #var m%checkmodezone 40a
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest langenfirth
+      put #var m%checkmodemove YES
+      put #var m%checkmodemovelist siksraja
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 104|105|146|147
+    }
+    if ("$m%checkmodecombatpreset" = "p2-marauders") then
+    {
+      put #var m%checkmodezone 41
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest fornsted
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 16|17|18|19|25|26|27|28|29
+    }
+    if ("$m%checkmodecombatpreset" = "p2-brocketdeer") then
+    {
+      put #var m%checkmodezone 40a
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest langenfirth
+      put #var m%checkmodemove NO
+      put #var m%checkmodemovelist siksraja
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 148|149|150|151
+    }
+    if ("$m%checkmodecombatpreset" = "p2-brocketdeerelder") then
+    {
+      put #var m%checkmodezone 40a
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest langenfirth
+      put #var m%checkmodemove YES
+      put #var m%checkmodemovelist siksraja
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 155|154|153|152
+    }
     if ("$m%checkmodecombatpreset" = "p2-seordmaors") then
     {
       put #var m%checkmodezone 41
@@ -365,6 +456,37 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 77|78|79|76|204
+    }
+    if ("$m%checkmodecombatpreset" = "p3-snowbeasts") then
+    {
+      put #var m%checkmodezone 66
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest fayrin
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 167|168|169|170|171
+    }
+    if ("$m%checkmodecombatpreset" = "p3-rocktrolls2") then
+    {
+      put #var m%checkmodezone 68
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest ylono
+      put #var m%checkmodemove YES
+      put #var m%checkmodemovelist sgate
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 8|9|10|11|12|13|14
+    }
+    if ("$m%checkmodecombatpreset" = "p3-gargoyles") then
+    {
+      put #var m%checkmodezone 66
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest fayrin
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 173|174|178|179|180|181|182|183|184|185|186|187|188|189|190
     }
     if ("$m%checkmodecombatpreset" = "p3-gryphons") then
     {
@@ -436,8 +558,9 @@ VARCHECKS:
     {
       put #var m%checkmodezone 68
       put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest corik
-      put #var m%checkmodemove NO
+      put #var m%checkmodetraveldest ylono
+      put #var m%checkmodemove YES
+      put #var m%checkmodemovelist sgate
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 139|140|141|142|143|144|210|209|145|146|147|148|149|150
@@ -446,9 +569,9 @@ VARCHECKS:
     {
       put #var m%checkmodezone 68a
       put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest corik
+      put #var m%checkmodetraveldest ylono
       put #var m%checkmodemove YES
-      put #var m%checkmodemovelist ice caves
+      put #var m%checkmodemovelist sgate|ice caves
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 16|15|14|13|12|27|11|10|28|9|8|26|17|18|19|20|21
@@ -503,8 +626,9 @@ VARCHECKS:
     {
       put #var m%checkmodezone 68
       put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest corik
-      put #var m%checkmodemove NO
+      put #var m%checkmodetraveldest ylono
+      put #var m%checkmodemove YES
+      put #var m%checkmodemovelist sgate
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 151|152|153|154|155|156|157|158|159|160
@@ -513,8 +637,9 @@ VARCHECKS:
     {
       put #var m%checkmodezone 68
       put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest corik
-      put #var m%checkmodemove NO
+      put #var m%checkmodetraveldest ylono
+      put #var m%checkmodemove YES
+      put #var m%checkmodemovelist sgate
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 163|164|165|166|167|168|169|170|171|172|173|174|175|176
@@ -549,6 +674,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 637|638|639|640|641|642
     }
+    #185
     if ("$m%checkmodecombatpreset" = "p5-voidmoths") then
     {
       put #var m%checkmodezone 127
@@ -558,6 +684,17 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 643|644|645|646|647|648
+    }
+    #195
+    if ("$m%checkmodecombatpreset" = "p5-shadowmoths") then
+    {
+      put #var m%checkmodezone 127
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest boar
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 649|650|651|652|653|654
     }
     if ("$m%checkmodecombatpreset" = "p5-iceadders") then
     {
@@ -754,16 +891,6 @@ VARCHECKS:
   if !matchre("$paranoiaalerts", "\b(YES|NO)\b") then put #var paranoiaalerts NO
   
   #UPKEEP
-  #if !matchre("$m%checkmodeaumoveclenchshard", "\b(YES|NO)\b") then put #var m%checkmodeaumoveclenchshard NO
-  if !matchre("$m%checkmodemovewhistle", "\b(YES|NO)\b") then put #var m%checkmodemovewhistle NO
-  if !matchre("$m%checkmodemovescream", "\b(YES|NO)\b") then put #var m%checkmodemovescream NO
-  if !matchre("$m%checkmodemovevanish", "\b(YES|NO)\b") then put #var m%checkmodemovevanish NO
-  if !matchre("$m%checkmodebugout", "\b(YES|NO)\b") then put #var m%checkmodebugout NO
-  if $m%checkmodebugoutnum > 0 then
-  else put #var m%checkmodebugoutnum 1
-  if !matchre("$m%checkmodebugoutonbleed", "\b(YES|NO)\b") then put #var m%checkmodebugoutonbleed NO
-  if $m%checkmodebugoutroom > 0 then
-  else put #var m%checkmodebugoutroom 1
   if !matchre("$m%checkmodeautoupkeep", "\b(YES|NO)\b") then put #var m%checkmodeautoupkeep NO
   if !matchre("$m%checkmodeauonhealth", "\b(YES|NO)\b") then put #var m%checkmodeauonhealth NO
   if $m%checkmodeauhealthnum >= 0 then
@@ -813,6 +940,7 @@ VARCHECKS:
   if !matchre("$m%checkmodecollectcoin", "\b(YES|NO)\b") then put #var m%checkmodecollectcoin YES
   if !matchre("$m%checkmodecollectscroll", "\b(YES|NO)\b") then put #var m%checkmodecollectscroll YES
   if !matchre("$m%checkmodecollectmaps", "\b(YES|NO)\b") then put #var m%checkmodecollectmaps YES
+  if !matchre("$m%checkmodecollectmaterials", "\b(YES|NO)\b") then put #var m%checkmodecollectmaterials YES
   if !matchre("$m%checkmodecollectgem", "\b(YES|NO)\b") then put #var m%checkmodecollectgem YES
   if !matchre("$m%checkmodesavegwethstones", "\b(YES|NO)\b") then put #var m%checkmodesavegwethstones NO
   if !matchre("$m%checkmodecollectboxes", "\b(YES|NO)\b") then put #var m%checkmodecollectboxes NO
@@ -1621,6 +1749,9 @@ VARCHECKS:
   if !matchre("$m%checkmodemovevanish", "\b(YES|NO)\b") then put #var m%checkmodemovevanish NO
   #GUILD-TRADER
   if !matchre("$m%checkmodeinvest", "\b(YES|NO)\b") then put #var m%checkmodeinvest NO
+  if !matchre("$m%checkmodetradingsell", "\b(YES|NO)\b") then put #var m%checkmodetradingsell NO
+  if !matchre("$m%checkmodetradingsellitem", "\b(bundles|pouches|both)\b") then put #var m%checkmodetradingsellitem both
+  if !matchre("$m%checkmodetradingtasks", "\b(YES|NO)\b") then put #var m%checkmodetradingtasks NO
   #GUILD-WM
   if !matchre("$m%checkmodesummoning", "\b(YES|NO)\b") then put #var m%checkmodesummoning NO
   if !matchre("$m%checkmodesummonweapon", "\b(YES|NO)\b") then put #var m%checkmodesummonweapon NO
@@ -1815,8 +1946,8 @@ TOWNPRESET:
 		put #var m%checkmode$0travel YES
 		put #var m%checkmode$0traveldest leth
 		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 0
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 0
+		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 206
+		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 207
 	}
 	if ("$m%checkmode$0preset" = "ilaya") then
 	{
@@ -4196,7 +4327,7 @@ FLEEP:
   pause
 FLEE:
   matchre FLEEP %waitstring
-  matchre FLEECONT You foresee the situation deteriorating rapidly.|You realize you're out of your element!|Either you're looking really tasty|You feel the wrenching pain of dejection as you|Hoping the gods will come to your rescue, you mutter|You suddenly realize that you may be completely outclassed in this match.|You suddenly realize that the hunter may be the hunted\.|For some inexplicable reason, you can't flee from this area\.  You frantically attempt to disengage from combat\.
+  matchre FLEECONT You foresee the situation deteriorating rapidly.|You realize you're out of your element!|Either you're looking really tasty|You feel the wrenching pain of dejection as you|Hoping the gods will come to your rescue, you mutter|You suddenly realize that you may be completely outclassed in this match.|You suddenly realize that the hunter may be the hunted\.|For some inexplicable reason, you can't flee from this area\.  You frantically attempt to disengage from combat\.|Scanning the area for an escape route, you turn
   match RETURN You assess your combat situation and realize you don't see anything engaged with you.
   put flee
   matchwait 5
@@ -4801,6 +4932,7 @@ MEDITATEPOWERP:
 MEDITATEPOWER:
   matchre MEDITATEPOWERP %waitstring
   match RETURN You feel a jolt as your vision snaps shut.
+  match MEDITATEPOWERP But you are currently starting a meditation, and cannot focus your mind on another.
   put meditate power
  	matchwait 5
 	var timeoutsub MEDITATE POWER
@@ -4816,6 +4948,7 @@ MEDITATION:
   match MEDITATIONWRONG You have no idea how to do that.
   match MEDITATIONTRAIN You have not been trained in that type of meditation.
   match MEDITATIONRETURN Roundtime
+  match RETURN Your inner fire lacks the strength to empower such a potent mental activity.
   put meditate %meditationtype
   matchwait 5
   var timeoutsub MEDITATION
@@ -4885,7 +5018,7 @@ WARHORNP:
 WARHORN:
   matchre WARHORNP %waitstring
   matchre RETURN Roundtime
-  put exhale %warhornitem lure
+  put exhale warhorn lure
   matchwait 5
   var timeoutsub WARHORN
   var timeoutcommand exhale %warhornitem lure
@@ -6821,7 +6954,7 @@ GWETHGET:
   return
 
 BOXGET:
-  if matchre ("$roomobjs", "(%boxtype) (%boxes)") then
+  if !matchre ("$roomobjs", "\b(%boxtype) (%boxes)\b(,|\.| and)") then
   {
     var boxitem $1 $2
     gosub GETITEM %boxitem
@@ -6848,13 +6981,14 @@ LOOT:
 
 
 LOOTCHECK:
-  if (%collectcoin = "YES") then gosub COINGET
-  if (%savegwethstones = "YES") then gosub GWETHGET
-  if (%collectgem = "YES") then gosub GEMGET
-  if (%collectboxes = "YES") then gosub BOXGET
-  if (%collectscroll = "YES") then gosub SCROLLGET
-  if (%collectmaps = "YES") then gosub MAPGET
-  if (%misckeeplist != "none") then
+  if ("%collectcoin" = "YES") then gosub COINGET
+  if ("%savegwethstones" = "YES") then gosub GWETHGET
+  if ("%collectgem" = "YES") then gosub GEMGET
+  if ("%collectboxes" = "YES") then gosub BOXGET
+  if ("%collectscroll" = "YES") then gosub SCROLLGET
+  if ("%collectmaps" = "YES") then gosub MAPGET
+  if ("%collectmaterials" = "YES") then gosub MATERIALSGET
+  if ("%misckeeplist" != "none") then
   {
     eval keeplistnum count("%misckeeplist", "|")
     var miscgetcounter 0
@@ -6871,6 +7005,18 @@ MAPGET:
     gosub STOWITEM map
   }
   if matchre ("$roomobjs", "\b(%treasuremaps)\b(,|\.| and)") then goto MAPGET
+  return
+
+MATERIALSGET:
+  if matchre ("$roomobjs", "\b(%materials) (\w+)\b(,|\.| and)") then
+  {
+    var materialadj $1
+    var materialnoun $2
+    gosub GETITEM %materialnoun
+    if %lootalerts = "YES" then put #echo %alertwindow Yellow [Treasure]: Found a %materialadj %materialnoun!
+    gosub STOWITEM %materialnoun
+  }
+    if matchre ("$roomobjs", "\b(%materials) (\w+)\b(,|\.| and)") then goto MATERIALSGET
   return
 
 
@@ -7242,6 +7388,84 @@ INVEST:
 INVESTRETREAT:
   gosub RETREAT
   goto INVEST
+
+
+TASKASKP:
+  pause
+TASKASK:
+  matchre TASKASKP %waitstring
+  match RETURN Mags frowns and shakes her head.  "Sorry, me hearin' isnae what it used tae be.  Come again?"
+  match TASKFIND The firewood peddler Mags looks at you and says, "You are already on a task.  Please complete that task, or you may ask to cancel the job by asking me FOR TASK CANCEL."
+  matchre TASKACCEPT The firewood peddler Mags says, "I do have a small task I'd like for you to perform\.  I need (\d*) (.*)\.  If you could get those for me, I would greatly appreciate it\."
+  matchre TASKBAD The firewood peddler Mags says, "I am sorry, you must wait before I can give you a task\."
+  put ask mags for task
+  matchwait 5
+  var timeoutsub TASKASK
+  var timeoutcommand ask mags for task
+	goto TIMEOUT
+  
+TASKACCEPTP:
+  pause
+TASKACCEPT:
+  matchre TASKACCEPTP %waitstring
+  matchre TASKFIND The firewood peddler Mags says, "Well, then.  Get to it.  Remember, I need \d* .*\.  Also, I will treat each item you give me as one item\."  The firewood peddler Mags glares at you, "So, don't try to give me a huge bundle, I'll only credit you for one\!"
+  put accept task
+  matchwait 5
+  var timeoutsub TASKACCEPT
+  var timeoutcommand accept task
+	goto TIMEOUT
+
+TASKFINDP:
+  pause
+TASKFIND:
+  matchre TASKFINDP %waitstring
+  match RETURN You look in your task journal and see the following entry:
+  put task
+  matchwait 5
+  var timeoutsub TASKFIND
+  var timeoutcommand task
+	goto TIMEOUT
+	
+	
+TASKMOVE:
+  if ($zoneid != 1) then gosub TRAVEL crossing
+  if (!matchre("$roomobjs" "Mags")) then gosub MOVE mags
+  return
+  
+TASKBAD:
+  put #echo Yellow Mags is on cooldown!
+  pause 10
+  goto TASKASK
+  
+TASKFORAGELOOP:
+  if (%heldquantity >= %quantity) then return
+  gosub FORAGE %forageitem
+  if (matchre ("$righthand", "%forageitem")) then
+  {
+    gosub STOW right
+    math heldquantity add 1
+  }
+  goto TASKFORAGELOOP
+  
+TASKGIVELOOP:
+  gosub GETITEM %forageitem
+  gosub TASKGIVEMAGS 
+  if (%givingdone = 1) then return
+  else goto TASKGIVELOOP
+
+TASKGIVEMAGSP:
+  pause
+TASKGIVEMAGS:
+  matchre TASKGIVEMAGSP %waitstring
+  matchre RETURN The firewood peddler Mags takes the stems and says, "Thanks, .*\!  I need .* more\."
+  matchre TASKGIVEGOOD The firewood peddler Mags says, "Thank you very much, .*\.  I have a few things here for you, thank you so much for your help\."
+  put give mags
+  matchwait
+  
+TASKGIVEGOOD:
+  var givingdone 1
+  return
+
 
 #####WM_SUBS#####
 
@@ -7958,7 +8182,7 @@ KICK:
   match KICK You take a step back
   matchre KICKS You can't do that from your position.|You can't quite manage
   matchre RETURN I could not find|Now what did the|You lean back and kick your feet|Now THAT would be a trick!
-  put kick rock
+  put kick %kickitem
   matchwait 5
   var timeoutsub KICK
   var timeoutcommand kick %kickitem

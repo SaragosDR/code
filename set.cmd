@@ -807,6 +807,26 @@ SET:
     if tolower("%1") = "tktitem" then goto TEXTSET
     if tolower("%1") = "shadowlingnoun" then goto TEXTSET
     if tolower("%1") = "invest" then goto YESNOSET
+    if tolower("%1") = "tradingsell" then goto YESNOSET
+    if tolower("%1") = "tradingsellitem" then
+    {
+      if matchre("%2", "\b(0|1|2)\b") then
+      {
+        {  
+          var setvar cambitems
+          eval input toupper(%2)  
+          put #var m$varset%setvar %input
+          put #var save
+          goto VARDISPLAY
+        }
+        else
+        {
+          put #echo mono Must be either bundles, pouches, or both!
+          goto END
+        }
+      }
+    }
+    if tolower("%1") = "tradingtasks" then goto YESNOSET
     if tolower("%1") = "summoning" then goto YESNOSET
     if tolower("%1") = "summonweapon" then goto YESNOSET
     if tolower("%1") = "summonweapontimer" then goto TEXTSET
@@ -889,6 +909,7 @@ SET:
     if tolower("%1") = "collectcoin" then goto YESNOSET
     if tolower("%1") = "collectscroll" then goto YESNOSET
     if tolower("%1") = "collectmaps" then goto YESNOSET
+    if tolower("%1") = "collectmaterials" then goto YESNOSET
     if tolower("%1") = "misckeeplist" then goto LISTSET
     if tolower("%1") = "collectgem" then goto YESNOSET
     if tolower("%1") = "savegwethstones" then goto YESNOSET
@@ -905,6 +926,7 @@ SET:
     if tolower("%1") = "tarantulaskill1" then goto TEXTSET
     if tolower("%1") = "tarantulaskill2" then goto TEXTSET
     if tolower("%1") = "custommovement" then goto YESNOSET
+    if tolower("%1") = "killbeforemove" then goto YESNOSET
     if tolower("%1") = "combatpreset" then
     {
       #echo combatpresetp1: %combatpresetp1
@@ -1445,13 +1467,13 @@ SET:
     if tolower("%1") = "pspellc3" then goto CYCLICSET
     if tolower("%1") = "pskillc3" then goto MSKILLSET
     if tolower("%1") = "pspellc3prepmana" then goto TEXTSET
-  put #echo mono Invalid option.  .set display all to see a list of options.
-  goto END
+    put #echo mono Invalid option.  .set display all to see a list of options.
+    goto END
   }
   else goto MAINHELP
 
 MAINHELP:
-	if $traindefaultset != 1 then
+  if $traindefaultset != 1 then
 	{
 	  var traindefaultset 1
 	  gosub SETDEFAULTS
@@ -1993,13 +2015,6 @@ DISPLAYUPKEEP:
   put #echo mono  =================== Upkeep ====================
   put #echo mono =================== Mode: $varset ===================
 	put #echo mono ===============================================
-  put #echo
-  #put #echo mono MoveClenchShard: $m$varsetmoveclenchshard
-  #put #echo mono ShardItem: $m$varsetsharditem
-  gosub OUTPUT Bugout
-  gosub OUTPUT BugoutNum
-  gosub OUTPUT BugoutOnBleed
-	gosub OUTPUT BugoutRoom
 	put #echo
 	gosub OUTPUT AutoUpkeep
 	gosub OUTPUT AUOnHealth AUHealthNum
@@ -2047,13 +2062,14 @@ DISPLAYLOOT:
   put #echo mono LootAlerts: $m$varsetlootalerts
   put #echo mono LootType: $m$varsetloottype     (treasure|boxes|equipment|goods|all)
 	put #echo mono LootAllDead: $m$varsetlootalldead     (not group-hunting friendly)  
-	put #echo mono CollectCoin: $m$varsetcollectcoin
-	put #echo mono CollectScroll: $m$varsetcollectscroll
-	put #echo mono CollectMaps: $m$varsetcollectmaps
-	gosub OUTPUT CollectGem
-	gosub OUTPUT SaveGwethStones
 	gosub OUTPUT CollectBoxes
 	gosub OUTPUT BoxStorage
+	gosub OUTPUT COllectCoin	
+	gosub OUTPUT CollectGem
+	gosub OUTPUT SaveGwethStones
+	gosub OUTPUT CollectMaps
+	gosub OUTPUT CollectMaterials
+	gosub OUTPUT CollectScroll
 	put #echo mono MiscKeepList: $m$varsetmisckeeplist    (list of loot items to be kept, separated by the | character)
 	put #echo
   gosub OUTPUT Skinning
@@ -2198,8 +2214,6 @@ DISPLAYNONCOMBAT:
 	put #echo mono  =================== Noncombat ====================
   put #echo mono =================== Mode: $varset ===================
 	put #echo mono ===============================================
-	put #echo
-  put #echo mono Travel variable is a valid destination for the travel.cmd script included with the automapper repository.  MoveList variables is a list of valid #goto locations for the automapper or directions such as "go reeds", separated by the | character.
   put #echo
   gosub OUTPUT NonCombat
 	put #echo
@@ -2669,6 +2683,9 @@ DISPLAYGUILD:
     if $guild = "Trader" then
     {
       gosub OUTPUT Invest
+      gosub OUTPUT TradingSell
+      gosub OUTPUT TradingSellItem
+      gosub OUTPUT TradingTasks
     }
     if $guild = "Warrior Mage" then
     {
@@ -2773,10 +2790,18 @@ DISPLAYMOVEMENT:
   put #echo
   put #echo mono =================== Combat Movement ===================
   put #echo
+  #put #echo mono MoveClenchShard: $m$varsetmoveclenchshard
+  #put #echo mono ShardItem: $m$varsetsharditem
+  gosub OUTPUT Bugout
+  gosub OUTPUT BugoutNum
+  gosub OUTPUT BugoutOnBleed
+	gosub OUTPUT BugoutRoom
+  put #echo
   gosub OUTPUT CustomMovement
+  gosub OUTPUT KillBeforeMove
   put #echo
   gosub OUTPUT CombatPreset
-  put #echo mono Options: 
+  put #echo Gray mono Options: 
   #708090
   put #echo Gray --P1: %combatpresetp1
   put #echo Gray --P2: %combatpresetp2
@@ -3030,10 +3055,6 @@ VARCOPY:
   return
 
 VARCOPYUPKEEP:
-  put #var m%destbugout $m%sourcebugout
-  put #var m%destbugoutnum $m%sourcebugoutnum
-  put #var m%destbugoutonbleed $m%sourcebugoutonbleed
-  put #var m%destbugoutroom $m%sourcebugoutroom
   put #var m%destautoupkeep $m%sourceautoupkeep
   put #var m%destmoveclenchshard $m%sourcemoveclenchshard
   put #var m%destmovewhistle $m%sourcemovewhistle
@@ -3182,7 +3203,13 @@ VARCOPYGENERAL:
   return
   
 VARCOPYMOVEMENT:
+  put #var m%destbugout $m%sourcebugout
+  put #var m%destbugoutnum $m%sourcebugoutnum
+  put #var m%destbugoutonbleed $m%sourcebugoutonbleed
+  put #var m%destbugoutroom $m%sourcebugoutroom
+
   put #var m%destcustommovement $m%sourcecustommovement
+  put #var m%destkillbeforemove $m%sourcekillbeforemove
   put #var m%destcombatpreset $m%sourcecombatpreset
   put #var m%destpresetpremium $m%sourcepresetpremium
   put #var m%destzone $m%sourcezone
@@ -3248,6 +3275,7 @@ VARCOPYLOOT:
   put #var m%destcollectcoin $m%sourcecollectcoin
   put #var m%destcollectscroll $m%sourcecollectscroll
   put #var m%destcollectmaps $m%sourcecollectmaps
+  put #var m%destcollectmaterials $m%sourcecollectmaterials
   put #var m%destcollectgem $m%sourcecollectgem
   put #var m%destsavegwethstones $m%sourcesavegwethstones
   put #var m%destcollectboxes $m%sourcecollectboxes
@@ -3820,6 +3848,9 @@ VARCOPYGUILD:
   put #var m%destburglekhrislight $m%sourceburglekhrislight
   
   put #var m%destinvest $m%sourceinvest
+  put #var m%desttradingsell $m%sourcetradingsell
+  put #var m%desttradingsellitem $m%sourcetradingsellitem
+  put #var m%desttradingtasks $m%sourcetradingtasks
   
   put #var m%destignitebackup $m%sourceignitebackup
   put #var m%destsummoning $m%sourcesummoning

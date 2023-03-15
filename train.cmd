@@ -1,6 +1,6 @@
 ########################################
 ###Training scripts by player of Saragos.
-###Last Updated: 03/04/2023
+###Last Updated: 03/14/2023
 ########################################
 
 include library.cmd
@@ -71,6 +71,24 @@ var boxtype brass|copper|deobar|driftwood|iron|ironwood|mahogany|oaken|pine|stee
 var boxes coffer|crate|strongbox|caddy|casket|skippet|trunk|chest|\bbox
 var junkloot runestone|scroll|tablet|vellum|sheiska leaf|ostracon|hhr'lav'geluhh bark|papyrus roll|smudged parchment|lockpick|fragment|package
 var collectibles albredine ring|crystal ring|\bdira\b|kirmhiro draught|\bmap\b|package|soulstone|(?<!crossbow) \bbolts?\b|flarmencrank|\bgear\b|glarmencoupler|\bnuts?\b|rackensprocket|spangleflange
+var raremetals animite|damite|darkstone|electrum|glaes|haralun|kertig|lumium|muracite|niniam
+var specialmetals agonite|audrualm|coralite|haledroth|icesteel|indurium|kadepa|kelpzyte|kiralan|loimic|niello|orichalcum|quelium|silversteel|telothian|tomiek|tyrium|vardite
+var metals %raremetals|%specialmetals
+var specialstones anjisis|belzune|blackwater jet|diamondique|felstone|fulginode|senci|xenomite
+var stones %specialstones
+var rarebones demonbone
+var specialbones blackened bone|bulbous bone|caracal bone|charred bone|crystal-bone|desumos bone|dragon bone|fae bone|horse bone|jaguar bone|mammoth bone|moradu-bone|morgawr bone|sprite-bone|wood drake bone|wraith bone|wyvern bone|zeltfish-bone
+var bones %rarebones|%specialbones
+var rarewoods azurelle|bloodwood|bocote|cherry|copperwood|darkspine|durian|ebony|goldwood|hickory|ilomba|ironwood|kapok|lelori|mistwood|osage|redwood|rockwood|rosewood|sandalwood|silverwood|tamarak|yew
+var specialwoods adderwood|aformosia|albarco|alerce|avodire|crabwood|diamondwood|felwood|finvire|greenheart|macawood|ramin|smokewood
+var woods %rarewoods|%specialwoods
+var rarecloths electroweave|steelsilk
+var specialcloths arzumodine|bourde|dergatine|dragonar|faeweave|farandine|imperial weave|jaspe|khaddar|ruazin wool|titanese|zenganne
+var cloths %rarecloths|%specialcloths
+var rareleathers demonscale|firecat-skin leather|inkhorne-skin leather|jaguar-pelt leather|mammoth-hide leather|onyx-hide leather|puffy-white leather|raven pelt|serpentine-hide leather|white fox pelt leather|wyvern-hide leather
+var specialleathers bark-hide leather|cloud-white leather|corrugated-hide leather|crusty bark-hide leather|dark dragon-scale hide|desumos-pelt leather|diamond-hide|droluger-hide leather|korograth hide|morgawr leather|punka|seal-pelt leather|shadowleaf
+var leathers %rareleathers|%specialleathers
+var materials %metals|%stones|%bones|%woods|%cloths|%leathers
 
 #RESEARCH_TRIGGERS
 action var appfocusdone 1; var appfocusing 0; var rprojectactive 0; var researching 0 when ^Breakthrough!
@@ -181,6 +199,7 @@ action var fleegood 1 when Bolting quickly away, you consider making a substanti
 action var fleegood 1 when You flee from the scene of battle like a coward!
 action var fleegood 1 when All that running from the guard may pay off!  You turn southwest to make your getaway!
 action var fleegood 1 when Either you're looking really tasty, or you've forgotten to wear your Innocence.  Deciding to abandon the cause, you turn and start running south!
+action var fleegood 1 when You flee like a sniveling mage confronted by a berserking barbarian!
 action send stow feet when ^You notice (?:an?|some).*at your feet, and do not wish to leave it behind\.
 
 #TACTICS_TRIGGERS
@@ -345,13 +364,13 @@ ALERTINIT:
   
   if %speechalerts = "YES" then
   { 
-    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket
+    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.
     var monsterspeech A sickly blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "
     var hespeech A voice on the wind whispers|A pair of Merelew guards assist you into the water|The libik (?:shouts|yells),|The seedy monger looks up to you and|The Monger's voice booms out,|The Monger's booming voice comes from the booth,|One of the attendants glances at you and says,|One of the monger's assistants addresses you, saying,|^An attendant in an otter costume exclaims|\w+ chants, "C'mon! I feel the luck of Eluned smiling on you all!
     var speechwhitelist %generalspeech|%ferryspeech|%monsterspeech|%spellspeech|%hespeech
-    var namementionwhitelist Welcome back, (Sir|Madam)|Farewell, (Sir|Madam)|Take care, (Sir|Madam)
+    var namementionwhitelist Welcome back, (Sir|Madam)|Farewell, (Sir|Madam)|Take care, (Sir|Madam)|Thanks,|Thank you very much,
     action (speech) var speechspeaker $1; var speechtext $2; var speechdiff2 %t; math speechdiff2 subtract %lastspeech; var speechdiff %speechdiff2 when ^(?!%speechwhitelist)(.{0,40}).*\, "(?!Say Ahh!)(.+)"
     action (speech) put #echo %alertwindow Yellow [Speech] %speechspeaker...; put #play Speech; put #flash; var lastspeech %t when eval %speechdiff >= 1
     action (speech) put #echo %alertwindow Yellow [Speech]: Name mention.; put #play Speech; put #flash when \"(?!%namementionwhitelist).*$charactername.*\"
@@ -374,7 +393,8 @@ ALERTINIT:
     action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 bows. when ^(\S+) bows to you.
     action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 curtsies. when ^(\S+) curtsies to you.
     action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 flails. when ^(\S+) flails (his|her) arms about.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 frowns. when ^(\S+) frowns
+    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 frowns. when ^(\S+) frowns\.
+    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 frowns at $2. when ^(\S+) frowns at (\S+)\.
     action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 hugs $2. when ^(\S+) hugs (\S+)
     action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 glares. when ^(\S+) glares
     action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 grins. when ^(\S+) grins at
@@ -1427,11 +1447,15 @@ PALADINONLY:
   return
 
 RANGERONLY:
+  
+  action var pounceready 1 when You think you have the strength to pounce upon prey once again\.
+  
   var pounce $m%varsetpounce
   var snipe $m%varsetsnipe
   var dualload $m%varsetdualload
   var ritstype $m%varsetritstype
   
+  var pounceready 1
   var nextpounce 0
   return
 
@@ -1476,7 +1500,13 @@ THIEFONLY:
   return
 
 TRADERONLY:
+  action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) (.*)s\.
+  action var quantity $1 when You need to turn in (\d*) more\.
+  
   var invest $m%varsetinvest
+  var tradingsell $m%varsettradingsell
+  var tradingsellitem $m%varsettradingsellitem
+  var tradingtasks $m%varsettradingtasks
   return
 
 WARMAGEONLY:
@@ -1668,6 +1698,7 @@ STATUSVARLOAD:
   var summlock 0
   var tacticslock 0
   var targetlock 0
+  var tradinglock 0
   var utilitylock 0
   var wardinglock 0
   var weapon1lock 0
@@ -1947,6 +1978,7 @@ MAINVARLOAD:
   var bugoutnum $m%varsetbugoutnum
   var bugoutonbleed $m%varsetbugoutonbleed
   var bugoutroom $m%varsetbugoutroom
+  var killbeforemove $m%varsetkillbeforemove
   var autoupkeep $m%varsetautoupkeep
   var moveclenchshard $m%varsetmoveclenchshard
   var movewhistle $m%varsetmovewhistle
@@ -2098,6 +2130,7 @@ MAINVARLOAD:
   var collectcoin $m%varsetcollectcoin
   var collectscroll $m%varsetcollectscroll
   var collectmaps $m%varsetcollectmaps
+  var collectmaterials $m%varsetcollectmaterials
   var collectgem $m%varsetcollectgem
   var savegwethstones $m%varsetsavegwethstones
   var collectboxes $m%varsetcollectboxes
@@ -3238,6 +3271,17 @@ NONCOMBATLOOP:
       var firstawake 0
     }
   }
+  #TRADING_TASKS
+  if (("%tradingtasks" = "YES") && ("$guild" = "Trader")) then
+  {
+    if $Trading.LearningRate > 33 then var tradinglock 1
+    if $Trading.LearningRate < 4 then var tradinglock 0
+    if $Trading.Ranks = 1750 then var tradinglock 1
+    if (%tradinglock = 0) then
+    {
+      gosub TASKLOGIC
+    }
+  }
   #HEALING
   if %selfheal = 1 then gosub HEALTHCHECK
   #APPFOCUS
@@ -3768,6 +3812,8 @@ UPKEEPSET:
   var pawnshop none
   var almsbox 0
   var ammoroom 0
+  var hastasks 0
+  var taskgiver 0
   #CROSSING
   if (($zoneid = 1) || ($zoneid = 4)) then
   {
@@ -3802,6 +3848,8 @@ UPKEEPSET:
     var townname crossing
     var ammoroom weapon
     var ammozone 1
+    var hastasks
+    var taskgiver Mags
   }
   #DIRGE
   if $zoneid = 13 then
@@ -5570,6 +5618,38 @@ BURGLELOGIC:
   }
   else goto BURGLEARRESTED
 
+BURGLEPAWNLOGIC:
+  gosub BURGLEPAWNSET
+  echo pawnshop: %pawnshop
+  if (%pawnshop = "none") then var burglepawnsold -2
+  else
+  {
+    gosub DEEPSLEEP
+    var burglepawnsold 0
+    eval burglelootlistnum count("%burglelootlist", "|")
+    echo burglelootlist: %burglelootlist
+    echo burglelootlistnum: %burglelootlistnum
+    if ((%burglelootlist(0) != "") || (%burglelootlistnum > 0)) then
+    {
+      var rtzone %burglepawnzone
+      var rttravel %burglepawntravel
+      var rttraveldest %burglepawntraveldest
+      var rtmove %burglepawnmove
+      var rtmovelist %burglepawnmovelist
+      var rttargetroom %pawnshop
+      var rtfindroom NO
+      gosub ROOMTRAVEL
+      var pawncounter 0
+      var burglepawnsold 0
+      var pawntotal 0
+      gosub STOWALL
+      gosub BURGLEPAWN
+    }
+    else var burglepawnsold -1
+  }
+  return
+  return
+
 BURGLEPAWN:
   gosub GETITEM %burglelootlist(%pawncounter) from %burglestorage
   if ("$righthand" != "Empty") then
@@ -6000,6 +6080,26 @@ BURGLEKHRISTOP:
     }
   }
   return
+
+
+TASKLOGIC:
+  if $Trading.LearningRate > 33 then var tradinglock 1
+	if $Trading.LearningRate < 4 then var tradinglock 0
+  if $Trading.Ranks = 1750 then var tradinglock 1
+  if (%tradinglock = 1) then return
+  gosub TASKMOVE
+  gosub TASKASK
+  pause 1
+  put #echo Yellow Quantity: %quantity
+  put #echo Yellow Forageitem: %forageitem
+  gosub MOVE ntr
+  var heldquantity 0
+  gosub TASKFORAGELOOP
+  gosub TASKMOVE
+  var givingdone 0
+  gosub AWAKE
+  gosub TASKGIVELOOP
+  goto TASKLOGIC
 
 
 COLLECTLOGIC:
@@ -6844,13 +6944,15 @@ RECALLLOGIC:
   return
 
 POUNCELOGIC:
-  if (%t >= %nextpounce) then
+  if (%pounceready = 1) then
   {
     gosub MONSTERARRAY
-    if !matchre("%monsterarray", "%critters") then return
-    gosub POUNCE
-    var nextpounce %t
-    math nextpounce add 120
+    if matchre("%monsterarray", "%critters") then
+    {
+      #put #echo %alertwindow Pounced!
+      gosub POUNCE
+      var pounceready 0
+    }
   }
   return
 
@@ -8370,6 +8472,7 @@ NONCOMBATLOGIC:
 	var movetrainactive 0
 	var movetrainperformactive 0
 	var movetrainburgleactive 0
+	var movetraintasksactive 0
 	if %perform = "YES" then
 	{
 		if $Performance.LearningRate > 20 then var performlock 1
@@ -8378,16 +8481,6 @@ NONCOMBATLOGIC:
 		if %performlock != 1 then
 		{
 			var movetrainactive 1
-			if (%killbeforeleave = -1) then
-			{
-			  gosub MONSTERARRAY
-        if !matchre("%monsterarray", "%critters") then var killbeforeleave 1
-        else
-        {
-				  var killbeforeleave 0
-				  put #echo %alertwindow Waiting for kill before leaving for NonCombat.
-			  }
-			}
 			var movetrainperformactive 1
 		}
 	}
@@ -8399,27 +8492,46 @@ NONCOMBATLOGIC:
 			if %t >= %nextburgle then
 			{
 				var movetrainactive 1
-				if (%killbeforeleave = -1) then
-				{
-				  gosub MONSTERARRAY
-          if !matchre("%monsterarray", "%critters") then var killbeforeleave 1
-          else
-          {
-				    var killbeforeleave 0
-				    put #echo %alertwindow Waiting for kill before leaving for NonCombat.
-				  }
-				}
 				var movetrainburgleactive 1
 			}
 		} 
 	}
-	#EXECUTING_MOVE_TRAIN
+	#TRADING_TASKS
+	if ("%tradingtasks" = "YES") then
+	{
+	  if $Trading.LearningRate > 33 then var tradinglock 1
+		if $Trading.LearningRate < 4 then var tradinglock 0
+		if $Trading.Ranks = 1750 then var tradinglock 1
+	  if (%tradinglock != 1) then
+	  {
+	    var movetrainactive 1
+	    var movetraintaskactive 1
+	  }
+	}
+	
+	#EXECUTING_NONCOMBAT_TRAIN
 	if %movetrainactive = 1 then
 	{
-	  ##KILL_NEXT
-		if %killbeforeleave != 1 then return
-		var killbeforeleave -1
-		#STARTING_MOVETRAIN
+	  #KILL_BEFORE_MOVE
+	  if ("%killbeforemove" = "YES") then
+	  {
+      #CHECKING_FOR_MONSTERS
+      if (%killbeforeleave = -1) then
+      {
+        gosub MONSTERARRAY
+        if !matchre("%monsterarray", "%critters") then var killbeforeleave 1
+        else
+        {
+          var killbeforeleave 0
+          put #echo %alertwindow Waiting for kill before leaving for NonCombat.
+        }
+      }
+      ##KILL_NEXT
+      if %killbeforeleave != 1 then return
+		  var killbeforeleave -1
+		}
+		
+		#STARTING_NONCOMBAT_TRAIN
 		put #echo %alertwindow [NonCombat]: Leaving combat to train.
 		if (%movetrainburgleactive) = 1 then
 		{
@@ -8441,38 +8553,26 @@ NONCOMBATLOGIC:
 			var movetrainburgleactive 0
 			gosub RELINVIS
 			#BURGLE_PAWN
-			if %burglepawn = "YES" then
-			{
-				gosub BURGLEPAWNSET
-				echo pawnshop: %pawnshop
-				if (%pawnshop = "none") then var burglepawnsold -2
-				else
-				{
-					gosub DEEPSLEEP
-					var burglepawnsold 0
-					eval burglelootlistnum count("%burglelootlist", "|")
-					echo burglelootlist: %burglelootlist
-					echo burglelootlistnum: %burglelootlistnum
-					if ((%burglelootlist(0) != "") || (%burglelootlistnum > 0)) then
-					{
-						var rtzone %burglepawnzone
-						var rttravel %burglepawntravel
-						var rttraveldest %burglepawntraveldest
-						var rtmove %burglepawnmove
-						var rtmovelist %burglepawnmovelist
-						var rttargetroom %pawnshop
-						var rtfindroom NO
-						gosub ROOMTRAVEL
-						var pawncounter 0
-						var burglepawnsold 0
-						var pawntotal 0
-						gosub STOWALL
-						gosub BURGLEPAWN
-					}
-					else var burglepawnsold -1
-				}
-			}
+			if %burglepawn = "YES" then gosub BURGLEPAWNLOGIC
 		}
+
+    #TRADING_TASKS
+    if (%movetraintaskactive = 1) then
+		{
+      gosub DEEPSLEEP
+      gosub LEAVEROOM
+      var rtzone 1
+      var rttravel YES
+      var rttraveldest crossing
+      var rtmove NO
+      var rtmovelist none
+      var rttargetroom mags
+      var rtfindroom NO
+      gosub ROOMTRAVEL
+      gosub STOWALL
+      gosub AWAKE
+      gosub TASKLOGIC
+    }
 
 		#PERFORMANCE
 		#put #echo Yellow movetrainperformactive: %movetrainperformactive
@@ -9062,11 +9162,11 @@ ROOMTRAVEL:
   {
     if (%rtzone != 0) then
 		{
-			if %rttravel = "YES" then
+			if ("%rttravel" = "YES") then
 			{
 				gosub TRAVEL %rttraveldest
 			}
-			if %rtmove = "YES" then
+			if ("%rtmove" = "YES") then
 			{
 				var mlmovetarget 0
 				var mlstring %rtmovelist
@@ -9079,7 +9179,7 @@ ROOMTRAVEL:
   {
     gosub MOVE %rttargetroom
   }
-  if %rtfindroom = "YES" then gosub FINDROOMLOGIC
+  if ("%rtfindroom" = "YES") then gosub FINDROOMLOGIC
   return
   
 
