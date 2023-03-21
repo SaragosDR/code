@@ -1,6 +1,6 @@
 ########################################
 ###Training scripts by player of Saragos.
-###Last Updated: 03/14/2023
+###Last Updated: 03/20/2023
 ########################################
 
 include library.cmd
@@ -1129,6 +1129,7 @@ BARBARIANONLY:
   var berserkearthquake $m%varsetberserkearthquake
   var berserkflashflood $m%varsetberserkflashflood
   var berserklandslide $m%varsetberserklandslide
+  var landslidetraining $m%varsetlandslidetraining
   var berserktornado $m%varsetberserktornado
   var berserktsunami $m%varsetberserktsunami
   var tsunamibackup $m%varsettsunamibackup
@@ -1505,7 +1506,8 @@ TRADERONLY:
   
   var invest $m%varsetinvest
   var tradingsell $m%varsettradingsell
-  var tradingsellitem $m%varsettradingsellitem
+  var tradingselltown $m%varsettradingselltown
+  var tradingsellsource $m%varsettradingsellsource
   var tradingtasks $m%varsettradingtasks
   return
 
@@ -1727,6 +1729,7 @@ STATUSVARLOAD:
   var nextalmanac 0
   var nextapp 0
   var nextassess 0
+  var nextberserk 0
   var nextburgle 0
   var nextbadge 0
   var nextcast 0
@@ -3271,6 +3274,17 @@ NONCOMBATLOOP:
       var firstawake 0
     }
   }
+  #TRADING_SELL
+  if (("%tradingsell" = "YES") && ("$guild" = "Trader")) then
+  {
+    if $Trading.LearningRate > 28 then var tradinglock 1
+    if $Trading.LearningRate < 4 then var tradinglock 0
+    if $Trading.Ranks = 1750 then var tradinglock 1
+    if (%tradinglock = 0) then
+    {
+      gosub TRADINGSELLLOGIC
+    }
+  }
   #TRADING_TASKS
   if (("%tradingtasks" = "YES") && ("$guild" = "Trader")) then
   {
@@ -4172,6 +4186,7 @@ AUTOUPKEEPLOGIC:
 			{
 				gosub LEAVEROOM
 				gosub PREMIUMRINGGO
+				if ("$guild" = "Barbarian") then gosub FORMSTOPALL
 				if %goodring != 1 then
 				{
 					 put #echo %alertwindow Yellow [UPKEEP]: Unable to go to Fang Cove yet due to premium ring timer!
@@ -4227,6 +4242,7 @@ AUGO:
   var rttargetroom %upkeeptargetroom
   var rtfindroom NO
   gosub ROOMTRAVEL
+  if ("$guild" = "Barbarian") then gosub FORMSTOPALL
   return
   
   
@@ -5465,7 +5481,7 @@ ASSESSLOGIC:
   if %t > %nextassess then 
   {
     math nextassess set %t
-    math nextassess add 17
+    math nextassess add 12
     if $Appraisal.LearningRate < 34 then gosub ASSESSINSTRUMENT
   }
   return
@@ -6079,6 +6095,101 @@ BURGLEKHRISTOP:
       gosub KHRISTOP hasten
     }
   }
+  return
+
+TRADINGSELLLOGIC:
+  if $Trading.LearningRate > 28 then var tradinglock 1
+	if $Trading.LearningRate < 4 then var tradinglock 0
+  if $Trading.Ranks = 1750 then var tradinglock 1
+  if (%tradinglock = 1) then return
+  gosub UPKEEPSET
+  gosub STOWALL
+  var speechalerts NO
+  if %hasvault != 1 then 
+  {
+    put #echo %alertwindow No vault is recognized in this town, so TradingSell cannot be completed!
+    return
+  }
+
+  if ("%vaulttown" != "%townname") then
+  {
+    put #echo %alertwindow Your vault is not set to be in this town, so TradingSell cannot be completed!
+    return
+  }
+  else
+  {
+    if matchre("$roomobjs", "uniformed Dwarven attendant") then
+    else
+    {
+      if %multizone = 1 then
+      {
+        var upkeepzone %vaultzone
+        gosub UPKEEPZONEMOVE
+      }
+      gosub MOVE carousel
+    }
+    var hasvaultsuccess 0
+    gosub ENTERVAULT
+    if %vaultsuccess = 1 then
+    {
+      gosub GETITEM bundle from vault
+      if ("$righthand = "Empty") then
+      {
+        gosub GETITEM gem pouch from vault
+        if ("$righthand = "Empty") then
+        {
+          put #echo %alertwindow No bundles or pouches could be found, so TradingSell cannot be completed!  Turning off TradingSell.
+          var tradingsell NO
+          put #var $m%varsettradingsell NO
+          return
+        }
+      }
+    }
+    gosub EXITVAULT
+    if (($zoneid = 150) && ($roomid = 0)) then move west
+  }
+  #BUNDLE_SELLING
+  if ("$righthandnoun" = "bundle") then
+  {
+    if %furrier != "none" then
+    {
+      if ((matchre("$roomobjs" "%furrier")) || (matchre("$roomdesc" "%furrier"))) then
+      else
+      {
+        if %multizone = 1 then
+        {
+          var upkeepzone %furrierzone
+          gosub UPKEEPZONEMOVE
+        }
+        gosub MOVE bundle
+      }
+      gosub SELLITEM bundle
+      if ("$righthand" = "bundling rope") then gosub DUMPITEM bundling rope
+    }
+  }
+  #GEMPOUCH_SELLING
+  if ("$righthandnoun" = "pouch") then
+  {
+    if (%appraiser != "none") then
+    {
+      put #echo Yellow Selling gem pouches!
+      var soldgem 0
+      if ((matchre("$roomobjs" "%appraiser")) || (matchre("$roomdesc" "%appraiser"))) then
+      else
+      {
+        if %multizone = 1 then
+        {
+          var upkeepzone %appraiserzone
+          gosub UPKEEPZONEMOVE
+        }
+        gosub MOVE gem
+      }
+      gosub GEMPOUCHSELL
+    }
+  }
+  #BANK
+  gosub MINMONEYLOGIC
+  var speechalerts $speechalerts
   return
 
 
@@ -8472,6 +8583,7 @@ NONCOMBATLOGIC:
 	var movetrainactive 0
 	var movetrainperformactive 0
 	var movetrainburgleactive 0
+	var movetrainsellactive 0
 	var movetraintasksactive 0
 	if %perform = "YES" then
 	{
@@ -8496,16 +8608,18 @@ NONCOMBATLOGIC:
 			}
 		} 
 	}
-	#TRADING_TASKS
-	if ("%tradingtasks" = "YES") then
+
+	#TRADING_SELL_TASKS
+	if (("%tradingsell" = "YES") || ("%tradingtasks" = "YES")) then
 	{
-	  if $Trading.LearningRate > 33 then var tradinglock 1
+	  if $Trading.LearningRate > 28 then var tradinglock 1
 		if $Trading.LearningRate < 4 then var tradinglock 0
 		if $Trading.Ranks = 1750 then var tradinglock 1
 	  if (%tradinglock != 1) then
 	  {
 	    var movetrainactive 1
-	    var movetraintaskactive 1
+	    if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var movetrainsellactive 1
+	    if ("%tradingtasks" = "YES") then var movetraintasksactive 1
 	  }
 	}
 	
@@ -8545,6 +8659,7 @@ NONCOMBATLOGIC:
 			var rttargetroom %burgletargetroom
 			var rtfindroom NO
 			gosub ROOMTRAVEL
+			if ("$guild" = "Barbarian") then gosub FORMSTOPALL
 			gosub STOWALL
 			gosub AWAKE
 			#BURGLING
@@ -8555,9 +8670,27 @@ NONCOMBATLOGIC:
 			#BURGLE_PAWN
 			if %burglepawn = "YES" then gosub BURGLEPAWNLOGIC
 		}
-
+    
+    #TRADING_SELL
+    if (%movetrainsellactive = 1) then
+		{
+      gosub DEEPSLEEP
+      gosub LEAVEROOM
+      var rtzone 1
+      var rttravel YES
+      var rttraveldest %tradingselltown
+      var rtmove NO
+      var rtmovelist none
+      var rttargetroom 0
+      var rtfindroom NO
+      gosub ROOMTRAVEL
+      gosub STOWALL
+      gosub AWAKE
+      gosub TRADINGSELLLOGIC
+    }
+    
     #TRADING_TASKS
-    if (%movetraintaskactive = 1) then
+    if (%movetraintasksactive = 1) then
 		{
       gosub DEEPSLEEP
       gosub LEAVEROOM
@@ -8589,6 +8722,7 @@ NONCOMBATLOGIC:
 			var rttargetroom %performtargetroom
 			var rtfindroom NO
 			gosub ROOMTRAVEL
+			if ("$guild" = "Barbarian") then gosub FORMSTOPALL
 			gosub AWAKE
 			gosub STOWALL
 			gosub MTPERFORMLOOP
@@ -9148,6 +9282,7 @@ ROOMTRAVELUPKEEP:
 		var rtfindroom NO
   }
   gosub ROOMTRAVEL
+  if ("$guild" = "Barbarian") then gosub FORMSTOPALL
   return
 
 ROOMTRAVEL:
@@ -9496,9 +9631,23 @@ BARBBUFFLOGIC:
     gosub BERSERK
   }
   if ((%berserklandslide = "YES") && ($SpellTimer.Landslide.active != 1)) then
-  {     
-    var berserktype Landslide
-    gosub BERSERK
+  {
+    if ("%landslidetraining" = "YES") then
+    {
+      if ($Warding.LearningRate > 33) then var wardinglock 1
+      if ($Warding.LearningRate < 20) then var wardinglock 0
+      if ($Warding.Ranks = 1750) then var wardinglock 1
+      if (%wardinglock = 0) then
+      {
+        var berserktype Landslide
+        gosub BERSERK
+      }
+    }
+    else
+    {
+      var berserktype Landslide
+      gosub BERSERK
+    }
   }
   if ((%berserktornado = "YES") && ($SpellTimer.Tornado.active != 1)) then
   {     
@@ -12181,6 +12330,7 @@ BUGOUT:
   gosub MOVEANYROOM
   gosub MOVE %bugoutroom
   gosub RELSPELL
+  if ("$guild" = "Barbarian") then gosub FORMSTOPALL
   gosub RELALL
   gosub CASTRESET
   gosub DEEPSLEEP

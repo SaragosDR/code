@@ -624,6 +624,7 @@ SET:
     if tolower("%1") = "berserkearthquake" then goto YESNOSET
     if tolower("%1") = "berserkflashflood" then goto YESNOSET
     if tolower("%1") = "berserklandslide" then goto YESNOSET
+    if tolower("%1") = "landslidetraining" then goto YESNOSET
     if tolower("%1") = "berserktornado" then goto YESNOSET
     if tolower("%1") = "berserktsunami" then goto YESNOSET
     if tolower("%1") = "tsunamibackup" then goto TEXTSET
@@ -808,12 +809,28 @@ SET:
     if tolower("%1") = "shadowlingnoun" then goto TEXTSET
     if tolower("%1") = "invest" then goto YESNOSET
     if tolower("%1") = "tradingsell" then goto YESNOSET
-    if tolower("%1") = "tradingsellitem" then
+    if tolower("%1") = "tradingselltown" then
     {
-      if matchre("%2", "\b(0|1|2)\b") then
+      if (matchre("%2", "\b(%townvaultpresetlist)\b")) then
+      {  
+        var setvar tradingselltown
+        eval input tolower(%2)  
+        put #var m$varset%setvar %input
+        put #var save
+        goto VARDISPLAY
+      }
+      else
+      {
+        put #echo mono You can only choose from %townvaultpresetlist.
+        goto END
+      }
+    }
+    if tolower("%1") = "tradingsellsource" then
+    {
+      if matchre("%2", "\b(vault|portal)\b") then
       {
         {  
-          var setvar cambitems
+          var setvar tradingsellsource
           eval input toupper(%2)  
           put #var m$varset%setvar %input
           put #var save
@@ -821,7 +838,7 @@ SET:
         }
         else
         {
-          put #echo mono Must be either bundles, pouches, or both!
+          put #echo mono Must be either vault or portal!
           goto END
         }
       }
@@ -1020,6 +1037,22 @@ SET:
     
     if tolower("%1") = "premiumring" then goto YESNOSET
     if tolower("%1") = "premiumringitem" then goto TEXTSET
+    if tolower("%1") = "nearestpremiumportal" then
+    {
+      if (matchre("%2", "\b(%townpresetlist)\b")) then
+      {  
+        var setvar nearestpremiumportal
+        eval input tolower(%2)  
+        put #var m$varset%setvar %input
+        put #var save
+        goto VARDISPLAY
+      }
+      else
+      {
+        put #echo mono You can only choose from %townpresetlist.
+        goto END
+      }
+    }
     if tolower("%1") = "burglepreset" then
     {
       if (matchre("%2", "\b(%townpresetlist)\b")) then
@@ -2470,7 +2503,7 @@ DISPLAYGUILD:
       gosub OUTPUT BerserkDrought
       gosub OUTPUT BerserkEarthquake
       gosub OUTPUT BerserkFlashflood
-      gosub OUTPUT BerserkLandslide
+      gosub OUTPUT BerserkLandslide LandslideTraining
       gosub OUTPUT BerserkTornado
       gosub OUTPUT BerserkTsunami
       put #echo mono TsunamiBackup $m$varsettsunamibackup     (the weapon Tsunami will use to activate with if you otherwise have no acceptable weapon in hand)
@@ -2684,7 +2717,8 @@ DISPLAYGUILD:
     {
       gosub OUTPUT Invest
       gosub OUTPUT TradingSell
-      gosub OUTPUT TradingSellItem
+      #put #echo mono TradingSellSource: $m$varsettradingsellsource     (vault or portal)
+      gosub OUTPUT TradingSellTown
       gosub OUTPUT TradingTasks
     }
     if $guild = "Warrior Mage" then
@@ -2844,6 +2878,7 @@ DISPLAYMOVEMENT:
 	put #echo
 	gosub OUTPUT PremiumRing
 	gosub OUTPUT PremiumRingItem
+	gosub OUTPUT NearestPremiumPortal
 	put #echo
 	gosub OUTPUT UpkeepPreset
 	put #echo Gray mono Options: %townpresetlist
@@ -2886,6 +2921,7 @@ DISPLAYMOVEMENT:
   }
   put #echo
   put #echo mono =================== NonCombat Movement ===================
+  put #echo Gray mono Options: %townpresetlist
   put #echo
   gosub OUTPUT BurglePreset
   if ("$m$varsetcustommovement" = "YES") then
@@ -3234,6 +3270,7 @@ VARCOPYMOVEMENT:
   put #var m%destupkeeptargetroom $m%sourceupkeeptargetroom
   put #var m%destpremiumring $m%sourcepremiumring
   put #var m%destpremiumringitem $m%sourcepremiumringitem
+  put #var m%destnearestpremiumportal $m%sourcenearestpremiumportal
   
   put #var m%destammopreset $m%sourceammopreset
   put #var m%destammozone $m%sourceammozone
@@ -3679,6 +3716,7 @@ VARCOPYGUILD:
   put #var m%destberserkearthquake $m%sourceberserkearthquake
   put #var m%destberserkflashflood $m%sourceberserkflashflood
   put #var m%destberserklandslide $m%sourceberserklandslide
+  put #var m%destlandslidetraining $m%sourcelandslidetraining
   put #var m%destberserktornado $m%sourceberserktornado
   put #var m%destberserktsunami $m%sourceberserktsunami
   put #var m%desttsunamibackup $m%sourcetsunamibackup
@@ -3850,6 +3888,8 @@ VARCOPYGUILD:
   put #var m%destinvest $m%sourceinvest
   put #var m%desttradingsell $m%sourcetradingsell
   put #var m%desttradingsellitem $m%sourcetradingsellitem
+  put #var m%desttradingselltown $m%sourcetradingselltown
+  put #var m%desttradingsellsource $m%sourcetradingsellsource
   put #var m%desttradingtasks $m%sourcetradingtasks
   
   put #var m%destignitebackup $m%sourceignitebackup
