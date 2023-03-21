@@ -1,4 +1,44 @@
-03/04/2023
+03/20/23
+Updated Scripts: train, libary, set
+New Variables: TradingSell and TradingTown.  Will sell a bundle or gem pouch from your vault to learn trading experience when doing noncombat training in town.  If enabled, TradingTasks will run afterwards and top up your Trading experience before heading back.
+
+Added combat presets for: 
+P1: crocodiles, dire bears
+P2: swamp trolls, piruati serpents
+P3: rock trolls 1, eidolon steeds, crocodiles
+Updated existing presets for: p1-origami, p1-vipers, p1-leucros
+
+Added a throttle to berserk attempts if it fails because inner fire is low.
+Lowered the timer on assessing instruments to 12 seconds from 17 seconds.
+Added missing text to vault entry for when you've been kicked out for taking too long.
+Barbarian forms are now stopped during travel to conserve Inner Fire.
+Changed the Crossing burgle location to avoid characters with low Athletics getting stuck on the walls.
+
+
+
+03/14/2023
+Updated Scripts: train, library, set
+
+New Variable - CollectMaterials.  Collects rare material drops from high level creatures.  Defaults to YES.
+New Variable - KillBeforeMove.  Determines if the script waits for a kill before leaving combat for NonCombat training in order to get your ammo back.  Defaults to YES.
+New Variable - TradingTasks.  Allows a Trader to run tasks for Trading experience during NonCombat.  Only available to Traders.  Only works in Crossing.  Defaults to NO.
+
+Added combat presets for: 
+P1: origami, cave bears, rock trolls
+P2: young brocket deer, marauders, brocket deer, elder brocket deer
+P3: snowbeasts, rock trolls2, gargoyles
+P5: shadowflame moths
+
+Refined how Pounce determines whether it's off cooldown.
+Bugfix to warhorn use.  For some reason, DR can't handle using an adjective for blowing it, so the exhale command now explicitly uses "warhorn" instead of your WarhornItem variable.
+Bugout variables have been moved to the Movement section.
+Changed movement presets for Adan'f to avoid the climbing sections in Eidolon steeds.
+Fixed a bug with endrus serpent presets.
+Fixed incorrect burgle and perform rooms in Leth.
+Fixed a bug with kick sub not working properly with dust bunnies.
+
+
+03/05/2023
 Updated Scripts: train, library, set
 
 New Features
@@ -34,8 +74,9 @@ Added missing text to Barbarian roar sub for when your voice runs out.
 Fixed a bug with how Khri Adaptation was setup.
 
 Combat
-Added missing text for melee attacks for flying creatures.
+Added missing text for melee attacks and tactics analyzing against flying creatures.
 Added missing text for attempting to flee in a watery area.
+Added missing text for Barbarian feleeing.
 Fix for attempting to dissect an undead creature.  Script will now turn off dissect and alert you when this happens.
 Fix for attempting to dual load, but See the Wind is not active.
 Added Adan'f elder blademaster speech to whitelist.
