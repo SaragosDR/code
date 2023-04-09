@@ -612,6 +612,7 @@ SET:
         goto END
       }
     }
+    if tolower("%1") = "mininnerfire" then goto TEXTSET
     if tolower("%1") = "berserkava" then goto YESNOSET
     if tolower("%1") = "avafatigue" then goto TEXTSET
     if tolower("%1") = "berserkdrought" then goto YESNOSET
@@ -620,12 +621,15 @@ SET:
     if tolower("%1") = "meditatestaunch" then goto YESNOSET
     if tolower("%1") = "expaccuracy" then goto YESNOSET
     if tolower("%1") = "expdamage" then goto YESNOSET
+    if tolower("%1") = "berserkblizzard" then goto YESNOSET
     if tolower("%1") = "berserkcyclone" then goto YESNOSET
     if tolower("%1") = "berserkearthquake" then goto YESNOSET
     if tolower("%1") = "berserkflashflood" then goto YESNOSET
+    if tolower("%1") = "berserkhurricane" then goto YESNOSET
     if tolower("%1") = "berserklandslide" then goto YESNOSET
     if tolower("%1") = "landslidetraining" then goto YESNOSET
     if tolower("%1") = "berserktornado" then goto YESNOSET
+    if tolower("%1") = "tornadotraining" then goto YESNOSET
     if tolower("%1") = "berserktsunami" then goto YESNOSET
     if tolower("%1") = "tsunamibackup" then goto TEXTSET
     if tolower("%1") = "berserkvolcano" then goto YESNOSET
@@ -1005,12 +1009,6 @@ SET:
         goto END
       }
     }
-    if tolower("%1") = "upkeepzone" then goto TEXTSET
-    if tolower("%1") = "upkeeptravel" then goto YESNOSET
-    if tolower("%1") = "upkeeptraveldest" then goto TEXTSET
-    if tolower("%1") = "upkeepmove" then goto YESNOSET
-    if tolower("%1") = "upkeepmovelist" then goto LISTSET
-    if tolower("%1") = "upkeeptargetroom" then goto TEXTSET
     
     if tolower("%1") = "ammopreset" then
     {
@@ -1028,20 +1026,13 @@ SET:
         goto END
       }
     }
-    if tolower("%1") = "ammozone" then goto TEXTSET
-    if tolower("%1") = "ammotravel" then goto YESNOSET
-    if tolower("%1") = "ammotraveldest" then goto TEXTSET
-    if tolower("%1") = "ammomove" then goto YESNOSET
-    if tolower("%1") = "ammomovelist" then goto LISTSET
-    if tolower("%1") = "ammotargetroom" then goto TEXTSET
-    
     if tolower("%1") = "premiumring" then goto YESNOSET
     if tolower("%1") = "premiumringitem" then goto TEXTSET
-    if tolower("%1") = "nearestpremiumportal" then
+    if tolower("%1") = "nearestportaltown" then
     {
-      if (matchre("%2", "\b(%townpresetlist)\b")) then
+      if (matchre("%2", "\b(%townportalpresetlist)\b")) then
       {  
-        var setvar nearestpremiumportal
+        var setvar nearestportaltown
         eval input tolower(%2)  
         put #var m$varset%setvar %input
         put #var save
@@ -1049,13 +1040,13 @@ SET:
       }
       else
       {
-        put #echo mono You can only choose from %townpresetlist.
+        put #echo mono You can only choose from %townportalpresetlist.
         goto END
       }
     }
     if tolower("%1") = "burglepreset" then
     {
-      if (matchre("%2", "\b(%townpresetlist)\b")) then
+      if (matchre("%2", "\b(%trainingtownpresetlist)\b")) then
       {  
         var setvar burglepreset
         eval input tolower(%2)  
@@ -1069,12 +1060,6 @@ SET:
         goto END
       }
     }
-    if tolower("%1") = "burglezone" then goto TEXTSET
-    if tolower("%1") = "burgletravel" then goto YESNOSET
-    if tolower("%1") = "burgletraveldest" then goto TEXTSET
-    if tolower("%1") = "burglemove" then goto YESNOSET
-    if tolower("%1") = "burglemovelist" then goto LISTSET
-    if tolower("%1") = "burgletargetroom" then goto TEXTSET
     if tolower("%1") = "pawnpreset" then
     {
       if (matchre("%2", "\b(%pawnpresetlist)\b")) then
@@ -1091,14 +1076,9 @@ SET:
         goto END
       }
     }
-    if tolower("%1") = "pawnzone" then goto TEXTSET
-    if tolower("%1") = "pawntravel" then goto YESNOSET
-    if tolower("%1") = "pawntraveldest" then goto TEXTSET
-    if tolower("%1") = "pawnmove" then goto YESNOSET
-    if tolower("%1") = "pawnmovelist" then goto LISTSET
     if tolower("%1") = "performpreset" then
     {
-      if (matchre("%2", "\b(%townpresetlist)\b")) then
+      if (matchre("%2", "\b(%trainingtownpresetlist)\b")) then
       {  
         var setvar performpreset
         eval input tolower(%2)  
@@ -1111,14 +1091,7 @@ SET:
         put #echo mono You can only choose from %townpresetlist.
         goto END
       }
-    }
-    if tolower("%1") = "performzone" then goto TEXTSET
-    if tolower("%1") = "performtravel" then goto YESNOSET
-    if tolower("%1") = "performtraveldest" then goto TEXTSET
-    if tolower("%1") = "performmove" then goto YESNOSET
-    if tolower("%1") = "performmovelist" then goto LISTSET
-    if tolower("%1") = "performtargetroom" then goto TEXTSET
-    
+    }  
     if tolower("%1") = "lootalerts" then goto YESNO
     if tolower("%1") = "loottype" then
     {
@@ -2494,17 +2467,21 @@ DISPLAYGUILD:
       gosub OUTPUT ExpAccuracy
       gosub OUTPUT ExpDamage
       put #echo
+      put #echo mono MinInnerFire: $m$varsetmininnerfire     (minimum inner fire to start a berserk or meditation.)
+      put #echo
       put #echo mono Conditional Abilities
       gosub OUTPUT BerserkAva AvaFatigue
       gosub OUTPUT BerserkFamine FamineVit
       gosub OUTPUT MeditateStaunch
       put #echo
+      gosub OUTPUT BerserkBlizzard
       gosub OUTPUT BerserkCyclone
       gosub OUTPUT BerserkDrought
       gosub OUTPUT BerserkEarthquake
       gosub OUTPUT BerserkFlashflood
+      gosub OUTPUT BerserkHurricane
       gosub OUTPUT BerserkLandslide LandslideTraining
-      gosub OUTPUT BerserkTornado
+      gosub OUTPUT BerserkTornado TornadoTraining
       gosub OUTPUT BerserkTsunami
       put #echo mono TsunamiBackup $m$varsettsunamibackup     (the weapon Tsunami will use to activate with if you otherwise have no acceptable weapon in hand)
       gosub OUTPUT BerserkVolcano
@@ -2876,107 +2853,24 @@ DISPLAYMOVEMENT:
   put #echo
   put #echo mono =================== Upkeep Movement ===================
 	put #echo
-	gosub OUTPUT PremiumRing
-	gosub OUTPUT PremiumRingItem
-	gosub OUTPUT NearestPremiumPortal
-	put #echo
 	gosub OUTPUT UpkeepPreset
 	put #echo Gray mono Options: %townpresetlist
-	if ("$m$varsetcustommovement" = "YES") then
-	{
-    if ($m$varsetupkeeppreset = "none") then
-    {
-      gosub OUTPUT UpkeepZone
-      gosub OUTPUT UpkeepTravel UpkeepTravelDest
-      gosub OUTPUT UpkeepMove UpkeepMoveList
-      gosub OUTPUT UpkeepTargetRoom
-    }
-    else
-    {
-      gosub OUTPUTGRAY UpkeepZone
-      gosub OUTPUTGRAY UpkeepTravel UpkeepTravelDest
-      gosub OUTPUTGRAY UpkeepMove UpkeepMoveList
-      gosub OUTPUTGRAY UpkeepTargetRoom
-    }
-    put #echo
-  }
+	gosub OUTPUT PremiumRing
+	gosub OUTPUT PremiumRingItem
+	gosub OUTPUT NearestPortalTown
+	put #echo Gray mono Options: %townportalpresetlist
+	put #echo
 	gosub OUTPUT AmmoPreset
 	put #echo Gray mono Options: %ammopresetlist
-	if ("$m$varsetcustommovement" = "YES") then
-	{
-    if ($m$varsetammopreset = "none") then
-    {
-      gosub OUTPUT AmmoZone
-      gosub OUTPUT AmmoTravel AmmoTravelDest
-      gosub OUTPUT AmmoMove AmmoMoveList
-      gosub OUTPUT AmmoTargetRoom
-    }
-    else
-    {
-      gosub OUTPUTGRAY AmmoZone
-      gosub OUTPUTGRAY AmmoTravel AmmoTravelDest
-      gosub OUTPUTGRAY AmmoMove AmmoMoveList
-      gosub OUTPUTGRAY AmmoTargetRoom
-    }
-  }
   put #echo
   put #echo mono =================== NonCombat Movement ===================
-  put #echo Gray mono Options: %townpresetlist
   put #echo
   gosub OUTPUT BurglePreset
-  if ("$m$varsetcustommovement" = "YES") then
-  {
-    if ($m$varsetburglepreset = "none") then
-    {
-      gosub OUTPUT BurgleZone
-      gosub OUTPUT BurgleTravel BurgleTravelDest
-      gosub OUTPUT BurgleMove BurgleMoveList
-      gosub OUTPUT BurgleTargetRoom
-    }
-    else
-    {
-      gosub OUTPUTGRAY BurgleZone
-      gosub OUTPUTGRAY BurgleTravel BurgleTravelDest
-      gosub OUTPUTGRAY BurgleMove BurgleMoveList 
-      gosub OUTPUTGRAY BurgleTargetRoom
-    }
-    put #echo
-  }
+  put #echo Gray mono Options: %trainingtownpresetlist
 	gosub OUTPUT PawnPreset
-	if ("$m$varsetcustommovement" = "YES") then
-	{
-    if ($m$varsetpawnpreset = "none") then
-    {
-      gosub OUTPUT PawnZone
-      gosub OUTPUT PawnTravel PawnTravelDest
-      gosub OUTPUT PawnMove PawnMoveList
-    }
-    else
-    {
-      gosub OUTPUTGRAY PawnZone
-      gosub OUTPUTGRAY PawnTravel PawnTravelDest
-      gosub OUTPUTGRAY PawnMove PawnMoveList
-    }
-    put #echo
-  }
+	put #echo Gray mono Options: %pawnpresetlist
   gosub OUTPUT PerformPreset
-  if ("$m$varsetcustommovement" = "YES") then
-  {
-    if ($m$varsetperformpreset = "none") then
-    {
-      gosub OUTPUT PerformZone
-      gosub OUTPUT PerformTravel PerformTravelDest
-      gosub OUTPUT PerformMove PerformMoveList
-      gosub OUTPUT PerformTargetRoom
-    }
-    else
-    {
-      gosub OUTPUTGRAY PerformZone
-      gosub OUTPUTGRAY PerformTravel PerformTravelDest
-      gosub OUTPUTGRAY PerformMove PerformMoveList
-      gosub OUTPUTGRAY PerformTargetRoom
-    }  
-  }
+  put #echo Gray mono Options: %trainingtownpresetlist
   put #echo
   return
 
@@ -3262,46 +3156,14 @@ VARCOPYMOVEMENT:
   put #var m%destfrprefergroup $m%sourcefrprefergroup
   
   put #var m%destupkeeppreset $m%sourceupkeeppreset
-  put #var m%destupkeepzone $m%sourceupkeepzone
-  put #var m%destupkeeptravel $m%sourceupkeeptravel
-  put #var m%destupkeeptraveldest $m%sourceupkeeptraveldest
-  put #var m%destupkeepmove $m%sourceupkeepmove
-  put #var m%destupkeepmovelist $m%sourceupkeepmovelist
-  put #var m%destupkeeptargetroom $m%sourceupkeeptargetroom
   put #var m%destpremiumring $m%sourcepremiumring
   put #var m%destpremiumringitem $m%sourcepremiumringitem
-  put #var m%destnearestpremiumportal $m%sourcenearestpremiumportal
+  put #var m%destnearestportaltown $m%sourcenearestportaltown
   
   put #var m%destammopreset $m%sourceammopreset
-  put #var m%destammozone $m%sourceammozone
-  put #var m%destammotravel $m%sourceammotravel
-  put #var m%destammotraveldest $m%sourceammotraveldest
-  put #var m%destammomove $m%sourceammomove
-  put #var m%destammomovelist $m%sourceammomovelist
-  put #var m%destammotargetroom $m%sourceammotargetroom
-  
   put #var m%destburglepreset $m%sourceburglepreset
-  put #var m%destburglezone $m%sourceburglezone
-  put #var m%destburgletravel $m%sourceburgletravel
-  put #var m%destburgletraveldest $m%sourceburgletraveldest
-  put #var m%destburglemove $m%sourceburglemove
-  put #var m%destburglemovelist $m%sourceburglemovelist
-  put #var m%destburgletargetroom $m%sourceburgletargetroom
-  
   put #var m%destpawnpreset $m%sourcepawnpreset
-  put #var m%destpawnzone $m%sourcepawnzone
-  put #var m%destpawntravel $m%sourcepawntravel
-  put #var m%destpawntraveldest $m%sourcepawntraveldest
-  put #var m%destpawnmove $m%sourcepawnmove
-  put #var m%destpawnmovelist $m%sourcepawnmovelist
-  
   put #var m%destperformpreset $m%sourceperformpreset
-  put #var m%destperformzone $m%sourceperformzone
-  put #var m%destperformtravel $m%sourceperformtravel
-  put #var m%destperformtraveldest $m%sourceperformtraveldest
-  put #var m%destperformmove $m%sourceperformmove
-  put #var m%destperformmovelist $m%sourceperformmovelist
-  put #var m%destperformtargetroom $m%sourceperformtargetroom
   put #var save
   return
   
@@ -3704,6 +3566,7 @@ VARCOPYGUILD:
   put #var m%destexpertise $m%sourceexpertise
   put #var m%destwhirlwind $m%sourcewhirlwind
   put #var m%destdualload $m%sourcedualload
+  put #var m%destmininnerfire $m%sourcemininnerfire
   put #var m%destberserkava $m%sourceberserkava
   put #var m%destberserkdrought $m%sourceberserkdrought
   put #var m%destavafatigue $m%sourceavafatigue
@@ -3712,12 +3575,15 @@ VARCOPYGUILD:
   put #var m%destmeditatestaunch $m%sourcemeditatestaunch
   put #var m%destexpaccuracy $m%sourceexpaccuracy
   put #var m%destexpdamage $m%sourceexpdamage
+  put #var m%destberserkblizzard $m%sourceberserkblizzard
   put #var m%destberserkcyclone $m%sourceberserkcyclone
   put #var m%destberserkearthquake $m%sourceberserkearthquake
   put #var m%destberserkflashflood $m%sourceberserkflashflood
+  put #var m%destberserkhurricane $m%sourceberserkhurricane
   put #var m%destberserklandslide $m%sourceberserklandslide
   put #var m%destlandslidetraining $m%sourcelandslidetraining
   put #var m%destberserktornado $m%sourceberserktornado
+  put #var m%desttornadotraining $m%sourcetornadotraining
   put #var m%destberserktsunami $m%sourceberserktsunami
   put #var m%desttsunamibackup $m%sourcetsunamibackup
   put #var m%destberserkvolcano $m%sourceberserkvolcano

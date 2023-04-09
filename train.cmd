@@ -1,6 +1,6 @@
 ########################################
 ###Training scripts by player of Saragos.
-###Last Updated: 03/20/2023
+###Last Updated: 04/08/2023
 ########################################
 
 include library.cmd
@@ -364,7 +364,7 @@ ALERTINIT:
   
   if %speechalerts = "YES" then
   { 
-    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes
+    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.
     var monsterspeech A sickly blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "
@@ -489,8 +489,8 @@ ALERTINIT:
   if %autoupkeep = "YES" then
   { 
     if %auonhealth = "YES" then action var goupkeep 1;var autype health when eval $health <= $auhealthnum
-    if %auonhealth = "YES" then action var goupkeep 1 when You try to creep out of hiding but your injuries cause you to stumble and crash to the ground!
-    if %auonhealth = "YES" then action var goupkeep 1 when when Your (.+) is too injured for you to do that.
+    if %auonhealth = "YES" then action var goupkeep 1;var autype wounds when You try to creep out of hiding but your injuries cause you to stumble and crash to the ground!
+    if %auonhealth = "YES" then action var goupkeep 1;var autype wounds when when Your (.+) is too injured for you to do that.
     if %auonbleed = "YES" then action var goupkeep 1;var autype bleed when eval $bleeding = 1
     action var goupkeep 1; var autype hands when Your (right|left) hand is too injured to draw .*\!
     action var goupkeep 1;var autype hands when Your (right|left) hand is too injured to do that\.
@@ -1117,6 +1117,7 @@ BARBARIANONLY:
   var expertise $m%varsetexpertise
   var whirlwind $m%varsetwhirlwind
   var dualload $m%varsetdualload
+  var mininnerfire $m%varsetmininnerfire
   var berserkava $m%varsetberserkava
   var avafatigue $m%varsetavafatigue
   var berserkfamine $m%varsetberserkfamine
@@ -1124,13 +1125,16 @@ BARBARIANONLY:
   var meditatestaunch $m%varsetmeditatestaunch
   var expaccuracy $m%varsetexpaccuracy
   var expdamage $m%varsetexpdamage
+  var berserkblizzard $m%varsetberserkblizzard
   var berserkcyclone $m%varsetberserkcyclone
   var berserkdrought $m%varsetberserkdrought
   var berserkearthquake $m%varsetberserkearthquake
   var berserkflashflood $m%varsetberserkflashflood
+  var berserkhurricane $m%varsetberserkhurricane
   var berserklandslide $m%varsetberserklandslide
   var landslidetraining $m%varsetlandslidetraining
   var berserktornado $m%varsetberserktornado
+  var tornadotraining $m%varsettornadotraining
   var berserktsunami $m%varsetberserktsunami
   var tsunamibackup $m%varsettsunamibackup
   var berserkvolcano $m%varsetberserkvolcano
@@ -1182,7 +1186,7 @@ BARBARIANONLY:
   action var edamage 0 when You sense your ability to land deadly blows decrease as the battle shifts before you\. 	
   action var edamage 1 when Utilizing flawless combat expertise you execute an attack combination and increase the damage of your next few attacks\.
   
-  action math nextacm%acmtype subtract 45 when With expert skill you end the attack and maneuver into a better position\.
+  #action math nextacm%acmtype subtract 45;put #echo %alertwindow Subtracting 45 seconds from %acmtype timer - %nextacm%acmtype. when With expert skill you end the attack and maneuver into a better position\.
   #;put #echo %alertwindow Subtracting 45 seconds from %acmtype timer. 
   return
 
@@ -1988,22 +1992,11 @@ MAINVARLOAD:
   var movescream $m%varsetmovescream
   var movevanish $m%varsetmovevanish
   var upkeeppreset $m%varsetupkeeppreset
-  var upkeepzone $m%varsetupkeepzone
-  var upkeeptravel $m%varsetupkeeptravel 
-  var upkeeptraveldest $m%varsetupkeeptraveldest
-  var upkeepmove $m%varsetupkeepmove
-  var upkeepmovelist $m%varsetupkeepmovelist
-  var upkeeptargetroom $m%varsetupkeeptargetroom
   var premiumring $m%varsetpremiumring
   var premiumringitem $m%varsetpremiumringitem
+  var nearestportaltown $m%varsetnearestportaltown
   
   var ammopreset $m%varsetammopreset
-  var ammozone $m%varsetammozone
-  var ammotravel $m%varsetammotravel 
-  var ammotraveldest $m%varsetammotraveldest
-  var ammomove $m%varsetammomove
-  var ammomovelist $m%varsetammomovelist
-  var ammotargetroom $m%varsetammotargetroom
   
   var auonhealth $m%varsetauonhealth
   var auhealthnum $m%varsetauhealthnum
@@ -2290,25 +2283,9 @@ MAINVARLOAD:
   
   var noncombat $m%varsetnoncombat
   var burgle $m%varsetburgle
-  var burglezone $m%varsetburglezone
-  var burgletravel $m%varsetburgletravel
-  var burgletraveldest $m%varsetburgletraveldest
-  var burglemove $m%varsetburglemove
-  var burglemovelist $m%varsetburglemovelist
-  var burgletargetroom $m%varsetburgletargetroom
-  
-  var burglepawnzone $m%varsetburglepawnzone
-  var burglepawntravel $m%varsetburglepawntravel
-  var burglepawntraveldest $m%varsetburglepawntraveldest
-  var burglepawnmove $m%varsetburglepawnmove
-  var burglepawnmovelist $m%varsetburglepawnmovelist
-  
-  var performzone $m%varsetperformzone
-  var performtravel $m%varsetperformtravel
-  var performtraveldest $m%varsetperformtraveldest
-  var performmove $m%varsetperformmove
-  var performmovelist $m%varsetperformmovelist
-  var performtargetroom $m%varsetperformtargetroom
+  var burglepreset $m%varsetburglepreset
+  var burglepawnpreset $m%varsetburglepawnpreset
+  var performpreset $m%varsetperformpreset
   
   var buffnum $m%varsetbuffnum
   if %buffnum > 0 then var buff1 $m%varsetbuff1
@@ -3046,7 +3023,7 @@ COMBATLOOP:
       gosub WARHORN
       gosub STOWITEM %warhornitem
       var nextwarhorn %t
-      math nextwarhorn add 240
+      math nextwarhorn add 605
     }
   }
  	if ("$guild" = "Paladin") then
@@ -3800,16 +3777,6 @@ UPKEEPLOGIC:
   put #echo %alertwindow [UPKEEP]: %outputtext
   return
 
-
-BURGLEPAWNSET:
-  var pawnshop none
-  if (%burglepawnzone = 1) then var pawnshop Cormyn
-  if (%burglepawnzone = 30) then var pawnshop Ioun
-  if (%burglepawnzone = 67) then var pawnshop Aelik
-  if (%burglepawnzone = 90) then var pawnshop Paedraig
-  if (%burglepawnzone = 116) then var pawnshop Relf
-  return
-
 UPKEEPSET:
   var townname none
   var mrep none
@@ -4132,6 +4099,7 @@ UPKEEPSET:
     var appraiser Wickett
     #if $Time.isDay = 1 then var appraiser Wickett
     #else var appraiser gemsmith
+    var healer Yrisa
     var hasvault 1
     var hasbank 1
     var currency Dokora
@@ -4161,6 +4129,7 @@ AUTOUPKEEPLOGIC:
   if ("%autype" = "burden") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to burden of %encumbrance.
   if ("%autype" = "bleed") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to bleeding.
   if ("%autype" = "nerves") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to nerve damage.
+  if ("%autype" = "wounds") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to significant wounds.
   if ("%autype" = "hands") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to missing hand(s).
   if ("%autype" = "ammo") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to running out of ammo.
   if %autype = "manual" then
@@ -4175,37 +4144,69 @@ AUTOUPKEEPLOGIC:
   gosub DEEPSLEEP
   if %rpastatus = 1 then gosub RPATOGGLE
   #LEAVING
-  put #echo Yellow premiumring: %premiumring
-  put #echo Yellow autype: %autype
-  if ("%autype" != "ammo") then
+  #put #echo Yellow premiumring: %premiumring
+  #put #echo Yellow autype: %autype
+  
+  gosub LEAVEROOM
+  if ("%autype" = "ammo") then
   {
-		if ("%premiumring" = "YES") then
-		{
-			if %t < %nextring then return
-			if $zoneid != 150 then
-			{
-				gosub LEAVEROOM
-				gosub PREMIUMRINGGO
-				if ("$guild" = "Barbarian") then gosub FORMSTOPALL
-				if %goodring != 1 then
-				{
-					 put #echo %alertwindow Yellow [UPKEEP]: Unable to go to Fang Cove yet due to premium ring timer!
-					 #echo t: %t
-					 #echo nextring: %nextring
-					 var stance shield
-					 gosub STANCECHANGE
-					 var goupkeep 0
-					 return
-				}
-				put #mapper reset
-				pause 1
-				gosub STOWALL
-			}
-		}
-		else gosub ROOMTRAVELUPKEEP
+    gosub NEWTOWNPRESET %ammopreset upkeep
+    gosub ROOMTRAVEL
   }
-  else gosub ROOMTRAVELUPKEEP
-  if $invisible = 1 then gosub RELINVIS
+  else
+  {
+    if ("%upkeeppreset" != "fangcove") then
+    {
+      gosub NEWTOWNPRESET %upkeeppreset upkeep
+      gosub ROOMTRAVEL
+    }
+    else
+    {
+      #FANGCOVE
+      var fangcovevist -1
+      if ("%premiumring" = "YES") then
+      {
+        if %t < %nextring then return
+        if $zoneid != 150 then
+        {
+          gosub LEAVEROOM
+          gosub PREMIUMRINGGO
+          if (%goodring = 1) then
+          {
+            var fangcovevisit 1
+            if ("$guild" = "Barbarian") then
+            {
+              gosub BERSERKSTOPALL
+              gosub FORMSTOPALL
+            }
+          }
+          else
+          {
+            #FANGCOVE_PORTAL
+            var fangcovevisit 2
+            gosub NEWTOWNPRESET %nearestportaltown upkeep
+            gosub ROOMTRAVEL
+            gosub MOVE portal
+            move go meeting portal
+          }
+          put #mapper reset
+          pause 1
+          gosub STOWALL
+        }
+      }
+      else
+      {
+        #FANGCOVE_PORTAL
+        var fangcovevisit 2
+        gosub NEWTOWNPRESET %nearestportaltown upkeep
+        gosub ROOMTRAVEL
+        gosub MOVE portal
+        move go meeting portal
+      }
+    }
+  }
+  
+	if $invisible = 1 then gosub RELINVIS
   #UPKEEP
   if %upkeeptest != 1 then
   {
@@ -4219,11 +4220,19 @@ AUTOUPKEEPLOGIC:
   var stance shield
   gosub STANCECHANGE
   var goupkeep 0
-  if %premiumring = "YES" then
+  if ("%upkeeppreset" = "fangcove") then
   {
-    gosub PREMIUMRINGBACK
-    put #mapper reset
-    pause 1
+    if (%fangcovevisit = 1) then
+    {
+      gosub PREMIUMRINGBACK
+      put #mapper reset
+      pause 1
+    }
+    else
+    {
+      gosub MOVE portal
+      move go exit portal
+    }
   }
   gosub ROOMTRAVELCOMBAT
   put #echo %alertwindow [UPKEEP]: Returned to combat from AutoUpkeep.
@@ -4234,15 +4243,8 @@ AUTOUPKEEPLOGIC:
 
 AUGO:
   gosub LEAVEROOM
-  var rtzone %upkeepzone
-  var rttravel %upkeeptravel
-  var rttraveldest %upkeeptraveldest
-  var rtmove %upkeepmove
-  var rtmovelist %upkeepmovelist
-  var rttargetroom %upkeeptargetroom
-  var rtfindroom NO
+  gosub NEWTOWNPRESET %upkeeppreset upkeep
   gosub ROOMTRAVEL
-  if ("$guild" = "Barbarian") then gosub FORMSTOPALL
   return
   
   
@@ -4359,7 +4361,7 @@ AUTOPATHLOGIC:
   if %healthcheckgood != 1 then
   {
     var didnonpremheal 1
-    if ((matchre("$roomobjs" "%healer")) || (matchre("$roomdesc" "%healer"))) then
+    if ((matchre("$roomobjs" "%healer")) || (matchre("$roomdesc" "%healer")) || (matchre("$roomname" "%healer"))) then
     else
     {
       if %multizone = 1 then
@@ -4370,7 +4372,8 @@ AUTOPATHLOGIC:
       #HEALER_MOVES
       if (($zoneid = 30) || ($zoneid = 42)) then gosub MOVE healer
       else gosub MOVE %healer
-      if ((matchre("$roomobjs" "%healer")) || (matchre("$roomdesc" "%healer"))) then
+      put #echo Yellow Healer: %healer
+      if ((matchre("$roomobjs" "%healer")) || (matchre("$roomdesc" "%healer") || (matchre("$roomname" "%healer"))) then
       else
       {
         echo Something's wrong!  Can't find the healer!
@@ -5635,8 +5638,6 @@ BURGLELOGIC:
   else goto BURGLEARRESTED
 
 BURGLEPAWNLOGIC:
-  gosub BURGLEPAWNSET
-  echo pawnshop: %pawnshop
   if (%pawnshop = "none") then var burglepawnsold -2
   else
   {
@@ -5647,13 +5648,7 @@ BURGLEPAWNLOGIC:
     echo burglelootlistnum: %burglelootlistnum
     if ((%burglelootlist(0) != "") || (%burglelootlistnum > 0)) then
     {
-      var rtzone %burglepawnzone
-      var rttravel %burglepawntravel
-      var rttraveldest %burglepawntraveldest
-      var rtmove %burglepawnmove
-      var rtmovelist %burglepawnmovelist
-      var rttargetroom %pawnshop
-      var rtfindroom NO
+      gosub NEWTOWNPRESET %pawnpreset pawn
       gosub ROOMTRAVEL
       var pawncounter 0
       var burglepawnsold 0
@@ -5663,7 +5658,6 @@ BURGLEPAWNLOGIC:
     }
     else var burglepawnsold -1
   }
-  return
   return
 
 BURGLEPAWN:
@@ -6104,7 +6098,8 @@ TRADINGSELLLOGIC:
   if (%tradinglock = 1) then return
   gosub UPKEEPSET
   gosub STOWALL
-  var speechalerts NO
+  action (speech) off
+  action (emote) off
   if %hasvault != 1 then 
   {
     put #echo %alertwindow No vault is recognized in this town, so TradingSell cannot be completed!
@@ -6189,7 +6184,8 @@ TRADINGSELLLOGIC:
   }
   #BANK
   gosub MINMONEYLOGIC
-  var speechalerts $speechalerts
+  action (speech) on
+  action (emote) on
   return
 
 
@@ -8502,7 +8498,7 @@ SUMMWEAPONLOGIC:
       {
         var nextsumm %t
         math nextsumm add %summonweapontimer 
-        gosub SUMMONWEAPON
+        gosub SUMMONWEAPONTRAIN
         if %summweaponname != 0 then gosub BREAKWEAPON %summweaponname
         if %summfull = 1 then var summfull 0         
       }
@@ -8651,15 +8647,8 @@ NONCOMBATLOGIC:
 		{
 			gosub DEEPSLEEP
 			gosub LEAVEROOM
-			var rtzone %burglezone
-			var rttravel %burgletravel
-			var rttraveldest %burgletraveldest
-			var rtmove %burglemove
-			var rtmovelist %burglemovelist
-			var rttargetroom %burgletargetroom
-			var rtfindroom NO
+			gosub NEWTOWNPRESET %burglepreset burgle
 			gosub ROOMTRAVEL
-			if ("$guild" = "Barbarian") then gosub FORMSTOPALL
 			gosub STOWALL
 			gosub AWAKE
 			#BURGLING
@@ -8713,16 +8702,9 @@ NONCOMBATLOGIC:
 		{
 			gosub DEEPSLEEP
 		  gosub LEAVEROOM
+		  gosub NEWTOWNPRESET %performpreset perform
 			var firstclean 0   
-			var rtzone %performzone
-			var rttravel %performtravel
-			var rttraveldest %performtraveldest
-			var rtmove %performmove
-			var rtmovelist %performmovelist
-			var rttargetroom %performtargetroom
-			var rtfindroom NO
 			gosub ROOMTRAVEL
-			if ("$guild" = "Barbarian") then gosub FORMSTOPALL
 			gosub AWAKE
 			gosub STOWALL
 			gosub MTPERFORMLOOP
@@ -9263,26 +9245,13 @@ ROOMTRAVELUPKEEP:
   gosub LEAVEROOM
   if ("%autype" = "ammo") then
   {
-    var rtzone %ammozone
-		var rttravel %ammotravel
-		var rttraveldest %ammotraveldest
-		var rtmove %ammomove
-		var rtmovelist %ammomovelist
-		var rttargetroom %ammotargetroom
-		var rtfindroom NO
+    gosub NEWTOWNPRESET %ammopreset upkeep
   }
   else
   {
-		var rtzone %upkeepzone
-		var rttravel %upkeeptravel
-		var rttraveldest %upkeeptraveldest
-		var rtmove %upkeepmove
-		var rtmovelist %upkeepmovelist
-		var rttargetroom %upkeeptargetroom
-		var rtfindroom NO
+    gosub NEWTOWNPRESET %upkeeppreset upkeep
   }
   gosub ROOMTRAVEL
-  if ("$guild" = "Barbarian") then gosub FORMSTOPALL
   return
 
 ROOMTRAVEL:
@@ -9308,11 +9277,18 @@ ROOMTRAVEL:
 				eval mlcount count("%rtmovelist","|")
 				gosub MOVELOOP 
 			}
+			if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
 		}
   }
   if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then
   {
     gosub MOVE %rttargetroom
+  }
+  #BARB_SHUTOFF
+  if ("$guild" = "Barbarian") then
+  {
+    gosub BERSERKSTOPALL
+    gosub FORMSTOPALL
   }
   if ("%rtfindroom" = "YES") then gosub FINDROOMLOGIC
   return
@@ -9582,24 +9558,23 @@ SPELLSKILLTEST:
     var skilltest $Sorcery.LearningRate
   }
   return
-
-
+  
+  
 BARBBUFFLOGIC:
+  #SPECIAL_BUFFS
   if (%playing = 1) then return
   if ((%berserkava = "YES") && ($SpellTimer.Avalanche.active != 1)) then
   {
 		if ($stamina < %avafatigue) then
 		{
-  		var berserktype Avalanche
-			gosub BERSERK
+  		gosub BERSERK Avalanche
 		}
   }
   if ((%berserkfamine = "YES") && ($SpellTimer.Famine.active != 1)) then
   {
 		if $health < %faminevit then
 		{
-			var berserktype Famine
-			gosub BERSERK
+			gosub BERSERK Famine
 		}
   }
   if ((%meditatestaunch = "YES") && ($SpellTimer.Staunch.active != 1)) then
@@ -9610,226 +9585,64 @@ BARBBUFFLOGIC:
 			gosub MEDITATION
 		}
   }
-  if ((%berserkcyclone = "YES") && ($SpellTimer.Cyclone.active != 1)) then
-  {     
-    var berserktype Cyclone
-    gosub BERSERK
-  }
-  if ((%berserkdrought = "YES") && ($SpellTimer.Drought.active != 1)) then
-  {     
-    var berserktype Drought
-    gosub BERSERK
-  }
-  if ((%berserkearthquake = "YES") && ($SpellTimer.Earthquake.active != 1)) then
-  {     
-    var berserktype Earthquake
-    gosub BERSERK
-  }
-  if ((%berserkflashflood = "YES") && ($SpellTimer.Flashflood.active != 1)) then
-  {     
-    var berserktype Flashflood
-    gosub BERSERK
-  }
-  if ((%berserklandslide = "YES") && ($SpellTimer.Landslide.active != 1)) then
+  #BERSERKS
+  gosub BERSERKLOGIC Blizzard
+  gosub BERSERKLOGIC Cyclone
+  gosub BERSERKLOGIC Drought
+  gosub BERSERKLOGIC Earthquake
+  gosub BERSERKLOGIC Flashflood
+  gosub BERSERKLOGIC Hurricane
+  if ("%landslidetraining" = "YES") then
   {
-    if ("%landslidetraining" = "YES") then
+    if ($Warding.LearningRate > 29) then var wardinglock 1
+    if ($Warding.LearningRate < 20) then var wardinglock 0
+    if ($Warding.Ranks = 1750) then var wardinglock 1
+    if (%wardinglock = 0) then
     {
-      if ($Warding.LearningRate > 33) then var wardinglock 1
-      if ($Warding.LearningRate < 20) then var wardinglock 0
-      if ($Warding.Ranks = 1750) then var wardinglock 1
-      if (%wardinglock = 0) then
-      {
-        var berserktype Landslide
-        gosub BERSERK
-      }
+      gosub BERSERKLOGIC Landslide
     }
     else
     {
-      var berserktype Landslide
-      gosub BERSERK
-    }
-  }
-  if ((%berserktornado = "YES") && ($SpellTimer.Tornado.active != 1)) then
-  {     
-    var berserktype Tornado
-    gosub BERSERK
-  }
-  if ((%berserktsunami = "YES") && ($SpellTimer.Tsunami.active != 1)) then
-  {     
-    var berserktype Tsunami
-    gosub BERSERK
-  }
-  if ((%berserkvolcano = "YES") && ($SpellTimer.Volcano.active != 1)) then
-  {     
-    var berserktype Volcano
-    gosub BERSERK
-  }
-  if ((%berserkwildfire = "YES") && ($SpellTimer.Wildfire.active != 1)) then
-  {     
-    var berserktype Wildfire
-    gosub BERSERK
-  }
- 
-  if (%bearform = "YES") then
-  {
-    if ($SpellTimer.Bear.active != 1) then
-    {
-      var formtype Bear
-	    gosub FORM
+      if ($SpellTimer.Landslide.active = 1) then gosub BERSERKSTOP Landslide
     }
   }
   else
+  {  
+    gosub BERSERKLOGIC Landslide
+  }
+
+
+  if ("%tornadotraining" = "YES") then
   {
-		if ($SpellTimer.Bear.active = 1) then
-		{
-			var formtype Bear
-			gosub FORMSTOP
-		}
-	}
-	if (%buffaloform = "YES") then
-  {
-    if ($SpellTimer.Buffalo.active != 1) then
+    if ($Augmentation.LearningRate > 29) then var augmentationlock 1
+    if ($Augmentation.LearningRate < 20) then var augmentationlock 0
+    if ($Augmentation.Ranks = 1750) then var augmentationlock 1
+    if (%augmentationlock = 0) then
     {
-      var formtype Buffalo
-	    gosub FORM
+      gosub BERSERKLOGIC Tornado
+    }
+    else
+    {
+      if ($SpellTimer.Tornado.active = 1) then gosub BERSERKSTOP Tornado
     }
   }
-  else
-  {
-		if ($SpellTimer.Buffalo.active = 1) then
-		{
-			var formtype Buffalo
-			gosub FORMSTOP
-		}
-	}
-	if (%dragonform = "YES") then
-  {
-    if ($SpellTimer.Dragon.active != 1) then
-    {
-      var formtype Dragon
-	    gosub FORM
-    }
-  }
-  else
-  {
-		if ($SpellTimer.Dragon.active = 1) then
-		{
-			var formtype Dragon
-			gosub FORMSTOP
-		}
-	}
-	if (%eagleform = "YES") then
-  {
-    if ($SpellTimer.Eagle.active != 1) then
-    {
-      var formtype Eagle
-	    gosub FORM
-    }
-  }
-  else
-  {
-		if ($SpellTimer.Eagle.active = 1) then
-		{
-			var formtype Eagle
-			gosub FORMSTOP
-		}
-	}
-	if (%monkeyform = "YES") then
-  {
-    if ($SpellTimer.Monkey.active != 1) then
-    {
-      var formtype Monkey
-	    gosub FORM
-    }
-  }
-  else
-  {
-		if ($SpellTimer.Monkey.active = 1) then
-		{
-			var formtype Monkey
-			gosub FORMSTOP
-		}
-	}
-	if (%owlform = "YES") then
-  {
-    if ($SpellTimer.Owl.active != 1) then
-    {
-      var formtype Owl
-	    gosub FORM
-    }
-  }
-  else
-  {
-		if ($SpellTimer.Owl.active = 1) then
-		{
-			var formtype Owl
-			gosub FORMSTOP
-		}
-	}
-	if (%pantherform = "YES") then
-  {
-    if ($SpellTimer.Panther.active != 1) then
-    {
-      var formtype Panther
-	    gosub FORM
-    }
-  }
-  else
-  {
-		if ($SpellTimer.Panther.active = 1) then
-		{
-			var formtype Panther
-			gosub FORMSTOP
-		}
-	}
-	if (%piranhaform = "YES") then
-  {
-    if ($SpellTimer.Piranha.active != 1) then
-    {
-      var formtype Piranha
-	    gosub FORM
-    }
-  }
-  else
-  {
-		if ($SpellTimer.Piranha.active = 1) then
-		{
-			var formtype Piranha
-			gosub FORMSTOP
-		}
-	}
-	if (%pythonform = "YES") then
-  {
-    if ($SpellTimer.Python.active != 1) then
-    {
-      var formtype Python
-	    gosub FORM
-    }
-  }
-  else
-  {
-		if ($SpellTimer.Python.active = 1) then
-		{
-			var formtype Python
-			gosub FORMSTOP
-		}
-	}
-	if (%wolverineform = "YES") then
-  {
-    if ($SpellTimer.Wolverine.active != 1) then
-    {
-      var formtype Wolverine
-	    gosub FORM
-    }
-  }
-  else
-  {
-		if ($SpellTimer.Wolverine.active = 1) then
-		{
-			var formtype Wolverine
-			gosub FORMSTOP
-		}
-	} 
+  else gosub BERSERKLOGIC Tornado
+  gosub BERSERKLOGIC Tsunami
+  gosub BERSERKLOGIC Volcano
+  gosub BERSERKLOGIC Wildfire
+
+  #FORMS
+  gosub FORMLOGIC Bear
+  gosub FORMLOGIC Buffalo
+  gosub FORMLOGIC Dragon
+  gosub FORMLOGIC Eagle
+  gosub FORMLOGIC Monkey
+  gosub FORMLOGIC Owl
+  gosub FORMLOGIC Panther
+  gosub FORMLOGIC Piranha
+  gosub FORMLOGIC Python
+  gosub FORMLOGIC Wolverine
+	   
   
   if ((%meditatebastion = "YES") && ($SpellTimer.Bastion.active != 1)) then
   {
@@ -9852,6 +9665,43 @@ BARBBUFFLOGIC:
     gosub MEDITATION
   }
   return
+  
+BERSERKLOGIC:
+  if ($mana < %mininnerfire) then return
+  var berserktype $0
+  eval berserklower tolower("%berserktype")
+  #put #echo berserk%berserklower: %berserk%berserklower   SpellTimer.%berserkype.active: $SpellTimer.%berserktype.active
+  if ((%berserk%berserklower = "YES") && ($SpellTimer.%berserktype.active != 1)) then
+  {
+    gosub BERSERK %berserktype
+  }
+  else
+  {
+    if ((%berserk%berserklower = "NO") && ($SpellTimer.%berserktype.active = 1)) then
+    {
+      gosub BERSERKSTOP %berserktype
+    }
+  }
+  return
+
+FORMLOGIC:
+  var formtype $0
+  eval formlower tolower("%formtype")
+  #put #echo %formlowerform: %%formlowerform   SpellTimer.%formtype.active: $SpellTimer.%formtype.active
+  if ((%%formlowerform = "YES") && ($SpellTimer.%formtype.active != 1)) then
+  {
+    gosub FORM %formtype
+  }
+  else
+  {
+    if ((%%formlowerform = "NO") && ($SpellTimer.%formtype.active = 1)) then
+    {
+      echo going to formstop
+      gosub FORMSTOP %formtype
+    }
+  }
+  return
+  
   
 BARBROARLOGIC:
   if (%playing = 1) then return
@@ -9930,6 +9780,7 @@ KHRILOGIC:
   { 
     if $SpellTimer.KhriAdaptation.active = 1 then var badkhrilist %badkhrilist|%khritype
   }
+  var khritype avoidance
   if %khriavoidance = "YES" then
   {
     if $SpellTimer.KhriAvoidance.active != 1 then var khrilist %khrilist|%khritype
@@ -11587,7 +11438,7 @@ TACTICSEXPERTHANDCHECK:
 	if ($Offhand_Weapon.LearningRate > 32) then var offhandlock 1
 	if ($Offhand_Weapon.LearningRate < 20) then var offhandlock 0
 	if ($Offhand.Ranks = 1750) then var offhandlock 1
-	if ($Tactics.LearningRate > 33) then var tacticslock 1
+	if ($Tactics.LearningRate > 29) then var tacticslock 1
 	if ($Tactics.LearningRate < 20) then var tacticslock 0
 	if ($Tactics.Ranks = 1750) then var tacticslock 1
 	
@@ -11869,7 +11720,7 @@ ACMLOGIC:
 		{
 			if (%t >= %nextacmimpale) then
 			{
-				var acmtype impale
+			  var acmtype impale
 				var usingacm 1
 			}
 		}
@@ -11877,7 +11728,7 @@ ACMLOGIC:
 		{
 			if (%t >= %nextacmpalmstrike then
 			{
-				var acmtype palmstrike
+			  var acmtype palmstrike
 				var usingacm 1
 			}
 		}
@@ -11911,7 +11762,6 @@ ACMLOGIC:
 								gosub STOW right
 								gosub WIELD right %%offhandlowestweapon
 							}
-							#put #echo >Log Doublestrike!
 							var acmtype doublestrike
 							var usingacm 1
 						}
@@ -11932,7 +11782,7 @@ ACMLOGIC:
 					if %goodoffhand = 1 then
 					{
 						gosub STOW right
-						gosub WIELD right %%offhandlowestweapon						
+						gosub WIELD right %%offhandlowestweapon
 						var acmtype doublestrike
 						var usingacm 1
 					}
@@ -12330,7 +12180,11 @@ BUGOUT:
   gosub MOVEANYROOM
   gosub MOVE %bugoutroom
   gosub RELSPELL
-  if ("$guild" = "Barbarian") then gosub FORMSTOPALL
+  if ("$guild" = "Barbarian") then
+  {
+    gosub BERSERKSTOPALL
+    gosub FORMSTOPALL
+  }
   gosub RELALL
   gosub CASTRESET
   gosub DEEPSLEEP

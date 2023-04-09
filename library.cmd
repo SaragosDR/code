@@ -11,17 +11,18 @@ var transnecro |ivm|ks|bue|worm|ch|php|
 var aimweapons bow|xbow|sling
 var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|field|plane|planes|road|spell|symbiosis strengthen|symbiosis endure|symbiosis avoid|symbiosis spring|symbiosis remember|symbiosis resolve|symbiosis impress|symbiosis discern|symbiosis explore|symbiosis watch|symbiosis harvest|symbiosis heal|symbiosis learn|symbiosis examine|symbiosis perform|symbiosis cast|symbiosis harness|symbiosis activate
 
-var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
+var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-animateditems||p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
 var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-seordmaors
-var combatpresetp3 p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-prereniyoung|p3-prereni|p3-prerenielder|p3-gryphons|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-adanfsorcs|p3-adanfblades
-var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2
+var combatpresetp3 p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-prerenielder|p3-gryphons|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-adanfsorcs|p3-adanfblades
+var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p4-merkreshcelpeze4
 var combatpresetp5 p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-blackapes|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
 var combatpresetlist none|%combatpresetp1|%combatpresetp2|%combatpresetp3|%combatpresetp4|%combatpresetp5
 
 var townpresetlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|shard|fangcove|hibarnhvidar|boarclan|ratha|merkresh
+var trainingtownpresetlist none|muspari|theren|rossman|riverhaven|dirge|kaerna|crossing|leth|ilaya|shard|fangcove|hibarnhvidar|boarclan|ratha|merkresh
 #|aesry|merkresh|jeihrem
 var townvaultpresetlist none|muspari|theren|riverhaven|dirge|crossing|leth|shard|fangcove|hibarnhvidar|boarclan|ratha|aesry|merkresh|jeihrem
-var townportalpresetlist none|crossing
+var townportalpresetlist none|muspari|therenborough|langenfirth|riverhaven|crossing|leth|shard|hibarnhvidar|ainghazal|ratha|mriss|aesry
 var pawnpresetlist none|crossing|riverhaven|shard|hibarnhvidar
 var ammopresetlist none|crossing|shard|ratha
 
@@ -43,11 +44,6 @@ SETDEFAULTS:
   #MULTI_AND_VARFIX
   if !def(varset) then
   {
-    if def(combat) then
-    {
-      put #echo Yellow Converting variables!
-      gosub VARCONVERT
-    }
     put #var varset 1
   }
   if !matchre("$varset", "\b(1|2|3|4)\b") then put #var varset 1
@@ -277,6 +273,19 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 228|229|230|231|232|233
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 228|229|230|231|232|233|234|235|236|237
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 234|235|236|237
+    }
+    if ("$m%checkmodecombatpreset" = "p1-animateditems") then
+    {
+      put #var m%checkmodezone 7a
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest kaerna
+      put #var m%checkmodemove YES
+      put #var m%checkmodemovelist baerholt
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 0
+      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 70|71|72|73|74|75|76|77|78|79|80|81|82
+      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 70|71|72|73|74|75|76|77|78|79|80|81|82
     }
     if ("$m%checkmodecombatpreset" = "p1-beisswurms") then
     {
@@ -583,18 +592,6 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 234|235|236|237|238|239|240|241|242|243
     }
-    if ("$m%checkmodecombatpreset" = "p3-prereni") then
-    {
-      put #var m%checkmodezone 66
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 664|665|666
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 664|665|666|661|663
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 661|663
-    }
     if ("$m%checkmodecombatpreset" = "p3-prereniyoung") then
     {
       put #var m%checkmodezone 66
@@ -606,6 +603,42 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 656|657|658|659
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 656|657|658|659|660|662
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 660|662
+    }
+    if ("$m%checkmodecombatpreset" = "p3-redleucros") then
+    {
+      put #var m%checkmodezone 65
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest fayrin
+      put #var m%checkmodemove YES
+      put #var m%checkmodemovelist undergondola
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 5|6|7|8|9|10|11|12|13|14
+    }
+    if ("$m%checkmodecombatpreset" = "p3-goldenpards") then
+    {
+      put #var m%checkmodezone 69
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest wyvern
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 87|107|108|109|110|111|112|113|114|115|129|130|131|132
+      #if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 656|657|658|659
+      #if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 656|657|658|659|660|662
+      #if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 660|662
+    }
+    if ("$m%checkmodecombatpreset" = "p3-prereni") then
+    {
+      put #var m%checkmodezone 66
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest fayrin
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 664|665|666
+      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 664|665|666|661|663
+      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 661|663
     }
     if ("$m%checkmodecombatpreset" = "p3-prerenielder") then
     {
@@ -740,6 +773,26 @@ VARCHECKS:
       put #var m%checkmodefindroomlist 133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152
     }
     if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze2") then
+    {
+      put #var m%checkmodezone 107
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest merkresh
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 156|157|158|159|160|161|162|163|164|165|166|167|168
+    }
+    if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze3") then
+    {
+      put #var m%checkmodezone 107
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest merkresh
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 34|35|36|37|
+    }
+    if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze4") then
     {
       put #var m%checkmodezone 107
       put #var m%checkmodetravel YES
@@ -891,74 +944,13 @@ VARCHECKS:
   
   if !matchre("$m%checkmodepremiumring", "\b(YES|NO)\b") then put #var m%checkmodepremiumring NO
   if !def(m%checkmodepremiumringitem) then put #var m%checkmodepremiumringitem band
+  if !matchre("$m%checkmodenearestportaltown", "\b(%townportalpresetlist)\b") then put #var m%checkmodenearestportaltown none
   
   if !matchre("$m%checkmodeupkeeppreset", "\b(%townpresetlist)\b") then put #var m%checkmodeupkeeppreset crossing
-  if ("$m%checkmodeupkeeppreset" != "none") then
-  {
-    gosub TOWNPRESET upkeep
-  }
-  if $m%checkmodeupkeepzone > -1 then
-  else put #var m%checkmodeupkeepzone 0 
-  if !matchre("$m%checkmodeupkeeptravel", "\b(YES|NO)\b") then put #var m%checkmodeupkeeptravel NO
-  if !def(m%checkmodeupkeeptraveldest) then put #var m%checkmodeupkeeptraveldest crossing
-  if !matchre("$m%checkmodeupkeepmove", "\b(YES|NO)\b") then put #var m%checkmodeupkeepmove NO
-  if !def(m%checkmodeupkeepmovelist) then put #var m%checkmodeupkeepmovelist 1|42
-  if ($m%checkmodeupkeeptargetroom > -1) then 
-  else put #var m%checkmodeupkeeptargetroom 0
-  
   if !matchre("$m%checkmodeammopreset", "\b(%ammopresetlist)\b") then put #var m%checkmodeammopreset none
-  if ("$m%checkmodeammopreset" != "none") then
-  {
-    gosub TOWNPRESET ammo
-  }
-  if $m%checkmodeammozone > -1 then
-  else put #var m%checkmodeammozone 0 
-  if !matchre("$m%checkmodeammotravel", "\b(YES|NO)\b") then put #var m%checkmodeammotravel NO
-  if !def(m%checkmodeammotraveldest) then put #var m%checkmodeammotraveldest crossing
-  if !matchre("$m%checkmodeammomove", "\b(YES|NO)\b") then put #var m%checkmodeammomove NO
-  if !def(m%checkmodeammomovelist) then put #var m%checkmodeammomovelist 1|42
-  if ($m%checkmodeammotargetroom > -1) then 
-  else put #var m%checkmodeammotargetroom 0
-  
-  if !matchre("$m%checkmodeburglepreset", "\b(%townpresetlist)\b") then put #var m%checkmodeburglepreset none
-  if ("$m%checkmodeburglepreset" != "none") then
-  {
-    gosub TOWNPRESET burgle
-  }
-  if ($m%checkmodeburglezone > -1) then
-  else put #var m%checkmodeburglezone 0
-  if !matchre("$m%checkmodeburgletravel", "\b(YES|NO)\b") then put #var m%checkmodeburgletravel NO
-  if !def(m%checkmodeburgletraveldest) then put #var m%checkmodeburgletraveldest crossing
-  if !matchre("$m%checkmodeburglemove", "\b(YES|NO)\b") then put #var m%checkmodeburglemove NO
-  if !def(m%checkmodeburglemovelist) then put #var m%checkmodeburglemovelist 1|42
-  if ($m%checkmodeburgletargetroom > -1) then
-  else put #var m%checkmodeburgletargetroom 0
-  
+  if !matchre("$m%checkmodeburglepreset", "\b(%trainingtownpresetlist)\b") then put #var m%checkmodeburglepreset none
   if !matchre("$m%checkmodepawnpreset", "\b(%pawnpresetlist)\b") then put #var m%checkmodepawnpreset none
-  if ("$m%checkmodepawnpreset" != "none") then
-  {
-    gosub TOWNPRESET pawn
-  }
-  if ($m%checkmodepawnzone > -1) then
-  else put #var m%checkmodepawnzone 0
-  if !matchre("$m%checkmodepawntravel", "\b(YES|NO)\b") then put #var m%checkmodepawntravel NO
-  if !def(m%checkmodepawntraveldest) then put #var m%checkmodepawntraveldest crossing
-  if !matchre("$m%checkmodepawnmove", "\b(YES|NO)\b") then put #var m%checkmodepawnmove NO
-  if !def(m%checkmodepawnmovelist) then put #var m%checkmodepawnmovelist 1|42
-  
-  if !matchre("$m%checkmodeperformpreset", "\b(%townpresetlist)\b") then put #var m%checkmodeperformpreset none
-  if ("$m%checkmodeperformpreset" != "none") then
-  {
-    gosub TOWNPRESET perform
-  }
-  if ($m%checkmodeperformzone > -1) then
-  else put #var m%checkmodeperformzone 0
-  if !matchre("$m%checkmodeperformtravel", "\b(YES|NO)\b") then put #var m%checkmodeperformtravel NO
-  if !def(m%checkmodeperformtraveldest) then put #var m%checkmodeperformtraveldest crossing
-  if !matchre("$m%checkmodeperformmove", "\b(YES|NO)\b") then put #var m%checkmodeperformmove NO
-  if !def(m%checkmodeperformmovelist) then put #var m%checkmodeperformmovelist 1|42
-  if ($m%checkmodeperformtargetroom > -1) then
-  else put #var m%checkmodeperformtargetroom 0
+  if !matchre("$m%checkmodeperformpreset", "\b(%trainingtownpresetlist)\b") then put #var m%checkmodeperformpreset none
   
   #ALERTS
   if !matchre("$alertwindow", "\b(Main|Log|Conversation)\b") then put #var alertwindow Log
@@ -1628,6 +1620,8 @@ VARCHECKS:
   if !matchre("$m%checkmodeexpertise", "\b(YES|NO)\b") then put #var m%checkmodeexpertise NO
   if !matchre("$m%checkmodewhirlwind", "\b(YES|NO)\b") then put #var m%checkmodewhirlwind NO
   if !matchre("$m%checkmodedualload", "\b(YES|NO)\b") then put #var m%checkmodedualload NO
+  if $m%checkmodemininnerfire >= 0 then
+  else put #var m%checkmodemininnerfire 20
   if !matchre("$m%checkmodeberserkava", "\b(YES|NO)\b") then put #var m%checkmodeberserkava NO
   if $m%checkmodeavafatigue >= 0 then
   else put #var m%checkmodeavafatigue 90
@@ -1638,12 +1632,15 @@ VARCHECKS:
   if !matchre("$m%checkmodemeditatestaunch", "\b(YES|NO)\b") then put #var m%checkmodemeditatestaunch NO
   if !matchre("$m%checkmodeexpaccuracy", "\b(YES|NO)\b") then put #var m%checkmodeexpaccuracy NO
   if !matchre("$m%checkmodeexpdamage", "\b(YES|NO)\b") then put #var m%checkmodeexpdamage NO
+  if !matchre("$m%checkmodeberserkblizzard", "\b(YES|NO)\b") then put #var m%checkmodeberserkblizzard NO
   if !matchre("$m%checkmodeberserkcyclone", "\b(YES|NO)\b") then put #var m%checkmodeberserkcyclone NO
   if !matchre("$m%checkmodeberserkearthquake", "\b(YES|NO)\b") then put #var m%checkmodeberserkearthquake NO
   if !matchre("$m%checkmodeberserkflashflood", "\b(YES|NO)\b") then put #var m%checkmodeberserkflashflood NO
+  if !matchre("$m%checkmodeberserkhurricane", "\b(YES|NO)\b") then put #var m%checkmodeberserkhurricane NO
   if !matchre("$m%checkmodeberserklandslide", "\b(YES|NO)\b") then put #var m%checkmodeberserklandslide NO
   if !matchre("$m%checkmodelandslidetraining", "\b(YES|NO)\b") then put #var m%checkmodelandslidetraining NO
   if !matchre("$m%checkmodeberserktornado", "\b(YES|NO)\b") then put #var m%checkmodeberserktornado NO
+  if !matchre("$m%checkmodetornadotraining", "\b(YES|NO)\b") then put #var m%checkmodetornadotraining NO
   if !matchre("$m%checkmodeberserktsunami", "\b(YES|NO)\b") then put #var m%checkmodeberserktsunami NO
   if !matchre("$m%checkmodeberserkvolcano", "\b(YES|NO)\b") then put #var m%checkmodeberserkvolcano NO
   if !matchre("$m%checkmodeberserkwildfire", "\b(YES|NO)\b") then put #var m%checkmodeberserkwildfire NO
@@ -1858,6 +1855,7 @@ VARCHECKS:
   
   
   #CONDITIONAL_VARIABLE_SWITCHES
+  if $m%checkmodepremiumring = "YES" then put #var m%checkmodeupkeeppreset fangcove
   if (($m%checkmodebugoutonbleed = "YES") && ($m%checkmodeauonbleed = "YES") && ($m%checkmodeautoupkeep = "YES")) then put #var m%checkmodebugoutonbleed NO
   if $m%checkmodeharvest = "YES" then put #var m%checkmodepreserve YES
   if $m%checkmodetmfocus = "YES" then put #var m%checkmodetmdbprior YES
@@ -1972,156 +1970,191 @@ VARCHECKOTHER:
   if !matchre("$killthrownbond", "\b(YES|NO)\b") then put #var killthrownbond NO
   return
 
-TOWNPRESET:
-  if ("$m%checkmode$0preset" = "muspari") then
+
+NEWTOWNPRESET:
+  var towncheck $1
+  var towntype $2
+  put #echo Yellow towncheck: %towncheck
+  put #echo Yellow towntype: %towntype
+  var rttargetroom 0
+  if ("%towncheck" = "muspari") then
 	{
-		put #var m%checkmode$0zone 47
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest muspari
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 0
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 0
+		var rtzone 47
+		var rttravel YES
+		var rttraveldest muspari
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 47
+		if (%towntype = "burgle") then var rttargetroom 0
+		if (%towntype = "perform") then var rttargetroom 0
+		if (%towntype = "pawn") then var rttargetroom 0
 	}
-  if ("$m%checkmode$0preset" = "theren") then
+  if ("%towncheck" = "theren") then
 	{
-		put #var m%checkmode$0zone 42
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest theren
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 239
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 242
+		var rtzone 42
+		var rttravel YES
+		var rttraveldest theren
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 42
+		if (%towntype = "burgle") then var rttargetroom 239
+		if (%towntype = "perform") then var rttargetroom 242
 	}
-	if ("$m%checkmode$0preset" = "rossman") then
+	if ("%towncheck" = "rossman") then
 	{
-		put #var m%checkmode$0zone 34a
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest rossman
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 0
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 0
+		var rtzone 34a
+		var rttravel YES
+		var rttraveldest rossman
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 34a
+		if (%towntype = "burgle") then var rttargetroom 0
+		if (%towntype = "perform") then var rttargetroom 0
 	}
-  if ("$m%checkmode$0preset" = "riverhaven") then
+  if ("%towncheck" = "riverhaven") then
 	{
-		put #var m%checkmode$0zone 30
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest riverhaven
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 250
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 219
+		var rtzone 30
+		var rttravel YES
+		var rttraveldest riverhaven
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 47
+		if (%towntype = "burgle") then var rttargetroom 250
+		if (%towntype = "perform") then var rttargetroom 219
+		if (%towntype = "pawn") then var rttargetroom Ioun
 	}
-	if ("$m%checkmode$0preset" = "dirge") then
+	if ("%towncheck" = "dirge") then
 	{
-		put #var m%checkmode$0zone 13
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest dirge
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 0
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 0
+		var rtzone 13
+		var rttravel YES
+		var rttraveldest dirge
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 13
+		if (%towntype = "burgle") then var rttargetroom 0
+		if (%towntype = "perform") then var rttargetroom 0
 	}
-	if ("$m%checkmode$0preset" = "crossing") then
+	if ("%towncheck" = "kaerna") then
 	{
-		put #var m%checkmode$0zone 1
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest crossing
-		put #var m%checkmode$0move NO
-		#if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 388
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 68
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 227
+		var rtzone 7
+		var rttravel YES
+		var rttraveldest caravansary
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 7
+		if (%towntype = "burgle") then var rttargetroom 480
+		if (%towntype = "perform") then var rttargetroom 511
 	}
-	if ("$m%checkmode$0preset" = "leth") then
+	if ("%towncheck" = "crossing") then
 	{
-		put #var m%checkmode$0zone 61
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest leth
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 206
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 207
+		var rtzone 1
+		var rttravel YES
+		var rttraveldest crossing
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 1
+		if (%towntype = "burgle") then var rttargetroom 388
+		if (%towntype = "perform") then var rttargetroom 227
+	  if (%towntype = "pawn") then var rttargetroom Cormyn
 	}
-	if ("$m%checkmode$0preset" = "ilaya") then
+	if ("%towncheck" = "leth") then
 	{
-		put #var m%checkmode$0zone 112
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest ilaya
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 190
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 185
+		var rtzone 61
+		var rttravel YES
+		var rttraveldest leth
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 61
+		if (%towntype = "burgle") then var rttargetroom 206
+		if (%towntype = "perform") then var rttargetroom 207
 	}
-	if ("$m%checkmode$0preset" = "fangcove") then
+	if ("%towncheck" = "ilaya") then
 	{
-		put #var m%checkmode$0zone 150
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest fangcove
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 0
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 0
+		var rtzone 112
+		var rttravel YES
+		var rttraveldest ilaya
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 112
+		if (%towntype = "burgle") then var rttargetroom 190
+		if (%towntype = "perform") then var rttargetroom 185
 	}
-	if ("$m%checkmode$0preset" = "shard") then
+	if ("%towncheck" = "fangcove") then
 	{
-		put #var m%checkmode$0zone 67
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest shard
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 194
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 180
+		var rtzone 150
+		var rttravel YES
+		var rttraveldest fangcove
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 150
+		if (%towntype = "burgle") then var rttargetroom 0
+		if (%towntype = "perform") then var rttargetroom 0
 	}
-	if ("$m%checkmode$0preset" = "hibarnhvidar") then
+	if ("%towncheck" = "shard") then
 	{
-		put #var m%checkmode$0zone 116
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest hib
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 439
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 442
+		var rtzone 67
+		var rttravel YES
+		var rttraveldest shard
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 67
+		if (%towntype = "burgle") then var rttargetroom 194
+		if (%towntype = "perform") then var rttargetroom 180
+		if (%towntype = "pawn") then var rttargetroom Aelik
 	}
-	if ("$m%checkmode$0preset" = "boarclan") then
+	if ("%towncheck" = "hibarnhvidar") then
 	{
-		put #var m%checkmode$0zone 127
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest boar
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 29
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 233
+		var rtzone 116
+		var rttravel YES
+		var rttraveldest hib
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 116
+		if (%towntype = "burgle") then var rttargetroom 439
+		if (%towntype = "perform") then var rttargetroom 442
+		if (%towntype = "pawn") then var rttargetroom Relf
 	}
-  if ("$m%checkmode$0preset" = "ratha") then
+	if ("%towncheck" = "boarclan") then
 	{
-		put #var m%checkmode$0zone 90
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest ratha
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 579
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 578
+		var rtzone 127
+		var rttravel YES
+		var rttraveldest boar
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 127
+		if (%towntype = "burgle") then var rttargetroom 29
+		if (%towntype = "perform") then var rttargetroom 233
 	}
-	if ("$m%checkmode$0preset" = "aesry") then
+  if ("%towncheck" = "ratha") then
 	{
-		put #var m%checkmode$0zone 99
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest aesry
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 144
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 130
+		var rtzone 90
+		var rttravel YES
+		var rttraveldest ratha
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 90
+		if (%towntype = "burgle") then var rttargetroom 579
+		if (%towntype = "perform") then var rttargetroom 578
+		if (%towntype = "pawn") then var rttargetroom Paedraig
 	}
-	if ("$m%checkmode$0preset" = "merkresh") then
+	if ("%towncheck" = "aesry") then
 	{
-		put #var m%checkmode$0zone 107
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest merkresh
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 19
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 300
+		var rtzone 99
+		var rttravel YES
+		var rttraveldest aesry
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 99
+		if (%towntype = "burgle") then var rttargetroom 144
+		if (%towntype = "perform") then var rttargetroom 130
 	}
-  if ("$m%checkmode$0preset" = "jeihrem") then
+	if ("%towncheck" = "merkresh") then
 	{
-		put #var m%checkmode$0zone 90f
-		put #var m%checkmode$0travel YES
-		put #var m%checkmode$0traveldest jeihrem
-		put #var m%checkmode$0move NO
-		if ($0 = "burgle") then put #var m%checkmodeburgletargetroom 0
-		if ($0 = "perform") then put #var m%checkmodeperformtargetroom 0
+		var rtzone 107
+		var rttravel YES
+		var rttraveldest merkresh
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 107
+		if (%towntype = "burgle") then var rttargetroom 19
+		if (%towntype = "perform") then var rttargetroom 300
 	}
+  if ("%towncheck" = "jeihrem") then
+	{
+		var rtzone 90f
+		var rttravel YES
+		var rttraveldest jeihrem
+		var rtmove NO
+		if (%towntype = "upkeep") then var upkeepzone 90f
+		if (%towntype = "burgle") then var rttargetroom 0
+		if (%towntype = "perform") then var rttargetroom 0
+	}
+	var rtfindroom NO
   return
-
-
-
 
 
 
@@ -2182,7 +2215,11 @@ STATUSCHECK:
     #BLEEDING
     if (($bleeding = 1) && (%scriptmode = 1)) then
     {
-      if %auonbleed = "YES" then var goupkeep 1
+      if %auonbleed = "YES" then
+      {
+        var autype bleed
+        var goupkeep 1
+      }
       if %t > %nextbleed then gosub BLEEDCHECK
     }
     #BURDEN
@@ -3811,6 +3848,7 @@ ATTACKACM:
   matchre ATTACKACMP %waitstring
   match ATTACKACMSUCCESS Roundtime:
   match ATTACKACMSUCCESS With a loud twang, you let fly your
+  match ATTACKACMBARBSUCCESS With expert skill you end the attack and maneuver into a better position.
   match ATTACKACMSTOW You must free up your left hand first.
   matchre ATTACKACMSTAND You'll need to stand up first.
 	matchre ADV You aren't close enough to attack\.
@@ -3847,9 +3885,20 @@ ATTACKACMLOAD:
   goto ATTACKACM
 
 ATTACKACMSUCCESS:
+  #put #echo %alertwindow Yellow Used ACM %acmtype!
   var nextacm%acmtype %t
   math nextacm%acmtype add 90
-  #put #echo %alertwindow Used ACM %acmtype!
+  if %acmtype = "doublestrike" then
+  {
+    if (%hand = "right") then gosub STOW left
+    else gosub STOW right
+  }
+  return
+
+ATTACKACMBARBSUCCESS:
+  #put #echo %alertwindow Yellow Used ACM %acmtype with Barbarian success!
+  var nextacm%acmtype %t
+  math nextacm%acmtype add 55
   if %acmtype = "doublestrike" then
   {
     if (%hand = "right") then gosub STOW left
@@ -4615,7 +4664,7 @@ TRAVELMAIN:
   pause 0.1
   match RETURN REACHED YOUR DESTINATION
   put .travel %traveltarget
-  matchwait 90
+  matchwait 180
   goto TRAVELMAIN
 
 OLDMOVE:
@@ -4920,9 +4969,13 @@ KHRISTOPMAIN:
 
 
 #####BARBARIAN_SUBS#####
+
+BERSERK:
+  var berserktype $0
+  goto BERSERKMAIN
 BERSERKP:
   pause
-BERSERK:
+BERSERKMAIN:
   if (%t < %nextberserk) then return
   var tsunamistow 0
   if %berserktype = "Tsunami" then
@@ -4947,13 +5000,13 @@ BERSERK:
   match BERSERKPAUSE Your inner fire lacks the strength to fuel such a rage at this time.
   put berserk %berserktype
   matchwait 5
-	var timeoutsub BERSERK
+	var timeoutsub BERSERKMAIN
   var timeoutcommand berserk %berserktype
 	goto TIMEOUT
 
 BERSERKPAUSE:
   var nextberserk %t
-  math nextberserk add 60
+  math nextberserk add 120
   return
 
 BERSERKRETURN:
@@ -4973,18 +5026,47 @@ BERSERKTRAIN:
   put #play JustArrived
   return
 
+BERSERKSTOP:
+  var berserktype $0
+  goto BERSERKSTOPMAIN
+BERSERKSTOPP:
+  pause
+BERSERKSTOPMAIN:
+  matchre BERSERKSTOPP %waitstring
+  match BARBRETURN A good positive attitude never hurts.
+  match BARBRETURN Maybe try berserking first?
+  put berserk stop %berserktype
+  put yes
+  matchwait
 
+BERSERKSTOPALLP:
+  pause
+BERSERKSTOPALL:
+  matchre BERSERKP %waitstring
+  match BARBRETURN A good positive attitude never hurts.
+  match BARBRETURN Maybe try berserking first?
+  put berserk stop all
+  put yes
+  matchwait 5
+	var timeoutsub BERSERKSTOPALL
+  var timeoutcommand berserk stop all
+	goto TIMEOUT
+
+
+FORM:
+  var formtype $0
+  goto FORMMAIN
 FORMP:
   pause
-FORM:
+FORMMAIN:
   matchre FORMP %waitstring
   match FORMBAD You find yourself unable to focus on an additional form.  Perhaps try stopping one first?
   match FORMWRONG You have no idea how to do that.
   match FORMTRAIN You have not been trained in that form.
-  matchre FORMRETURN But you are already practicing that form!|Roundtime
+  matchre BARBRETURN But you are already practicing that form!|Roundtime
   put form start %formtype
   matchwait 5
-	var timeoutsub FORM
+	var timeoutsub FORMMAIN
   var timeoutcommand form start %formtype
 	goto TIMEOUT
 
@@ -5006,16 +5088,15 @@ FORMTRAIN:
   put #play JustArrived
   return
   
-FORMRETURN:
+BARBRETURN:
   gosub MEDITATEPOWER
   return
 
 FORMSTOPP:
   pause
 FORMSTOP:
-  put #var SpellTimer.%formtype.active 0
   matchre FORMSTOPP %waitstring
-  matchre FORMRETURN But you are not practicing that form!|You feel your inner fire cool as you finish practicing the Form|The powerful gait of the Buffalo form
+  matchre BARBRETURN But you are not practicing that form!|You feel your inner fire cool as you finish practicing the Form|The powerful gait of the Buffalo form
   put form stop %formtype
   matchwait 5
 	var timeoutsub FORMSTOP
@@ -5026,7 +5107,7 @@ FORMSTOPALLP:
   pause
 FORMSTOPALL:
   matchre FORMSTOPALLP %waitstring
-  matchre FORMRETURN You relax your body and cease practicing all form types\.|You feel your inner fire cool as you finish practicing the Form|You have to be practicing a form to be able to stop it\.
+  matchre BARBRETURN You relax your body and cease practicing all form types\.|You feel your inner fire cool as you finish practicing the Form|You have to be practicing a form to be able to stop it\.
   put form stop all
   matchwait 5
 	var timeoutsub FORMSTOPALL
@@ -7802,17 +7883,101 @@ SUMMFULL:
   var summfull 1
   return
 
+SUMMONCHARGEP:
+	pause
+SUMMONCHARGE:
+  matchre RETURN you feel that you can still gather|you feel that you have reached your limit|You align yourself to it, briefly decreasing|You continue meditating
+  matchre SUMMONCHARGEFULL You so heavily embody the Elemental Plane
+  matchre SUMMONCHARGEP %waitstring
+  put summon admittance
+	matchwait
+	
+SUMMONCHARGEFULL:
+  put #echo Yellow Charging complete!
+  exit
 
-SUMMONWEAPONP:
-  pause
 SUMMONWEAPON:
-  matchre SUMMONWEAPONP %waitstring
+  var argument $0
+SUMMONWEAPONMAIN:
+  matchre SUMMONWEAPONMAIN %waitstringgood
+  matchre BADNEWS %waitstringbad
+  match NOCHARGE You lack the elemental charge to summon a weapon.
+  match RETURN Roundtime
+  #matchre RETURN Closing your eyes, you grunt briefly in effort as you sense a small \w+ ethereal fissure open in front of you\.  Thrusting your hand through, you draw out (a|an) \w+ \w+\.
+  #match SUMMONWEAPONSTOW How can you summon a weapon, when your hands are full?
+  send summon weapon %argument
+  matchwait 5
+  goto COMBOERROR
+
+SUMMONWEAPONNOCHARGE:
+  put #echo Yellow You're out of elemental charge!
+  exit
+
+SUMMONWEAPONSHAPE:
+  var argument $0
+SUMMONWEAPONSHAPEMAIN:
+  matchre SUMMONWEAPONSHAPEMAIN %waitstringgood
+  matchre BADNEWS %waitstringbad
+  matchre RETURN You reach out with your will and reshape your \w+ into .*\.
+  match SUMMONWEAPONNOCHARGE You lack the elemental charge to modify your weapon.
+  send shape $righthandnoun to %argument
+  matchwait 5
+  goto COMBOERROR
+
+SUMMONWEAPONPULL:
+  var argument $0
+SUMMONWEAPONPULLMAIN:
+  matchre SUMMONWEAPONPULLMAIN %waitstringgood
+  matchre BADNEWS %waitstringbad
+  match RETURN That's as heavy as you can make it!
+  match RETURN Roundtime
+  #matchre RETURN Closing your eyes, you grunt briefly in effort as you sense a small \w+ ethereal fissure open in front of you\.  Thrusting your \w+ \w+ through, you bind more material to your \w+, and pull it back out\.  
+  send pull my %argument
+  matchwait 5
+  goto COMBOERROR
+  
+SUMMONWEAPONPUSH:
+  var argument $0
+SUMMONWEAPONPUSHMAIN: 
+    matchre SUMMONWEAPONPUSHMAIN %waitstringgood
+    matchre BADNEWS %waitstringbad
+    match return Roundtime
+    send push my %argument
+    matchwait 5
+    goto COMBOERROR
+
+SUMMONWEAPONTURN:
+  var argument $0
+SUMMONWEAPONTURNMAIN:
+    matchre SUMMONWEAPONTURNMAIN %waitstringgood
+    matchre BADNEWS %waitstringbad
+    match return Roundtime
+    send turn %argument
+    matchwait 5
+    goto COMBOERROR
+
+SUMMONWEAPONBREAK:
+  var argument $0
+SUMMONWEAPONBREAKMAIN:
+    matchre SUMMONWEAPONBREAKMAIN %waitstringgood
+    matchre BADNEWS %waitstringbad
+    match RETURN Focusing your will
+    match RETURN Break what?
+    send break my %argument
+    matchwait 5
+    goto COMBOERROR
+
+
+SUMMONWEAPONTRAINP:
+  pause
+SUMMONWEAPONTRAIN:
+  matchre SUMMONWEAPONTRAINP %waitstring
   matchre RETURN You lack the elemental charge to summon a weapon\.
   matchre SUMMONWEAPONSET Closing your eyes, you grunt briefly in effort as you sense a small earthen ethereal fissure open in front of you\.  Thrusting your hand through, you draw out a.*stone (\w+)\.
   match SUMMONWEAPONSTOW How can you summon a weapon, when your hands are full?
   put summon weapon
   matchwait 5
-	var timeoutsub SUMMONWEAPON
+	var timeoutsub SUMMONWEAPONTRAIN
   var timeoutcommand summon weapon
 	goto TIMEOUT
 
@@ -7822,7 +7987,7 @@ SUMMONWEAPONSET:
 
 SUMMONWEAPONSTOW:
   gosub STOW left
-  goto SUMMONWEAPON
+  goto SUMMONWEAPONTRAIN
 
 
 COMMANDWARRIORP:
@@ -7893,7 +8058,112 @@ GAZESANOWRET:
   var timeoutcommand gaze %sanowretitem
 	goto TIMEOUT
 
-#ARMOR	
+
+###PVP_SUBS###
+
+MANEUVERTEST:
+  eval maneuvernum count("%maneuverlist", "|")
+  var maneuvertest 0
+  var maneuver -1
+  var closestmane 0
+  gosub MANEUVERTESTLOOP
+  if (%maneuver = -1) then
+  {
+    var secondsleft 90
+    math secondsleft subtract %closestmane
+    put #echo Yellow No maneuvers are off cooldown!  Closest maneuver: %secondsleft sec.
+    exit
+  }
+  return
+
+MANEUVERTESTLOOP:
+  #echo maneuvertest: %maneuvertest  maneuvernum: %maneuvernum
+  if (%maneuvertest > %maneuvernum) then return
+  var manetest $unixtime
+	math manetest subtract $%maneuverlist(%maneuvertest)last
+	#echo %maneuverlist(%maneuvertest)last: $%maneuverlist(%maneuvertest)last
+	#echo manetest: %manetest
+	if (%manetest > 90) then
+	{
+	  var maneuver %maneuvertest
+	  return
+	}
+	else
+	{
+	  if (%manetest > %closestmane) then var closestmane %manetest
+	}
+	math maneuvertest add 1
+	goto MANEUVERTESTLOOP
+
+
+
+
+ATTACKACMCOMBO:
+  var argument $0
+ATTACKACMCOMBOMAIN:
+  matchre ATTACKACMMAIN %waitstringgood
+  matchre ATTACKACMCBADNEWS %waitstringbad
+  match ATTACKACMCRETURN Roundtime:
+  match RETURN With a loud twang, you let fly your
+  #match ATTACKACMCSTOW You must free up your left hand first.
+  matchre ATTACKACMCSTAND You'll need to stand up first\.|You must be standing to perform that maneuver\.
+  matchre ATTACKACMCRANGE ^You aren't close enough to attack\.
+  matchre ATTACKACMCGONE ^What are you trying to attack\?
+  matchre ATTACKACMCRETURN  ^\* .* is slain before your eyes!
+  matchre ATTACKACMCWRONG With your fist\?  That might hurt\.|This weapon lacks the edge necessary to cleave your enemy with\.|Your hands must be empty to deliver such a blow\.|A pike or halberd weapon is necessary to impale your enemy with\.|Only a staff is suitable for the complex motions of the twirl maneuver\.|This works best when you use a suitable ranged weapon\.|This works best when you use a suitable weapon\.|This works best when you are dual wielding suitable weapons\.
+  matchre ATTACKACMCFAIL You must rest a bit longer before attempting that maneuver again\.
+  match ATTACKACMCBADNAME You cannot figure out how to do that.
+  send maneuver %argument
+  matchwait 5
+  gosub ERROR
+
+ATTACKACMCSTOW:
+  gosub STOW left
+  goto ATTACKACMCOMBOMAIN
+
+ATTACKACMCRETURN:
+  put #var %manenamelast $unixtime
+  put #echo Yellow Maneuver complete!
+  return
+
+ATTACKACMCGONE:
+  put #echo Yellow Maneuver failed - gone!
+  return
+
+ATTACKACMCRANGE:
+  put #echo Yellow Maneuver failed - range!  Advancing!
+  gosub ADV
+  goto ATTACKACMMAIN
+  return
+
+ATTACKACMCSTAND:
+  gosub STAND
+  goto ATTACKACMMAIN
+
+ATTACKACMCWRONG:
+  send #echo Yellow ACM attempted with improper item(s) in hands!
+  exit
+
+ATTACKACMCFAIL:
+  send #echo Yellow ACM is still on cooldown!
+  var failtest $unixtime
+  math failtest subtract 80
+  put #var %manenamelast %failtest
+  exit
+
+ATTACKACMCBADNAME:
+  send #echo Yellow ACM attempted with bad syntax!
+  exit
+
+ATTACKACMCBADNEWS:
+  put #echo Yellow You've been disrupted!
+  exit
+
+COMBOERROR:
+  put #echo Yellow Something went wrong.
+  exit
+
+###ARMOR_SUBS###
 ARMORSET:
   math testcount add 1
   if %testcount > 4 then return
@@ -8262,8 +8532,8 @@ COLLECT:
 	matchre COLLECTP %waitstring
 	matchre RETURN /You manage to collect|The room is too cluttered to find anything here!|You find something dead and lifeless, is this what you were looking for?|Searching and searching, you fail to find anything./
 	match COLLECTR You cannot collect anything while in combat!
-	matchre RETURN /You forage around|You wander around and|You begin to forage/
-	matchre RETURN /You are sure you knew what you were looking for|You are certain you could find what you were looking for/|As you rummage around|You are certain you could find
+	matchre RETURN You forage around|You wander around and|You begin to forage/
+	matchre RETURN You are sure you knew what you were looking for|You are certain you could find what you were looking for/|As you rummage around|You are certain you could find
 	match BADCOLLECT You survey the area and realize that any collecting efforts would be futile.
 	match FULLHANDS You really need to have at least one hand free to properly collect something.
 	put collect %collectitem
@@ -8288,16 +8558,16 @@ KICKP:
 	pause
 KICK:
   if $standing != 1 then gosub STAND
-  if matchre ("$roomobjs", "a pile of rocks") then var kickitem rock
-  if matchre ("$roomobjs", "a pile of dust bunnies") then var kickitem bunnies
+  #if matchre ("$roomobjs", "a pile of rocks") then var kickitem rock
+  #if matchre ("$roomobjs", "a pile of dust bunnies") then var kickitem bunnies
   matchre KICKP %waitstring
   match KICK You take a step back
   matchre KICKS You can't do that from your position.|You can't quite manage
   matchre RETURN I could not find|Now what did the|You lean back and kick your feet|Now THAT would be a trick!
-  put kick %kickitem
+  put kick pile
   matchwait 5
   var timeoutsub KICK
-  var timeoutcommand kick %kickitem
+  var timeoutcommand kick pile
   goto TIMEOUT
 
 KICKS:
@@ -9423,659 +9693,6 @@ PREMBADRETURN:
   pause 60
   goto PREMIUMRINGBACK
 
-VARCONVERT:
-  put #var m1bugout $bugout
-  put #var m1bugoutnum $bugoutnum
-  put #var m1bugoutonbleed $bugoutonbleed
-  put #var m1bugoutroom $bugoutroom
-  put #var m1autoupkeep $autoupkeep
-  put #var m1moveclenchshard $moveclenchshard
-  put #var m1movewhistle $movewhistle
-  put #var m1movescream $movescream
-  put #var m1movevanish $movevanish
-  put #var m1autravel $autravel 
-  put #var m1autraveldest $autraveldest
-  put #var m1aumove $aumove
-  put #var m1aumovelist $aumovelist
-  put #var m1premiumring $premiumring
-  put #var m1premiumringitem $premiumringitem
-  put #var m1auonhealth $auonhealth
-  put #var m1auhealthnum $auhealthnum
-  put #var m1auonbleed $auonbleed
-  put #var m1auonnerves $auonnerves
-  put #var m1auonburden $auonburden
-  put #var m1minmoney $minmoney
-  put #var m1exchange $exchange
-  put #var m1premiumheal $premiumheal
-  put #var m1nonpremheal $nonpremheal
-  put #var m1repair $repair
-  put #var m1repairlist $repairlist
-  put #var m1bundlesell $bundlesell
-  put #var m1bundlevault $bundlevault
-  put #var m1vaultmove $vaultmove
-  put #var m1bundlerope $bundlerope
-  put #var m1gemvault $gemvault
-  put #var m1gempouches $gempouches
-  put #var m1spiderfeed $spiderfeed
-  put #var m1incense $incense
-  put #var m1burglestorage $burglestorage
-  put #var m1burgletool $burgletool
-  put #var m1burglepickitem $burglepickitem
-  put #var m1burglepickworn $burglepickworn
-  put #var m1burgleropeitem $burgleropeitem
-  put #var m1burglemaxgrabs $burglemaxgrabs
-  put #var m1burgleloot $burgleloot
-  put #var m1burglekeeplist $burglekeeplist
-  put #var m1burglepawn $burglepawn
-  put #var m1weapon1 $weapon1
-  put #var m1weapon2 $weapon2
-  put #var m1weapon3 $weapon3
-  put #var m1weapon4 $weapon4
-  put #var m1weapon5 $weapon5
-  put #var m1weapon6 $weapon6
-  put #var m1weapon7 $weapon7
-  put #var m1weapon8 $weapon8
-  put #var m1weapon9 $weapon9
-  put #var m1weapon10 $weapon10
-  put #var m1weapon11 $weapon11
-  put #var m1weapon12 $weapon12
-  put #var m1weapon13 $weapon13
-  put #var m1weapon14 $weapon14
-  
-  put #var m1offhand $offhand
-  put #var m1seoffhand $seoffhand
-  put #var m1secombo $secombo
-  put #var m1leoffhand $leoffhand
-  put #var m1sboffhand $sboffhand
-  put #var m1lboffhand $lboffhand
-  put #var m1staveoffhand $staveoffhand
-  put #var m1seweapon $seweapon
-  put #var m1leweapon $leweapon
-  put #var m1theweapon $theweapon
-  put #var m1sbweapon $sbweapon
-  put #var m1lbweapon $lbweapon
-  put #var m1thbweapon $thbweapon
-  put #var m1staveweapon $staveweapon
-  put #var m1staveworn $staveworn
-  put #var m1stavetied $stavetied
-  put #var m1poleweapon $poleweapon
-  put #var m1poleworn $poleworn
-  put #var m1poletied $poletied
-  put #var m1polecombo $polecombo
-  put #var m1bastardsworditem $bastardsworditem
-  put #var m1holyiconitem $holyiconitem
-  put #var m1risteitem $risteitem
-  put #var m1hhristeitem $hhristeitem
-  put #var m1xbowweapon $xbowweapon
-  put #var m1bowweapon $bowweapon
-  put #var m1ltweapon $ltweapon
-  put #var m1htweapon $htweapon
-  put #var m1xbowammo $xbowammo
-  put #var m1xbowworn $xbowworn
-  put #var m1bowammo $bowammo
-  put #var m1bowworn $bowworn
-  put #var m1slingweapon $slingweapon
-  put #var m1slingammo $slingammo
-  put #var m1collectammo $collectammo
-  
-  #GENERAL
-  put #var m1almanac $almanac
-  put #var m1almanacitem $almanacitem
-  put #var m1almanacalerts $almanacalerts
-  put #var m1ejournal $ejournal
-  put #var m1ejournalitem $ejournalitem
-  put #var m1ejournalstates $ejournalstates
-  put #var m1tarantula $tarantula
-  put #var m1tarantulaitem $tarantulaitem
-  put #var m1tarantulaskill1 $tarantulaskill1
-  put #var m1tarantulaskill2 $tarantulaskill2
-  put #var m1findroom $findroom
-  put #var m1findroomlist $findroomlist
-  put #var m1frwhitelist $frwhitelist
-  put #var m1frblacklist $frblacklist
-  put #var m1frprefergroup $frprefergroup
-  
-  #LOOT
-  put #var m1lootalerts $lootalerts
-  put #var m1loottype $loottype
-  put #var m1lootalldead $lootalldead
-  put #var m1collectcoin $collectcoin
-  put #var m1collectgem $collectgem
-  put #var m1collectscroll $collectscroll
-  put #var m1collectmaps $collectmaps
-  put #var m1savegwethstones $savegwethstones
-  put #var m1misckeeplist $misckeeplist
-  put #var m1storage $storage
-  put #var m1skinning $skinning
-  put #var m1arrange $arrange
-  put #var m1arrangeforpart $arrangeforpart
-  put #var m1skinafterlock $skinafterlock
-  put #var m1dropskins $dropskins
-  
-  put #var m1htbond $htbond
-  put #var m1htverb $htverb
-  put #var m1htoffhand $htoffhand
-  put #var m1ltbond $ltbond
-  put #var m1ltverb $ltverb
-  put #var m1ltoffhand $ltoffhand
-  put #var m1platring $platring
-  put #var m1platringitem $platringitem
-  put #var m1weaponnum $weaponnum
-  put #var m1lowestfirst $lowestfirst
-  put #var m1killafterlock $killafterlock
-  put #var m1stealth $stealth
-  put #var m1locksmithbox $locksmithbox
-  put #var m1locksmithboxitem $locksmithboxitem
-  put #var m1locksmithboxtimer $locksmithboxtimer
-  put #var m1skinfatrainer $skinfatrainer
-  put #var m1skinfatrainertimer $skinfatrainertimer
-  put #var m1skinfatraineritem $skinfatraineritem
-  put #var m1climbingrope $climbingrope
-  put #var m1climbingropename $climbingropename
-  put #var m1climbingropehum $climbingropehum
-  put #var m1humsong $humsong
-  put #var m1windboard $windboard
-  put #var m1windboardcharge $windboardcharge
-  put #var m1windboardtrick $windboardtrick
-  put #var m1windboardtimer $windboardtimer
-  put #var m1appfocus $appfocus
-  put #var m1appfocusitem $appfocusitem
-  put #var m1recall $recall
-  put #var m1tactics $tactics
-  put #var m1tacticsweapons $tacticsweapons
-
-  put #var m1teaching $teaching
-  put #var m1teachtargets $teachtargets
-  put #var m1teachskill $teachskill
-  put #var m1teachtargetnum $teachtargetnum
-  put #var m1teachtarget1 $teachtarget1
-  put #var m1teachtarget2 $teachtarget2
-  put #var m1teachtarget3 $teachstarget3
-  put #var m1teacher $teacher
-  put #var m1stancemain $stancemain
-  put #var m1noncomdelay $noncomdelay
-  put #var m1outdoor $outdoor
-  put #var m1outdoortimer $outdoortimer
-  put #var m1collectitem $collectitem
-  put #var m1hunting $hunting
-  put #var m1huntingtimer $huntingtimer
-  put #var m1debil $debil
-  put #var m1debilskill $debilskill
-  put #var m1maxdebil $maxdebil
-  put #var m1tm $tm
-  put #var m1tmskill $tmskill
-  put #var m1maxtm $maxtm
-  put #var m1cyclic $cyclic
-  put #var m1cyclicbuff $cyclicbuff
-  put #var m1cyctm $cyctm
-  put #var m1cycdebil $cycdebil
-  put #var m1tmdbprior $tmdbprior
-  put #var m1spell $spell
-  put #var m1attune $attune
-  put #var m1minconcentration $minconcentration
-  put #var m1combatsanowret $combatsanowret
-  put #var m1noncomsanowret $noncomsanowret
-  put #var m1sanowretitem $sanowretitem
-  put #var m1buff $buff
-  put #var m1abuff $abuff
-  put #var m1gbuff $gbuff
-  put #var m1gbufftarget $gbufftarget
-  put #var m1buffbuffer $buffbuffer
- 
-  put #var m1cambrinth $cambrinth
-  put #var m1dedicatedcambrinth $dedicatedcambrinth
-  put #var m1research $research
-  put #var m1gafprepmana $gafprepmana
-  put #var m1gafaddmana $gafaddmana
-  put #var m1researchnum $researchnum
-  put #var m1researchtype1 $researchtype1
-  put #var m1researchtype2 $researchtype2
-  put #var m1researchtype3 $researchtype3
-  put #var m1researchtype4 $researchtype4
-  put #var m1researchtype5 $researchtype5
-  put #var m1harnessing $harnessing
-  put #var m1harnessmax $harnessmax
-  put #var m1chargemax $chargemax
-  put #var m1minmana $minmana
-  put #var m1castingthrottle $castingthrottle
-  put #var m1straightcast $straightcast
-  put #var m1cambitem1 $cambitem1
-  put #var m1cambitems $cambitems
-  put #var m1cambitem1mana $cambitem1mana
-  put #var m1cambitem1worn $cambitem1worn
-  put #var m1cambitem2 $cambitem2
-  put #var m1cambitem2mana $cambitem2mana
-  put #var m1cambitem2worn $cambitem2worn
-  put #var m1ritualfocus $ritualfocus
-  put #var m1ritualfocusstorage $ritualfocusstorage
-  put #var m1ritualfocusworn $ritualfocusworn
-  put #var m1ritualfocuscontainer $ritualfocuscontainer
-  put #var m1tmfocus $tmfocus
-  put #var m1tmfocusitem $tmfocusitem
-  
-  put #var m1tmfocusstorage $tmfocusstorage
-  put #var m1tmfocusworn $tmfocusworn
-  put #var m1tmfocuscontainer $tmfocuscontainer
-  put #var m1armorswap $armorswap
-  put #var m1armornum $armornum
-  put #var m1armor1name $armor1name
-  put #var m1armor1desc $armor1desc
-  put #var m1a1stealthrem $a1stealthrem
-  put #var m1armor2name $armor2name
-  put #var m1armor2desc $armor2desc
-  put #var m1a2stealthrem $a2stealthrem
-  put #var m1armor3name $armor3name
-  put #var m1armor3desc $armor3desc
-  put #var m1a3stealthrem $a3stealthrem
-  put #var m1armor4name $armor4name
-  put #var m1armor4desc $armor4desc
-  put #var m1a4stealthrem $a4stealthrem
-  put #var m1appraise $appraise
-  put #var m1appraisetarget $appraisetarget
-  put #var m1appraisetimer $appraisetimer
-  put #var m1appsaveitem $appsaveitem
-  put #var m1appsaveitemstorage $appsaveitemstorage
-  put #var m1perform $perform
-  put #var m1songtype $songtype
-  put #var m1instrument $instrument
-  put #var m1instrumentworn $instrumentworn
-  put #var m1instrumenthands $instrumenthands
-  put #var m1instrumentassess $instrumentassess
-  put #var m1instclean $instclean
-  put #var m1instcleancloth $instcleancloth
-  put #var m1compendium $compendium
-  put #var m1compendiumtimer $compendiumtimer
-  put #var m1textbook $textbook
-  put #var m1textbooktimer $textbooktimer
-  put #var m1textbookitem $textbookitem
-  put #var m1textbooklist $textbooklist
-  
-  put #var m1noncombat $noncombat
-  put #var m1burgle $moveburgle
-  
-  put #var m1buffnum $buffnum
-  put #var m1buff1 $buff1
-  put #var m1buff1prepmana $buff1prepmana
-  put #var m1buff1addmana $buff1addmana
-  put #var m1buff2 $buff2
-  put #var m1buff2prepmana $buff2prepmana
-  put #var m1buff2addmana $buff2addmana
-  put #var m1buff3 $buff3
-  put #var m1buff3prepmana $buff3prepmana
-  put #var m1buff3addmana $buff3addmana
-  put #var m1buff4 $buff4
-  put #var m1buff4prepmana $buff4prepmana
-  put #var m1buff4addmana $buff4addmana
-  put #var m1buff5 $buff5
-  put #var m1buff5prepmana $buff5prepmana
-  put #var m1buff5addmana $buff5addmana
-  put #var m1buff6 $buff6
-  put #var m1buff6prepmana $buff6prepmana
-  put #var m1buff6addmana $buff6addmana
-  put #var m1buff7 $buff7
-  put #var m1buff7prepmana $buff7prepmana
-  put #var m1buff7addmana $buff7addmana
-  put #var m1buff8 $buff8
-  put #var m1buff8prepmana $buff8prepmana
-  put #var m1buff8addmana $buff8addmana
-  put #var m1buff9 $buff9
-  put #var m1buff9prepmana $buff9prepmana
-  put #var m1buff9addmana $buff9addmana
-  put #var m1buff10 $buff10
-  put #var m1buff10prepmana $buff10prepmana
-  put #var m1buff10addmana $buff10addmana
-  put #var m1buff11 $buff11
-  put #var m1buff11prepmana $buff11prepmana
-  put #var m1buff11addmana $buff11addmana
-  put #var m1buff12 $buff12
-  put #var m1buff12prepmana $buff12prepmana
-  put #var m1buff12addmana $buff12addmana
-  put #var m1buff13 $buff13
-  put #var m1buff13prepmana $buff13prepmana
-  put #var m1buff13addmana $buff13addmana
-  put #var m1buff14 $buff14
-  put #var m1buff14prepmana $buff14prepmana
-  put #var m1buff14addmana $buff14addmana
-  put #var m1buff15 $buff15
-  put #var m1buff15prepmana $buff15prepmana
-  put #var m1buff15addmana $buff15addmana
-  put #var m1buff16 $buff16
-  put #var m1buff16prepmana $buff16prepmana
-  put #var m1buff16addmana $buff16addmana
-  put #var m1abuffnum $abuffnum
-  put #var m1abuff1 $abuff1
-  put #var m1abuff1prepmana $abuff1prepmana
-  put #var m1abuff1addmana $abuff1addmana
-  put #var m1abuff2 $abuff2
-  put #var m1abuff2prepmana $abuff2prepmana
-  put #var m1abuff2addmana $abuff2addmana
-  put #var m1abuff3 $abuff3
-  put #var m1abuff3prepmana $abuff3prepmana
-  put #var m1abuff3addmana $abuff3addmana
-  put #var m1abuff4 $abuff4
-  put #var m1abuff4prepmana $abuff4prepmana
-  put #var m1abuff4addmana $abuff4addmana
-  put #var m1abuff5 $abuff5
-  put #var m1abuff5prepmana $abuff5prepmana
-  put #var m1abuff5addmana $abuff5addmana
-  put #var m1abuff6 $abuff6
-  put #var m1abuff6prepmana $abuff6prepmana
-  put #var m1abuff6addmana $abuff6addmana
-  put #var m1abuff7 $abuff7
-  put #var m1abuff7prepmana $abuff7prepmana
-  put #var m1abuff7addmana $abuff7addmana
-  put #var m1abuff8 $abuff8
-  put #var m1abuff8prepmana $abuff8prepmana
-  put #var m1abuff8addmana $abuff8addmana
-  put #var m1gbuffnum $gbuffnum
-  put #var m1gbuff1 $gbuff1
-  put #var m1gbuff1prepmana $gbuff1prepmana
-  put #var m1gbuff1addmana $gbuff1addmana
-  put #var m1gbuff1duration $gbuff1duration
-  put #var m1gbuff2 $gbuff2
-  put #var m1gbuff2prepmana $gbuff2prepmana
-  put #var m1gbuff2addmana $gbuff2addmana
-  put #var m1gbuff2duration $gbuff2duration
-  put #var m1gbuff3 $gbuff3
-  put #var m1gbuff3prepmana $gbuff3prepmana
-  put #var m1gbuff3addmana $gbuff3addmana
-  put #var m1gbuff3duration $gbuff3duration
-  put #var m1gbuff4 $gbuff4
-  put #var m1gbuff4prepmana $gbuff4prepmana
-  put #var m1gbuff4addmana $gbuff4addmana
-  put #var m1gbuff4duration $gbuff4duration
-  put #var m1gbuff5 $gbuff5
-  put #var m1gbuff5prepmana $gbuff5prepmana
-  put #var m1gbuff5addmana $gbuff5addmana
-  put #var m1gbuff5duration $gbuff5duration
-  put #var m1gbuff6 $gbuff6
-  put #var m1gbuff6prepmana $gbuff6prepmana
-  put #var m1gbuff6addmana $gbuff6addmana
-  put #var m1gbuff6duration $gbuff6duration
-  put #var m1gbuff7 $gbuff7
-  put #var m1gbuff7prepmana $gbuff7prepmana
-  put #var m1gbuff7addmana $gbuff7addmana
-  put #var m1gbuff7duration $gbuff7duration
-  put #var m1gbuff8 $gbuff8
-  put #var m1gbuff8prepmana $gbuff8prepmana
-  put #var m1gbuff8addmana $gbuff8addmana
-  put #var m1gbuff8duration $gbuff8duration
-  put #var m1spellnum $spellnum
-  put #var m1spell1 $spell1
-  put #var m1skill1 $skill1
-  put #var m1spell1prepmana $spell1prepmana
-  put #var m1spell1addmana $spell1addmana
-  put #var m1spell1symb $spell1symb
-  put #var m1spell2 $spell2
-  put #var m1skill2 $skill2
-  put #var m1spell2prepmana $spell2prepmana
-  put #var m1spell2addmana $spell2addmana
-  put #var m1spell2symb $spell2symb
-  put #var m1spell3 $spell3
-  put #var m1skill3 $skill3
-  put #var m1spell3prepmana $spell3prepmana
-  put #var m1spell3addmana $spell3addmana
-  put #var m1spell3symb $spell3symb
-  put #var m1spell4 $spell4
-  put #var m1skill4 $skill4
-  put #var m1spell4prepmana $spell4prepmana
-  put #var m1spell4addmana $spell4addmana
-  put #var m1spell4symb $spell4symb
-  put #var m1spelltm $spelltm
-  put #var m1spelltmprepmana $spelltmprepmana
-  put #var m1spelltmaddmana $spelltmaddmana
-  put #var m1spelltmtattoo $spelltmtattoo
-  put #var m1spelldb $spelldb
-  put #var m1spelldbtattoo $spelldbtattoo
-  put #var m1spelldbprepmana $spelldbprepmana
-  put #var m1spelldbaddmana $spelldbaddmana
-  put #var m1misdirection $misdirection
-  put #var m1misdirectionprepmana $misdirectionprepmana
-  put #var m1misdirectionaddmana $misdirectionaddmana
-  put #var m1tattoobuff $tattoobuff
-  put #var m1tattoospell $tattoospell
-  put #var m1wandbuff $wandbuff
-  put #var m1wandstorage $wandstorage
-  put #var m1wandbuffnum $wandbuffnum
-  put #var m1wand1item $wand1item
-  put #var m1wand1num $wand1num
-  put #var m1wand1spell $wand1spell
-  put #var m1wand2item $wand2item
-  put #var m1wand2num $wand2num
-  put #var m1wand2spell $wand2spell
-  put #var m1tattooaddmana $tattooaddmana
-  put #var m1spellcnum $spellcnum
-  put #var m1spellc1 $spellc1
-  put #var m1skillc1 $skillc1
-  put #var m1spellc1skill $spellc1skill
-  put #var m1spellc1prepmana $spellc1prepmana
-  put #var m1spellc2 $spellc2
-  put #var m1skillc2 $skillc2
-  put #var m1spellc2skill $spellc2skill
-  put #var m1spellc2prepmana $spellc2prepmana
-  put #var m1spellc3 $spellc3
-  put #var m1skillc3 $skillc3
-  put #var m1spellc3skill $spellc3skill
-  put #var m1spellc3prepmana $spellc3prepmana
-  put #var m1debilassist $debilassist
-  put #var m1dbanum $dbanum
-  put #var m1dbalist $dbalist
-  put #var m1dbaspell1 $dbaspell1
-  put #var m1dbaspell1prepmana $dbaspell1prepmana
-  put #var m1dbaspell1addmana $dbaspell1addmana
-  put #var m1dbaspell2 $dbaspell2
-  put #var m1dbaspell2prepmana $dbaspell2prepmana
-  put #var m1dbaspell2addmana $dbaspell2addmana
-  put #var m1dbaspell3 $dbaspell3
-  put #var m1dbaspell3prepmana $dbaspell3prepmana
-  put #var m1dbaspell3addmana $dbaspell3addmana
-  put #var m1performcyclic $performcyclic
-  put #var m1pspellcnum $pspellcnum
-  put #var m1pspellc1 $pspellc1
-  put #var m1pskillc1 $pskillc1
-  put #var m1pspellc1pskill $pspellc1pskill
-  put #var m1pspellc1prepmana $pspellc1prepmana
-  put #var m1pspellc2 $pspellc2
-  put #var m1pskillc2 $pskillc2
-  put #var m1pspellc2pskill $pspellc2pskill
-  put #var m1pspellc2prepmana $pspellc2prepmana
-  put #var m1pspellc3 $pspellc3
-  put #var m1pskillc3 $pskillc3
-  put #var m1pspellc3pskill $pspellc3pskill
-  put #var m1pspellc3prepmana $pspellc3prepmana
-  put #var m1spellctm $spellctm
-  put #var m1spellctmprepmana $spellctmprepmana
-  put #var m1spellcdb $spellcdb
-  put #var m1spellcdbprepmana $spellcdbprepmana
-  if %cambitems < 1 then put #var m1cambitems 1
-  
-  put #var m1warhorn $warhorn
-  put #var m1warhornitem $warhornitem
-  put #var m1expertise $expertise
-  put #var m1whirlwind $whirlwind
-  put #var m1dualload $dualload
-  put #var m1berserkava $berserkava
-  put #var m1avafatigue $avafatigue
-  put #var m1berserkfamine $berserkfamine
-  put #var m1faminevit $faminevit
-  put #var m1meditatestaunch $meditatestaunch
-  put #var m1expaccuracy $expaccuracy
-  put #var m1expdamage $expdamage
-  put #var m1berserkcyclone $berserkcyclone
-  put #var m1berserkearthquake $berserkearthquake
-  put #var m1berserkflashflood $berserkflashflood
-  put #var m1berserklandslide $berserklandslide
-  put #var m1berserktornado $berserktornado
-  put #var m1berserktsunami $berserktsunami
-  put #var m1tsunamibackup $tsunamibackup
-  put #var m1berserkvolcano $berserkvolcano
-  put #var m1berserkwildfire $berserkwildfire
-  put #var m1bearform $bearform
-  put #var m1buffaloform $buffaloform
-  put #var m1dragonform $dragonform
-  put #var m1eagleform $eagleform
-  put #var m1monkeyform $monkeyform
-  put #var m1owlform $owlform
-  put #var m1pantherform $pantherform
-  put #var m1piranhaform $piranhaform
-  put #var m1pythonform $pythonform
-  put #var m1wolverineform $wolverineform
-  put #var m1meditatebastion $meditatebastion
-  put #var m1meditatecontemplation $meditatecontemplation
-  put #var m1meditatetenacity $meditatetenacity
-  
-  put #var m1whistlepiercing $whistlepiercing
-  put #var m1eilliescry $eilliescry
-  put #var m1eilliescryprepmana $eilliescryprepmana
-  put #var m1eilliescryaddmana $eilliescryaddmana
-  
-  put #var m1osrelmeraud $osrelmeraud
-  put #var m1omprepmana $omprepmana
-  put #var m1omaddmana $omaddmana
-  put #var m1ombuffnum $ombuffnum
-  put #var m1ombuff1 $ombuff1
-  put #var m1ombuff2 $ombuff2
-  put #var m1ombuff3 $ombuff3
-  put #var m1ombuff4 $ombuff4
-  put #var m1ombuff5 $ombuff5
-  put #var m1ombuff6 $ombuff6
-  put #var m1ombuff7 $ombuff7
-  put #var m1ombuff8 $ombuff8
-  put #var m1theurgy $theurgy
-  put #var m1pray $pray
-  put #var m1praydeity $praydeity
-  put #var m1meraudcommune $meraudcommune
-  put #var m1elunedcommune $elunedcommune
-  put #var m1tamsinecommune $tamsinecommune
-  put #var m1dance $dance
-  put #var m1recite $recite
-  put #var m1anloralpin $anloralpin
-  put #var m1anloralpinitem $anloralpinitem    
-  put #var m1pilgrimbadge $pilgrimbadge
-  put #var m1pilgrimbadgeitem $pilgrimbadgeitem
-  put #var m1prayermat $prayermat
-  put #var m1prayermatitem $prayermatitem
-  put #var m1dirtstacker $dirtstacker
-  put #var m1dirtstackeritem $dirtstackeritem
-  put #var m1lighter $lighter
-  put #var m1lighteritem $lighteritem
-  put #var m1watercontainer $watercontainer
-  put #var m1blessdelay $blessdelay
-  put #var m1hyhcast $hyhcast
-  
-  put #var m1avoidshock $avoidshock
-  put #var m1perchealth $perchealth
-  put #var m1manipulate $manipulate
-  put #var m1paralysis $paralysis
-  put #var m1paralysisprepmana $paralysisprepmana
-  put #var m1paralysisaddmana $paralysisaddmana
-  put #var m1vitheal $vitheal
-  put #var m1vithealnum $vithealnum
-  put #var m1vithealprepmana $vithealprepmana
-  put #var m1vithealaddmana $vithealaddmana
-  put #var m1heal $heal
-  put #var m1healprepmana $healprepmana
-  put #var m1healaddmana $healaddmana
-  put #var m1curedisease $curedisease
-  put #var m1cdprepmana $cdprepmana
-  put #var m1cdaddmana $cdaddmana
-  put #var m1adcheal $adcheal
-  put #var m1adcdisease $adcdisease
-  put #var m1adcpoison $adcpoison
-  put #var m1absolution $absolution
-  put #var m1absolutionprepmana $absolutionprepmana
-  put #var m1iztouch $iztouch
-  put #var m1izprepmana $izprepmana
-  put #var m1iztimer $iztimer
-  
-  put #var m1astro $astro
-  put #var m1astrotimer $astrotimer
-  put #var m1predictiontool $predictiontool
-  put #var m1predictiontoolitem $predictiontoolitem
-  put #var m1tktitem $tktitem
-  put #var m1pgprepmana $pgprepmana
-  put #var m1pgaddmana $pgaddmana
-  put #var m1mindshout $mindshout
-  put #var m1mindshoutprepmana $mindshoutprepmana
-  put #var m1mindshoutaddmana $mindshoutaddmana
-  put #var m1burglerf $burglerf
-  put #var m1burglerfdelay $burglerfdelay
-  
-  put #var m1necrostate $necrostate
-  put #var m1necrosafety $necrosafety
-  put #var m1necrowhitelist $necrowhitelist
-  put #var m1riteofgrace $riteofgrace
-  put #var m1rogprepmana $rogprepmana
-  put #var m1rogcycle $rogcycle
-  put #var m1dissect $dissect
-  put #var m1preserve $preserve
-  put #var m1harvest $harvest
-  put #var m1harveststore $harveststore
-  put #var m1harveststorenum $harveststorenum
-  put #var m1devour $devour
-  put #var m1devourprepmana $devourprepmana
-  put #var m1devouraddmana $devouraddmana
-  put #var m1eotbrel $eotbrel
-  put #var m1siphonvit $siphonvit
-  put #var m1siphonvitprepmana $siphonvitprepmana
-  put #var m1siphonvitaddmana $siphonvitaddmana
-  put #var m1siphonvitnum $siphonvitnum
-  
-  put #var m1smite $smite
-  
-  put #var m1snipe $snipe
-  put #var m1dualload $dualload
-  
-  put #var m1snipe $snipe
-  put #var m1backstab $backstab
-  put #var m1khrimax $khrimax
-  put #var m1khriadaptation $khriadaptation
-  put #var m1khriavoidance $khriavoidance
-  put #var m1khricunning $khricunning
-  put #var m1khridampen $khridampen
-  put #var m1khridarken $khridarken
-  put #var m1khriendure $khriendure
-  put #var m1khrielusion $khrielusion
-  put #var m1khriflight $khriflight
-  put #var m1khrifright $khrifright
-  put #var m1khrifocus $khrifocus
-  put #var m1khriharrier $khriharrier
-  put #var m1khrihasten $khrihasten
-  put #var m1khriplunder $khriplunder
-  put #var m1khrisagacity $khrisagacity
-  put #var m1khrisensing $khrisensing
-  put #var m1khrisight $khrisight
-  put #var m1khristeady $khristeady
-  put #var m1khristrike $khristrike
-  put #var m1khriguile $khriguile
-  put #var m1khriprowess $khriprowess
-  put #var m1khriterrify $khriterrify
-  put #var m1khridebil $khridebil
-  put #var m1khridebiltype $khridebiltype
-  
-  put #var m1burglethiefbin $burglethiefbin
-  put #var m1burglekhrihasten $burglekhrihasten
-  put #var m1burglekhriplunder $burglekhriplunder
-  put #var m1burglekhrisilence $burglekhrisilence
-  put #var m1burglekhrislight $burglekhrislight
-  
-  put #var m1ignitebackup $ignitebackup
-  put #var m1summoning $summoning
-  put #var m1summonweapon $summonweapon
-  put #var m1summonweapontimer $summonweapontimer
-  put #var m1pathway $pathway
-  put #var m1pathwaytype $pathwaytype
-  put #var m1domain $domain
-  put #var m1domaintype $domaintype
-  put #var m1chargeafterlock $chargeafterlock
-  put #var m1calspell $calspell
-  put #var m1calprepmana $calprepmana
-  put #var m1caladdmana $caladdmana
-  put #var m1groundingfield $groundingfield
-  put #var m1gfprepmana $gfprepmana
-  put #var m1gfaddmana $gfaddmana
-  put #var m1gfelement $gfelement
-  return
 
 # REPLACE input:
 #               v-no quotes, yes %
