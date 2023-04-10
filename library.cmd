@@ -280,7 +280,7 @@ VARCHECKS:
       put #var m%checkmodetravel YES
       put #var m%checkmodetraveldest kaerna
       put #var m%checkmodemove YES
-      put #var m%checkmodemovelist baerholt
+      put #var m%checkmodemovelist baearholt
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 0
