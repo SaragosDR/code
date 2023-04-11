@@ -11,7 +11,7 @@ var transnecro |ivm|ks|bue|worm|ch|php|
 var aimweapons bow|xbow|sling
 var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|field|plane|planes|road|spell|symbiosis strengthen|symbiosis endure|symbiosis avoid|symbiosis spring|symbiosis remember|symbiosis resolve|symbiosis impress|symbiosis discern|symbiosis explore|symbiosis watch|symbiosis harvest|symbiosis heal|symbiosis learn|symbiosis examine|symbiosis perform|symbiosis cast|symbiosis harness|symbiosis activate
 
-var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-animateditems||p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
+var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
 var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-seordmaors
 var combatpresetp3 p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-prerenielder|p3-gryphons|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-adanfsorcs|p3-adanfblades
 var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p4-merkreshcelpeze4
@@ -119,7 +119,7 @@ VARCHECKS:
   
   if !matchre("$m%checkmodecustommovement", "\b(YES|NO)\b") then put #var m%checkmodecustommovement NO
   if !matchre("$m%checkmodekillbeforemove", "\b(YES|NO)\b") then put #var m%checkmodekillbeforemove YES
-  if !matchre("$m%checkmodecombatpreset", "\b(%combatpresetlist)\b") then put #var m%checkmodecombatpreset none
+  if !matchre("$m%checkmodecombatpreset", "%combatpresetlist") then put #var m%checkmodecombatpreset none
   if !matchre("$m%checkmodepresetpremium", "\b(YES|NO|ONLY)\b") then put #var m%checkmodepresetpremium NO
   if ("$m%checkmodecombatpreset" != "none") then
   {
@@ -3243,12 +3243,47 @@ SWAPP:
   pause
 SWAP:
   matchre SWAPP %waitstring
-  matchre RETURN You move|You have nothing to swap!|Your (right|left) hand is too injured to do that\.
+  matchre RETURN You move|You have nothing to swap!
+  matchre SWAPWOUNDS Your (right|left) hand is too injured to do that\.
+  matchre SWAPNERVES Will alone cannot conquer the paralysis that has wracked your body\.
   put swap
   matchwait 5
   var timeoutsub SWAP
   var timeoutcommand swap
 	goto TIMEOUT
+
+SWAPINJURED:
+  if ("%autoupkeep" = "YES") then
+  {
+    var goupkeep 1
+    var autype wounds
+  }
+  else
+  {
+    if %bugout = "YES" then goto BUGOUT
+    else goto SWAPTOOINJURED
+  }
+  return
+
+SWAPNERVES:
+  if ("%autoupkeep" = "YES") then
+  {
+    var goupkeep 1
+    var autype nerves
+  }
+  else
+  {
+    if %bugout = "YES" then goto BUGOUT
+    else goto SWAPTOOINJURED
+  }
+
+SWAPTOOINJURED:
+  echo ===TOO INJURED TO SWAP WEAPON===
+  put #flash
+  put #play Advance
+  pause 5
+  goto SWAPTOOINJURED
+  return
 
 TIEITEMP:
   pause
@@ -4994,7 +5029,7 @@ BERSERKMAIN:
   matchre BERSERKP %waitstring
   match BERSERKWRONG You have no idea how to do that.
   match BERSERKTRAIN You have not been trained in that manner of berserking.
-  matchre BERSERKRETURN Roundtime|The momentus rage of the avalanche replenishes your energy\!|A ravenous energy fills your limbs and you feel yourself growing healthier\!|You struggle\, but find yourself lacking the inner fire to enact such a rage\!|A vortex of malice springs into being\, expanding your focus and steadying your shield arm\!|Fury storming forth\, your pulse whips itself up to a furious tempo\!|You sense the rage within you well up and explode in a wild rage of dangerous power\.|You form the epicenter of a violent rage bent on crumbling your enemies\!|The momentus eruption of the volcano hardens you against damage\!|Careful control and timing of rage can provide reflexes capable of weathering even a landslide\.|In a flash your body fills with a flood of resilient rage\!|A supernatural strength and need to lash out at your foes inhabits you\.|A supernatural timing pulses through your veins, steadying your reaction against reflex based contests\!|The .* in your hands suddenly feels easier to wield, and more capable of powerful attacks\.
+  matchre BERSERKRETURN Roundtime|The momentus rage of the avalanche replenishes your energy\!|A ravenous energy fills your limbs and you feel yourself growing healthier\!|You struggle\, but find yourself lacking the inner fire to enact such a rage\!|A vortex of malice springs into being\, expanding your focus and steadying your shield arm\!|Fury storming forth\, your pulse whips itself up to a furious tempo\!|You sense the rage within you well up and explode in a wild rage of dangerous power\.|You form the epicenter of a violent rage bent on crumbling your enemies\!|The momentus eruption of the volcano hardens you against damage\!|Careful control and timing of rage can provide reflexes capable of weathering even a landslide\.|In a flash your body fills with a flood of resilient rage\!|A supernatural strength and need to lash out at your foes inhabits you\.|A supernatural timing pulses through your veins, steadying your reaction against reflex based contests\!|The .* in your hands suddenly feels easier to wield, and more capable of powerful attacks\.|Unleashing a blizzard of hate, its raging violence amplifies the damage of your attacks\!|Fury wells up from within and swirls into a raging hurricane that leaves you in the calm eye of its center, supremely focused\.
   match BERSERKRETURN Your hands shake in anticipation of releasing the fury of the tsunami down upon your foes!
   matchre BERSERKRETURN But you are already enraged with that berserk\.
   match BERSERKPAUSE Your inner fire lacks the strength to fuel such a rage at this time.
@@ -5025,19 +5060,6 @@ BERSERKTRAIN:
   put #flash
   put #play JustArrived
   return
-
-BERSERKSTOP:
-  var berserktype $0
-  goto BERSERKSTOPMAIN
-BERSERKSTOPP:
-  pause
-BERSERKSTOPMAIN:
-  matchre BERSERKSTOPP %waitstring
-  match BARBRETURN A good positive attitude never hurts.
-  match BARBRETURN Maybe try berserking first?
-  put berserk stop %berserktype
-  put yes
-  matchwait
 
 BERSERKSTOPALLP:
   pause
@@ -8103,27 +8125,28 @@ ATTACKACMCOMBO:
 ATTACKACMCOMBOMAIN:
   matchre ATTACKACMMAIN %waitstringgood
   matchre ATTACKACMCBADNEWS %waitstringbad
-  match ATTACKACMCRETURN Roundtime:
-  match RETURN With a loud twang, you let fly your
+  #match ATTACKACMCRETURN Roundtime:
+  matchre ATTACKACMCRETURN ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and steady your weapon\.|^You lower your shoulders and begin to twirl your staff\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.
+  matchre ATTACKACMCRETURN  ^\* .* is slain before your eyes!|^You take a step back and set your staff into a twirling motion\.
+  #match RETURN With a loud twang, you let fly your
   #match ATTACKACMCSTOW You must free up your left hand first.
   matchre ATTACKACMCSTAND You'll need to stand up first\.|You must be standing to perform that maneuver\.
   matchre ATTACKACMCRANGE ^You aren't close enough to attack\.
   matchre ATTACKACMCGONE ^What are you trying to attack\?
-  matchre ATTACKACMCRETURN  ^\* .* is slain before your eyes!
   matchre ATTACKACMCWRONG With your fist\?  That might hurt\.|This weapon lacks the edge necessary to cleave your enemy with\.|Your hands must be empty to deliver such a blow\.|A pike or halberd weapon is necessary to impale your enemy with\.|Only a staff is suitable for the complex motions of the twirl maneuver\.|This works best when you use a suitable ranged weapon\.|This works best when you use a suitable weapon\.|This works best when you are dual wielding suitable weapons\.
   matchre ATTACKACMCFAIL You must rest a bit longer before attempting that maneuver again\.
   match ATTACKACMCBADNAME You cannot figure out how to do that.
   send maneuver %argument
   matchwait 5
-  gosub ERROR
+  gosub COMBOERROR
 
 ATTACKACMCSTOW:
   gosub STOW left
   goto ATTACKACMCOMBOMAIN
 
 ATTACKACMCRETURN:
-  put #var %manenamelast $unixtime
-  put #echo Yellow Maneuver complete!
+  #put #var %manenamelast $unixtime
+  #put #echo Yellow Maneuver complete!
   return
 
 ATTACKACMCGONE:
@@ -8145,10 +8168,10 @@ ATTACKACMCWRONG:
   exit
 
 ATTACKACMCFAIL:
-  send #echo Yellow ACM is still on cooldown!
-  var failtest $unixtime
-  math failtest subtract 80
-  put #var %manenamelast %failtest
+  #send #echo Yellow ACM is still on cooldown!
+  #var failtest $unixtime
+  #math failtest subtract 80
+  #put #var %manenamelast %failtest
   exit
 
 ATTACKACMCBADNAME:

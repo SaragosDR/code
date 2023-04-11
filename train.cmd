@@ -9284,12 +9284,6 @@ ROOMTRAVEL:
   {
     gosub MOVE %rttargetroom
   }
-  #BARB_SHUTOFF
-  if ("$guild" = "Barbarian") then
-  {
-    gosub BERSERKSTOPALL
-    gosub FORMSTOPALL
-  }
   if ("%rtfindroom" = "YES") then gosub FINDROOMLOGIC
   return
   
@@ -9601,10 +9595,6 @@ BARBBUFFLOGIC:
     {
       gosub BERSERKLOGIC Landslide
     }
-    else
-    {
-      if ($SpellTimer.Landslide.active = 1) then gosub BERSERKSTOP Landslide
-    }
   }
   else
   {  
@@ -9620,10 +9610,6 @@ BARBBUFFLOGIC:
     if (%augmentationlock = 0) then
     {
       gosub BERSERKLOGIC Tornado
-    }
-    else
-    {
-      if ($SpellTimer.Tornado.active = 1) then gosub BERSERKSTOP Tornado
     }
   }
   else gosub BERSERKLOGIC Tornado
@@ -9674,13 +9660,6 @@ BERSERKLOGIC:
   if ((%berserk%berserklower = "YES") && ($SpellTimer.%berserktype.active != 1)) then
   {
     gosub BERSERK %berserktype
-  }
-  else
-  {
-    if ((%berserk%berserklower = "NO") && ($SpellTimer.%berserktype.active = 1)) then
-    {
-      gosub BERSERKSTOP %berserktype
-    }
   }
   return
 
@@ -12166,6 +12145,12 @@ LEAVEROOM:
   gosub SPELLCANCEL
   gosub UNHIDE
   gosub FLEERETREAT
+  #BARB_SHUTOFF
+  if ("$guild" = "Barbarian") then
+  {
+    gosub BERSERKSTOPALL
+    gosub FORMSTOPALL
+  }
   return
 
 
