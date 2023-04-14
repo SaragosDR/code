@@ -1800,7 +1800,7 @@ VARCHECKS:
   #GUILD-THIEF
   if !matchre("$m%checkmodebackstab", "\b(YES|NO)\b") then put #var m%checkmodebackstab NO
   if !matchre("$m%checkmodesnipe", "\b(YES|NO)\b") then put #var m%checkmodesnipe NO
-  if $m%checkmodekhrimax >= 1 then
+  if (($m%checkmodekhrimax >= 1) && ($m%checkmodekhrimax <= 8)) then
   else put #var m%checkmodekhrimax 1
   if !matchre("$m%checkmodekhriadaptation", "\b(YES|NO)\b") then put #var m%checkmodekhriadaptation NO
   if !matchre("$m%checkmodekhriavoidance", "\b(YES|NO)\b") then put #var m%checkmodekhriavoidance NO
@@ -1926,6 +1926,17 @@ VARCHECKOTHER:
   #OTHER-ASTRAL
   if !matchre("$astralsafe", "\b(YES|NO)\b") then put #var astralsafe YES
   if !matchre("$hundredth", "\b(YES|NO)\b") then put #var hundredth NO
+  #OTHER-COMBO
+  if !def(maneuverlist) then put #var maneuverlist cleave|crash|twirl|impale|palmstrike|doublestrike|powershot
+  if !def(cleaveweapon) then put #var cleaveweapon zweihander
+  if !def(crashweapon) then put #var crashweapon dragonwood mallet
+  if !def(twirlweapon) then put #var twirlweapon spiritwood staff
+  if !def(impaleweapon) then put #var impaleweapon senci spear
+  if !def(doublestrikeweapon) then put #var doublestrikeweapon broadsword
+  if !def(doublestrikeweapon2) then put #var doublestrikeweapon2 scimitar
+  if !def(powershotammo) then put #var powershotammo crossbow bolt
+  if !def(powershotweapon) then put #var powershotweapon latchbow  
+    
   #OTHER-KILL
   #if !matchre("$killtype", "\b(TMFOCUS)\b") then put #var killtype TMFOCUS
   if !matchre("$killloot", "\b(YES|NO)\b") then put #var killloot YES
@@ -3771,7 +3782,7 @@ BOWLOADLOGIC:
     if matchre ("$righthand", "(%ubowammo)") then gosub SWAP
     if matchre ("$lefthand", "(%ubowammo)") then
     {
-      gosub BOWLOAD
+      gosub BOWLOAD %ubowammo
       if (%goupkeep = 1) then return
       gosub STOW left
       if %usingacm = 1 then goto ATTACKACM
@@ -3781,7 +3792,7 @@ BOWLOADLOGIC:
   }
   else
   {
-		gosub BOWLOAD
+		gosub BOWLOAD %ubowammo
 		if (%goupkeep = 1) then return
 		if ("$lefthand" != "Empty") then gosub STOW left
 		goto BOWAIM
@@ -3914,7 +3925,7 @@ ATTACKACMSTAND:
 ATTACKACMLOAD:
   gosub GETITEM my %ubowammo
   if matchre ("$righthand", "(%ubowammo)") then gosub SWAP
-  gosub BOWLOAD
+  gosub BOWLOAD %ubowammo
   if (%goupkeep = 1) then return
   if matchre ("$lefthand", "(%ubowammo)") then gosub STOW left
   goto ATTACKACM
@@ -4167,10 +4178,12 @@ BOWAIMSTOW:
   gosub STOW left
   goto BOWAIM
 
-
+BOWLOAD:
+  var bowloadammo $0
+  goto BOWLOADMAIN
 BOWLOADP:
 	pause
-BOWLOAD:
+BOWLOADMAIN:
 	matchre BOWLOADP %waitstring
 	matchre BOWLOADSTOW is already loaded|to load the|You load|You reach into your|You can not load the
 	matchre BOWLOADGETITEM You don't have the proper ammunition
@@ -4179,23 +4192,23 @@ BOWLOAD:
 	match BOWNOSTW Such a feat would be impossible without the winds to guide you\.
 	match BOWNOSTEADY Such a feat would be impossible without steadier hands.
 	match BOWNOAMMO What weapon are you trying to load?
-	if %usingdualload = 1 then put load my %ubowammos
-	else put load my %ubowammo
+	if %usingdualload = 1 then put load my %bowloadammos
+	else put load my %bowloadammo
 	matchwait 5
-	var timeoutsub BOWLOAD
-  if %usingdualload = 1 then var timeoutcommand load my %ubowammos
-  else var timeoutcommand load my %ubowammo
+	var timeoutsub BOWLOADMAIN
+  if %usingdualload = 1 then var timeoutcommand load my %bowloadammos
+  else var timeoutcommand load my %bowloadammo
 	goto TIMEOUT
 
 BOWLOADSTOW:
-  if matchre ("$lefthand", "%ubowammo") then gosub STOWITEM %ubowammo
+  if matchre ("$lefthand", "%ubowammo") then gosub STOWITEM %bowloadammo
   return
 
 BOWLOADGETITEM:
   if %usingdualload = 1 then goto BOWNOAMMO
   gosub STOW left
-  gosub GETITEM %ubowammo
-  goto BOWLOAD
+  gosub GETITEM %bowloadammo
+  goto BOWLOADMAIN
 
 BOWDLBAD:
   var usingdualload 0
@@ -4206,15 +4219,15 @@ BOWDLBAD:
 
 BOWNOEAGLE:
   var usingdualload 0
-  goto BOWLOAD
+  goto BOWLOADMAIN
   
 BOWNOSTW:
   var usingdualload 0
-  goto BOWLOAD
+  goto BOWLOADMAIN
   
 BOWNOSTEADY:
   var usingdualload 0
-  goto BOWLOAD
+  goto BOWLOADMAIN
 
 BOWNOAMMO:
   gosub DEEPSLEEP
@@ -4627,6 +4640,7 @@ THROWGET:
   if ((%weapontype = "ht") && (%htbond = "SPECIAL")) then return
   matchre THROWGETP %waitstring
   matchre RETURN You pick up|You fade in for a moment as you pick up|You are already holding that.|You pull|You get
+  matchre RETURN ^But that is already in your inventory\.|^You should untie the
   matchre THROWBOND What were you|Sheesh, it's still alive!
 	put get %weaponname
 	matchwait 5
@@ -5038,6 +5052,10 @@ BERSERKMAIN:
 	var timeoutsub BERSERKMAIN
   var timeoutcommand berserk %berserktype
 	goto TIMEOUT
+	
+BERSERKALREADY:
+  put #echo %alertwindow Yellow Attempted to start a berserk that was already up!
+  goto BERSERKRETURN
 
 BERSERKPAUSE:
   var nextberserk %t
@@ -5171,9 +5189,10 @@ MEDITATIONRETURN:
   return
 
 MEDITATIONBAD:
-  put #echo >$alertwindow Yellow Tried to start %meditationtype meditation, but there were already 3 meditations up!  Please investigate.
-  put #flash
-  put #play JustArrived
+  #put #echo >$alertwindow Yellow Tried to start %meditationtype meditation, but there were already 3 meditations up!  Please investigate.
+  #put #flash
+  #put #play JustArrived
+  gosub MEDITATEPOWER
   return
 
 MEDITATIONWRONG:
@@ -7675,7 +7694,10 @@ TASKGIVEMAGS:
   matchre RETURN The firewood peddler Mags takes the stems and says, "Thanks, .*\!  I need .* more\."
   matchre TASKGIVEGOOD The firewood peddler Mags says, "Thank you very much, .*\.  I have a few things here for you, thank you so much for your help\."
   put give mags
-  matchwait
+  matchwait 5
+  var timeoutsub TASKGIVEMAGS
+  var timeoutcommand give mags
+	goto TIMEOU
   
 TASKGIVEGOOD:
   var givingdone 1
@@ -7913,6 +7935,9 @@ SUMMONCHARGE:
   matchre SUMMONCHARGEP %waitstring
   put summon admittance
 	matchwait
+	var timeoutsub SUMMONCHARGE
+  var timeoutcommand summon admittance
+	goto TIMEOU
 	
 SUMMONCHARGEFULL:
   put #echo Yellow Charging complete!
@@ -8126,7 +8151,7 @@ ATTACKACMCOMBOMAIN:
   matchre ATTACKACMMAIN %waitstringgood
   matchre ATTACKACMCBADNEWS %waitstringbad
   #match ATTACKACMCRETURN Roundtime:
-  matchre ATTACKACMCRETURN ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and steady your weapon\.|^You lower your shoulders and begin to twirl your staff\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.
+  matchre ATTACKACMCRETURN ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and steady your weapon\.|^You lower your shoulders and begin to twirl your staff\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|You square up your feet and arch your back while searching for an engaged enemy to target\.
   matchre ATTACKACMCRETURN  ^\* .* is slain before your eyes!|^You take a step back and set your staff into a twirling motion\.
   #match RETURN With a loud twang, you let fly your
   #match ATTACKACMCSTOW You must free up your left hand first.
@@ -9089,7 +9114,10 @@ WINDCHARGE:
   matchre RETURN You strain, but lack the mental stamina to charge the windboard this much.
   match WINDCSUCC Roundtime:
   put charge windboard 50
-  matchwait
+  matchwait 5
+  var timeoutsub WINDCHARGE
+  var timeoutcommand charge windboard 50
+	goto TIMEOUT
 
 WINDCFULL:
   var windboardcharge 50
@@ -9112,7 +9140,10 @@ WINDMOUNT:
   match WINDMRET You cannot really do anything on your windboard while in combat.
   match RETURN You put your
   put mount windboard
-  matchwait
+  matchwait 5
+  var timeoutsub WINDMOUNT
+  var timeoutcommand mount windboard
+	goto TIMEOUT
 
 WINDMRET:
   gosub RETREAT
@@ -9124,7 +9155,10 @@ WINDDISMOUNT:
   matchre WINDDISMOUNTP %waitstring
   matchre RETURN You step off your|You're not riding around on
   put dismount windboard
-  matchwait
+  matchwait 5
+  var timeoutsub WINDDISMOUNT
+  var timeoutcommand dismount windboard
+	goto TIMEOUT
   
 WINDTRICKP:
   pause
@@ -9133,7 +9167,10 @@ WINDTRICK:
   match RETURN Roundtime:
   match WINDTRET You cannot really do anything on your windboard while in combat.
   put %windboardtrick windboard
-  matchwait
+  matchwait 5
+  var timeoutsub WINDTRICK
+  var timeoutcommand %windboardtrick windboard
+	goto TIMEOUT
 
 WINDTRET:
   gosub RETREAT
@@ -9148,7 +9185,11 @@ APPRAISE:
   match RETURN Appraise what?  Type APPRAISE HELP for more information.
   if %appsaveitem != "none" then put appraise %appsaveitem bundle quick
   else put appraise bundle quick
-  matchwait
+  matchwait 5
+  var timeoutsub APPRAISE
+  if %appsaveitem != "none" then var timeoutcommand %appsaveitem bundle quick
+  else var timeoutcommand bundle quick
+	goto TIMEOUT
   
 APPRET:
   gosub RETREAT
@@ -9178,7 +9219,10 @@ APPRAISECREATURE:
   match RETURN It's hard to appraise the
   match RETURN You can't determine anything about this creature.
   put appraise %appraisemon quick
-  matchwait 
+  matchwait 5
+  var timeoutsub APPRAISECREATURE
+  var timeoutcommand appraise %appraisemon quick
+	goto TIMEOUT
  
 RECALLP:
   pause
@@ -9196,7 +9240,10 @@ RECALL:
   matchre RECALLP %waitstring
   matchre RETURN Roundtime:|You are far too occupied by present matters|You search your mind
   put recall %recallmon
-  matchwait 
+  matchwait 5
+  var timeoutsub RECALL
+  var timeoutcommand recall %recallmon
+	goto TIMEOUT
   
 MONSTERARRAY:
   var monsterarray $monsterlist

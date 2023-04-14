@@ -1,6 +1,6 @@
 ########################################
 ###Training scripts by player of Saragos.
-###Last Updated: 04/11/2023
+###Last Updated: 04/13/2023
 ########################################
 
 include library.cmd
@@ -1551,12 +1551,12 @@ MAGICVARLOAD:
   if (("$guild" = "Thief") || ("$guild" = "Barbarian")) then
   {
     #NMU_SETUP
-    if "$guild" = "Thief" then
+    if ("$guild" = "Thief") then
     {
       if %scriptmode != 2 then gosub KHRIVARRESET
       gosub KHRIVARS
     }
-    if "$guild" = "Barbarian" then gosub BARBVARRESET  
+    if ("$guild" = "Barbarian") then gosub BARBVARRESET  
   }
   else
   {
@@ -6072,21 +6072,21 @@ BURGLEEOTBCAST:
 BURGLEKHRISTOP:
   if $SpellTimer.KhriPlunder.active = 1 then
   {
-    gosub KHRISTOP plunder
+    gosub KHRISTOP Plunder
   }
   if $SpellTimer.KhriSilence.active = 1 then
   {
-    gosub KHRISTOP silence
+    gosub KHRISTOP Silence
   }
   if $SpellTimer.KhriSlight.active = 1 then
   {
-    gosub KHRISTOP slight
+    gosub KHRISTOP Slight
   }
   if %khrihasten != "YES" then
   { 
     if $SpellTimer.KhriHasten.active = 1 then
     {
-      gosub KHRISTOP hasten
+      gosub KHRISTOP Hasten
     }
   }
   return
@@ -8191,10 +8191,12 @@ BARBVARRESET:
   if %berserkfamine = "YES" then put #var SpellTimer.Famine.active 0
   if %meditatestaunch = "YES" then put #var SpellTimer.Staunch.active 0
   
+  if %berserkblizzard = "YES" then put #var SpellTimer.Blizzard.active 0
   if %berserkcyclone = "YES" then put #var SpellTimer.Cyclone.active 0
   if %berserkdrought = "YES" then put #var SpellTimer.Drought.active 0
   if %berserkearthquake = "YES" then put #var SpellTimer.Earthquake.active 0
   if %berserkflashflood = "YES" then put #var SpellTimer.Flashflood.active 0
+  if %berserkhurricane = "YES" then put #var SpellTimer.Hurricane.active 0
   if %berserklandslide = "YES" then put #var SpellTimer.Landslide.active 0
   if %berserktornado = "YES" then put #var SpellTimer.Tornado.active 0
   if %berserktsunami = "YES" then put #var SpellTimer.Tsunami.active 0
@@ -9746,267 +9748,68 @@ BARBROARLOGIC:
   }
   return
   
+KHRITEST:  
+  eval khritype tolower($0)
+  #echo khri%khritype: %khri%khritype
+  if ("%khri%khritype" = "YES") then
+  {
+    #echo SpellTimer.Khri$0.active: $SpellTimer.Khri$0.active
+    if ($SpellTimer.Khri$0.active != 1) then
+    {
+      eval khrilistchars length("%khrilist")
+      if (%khrilistchars > 0) then var khrilist %khrilist|%khritype
+      else var khrilist %khritype
+    }
+  }
+  else
+  { 
+    #echo SpellTimer.Khri$0.active: $SpellTimer.Khri$0.active
+    if ($SpellTimer.Khri$0.active = 1) then
+    {
+      eval khrilistchars length("%badkhrilist")
+      if (%khrilistchars > 0) then var badkhrilist %badkhrilist|%khritype
+      else var badkhrilist %khritype
+    }
+  }
+  return
+
 KHRILOGIC:
   if %combatperforming = 1 then return
   var khrilist
   var badkhrilist
-  var khritype adaptation
-  if %khriadaptation = "YES" then
-  {
-    if $SpellTimer.KhriAdaptation.active != 1 then var khrilist %khrilist|%khritype
-  }
-  else
-  { 
-    if $SpellTimer.KhriAdaptation.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype avoidance
-  if %khriavoidance = "YES" then
-  {
-    if $SpellTimer.KhriAvoidance.active != 1 then var khrilist %khrilist|%khritype
-  }
-  else
-  { 
-    if $SpellTimer.KhriAvoidance.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype cunning
-  if %khricunning = "YES" then
-  {
-    if $SpellTimer.KhriCunning.active != 1 then var khrilist %khrilist|%khritype
-  }
-  else
-  { 
-    if $SpellTimer.KhriCunning.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype darken
-  if %khridarken = "YES" then
-  {
-    if $SpellTimer.KhriDarken.active != 1 then var khrilist %khrilist|%khritype  
-  }
-  else
-  { 
-    if $SpellTimer.KhriDarken.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype dampen
-  if %khridampen = "YES" then
-  {
-    if $SpellTimer.KhriDampen.active != 1 then var khrilist %khrilist|%khritype
-  }
-  else
-  { 
-    if $SpellTimer.KhriDampen.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype elusion
-  if %khrielusion = "YES" then
-  {
-    if $SpellTimer.KhriElusion.active != 1 then var khrilist %khrilist|%khritype
-  }
-  else
-  { 
-    if $SpellTimer.KhriElusion.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype endure
-  if %khriendure = "YES" then
-  {
-    if $SpellTimer.KhriEndure.active != 1 then var khrilist %khrilist|%khritype
-  }
-  else
-  { 
-    if $SpellTimer.KhriEndure.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype evanescence
-  if %khrievanescence = "YES" then
-  {
-    if $SpellTimer.KhriEvanescence.active != 1 then var khrilist %khrilist|%khritype
-  }
-  else
-  { 
-    if $SpellTimer.KhriEvanescence.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype flight
-  if %khriflight = "YES" then
-  {
-    if $SpellTimer.KhriFlight.active != 1 then var khrilist %khrilist|%khritype
-  }
-  else
-  { 
-    if $SpellTimer.KhriFlight.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype fright
-  if %khrifright = "YES" then
-  {
-    if $SpellTimer.KhriFright.active != 1 then var khrilist %khrilist|%khritype
-  }
-  else
-  { 
-    if $SpellTimer.KhriFright.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype focus
-  if %khrifocus = "YES" then
-  {
-    if $SpellTimer.KhriFocus.active != 1 then
-    {
-      var khrilist %khrilist|%khritype
-    }
-  }
-  else
-  { 
-    if $SpellTimer.KhriFocus.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype guile
-  if %khriguile = "YES" then
-  {
-    if $SpellTimer.KhriGuile.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriGuile.active = 1 then
-    {
-      if ((%khridebil = "YES") && (%khridebiltype = "guile")) then 
-      else var badkhrilist %badkhrilist|%khritype
-    }
-  }
-  var khritype harrier
-  if %khriharrier = "YES" then
-  {
-    if $SpellTimer.KhriHarrier.active != 1 then var khrilist %khrilist|%khritype
-  }
-  else
-  { 
-    if $SpellTimer.KhriHarrier.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype hasten
-  if %khrihasten = "YES" then
-  {
-    if $SpellTimer.KhriHasten.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriHasten.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype insight
-  if %khriinsight = "YES" then
-  {
-    if $SpellTimer.KhriInsight.active != 1 then var khrilist %khrilist|%khritype
-  }
-  else
-  { 
-    if $SpellTimer.KhriInsight.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype plunder
-  if %khriplunder = "YES" then
-  {
-    if $SpellTimer.KhriPlunder.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriPlunder.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype prowess
-  if %khriprowess = "YES" then
-  {
-    if $SpellTimer.KhriProwess.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriProwess.active = 1 then
-    {
-      if ((%khridebil = "YES") && (%khridebiltype = "prowess")) then 
-      else var badkhrilist %badkhrilist|%khritype
-    }
-  }
-  var khritype terrify
-  if %khriterrify = "YES" then
-  {
-    if $SpellTimer.KhriTerrify.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriTerrify.active = 1 then
-    {
-      if ((%khridebil = "YES") && (%khridebiltype = "terrify")) then 
-      else var badkhrilist %badkhrilist|%khritype
-    }
-  }
-  var khritype sagacity
-  if %khrisagacity = "YES" then
-  {
-    if $SpellTimer.KhriSagacity.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriSagacity.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype sensing
-  if %khrisensing = "YES" then
-  {
-    if $SpellTimer.KhriSensing.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriSensing.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype serenity
-  if %khriserenity = "YES" then
-  {
-    if $SpellTimer.KhriSerenity.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriSerenity.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype shadowstep
-  if %khrishadowstep = "YES" then
-  {
-    if $SpellTimer.KhriShadowstep.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriShadowstep.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype sight
-  if %khrisight = "YES" then
-  {
-    if $SpellTimer.KhriSight.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriSight.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype steady
-  if %khristeady = "YES" then
-  {
-  if $SpellTimer.KhriSteady.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriSteady.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-  var khritype strike
-  if %khristrike = "YES" then
-  {
-  if $SpellTimer.KhriStrike.active != 1 then var khrilist %khrilist|%khritype
-  }  
-  else
-  { 
-    if $SpellTimer.KhriStrike.active = 1 then var badkhrilist %badkhrilist|%khritype
-  }
-
+  gosub KHRITEST Adaptation
+  gosub KHRITEST Avoidance
+  gosub KHRITEST Cunning
+  gosub KHRITEST Darken
+  gosub KHRITEST Dampen
+  gosub KHRITEST Elusion
+  gosub KHRITEST Endure
+  gosub KHRITEST Evanescence
+  gosub KHRITEST Flight
+  gosub KHRITEST Fright
+  gosub KHRITEST Focus
+  gosub KHRITEST Guile
+  gosub KHRITEST Harrier
+  gosub KHRITEST Hasten
+  gosub KHRITEST Insight
+  gosub KHRITEST Plunder
+  gosub KHRITEST Prowess
+  gosub KHRITEST Terrify
+  gosub KHRITEST Sagacity
+  gosub KHRITEST Sensing
+  gosub KHRITEST Serenity
+  gosub KHRITEST Shadowstep
+  gosub KHRITEST Sight
+  gosub KHRITEST Steady
+  gosub KHRITEST Strike
+  
   #UNUSED_KHRI
-  if $SpellTimer.KhriSafe.active = 1 then
-  {
-    var khritype safe
-    var badkhrilist %badkhrilist|%khritype
-  }
-  if $SpellTimer.KhriSilence.active = 1 then
-  {
-    var khritype silence
-    var badkhrilist %badkhrilist|%khritype
-  }
-  if $SpellTimer.KhriSlight.active = 1 then
-  {
-    var khritype slight
-    var badkhrilist %badkhrilist|%khritype
-  }
+  gosub KHRITEST Credence
+  gosub KHRITEST Intimidate
+  gosub KHRITEST Safe
+  gosub KHRITEST Silence
+  gosub KHRITEST Slight
+  
   if %khridebil = "YES" then
   {
     if $Debilitation.LearningRate > 32 then var debillock 1
@@ -10021,16 +9824,18 @@ KHRILOGIC:
       }
     }
   }
+  #CHOOSELOOP
   #put #echo Yellow khrilist: %khrilist
   eval khrilistchars length("%khrilist")
   if (%khrilistchars > 0) then
   {
     eval khrilen count("%khrilist", "|")
-		var khricount 1
+		var khricount 0
 		var khristring
 		gosub KHRICHOOSELOOP
   }
   
+  #put #echo Yellow badkhrilist: %badkhrilist
   eval khrilen count("%badkhrilist", "|")
   if %khrilen > 0 then
   {
@@ -10042,6 +9847,7 @@ KHRILOGIC:
   
   
 KHRICHOOSELOOP:
+  #echo khristring: %khristring
   eval spacecount count("%khristring", " ")
   #echo khricount: %khricount     khrilen: %khrilen
   #echo spacecount: %spacecount    khrimax: %khrimax
@@ -12012,7 +11818,7 @@ SKINNINGLOGIC:
   
   var badskin 0
   var noskin 0
-  if %arrange > 0 then
+  if (%arrange > 0) then
   {
     if $Skinning.LearningRate >= 30 then
     {

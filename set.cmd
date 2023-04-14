@@ -1255,6 +1255,15 @@ SET:
     if tolower("%1") = "astralsafe" then goto REGYESNOSET 
     if tolower("%1") = "hundredth" then goto REGYESNOSET 
     
+    if tolower("%1") = "maneuverlist" then goto REGLISTSET
+    if tolower("%1") = "cleaveweapon" then goto REGTEXTSET
+    if tolower("%1") = "crashweapon" then goto REGTEXTSET
+    if tolower("%1") = "impaleweapon" then goto REGTEXTSET
+    if tolower("%1") = "twirlweapon" then goto REGTEXTSET
+    if tolower("%1") = "doublestrikeweapon" then goto REGTEXTSET
+    if tolower("%1") = "doublestrikeweapon2" then goto REGTEXTSET
+    if tolower("%1") = "powershotweapon" then goto REGTEXTSET
+    if tolower("%1") = "powershotammo" then goto REGTEXTSET
     
     if tolower("%1") = "killdb" then goto REGYESNOSET
     if tolower("%1") = "killdbspell" then goto REGTEXTSET
@@ -2739,6 +2748,17 @@ DISPLAYOTHER:
   echo
   put #echo mono PScriptMode: $pscriptmode
   echo
+  put #echo mono =================== Combo Script Variables ===================
+  echo
+  gosub REGOUTPUT ManeuverList
+  gosub REGOUTPUT CleaveWeapon
+  gosub REGOUTPUT CrashWeapon
+  gosub REGOUTPUT ImpaleWeapon
+  gosub REGOUTPUT TwirlWeapon
+  gosub REGOUTPUT DoublestrikeWeapon
+  gosub REGOUTPUT DoublestrikeWeapon2
+  gosub REGOUTPUT PowershotWeapon
+  gosub REGOUTPUT PowershotAmmo
   if $guild = "Moon Mage" then
   {
     put #echo mono =================== Astral Script Variables===================
