@@ -1,3 +1,46 @@
+04/13/23
+Updated Scripts: train, library, set, combo
+
+Added Combo script for ACM combos.  Variables for this are in the Other section of Set.cmd.
+
+Script will now gracefully handle having nerves too injured to swap a weapon from hand to hand.
+Added missing text for attempting to pick up a thrown weapon, but it's already on your person.
+Khri logic has been reworked and all Khri now go through a central logic.
+Fixed bugs in khri activation for long strings.
+Fixed bugs with animated object creature identification.
+Fixed several Barbarian-relrated bugs.
+
+
+04/08/23
+Updated Scripts: train, libary, set, hurl
+
+Added Hurl script for PvP, quick killing.  Will need to be manually edited to change variables for now.
+
+MOVEMENT
+All of the more detailed movement variables for towns have been eliminated.  You now just select the town to move to.  This may require adjusting your variables under the movement section.
+Traveling to Fang Cove now attempts to use the Premium Ring first, if set to do so, and then will move to the town in the NearestPortalTown variable to use one of the portals if unable to use the ring.  This should prevent characters being unable to go to Upkeep if their rings are on cooldown.  Additionally, PremiumRing variable now forces the UpkeepPreset variable to "fangcove".
+Fixed some issues with upkeep sometimes being triggered but not reporting the reason when it was for wounds that were preventing certain actions.  Upkeep should now always report why it went on upkeep.
+Travel now has another layer of checks to make sure you made it to the right map if the travel script fails.
+Crossing burgle location moved back to the city walls.  Added new Kaerna location for burgling for those who can't climb the walls.
+
+Added combat presets for: 
+P1: animated items
+P3: red leucros
+p4: merkresh celps 3, merkresh celps 4
+
+Fixed a bug with Khri Avoidance variable activating Adaptation instead.
+Bugfix to improper speech alert squelching for Traders selling bundles.
+Script is now better at turning off collecting if it's not a valid room for collecting.
+
+Improved tracking of Barbarian lowering of ACM cooldown.
+All Barbarian berserks and forms are now run through unified logic and will stop the berserk or form if it's not supposed to be on.
+Barbarian berserks are now stopped during travel as well as forms.
+Adjusted Barbarian warhorn timer to be longer.
+New variables for Barbarians: TornadoTraining and LandslideTraining.  Used if you just want those abilities active to lock the magic skills, but not to maintain as buffs.
+
+
+
+
 03/20/23
 Updated Scripts: train, libary, set
 New Variables: TradingSell and TradingTown.  Will sell a bundle or gem pouch from your vault to learn trading experience when doing noncombat training in town.  If enabled, TradingTasks will run afterwards and top up your Trading experience before heading back.
