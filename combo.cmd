@@ -1,12 +1,10 @@
 include library.cmd
+action (combo) on
 
 var alertwindow $alertwindow
 
 var waitstringgood  ^\.\.\.wait|^Sorry\, you may only type ahead
 var waitstringbad ^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.
-action put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and steady your weapon\.|^You lower your shoulders and begin to twirl your staff\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|You square up your feet and arch your back while searching for an engaged enemy to target\.
-#put #echo Yellow Maneuver complete! manenamelast: %manenamelast - $unixtime 
-action var failtest $unixtime; math failtest subtract 80; put #var %manenamelast %failtest; send #echo Yellow ACM is still on cooldown! when You must rest a bit longer before attempting that maneuver again\.
 
 var maneuverlist $maneuverlist
 var cleaveweapon $cleaveweapon

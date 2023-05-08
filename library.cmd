@@ -12,8 +12,8 @@ var aimweapons bow|xbow|sling
 var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|field|plane|planes|road|spell|symbiosis strengthen|symbiosis endure|symbiosis avoid|symbiosis spring|symbiosis remember|symbiosis resolve|symbiosis impress|symbiosis discern|symbiosis explore|symbiosis watch|symbiosis harvest|symbiosis heal|symbiosis learn|symbiosis examine|symbiosis perform|symbiosis cast|symbiosis harness|symbiosis activate
 
 var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
-var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-seordmaors
-var combatpresetp3 p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-prerenielder|p3-gryphons|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-adanfsorcs|p3-adanfblades
+var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-gryphonsbaby|p2-gryphonsyoung|p2-seordmaors
+var combatpresetp3 p3-snippets|p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-sylphs|p3-prereniyoung|p3-redleucros|p3-prereni|p3-windbags|p3-prerenielder|p3-gryphons|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-adanfsorcs|p3-adanfblades
 var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p4-merkreshcelpeze4
 var combatpresetp5 p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-blackapes|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
 var combatpresetlist none|%combatpresetp1|%combatpresetp2|%combatpresetp3|%combatpresetp4|%combatpresetp5
@@ -28,6 +28,11 @@ var ammopresetlist none|crossing|shard|ratha
 
 var Ordinal none|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth
 var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.
+
+action (combo) put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
+action (combo) var barbmane $unixtime; math barbmane subtract 30; put #var %manenamelast %barbmane; put #var save;put #echo Yellow Barbarian Maneuver %manename cooldown reduction! when With expert skill you end the attack and maneuver into a better position\.
+action (combo) var failtest $unixtime; math failtest subtract 80; put #var %manenamelast %failtest; send #echo Yellow ACM is still on cooldown! when You must rest a bit longer before attempting that maneuver again\.
+action (combo) off
 
 goto LIBEND
 
@@ -508,6 +513,28 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 155|154|153|152
     }
+    if ("$m%checkmodecombatpreset" = "p2-gryphonsbaby") then
+    {
+      put #var m%checkmodezone 34
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest rossman
+      put #var m%checkmodemove YES
+      put #var m%checkmodemovelist gryphons|49
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 90|91|92
+    }
+    if ("$m%checkmodecombatpreset" = "p2-gryphonsyoung") then
+    {
+      put #var m%checkmodezone 34
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest rossman
+      put #var m%checkmodemove YES
+      put #var m%checkmodemovelist gryphons|49
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 93|116|117|118|119
+    }
     if ("$m%checkmodecombatpreset" = "p2-seordmaors") then
     {
       put #var m%checkmodezone 41
@@ -517,6 +544,16 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 77|78|79|76|204
+    }
+    if ("$m%checkmodecombatpreset" = "p3-snippets") then
+    {
+      put #var m%checkmodezone 66
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest fayrin
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 711|712|713|714|715|716
     }
     if ("$m%checkmodecombatpreset" = "p3-rocktrolls1") then
     {
@@ -582,6 +619,16 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 184|183|185|186|187
     }
+    if ("$m%checkmodecombatpreset" = "p3-sylphs") then
+    {
+      put #var m%checkmodezone 66
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest fayrin
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 717|718|719|720|721
+    }
     if ("$m%checkmodecombatpreset" = "p3-gryphons") then
     {
       put #var m%checkmodezone 69
@@ -639,6 +686,16 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 664|665|666
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 664|665|666|661|663
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 661|663
+    }
+    if ("$m%checkmodecombatpreset" = "p3-windbags") then
+    {
+      put #var m%checkmodezone 66
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest fayrin
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 722|723|724|725|726|727|728|729
     }
     if ("$m%checkmodecombatpreset" = "p3-prerenielder") then
     {
@@ -951,6 +1008,10 @@ VARCHECKS:
   if !matchre("$m%checkmodeburglepreset", "\b(%trainingtownpresetlist)\b") then put #var m%checkmodeburglepreset none
   if !matchre("$m%checkmodepawnpreset", "\b(%pawnpresetlist)\b") then put #var m%checkmodepawnpreset none
   if !matchre("$m%checkmodeperformpreset", "\b(%trainingtownpresetlist)\b") then put #var m%checkmodeperformpreset none
+  
+  #DEATH_DISCO
+  if !matchre("$deathaction", "\b(logout|alert)\b") then put #var deathaction logout
+  if !matchre("$disconnectaction", "\b(reconnect|quit)\b") then put #var disconnectaction reconnect
   
   #ALERTS
   if !matchre("$alertwindow", "\b(Main|Log|Conversation)\b") then put #var alertwindow Log
@@ -1936,6 +1997,13 @@ VARCHECKOTHER:
   if !def(doublestrikeweapon2) then put #var doublestrikeweapon2 scimitar
   if !def(powershotammo) then put #var powershotammo crossbow bolt
   if !def(powershotweapon) then put #var powershotweapon latchbow  
+  #OTHER-SLIDE
+  if !matchre("$summonelement", "\b(electric|cold|fire)\b") then put #var summonelement electric
+  if !def(summoningot) then put #var summoningot none
+  if !def(summonlist) then put #var summonlist cleave|crash|twirl|impale|doublestrike|palmstrike
+  if !def(summoncleave) then put #var summoncleave 2he
+  if !def(summoncrash then put #var summoncrash 2hb
+  if !def(summondoublestrike) then put #var summondoublestrike se
     
   #OTHER-KILL
   #if !matchre("$killtype", "\b(TMFOCUS)\b") then put #var killtype TMFOCUS
@@ -2016,8 +2084,8 @@ NEWTOWNPRESET:
 		var rttraveldest rossman
 		var rtmove NO
 		if (%towntype = "upkeep") then var upkeepzone 34a
-		if (%towntype = "burgle") then var rttargetroom 0
-		if (%towntype = "perform") then var rttargetroom 0
+		if (%towntype = "burgle") then var rttargetroom 128
+		if (%towntype = "perform") then var rttargetroom 95
 	}
   if ("%towncheck" = "riverhaven") then
 	{
@@ -2181,12 +2249,8 @@ NEWTOWNPRESET:
 
 STATUSCHECK:
   #DEATH_AND_CONNECTION_CHECKING
-  if ($dead = 1) then goto DEADWAIT
-  if ($connected = 0) then
-  {
-    put #echo >$alertwindow Yellow Disconnected!  Waiting to reconnect and restart script.
-    goto CONNECTEDWAIT
-  }
+  if ($dead = 1) then goto DEADLOGIC
+  if ($connected = 0) then gosub CONNECTEDLOGIC
   #MAELDRYTH
   if matchre("$roomobjs", "a maeldryth") then
   {
@@ -2459,12 +2523,8 @@ RETURN:
   return
 
 TIMEOUT:
-  if ($dead = 1) then goto DEADWAIT
-  if ($connected = 0) then
-  {
-    put #echo >$alertwindow Yellow Disconnected!  Waiting to reconnect and restart script.
-    goto CONNECTEDWAIT
-  }
+  if ($dead = 1) then goto DEADLOGIC
+  if ($connected = 0) then gosub CONNECTEDLOGIC
   math timeoutcount add 1
   if %timeoutcount >= 1 then 
   {
@@ -2480,19 +2540,37 @@ TIMEOUT:
 	}
 	goto %timeoutsub
 
+DEADLOGIC:
+  if ("%deathaction" = "logout") then
+  {
+    put #echo %alertwindow Yellow You are dead!  Logging out!
+    put quit
+    exit
+  }
+  else goto DEADWAIT
+  
 DEADWAIT:
-  put quit
   put #flash
   put #play JustArrived
   pause 4
   goto DEADWAIT
 
-CONNECTEDWAIT:
-  #put #flash
-  #put #play JustArrived
+CONNECTEDLOGIC:
+  if ("%disconnectaction" = "quit") then
+  {
+    put #echo %alertwindow Yellow Disconnected!  Quitting.
+    put #flash
+    put #play JustArrived
+    exit
+  }
+  else goto RECONNECTLOOP
+  
+RECONNECTLOOP:
+  put #connect $characternamedr
+  pause 4 
   if ($connected = 1) then return
-  pause 4
-  goto CONNECTEDWAIT
+  pause 30
+  goto RECONNECTLOOP
 
 
 
@@ -5955,7 +6033,7 @@ INVOKECAMB:
 	if %dedicatedcambrinth != "YES" then put invoke %cambitem%invokecount %ctotal%invokecount
 	else put invoke %cambitem%invokecount %ctotal%invokecount spell
 	matchwait 5
-	var timeoutsub INVOKE
+	var timeoutsub INVOKECAMB
   if %dedicatedcambrinth != "YES" then var timeoutcommand invoke %cambitem%invokecount %ctotal%invokecount
 	else var timeoutcommand invoke %cambitem%invokecount %ctotal%invokecount spell
 	goto TIMEOUT
@@ -8129,7 +8207,7 @@ MANEUVERTESTLOOP:
   var manetest $unixtime
 	math manetest subtract $%maneuverlist(%maneuvertest)last
 	#echo %maneuverlist(%maneuvertest)last: $%maneuverlist(%maneuvertest)last
-	#echo manetest: %manetest
+  #echo manetest: %manetest
 	if (%manetest > 90) then
 	{
 	  var maneuver %maneuvertest
@@ -8148,10 +8226,10 @@ MANEUVERTESTLOOP:
 ATTACKACMCOMBO:
   var argument $0
 ATTACKACMCOMBOMAIN:
-  matchre ATTACKACMMAIN %waitstringgood
+  matchre ATTACKACMCOMBOMAIN %waitstringgood
   matchre ATTACKACMCBADNEWS %waitstringbad
   #match ATTACKACMCRETURN Roundtime:
-  matchre ATTACKACMCRETURN ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and steady your weapon\.|^You lower your shoulders and begin to twirl your staff\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|You square up your feet and arch your back while searching for an engaged enemy to target\.
+  matchre ATTACKACMCRETURN ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
   matchre ATTACKACMCRETURN  ^\* .* is slain before your eyes!|^You take a step back and set your staff into a twirling motion\.
   #match RETURN With a loud twang, you let fly your
   #match ATTACKACMCSTOW You must free up your left hand first.
@@ -8181,12 +8259,12 @@ ATTACKACMCGONE:
 ATTACKACMCRANGE:
   put #echo Yellow Maneuver failed - range!  Advancing!
   gosub ADV
-  goto ATTACKACMMAIN
+  goto ATTACKACMCOMBOMAIN
   return
 
 ATTACKACMCSTAND:
   gosub STAND
-  goto ATTACKACMMAIN
+  goto ATTACKACMCOMBOMAIN
 
 ATTACKACMCWRONG:
   send #echo Yellow ACM attempted with improper item(s) in hands!

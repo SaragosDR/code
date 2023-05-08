@@ -44,7 +44,7 @@ var skinnableundead1 ice adder|adder skeleton|enraged tusky|fell hog|ghoul|ghoul
 var skinnableundead2 mutant togball|reaver|shadow hound|squirrel|steed|zombie kobold headhunter|zombie kobold savage
 
 var construct ashu hhinvi|boggle|bone amalgam|clay archer|clay mage|clay soldier|clockwork assistant|gam chaga|glass construct|(granite|marble|onyx|quartz) gargoyle|lachmate|lava drake|miniscule (fork|griddle|knife|lid|pan|plate|pot|spoon|teapot)|origami \S+|(alabaster|andesite|breccia|dolomite|marble|obsidian|quartzite|rock) guardian|rough-hewn doll
-var skinnableconstruct Endrus serpent|(granite|marble|onyx|quartz) gargoyle|lava drake|marble gargoyle
+var skinnableconstruct Endrus serpent|(granite|marble|onyx|quartz) gargoyle|lava drake|marble gargoyle|snippet|sylph|windbag
 
 var invasioncritters bone amalgam|bone warrior|brine shark|cloud eel|Drogorian stormrider|Elpalzi (bowyer|deadeye|dissident|fomenter|hunter|incendiary|instigator|malcontent|malcontent|partisan|rebel|sharpshooter|toxophilite)|flea-ridden beast|putrefying shambler|revivified mutt|shambling horror|skeletal peon|thunder eel|transmogrified oaf|Asketian harbinger|giant adder|wind wretch|wind hag|North Wind banshee|blight locust|murder crow|mantrap|clockwork monstrosity|rafflesia|Black Fang watcher
 
@@ -358,13 +358,12 @@ ALERTINIT:
   else var alertwindow >%alertwindow
   ##AWARENESS_TRIGGERS##
   #action put #flash; put #play Body;put #echo %alertwindow Yellow [Health]: Dead; goto DEADWAIT when eval $dead = 1
-  #action (hunt) goto DEAD when eval $dead = 1
   #action put #flash; put #play Body;put #echo %alertwindow Yellow [Health]: Disconnected; goto DEADWAIT when eval $connected = 0
   
   
   if %speechalerts = "YES" then
   { 
-    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says
+    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.
     var monsterspeech A sickly blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "
@@ -1454,6 +1453,7 @@ PALADINONLY:
 RANGERONLY:
   
   action var pounceready 1 when You think you have the strength to pounce upon prey once again\.
+  action var pounceready 0 when You're too tired from the last time you pounced on some prey\.
   
   var pounce $m%varsetpounce
   var snipe $m%varsetsnipe
@@ -1461,7 +1461,6 @@ RANGERONLY:
   var ritstype $m%varsetritstype
   
   var pounceready 1
-  var nextpounce 0
   return
 
 THIEFONLY: 
@@ -2558,6 +2557,8 @@ MAINVARLOAD:
       var totalcamb 0
     }
   }
+  var deathaction $deathaction
+  var disconnectaction $disconnectaction
   var alertwindow $alertwindow
   var healthalerts $healthalerts
   var healthalertnum $healthalertnum
@@ -3254,11 +3255,13 @@ NONCOMBATLOOP:
   #TRADING_SELL
   if (("%tradingsell" = "YES") && ("$guild" = "Trader")) then
   {
+    #put #echo >Log Yellow tradingsell: %tradingsell Logic started.
     if $Trading.LearningRate > 28 then var tradinglock 1
     if $Trading.LearningRate < 4 then var tradinglock 0
     if $Trading.Ranks = 1750 then var tradinglock 1
     if (%tradinglock = 0) then
     {
+      #put #echo >Log [Train] Attempting to sell bundle.
       gosub TRADINGSELLLOGIC
     }
   }
@@ -4230,6 +4233,7 @@ AUTOUPKEEPLOGIC:
     }
     else
     {
+      put #echo Yellow premium ring going back!
       gosub MOVE portal
       move go exit portal
     }
@@ -6092,20 +6096,31 @@ BURGLEKHRISTOP:
   return
 
 TRADINGSELLLOGIC:
+  #put #echo >Log Yellow Tradingsell logic sub!
   if $Trading.LearningRate > 28 then var tradinglock 1
 	if $Trading.LearningRate < 4 then var tradinglock 0
   if $Trading.Ranks = 1750 then var tradinglock 1
-  if (%tradinglock = 1) then return
+  #put #echo >Log tradinglock: %tradinglock
+  if (%tradinglock = 1) then
+  {
+    #BANK
+    gosub MINMONEYLOGIC
+    action (speech) on
+    action (emote) on
+    return
+  }
+  #put #echo >Log Before upkeepset
   gosub UPKEEPSET
   gosub STOWALL
   action (speech) off
   action (emote) off
-  if %hasvault != 1 then 
+  #put #echo >Log hasvault: %hasvault
+  if (%hasvault != 1) then 
   {
     put #echo %alertwindow No vault is recognized in this town, so TradingSell cannot be completed!
     return
   }
-
+  #put #echo >Log vaulttown: %vaulttown     townname: %townname
   if ("%vaulttown" != "%townname") then
   {
     put #echo %alertwindow Your vault is not set to be in this town, so TradingSell cannot be completed!
@@ -6131,11 +6146,13 @@ TRADINGSELLLOGIC:
       if ("$righthand = "Empty") then
       {
         gosub GETITEM gem pouch from vault
-        if ("$righthand = "Empty") then
+        if ("$righthand" = "Empty") then
         {
           put #echo %alertwindow No bundles or pouches could be found, so TradingSell cannot be completed!  Turning off TradingSell.
           var tradingsell NO
-          put #var $m%varsettradingsell NO
+          put #var m%varsettradingsell NO
+          put #var save
+          gosub EXITVAULT
           return
         }
       }
@@ -6158,6 +6175,7 @@ TRADINGSELLLOGIC:
         }
         gosub MOVE bundle
       }
+      put #echo >Log [Train] Selling bundle.
       gosub SELLITEM bundle
       if ("$righthand" = "bundling rope") then gosub DUMPITEM bundling rope
     }
@@ -6179,14 +6197,12 @@ TRADINGSELLLOGIC:
         }
         gosub MOVE gem
       }
+      put #echo >Log [Train] Selling gem pouch.
       gosub GEMPOUCHSELL
     }
   }
-  #BANK
-  gosub MINMONEYLOGIC
-  action (speech) on
-  action (emote) on
-  return
+  goto TRADINGSELLLOGIC
+  
 
 
 TASKLOGIC:
@@ -7056,7 +7072,7 @@ POUNCELOGIC:
     gosub MONSTERARRAY
     if matchre("%monsterarray", "%critters") then
     {
-      #put #echo %alertwindow Pounced!
+      put #echo %alertwindow Pounced!
       gosub POUNCE
       var pounceready 0
     }
@@ -7385,12 +7401,12 @@ MAINSPELLLOGIC:
           }
         }
       }
-      if %heal = "YES" then
+      if ("%heal" = "YES") then
       {
         if ((%t > %nexthealcheck) || ($bleeding = 1)) then
         {
           #echo SpellTimer.Heal.active: $SpellTimer.Heal.active
-          if $SpellTimer.Heal.active != 1 then
+          if ($SpellTimer.Heal.active != 1) then
           {
             if %casting != 1 then
             {
@@ -7421,7 +7437,7 @@ MAINSPELLLOGIC:
           }
         }
       }
-      if %vitheal = "YES" then
+      if ("%vitheal" = "YES") then
       {
         if $health <= %vithealnum then
         {
@@ -8608,17 +8624,22 @@ NONCOMBATLOGIC:
 	}
 
 	#TRADING_SELL_TASKS
-	if (("%tradingsell" = "YES") || ("%tradingtasks" = "YES")) then
-	{
-	  if $Trading.LearningRate > 28 then var tradinglock 1
-		if $Trading.LearningRate < 4 then var tradinglock 0
-		if $Trading.Ranks = 1750 then var tradinglock 1
-	  if (%tradinglock != 1) then
-	  {
-	    var movetrainactive 1
-	    if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var movetrainsellactive 1
-	    if ("%tradingtasks" = "YES") then var movetraintasksactive 1
-	  }
+	if ("$guild" = "Trader") then
+	{ 
+    #put #echo >Log Yellow tradingsell: %tradingsell
+    if (("%tradingsell" = "YES") || ("%tradingtasks" = "YES")) then
+    {
+      if $Trading.LearningRate > 28 then var tradinglock 1
+      if $Trading.LearningRate < 4 then var tradinglock 0
+      if $Trading.Ranks = 1750 then var tradinglock 1
+      #put #echo >Log Yellow tradinglock: %tradinglock
+      if (%tradinglock != 1) then
+      {
+        var movetrainactive 1
+        if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var movetrainsellactive 1
+        if ("%tradingtasks" = "YES") then var movetraintasksactive 1
+      }
+    }
 	}
 	
 	#EXECUTING_NONCOMBAT_TRAIN
@@ -8677,6 +8698,7 @@ NONCOMBATLOGIC:
       gosub ROOMTRAVEL
       gosub STOWALL
       gosub AWAKE
+      var foundsellitem 0
       gosub TRADINGSELLLOGIC
     }
     

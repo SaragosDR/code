@@ -71,6 +71,39 @@ SET:
     if tolower("%1") = "mode1priority" then goto REGYESNOSET
     if tolower("%1") = "mode2priority" then goto REGYESNOSET
     
+    
+    if tolower("%1") = "deathaction" then
+    {
+      if matchre("%2", "\b(logout|alert)\b") then
+      {  
+        var setvar deathaction
+        var input %2  
+        put #var %setvar %input
+        put #var save
+        goto VARDISPLAY
+      }
+      else
+      {
+        put #echo mono You can only set logout or alert!
+        goto END
+      }
+    }
+    if tolower("%1") = "disconnectaction" then
+    {
+      if matchre("%2", "\b(reconnect|quit)\b") then
+      {  
+        var setvar disconnectaction
+        var input %2  
+        put #var %setvar %input
+        put #var save
+        goto VARDISPLAY
+      }
+      else
+      {
+        put #echo mono You can only set reconnect or quit!
+        goto END
+      }
+    }
     if tolower("%1") = "alertwindow" then
     {
       if matchre("%2", "\b(Main|Conversation|Log)\b") then
@@ -1265,6 +1298,13 @@ SET:
     if tolower("%1") = "powershotweapon" then goto REGTEXTSET
     if tolower("%1") = "powershotammo" then goto REGTEXTSET
     
+    if tolower("%1") = "summonelement" then goto REGTEXTSET
+    if tolower("%1") = "summoningot" then goto REGTEXTSET
+    if tolower("%1") = "summonlist" then goto REGLISTSET
+    if tolower("%1") = "summoncleave" then goto REGTEXTSET
+    if tolower("%1") = "summoncrash" then goto REGTEXTSET
+    if tolower("%1") = "summondoublestrike" then goto REGTEXTSET
+    
     if tolower("%1") = "killdb" then goto REGYESNOSET
     if tolower("%1") = "killdbspell" then goto REGTEXTSET
     if tolower("%1") = "killdbprepmana" then goto REGTEXTSET
@@ -1985,12 +2025,8 @@ DISPLAYGENERAL:
 	gosub REGOUTPUT Guild
 	gosub REGOUTPUT Circle
 	put #echo
-	gosub OUTPUT Almanac AlmanacItem
-	gosub OUTPUT AlmanacAlerts
-	gosub OUTPUT EJournal EJournalItem
-	gosub OUTPUT EJournalStates
-	gosub OUTPUT Tarantula TarantulaItem
-	gosub OUTPUT TarantulaSkill1 TarantulaSkill2
+	put #echo mono DeathAction: $deathaction     (logout or alert)
+	put #echo mono DisconnectAction: $disconnectaction     (reconnect or quit)
 	put #echo
 	gosub REGOUTPUT AlertWindow
   gosub REGOUTPUT HealthAlerts HealthAlertNum
@@ -2007,6 +2043,13 @@ DISPLAYGENERAL:
 	put #echo
   gosub REGOUTPUT ParanoiaAlerts
   put #echo
+	gosub OUTPUT Almanac AlmanacItem
+	gosub OUTPUT AlmanacAlerts
+	gosub OUTPUT EJournal EJournalItem
+	gosub OUTPUT EJournalStates
+	gosub OUTPUT Tarantula TarantulaItem
+	gosub OUTPUT TarantulaSkill1 TarantulaSkill2
+	put #echo
   put #echo Gray mono -----MultiTrain - Training different variable set sin multiple combat areas-----
   put #echo Gray mono *** NOTE: MULTITRAIN CURRENTLY ONLY WORKS WITH MODES 1 AND 2! ***
   put #echo Gray mono Valid weapon skills to trigger off of: brawl, se, le, the, sb, lb, thb, stave, pole, lt, ht, bow, xbow, sling, parry
@@ -2759,6 +2802,18 @@ DISPLAYOTHER:
   gosub REGOUTPUT DoublestrikeWeapon2
   gosub REGOUTPUT PowershotWeapon
   gosub REGOUTPUT PowershotAmmo
+  if ("$guild" = "Warrior Mage") then
+  {
+    echo
+    put #echo mono =================== Slide Script Variables ===================
+    echo
+    gosub REGOUTPUT SummonElement
+    gosub REGOUTPUT SummonIngot
+    gosub REGOUTPUT SummonList
+    gosub REGOUTPUT SummonCleave
+    gosub REGOUTPUT SummonCrash
+    gosub REGOUTPUT SummonDoublestrike
+  }
   if $guild = "Moon Mage" then
   {
     put #echo mono =================== Astral Script Variables===================

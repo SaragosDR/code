@@ -1,3 +1,21 @@
+05/07/23
+Updated Scripts: train, library, set, combo, slide
+
+Added electric slide script for ACM combos with elemental weapons.  Variables for this are in the Other section of Set.cmd
+New Variables: DeathAction and DisconnectAction.  Defines script behavior for either states.  Default is logout on death, and reconnect for disconnect.
+
+Bugfixes to combo script.
+Barbarian cooldown reductions added to combo script.
+Numerous bugfixes to TradingSell.
+TradingSell now will sell bundles again and again until it gets to the desired mindstate, rather than doing so once per trip, burning through bundles faster but training more efficiently.
+
+Added combat presets for: 
+P2: baby gryphons, young gryphons
+P3: snippets, sylphs, windbags
+Added burgle and perform presets for Rossman's Landing.
+
+
+
 04/13/23
 Updated Scripts: train, library, set, combo
 
