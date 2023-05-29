@@ -1,3 +1,20 @@
+05/28/23
+Updated Scripts: train, library, set
+
+NonPremHeal and PremiumHeal variables have been merged into the AutoPath variable.  All settings should automatically carry over.
+UpkeepPreset variable is now named UpkeepTown and is found under the Movement section.  All settings should automatically carry over.
+AmmoPreset variable functions have been folded into the AmmoBuyTown variable.  AmmoBuyTown is now found under the Movement section.
+VaultTown variable is now found under the Movement section.
+Added missing logic for needing to stop playing for the STOWITEM sub.
+Empath target checking should no longer process (and constantly look) during script activities that don't involve combat.
+Changed rank cap calculations script-wide to deal with situations where you might have slightly over cap ranks (1750.01).
+Fixed a bug that could cause the script not to properly identify that you were in fang cove in some circumstances if you walked through the portal instead of using a ring.
+Fixed a bug with teaching logic where the script would not properly recover from attempting to teach someone who was already teaching you.
+Cleaned up some teaching logic.
+Tweaked heroic tattoo activation pauses to have less avoidable downtime.
+Added alerts to help with investigating the messaging for the new rare loot drops.
+
+
 05/07/23
 Updated Scripts: train, library, set, combo, slide
 

@@ -120,7 +120,7 @@ action var appfocusing 0 when ^You feel ready for any sort of appraisal focus.
 action var currentteacher $1; var currentclass $3 when ^(\w+) is teaching a class on (extremely advanced|advanced|intermediate|basic|simplistic|extremely simplistic) \(compared to what you already know\) (.+)( which|, but).+You are in this class!$
 action var currentteacher $1; var currentclass $3 when ^(\w+) is teaching a class on(?! (extremely advanced|advanced|intermediate|basic|simplistic|extremely simplistic)) (.+)( which|, but).+You are in this class!$
 action var currentteacher SELF; var currentclass $1 when ^You are teaching a class on (.+) which
-action var currentteacher 0; var currentclass 0 when ^All of your students have left, so you stop teaching|^Because you have no more students, your class ends|^But you aren't listening to anyone|^But you aren't teaching anyone|^No one seems to be teaching|^You stop listening to|^You stop teaching so as not to disturb the aura of quiet here|^You stop teaching\.|^Your teacher (has left|is not here), so you are no longer learning anything|cannot concentrate to teach .+ in combat\.|stops teaching and looks around quietly|Your students can no longer see you
+action var currentteacher 0; var currentclass 0 when ^All of your students have left, so you stop teaching|^Because you have no more students, your class ends|^But you aren't listening to anyone|^But you aren't teaching anyone|^No one seems to be teaching|^You stop listening to|^You stop teaching so as not to disturb the aura of quiet here|^You stop teaching\.|^Your teacher (has left|is not here), so you are no longer learning anything|cannot concentrate to teach .+ in combat\.|stops teaching and looks around quietly|Your students can no longer see you|No one seems to be teaching\.
 action var currentteacher $1; var currentclass $2 when ^You begin to listen to (\w+) teach the (.+) skill
 action var currentteacher SELF; var currentclass $1 when ^You continue to instruct your students? on (.+)\.$
 action var currentteacher SELF; var currentclass $1 when begins to listen to you teach the (.+) skill
@@ -180,12 +180,12 @@ action put #play Echo; put #echo %alertwindow Yellow [Magic] Attempting to cast 
 #action var something 1 when The complementary nature of the spell empowers you.
 
 action var nexttattoo 0 when You suddenly feel less heroic.
-action var nexttattoo %t; math nexttattoo add 1800 when \[You will be able to use your tattoo again about an hour from now\.\]
-action var nexttattoo %t; math nexttattoo add 1800 when \[You will be able to use your tattoo again about half an hour from now\.\]
-action var nexttattoo %t; math nexttattoo add 1200 when \[You will be able to use your tattoo again about 20 minutes from now\.\]
-action var nexttattoo %t; math nexttattoo add 600 when \[You will be able to use your tattoo again about 10 minutes from now\.\]
-action var nexttattoo %t; math nexttattoo add 120 when \[You will be able to use your tattoo again a few minutes from now\.\]
-action var nexttattoo %t; math nexttattoo add 60 when \[You will be able to use your tattoo again about a minute from now\.\]
+action var nexttattoo %t; math nexttattoo add 900 when \[You will be able to use your tattoo again about an hour from now\.\]
+action var nexttattoo %t; math nexttattoo add 600 when \[You will be able to use your tattoo again about half an hour from now\.\]
+action var nexttattoo %t; math nexttattoo add 300 when \[You will be able to use your tattoo again about 20 minutes from now\.\]
+action var nexttattoo %t; math nexttattoo add 150 when \[You will be able to use your tattoo again about 10 minutes from now\.\]
+action var nexttattoo %t; math nexttattoo add 60 when \[You will be able to use your tattoo again a few minutes from now\.\]
+action var nexttattoo %t; math nexttattoo add 30 when \[You will be able to use your tattoo again about a minute from now\.\]
 
 #COMBAT_TRIGGERS
 action var balance $2 when \[You're(.*) (\S+) (balance|balanced|unbalanced|imbalanced)(.*)\]
@@ -283,6 +283,8 @@ action var justice 0 when You're fairly certain this area is lawless and unsafe.
 action math pawntotal add $3 when ^(.+) takes your (.*) and gives it a quick but thorough examination\.  After pausing for a moment, he hands you (\d+) (\S+) for it\.
 
 #MISC_TRIGGERS
+action put #echo Black,Yellow ****FOUND RARE MATERIAL DROP!  CHECK ME!****; put #echo >Log Black,Yellow ****FOUND RARE MATERIAL DROP!  CHECK ME!****; put #flash; put #play MiniFanfare3 when Your luck knows no bounds\!
+
 action var playing 0;var humming 0 when ^You finish playing .* on your .*\.
 action var playing 0;var humming 0 when ^You stop playing your song\.
 action var playing 0;var humming 0 when ^You finish humming
@@ -1023,8 +1025,7 @@ COMMANDPARSE:
       var minmoney 0
       var exchange NO
       var repair NO
-      var nonpremheal NO
-      var premiumheal NO
+      var autopath NO
       var bundlesell NO
       var bundlevault NO
       var vaultmove NO
@@ -1990,12 +1991,14 @@ MAINVARLOAD:
   var movewhistle $m%varsetmovewhistle
   var movescream $m%varsetmovescream
   var movevanish $m%varsetmovevanish
-  var upkeeppreset $m%varsetupkeeppreset
+  var upkeeptown $m%varsetupkeeptown
   var premiumring $m%varsetpremiumring
   var premiumringitem $m%varsetpremiumringitem
   var nearestportaltown $m%varsetnearestportaltown
   
   var ammopreset $m%varsetammopreset
+  var vaulttown $m%varsetvaulttown
+  var ammobuytown $m%varsetammobuytown
   
   var auonhealth $m%varsetauonhealth
   var auhealthnum $m%varsetauhealthnum
@@ -2006,13 +2009,11 @@ MAINVARLOAD:
   var auonammo $m%varsetauonammo
   var minmoney $m%varsetminmoney
   var exchange $m%varsetexchange
-  var premiumheal $m%varsetpremiumheal
-  var nonpremheal $m%varsetnonpremheal
+  var autopath $m%varsetautopath
   var repair $m%varsetrepair
   var repairlist $m%varsetrepairlist
   var bundlesell $m%varsetbundlesell
   var bundlevault $m%varsetbundlevault
-  var vaulttown $m%varsetvaulttown
   var vaultmove $m%varsetvaultmove
   var bundlerope $m%varsetbundlerope
   var gemsell $m%varsetgemsell
@@ -2020,7 +2021,6 @@ MAINVARLOAD:
   var gempouches $m%varsetgempouches
   var ammobuy $m%varsetammobuy
   var ammobuylist $m%varsetammobuylist
-  var ammobuytown $m%varsetammobuytown
   var ammocontainer $m%varsetammocontainer
   var ammomin $m%varsetammomin
   var spiderfeed $m%varsetspiderfeed
@@ -3258,7 +3258,7 @@ NONCOMBATLOOP:
     #put #echo >Log Yellow tradingsell: %tradingsell Logic started.
     if $Trading.LearningRate > 28 then var tradinglock 1
     if $Trading.LearningRate < 4 then var tradinglock 0
-    if $Trading.Ranks = 1750 then var tradinglock 1
+    if $Trading.Ranks >= 1750 then var tradinglock 1
     if (%tradinglock = 0) then
     {
       #put #echo >Log [Train] Attempting to sell bundle.
@@ -3270,7 +3270,7 @@ NONCOMBATLOOP:
   {
     if $Trading.LearningRate > 33 then var tradinglock 1
     if $Trading.LearningRate < 4 then var tradinglock 0
-    if $Trading.Ranks = 1750 then var tradinglock 1
+    if $Trading.Ranks >= 1750 then var tradinglock 1
     if (%tradinglock = 0) then
     {
       gosub TASKLOGIC
@@ -3309,13 +3309,13 @@ NONCOMBATLOOP:
     {
       if ($Athletics.LearningRate < 20) then var athleticslock 0
       if ($Athletics.LearningRate = 34) then var athleticslock 1
-      if ($Athletics.LearningRate = 1750) then var athleticslock 1
+      if ($Athletics.LearningRate >= 1750) then var athleticslock 1
       if (%athleticslock = 1) then gosub STOWITEM %climbingropename
     }
     else var athleticslock 1
     if $Performance.LearningRate < 20 then var performlock 0
     if $Performance.LearningRate = 34 then var performlock 1
-    if $Performance.Ranks = 1750 then var performlock 1
+    if $Performance.Ranks >= 1750 then var performlock 1
     if %perform = "NO" then var performlock 1
     if ((%performlock = 0) || (%athleticslock = 0)) then
     {
@@ -3544,24 +3544,29 @@ UPKEEPLOGIC:
     }
     if ((%researching != 1) && (%rprojectactive != 1)) then gosub APPFOCUSLOGIC
   }
-  if %premiumheal = "YES" then
+  #AUTOPATH
+  if ("$zoneid" = "150") then
   {
-    var didpremheal 0
-    if $zoneid = "150" then
+    if (("%autopath" = "YES") || ("%autopath" = "PREMIUM")) then
     {
-      var didpremheal 1
+      var didautopath 1
       gosub MOVE healer
       put join list
       waitfor Yrisa crosses $charactername's name from the list.
     }
+    else var didautopath 0
   }
-  if %nonpremheal = "YES" then
+  else
   {
-    if %healer != "none" then
+    if ("%autopath" = "YES") then
     {
-      gosub AUTOPATHLOGIC
+      if ("%healer" != "none") then
+      {
+        gosub AUTOPATHLOGIC
+      }
     }
   }
+  #BUNDLES
   if %bundlesell = "YES" then
   {
     if %furrier != "none" then
@@ -3692,8 +3697,7 @@ UPKEEPLOGIC:
   if %scriptmode != 3 then gosub BUFFINGONLYLOOP
   #REPORTING
   var outputtext Completed upkpeep
-  if %didpremheal = 1 then var outputtext %outputtext, premium healed
-  if %didnonpremheal = 1 then var outputtext %outputtext, autopath healed
+  if %didautopath = 1 then var outputtext %outputtext, healed at autopath
   if %repair = "YES" then
   {
     if %didrepair = 1 then var outputtext %outputtext, repaired items
@@ -4153,14 +4157,14 @@ AUTOUPKEEPLOGIC:
   gosub LEAVEROOM
   if ("%autype" = "ammo") then
   {
-    gosub NEWTOWNPRESET %ammopreset upkeep
+    gosub NEWTOWNPRESET %ammobuytown upkeep
     gosub ROOMTRAVEL
   }
   else
   {
-    if ("%upkeeppreset" != "fangcove") then
+    if ("%upkeeptown" != "fangcove") then
     {
-      gosub NEWTOWNPRESET %upkeeppreset upkeep
+      gosub NEWTOWNPRESET %upkeeptown upkeep
       gosub ROOMTRAVEL
     }
     else
@@ -4191,10 +4195,7 @@ AUTOUPKEEPLOGIC:
             gosub ROOMTRAVEL
             gosub MOVE portal
             move go meeting portal
-          }
-          put #mapper reset
-          pause 1
-          gosub STOWALL
+          }    
         }
       }
       else
@@ -4206,6 +4207,9 @@ AUTOUPKEEPLOGIC:
         gosub MOVE portal
         move go meeting portal
       }
+      put #mapper reset
+      pause 1
+      gosub STOWALL
     }
   }
   
@@ -4223,7 +4227,7 @@ AUTOUPKEEPLOGIC:
   var stance shield
   gosub STANCECHANGE
   var goupkeep 0
-  if ("%upkeeppreset" = "fangcove") then
+  if ("%upkeeptown" = "fangcove") then
   {
     if (%fangcovevisit = 1) then
     {
@@ -4247,7 +4251,7 @@ AUTOUPKEEPLOGIC:
 
 AUGO:
   gosub LEAVEROOM
-  gosub NEWTOWNPRESET %upkeeppreset upkeep
+  gosub NEWTOWNPRESET %upkeeptown upkeep
   gosub ROOMTRAVEL
   return
   
@@ -4364,7 +4368,7 @@ AUTOPATHLOGIC:
   gosub HEALTHCHECK
   if %healthcheckgood != 1 then
   {
-    var didnonpremheal 1
+    var didautopath 1
     if ((matchre("$roomobjs" "%healer")) || (matchre("$roomdesc" "%healer")) || (matchre("$roomname" "%healer"))) then
     else
     {
@@ -4381,7 +4385,7 @@ AUTOPATHLOGIC:
       else
       {
         echo Something's wrong!  Can't find the healer!
-        var didnonpremheal 0
+        var didautopath 0
         return
       }
     }
@@ -5451,7 +5455,7 @@ APPLOGIC:
   }
   if $Appraisal.LearningRate < 20 then var appraiselock 0
   if $Appraisal.LearningRate > 33 then var appraiselock 1
-  if $Appraisal.Ranks = 1750 then var appraiselock 1
+  if $Appraisal.Ranks >= 1750 then var appraiselock 1
   if %appraiselock = 0 then
   {
     if (%t >= %nextapp) then
@@ -5496,7 +5500,7 @@ ASSESSLOGIC:
 ASTROLOGIC:
   if "$guild" != "Moon Mage" then return
   if %t < %nextastro then return
-  if $Astrology.Ranks = 1750 then return
+  if $Astrology.Ranks >= 1750 then return
   if (($SpellTimer.PiercingGaze.active != 1) || ($SpellTimer.PiercingGaze.duration < 3)) then return
   if %checkastropool = 1 then
   {
@@ -5538,7 +5542,7 @@ ASTROLOGIC:
 ATTUNELOGIC:
   if $Attunement.LearningRate < 20 then var attunelock 0
   if $Attunement.LearningRate > 33 then var attunelock 1
-  if $Attunement.Ranks = 1750 then var attunelock 1
+  if $Attunement.Ranks >= 1750 then var attunelock 1
   if $charactername = "Eyuve" then
   {
     if $Attunement.LearningRate < 32 then var attunelock 0
@@ -5744,10 +5748,10 @@ BURGLESTART:
   matchwait
 
 BURGLETOOLGET:
-  if $Locksmithing.Ranks = 1750 then var burgletoolchosen rope
+  if $Locksmithing.Ranks >= 1750 then var burgletoolchosen rope
   else
   {
-    if $Athletics.Ranks = 1750 then var burgletoolchosen pick
+    if $Athletics.Ranks >= 1750 then var burgletoolchosen pick
   }
   if %burgletool = "rope" then var burgletoolchosen rope
   if %burgletool = "pick" then var burgletoolchosen pick
@@ -5961,7 +5965,7 @@ BURGLERECALL:
   matchwait
 
 BURGLERECALLGOOD:
-  if (($Athletics.Ranks = 1750) && ($Locksmithing.Ranks = 1750) && ($Thievery.Ranks = 1750) && ($Stealth.Ranks = 1750)) then var burgleready 0
+  if (($Athletics.Ranks >= 1750) && ($Locksmithing.Ranks >= 1750) && ($Thievery.Ranks >= 1750) && ($Stealth.Ranks >= 1750)) then var burgleready 0
   else var burgleready 1
   return
 
@@ -6099,7 +6103,7 @@ TRADINGSELLLOGIC:
   #put #echo >Log Yellow Tradingsell logic sub!
   if $Trading.LearningRate > 28 then var tradinglock 1
 	if $Trading.LearningRate < 4 then var tradinglock 0
-  if $Trading.Ranks = 1750 then var tradinglock 1
+  if $Trading.Ranks >= 1750 then var tradinglock 1
   #put #echo >Log tradinglock: %tradinglock
   if (%tradinglock = 1) then
   {
@@ -6208,7 +6212,7 @@ TRADINGSELLLOGIC:
 TASKLOGIC:
   if $Trading.LearningRate > 33 then var tradinglock 1
 	if $Trading.LearningRate < 4 then var tradinglock 0
-  if $Trading.Ranks = 1750 then var tradinglock 1
+  if $Trading.Ranks >= 1750 then var tradinglock 1
   if (%tradinglock = 1) then return
   gosub TASKMOVE
   gosub TASKASK
@@ -6233,7 +6237,7 @@ COLLECTLOGIC:
   }
   if $Outdoorsmanship.LearningRate > 32 then var outdoorlock 1
   if $Outdoorsmanship.LearningRate < 20 then var outdoorlock 0
-  if $Outdoorsmanship.Ranks = 1750 then var outdoorlock 1
+  if $Outdoorsmanship.Ranks >= 1750 then var outdoorlock 1
   if %outdoorlock = 0 then
   {
     if %t >= %nextcollect then
@@ -6253,10 +6257,10 @@ COMPLOGIC:
   {
     if $First_Aid.LearningRate > 33 then var firstaidlock 1
     if $First_Aid.LearningRate < 21 then var firstaidlock 0
-    if $First_Aid.Ranks = 1750 then var firstaidlock 1
+    if $First_Aid.Ranks >= 1750 then var firstaidlock 1
     if $Scholarship.LearningRate > 33 then var scholarlock 1
     if $Scholarship.LearningRate < 21 then var scholarlock 0
-    if $Scholarship.Ranks = 1750 then var scholarlock 1
+    if $Scholarship.Ranks >= 1750 then var scholarlock 1
     if ((%scholarlock = 0) || (%firstaidlock = 0)) then
     { 
       var turncount 0
@@ -6434,7 +6438,7 @@ HUNTLOGIC:
   if ((%usingtactics = 1) || (%usingexpert = 1)) then return
   if $Perception.LearningRate > 32 then var perclock 1
   if $Perception.LearningRate < 20 then var perclock 0
-  if $Perception.Ranks = 1750 then var perclock 1
+  if $Perception.Ranks >= 1750 then var perclock 1
   if %perclock = 0 then
   {
     if (%t >= %nexthunt) then
@@ -6521,10 +6525,10 @@ ICUTULOGIC:
     {
       if $Targeted_Magic.LearningRate > 33 then var targetlock 1
       if $Targeted_Magic.LearningRate < 20 then var targetlock 0
-      if $Targeted_Magic.Ranks = 1750 then var targetlock 1
+      if $Targeted_Magic.Ranks >= 1750 then var targetlock 1
       if $Empathy.LearningRate > 33 then var empathylock 1
       if $Empathy.LearningRate < 20 then var empathylock 0
-      if $Empathy.Ranks = 1750 then var empathylock 1
+      if $Empathy.Ranks >= 1750 then var empathylock 1
       if ((%targetlock = 0) || (%empathylock = 0)) then
       {
         #echo mana: $mana
@@ -6553,7 +6557,7 @@ ICUTULOGIC:
 MANIPLOGIC:
   if $Empathy.LearningRate > 33 then var empathylock 1
   if $Empathy.LearningRate < 20 then var empathylock 0
-  if $Empathy.Ranks = 1750 then var empathylock 1
+  if $Empathy.Ranks >= 1750 then var empathylock 1
   if %empathylock = 1 then return
   else
   {
@@ -6802,7 +6806,7 @@ COMMUNELOGIC:
     var nextcommsense %t
     math nextcommsense add 600
   }
-  if $Theurgy.Ranks = 1750 then return
+  if $Theurgy.Ranks >= 1750 then return
   if $Theurgy.LearningRate > 9 then return
   if %commgood = 1 then
   {
@@ -7056,7 +7060,7 @@ RECALLLOGIC:
   {
     if $Scholarship.LearningRate > 33 then var scholarlock 1
     if $Scholarship.LearningRate < 21 then var scholarlock 0
-    if $Scholarship.Ranks = 1750 then var scholarlock 1
+    if $Scholarship.Ranks >= 1750 then var scholarlock 1
 	  if %scholarlock != 1 then
 	  {
 	    gosub RECALL
@@ -7740,22 +7744,22 @@ CYCFINDER:
   var cycfindleast 34
   if ($Augmentation.LearningRate > 33) then var augmentationlock 1
   if ($Augmentation.LearningRate < 20) then var augmentationlock 0
-  if ($Augmentation.Ranks = 1750) then var augmentationlock 1
+  if ($Augmentation.Ranks >= 1750) then var augmentationlock 1
   if ($Utility.LearningRate > 33) then var utilitylock 1
   if ($Utility.LearningRate < 20) then var utilitylock 0
-  if ($Utility.Ranks = 1750) then var utilitylock 1
+  if ($Utility.Ranks >= 1750) then var utilitylock 1
   if ($Warding.LearningRate > 33) then var wardinglock 1
   if ($Warding.LearningRate < 20) then var wardinglock 0
-  if ($Warding.Ranks = 1750) then var wardinglock 1
+  if ($Warding.Ranks >= 1750) then var wardinglock 1
   if ($Sorcery.LearningRate > 33) then var sorcerylock 1
   if ($Sorcery.LearningRate < 20) then var sorcerylock 0
-  if ($Sorcery.Ranks = 1750) then var sorcerylock 1
+  if ($Sorcery.Ranks >= 1750) then var sorcerylock 1
   if ($Targeted_Magic.LearningRate > 33) then var targetlock 1
   if ($Targeted_Magic.LearningRate < 20) then var targetlock 0
-  if ($Targeted_Magic.Ranks = 1750) then var targetlock 1
+  if ($Targeted_Magic.Ranks >= 1750) then var targetlock 1
   if ($Debilitation.LearningRate > 32) then var debillock 1
   if ($Debilitation.LearningRate < 20) then var debillock 0
-  if ($Debilitation.Ranks = 1750) then var debillock 1 
+  if ($Debilitation.Ranks >= 1750) then var debillock 1 
       
   if (%cyclic = "YES") then
   {
@@ -8079,10 +8083,10 @@ SPELLSWITCH:
     {
       if $Targeted_Magic.LearningRate > 33 then var targetlock 1
       if $Targeted_Magic.LearningRate < 20 then var targetlock 0
-      if $Targeted_Magic.Ranks = 1750 then var targetlock 1
+      if $Targeted_Magic.Ranks >= 1750 then var targetlock 1
       if $Sorcery.LearningRate > 33 then var sorcerylock 1
       if $Sorcery.LearningRate < 20 then var sorcerylock 0
-      if $Sorcery.Ranks = 1750 then var sorcerylock 1
+      if $Sorcery.Ranks >= 1750 then var sorcerylock 1
       if ((%targetlock = 0) && (%tmskill = "tm")) then gosub SPELLSWITCHTM
       else
       {
@@ -8097,10 +8101,10 @@ SPELLSWITCH:
     {
       if $Debilitation.LearningRate > 32 then var debillock 1
       if $Debilitation.LearningRate < 20 then var debillock 0
-      if $Debilitation.Ranks = 1750 then var debillock 1
+      if $Debilitation.Ranks >= 1750 then var debillock 1
       if $Sorcery.LearningRate > 33 then var sorcerylock 1
       if $Sorcery.LearningRate < 20 then var sorcerylock 0
-      if $Sorcery.Ranks = 1750 then var sorcerylock 1
+      if $Sorcery.Ranks >= 1750 then var sorcerylock 1
       if ((%debillock = 0) && (%debilskill = "debil")) then gosub SPELLSWITCHDB
       else
       {
@@ -8506,7 +8510,7 @@ STANCELOGIC:
 SUMMWEAPONLOGIC:
   if $Summoning.LearningRate > 33 then var summlock 1
   if $Summoning.LearningRate < 20 then var summlock 0
-  if $Summoning.Ranks = 1750 then var summlock 1
+  if $Summoning.Ranks >= 1750 then var summlock 1
   if %summlock != 1 then
   {
     if %t >= %nextsumm then
@@ -8540,7 +8544,7 @@ PATHWAYLOGIC:
   if %pathwayactive = -1 then gosub PATHCHECK
   if $Summoning.LearningRate < 34 then var summlock 1
   if $Summoning.LearningRate < 20 then var summlock 0
-  if $Summoning.Ranks = 1750 then var summlock 1
+  if $Summoning.Ranks >= 1750 then var summlock 1
   if %summlock != 1 then
   {
     if %pathwayactive = 0 then 
@@ -8566,7 +8570,7 @@ PATHWAYLOGIC:
 WHISTLELOGIC:
   if $Bardic_Lore.LearningRate > 33 then var bardlorelock 1
   if $Bardic_Lore.LearningRate < 20 then var bardlorelock 0
-  if $Bardic_Lore.Ranks = 1750 then var bardlorelock 1
+  if $Bardic_Lore.Ranks >= 1750 then var bardlorelock 1
   if %bardlorelock = 0 then
   {
     if (%t >= %nextwhistle) then
@@ -8588,7 +8592,7 @@ SANOWRETLOGIC:
   {
     if $Arcana.LearningRate < 20 then var arcanalock 0
     if $Arcana.LearningRate > 31 then var arcanalock 1
-    if $Arcana.Ranks = 1750 then var arcanalock 1
+    if $Arcana.Ranks >= 1750 then var arcanalock 1
     if %arcanalock != 1 then gosub GAZESANOWRET
   }
   return
@@ -8603,7 +8607,7 @@ NONCOMBATLOGIC:
 	{
 		if $Performance.LearningRate > 20 then var performlock 1
 		if $Performance.LearningRate < 4 then var performlock 0
-		if $Performance.Ranks = 1750 then var performlock 1
+		if $Performance.Ranks >= 1750 then var performlock 1
 		if %performlock != 1 then
 		{
 			var movetrainactive 1
@@ -8631,7 +8635,7 @@ NONCOMBATLOGIC:
     {
       if $Trading.LearningRate > 28 then var tradinglock 1
       if $Trading.LearningRate < 4 then var tradinglock 0
-      if $Trading.Ranks = 1750 then var tradinglock 1
+      if $Trading.Ranks >= 1750 then var tradinglock 1
       #put #echo >Log Yellow tradinglock: %tradinglock
       if (%tradinglock != 1) then
       {
@@ -8762,23 +8766,7 @@ TEACHINGLOGIC:
     echo CurrentTeacher: %currentteacher
     echo CurrentClass: %currentclass    
   }
-  #if %askstudent != 0 then
-  #{
-  #  var students %teachtargets
-  #  eval students tolower("%students")
-  #  eval askstudent tolower("%askstudent")
-  #  if matchre("%askstudent", "%students") then
-  #  {
-  #    eval currentclass tolower(%currentclass)
-  #    if %currentclass != "%askclass" then
-  #    {
-  #      var teachskill %askclass
-  #      var askstudent 0
-  #      var askclass 0
-  #    }
-  #  }
-  #}
-  if %currentteacher = "SELF" then
+  if (("%currentteacher" = "SELF") && (%currentclass = 0)) then
   {
     #eval currentclass tolower(%currentclass)
     if matchre("%currentclass", "%teachskill") then
@@ -8795,7 +8783,7 @@ TEACHINGLOGIC:
       pause 5
     }
   }
-  if %currentteacher = 0 then
+  if ((%currentteacher = 0) && (%currentclass = 0)) then
   {
     var teachcounter 0
     gosub TEACHINGLOOP
@@ -8822,10 +8810,10 @@ TEXTLOGIC:
   {
     if $First_Aid.LearningRate > 33 then var firstaidlock 1
     if $First_Aid.LearningRate < 21 then var firstaidlock 0
-    if $First_Aid.Ranks = 1750 then var firstaidlock 1
+    if $First_Aid.Ranks >= 1750 then var firstaidlock 1
     if $Scholarship.LearningRate > 33 then var scholarlock 1
     if $Scholarship.LearningRate < 21 then var scholarlock 0
-    if $Scholarship.Ranks = 1750 then var scholarlock 1
+    if $Scholarship.Ranks >= 1750 then var scholarlock 1
     if ((%firstaidlock = 0) || (%scholarlock = 0)) then
     {
       var textagain 0
@@ -9014,7 +9002,7 @@ WEAPONLOGIC:
 			{
 				if ($Offhand_Weapon.LearningRate > 32) then var offhandlock 1
 				if ($Offhand_Weapon.LearningRate < 20) then var offhandlock 0
-				if ($Offhand_Weapon.Ranks = 1750) then var offhandlock 1
+				if ($Offhand_Weapon.Ranks >= 1750) then var offhandlock 1
 				if (%offhandlock = 0) then
 				{
 					if ((%weapontype = "lt") || (%weapontype = "ht") then var hand left
@@ -9038,7 +9026,7 @@ LOCKSMITHLOGIC:
   if (%aiming = 1) then return
   if ($Locksmithing.LearningRate > 32) then var locksmithinglock 1
   if ($Locksmithing.LearningRate < 20) then var locksmithinglock 0
-  if ($Locksmithing.Ranks = 1750) then var locksmithinglock 1
+  if ($Locksmithing.Ranks >= 1750) then var locksmithinglock 1
   if (%t >= %nextlockbox) then
   {
     if (%locksmithinglock != 1) then
@@ -9064,10 +9052,10 @@ SKINFATRAINERLOGIC:
   if %aiming = 1 then return
   if $First_Aid.LearningRate > 32 then var firstaidlock 1
   if $First_Aid.LearningRate < 20 then var firstaidlock 0
-  if $First_Aid.Ranks = 1750 then var firstaidlock 1
+  if $First_Aid.Ranks >= 1750 then var firstaidlock 1
   if $Skinning.LearningRate > 32 then var skinninglock 1
   if $Skinning.LearningRate < 20 then var skinninglock 0
-  if $Skinning.Ranks = 1750 then var skinninglock 1
+  if $Skinning.Ranks >= 1750 then var skinninglock 1
   if %t >= %nextskinfa then
   {
     if ((%skinninglock = 0) || (%firstaidlock = 0)) then
@@ -9269,11 +9257,11 @@ ROOMTRAVELUPKEEP:
   gosub LEAVEROOM
   if ("%autype" = "ammo") then
   {
-    gosub NEWTOWNPRESET %ammopreset upkeep
+    gosub NEWTOWNPRESET %ammobuytown upkeep
   }
   else
   {
-    gosub NEWTOWNPRESET %upkeeppreset upkeep
+    gosub NEWTOWNPRESET %upkeeptown upkeep
   }
   gosub ROOMTRAVEL
   return
@@ -9512,7 +9500,7 @@ WINDBOARDLOGIC:
   {
     if $Athletics.LearningRate > 32 then var athleticslock 1
     if $Athletics.LearningRate < 20 then var athleticslock 0
-    if $Athletics.Ranks = 1750 then var athleticslock 1
+    if $Athletics.Ranks >= 1750 then var athleticslock 1
     if %athleticslock = 0 then
     {
       if $windboardcharge > 3 then
@@ -9557,22 +9545,22 @@ SPELLSKILLTEST:
   var skillcap 0
   if %skill = "warding" then
   {
-    if $Warding.Ranks = 1750 then var skillcap 1
+    if $Warding.Ranks >= 1750 then var skillcap 1
     var skilltest $Warding.LearningRate
   }
   if %skill = "utility" then
   {
-    if $Utility.Ranks = 1750 then var skillcap 1
+    if $Utility.Ranks >= 1750 then var skillcap 1
     var skilltest $Utility.LearningRate
   }
   if %skill = "augmentation" then
   {
-    if $Augmentation.Ranks = 1750 then var skillcap 1
+    if $Augmentation.Ranks >= 1750 then var skillcap 1
     var skilltest $Augmentation.LearningRate
   }
   if %skill = "sorcery" then
   {
-    if $Sorcery.Ranks = 1750 then var skillcap 1
+    if $Sorcery.Ranks >= 1750 then var skillcap 1
     var skilltest $Sorcery.LearningRate
   }
   return
@@ -9614,7 +9602,7 @@ BARBBUFFLOGIC:
   {
     if ($Warding.LearningRate > 29) then var wardinglock 1
     if ($Warding.LearningRate < 20) then var wardinglock 0
-    if ($Warding.Ranks = 1750) then var wardinglock 1
+    if ($Warding.Ranks >= 1750) then var wardinglock 1
     if (%wardinglock = 0) then
     {
       gosub BERSERKLOGIC Landslide
@@ -9630,7 +9618,7 @@ BARBBUFFLOGIC:
   {
     if ($Augmentation.LearningRate > 29) then var augmentationlock 1
     if ($Augmentation.LearningRate < 20) then var augmentationlock 0
-    if ($Augmentation.Ranks = 1750) then var augmentationlock 1
+    if ($Augmentation.Ranks >= 1750) then var augmentationlock 1
     if (%augmentationlock = 0) then
     {
       gosub BERSERKLOGIC Tornado
@@ -11003,7 +10991,7 @@ EVENWEAPONLOOP:
 
   if $%weaponskill%evencount.LearningRate = 34 then var weapon%evencountlock 1
   if $%weaponskill%evencount.LearningRate < 25 then var weapon%evencountlock 0
-  if $%weaponskill%evencount.Ranks = 1750 then var weapon%evencountlock 1
+  if $%weaponskill%evencount.Ranks >= 1750 then var weapon%evencountlock 1
   if (%weapon%evencountlock) = 1 then
   {
 		#echo EvenTrain - Weapon%evencount locked.
@@ -11201,7 +11189,7 @@ SMITECHECK:
     {
       if $Conviction.LearningRate > 33 then var convictionlock 1
       if $Conviction.LearningRate < 20 then var convictionlock 0
-      if $Conviction.Ranks = 1750 then var convictionlock 1
+      if $Conviction.Ranks >= 1750 then var convictionlock 1
       if %convictionlock = 0 then
       {
         gosub SMITETEST
@@ -11219,14 +11207,14 @@ STEALTHCHECK:
     #echo stealthlock: %stealthlock
     if $Stealth.LearningRate > 33 then var stealthlock 1
     if $Stealth.LearningRate < 20 then var stealthlock 0
-    if $Stealth.Ranks = 1750 then var stealthlock 1
+    if $Stealth.Ranks >= 1750 then var stealthlock 1
     if %stealthlock = 1 then var usingstealth 0
     else var usingstealth 1
     if (("$guild" = "Thief") && (%backstab = "YES")) then
     {
       if $Backstab.LearningRate > 33 then var backstablock 1
       if $Backstab.LearningRate < 20 then var backstablock 0
-      if $Backstab.Ranks = 1750 then var backstablock 1
+      if $Backstab.Ranks >= 1750 then var backstablock 1
       if %backstablock != 1 then
       {
         if ((%weapontype = "se") || (%weapontype = "sb")) then var usingstealth 1
@@ -11238,16 +11226,16 @@ STEALTHCHECK:
 TACTICSEXPERTHANDCHECK:
 	if ($Backstab.LearningRate > 33) then var backstablock 1
 	if ($Backstab.LearningRate < 20) then var backstablock 0
-	if ($Backstab.Ranks = 1750) then var backstablock 1
+	if ($Backstab.Ranks >= 1750) then var backstablock 1
 	if ($Expertise.LearningRate > 33) then var expertlock 1
 	if ($Expertise.LearningRate < 20) then var expertlock 0
-	if ($Expertise.Ranks = 1750) then var expertlock 1
+	if ($Expertise.Ranks >= 1750) then var expertlock 1
 	if ($Offhand_Weapon.LearningRate > 32) then var offhandlock 1
 	if ($Offhand_Weapon.LearningRate < 20) then var offhandlock 0
-	if ($Offhand.Ranks = 1750) then var offhandlock 1
+	if ($Offhand.Ranks >= 1750) then var offhandlock 1
 	if ($Tactics.LearningRate > 29) then var tacticslock 1
 	if ($Tactics.LearningRate < 20) then var tacticslock 0
-	if ($Tactics.Ranks = 1750) then var tacticslock 1
+	if ($Tactics.Ranks >= 1750) then var tacticslock 1
 	
   var hand right
   if ((%offhand = "YES") && (%offhandlock != 1)) then 
@@ -11650,23 +11638,23 @@ OFFHANDCHOOSELOOP:
   var offhandteststate 35
   if ("%offhandlist(%offhandchoosecount)" = "se") then
   {
-    if $Small_Edged.Ranks != 1750 then var offhandteststate $Small_Edged.LearningRate
+    if $Small_Edged.Ranks < 1750 then var offhandteststate $Small_Edged.LearningRate
   }
   if ("%offhandlist(%offhandchoosecount)" = "sb") then
   {
-    if $Small_Blunt.Ranks != 1750 then var offhandteststate $Small_Blunt.LearningRate
+    if $Small_Blunt.Ranks < 1750 then var offhandteststate $Small_Blunt.LearningRate
   }
   if ("%offhandlist(%offhandchoosecount)" = "le") then
   {
-    if $Large_Edged.Ranks != 1750 then var offhandteststate $Large_Edged.LearningRate
+    if $Large_Edged.Ranks < 1750 then var offhandteststate $Large_Edged.LearningRate
   }
   if ("%offhandlist(%offhandchoosecount)" = "lb") then
   {
-    if $Large_Blunt.Ranks != 1750 then var offhandteststate $Large_Blunt.LearningRate
+    if $Large_Blunt.Ranks < 1750 then var offhandteststate $Large_Blunt.LearningRate
   }
   if ("%offhandlist(%offhandchoosecount)" = "stave") then
   {
-    if $Staves.Ranks != 1750 then var offhandteststate $Staves.LearningRate
+    if $Staves.Ranks < 1750 then var offhandteststate $Staves.LearningRate
   }
   #echo --
   #echo %offhandlist(%offhandchoosecount): %offhandteststate
@@ -11783,7 +11771,7 @@ MONTEST:
         {
           if $First_Aid.LearningRate > 33 then var firstaidlock 1
           if $First_Aid.LearningRate < 21 then var firstaidlock 0
-          if $First_Aid.Ranks = 1750 then var firstaidlock 1
+          if $First_Aid.Ranks >= 1750 then var firstaidlock 1
           if %firstaidlock = 0 then
           {
             if %skinning = "YES" then

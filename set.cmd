@@ -166,8 +166,22 @@ SET:
     }
     if tolower("%1") = "minmoney" then goto TEXTSET
     if tolower("%1") = "exchange" then goto YESNOSET
-    if tolower("%1") = "premiumheal" then goto YESNOSET
-    if tolower("%1") = "nonpremheal" then goto YESNOSET
+    if tolower("%1") = "autopath" then
+    {
+      eval input toupper(%2)  
+      if matchre("%input", "\b(YES|NO|PREMIUM)\b") then
+      {  
+        var setvar autopath
+        put #var m$varset%setvar %input
+        put #var save
+        goto VARDISPLAY
+      }
+      else
+      {
+        put #echo mono You can only choose yes, no, or premium!
+        goto END
+      }
+    }
     if tolower("%1") = "repair" then goto YESNOSET
     if tolower("%1") = "repairlist" then
     {
@@ -1026,11 +1040,11 @@ SET:
     if tolower("%1") = "movelist" then goto LISTSET
     if tolower("%1") = "targetroom" then goto TEXTSET
      
-    if tolower("%1") = "upkeeppreset" then
+    if tolower("%1") = "upkeeptown" then
     {
       if (matchre("%2", "\b(%townpresetlist)\b")) then
       {  
-        var setvar upkeeppreset
+        var setvar upkeeptown
         eval input tolower(%2)  
         put #var m$varset%setvar %input
         put #var save
@@ -1043,22 +1057,6 @@ SET:
       }
     }
     
-    if tolower("%1") = "ammopreset" then
-    {
-      if (matchre("%2", "\b(%ammopresetlist)\b")) then
-      {  
-        var setvar ammopreset
-        eval input tolower(%2)  
-        put #var m$varset%setvar %input
-        put #var save
-        goto VARDISPLAY
-      }
-      else
-      {
-        put #echo mono You can only choose from %ammopresetlist.
-        goto END
-      }
-    }
     if tolower("%1") = "premiumring" then goto YESNOSET
     if tolower("%1") = "premiumringitem" then goto TEXTSET
     if tolower("%1") = "nearestportaltown" then
@@ -2080,23 +2078,20 @@ DISPLAYUPKEEP:
   gosub OUTPUT AUOnNerves
   gosub OUTPUT AUOnBurden AUBurdenNum
   gosub OUTPUT AUOnAmmo
-	put #echo
 	gosub OUTPUT MinMoney
 	gosub OUTPUT Exchange
-	gosub OUTPUT PremiumHeal
-	gosub OUTPUT NonPremHeal
+	
+	put #echo mono AutoPath: $m$varsetautopath     (yes|no|premium)
 	gosub OUTPUT Repair
 	gosub OUTPUT RepairList
   gosub OUTPUT BundleSell
   gosub OUTPUT BundleVault
-  gosub OUTPUT VaultTown
   gosub OUTPUT VaultMove
   gosub OUTPUT BundleRope
   gosub OUTPUT GemSell
   gosub OUTPUT GemVault
   gosub OUTPUT GemPouches
   gosub OUTPUT AmmoBuy
-  gosub OUTPUT AmmoBuyTown
   gosub OUTPUT AmmoBuyList
   gosub OUTPUT AmmoContainer
   gosub OUTPUT AmmoMin
@@ -2311,6 +2306,8 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT SongType
   gosub OUTPUT ClimbingRope ClimbingRopeName
   gosub OUTPUT ClimbingRopeHum HumSong
+  put #echo
+  gosub OUTPUT BoxPopping
   put #echo mono NonComSanowret: $m$varsetnoncomsanowret
   put #echo
 	gosub OUTPUT Research
@@ -2928,14 +2925,15 @@ DISPLAYMOVEMENT:
   put #echo
   put #echo mono =================== Upkeep Movement ===================
 	put #echo
-	gosub OUTPUT UpkeepPreset
+	gosub OUTPUT UpkeepTown
 	put #echo Gray mono Options: %townpresetlist
 	gosub OUTPUT PremiumRing
 	gosub OUTPUT PremiumRingItem
 	gosub OUTPUT NearestPortalTown
 	put #echo Gray mono Options: %townportalpresetlist
 	put #echo
-	gosub OUTPUT AmmoPreset
+	gosub OUTPUT VaultTown
+  gosub OUTPUT AmmoBuyTown
 	put #echo Gray mono Options: %ammopresetlist
   put #echo
   put #echo mono =================== NonCombat Movement ===================
@@ -3074,13 +3072,11 @@ VARCOPYUPKEEP:
   put #var m%destauonammo $m%sourceauonammo
   put #var m%destminmoney $m%sourceminmoney
   put #var m%destexchange $m%sourceexchange
-  put #var m%destpremiumheal $m%sourcepremiumheal
-  put #var m%destnonpremheal $m%sourcenonpremheal
+  put #var m%destautopath $m%sourceautopath
   put #var m%destrepair $m%sourcerepair
   put #var m%destrepairlist $m%sourcerepairlist
   put #var m%destbundlesell $m%sourcebundlesell
   put #var m%destbundlevault $m%sourcebundlevault
-  put #var m%destvaulttown $m%sourcevaulttown
   put #var m%destvaultmove $m%sourcevaultmove
   put #var m%destbundlerope $m%sourcebundlerope
   put #var m%destgemsell $m%sourcegemsell
@@ -3088,7 +3084,6 @@ VARCOPYUPKEEP:
   put #var m%destgempouches $m%sourcegempouches
   put #var m%destammobuy $m%sourceammobuy
   put #var m%destammobuylist $m%sourceammobuylist
-  put #var m%destammobuytown $m%sourceammobuytown
   put #var m%destammocontainer $m%sourceammocontainer
   put #var m%destammomin $m%sourceammomin
   put #var m%destspiderfeed $m%sourcespiderfeed
@@ -3230,12 +3225,13 @@ VARCOPYMOVEMENT:
   put #var m%destfrblacklist $m%sourcefrblacklist
   put #var m%destfrprefergroup $m%sourcefrprefergroup
   
-  put #var m%destupkeeppreset $m%sourceupkeeppreset
+  put #var m%destupkeeptown $m%sourceupkeeptown
   put #var m%destpremiumring $m%sourcepremiumring
   put #var m%destpremiumringitem $m%sourcepremiumringitem
   put #var m%destnearestportaltown $m%sourcenearestportaltown
   
-  put #var m%destammopreset $m%sourceammopreset
+  put #var m%destvaulttown $m%sourcevaulttown
+  put #var m%destammobuytown $m%sourceammobuytown
   put #var m%destburglepreset $m%sourceburglepreset
   put #var m%destpawnpreset $m%sourcepawnpreset
   put #var m%destperformpreset $m%sourceperformpreset

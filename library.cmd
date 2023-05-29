@@ -1003,8 +1003,18 @@ VARCHECKS:
   if !def(m%checkmodepremiumringitem) then put #var m%checkmodepremiumringitem band
   if !matchre("$m%checkmodenearestportaltown", "\b(%townportalpresetlist)\b") then put #var m%checkmodenearestportaltown none
   
-  if !matchre("$m%checkmodeupkeeppreset", "\b(%townpresetlist)\b") then put #var m%checkmodeupkeeppreset crossing
+  if !def(m%checkmodeupkeeptown) then
+  {
+    if def(m%checkmodeupkeeppreset) then
+    {
+      put #var m%checkmodeupkeeptown $m%checkmodeupkeeppreset
+    }
+  }
+  if !matchre("$m%checkmodeupkeeptown", "\b(%townpresetlist)\b") then put #var m%checkmodeupkeeptown crossing
+  
   if !matchre("$m%checkmodeammopreset", "\b(%ammopresetlist)\b") then put #var m%checkmodeammopreset none
+  if !matchre("$m%checkmodevaulttown", "\b(%townvaultpresetlist)\b") then put #var m%checkmodevaulttown none
+  if !matchre("$m%checkmodeammobuytown", "\b(%ammopresetlist)\b") then put #var m%checkmodeammobuytown none
   if !matchre("$m%checkmodeburglepreset", "\b(%trainingtownpresetlist)\b") then put #var m%checkmodeburglepreset none
   if !matchre("$m%checkmodepawnpreset", "\b(%pawnpresetlist)\b") then put #var m%checkmodepawnpreset none
   if !matchre("$m%checkmodeperformpreset", "\b(%trainingtownpresetlist)\b") then put #var m%checkmodeperformpreset none
@@ -1043,14 +1053,19 @@ VARCHECKS:
   if $m%checkmodeminmoney >= 0 then
   else put #var m%checkmodeminmoney 0
   if !matchre("$m%checkmodeexchange", "\b(YES|NO)\b") then put #var m%checkmodeexchange NO
-  if !matchre("$m%checkmodepremiumheal", "\b(YES|NO)\b") then put #var m%checkmodepremiumheal NO
-  if !matchre("$m%checkmodenonpremheal", "\b(YES|NO)\b") then put #var m%checkmodenonpremheal NO
+  if !def(m%checkmodeautopath) then
+  {
+    if (("$m%checkmodepremiumheal" = "YES") && ("$m%checkmodenonpremheal" = "YES")) then put #var m%checkmodeautopath YES
+    if (("$m%checkmodepremiumheal" = "YES") && ("$m%checkmodenonpremheal" = "NO")) then put #var m%checkmodeautopath PREMIUM
+    if (("$m%checkmodepremiumheal" = "NO") && ("$m%checkmodenonpremheal" = "YES")) then put #var m%checkmodeautopath YES
+    if (("$m%checkmodepremiumheal" = "NO") && ("$m%checkmodenonpremheal" = "NO")) then put #var m%checkmodeautopath YES
+  }
+  if !matchre("$m%checkmodeautopath", "\b(YES|NO|PREMIUM)\b") then put #var m%checkmodeautopath YES
   if !matchre("$m%checkmoderepair", "\b(YES|NO)\b") then put #var m%checkmoderepair NO
   if !def(m%checkmoderepairlist) then put #var m%checkmoderepairlist scimitar|nightstick
   if !matchre("$m%checkmodebundlesell", "\b(YES|NO)\b") then put #var m%checkmodebundlesell NO
   if !matchre("$m%checkmodebundlevault", "\b(YES|NO)\b") then put #var m%checkmodebundlevault NO
   if (($m%checkmodebundlevault = "YES") && ($m%checkmodebundlesell = "YES")) then put #var m%checkmodebundlesell NO
-  if !matchre("$m%checkmodevaulttown", "\b(%townvaultpresetlist)\b") then put #var m%checkmodevaulttown none
   if !matchre("$m%checkmodevaultmove", "\b(YES|NO)\b") then put #var m%checkmodevaultmove NO
   if $m%checkmodebundlerope >= 0 then
   else put #var m%checkmodebundlerope 0
@@ -1060,7 +1075,6 @@ VARCHECKS:
   else put #var m%checkmodegempouches 0
   if !matchre("$m%checkmodeammobuy", "\b(YES|NO)\b") then put #var m%checkmodeammobuy NO
   if !def(m%checkmodeammobuylist) then put #var m%checkmodeammobuylist bow|xbow|sling
-  if !matchre("$m%checkmodeammobuytown", "\b(%ammopresetlist)\b") then put #var m%checkmodeammobuytown none
   if !def(m%checkmodeammocontainer) then put #var m%checkmodeammocontainer backpack
   if $m%checkmodeammomin >= 0 then
   else put #var m%checkmodeammomin 100
@@ -1916,14 +1930,13 @@ VARCHECKS:
   
   
   #CONDITIONAL_VARIABLE_SWITCHES
-  if $m%checkmodepremiumring = "YES" then put #var m%checkmodeupkeeppreset fangcove
+  if $m%checkmodepremiumring = "YES" then put #var m%checkmodeupkeeptown fangcove
   if (($m%checkmodebugoutonbleed = "YES") && ($m%checkmodeauonbleed = "YES") && ($m%checkmodeautoupkeep = "YES")) then put #var m%checkmodebugoutonbleed NO
   if $m%checkmodeharvest = "YES" then put #var m%checkmodepreserve YES
   if $m%checkmodetmfocus = "YES" then put #var m%checkmodetmdbprior YES
   if %necrostate = "forsaken" then
   {
-    put #var m%checkmodepremiumheal NO
-    put #var m%checkmodenonpremheal NO
+    put #var m%checkmodeautopath NO
   }
   if (($m%checkmodenecrosafety = "YES") && ($m%checkmoderiteofgrace = "YES")) then
   {
@@ -2383,12 +2396,11 @@ STATUSCHECK:
     }
   }
   #TARGET_SELECTION
-  if %scriptmode = 1 then
+  if ((%scriptmode = 1) && (%upkeepactive != 1) && (%movetrainactive != 1)) then
   {
-    #echo Goodtarget: %goodtarget
-    if %goodtarget = 0 then
+    if (%goodtarget = 0) then
     {
-      if %avoidshock = "YES" then gosub TARGETSELECT
+      if ("%avoidshock" = "YES") then gosub TARGETSELECT
       else gosub FACE
     }
   }
@@ -3054,7 +3066,7 @@ STOWMAIN:
   matchre STOWP %waitstring
   match STOWTOOHEAVY That's too heavy to go in there!
   matchre STOWUNLOAD You need to unload|You should unload
-  matchre STOWSTOPPLAY You should stop playing before you do that.
+  match STOWSTOPPLAY You should stop playing before you do that.
   matchre STOWSKINBAD You try to stuff your
   matchre STOWGEMBAD You think the .* pouch is too full to fit another gem into\.
   matchre STOWCOIL The \S+ rope is too long, even after stuffing it, to fit in the
@@ -3294,6 +3306,7 @@ STOWITEMMAIN:
   gosub STOWCUSTOM %stowitemstring
   if %stowcustomsuccess = 1 then return
   matchre STOWITEMP %waitstring
+  match STOWITEMSTOPPLAY You should stop playing before you do that.
   match STOWITEMTOOHEAVY That's too heavy to go in there!
   matchre RETURN You put your|You sling|You attach|You open your pouch|You stop as
   match RETURN Stow what?  Type 'STOW HELP' for details.
@@ -3303,6 +3316,10 @@ STOWITEMMAIN:
   var timeoutsub STOWITEMMAIN
   var timeoutcommand stow %stowitemstring
 	goto TIMEOUT
+
+STOWITEMSTOPPLAY:
+  gosub PLAYSTOP
+  goto STOWITEMMAIN
 
 STOWITEMTOOHEAVY:
   gosub DEEPSLEEP
@@ -5438,10 +5455,10 @@ ARRANGEMANA:
   {
     if $Arcana.LearningRate < 20 then var arcanalock 0
     if $Arcana.LearningRate > 31 then var arcanalock 1
-    if $Arcana.Ranks = 1750 then var arcanalock 1
+    if $Arcana.Ranks >= 1750 then var arcanalock 1
     if $Attunement.LearningRate < 20 then var attunelock 0
     if $Attunement.LearningRate > 31 then var attunelock 1
-    if $Attunement.Ranks = 1750 then var attunelock 1
+    if $Attunement.Ranks >= 1750 then var attunelock 1
   }
   else
   {
@@ -9050,19 +9067,19 @@ TEACHP:
 TEACH:
   eval tempteach tolower("$roomplayers")
   eval teachtarget tolower("%teachtarget")
-  #echo tempteach: %tempteach
-  #echo teachtarget: %teachtarget
-  if matchre ("%tempteach", "%teachtarget") then
-  {
-    matchre TEACHP %waitstring
-    matchre RETURN You begin to lecture|I don't understand which skill you wish to teach.|is already listening to you|I don't understand which skill you wish to teach.|You have already offered|I could not find who you were referring to.|That person is too busy teaching their own students to listen to your lesson.
-    put teach %teachskill to %teachtarget 
-    matchwait 5
-    var timeoutsub TEACH
-    var timeoutcommand teach %teachskill to %teachtarget
-    goto TIMEOUT
-  }
-  else return
+  if !matchre ("%tempteach", "%teachtarget") then return
+  matchre TEACHP %waitstring
+  matchre RETURN You begin to lecture|I don't understand which skill you wish to teach.|is already listening to you|I don't understand which skill you wish to teach.|You have already offered|I could not find who you were referring to.|That person is too busy teaching their own students to listen to your lesson.
+  match TEACHBAD You cannot listen to a teacher and teach at the same time!
+  put teach %teachskill to %teachtarget 
+  matchwait 5
+  var timeoutsub TEACH
+  var timeoutcommand teach %teachskill to %teachtarget
+  goto TIMEOUT
+
+TEACHBAD:
+  gosub TEACHASSESS
+  return
 
 TEACHSTOPP:
   pause
