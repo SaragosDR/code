@@ -4157,6 +4157,7 @@ AUTOUPKEEPLOGIC:
   gosub LEAVEROOM
   if ("%autype" = "ammo") then
   {
+    var fangcovevist -1
     gosub NEWTOWNPRESET %ammobuytown upkeep
     gosub ROOMTRAVEL
   }
@@ -4209,6 +4210,7 @@ AUTOUPKEEPLOGIC:
       }
       put #mapper reset
       pause 1
+      move n
       gosub STOWALL
     }
   }
