@@ -179,11 +179,13 @@ action put #play Echo; put #echo %alertwindow Yellow [Magic] Attempting to cast 
 
 #action var something 1 when The complementary nature of the spell empowers you.
 
-action var nexttattoo 0 when You suddenly feel less heroic.
-action var nexttattoo %t; math nexttattoo add 900 when \[You will be able to use your tattoo again about an hour from now\.\]
-action var nexttattoo %t; math nexttattoo add 600 when \[You will be able to use your tattoo again about half an hour from now\.\]
-action var nexttattoo %t; math nexttattoo add 300 when \[You will be able to use your tattoo again about 20 minutes from now\.\]
-action var nexttattoo %t; math nexttattoo add 150 when \[You will be able to use your tattoo again about 10 minutes from now\.\]
+action var tattooactive 1 when ^You brace yourself as you activate your tattoo, but nothing happens as you're already under a heroic effect\.
+action var tattooactive 1 when ^You brace yourself as you activate your tattoo and feel empowered, as its magic washes over you\.
+action var nexttattoo 0; var tattooactive 0 when You suddenly feel less heroic.
+action var nexttattoo %t; math nexttattoo add 2100 when \[You will be able to use your tattoo again about an hour from now\.\]
+action var nexttattoo %t; math nexttattoo add 1500 when \[You will be able to use your tattoo again about half an hour from now\.\]
+action var nexttattoo %t; math nexttattoo add 900 when \[You will be able to use your tattoo again about 20 minutes from now\.\]
+action var nexttattoo %t; math nexttattoo add 300 when \[You will be able to use your tattoo again about 10 minutes from now\.\]
 action var nexttattoo %t; math nexttattoo add 60 when \[You will be able to use your tattoo again a few minutes from now\.\]
 action var nexttattoo %t; math nexttattoo add 30 when \[You will be able to use your tattoo again about a minute from now\.\]
 
@@ -367,7 +369,7 @@ ALERTINIT:
   { 
     var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.
-    var monsterspeech A sickly blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
+    var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "
     var hespeech A voice on the wind whispers|A pair of Merelew guards assist you into the water|The libik (?:shouts|yells),|The seedy monger looks up to you and|The Monger's voice booms out,|The Monger's booming voice comes from the booth,|One of the attendants glances at you and says,|One of the monger's assistants addresses you, saying,|^An attendant in an otter costume exclaims|\w+ chants, "C'mon! I feel the luck of Eluned smiling on you all!
     var speechwhitelist %generalspeech|%ferryspeech|%monsterspeech|%spellspeech|%hespeech
@@ -1831,12 +1833,16 @@ STATUSVARLOAD:
   var armortype 0
   var badface 0
   var bugoutnostow 0
-  var shieldworn 0
   var alertsonly 0
+  var shieldworn 0
+  var parrystickworn 0
+  var shieldworn 0
   var armor1worn 0
   var armor2worn 0
   var armor3worn 0
   var armor4worn 0
+  var armor5worn 0
+  var armor6worn 0
   var askclass 0
   var askstudent 0
   var movetrainactive 0
@@ -1879,7 +1885,7 @@ STATUSVARLOAD:
   var evenweapontarget 0
   var facebrawlfail 0
   var feetcheck 0
-  var firstarmor 0
+  var firstarmorcheck 0
   var firstawake 1
   var firstclean 0
   var firstcommsense 1
@@ -1948,6 +1954,7 @@ STATUSVARLOAD:
   var teachingonly 0
   var testcount 0
   var textposition 0
+  var tattooactive 0
   var tattoocast 0
   var tmcast 0
   var tmcount 0
@@ -1986,6 +1993,7 @@ MAINVARLOAD:
   var bugoutonbleed $m%varsetbugoutonbleed
   var bugoutroom $m%varsetbugoutroom
   var killbeforemove $m%varsetkillbeforemove
+  var movetimeout $m%varsetmovetimeout
   var autoupkeep $m%varsetautoupkeep
   var moveclenchshard $m%varsetmoveclenchshard
   var movewhistle $m%varsetmovewhistle
@@ -2246,20 +2254,16 @@ MAINVARLOAD:
   var tmfocusstorage $m%varsettmfocusstorage
   var tmfocusworn $m%varsettmfocusworn
   var tmfocuscontainer $m%varsettmfocuscontainer
-  var armorswap $m%varsetarmorswap
+  var armorcheck $m%varsetarmorcheck
+  var shielditem $m%varsetshielditem
+  var parrystickitem $m%varsetparrystickitem
   var armornum $m%varsetarmornum
-  var armor1name $m%varsetarmor1name
-  var armor1desc $m%varsetarmor1desc
-  var a1stealthrem $m%varseta1stealthrem
-  var armor2name $m%varsetarmor2name
-  var armor2desc $m%varsetarmor2desc
-  var a2stealthrem $m%varseta2stealthrem
-  var armor3name $m%varsetarmor3name
-  var armor3desc $m%varsetarmor3desc
-  var a3stealthrem $m%varseta3stealthrem
-  var armor4name $m%varsetarmor4name
-  var armor4desc $m%varsetarmor4desc
-  var a4stealthrem $m%varseta4stealthrem
+  var armor1item $m%varsetarmor1item
+  var armor2item $m%varsetarmor2item
+  var armor3item $m%varsetarmor3item
+  var armor4item $m%varsetarmor4item
+  var armor5item $m%varsetarmor5item
+  var armor6item $m%varsetarmor6item
   var appraise $m%varsetappraise
   var appraisetarget $m%varsetappraisetarget
   var appraisetimer $m%varsetappraisetimer
@@ -2823,8 +2827,7 @@ COMBATLOOP:
   {
     gosub MULTITRAINLOGIC
   }
-  #PRERUN_ACTIONS
-  #gosub STATUSCHECK
+  if (("%armorcheck" = "YES") && (%firstarmorcheck = 0)) then gosub ARMORCHECK
   if %firststowall = 1 then
   {
     gosub STOWALL
@@ -3495,13 +3498,11 @@ BUFFINGONLYLOOP:
     }
   }
   #BUFFING
-  if %casting != 1 then
-  {
-    if $mana >= %minmana then gosub BUFFLOGIC
-  }
+  if ((%casting != 1) && ($mana >= %minmana)) then gosub BUFFLOGIC
   gosub STATUSCHECK
-  if %anybuff = 0 then
+  if (%anybuff = 0) then
   {
+    gosub DEVICEBUFFLOGIC
     if %scriptmode = 2 then goto DONEBUFFING
     if ((%scriptmode = 1) || (%scriptmode = 3)) then
     {
@@ -3635,7 +3636,8 @@ UPKEEPLOGIC:
   #GEMPOUCHES
   if %gempouches > 0 then
   {
-    if %appraiser != "none" then
+    put #echo Yellow appraiser: %appraiser
+    if ("%appraiser" != "none") then
     {
       var pouchcount 0
       var gempouchesnum 0
@@ -4170,13 +4172,13 @@ AUTOUPKEEPLOGIC:
     }
     else
     {
-      #FANGCOVE
-      var fangcovevist -1
-      if ("%premiumring" = "YES") then
+      if ($zoneid != 150) then
       {
-        if %t < %nextring then return
-        if $zoneid != 150 then
+        #FANGCOVE
+        var fangcovevist 0
+        if ("%premiumring" = "YES") then
         {
+          if %t < %nextring then return
           gosub LEAVEROOM
           gosub PREMIUMRINGGO
           if (%goodring = 1) then
@@ -4198,20 +4200,21 @@ AUTOUPKEEPLOGIC:
             move go meeting portal
           }    
         }
+        else
+        {
+          #FANGCOVE_PORTAL
+          var fangcovevisit 2
+          gosub NEWTOWNPRESET %nearestportaltown upkeep
+          gosub ROOMTRAVEL
+          gosub MOVE portal
+          move go meeting portal
+        }
+        put #mapper reset
+        pause 1
+        move n
+        gosub STOWALL
       }
-      else
-      {
-        #FANGCOVE_PORTAL
-        var fangcovevisit 2
-        gosub NEWTOWNPRESET %nearestportaltown upkeep
-        gosub ROOMTRAVEL
-        gosub MOVE portal
-        move go meeting portal
-      }
-      put #mapper reset
-      pause 1
-      move n
-      gosub STOWALL
+      else var fangcovevisit -1
     }
   }
   
@@ -4228,6 +4231,7 @@ AUTOUPKEEPLOGIC:
   #RETURNING
   var stance shield
   gosub STANCECHANGE
+  if ("%armorcheck" = "YES") then gosub ARMORCHECK
   var goupkeep 0
   if ("%upkeeptown" = "fangcove") then
   {
@@ -4239,9 +4243,12 @@ AUTOUPKEEPLOGIC:
     }
     else
     {
-      put #echo Yellow premium ring going back!
-      gosub MOVE portal
-      move go exit portal
+      if (%fangcovevisit = 1) then
+      {
+        put #echo Yellow premium ring going back!
+        gosub MOVE portal
+        move go exit portal
+      }
     }
   }
   gosub ROOMTRAVELCOMBAT
@@ -4406,6 +4413,67 @@ HEALERUSE:
   match RETURN You sit up.
   put lie
   matchwait
+
+#####LOCKSMITHING_LOGIC#####
+LOCKSMITHKHRI:
+  if %burglekhrihasten = "YES" then
+  {
+    if $SpellTimer.KhriHasten.active != 1 then
+    {
+      gosub KHRI hasten
+    }
+  }
+  if %burglekhriplunder = "YES" then
+  {
+    if $SpellTimer.KhriPlunder.active != 1 then
+    {
+      gosub KHRI plunder
+    }
+  }
+  if %burglekhrisilence = "YES" then
+  {
+    if $SpellTimer.KhriSilence.active != 1 then
+    {
+      gosub KHRI silence
+    }
+  }
+  if %burglekhrislight = "YES" then
+  {
+    if $SpellTimer.KhriSlight.active != 1 then
+    {
+      gosub KHRI slight
+    }
+  }
+  if %burglekhrisight = "YES" then
+  {
+    if $SpellTimer.KhriSight.active != 1 then
+    {
+      gosub KHRI sight
+    }
+  }
+  return
+
+LOCKSMITHCAST:
+  if %burglerf = "YES" then
+  {
+    if (($SpellTimer.RefractiveField.active = 0) || ($SpellTimer.RefractiveField.duration < 2)) then
+    {
+      if %casting = 1 then
+      {
+        gosub RELSPELL
+        gosub RELSYMBIOSIS
+      }
+      var spellprepping rf
+      var prepmana 5
+      var addmana 0
+      var casting 1
+      gosub PREP
+      pause %burglerfdelay
+      gosub CAST
+    }
+  }
+  return  
+
 
 REPAIRLOGIC:
   var didrepair 0
@@ -6149,9 +6217,13 @@ TRADINGSELLLOGIC:
     if %vaultsuccess = 1 then
     {
       gosub GETITEM bundle from vault
-      if ("$righthand = "Empty") then
+      pause 1
+      echo righthand: $righthand
+      if ("$righthand" = "Empty") then
       {
         gosub GETITEM gem pouch from vault
+        pause 1
+        echo righthand: $righthand
         if ("$righthand" = "Empty") then
         {
           put #echo %alertwindow No bundles or pouches could be found, so TradingSell cannot be completed!  Turning off TradingSell.
@@ -6166,6 +6238,7 @@ TRADINGSELLLOGIC:
     gosub EXITVAULT
     if (($zoneid = 150) && ($roomid = 0)) then move west
   }
+  #put #echo >Log [Trading] Attempting to sell bundle or pouch.
   #BUNDLE_SELLING
   if ("$righthandnoun" = "bundle") then
   {
@@ -6181,7 +6254,7 @@ TRADINGSELLLOGIC:
         }
         gosub MOVE bundle
       }
-      put #echo >Log [Train] Selling bundle.
+      put #echo >Log [Trading] Selling bundle.
       gosub SELLITEM bundle
       if ("$righthand" = "bundling rope") then gosub DUMPITEM bundling rope
     }
@@ -6203,7 +6276,7 @@ TRADINGSELLLOGIC:
         }
         gosub MOVE gem
       }
-      put #echo >Log [Train] Selling gem pouch.
+      put #echo >Log [Trading] Selling gem pouch.
       gosub GEMPOUCHSELL
     }
   }
@@ -6456,7 +6529,7 @@ NVSTEALTHLOGIC:
   if $monstercount > 0 then
   {
     gosub STEALTHCHECK
-    if (%armorswap = "YES") then gosub ARMORCHECK
+    #gosub ARMORCHECK
     if (%usingstealth = 1) then
     {
       gosub HIDELOGIC
@@ -7078,7 +7151,7 @@ POUNCELOGIC:
     gosub MONSTERARRAY
     if matchre("%monsterarray", "%critters") then
     {
-      put #echo %alertwindow Pounced!
+      #put #echo %alertwindow Pounced!
       gosub POUNCE
       var pounceready 0
     }
@@ -8187,7 +8260,7 @@ SPELLSWITCHTM:
       if %avoidshock = "YES" then
       {
         if %goodtarget = 0 then gosub TARGETSELECT
-        if %shockcritter = 1 then var paralysisuse 1
+        if ((%shockcritter = 1) || (%specialmanipuse = 1)) then var paralysisuse 1
       }
     }
   }
@@ -8747,8 +8820,9 @@ NONCOMBATLOGIC:
 		#gosub BUFFINGONLYLOOP
 		gosub RELCYCLIC
 		gosub PERCSELF
-		var stance shield
+		var stance %stancemain
 		gosub STANCECHANGE
+		if ("%armorcheck" = "YES") then gosub ARMORCHECK
 		gosub ROOMTRAVELCOMBAT
 		gosub AWAKE
 		if %necrosafety = "YES" then gosub JUSTICECHECK
@@ -8985,8 +9059,6 @@ WEAPONLOGIC:
     gosub WEAPONSET 
     #STEALTH_CHECK
     gosub STEALTHCHECK
-    #ARMORSWAP_CHECK
-    if (%armorswap = "YES") then gosub ARMORCHECK 
     #MELEE_WEAPONS
     if (%weaponmode = "melee") then
     {
@@ -9875,9 +9947,9 @@ KHRICHOOSELOOP:
   goto KHRICHOOSELOOP
   
 BUFFLOGIC:
-  if %combatperforming = 1 then return
-  if %playing = 1 then return
-  if %necrosafety = "YES" then
+  if (%combatperforming = 1) then return
+  if (%playing = 1) then return
+  if ("%necrosafety" = "YES") then
   {
     gosub NSAFETYCHECK
     if %necrogood != 1 then return
@@ -9938,10 +10010,10 @@ BUFFLOGIC:
       }
     }
   }
-  if %casting != 1 then
+  if (%casting != 1) then
   {
 	  #BUFFS
-    if %buff = "YES" then
+    if ("%buff" = "YES") then
     {
       var buffing 0
       var buffloop 0
@@ -10058,23 +10130,6 @@ BUFFLOGIC:
 			}
     }
   }
-  #HEROIC_TATTOO
-  if ((%tattoobuff = "YES") && (%tattootype = "heroic")) then
-  {
-    #put #echo t: %t     nexttattoo: %nexttattoo
-		if %t >= %nexttattoo then
-		{
-			gosub INVOKETATTOO
-		}
-  }
-  #WAND
-  if %wandbuff = "YES" then
-  {
-    if %anybuff != 1 then
-    {
-      gosub WANDBUFFING
-    }
-  }
   if %casting != 1 then
   {
     #GBUFFS
@@ -10091,32 +10146,49 @@ BUFFLOGIC:
   }
   return
 
-WANDBUFFING:
-  if %wandbuffnum > 0 then
+DEVICEBUFFLOGIC:
+  #put #echo Yellow Tattoobuff: %tattoobuff  tattootype: %tattootype
+  #HEROIC_TATTOO
+  if ((%tattoobuff = "YES") && (%tattootype = "heroic") && (%tattooactive != 1)) then
   {
-    #echo gametime: $gametime   wand1next: $wand1next
-    if $gametime >= $wand1next then
-    {
-      #put #echo %wand1var.active: $%wand1var.active
-      if $%wand1var.active != 1 then
-      {
-        var wcounter 1
-        gosub WANDBUFFINGLOGIC
-        gosub PERC
-        return
-      }      
-    }
+    #put #echo Yellow t: %t     nexttattoo: %nexttattoo
+		if (%t >= %nexttattoo) then
+		{
+		  #put #echo Yellow Attempting to invoke tattoo.
+		  #put #echo >Log Attempting to invoke tattoo.
+		  var anybuff 1
+			gosub INVOKETATTOO
+		}
   }
-  if %wandbuffnum > 1 then
+  #WAND
+  if ("%wandbuff" = "YES") then
   {
-    if $gametime >= $wand2next then
+    if (%wandbuffnum > 0) then
     {
-      if $%wand2var.active != 1 then
+      #echo gametime: $gametime   wand1next: $wand1next
+      if ($gametime >= $wand1next) then
       {
-        var wcounter 2
-        gosub WANDBUFFINGLOGIC
-        gosub PERC
-        return
+        #put #echo %wand1var.active: $%wand1var.active
+        if ($%wand1var.active != 1) then
+        {
+          var wcounter 1
+          var anybuff 1
+          gosub WANDBUFFINGLOGIC
+          gosub PERC
+        }      
+      }
+    }
+    if (%wandbuffnum > 1) then
+    {
+      if ($gametime >= $wand2next) then
+      {
+        if ($%wand2var.active != 1) then
+        {
+          var wcounter 2
+          var anybuff 1
+          gosub WANDBUFFINGLOGIC
+          gosub PERC
+        }
       }
     }
   }
@@ -10171,42 +10243,44 @@ WANDBUFFINGLOGIC:
 
 BUFFINGLOOP:
   math buffloop add 1
-  if %buffloop <= %buffnum then
+  if %buffloop > %buffnum then
   {
-    if ((($%buff%buffloopvar.active = 1) && ($%buff%buffloopvar.duration < %buffbuffer)) || ($%buff%buffloopvar.active != 1)) then
-    {
-      #if %buff%buffloop = "col" then
-      #{ 
-      #  gosub MOONCHECK
-      #  if %moonsout = 1 then gosub BUFFINGFUNC
-      #  if %casting = 1 then return
-      #  else goto BUFFINGLOOP
-      #}
-      if matchre ("%buff%buffloop", "%transnecro") then
-      {  
-        #echo Testing a Transcendental spell!
-        if %necrosafety = "YES" then
-        {
-          if %justice = 1 then return
-        }
-      }
-      if %buff%buffloop = "iots" then
-      {
-        if %iotsscan = 0 then
-        {
-          gosub FINDBODY
-          gosub TELEOBJECTS
-          var iotsscan 1
-        }
-        if ((%verena = 1) || (%szeldia = 1) || (%dawgolesh = 1) || (%merewalda = 1)) then gosub BUFFINGFUNC
-        if %casting = 1 then return
-        else goto BUFFINGLOOP
-      }
-      gosub BUFFINGFUNC
-      if %casting = 1 then return
-    }
+    var anybuff 0
+    return
   }
-  else return
+  #put #echo Yellow %buff%buffloopvar
+  if ((($%buff%buffloopvar.active = 1) && ($%buff%buffloopvar.duration < %buffbuffer)) || ($%buff%buffloopvar.active != 1)) then
+  {
+    #if %buff%buffloop = "col" then
+    #{ 
+    #  gosub MOONCHECK
+    #  if %moonsout = 1 then gosub BUFFINGFUNC
+    #  if %casting = 1 then return
+    #  else goto BUFFINGLOOP
+    #}
+    if matchre ("%buff%buffloop", "%transnecro") then
+    {  
+      #echo Testing a Transcendental spell!
+      if %necrosafety = "YES" then
+      {
+        if %justice = 1 then return
+      }
+    }
+    if %buff%buffloop = "iots" then
+    {
+      if %iotsscan = 0 then
+      {
+        gosub FINDBODY
+        gosub TELEOBJECTS
+        var iotsscan 1
+      }
+      if ((%verena = 1) || (%szeldia = 1) || (%dawgolesh = 1) || (%merewalda = 1)) then gosub BUFFINGFUNC
+      if %casting = 1 then return
+      else goto BUFFINGLOOP
+    }
+    gosub BUFFINGFUNC
+    if %casting = 1 then return
+  }
   goto BUFFINGLOOP
   
 BUFFINGFUNC:
@@ -11286,23 +11360,8 @@ TACTICSEXPERTHANDCHECK:
   }
   return
 
-ARMORCHECK:
-  if %laststealth != %usingstealth then
-  {
-    if %armorswap = "YES" then
-    {
-      gosub NEWARMORFIND
-      var laststealth %usingstealth
-    }
-  }
-  var armorloop 0
-  gosub ARMORCHECKLOOP
-  return
-
-ARMORCHECKLOOP:
+ARMORCHECKLOOPOLD:
   math armorloop add 1
-  #echo armorloop: %armorloop
-  #echo armornum: %armornum
   if %armorloop > %armornum then return
   if %usingstealth = 1 then
   {
@@ -11769,23 +11828,24 @@ MONTEST:
       if "$guild" = "Necromancer" then gosub NRITUAL
       else
       {
-        if %dissect = "YES" then
+        if ("%dissect" = "YES") then
         {
           if $First_Aid.LearningRate > 33 then var firstaidlock 1
           if $First_Aid.LearningRate < 21 then var firstaidlock 0
           if $First_Aid.Ranks >= 1750 then var firstaidlock 1
-          if %firstaidlock = 0 then
+          if ((%firstaidlock = 0) && ("%skinning" = "YES")) then
           {
-            if %skinning = "YES" then
+            if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
             {
-              if matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
+              if ($Skinning.Ranks >= 1750) then gosub DISSECTLOGIC
+              else
               {
-                if $Skinning.LearningRate > $First_Aid.LearningRate then gosub DISSECTLOGIC
+                if ($Skinning.LearningRate > $First_Aid.LearningRate) then gosub DISSECTLOGIC
               }
-              else gosub DISSECTLOGIC
             }
-            else gosub DISSECTLOGIC
+            else gosub DISSECTLOGIC 
           }
+          else gosub DISSECTLOGIC
         }
       }
     } 

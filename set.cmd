@@ -958,21 +958,16 @@ SET:
     if tolower("%1") = "researchtype4" then goto TEXTSET
     if tolower("%1") = "researchtype5" then goto TEXTSET
     if tolower("%1") = "shieldname" then goto TEXTSET
-    if tolower("%1") = "shielddesc" then goto TEXTSET
-    if tolower("%1") = "armorswap" then goto YESNOSET
+    if tolower("%1") = "armorcheck" then goto YESNOSET
+    if tolower("%1") = "shielditem" then goto TEXTSET
+    if tolower("%1") = "parrystickitem" then goto TEXTSET
     if tolower("%1") = "armornum" then goto TEXTSET
-    if tolower("%1") = "armor1name" then goto TEXTSET
-    if tolower("%1") = "armor1desc" then goto TEXTSET
-    if tolower("%1") = "a1stealthrem" then goto YESNOSET
-    if tolower("%1") = "armor2name" then goto TEXTSET
-    if tolower("%1") = "armor2desc" then goto TEXTSET
-    if tolower("%1") = "a2stealthrem" then goto YESNOSET
-    if tolower("%1") = "armor3name" then goto TEXTSET
-    if tolower("%1") = "armor3desc" then goto TEXTSET
-    if tolower("%1") = "a3stealthrem" then goto YESNOSET
-    if tolower("%1") = "armor4name" then goto TEXTSET
-    if tolower("%1") = "armor4desc" then goto TEXTSET
-    if tolower("%1") = "a4stealthrem" then goto YESNOSET
+    if tolower("%1") = "armor1item" then goto TEXTSET
+    if tolower("%1") = "armor2item" then goto TEXTSET
+    if tolower("%1") = "armor3item" then goto TEXTSET
+    if tolower("%1") = "armor4item" then goto TEXTSET
+    if tolower("%1") = "armor5item" then goto TEXTSET
+    if tolower("%1") = "armor6item" then goto TEXTSET
     if tolower("%1") = "storage" then goto TEXTSET
     if tolower("%1") = "collectcoin" then goto YESNOSET
     if tolower("%1") = "collectscroll" then goto YESNOSET
@@ -1012,6 +1007,7 @@ SET:
         goto END
       }
     }
+    if tolower("%1") = "movetimeout" then goto TEXTSET
     if tolower("%1") = "presetpremium" then
     {
       eval input toupper(%2) 
@@ -1077,7 +1073,7 @@ SET:
     }
     if tolower("%1") = "burglepreset" then
     {
-      if (matchre("%2", "\b(%trainingtownpresetlist)\b")) then
+      if (matchre("%2", "\b(%townburglepresetlist)\b")) then
       {  
         var setvar burglepreset
         eval input tolower(%2)  
@@ -1087,7 +1083,7 @@ SET:
       }
       else
       {
-        put #echo mono You can only choose from %townpresetlist.
+        put #echo mono You can only choose from %townburglepresetlist.
         goto END
       }
     }
@@ -1109,7 +1105,7 @@ SET:
     }
     if tolower("%1") = "performpreset" then
     {
-      if (matchre("%2", "\b(%trainingtownpresetlist)\b")) then
+      if (matchre("%2", "\b(%townperformpresetlist)\b")) then
       {  
         var setvar performpreset
         eval input tolower(%2)  
@@ -1119,7 +1115,7 @@ SET:
       }
       else
       {
-        put #echo mono You can only choose from %townpresetlist.
+        put #echo mono You can only choose from %townperformpresetlist.
         goto END
       }
     }  
@@ -2199,22 +2195,16 @@ DISPLAYCOMBAT:
 	  gosub OUTPUT PlatRingItem
 	}
 	put #echo
-	put #echo Mono ArmorSwap: $m$varsetarmorswap     (Only used for low level characters who need to remove armor for stealth training in combat.)
-  if ("$m$varsetarmorswap" = "YES") then
-  {
-    put #echo Gray mono (Name variable is the text used to refer to armor in "get item")
-    put #echo Gray mono (Description variable is the description listed in "inv armor")
-    gosub OUTPUT ArmorNum
-    gosub OUTPUT ShieldName ShieldDesc
-    gosub OUTPUT Armor1Name Armor1Desc
-    gosub OUTPUT A1StealthRem
-    gosub OUTPUT Armor2Name Armor2Desc
-    gosub OUTPUT A2StealthRem
-    gosub OUTPUT Armor3Name Armor3Desc
-    gosub OUTPUT A3StealthRem
-    gosub OUTPUT Armor4Name Armor4Desc
-    gosub OUTPUT A4StealthRem
-  }
+  gosub OUTPUT ArmorCheck
+  gosub OUTPUT ShieldItem
+  gosub OUTPUT ParryStickItem
+  gosub OUTPUT ArmorNum
+  gosub OUTPUT Armor1Item
+  gosub OUTPUT Armor2Item
+  gosub OUTPUT Armor3Item
+  gosub OUTPUT Armor4Item
+  gosub OUTPUT Armor5Item
+  gosub OUTPUT Armor6Item
   put #echo
 	return
 
@@ -2878,10 +2868,10 @@ DISPLAYMOVEMENT:
   gosub OUTPUT Bugout
   gosub OUTPUT BugoutNum
   gosub OUTPUT BugoutOnBleed
-	gosub OUTPUT BugoutRoom
   put #echo
   gosub OUTPUT CustomMovement
   gosub OUTPUT KillBeforeMove
+  gosub OUTPUT MoveTimeout
   put #echo
   gosub OUTPUT CombatPreset
   put #echo Gray mono Options: 
@@ -2904,6 +2894,7 @@ DISPLAYMOVEMENT:
       gosub OUTPUT TargetRoom
       gosub OUTPUT FindRoom
       gosub OUTPUT FindRoomList
+      gosub OUTPUT BugoutRoom
     }
     else
     {
@@ -2916,6 +2907,7 @@ DISPLAYMOVEMENT:
       put #echo
       gosub OUTPUTGRAY FindRoom
       gosub OUTPUTGRAY FindRoomList
+      gosub OUTPUTGRAY BugoutRoom
     }
   }
   put #echo
@@ -2939,11 +2931,11 @@ DISPLAYMOVEMENT:
   put #echo mono =================== NonCombat Movement ===================
   put #echo
   gosub OUTPUT BurglePreset
-  put #echo Gray mono Options: %trainingtownpresetlist
+  put #echo Gray mono Options: %townburglepresetlist
 	gosub OUTPUT PawnPreset
 	put #echo Gray mono Options: %pawnpresetlist
   gosub OUTPUT PerformPreset
-  put #echo Gray mono Options: %trainingtownpresetlist
+  put #echo Gray mono Options: %townperformpresetlist
   put #echo
   return
 
@@ -3171,20 +3163,16 @@ VARCOPYCOMBAT:
   put #var m%destplatring $m%sourceplatring
   put #var m%destplatringitem $m%sourceplatringitem
   
-  put #var m%destarmorswap $m%sourcearmorswap
+  put #var m%destarmorcheck $m%sourcearmorcheck
   put #var m%destarmornum $m%sourcearmornum
-  put #var m%destarmor1name $m%sourcearmor1name
-  put #var m%destarmor1desc $m%sourcearmor1desc
-  put #var m%desta1stealthrem $m%sourcea1stealthrem
-  put #var m%destarmor2name $m%sourcearmor2name
-  put #var m%destarmor2desc $m%sourcearmor2desc
-  put #var m%desta2stealthrem $m%sourcea2stealthrem
-  put #var m%destarmor3name $m%sourcearmor3name
-  put #var m%destarmor3desc $m%sourcearmor3desc
-  put #var m%desta3stealthrem $m%sourcea3stealthrem
-  put #var m%destarmor4name $m%sourcearmor4name
-  put #var m%destarmor4desc $m%sourcearmor4desc
-  put #var m%desta4stealthrem $m%sourcea4stealthrem
+  put #var m%destshielditem $m%sourceshielditem
+  put #var m%destparrystickitem $m%sourceparrystickitem
+  put #var m%destarmor1item $m%sourcearmor1item
+  put #var m%destarmor2item $m%sourcearmor2item
+  put #var m%destarmor3item $m%sourcearmor3item
+  put #var m%destarmor4item $m%sourcearmor4item
+  put #var m%destarmor5item $m%sourcearmor5item
+  put #var m%destarmor6item $m%sourcearmor6item
   put #var save
   return
   
@@ -3206,10 +3194,10 @@ VARCOPYMOVEMENT:
   put #var m%destbugout $m%sourcebugout
   put #var m%destbugoutnum $m%sourcebugoutnum
   put #var m%destbugoutonbleed $m%sourcebugoutonbleed
-  put #var m%destbugoutroom $m%sourcebugoutroom
 
   put #var m%destcustommovement $m%sourcecustommovement
   put #var m%destkillbeforemove $m%sourcekillbeforemove
+  put #var m%destmovetimeout $m%sourcemovetimeout
   put #var m%destcombatpreset $m%sourcecombatpreset
   put #var m%destpresetpremium $m%sourcepresetpremium
   put #var m%destzone $m%sourcezone
@@ -3218,6 +3206,7 @@ VARCOPYMOVEMENT:
   put #var m%destmove $m%sourcemove
   put #var m%destmovelist $m%sourcemovelist
   put #var m%desttargetroom $m%sourcetargetroom
+  put #var m%destbugoutroom $m%sourcebugoutroom
   
   put #var m%destfindroom $m%sourcefindroom
   put #var m%destfindroomlist $m%sourcefindroomlist

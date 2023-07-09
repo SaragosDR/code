@@ -1,3 +1,40 @@
+07/08/23
+Updated Scripts: train, library, set
+
+All old armor variables have been removed.  New armor variables added along with ArmorCheck variable.  Armor check will verify your armor is on before going into combat, and will bugout if it can't find and wear the appropriate armor.  Armor variables only need enough for the parser to find the pieces to verify, unlike the previous system.  Armor removal for training stealth is not currently in the script (sorry Paladins), but I intend to add it back later.  If ArmorCheck is enabled, armor will be checked before entering combat (at script start and during movement), will attempt to wear armor that's present but not worn, and will not enter combat if the check fails.
+
+Movement-Related
+Added MoveTimeout variable.  This is the amount of time the script will wait to restart external script movement (Travel or Automapper) if it doesn't make it to the destination.  Keep this higher on newer characters or if you're having characters travel a long distance.  Default is 5 minutes.
+Bugout room is now automatically set by the hunting area you're in, so there's no need to change it when moving around.  It's been removed from visibility in the Movement section unless CustomMovement is set.
+Added hunting zones:
+  P3: quartz gargoyles.
+  P4: juvenile, adult, and elder armadillos.
+  p5: maiden's tress, matron's tress, deadwood dryad, blightwater nyad 1, blightwater nyad 2.
+Added M'riss as a valid burgle and perform location.
+Added Fang Cove as a valid perform location (no burgle locations available).
+AutoUpkeep can now support Fang Cove upkeep when you're already in Fang Cove.
+When returning to combat from Upkeep, stance will automatically be changed to your default stance, not shield.
+Bugfixes to travel in Shard to avoid mapper issues with Yolesi's room.
+
+Misc and Fixes
+Fetid antelope vellum (Shadow Web) from Adan'f will no longer be collected with scrolls.  They're too common to be worthwhile to keep.
+Fixed a bug that would cause dissections not to happen when a character has capped Skinning but not FA.
+Whitelisted blightwater nyad speech from alerts.
+Heroic tatto logic completely rewritten.  Tattoos and wands are now processed through the constantly running StatusCheck sub, instead of inside buff sub.  This was to solve many issues with tattoos and wands not being up as constantly as they should be.
+Revamp of fault tolerance on GET, STOW, and PUT subs.  Resolved many issues, script should be a lot better at detecting failure to properly stow items, and either recover or bugout when appropriate.
+
+05/29/23
+Updated Scripts: train, library
+
+Added support for "youthful attendant" at gem shop in Fang Cove.
+
+
+05/29/23
+Updated Scripts: train, library
+
+Bugfix to Fang Cove mapper issues.
+
+
 05/28/23
 Updated Scripts: train, library, set
 
