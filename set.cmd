@@ -148,6 +148,7 @@ SET:
     if tolower("%1") = "auonnerves" then goto YESNOSET
     if tolower("%1") = "auonburden" then goto YESNOSET
     if tolower("%1") = "auonammo" then goto YESNOSET
+    if tolower("%1") = "auonboxes" then goto YESNOSET
     if tolower("%1") = "auburdennum" then
     {
       if matchre("%2", "\b(1|2|3|4|5|6|7|8|9|10|11)\b") then
@@ -225,6 +226,10 @@ SET:
     if tolower("%1") = "gemsell" then goto YESNOSET
     if tolower("%1") = "gemvault" then goto YESNOSET
     if tolower("%1") = "gempouches" then goto TEXTSET
+    if tolower("%1") = "nuggetsell" then goto TEXTSET
+    if tolower("%1") = "barsell" then goto TEXTSET
+    if tolower("%1") = "boxpopping" then goto YESNOSET
+    if tolower("%1") = "dismantletype" then goto TEXTSET
 		if tolower("%1") = "ammobuy" then goto YESNOSET
 		if tolower("%1") = "ammobuylist" then goto TEXTSET
 		if tolower("%1") = "ammobuytown" then
@@ -620,6 +625,12 @@ SET:
     if tolower("%1") = "burgleeotb" then goto YESNOSET
     if tolower("%1") = "burgleeotbdelay" then goto TEXTSET
    
+    if tolower("%1") = "boxpopkhrifocus" then goto YESNOSET
+    if tolower("%1") = "boxpopkhrihasten" then goto YESNOSET
+    if tolower("%1") = "boxpopkhriplunder" then goto YESNOSET
+    if tolower("%1") = "boxpopkhrisafe" then goto YESNOSET
+    if tolower("%1") = "boxpopkhrisight" then goto YESNOSET
+   
     if tolower("%1") = "braidtarget" then goto TEXTSET
     if tolower("%1") = "songtype" then goto TEXTSET
     if tolower("%1") = "instrument" then goto TEXTSET
@@ -968,10 +979,13 @@ SET:
     if tolower("%1") = "armor4item" then goto TEXTSET
     if tolower("%1") = "armor5item" then goto TEXTSET
     if tolower("%1") = "armor6item" then goto TEXTSET
+    if tolower("%1") = "knucklesitem" then goto TEXTSET
     if tolower("%1") = "storage" then goto TEXTSET
     if tolower("%1") = "collectcoin" then goto YESNOSET
     if tolower("%1") = "collectscroll" then goto YESNOSET
     if tolower("%1") = "collectmaps" then goto YESNOSET
+    if tolower("%1") = "collectnuggets" then goto YESNOSET
+    if tolower("%1") = "collectbars" then goto YESNOSET
     if tolower("%1") = "collectmaterials" then goto YESNOSET
     if tolower("%1") = "misckeeplist" then goto LISTSET
     if tolower("%1") = "collectgem" then goto YESNOSET
@@ -1367,13 +1381,22 @@ SET:
     if tolower("%1") = "killthrownverb" then goto REGYESNOSET
     if tolower("%1") = "killweaponitem" then goto REGTEXTSET
     if tolower("%1") = "killammo" then goto REGTEXTSET
+    if tolower("%1") = "beckonthenaga" then goto REGYESNOSET
+    if tolower("%1") = "btnprepmana" then goto REGTEXTSET
+    if tolower("%1") = "btnaddmana" then goto REGTEXTSET
+    if tolower("%1") = "btnprepwait" then goto REGTEXTSET
     if tolower("%1") = "dragonsbreath" then goto REGYESNOSET
     if tolower("%1") = "dbprepmana" then goto REGTEXTSET
     if tolower("%1") = "dbaddmana" then goto REGTEXTSET
-    if tolower("%1") = "bgdbcombo" then goto REGYESNOSET
+    if tolower("%1") = "dbprepwait" then goto REGTEXTSET
+    if tolower("%1") = "blufmorgaraen" then goto REGYESNOSET
+    if tolower("%1") = "bgprepmana" then goto REGTEXTSET
+    if tolower("%1") = "bgaddmana" then goto REGTEXTSET
+    if tolower("%1") = "bgprepwait" then goto REGTEXTSET
     if tolower("%1") = "magneticballista" then goto REGYESNOSET
     if tolower("%1") = "mabprepmana" then goto REGTEXTSET
     if tolower("%1") = "mabaddmana" then goto REGTEXTSET
+    if tolower("%1") = "mabprepwait" then goto REGTEXTSET
     
     if tolower("%1") = "spellnum" then goto 1THRU4SET
     if tolower("%1") = "spell1" then goto TEXTSET
@@ -2074,6 +2097,7 @@ DISPLAYUPKEEP:
   gosub OUTPUT AUOnNerves
   gosub OUTPUT AUOnBurden AUBurdenNum
   gosub OUTPUT AUOnAmmo
+  gosub OUTPUT AUOnBoxes
 	gosub OUTPUT MinMoney
 	gosub OUTPUT Exchange
 	
@@ -2087,6 +2111,10 @@ DISPLAYUPKEEP:
   gosub OUTPUT GemSell
   gosub OUTPUT GemVault
   gosub OUTPUT GemPouches
+  gosub OUTPUT NuggetSell
+  gosub OUTPUT BarSell
+  gosub OUTPUT BoxPopping
+  gosub OUTPUT DismantleType
   gosub OUTPUT AmmoBuy
   gosub OUTPUT AmmoBuyList
   gosub OUTPUT AmmoContainer
@@ -2113,10 +2141,12 @@ DISPLAYLOOT:
 	put #echo mono LootAllDead: $m$varsetlootalldead     (not group-hunting friendly)  
 	gosub OUTPUT CollectBoxes
 	gosub OUTPUT BoxStorage
-	gosub OUTPUT COllectCoin	
+	gosub OUTPUT CollectCoin	
 	gosub OUTPUT CollectGem
 	gosub OUTPUT SaveGwethStones
 	gosub OUTPUT CollectMaps
+	gosub OUTPUT CollectNuggets
+	gosub OUTPUT CollectBars
 	gosub OUTPUT CollectMaterials
 	gosub OUTPUT CollectScroll
 	put #echo mono MiscKeepList: $m$varsetmisckeeplist    (list of loot items to be kept, separated by the | character)
@@ -2205,6 +2235,7 @@ DISPLAYCOMBAT:
   gosub OUTPUT Armor4Item
   gosub OUTPUT Armor5Item
   gosub OUTPUT Armor6Item
+  gosub OUTPUT KnucklesItem
   put #echo
 	return
 
@@ -2297,7 +2328,6 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT ClimbingRope ClimbingRopeName
   gosub OUTPUT ClimbingRopeHum HumSong
   put #echo
-  gosub OUTPUT BoxPopping
   put #echo mono NonComSanowret: $m$varsetnoncomsanowret
   put #echo
 	gosub OUTPUT Research
@@ -2728,6 +2758,11 @@ DISPLAYGUILD:
       put #echo mono BurgleKhriPlunder: $m$varsetburglekhriplunder
       put #echo mono BurgleKhriSilence: $m$varsetburglekhrisilence
       put #echo mono BurgleKhriSlight: $m$varsetburglekhrislight
+      gosub OUTPUT BoxpopKhriFocus
+      gosub OUTPUT BoxpopKhriHasten
+      gosub OUTPUT BoxpopKhriPlunder
+      gosub OUTPUT BoxpopKhriSafe
+      gosub OUTPUT BoxpopKhriSight
     }
     if $guild = "Trader" then
     {
@@ -2833,15 +2868,27 @@ DISPLAYKILL:
   put #echo mono KillTMPrepMana: $killtmprepmana
   put #echo mono KillTMAddMana: $killtmaddmana
   put #echo
-  if $guild = "Warrior Mage" then
+  if ("$guild" = "Bard") then
   {
-    #put #echo mono BGDBCombo: $bgdbcombo
+    put #echo mono BeckontheNaga: $beckonthenaga
+    put #echo mono BTNPrepMana: $btnprepmana
+    put #echo mono BTNAddMana: $btnaddmana
+    put #echo mono BTNPrepWait: $btnprepwait
+  }
+  if ("$guild" = "Warrior Mage") then
+  {
     put #echo mono DragonsBreath: $dragonsbreath
     put #echo mono DBPrepMana: $dbprepmana
     put #echo mono DBAddMana: $dbaddmana
+    put #echo mono DBPrepWait: $dbprepwait
+    put #echo mono BlufmorGaraen: $blufmorgaraen
+    put #echo mono BGPrepMana: $bgprepmana
+    put #echo mono BGAddMana: $bgaddmana
+    put #echo mono BGPrepWait: $bgprepwait
     put #echo mono MagneticBallista: $magneticballista
     put #echo mono MABPrepMana: $mabprepmana
     put #echo mono MABAddMana: $mabaddmana
+    put #echo mono MABPrepWait: $mabprepwait
   }
   put #echo
   put #echo mono KillWeapon: $killweapon
@@ -3062,6 +3109,7 @@ VARCOPYUPKEEP:
   put #var m%destauonburden $m%sourceauonburden
   put #var m%destauburdennum $m%sourceauburdennum
   put #var m%destauonammo $m%sourceauonammo
+  put #var m%destauonboxes $m%sourceauonboxes
   put #var m%destminmoney $m%sourceminmoney
   put #var m%destexchange $m%sourceexchange
   put #var m%destautopath $m%sourceautopath
@@ -3074,6 +3122,10 @@ VARCOPYUPKEEP:
   put #var m%destgemsell $m%sourcegemsell
   put #var m%destgemvault $m%sourcegemvault
   put #var m%destgempouches $m%sourcegempouches
+  put #var m%destnuggetsell $m%sourcenuggetsell
+  put #var m%destbarsell $m%sourcebarsell
+  put #var m%destboxpopping $m%sourceboxpopping
+  put #var m%destdismantletype $m%sourcedismantletype
   put #var m%destammobuy $m%sourceammobuy
   put #var m%destammobuylist $m%sourceammobuylist
   put #var m%destammocontainer $m%sourceammocontainer
@@ -3173,6 +3225,7 @@ VARCOPYCOMBAT:
   put #var m%destarmor4item $m%sourcearmor4item
   put #var m%destarmor5item $m%sourcearmor5item
   put #var m%destarmor6item $m%sourcearmor6item
+  put #var m%destknucklesitem $m%sourceknucklesitem
   put #var save
   return
   
@@ -3234,6 +3287,8 @@ VARCOPYLOOT:
   put #var m%destcollectcoin $m%sourcecollectcoin
   put #var m%destcollectscroll $m%sourcecollectscroll
   put #var m%destcollectmaps $m%sourcecollectmaps
+  put #var m%destcollectnuggets $m%sourcecollectnuggets
+  put #var m%destcollectbars $m%sourcecollectbars
   put #var m%destcollectmaterials $m%sourcecollectmaterials
   put #var m%destcollectgem $m%sourcecollectgem
   put #var m%destsavegwethstones $m%sourcesavegwethstones
@@ -3810,7 +3865,12 @@ VARCOPYGUILD:
   put #var m%destburglekhriplunder $m%sourceburglekhriplunder
   put #var m%destburglekhrisilence $m%sourceburglekhrisilence
   put #var m%destburglekhrislight $m%sourceburglekhrislight
-  
+  put #var m%destboxpopkhrifocus $m%sourceboxpopkhrifocus
+  put #var m%destboxpopkhrihasten $m%sourceboxpopkhrihasten
+  put #var m%destboxpopkhriplunder $m%sourceboxpopkhriplunder
+  put #var m%destboxpopkhrisafe $m%sourceboxpopkhrisafe
+  put #var m%destboxpopkhrisight $m%sourceboxpopkhrisight
+    
   put #var m%destinvest $m%sourceinvest
   put #var m%desttradingsell $m%sourcetradingsell
   put #var m%desttradingsellitem $m%sourcetradingsellitem

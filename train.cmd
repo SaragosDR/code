@@ -68,7 +68,7 @@ var gems3 (chunk of|some|piece of).*granite|hematite|iolite|ivory|jade|jasper|ku
 var gems4 opal|pearl|pebble|peridot|quartz|ruby|sapphire|spinel|star-stone|(waermodi|lasmodi|sjatmal|lantholite) stones|sunstone|talon|tanzanite|tooth|topaz|tourmaline|tsavorite|turquoise|zircon
 var gweths (jadeite|kyanite|lantholite|sjatmal|waermodi|lasmodi) stones
 var boxtype brass|copper|deobar|driftwood|iron|ironwood|mahogany|oaken|pine|steel|wooden
-var boxes coffer|crate|strongbox|caddy|casket|skippet|trunk|chest|\bbox
+var boxes coffer|crate|strongbox|caddy|casket|skippet|trunk|chest|box
 var junkloot runestone|scroll|tablet|vellum|sheiska leaf|ostracon|hhr'lav'geluhh bark|papyrus roll|smudged parchment|lockpick|fragment|package
 var collectibles albredine ring|crystal ring|\bdira\b|kirmhiro draught|\bmap\b|package|soulstone|(?<!crossbow) \bbolts?\b|flarmencrank|\bgear\b|glarmencoupler|\bnuts?\b|rackensprocket|spangleflange
 var raremetals animite|damite|darkstone|electrum|glaes|haralun|kertig|lumium|muracite|niniam
@@ -89,6 +89,8 @@ var rareleathers demonscale|firecat-skin leather|inkhorne-skin leather|jaguar-pe
 var specialleathers bark-hide leather|cloud-white leather|corrugated-hide leather|crusty bark-hide leather|dark dragon-scale hide|desumos-pelt leather|diamond-hide|droluger-hide leather|korograth hide|morgawr leather|punka|seal-pelt leather|shadowleaf
 var leathers %rareleathers|%specialleathers
 var materials %metals|%stones|%bones|%woods|%cloths|%leathers
+var nuggetmaterials brass|bronze|coal|copper|covellite|iron|lead|nickel|oravir|pewter|platinum|silver|steel|tin|gold|zinc|electrum|darkstone
+
 
 #RESEARCH_TRIGGERS
 action var appfocusdone 1; var appfocusing 0; var rprojectactive 0; var researching 0 when ^Breakthrough!
@@ -306,6 +308,7 @@ action var nextring %t;math nextring add 1800 when You will be able to PUSH your
 action var nextring %t;math nextring add 2400 when You will be able to PUSH your ring again about an hour from now\.
 action var nextring 0 when Your mind is momemtarily distracted with a vision of Fate's Fortune Lane.
 action var nextring 0 when You may again use your Estate Holder jewelry to teleport to Fang Cove.
+action var baddisarm 1 when ^However, a \w+ \w+ \w+ is not fully disarmed, making any chance of picking it unlikely\.
 
 
 action var cost $1 when the humble sum of (.+) coins for this
@@ -1504,6 +1507,12 @@ THIEFONLY:
   var burglekhriplunder $m%varsetburglekhriplunder
   var burglekhrisilence $m%varsetburglekhrisilence
   var burglekhrislight $m%varsetburglekhrislight
+  
+  var boxpopkhrifocus $m%varsetboxpopkhrifocus
+  var boxpopkhrihasten $m%varsetboxpopkhrihasten
+  var boxpopkhriplunder $m%varsetboxpopkhriplunder
+  var boxpopkhrisafe $m%varsetboxpopkhrisafe
+  var boxpopkhrisight $m%varsetboxpopkhrisight
   return
 
 TRADERONLY:
@@ -1831,6 +1840,7 @@ STATUSVARLOAD:
   var appfocusdone 0
   var appfocusonly 0
   var armortype 0
+  var baddisarm 0
   var badface 0
   var bugoutnostow 0
   var alertsonly 0
@@ -2015,6 +2025,7 @@ MAINVARLOAD:
   var auonburden $m%varsetauonburden
   var auburdennum $m%varsetauburdennum
   var auonammo $m%varsetauonammo
+  var auonboxes $m%varsetauonboxes
   var minmoney $m%varsetminmoney
   var exchange $m%varsetexchange
   var autopath $m%varsetautopath
@@ -2027,6 +2038,10 @@ MAINVARLOAD:
   var gemsell $m%varsetgemsell
   var gemvault $m%varsetgemvault
   var gempouches $m%varsetgempouches
+  var nuggetsell $m%varsetnuggetsell
+  var barsell $m%varsetbarsell
+  var boxpopping $m%varsetboxpopping
+  var dismantletype $m%varsetdismantletype
   var ammobuy $m%varsetammobuy
   var ammobuylist $m%varsetammobuylist
   var ammocontainer $m%varsetammocontainer
@@ -2133,6 +2148,8 @@ MAINVARLOAD:
   var collectcoin $m%varsetcollectcoin
   var collectscroll $m%varsetcollectscroll
   var collectmaps $m%varsetcollectmaps
+  var collectnuggets $m%varsetcollectnuggets
+  var collectbars $m%varsetcollectbars
   var collectmaterials $m%varsetcollectmaterials
   var collectgem $m%varsetcollectgem
   var savegwethstones $m%varsetsavegwethstones
@@ -2264,6 +2281,7 @@ MAINVARLOAD:
   var armor4item $m%varsetarmor4item
   var armor5item $m%varsetarmor5item
   var armor6item $m%varsetarmor6item
+  var knucklesitem $m%varsetknucklesitem
   var appraise $m%varsetappraise
   var appraisetarget $m%varsetappraisetarget
   var appraisetimer $m%varsetappraisetimer
@@ -2590,202 +2608,6 @@ MULTIVARLOAD:
   var mode2priority $mode2priority
   return
 
-KHRIVARS:
-  if %khridebiltype = prowess then var khridebilvar SpellTimer.KhriProwess
-  if %khridebiltype = guile then var khridebilvar SpellTimer.KhriGuile
-  if %khridebiltype = credence then var khridebilvar SpellTimer.KhriCredence
-  if %khridebiltype = terrify then var khridebilvar SpellTimer.KhriTerrify
-  if %khridebiltype = intimidate then var khridebilvar SpellTimer.KhriIntimidate
-  if %khridebiltype = eliminate then var khridebilvar SpellTimer.KhriEliminate
-  return
-
-SPELLVARSLOOP:
-  math spellvarscount add 1
-  if %spellvarscount > %buffnum then return
-  var spellname %buff%spellvarscount
-  gosub SPELLIDENT
-  var buff%spellvarscountvar %spellvar
-  #echo buff%spellvarscountvar: %buff%spellvarscountvar
-  goto SPELLVARSLOOP
-
-OMSPELLVARSLOOP:
-  math spellvarscount add 1
-  if %spellvarscount > %ombuffnum then return
-  var spellname %ombuff%spellvarscount
-  gosub SPELLIDENT
-  var ombuff%spellvarscountvar %spellvar
-  #echo ombuff%spellvarscountvar: %ombuff%spellvarscountvar
-  goto OMSPELLVARSLOOP
-
-SPELLIDENT:
-  if %spellname = "aa" then var spellvar SpellTimer.AspirantsAegis
-  if %spellname = "ab" then var spellvar SpellTimer.AirBubble
-  if %spellname = "abs" then var spellvar SpellTimer.Absolution
-  if %spellname = "aeg" then var spellvar SpellTimer.AegisofGranite 
-  if %spellname = "ags" then var spellvar SpellTimer.AggressiveStance
-  if %spellname = "art" then var spellvar SpellTimer.ArtificersEye
-  if %spellname = "as" then var spellvar SpellTimer.AntiStun
-  if %spellname = "aus" then var spellvar SpellTimer.AuraSight
-  if %spellname = "auspice" then var spellvar SpellTimer.Auspice
-  if %spellname = "ava" then var spellvar SpellTimer.AvrenAevareae
-  if %spellname = "awaken" then var spellvar SpellTimer.Awaken
-  if %spellname = "bc" then var spellvar SpellTimer.BraunsConjecture
-  if %spellname = "benediction" then var spellvar SpellTimer.Benediction
-  if %spellname = "bless" then var spellvar SpellTimer.Bless
-  if %spellname = "bloodthorns" then var spellvar SpellTimer.Bloodthorns
-  if %spellname = "bs" then var spellvar SpellTimer.BloodStaunching
-  if %spellname = "bg" then var spellvar SpellTimer.BlufmorGaraen
-  if %spellname = "blur" then var spellvar SpellTimer.Blur
-  if %spellname = "bue" then var spellvar SpellTimer.ButchersEye
-  if %spellname = "care" then var spellvar SpellTimer.CaressoftheSun
-  if %spellname = "centering" then var spellvar SpellTimer.Centering
-  if %spellname = "ch" then var spellvar SpellTimer.CalcifiedHide
-  if %spellname = "clarity" then var spellvar SpellTimer.Clarity
-  if %spellname = "col" then var spellvar SpellTimer.CageofLight
-  if %spellname = "cotc" then var spellvar SpellTimer.ClawsoftheCougar
-  if %spellname = "courage" then var spellvar SpellTimer.Courage
-  if %spellname = "cv" then var spellvar SpellTimer.ClearVision
-  if %spellname = "da" then var spellvar SpellTimer.DivineArmor
-  if %spellname = "dc" then var spellvar SpellTimer.DestinyCipher
-  if %spellname = "db" then var spellvar SpellTimer.DragonsBreath
-  if %spellname = "dema" then var spellvar SpellTimer.DesertsMaelstrom
-  if %spellname = "dr" then var spellvar SpellTimer.DivineRadiance
-  if %spellname = "drum" then var spellvar SpellTimer.DrumsoftheSnake
-  if %spellname = "ease" then var spellvar SpellTimer.EaseBurden
-  if %spellname = "echo" then var spellvar SpellTimer.EchoesofAether
-  if %spellname = "ecry" then var spellvar SpellTimer.EilliesCry
-  if %spellname = "eli" then var spellvar SpellTimer.Elision
-  if %spellname = "em" then var spellvar SpellTimer.EarthMeld
-  if %spellname = "emc" then var spellvar SpellTimer.EmuinsCandlelight
-  if %spellname = "enrichment" then var spellvar SpellTimer.Enrichment
-  if %spellname = "es" then var spellvar SpellTimer.EtherealShield
-  if %spellname = "etc" then var spellvar SpellTimer.EmbedtheCycle
-  if %spellname = "ey" then var spellvar SpellTimer.EssenceofYew
-  if %spellname = "fin" then var spellvar SpellTimer.Finesse
-  if %spellname = "fotf" then var spellvar SpellTimer.FailureoftheForge
-  if %spellname = "gf" then var spellvar SpellTimer.GroundingField
-  if %spellname = "gg" then var spellvar SpellTimer.GlythtidesGift
-  if %spellname = "ghoulflesh" then var spellvar SpellTimer.Ghoulflesh
-  if %spellname = "gi" then var spellvar SpellTimer.GamIrnan
-  if %spellname = "gol" then var spellvar SpellTimer.GiftofLife
-  if %spellname = "halo" then var spellvar SpellTimer.Halo
-  if %spellname = "harm" then var spellvar SpellTimer.Harmony
-  if %spellname = "hes" then var spellvar SpellTimer.HeroicStrength
-  if %spellname = "hol" then var spellvar SpellTimer.HandsofLirisa
-  if %spellname = "ignite" then var spellvar SpellTimer.Ignite
-  if %spellname = "ic" then var spellvar SpellTimer.IronConstitution
-  if %spellname = "inst" then var spellvar SpellTimer.Instinct
-  if %spellname = "iots" then var spellvar SpellTimer.InvocationoftheSpheres
-  if %spellname = "ivm" then var spellvar SpellTimer.IvoryMask
-  if %spellname = "ks" then var spellvar SpellTimer.KuraSilma
-  if %spellname = "lw" then var spellvar SpellTimer.LayWard
-  if %spellname = "lgv" then var spellvar SpellTimer.LastGiftofVithwokIV
-  if %spellname = "maf" then var spellvar SpellTimer.ManifestForce
-  if %spellname = "mapp" then var spellvar SpellTimer.MajorPhysicalProtection
-  if %spellname = "mef" then var spellvar SpellTimer.MentalFocus
-  if %spellname = "meg" then var spellvar SpellTimer.MembrachsGreed
-  if %spellname = "mis" then var spellvar SpellTimer.Misdirection
-  if %spellname = "mpp" then var spellvar SpellTimer.MinorPhysicalProtection
-  if %spellname = "mf" then var spellvar SpellTimer.MurrulasFlames
-  if %spellname = "mo" then var spellvar SpellTimer.MarshalOrder
-  if %spellname = "mof" then var spellvar SpellTimer.MantleofFlame
-  if %spellname = "mon" then var spellvar SpellTimer.MemoryofNature
-  if %spellname = "name" then var spellvar SpellTimer.NamingofTears
-  if %spellname = "non" then var spellvar SpellTimer.Nonchalance
-  if %spellname = "nou" then var spellvar SpellTimer.Noumena
-  if %spellname = "oath" then var spellvar SpellTimer.OathoftheFirstborn
-  if %spellname = "obfuscation" then var spellvar SpellTimer.Obfuscation
-  if %spellname = "phk" then var spellvar SpellTimer.PlatinumHandsofKertigen
-  if %spellname = "php" then var spellvar SpellTimer.PhilosophersPreservation
-  if %spellname = "pg" then var spellvar SpellTimer.PiercingGaze
-  if %spellname = "pom" then var spellvar SpellTimer.PersistenceofMana
-  if %spellname = "pop" then var spellvar SpellTimer.PerseveranceofPeriel
-  if %spellname = "pfe" then var spellvar SpellTimer.ProtectionfromEvil
-  if %spellname = "psy" then var spellvar SpellTimer.PsychicShield
-  if %spellname = "rage" then var spellvar SpellTimer.RageoftheClans
-  if %spellname = "repr" then var spellvar SpellTimer.RedeemersPride
-  if %spellname = "refresh" then var spellvar SpellTimer.Refresh
-  if %spellname = "rei" then var spellvar SpellTimer.ResearchersInsight
-  if %spellname = "rits" then var spellvar SpellTimer.RiverintheSky
-  if %spellname = "rw" then var spellvar SpellTimer.RighteousWrath
-  if %spellname = "sl" then var spellvar SpellTimer.SanyuLyba
-  if %spellname = "seer" then var spellvar SpellTimer.SeersSense
-  if %spellname = "shadowling" then var spellvar SpellTimer.Shadowling
-  if %spellname = "shadows" then var spellvar SpellTimer.Shadows
-  if %spellname = "sk" then var spellvar SpellTimer.SyamelyoKuniyo
-  if %spellname = "sks" then var spellvar SpellTimer.SkeinofShadows
-  if %spellname = "sol" then var spellvar SpellTimer.ShieldofLight
-  if %spellname = "solace" then var spellvar SpellTimer.Solace
-  if %spellname = "sos" then var spellvar SpellTimer.SoulShield
-  if %spellname = "sott" then var spellvar SpellTimer.SensesoftheTiger
-  if %spellname = "soul" then var spellvar SpellTimer.SoulAblaze
-  if %spellname = "sr" then var spellvar SpellTimer.SentinelsResolve
-  if %spellname = "stc" then var spellvar SpellTimer.StellarCollector
-  if %spellname = "stw" then var spellvar SpellTimer.SeetheWind
-  if %spellname = "substratum" then var spellvar SpellTimer.Substratum
-  if %spellname = "suf" then var spellvar SpellTimer.SureFooting
-  if %spellname = "sw" then var spellvar SpellTimer.SwirlingWinds
-  if %spellname = "tk" then var spellvar SpellTimer.TamsinesKiss
-  if %spellname = "tksh" then var spellvar SpellTimer.TelekineticShield
-  if %spellname = "tranquility" then var spellvar SpellTimer.Tranquility
-  if %spellname = "trc" then var spellvar SpellTimer.TrabeChalice
-  if %spellname = "turi" then var spellvar SpellTimer.TurmarIllumination
-  if %spellname = "tw" then var spellvar SpellTimer.Tailwind
-  if %spellname = "voi" then var spellvar SpellTimer.VeilofIce
-  if %spellname = "vigor" then var spellvar SpellTimer.Vigor
-  if %spellname = "will" then var spellvar SpellTimer.WillofWinter
-  if %spellname = "ws" then var spellvar SpellTimer.WolfScent
-  if %spellname = "wotp" then var spellvar SpellTimer.WisdomofthePack
-  if %spellname = "worm" then var spellvar SpellTimer.WormsMist
-  if %spellname = "ys" then var spellvar SpellTimer.YntrelSechra
-  return
-
-CYCSPELLVARSLOOP:
-  math spellvarscount add 1
-  if %spellvarscount > 3 then return
-  if %spellc%spellvarscount = "ac" then var spellc%spellvarscountvar SpellTimer.AetherCloak
-  if %spellc%spellvarscount = "ad" then var spellc%spellvarscountvar SpellTimer.AesandryDarlaeth
-  if %spellc%spellvarscount = "af" then var spellc%spellvarscountvar SpellTimer.AwakenForest
-  if %spellc%spellvarscount = "bes" then var spellc%spellvarscountvar SpellTimer.BearStrength
-  if %spellc%spellvarscount = "botf" then var spellc%spellvarscountvar SpellTimer.BlessingoftheFae
-  if %spellc%spellvarscount = "care" then var spellc%spellvarscountvar SpellTimer.CaressoftheSun
-  if %spellc%spellvarscount = "cs" then var spellc%spellvarscountvar SpellTimer.CheetahSwiftness
-  if %spellc%spellvarscount = "eye" then var spellc%spellvarscountvar SpellTimer.EyeofKertigen
-  if %spellc%spellvarscount = "fae" then var spellc%spellvarscountvar SpellTimer.FaenellasGrace
-  if %spellc%spellvarscount = "ghs" then var spellc%spellvarscountvar SpellTimer.GhostShroud
-  if %spellc%spellvarscount = "ghs" then var spellc%spellvarscountvar SpellTimer.GhostShroud
-  if %spellc%spellvarscount = "gj" then var spellc%spellvarscountvar SpellTimer.GlythtidesJoy
-  if %spellc%spellvarscount = "hodi" then var spellc%spellvarscountvar SpellTimer.HodiernasLilt
-  if %spellc%spellvarscount = "how" then var spellc%spellvarscountvar SpellTimer.HolyWarrior
-  if %spellc%spellvarscount = "mom" then var spellc%spellvarscountvar SpellTimer.MaskoftheMoons
-  if %spellc%spellvarscount = "regenerate" then var spellc%spellvarscountvar SpellTimer.Regenerate
-  if %spellc%spellvarscount = "rev" then var spellc%spellvarscountvar SpellTimer.Revelation
-  if %spellc%spellvarscount = "roc" then var spellc%spellvarscountvar SpellTimer.RiteofContrition
-  if %spellc%spellvarscount = "rog" then var spellc%spellvarscountvar SpellTimer.RiteofGrace
-  if %spellc%spellvarscount = "sanctuary" then var spellc%spellvarscountvar SpellTimer.Sanctuary
-  if %spellc%spellvarscount = "sov" then var spellc%spellvarscountvar SpellTimer.StepsofVuan
-  if %spellc%spellvarscount = "tr" then var spellc%spellvarscountvar SpellTimer.TruffenyisRally  
-  goto CYCSPELLVARSLOOP
-
-CYCTMDBVARS:
-  if %spellctm = "aban" then var spellc4var SpellTimer.AbandonedHeart
-  if %spellctm = "ars" then var spellc4var SpellTimer.ArbitersStylus
-  if %spellctm = "fr" then var spellc4var SpellTimer.FireRain
-  if %spellctm = "gs" then var spellc4var SpellTimer.GuardianSpirit
-  if %spellctm = "iz" then var spellc4var SpellTimer.IcutuZaharenela
-  if %spellctm = "pyre" then var spellc4var SpellTimer.Pyre
-  if %spellctm = "rim" then var spellc4var SpellTimer.Rimefang
-  if %spellctm = "ros" then var spellc4var SpellTimer.RingofSpears
-  if %spellctm = "sa" then var spellc4var SpellTimer.SoulAttrition
-  if %spellctm = "sls" then var spellc4var SpellTimer.StarlightSphere
-  if %spellctm = "usol" then var spellc4var SpellTimer.UniversalSolvent
-  if %spellcdb = "alb" then var spellc5var SpellTimer.AlbredasBalm
-  if %spellcdb = "dalu" then var spellc5var SpellTimer.DamarisLullaby
-  if %spellcdb = "dema" then var spellc5var SpellTimer.DesertsMaelstrom
-  if %spellcdb = "ee" then var spellc5var SpellTimer.ElectrostaticEddy
-  if %spellcdb = "hyh" then var spellc5var SpellTimer.HydraHex
-  if %spellcdb = "shw" then var spellc5var SpellTimer.ShadowWeb
-  return
 
 
 ###MAIN LOOP###
@@ -3646,6 +3468,21 @@ UPKEEPLOGIC:
       gosub GEMPOUCHLOGIC
     }
   }
+  #NUGGET_SELLING
+  if ("%nuggetsell" = "YES") then
+  {
+    if ("%appraiser" != "none") then gosub NUGGETSELLLOGIC
+  }
+  #BAR_SELLING
+  if ("%barsell" = "YES") then
+  {
+    if ("%appraiser" != "none") then gosub BARSELLLOGIC
+  }
+  #BOX_POPPING
+  if ("%boxpopping" = "YES") then
+  {
+    gosub BOXPOPPINGLOGIC
+  }
   #CLERIC_RITUAL_STUFF
   if ((%incense > 0) && ($guild = "Cleric")) then
   {
@@ -3735,6 +3572,24 @@ UPKEEPLOGIC:
       }
     }
   }
+  if ("%nuggetsell" = "YES") then
+  {
+    if (%soldnugget = 1) then var outputtext %outputtext, sold non-valuable nuggets
+    else
+    {
+      if %appraiser = "none" then var outputtext %outputtext, no appraiser at this location
+      else var outputtext %outputtext, no nuggets to sell
+    }
+  }
+  if ("%barsell" = "YES") then
+  {
+    if (%soldbar = 1) then var outputtext %outputtext, sold non-valuable bars
+    else
+    {
+      if %appraiser = "none" then var outputtext %outputtext, no appraiser at this location
+      else var outputtext %outputtext, no bars to sell
+    }
+  }
   if %bundlerope > 0 then
   {
     if %didgetrope = -1 then var outputtext %outputtext, no additional bundling ropes needed
@@ -3804,6 +3659,7 @@ UPKEEPSET:
   var ammoroom 0
   var hastasks 0
   var taskgiver 0
+  var boxpoprroom 0
   #CROSSING
   if (($zoneid = 1) || ($zoneid = 4)) then
   {
@@ -4112,6 +3968,7 @@ UPKEEPSET:
     var hasvault 1
     var hasbank 1
     var currency Dokora
+    var boxpoproom 11
     var upkeependroom 7
   }
   #JEIHREM
@@ -4141,6 +3998,7 @@ AUTOUPKEEPLOGIC:
   if ("%autype" = "wounds") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to significant wounds.
   if ("%autype" = "hands") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to missing hand(s).
   if ("%autype" = "ammo") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to running out of ammo.
+  if ("%autype" = "boxes") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to lacking space for boxes.
   if %autype = "manual" then
   {
     put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to manual trigger.
@@ -4415,65 +4273,65 @@ HEALERUSE:
   matchwait
 
 #####LOCKSMITHING_LOGIC#####
-LOCKSMITHKHRI:
-  if %burglekhrihasten = "YES" then
+BOXPOPPINGLOGIC:
+  if (%boxpoproom = 0) then return
+  if ($roomid != %boxpoproom) then
   {
-    if $SpellTimer.KhriHasten.active != 1 then
+    if %multizone = 1 then
     {
-      gosub KHRI hasten
+      var upkeepzone %boxpopzone
+      gosub UPKEEPZONEMOVE
     }
+    gosub MOVE %boxpoproom
   }
-  if %burglekhriplunder = "YES" then
+  gosub BOXSTORAGECHECK
+  if (%foundboxes = 1) then
   {
-    if $SpellTimer.KhriPlunder.active != 1 then
+    if ($roomid != 11) then gosub MOVE 11
+    if ("$guild" = "Thief") then
     {
-      gosub KHRI plunder
+      gosub KHRISTOP all
+      gosub BOXPOPPINGKHRI
     }
-  }
-  if %burglekhrisilence = "YES" then
-  {
-    if $SpellTimer.KhriSilence.active != 1 then
+    put #echo %alertwindow Yellow Box popping started.
+    gosub ARMORREMBOXPOP
+    var boxindex 0
+    gosub BOXPOPPINGLOOP
+    put #echo %alertwindow Yellow Box popping ended.
+    if ("$guild" = "Thief") then
     {
-      gosub KHRI silence
+      gosub KHRISTOP sight plunder safe focus hasten
     }
-  }
-  if %burglekhrislight = "YES" then
-  {
-    if $SpellTimer.KhriSlight.active != 1 then
-    {
-      gosub KHRI slight
-    }
-  }
-  if %burglekhrisight = "YES" then
-  {
-    if $SpellTimer.KhriSight.active != 1 then
-    {
-      gosub KHRI sight
-    }
+    gosub ARMORCHECK
+    if ($standing != 1) then gosub STAND
   }
   return
-
-LOCKSMITHCAST:
-  if %burglerf = "YES" then
+ 
+ 
+BOXPOPPINGLOOP:
+  if (%baddisarm != 1) then
   {
-    if (($SpellTimer.RefractiveField.active = 0) || ($SpellTimer.RefractiveField.duration < 2)) then
+    var boxitem %boxes(%boxindex)
+    gosub GETITEM my %boxitem from %boxstorage
+    if $righthand = "Empty" then
     {
-      if %casting = 1 then
-      {
-        gosub RELSPELL
-        gosub RELSYMBIOSIS
-      }
-      var spellprepping rf
-      var prepmana 5
-      var addmana 0
-      var casting 1
-      gosub PREP
-      pause %burglerfdelay
-      gosub CAST
+      math boxindex add 1
+      if %boxindex > 8 then return
+      goto BOXPOPPINGLOOP
     }
   }
-  return  
-
+  var baddisarm 0
+  gosub DISARM
+  if (%baddisarm = 1) then goto BOXPOPPINGLOOP
+  gosub PICK
+  if (%baddisarm = 1) then goto BOXPOPPINGLOOP
+  gosub OPENITEM my %boxitem
+  gosub BOXCOINGET
+  gosub BOXFILLPOUCH
+  gosub BOXLOOTCHECK
+  gosub DISMANTLE
+  goto BOXPOPPINGLOOP
+  
 
 REPAIRLOGIC:
   var didrepair 0
@@ -5012,7 +4870,7 @@ DIRTSTACKERLOGIC:
   goto DIRTSTACKERLOGIC
 
 GEMSELLLOGIC:
-  put #echo Yellow Selling gem pouches!
+  #put #echo Yellow Selling gem pouches!
   var soldgem 0
   if ((matchre("$roomobjs" "%appraiser")) || (matchre("$roomdesc" "%appraiser"))) then
 	else
@@ -5038,7 +4896,7 @@ GEMPOUCHSELL:
   {
     var soldgem 1
     gosub SELLITEM gem pouch
-    gosub STOWALL
+    gosub DUMPITEM gem pouch
     goto GEMPOUCHSELL
   }
   else return
@@ -5064,6 +4922,71 @@ GEMPOUCHLOGIC:
     gosub STOWALL
   }
   return
+
+
+NUGGETSELLLOGIC:
+  #put #echo Yellow Selling nuggets!
+  var soldnugget 0
+  if ((matchre("$roomobjs" "%appraiser")) || (matchre("$roomdesc" "%appraiser"))) then
+	else
+	{
+		if %multizone = 1 then
+		{
+		  var upkeepzone %appraiserzone
+			gosub UPKEEPZONEMOVE
+		}
+		gosub MOVE gem
+	}
+	gosub STOWALL
+	var nuggetnum 0
+	eval nuggetlistlength count("%nuggetmaterials", "|")
+	gosub NUGGETSELL
+	return
+
+NUGGETSELL:
+  if (%nuggetnum > %nuggetlistlength) then return
+  gosub GETITEM %nuggetmaterials(%nuggetnum) nugget
+  if ("$righthand" != "Empty") then
+  {
+    gosub SELLITEM %nuggetmaterials(%nuggetnum) nugget
+    var soldnugget 1
+    goto NUGGETSELL
+  }
+  math nuggetnum add 1
+  goto NUGGETSELL
+
+
+BARSELLLOGIC:
+  #put #echo Yellow Selling bars!
+  var soldbar 0
+  if ((matchre("$roomobjs" "%appraiser")) || (matchre("$roomdesc" "%appraiser"))) then
+	else
+	{
+		if %multizone = 1 then
+		{
+		  var upkeepzone %appraiserzone
+			gosub UPKEEPZONEMOVE
+		}
+		gosub MOVE gem
+	}
+	gosub STOWALL
+	var barnum 0
+	eval barlistlength count("%nuggetmaterials", "|")
+	gosub BARSELL
+	return
+
+BARSELL:
+  if (%barnum > %barlistlength) then return
+  gosub GETITEM %nuggetmaterials(%barnum) bar
+  if ("$righthand" != "Empty") then
+  {
+    gosub SELLITEM %nuggetmaterials(%barnum) bar
+    var soldbar 1
+    goto BARSELL
+  }
+  math barnum add 1
+  goto BARSELL
+
 
 TITHELOGIC:
   var tithesuccess 0
@@ -8436,6 +8359,7 @@ KHRIVARRESET:
     put #var SpellTimer.KhriStrike.active 0
     put #var SpellTimer.KhriStrike.duration 0
   }
+  put #save
   return
 
 SPELLVARRESET:
