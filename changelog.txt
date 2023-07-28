@@ -1,3 +1,20 @@
+07/27/23
+Updated Scripts: train, library, set, mtcorn, mtdroughtman, mtcruise, raffle, kill
+
+Added raffle script, and scripts I use for Droughtman's, Taisidon, and Corn Maze to the repo.
+Added fixed and updated kill script, with its own section of variables in Set.
+
+Added CollectNuggets variable to Loot section for non-valuable nuggets.  Defaults to YES.
+Added CollectBars variable to Loot section for non-valuable nuggets.  Defaults to YES.
+Added Added NuggetSell variable to Upkeep section for non-valuable nuggets.  Defaults to YES.
+Added Added BarSell variable to Upkeep section for non-valuable bars.  Defaults to YES.
+
+Added rock guardians preset for P1.
+Added missing text to Facing sub for Empaths avoiding shock.
+
+Added BoxPopping variable to Upkeep, and AUOnBoxPop variable to send you to upkeep when your box storage container is full.  This is highly experimental still, as it only works in Fang Cove and only Thief buffs work, so I recommend not playing with it yet until I release a later version.
+
+
 07/08/23
 Updated Scripts: train, library, set
 
