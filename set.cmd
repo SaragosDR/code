@@ -228,9 +228,7 @@ SET:
     if tolower("%1") = "gempouches" then goto TEXTSET
     if tolower("%1") = "nuggetsell" then goto TEXTSET
     if tolower("%1") = "barsell" then goto TEXTSET
-    if tolower("%1") = "boxpopping" then goto YESNOSET
-    if tolower("%1") = "dismantletype" then goto TEXTSET
-		if tolower("%1") = "ammobuy" then goto YESNOSET
+    if tolower("%1") = "ammobuy" then goto YESNOSET
 		if tolower("%1") = "ammobuylist" then goto TEXTSET
 		if tolower("%1") = "ammobuytown" then
     {
@@ -248,8 +246,29 @@ SET:
         goto END
       }
     }
+    if tolower("%1") = "lockpickbuytown" then
+    {
+      if matchre("%2", "\b(%lockpickpresetlist)\b") then
+      {  
+        var setvar lockpickbuytown
+        eval input tolower(%2)  
+        put #var m$varset%setvar %input
+        put #var save
+        goto VARDISPLAY
+      }
+      else
+      {
+        put #echo mono You can only choose from: %lockpickpresetlist!
+        goto END
+      }
+    }
 		if tolower("%1") = "ammocontainer" then goto TEXTSET
 		if tolower("%1") = "ammomin" then goto TEXTSET
+    if tolower("%1") = "lockpickbuy" then goto YESNOSET
+    if tolower("%1") = "lockpickstacker" then goto TEXTSET
+    if tolower("%1") = "lockpickitem" then goto TEXTSET
+    if tolower("%1") = "boxpopping" then goto YESNOSET
+    if tolower("%1") = "dismantletype" then goto TEXTSET
     if tolower("%1") = "spiderfeed" then goto YESNOSET
     if tolower("%1") = "incense" then goto TEXTSET
     if tolower("%1") = "stancemain" then goto TEXTSET
@@ -1495,7 +1514,13 @@ SET:
     if tolower("%1") = "wand1spell" then gosub WANDBUFFSET
     if tolower("%1") = "wand2item" then goto TEXTSET
     if tolower("%1") = "wand2num" then goto TEXTSET
-    if tolower("%1") = "wand2spell" then gosub WANDBUFFSET
+    if tolower("%1") = "wand2item" then goto TEXTSET
+    if tolower("%1") = "wand3num" then goto TEXTSET
+    if tolower("%1") = "wand3spell" then gosub WANDBUFFSET
+    if tolower("%1") = "wand3spell" then gosub WANDBUFFSET
+    if tolower("%1") = "wand4item" then goto TEXTSET
+    if tolower("%1") = "wand4num" then goto TEXTSET
+    if tolower("%1") = "wand4spell" then gosub WANDBUFFSET
     if tolower("%1") = "tattooaddmana" then goto TEXTSET
     if tolower("%1") = "tattooprepwait" then goto TEXTSET
     if tolower("%1") = "spelldb" then goto TEXTSET
@@ -2100,8 +2125,8 @@ DISPLAYUPKEEP:
   gosub OUTPUT AUOnBoxes
 	gosub OUTPUT MinMoney
 	gosub OUTPUT Exchange
-	
-	put #echo mono AutoPath: $m$varsetautopath     (yes|no|premium)
+	put #echo
+	gosub OUTPUT AutoPath (yes|no|premium)
 	gosub OUTPUT Repair
 	gosub OUTPUT RepairList
   gosub OUTPUT BundleSell
@@ -2113,21 +2138,22 @@ DISPLAYUPKEEP:
   gosub OUTPUT GemPouches
   gosub OUTPUT NuggetSell
   gosub OUTPUT BarSell
-  gosub OUTPUT BoxPopping
-  gosub OUTPUT DismantleType
+  put #echo
   gosub OUTPUT AmmoBuy
   gosub OUTPUT AmmoBuyList
   gosub OUTPUT AmmoContainer
   gosub OUTPUT AmmoMin
+  if $guild = "Cleric" then gosub OUTPUT Incense
+  put #echo
+  gosub OUTPUT LockpickBuy
+  gosub OUTPUT LockpickStacker (Required)
+  gosub OUTPUT LockpickItem
+  gosub OUTPUT BoxPopping
+  gosub OUTPUT DismantleType
   put #echo
 	gosub OUTPUT AppFocus
   gosub OUTPUT AppFocusItem
 	gosub OUTPUT SpiderFeed
-	if $guild = "Cleric" then
-  {
-    put #echo
-    gosub OUTPUT Incense
-  }
   return
 
 DISPLAYLOOT:
@@ -2409,6 +2435,9 @@ DISPLAYBUFF:
   gosub OUTPUT Wand1Spell Wand2Spell
   gosub OUTPUT Wand1Num Wand2num
   gosub OUTPUT Wand1Item Wand2Item
+  gosub OUTPUT Wand3Spell Wand4Spell
+  gosub OUTPUT Wand3Num Wand4num
+  gosub OUTPUT Wand3Item Wand4Item
   if $guild != "Bard" then
   {
     echo
@@ -2972,8 +3001,8 @@ DISPLAYMOVEMENT:
 	put #echo Gray mono Options: %townportalpresetlist
 	put #echo
 	gosub OUTPUT VaultTown
-  gosub OUTPUT AmmoBuyTown
-	put #echo Gray mono Options: %ammopresetlist
+  gosub OUTPUT AmmoBuyTown (%ammopresetlist)
+  gosub OUTPUT LockpickBuyTown (%lockpickpresetlist)
   put #echo
   put #echo mono =================== NonCombat Movement ===================
   put #echo
@@ -3017,21 +3046,29 @@ OUTPUT:
   var actualvar $m$varset%lowervar
   eval count2 length("$2")
   
-  if %count2 > 0 then
+  if (%count2 > 0) then
   {
-    eval spacenum count("$0", " ")
-    var displayvar2 $2
-    eval lowervar2 tolower("%displayvar2")
-    var actualvar2 $m$varset%lowervar2
-    eval namelength length("%lowervar")
-    eval varlength length("%actualvar")
-    var dotnum 40
-    math dotnum subtract %namelength
-    math dotnum subtract %varlength
-    math dotnum subtract 2
-    var dotcount 0
-    gosub DOTLOOP
-    put #echo mono %displayvar: %actualvar%dotvar%displayvar2: %actualvar2
+    eval parenthesesnum count("$2", "(")
+    if (%parenthesesnum = 0) then
+    { 
+      eval spacenum count("$0", " ")
+      var displayvar2 $2
+      eval lowervar2 tolower("%displayvar2")
+      var actualvar2 $m$varset%lowervar2
+      eval namelength length("%lowervar")
+      eval varlength length("%actualvar")     
+      var dotnum 40
+      math dotnum subtract %namelength
+      math dotnum subtract %varlength
+      math dotnum subtract 2
+      var dotcount 0
+      gosub DOTLOOP
+      put #echo mono %displayvar: %actualvar%dotvar%displayvar2: %actualvar2
+    }
+    else
+    {
+      put #echo mono %displayvar: %actualvar     $2
+    }
   }
   else put #echo mono %displayvar: %actualvar
   return
@@ -3124,12 +3161,15 @@ VARCOPYUPKEEP:
   put #var m%destgempouches $m%sourcegempouches
   put #var m%destnuggetsell $m%sourcenuggetsell
   put #var m%destbarsell $m%sourcebarsell
-  put #var m%destboxpopping $m%sourceboxpopping
-  put #var m%destdismantletype $m%sourcedismantletype
   put #var m%destammobuy $m%sourceammobuy
   put #var m%destammobuylist $m%sourceammobuylist
   put #var m%destammocontainer $m%sourceammocontainer
   put #var m%destammomin $m%sourceammomin
+  put #var m%destlockpickbuy $m%sourcelockpickbuy
+  put #var m%destlockpickstacker $m%sourcelockpickstacker
+  put #var m%destlockpickitem $m%sourcelockpickitem
+  put #var m%destboxpopping $m%sourceboxpopping
+  put #var m%destdismantletype $m%sourcedismantletype
   put #var m%destspiderfeed $m%sourcespiderfeed
   put #var m%destappfocus $m%sourceappfocus
   put #var m%destappfocusitem $m%sourceappfocusitem
@@ -3274,6 +3314,7 @@ VARCOPYMOVEMENT:
   
   put #var m%destvaulttown $m%sourcevaulttown
   put #var m%destammobuytown $m%sourceammobuytown
+  put #var m%destlockpickbuytown $m%sourcelockpickbuytown
   put #var m%destburglepreset $m%sourceburglepreset
   put #var m%destpawnpreset $m%sourcepawnpreset
   put #var m%destperformpreset $m%sourceperformpreset
@@ -3621,6 +3662,12 @@ VARCOPYSPELL:
   put #var m%destwand2item $m%sourcewand2item
   put #var m%destwand2num $m%sourcewand2num
   put #var m%destwand2spell $m%sourcewand2spell
+  put #var m%destwand3item $m%sourcewand3item
+  put #var m%destwand3num $m%sourcewand3num
+  put #var m%destwand3spell $m%sourcewand3spell
+  put #var m%destwand4item $m%sourcewand4item
+  put #var m%destwand4num $m%sourcewand4num
+  put #var m%destwand4spell $m%sourcewand4spell
   
   put #var m%destcyclic $m%sourcecyclic
   put #var m%destcyclicbuff $m%sourcecyclicbuff

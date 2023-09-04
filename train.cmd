@@ -43,7 +43,7 @@ var specialmanipulate tress
 var skinnableundead1 ice adder|adder skeleton|enraged tusky|fell hog|ghoul|ghoul crow|gremlin|grendel|lach|mastiff|mey|misshapen germish'din
 var skinnableundead2 mutant togball|reaver|shadow hound|squirrel|steed|zombie kobold headhunter|zombie kobold savage
 
-var construct ashu hhinvi|boggle|bone amalgam|clay archer|clay mage|clay soldier|clockwork assistant|gam chaga|glass construct|(granite|marble|onyx|quartz) gargoyle|lachmate|lava drake|miniscule (fork|griddle|knife|lid|pan|plate|pot|spoon|teapot)|origami \S+|(alabaster|andesite|breccia|dolomite|marble|obsidian|quartzite|rock) guardian|rough-hewn doll
+var construct ashu hhinvi|beltunumshi|boggle|bone amalgam|clay archer|clay mage|clay soldier|clockwork assistant|gam chaga|glass construct|(granite|marble|onyx|quartz) gargoyle|lachmate|lava drake|miniscule (fork|griddle|knife|lid|pan|plate|pot|spoon|teapot)|origami \S+|(alabaster|andesite|breccia|dolomite|marble|obsidian|quartzite|rock) guardian|rough-hewn doll
 var skinnableconstruct Endrus serpent|(granite|marble|onyx|quartz) gargoyle|lava drake|marble gargoyle|snippet|sylph|windbag
 
 var invasioncritters bone amalgam|bone warrior|brine shark|cloud eel|Drogorian stormrider|Elpalzi (bowyer|deadeye|dissident|fomenter|hunter|incendiary|instigator|malcontent|malcontent|partisan|rebel|sharpshooter|toxophilite)|flea-ridden beast|putrefying shambler|revivified mutt|shambling horror|skeletal peon|thunder eel|transmogrified oaf|Asketian harbinger|giant adder|wind wretch|wind hag|North Wind banshee|blight locust|murder crow|mantrap|clockwork monstrosity|rafflesia|Black Fang watcher
@@ -85,10 +85,11 @@ var woods %rarewoods|%specialwoods
 var rarecloths electroweave|steelsilk
 var specialcloths arzumodine|bourde|dergatine|dragonar|faeweave|farandine|imperial weave|jaspe|khaddar|ruazin wool|titanese|zenganne
 var cloths %rarecloths|%specialcloths
-var rareleathers demonscale|firecat-skin leather|inkhorne-skin leather|jaguar-pelt leather|mammoth-hide leather|onyx-hide leather|puffy-white leather|raven pelt|serpentine-hide leather|white fox pelt leather|wyvern-hide leather
-var specialleathers bark-hide leather|cloud-white leather|corrugated-hide leather|crusty bark-hide leather|dark dragon-scale hide|desumos-pelt leather|diamond-hide|droluger-hide leather|korograth hide|morgawr leather|punka|seal-pelt leather|shadowleaf
+var rareleathers demonscale|firecat-skin|inkhorne-skin|jaguar-pelt|mammoth-hide|onyx-hide|puffy-white|raven|serpentine-hide|white fox pelt|wyvern-hide
+var specialleathers bark-hide|cloud-white|corrugated-hide|crusty bark-hide|dark dragon-scale|desumos-pelt|diamond-hide|droluger-hide|korograth|morgawr|punka|seal-pelt|shadowleaf
 var leathers %rareleathers|%specialleathers
 var materials %metals|%stones|%bones|%woods|%cloths|%leathers
+var materialsnouns leather|hide|ingot|bar|shard|tear|nugget|stick|branch|limb|log|thick log|cloth|stack|pebble|stone|small rock|large rock|boulder|deed
 var nuggetmaterials brass|bronze|coal|copper|covellite|iron|lead|nickel|oravir|pewter|platinum|silver|steel|tin|gold|zinc|electrum|darkstone
 
 
@@ -287,7 +288,7 @@ action var justice 0 when You're fairly certain this area is lawless and unsafe.
 action math pawntotal add $3 when ^(.+) takes your (.*) and gives it a quick but thorough examination\.  After pausing for a moment, he hands you (\d+) (\S+) for it\.
 
 #MISC_TRIGGERS
-action put #echo Black,Yellow ****FOUND RARE MATERIAL DROP!  CHECK ME!****; put #echo >Log Black,Yellow ****FOUND RARE MATERIAL DROP!  CHECK ME!****; put #flash; put #play MiniFanfare3 when Your luck knows no bounds\!
+action put #echo Black,Yellow ****FOUND RARE MATERIAL DROP!  CHECK ME!****; put #echo >Log Black,Green ****FOUND RARE MATERIAL DROP!  CHECK ME!****; put #flash; put #play MiniFanfare3 when Your luck knows no bounds\!
 
 action var playing 0;var humming 0 when ^You finish playing .* on your .*\.
 action var playing 0;var humming 0 when ^You stop playing your song\.
@@ -370,7 +371,7 @@ ALERTINIT:
   
   if %speechalerts = "YES" then
   { 
-    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter
+    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "
@@ -1599,6 +1600,12 @@ MAGICVARLOAD:
   var spellname %wand2spell
   gosub SPELLIDENT
   var wand2var %spellvar
+  var spellname %wand3spell
+  gosub SPELLIDENT
+  var wand3var %spellvar
+  var spellname %wand4spell
+  gosub SPELLIDENT
+  var wand4var %spellvar
   return
 
 WEAPONVARLOAD:
@@ -2017,6 +2024,7 @@ MAINVARLOAD:
   var ammopreset $m%varsetammopreset
   var vaulttown $m%varsetvaulttown
   var ammobuytown $m%varsetammobuytown
+  var lockpickbuytown $m%varsetlockpickbuytown
   
   var auonhealth $m%varsetauonhealth
   var auhealthnum $m%varsetauhealthnum
@@ -2040,12 +2048,16 @@ MAINVARLOAD:
   var gempouches $m%varsetgempouches
   var nuggetsell $m%varsetnuggetsell
   var barsell $m%varsetbarsell
-  var boxpopping $m%varsetboxpopping
-  var dismantletype $m%varsetdismantletype
+  
   var ammobuy $m%varsetammobuy
   var ammobuylist $m%varsetammobuylist
   var ammocontainer $m%varsetammocontainer
   var ammomin $m%varsetammomin
+  var lockpickbuy $m%varsetlockpickbuy
+  var lockpickstacker $m%varsetlockpickstacker
+  var boxpopping $m%varsetboxpopping
+  var dismantletype $m%varsetdismantletype
+  
   var spiderfeed $m%varsetspiderfeed
   var incense $m%varsetincense
   var burglestorage $m%varsetburglestorage
@@ -2504,6 +2516,14 @@ MAINVARLOAD:
   var wand2item $m%varsetwand2item
   var wand2num $m%varsetwand2num
   var wand2spell $m%varsetwand2spell
+  var wand3item $m%varsetwand3item
+  var wand3num $m%varsetwand3num
+  var wand3spell $m%varsetwand3spell
+  var wand4item $m%varsetwand4item
+  var wand4num $m%varsetwand4num
+  var wand4spell $m%varsetwand4spell
+  
+  
   var spellcnum $m%varsetspellcnum
   if $m%varsetspellcnum > 0 then
   {
@@ -3659,7 +3679,7 @@ UPKEEPSET:
   var ammoroom 0
   var hastasks 0
   var taskgiver 0
-  var boxpoprroom 0
+  var boxpoproom 0
   #CROSSING
   if (($zoneid = 1) || ($zoneid = 4)) then
   {
@@ -3696,6 +3716,8 @@ UPKEEPSET:
     var ammozone 1
     var hastasks
     var taskgiver Mags
+    var boxpoproom 105
+    var boxpopzone 1
   }
   #DIRGE
   if $zoneid = 13 then
@@ -3712,6 +3734,7 @@ UPKEEPSET:
     var hasbank 1
     var currency Kronar
     var upkeependroom 11
+    var boxpoproom 176
   }
   #RIVERHAVEN
   if $zoneid = 30 then
@@ -3731,6 +3754,7 @@ UPKEEPSET:
     var pawnshop Ioun
     var almsbox 1
     var almsboxitem almsbox
+    var boxpoproom 272
   }
   #ROSSMANS
   if $zoneid = 34a then
@@ -3743,6 +3767,7 @@ UPKEEPSET:
     var financedappraiserzone
     var currency Lirum
     var upkeependroom 2
+    var boxpoproom 128
   }
   #LANGENFIRTH_THEREN
   if (($zoneid = 40) || ($zoneid = 42)) then
@@ -3772,6 +3797,8 @@ UPKEEPSET:
     var almsbox 1
     var almsboxzone 42
     var almsboxitem almsbox
+    var boxpoproom 304
+    var boxpopzone 42
   }
   #MOOSE_PARTY
   if (($zoneid = 47) || ($zoneid = 48)) then
@@ -3839,6 +3866,8 @@ UPKEEPSET:
     var pawnzone 67
     var ammoroom general
     var ammozone 67
+    var boxpoproom 131
+    var boxpopzone 67
   }
   #RATHA
   if $zoneid = 90 then
@@ -4290,7 +4319,7 @@ BOXPOPPINGLOGIC:
     if ($roomid != 11) then gosub MOVE 11
     if ("$guild" = "Thief") then
     {
-      gosub KHRISTOP all
+      gosub KHRISTOP
       gosub BOXPOPPINGKHRI
     }
     put #echo %alertwindow Yellow Box popping started.
@@ -4601,7 +4630,7 @@ SACKDONE:
 
 COUNTCONTAINER:
   action (bundles) var rummagestring $1 when You rummage (.+)
-  gosub RUMMAGE %storage
+  gosub RUMMAGE
   pause .5
   action (bundles) off
   eval bundropesnum count("%rummagestring","bundling rope")
@@ -10087,82 +10116,72 @@ DEVICEBUFFLOGIC:
   #WAND
   if ("%wandbuff" = "YES") then
   {
-    if (%wandbuffnum > 0) then
-    {
-      #echo gametime: $gametime   wand1next: $wand1next
-      if ($gametime >= $wand1next) then
-      {
-        #put #echo %wand1var.active: $%wand1var.active
-        if ($%wand1var.active != 1) then
-        {
-          var wcounter 1
-          var anybuff 1
-          gosub WANDBUFFINGLOGIC
-          gosub PERC
-        }      
-      }
-    }
-    if (%wandbuffnum > 1) then
-    {
-      if ($gametime >= $wand2next) then
-      {
-        if ($%wand2var.active != 1) then
-        {
-          var wcounter 2
-          var anybuff 1
-          gosub WANDBUFFINGLOGIC
-          gosub PERC
-        }
-      }
-    }
+    var wcounter 0
+    gosub WANDBUFFLOOP
   }
   return
   
-WANDBUFFINGLOGIC:
-  gosub STOWALL
-  pause 1
-  gosub GETITEM my %wand%wcounteritem in %wandstorage
-  gosub GETITEM my %wand%wcounteritem in %wandstorage
-  gosub WANDINVOKE %wand%wcounteritem
-  if %wandinvokegood = 1 then
+WANDBUFFLOOP:
+  math wcounter add 1
+  if (%wcounter > %wandbuffnum) then return
+  if (%wandbuffnum > 0) then
   {
-    var temp $gametime
-    math temp add 1920
-    put #var wand%wcounternext %temp
-    put #echo %alertwindow [WandBuff]: Successfully activated wand %wcounter.
-  }
-  else 
-  {
-    if %wand1num = 2 then
+    if ($%wand%wcountervar.active != 1) then
     {
-      var putitemname 
-      gosub WANDINVOKE second %wand%wcounteritem
-      if %wandinvokegood = 1 then
-      {
-        var temp $gametime
-        math temp add 1920
-        put #var wand%wcounternext %temp
-        put #echo %alertwindow [WandBuff]: Successfully activated wand %wcounter.
-      }
-      else
-      {
-        var temp $gametime
-        math temp add 120
-        put #var wand%wcounternext %temp
-        put #echo %alertwindow Yellow [WandBuff]: Unable to activate wand %wcounter.
-      }
-    }
-    else
-    {
-      var temp %gametime
-      math temp add 1920
-      put #var wand%wcounternext %temp
-      put #echo %alertwindow [WandBuff]: Unable to activate wand %wcounter.  Only one wand is available.
+      #echo gametime: $gametime   wand%wcounternext: $wand%wcounternext
+      var wandtest $wand%wcounternext
+      math wandtest subtract $gametime
+      #if ($gametime < $wand%wcounternext) then put #echo %alertwindow Yellow [WandBuff]: Wand %wcounter down, but still has a wait of %wandtest seconds
+      #else
+      #{
+        #put #echo %wand%wcountervar.active: $%wand%wcountervar.active 
+        var anybuff 1
+        gosub STOWALL
+        pause 1
+        gosub GETITEM my %wand%wcounteritem in %wandstorage
+        if (%wand%wcounternum > 1) then gosub GETITEM my %wand%wcounteritem in %wandstorage
+        gosub WANDINVOKE first %wand%wcounteritem
+        if (%wandinvokegood = 1) then
+        {
+          var temp $gametime
+          math temp add 1810
+          put #var wand%wcounternext %temp
+          put #echo %alertwindow [WandBuff]: Successfully activated wand %wcounter.
+        }
+        else 
+        {
+          if (%wand%wcounternum = 2) then
+          {
+            gosub WANDINVOKE second %wand%wcounteritem
+            if (%wandinvokegood = 1) then
+            {
+              var temp $gametime
+              math temp add 1810
+              put #var wand%wcounternext %temp
+              put #echo %alertwindow [WandBuff]: Successfully activated second wand %wcounter.
+            }
+            else
+            {
+              var temp $gametime
+              math temp add 10
+              put #var wand%wcounternext %temp
+              put #echo %alertwindow Yellow [WandBuff]: Unable to activate wand %wcounter.
+            }
+          }
+          else
+          {
+            var temp $gametime
+            math temp add 1810
+            put #var wand%wcounternext %temp
+            put #echo %alertwindow [WandBuff]: Wand %wcounter is down, but only one wand is available.
+          }
+        }
+        gosub STOWALL
+        gosub PERCSELF
+      #}    
     }
   }
-  gosub STOWALL
-  return
-
+  goto WANDBUFFLOOP
 
 
 BUFFINGLOOP:

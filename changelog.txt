@@ -1,3 +1,27 @@
+09/03/23
+Updated Scripts: train, library, set
+
+Wands
+Script can now accommodate up to four wands.
+Added HES to the list of wands that can be used with WandBuff.
+Rewrote wand usage.  Script no longer relies on timers, as Barbs and Thieves now have access to the info in the SpellWindow, and the timers were just too finicky.
+
+Treasure
+Tightened up regex for rare materials drops from high level critters to avoid issues with trapping random junk (such as beltunumshis made of rare materials).
+For safety, box popping now only pops carefully.  The time savings for doing it faster are not worth the deaths.
+Numerous bugfixes to box popping and box loot handling.
+Box popping will no longer get stuck if it finds a boar of soap in the box.
+Bugfixes to identification of valid towns for box popping.
+Added support for box popping to Crossing, Dirge, Riverhaven, Rossman's.
+
+Misc
+Added P3-windbags2, p3-beltunumshi hunting areas.
+Fixed a bug with multiword strings and identifying the TMFocusItem properly.
+Bugfix for adjusting your bundle when there's a bundle on the ground.
+Bugfix for rummaging sub when looking for bundling ropes.
+
+
+
 07/27/23
 Updated Scripts: train, library, set, mtcorn, mtdroughtman, mtcruise, raffle, kill
 

@@ -13,7 +13,7 @@ var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|fi
 
 var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-guardians|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
 var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-gryphonsbaby|p2-gryphonsyoung|p2-seordmaors
-var combatpresetp3 p3-snippets|p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-sylphs|p3-quartzgargoyles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-windbags|p3-frostcrones|p3-prerenielder|p3-gryphons|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-adanfsorcs|p3-adanfblades
+var combatpresetp3 p3-snippets|p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-sylphs|p3-quartzgargoyles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-windbags|p3-windbags2|p3-frostcrones|p3-prerenielder|p3-gryphons|p3-beltunumshi|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-adanfsorcs|p3-adanfblades
 var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p4-merkreshcelpeze4|p4-armadillosjuve|p4-armadillosadult|p4-armadilloselder
 var combatpresetp5 p5-maidenstress|p5-matronstress|p5-dryads|p5-nyads1|p5-blightogres1|p5-nyads2|p5-blightogres2|p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-blackapes|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
 var combatpresetlist none|%combatpresetp1|%combatpresetp2|%combatpresetp3|%combatpresetp4|%combatpresetp5
@@ -26,10 +26,12 @@ var townvaultpresetlist none|muspari|theren|riverhaven|dirge|crossing|leth|shard
 var townportalpresetlist none|muspari|therenborough|langenfirth|riverhaven|crossing|leth|shard|hibarnhvidar|ainghazal|ratha|mriss|aesry
 var pawnpresetlist none|crossing|riverhaven|shard|hibarnhvidar
 var ammopresetlist none|crossing|shard|ratha
+var lockpickpresetlist none|crossing|shard
 
 var Ordinal none|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth
 var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.
 
+#action (combo) var elapsed $gametime; math elapsed subtract %gametimestart; put #echo Yellow Elapsed: %elapsed; 10put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
 action (combo) put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
 action (combo) var barbmane $unixtime; math barbmane subtract 30; put #var %manenamelast %barbmane; put #var save;put #echo Yellow Barbarian Maneuver %manename cooldown reduction! when With expert skill you end the attack and maneuver into a better position\.
 action (combo) var failtest $unixtime; math failtest subtract 80; put #var %manenamelast %failtest; send #echo Yellow ACM is still on cooldown! when You must rest a bit longer before attempting that maneuver again\.
@@ -764,6 +766,17 @@ VARCHECKS:
       put #var m%checkmodefindroomlist 722|723|724|725|726|727|728|729
       put #var m%checkmodebugoutroom 128
     }
+    if ("$m%checkmodecombatpreset" = "p3-windbags2") then
+    {
+      put #var m%checkmodezone 66
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest fayrin
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 731|732|730|733|734|735|736
+      put #var m%checkmodebugoutroom 128
+    }
     if ("$m%checkmodecombatpreset" = "p3-frostcrones") then
     {
       put #var m%checkmodezone 66
@@ -808,6 +821,17 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 154|155|156|157|158|159|160|161|162|163|164|165|166|167
+      put #var m%checkmodebugoutroom 382
+    }
+    if ("$m%checkmodecombatpreset" = "p3-beltunumshi") then
+    {
+      put #var m%checkmodezone 69
+      put #var m%checkmodetravel YES
+      put #var m%checkmodetraveldest wyvern
+      put #var m%checkmodemove NO
+      put #var m%checkmodetargetroom 0
+      put #var m%checkmodefindroom YES
+      put #var m%checkmodefindroomlist 616|617|618|619|620|621|622|623|624|625|626|627|628
       put #var m%checkmodebugoutroom 382
     }
     if ("$m%checkmodecombatpreset" = "p3-adanfblood") then
@@ -1235,6 +1259,7 @@ VARCHECKS:
   if !matchre("$m%checkmodeammopreset", "\b(%ammopresetlist)\b") then put #var m%checkmodeammopreset none
   if !matchre("$m%checkmodevaulttown", "\b(%townvaultpresetlist)\b") then put #var m%checkmodevaulttown none
   if !matchre("$m%checkmodeammobuytown", "\b(%ammopresetlist)\b") then put #var m%checkmodeammobuytown none
+  if !matchre("$m%checkmodelockpickbuytown", "\b(%lockpickpresetlist)\b") then put #var m%checkmodelockpickbuytown none
   if !matchre("$m%checkmodeburglepreset", "\b(%townburglepresetlist)\b") then put #var m%checkmodeburglepreset none
   if !matchre("$m%checkmodepawnpreset", "\b(%pawnpresetlist)\b") then put #var m%checkmodepawnpreset none
   if !matchre("$m%checkmodeperformpreset", "\b(%townperformpresetlist)\b") then put #var m%checkmodeperformpreset none
@@ -1295,13 +1320,16 @@ VARCHECKS:
   else put #var m%checkmodegempouches 0
   if !matchre("$m%checkmodenuggetsell", "\b(YES|NO)\b") then put #var m%checkmodenuggetsell YES
   if !matchre("$m%checkmodebarsell", "\b(YES|NO)\b") then put #var m%checkmodebarsell YES
-  if !matchre("$m%checkmodeboxpopping", "\b(YES|NO)\b") then put #var m%checkmodeboxpopping NO
-  if !matchre("$m%checkmodedismantletype", "\b(none|bash|bunny|caravan|chomp|claw|crush|fire|focus|jump|pray|press|roar|salvage|shriek|slam|slip|stomp|thump|tinker|whistle)\b") then put #var m%checkmodedismantletype none
   if !matchre("$m%checkmodeammobuy", "\b(YES|NO)\b") then put #var m%checkmodeammobuy NO
   if !def(m%checkmodeammobuylist) then put #var m%checkmodeammobuylist bow|xbow|sling
   if !def(m%checkmodeammocontainer) then put #var m%checkmodeammocontainer backpack
   if $m%checkmodeammomin >= 0 then
   else put #var m%checkmodeammomin 100
+  if !matchre("$m%checkmodelockpickbuy", "\b(YES|NO)\b") then put #var m%checkmodelockpickbuy NO
+  if !def(m%checkmodelockpickstacker) then put #var m%checkmodelockpickstacker lockpick ring
+  if !matchre("$m%checkmodeboxpopping", "\b(YES|NO)\b") then put #var m%checkmodeboxpopping NO
+  if !matchre("$m%checkmodedismantletype", "\b(none|bash|bunny|caravan|chomp|claw|crush|fire|focus|jump|pray|press|roar|salvage|shriek|slam|slip|stomp|thump|tinker|whistle)\b") then put #var m%checkmodedismantletype none
+  
   if !matchre("$m%checkmodeappfocus", "\b(YES|NO)\b") then put #var m%checkmodeappfocus NO
   if !def(m%checkmodeappfocusitem) then put #var m%checkmodeappfocusitem shark
   if !matchre("$m%checkmodespiderfeed", "\b(YES|NO)\b") then put #var m%checkmodespiderfeed NO
@@ -1700,14 +1728,30 @@ VARCHECKS:
   if $m%checkmodetattooprepwait >= 0 then
   else put #var m%checkmodetattooprepwait 0
   if !matchre("$m%checkmodewandbuff", "\b(YES|NO)\b") then put #var m%checkmodewandbuff NO
-  if !matchre("$m%checkmodewandbuffnum", "\b(1|2)\b") then put #var m%checkmodewandbuffnum 1
+  if !matchre("$m%checkmodewandbuffnum", "\b(1|2|3|4)\b") then put #var m%checkmodewandbuffnum 1
   if !def(m%checkmodewandstorage) then put #var m%checkmodewandstorage backpack
-  if !def(m%checkmodewand1item) then put #var m%checkmodewand1item scepter
+  
+  if !def(m%checkmodewand1spell) then put #var m%checkmodewand1spell rage 
+  if !def(m%checkmodewand1item) then put #var m%checkmodewand1item indurium phoenix
   if $m%checkmodewand1num > 0 then
-  else put #var m%checkmodewand1num 1
-  if !def(m%checkmodewand2item) then put #var m%checkmodewand2item scepter
+  else put #var m%checkmodewand1num 2
+  
+  if !def(m%checkmodewand2spell) then put #var m%checkmodewand2spell mef
+  if !def(m%checkmodewand2item) then put #var m%checkmodewand2item bloodwood branch
   if $m%checkmodewand2num > 0 then
   else put #var m%checkmodewand2num 2
+  
+  if !def(m%checkmodewand3spell) then put #var m%checkmodewand3spell hes
+  if !def(m%checkmodewand3item) then put #var m%checkmodewand3item ironwood wand
+  if $m%checkmodewand3num > 0 then
+  else put #var m%checkmodewand3num 2
+  
+  
+  if !def(m%checkmodewand4spell) then put #var m%checkmodewand4spell will
+  if !def(m%checkmodewand4item) then put #var m%checkmodewand4item crystal
+  if $m%checkmodewand4num > 0 then
+  else put #var m%checkmodewand4num 2
+  
   if !def(m%checkmodewand1next) then put #var m%checkmodewand1next 0
   if !def(m%checkmodewand2next) then put #var m%checkmodewand2next 0
   if !matchre("$m%checkmodewand1spell", "\b(hes|mef|rage|rw|will|wotp)\b") then put #var m%checkmodewand1spell mef
@@ -2686,7 +2730,7 @@ STATUSCHECK:
   {
     if %tmfocusinuse = 1 then
     {
-      if matchre ("$righthandnoun", "%tmfocusitem") then
+      if (matchre("$righthand", "%tmfocusitem")) then
       else
       {
         gosub STOW right
@@ -2950,8 +2994,10 @@ BUY:
 BUYP:
   pause
 BUYMAIN:
-  matchre BUYP ...wait|type ahead|stunned|while entangled in a web.
+  matchre BUYP %waitstring
+  match BUYP Ragge exclaims, "Slow down!  Slow down!  Do you see any Halfling assistants in the shop?  I can only process one order at a time."
   matchre RETURN Brother Durantine nods slowly|Friar Othorp grins broadly|Sister Nongwen smiles and nods|Sister Imadrail smiles and nods|The sales clerk hands you your
+  matchre BUYOFFER Ragge sighs.  "Despite the rarity of this lockpick, I'm prepared to offer it to you for (\d+) kronars."
   match RETURN You realize you don't have that much.
   put order %buytarget
   matchwait 5
@@ -2959,6 +3005,19 @@ BUYMAIN:
   var timeoutcommand order %buytarget
 	goto TIMEOUT
 
+BUYOFFER:
+  var offeramount $1
+  goto BUYOFFERMAIN
+  
+  
+BUYOFFERMAINP:
+  pause
+BUYOFFERMAIN:
+  matchre BUYOFFERMAINP %waitstring
+  match RETURN Ragge hands over your lockpick.
+  put offer $1
+  matchwait
+  return
 
 BUNDLEPULLP:
   pause
@@ -3228,7 +3287,8 @@ PUTITEMP:
 	pause
 PUTITEMMAIN:
 	matchre PUTITEMP %waitstring
-	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the
+	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.
+
 	matchre PUTRETURN You put|You drop|You briefly twist the top off of|Raffle Attendant Tizzeg examines your ticket and exclaims|A bored-looking Human boy says
 	match PUTITEMSTOW There's no room in the
 	match RETURN That's too heavy to go in there!
@@ -3267,18 +3327,15 @@ REMOVESTOW:
   gosub STOWALL
   goto REMITEMMAIN
 
-RUMMAGE:
-  var rummagestring $0
-  goto RUMMAGEMAIN
 RUMMAGEP:
   pause
-RUMMAGEMAIN:
+RUMMAGE:
   matchre RUMMAGEP %waitstring
   matchre RETURN I don't know what you are referring to.|You rummage|While it's closed?
-  put rummage %rummagestring
+  put rummage %storage
 	matchwait 5
-	var timeoutsub RUMMAGEMAIN
-  var timeoutcommand rummage %rummagestring
+	var timeoutsub RUMMAGE
+  var timeoutcommand rummage %storage
 	goto TIMEOUT
 
 SHEATHEHAND:
@@ -3644,7 +3701,7 @@ SWAPP:
 SWAP:
   matchre SWAPP %waitstring
   matchre RETURN You move|You have nothing to swap!
-  matchre SWAPWOUNDS Your (right|left) hand is too injured to do that\.
+  matchre SWAPINJURED Your (right|left) hand is too injured to do that\.
   matchre SWAPNERVES Will alone cannot conquer the paralysis that has wracked your body\.
   put swap
   matchwait 5
@@ -3660,7 +3717,7 @@ SWAPINJURED:
   }
   else
   {
-    if %bugout = "YES" then goto BUGOUT
+    if ("%bugout" = "YES") then goto BUGOUT
     else goto SWAPTOOINJURED
   }
   return
@@ -3673,7 +3730,7 @@ SWAPNERVES:
   }
   else
   {
-    if %bugout = "YES" then goto BUGOUT
+    if ("%bugout" = "YES") then goto BUGOUT
     else goto SWAPTOOINJURED
   }
 
@@ -3711,7 +3768,7 @@ WEARARMORP:
   pause
 WEARARMORMAIN:
   matchre WEARARMORP %waitstring
-  matchre WEARARMORGOOD You are already wearing that\.|^You slide|^You put|^You slip|^You work
+  matchre WEARARMORGOOD ^You are already wearing that\.|^You slide|^You put|^You slip|^You work
   matchre RETURN ^I could not find what you were referring to\.|^Wear what\?
   put wear my %weararmoritem
   matchwait
@@ -4321,7 +4378,7 @@ ATTACKACM:
   match ATTACKACMSUCCESS With a loud twang, you let fly your
   match ATTACKACMBARBSUCCESS With expert skill you end the attack and maneuver into a better position.
   match ATTACKACMSTOW You must free up your left hand first.
-  matchre ATTACKACMSTAND You'll need to stand up first.
+  matchre ATTACKACMSTAND ^You'll need to stand up first\.|^You must be standing to perform that maneuver\.
 	matchre ADV You aren't close enough to attack\.
   #match BOWLOADLOGIC You prepare the shot, but stop when you realize the
   matchre ATTACKACMWRONG With your fist\?  That might hurt\.|This weapon lacks the edge necessary to cleave your enemy with\.|Your hands must be empty to deliver such a blow\.|A pike or halberd weapon is necessary to impale your enemy with\.|Only a staff is suitable for the complex motions of the twirl maneuver\.|This works best when you use a suitable ranged weapon\.|This works best when you use a suitable weapon\.|This works best when you are dual wielding suitable weapons\.
@@ -7087,7 +7144,7 @@ WANDINVOKEP:
 WANDINVOKEMAIN:
   var wandinvokegood 1
   matchre WANDINVOKEP %waitstring
-  matchre RETURN The world around you seems to slow as the spell grips your mind\.|The spell pulses through your soul, rekindling your holy rage\.|Mentally steeling yourself in preparation for the unnatural action|A glistening net of coiling tendrils|Your blood rises as images of ferocious battles play across your mind\.  You feel the fervor of combat grip you\.|You harness the currents of air and channel them around yourself\.|The overwhelming sense of unity with your hidden brothers and sisters sharpens your intuition, kin and prey alike\.|Your blood begins to boil and with a mighty shout you allow the rage within to flow outward for all to see\.
+  matchre RETURN The world around you seems to slow as the spell grips your mind\.|The spell pulses through your soul, rekindling your holy rage\.|Mentally steeling yourself in preparation for the unnatural action|A glistening net of coiling tendrils|Your blood rises as images of ferocious battles play across your mind\.  You feel the fervor of combat grip you\.|You harness the currents of air and channel them around yourself\.|The overwhelming sense of unity with your hidden brothers and sisters sharpens your intuition, kin and prey alike\.|Your blood begins to boil and with a mighty shout you allow the rage within to flow outward for all to see\.|^You feel the strange aliveness in your limbs renew itself\.
   match WANDINVOKESTOW You must be able to handle your disc with both hands to use it for a ritual.
   matchre WANDINVOKEBAD ^The \w+ remains inert\.
   match RETURN You are in no condition to do that.
@@ -7430,7 +7487,7 @@ BUNDLEADJUST:
   put adjust bundle
   matchwait 5
 	var timeoutsub BUNDLEADJUST
-  var timeoutcommand adjust bundle
+  var timeoutcommand adjust my bundle
 	goto TIMEOUT
 	
 
@@ -7859,7 +7916,7 @@ BOXGET:
 LOOTP:
   pause
 LOOT:
-  if %noloot = "YES" then return
+  if ("%noloot" = "YES") then return
   if !matchre ("$roomobjs", "((which|that) appears dead|\(dead\))") then return
   matchre RETURN You search|You should probably wait until|You find nothing of interest.|I could not find what you were referring to.
   match LOOT and get ready to search it!
@@ -7873,15 +7930,25 @@ LOOT:
 
 
 LOOTCHECK:
+  #put #echo Yellow Coin.
   if ("%collectcoin" = "YES") then gosub COINGET
+  #put #echo Yellow gwethstones
   if ("%savegwethstones" = "YES") then gosub GWETHGET
+  #put #echo Yellow gem
   if ("%collectgem" = "YES") then gosub GEMGET
+  #put #echo Yellow boxes
   if ("%collectboxes" = "YES") then gosub BOXGET
+  #put #echo Yellow scroll
   if ("%collectscroll" = "YES") then gosub SCROLLGET
+  #put #echo Yellow maps
   if ("%collectmaps" = "YES") then gosub MAPGET
+  #put #echo Yellow nuggets
   if ("%collectnuggets" = "YES") then gosub NUGGETSGET
+  #put #echo Yellow bars
   if ("%collectbars" = "YES") then gosub BARSGET
+  #put #echo Yellow materials
   if ("%collectmaterials" = "YES") then gosub MATERIALSGET
+  #put #echo Yellow misc
   if ("%misckeeplist" != "none") then
   {
     eval keeplistnum count("%misckeeplist", "|")
@@ -7902,7 +7969,7 @@ MAPGET:
   return
 
 MATERIALSGET:
-  if matchre ("$roomobjs", "\b(%materials) (\w+)\b(,|\.| and)") then
+  if matchre ("$roomobjs", "\b(%materials) (%materialsnouns)\b(,|\.| and)") then
   {
     var materialadj $1
     var materialnoun $2
@@ -7910,7 +7977,7 @@ MATERIALSGET:
     if %lootalerts = "YES" then put #echo %alertwindow Yellow [Treasure]: Found a %materialadj %materialnoun rare material!
     gosub STOWITEM %materialnoun
   }
-  if matchre ("$roomobjs", "\b(%materials) (\w+)\b(,|\.| and)") then goto MATERIALSGET
+  if matchre ("$roomobjs", "\b(%materials) (%materialsnouns)\b(,|\.| and)") then goto MATERIALSGET
   return
 
 
@@ -8204,7 +8271,6 @@ BOXFILLPOUCHFULL:
   gosub GETITEM %pouchnum gem pouch
   gosub WEARITEM gem pouch
   gosub STORE gem gem pouch
-  gosub STOWALL
   goto BOXFILLPOUCH
 
 BOXLOOTCHECKP:
@@ -8213,14 +8279,14 @@ BOXLOOTCHECK:
 	matchre BOXLOOTCHECKP \.\.\.wait|type ahead|stunned|while entangled in a web\.
 	#matchre stow_Gear (gear|\bbolt\b|\bnut\b|glarmencoupler|spangleflange|rackensprocket|flarmencrank)
 	matchre BOXLOOTGETMISC (map|treasure map|Treasure map)
-  matchre BOXLOOTGETMISC (nugget|ingot|\bbar\b|jadeite|kyanite|bark|parchment|\bdira\b|papyrus|tablet|vellum|\bscroll\b|\broll\b|ostracon|leaf|\brune\b)
+  matchre BOXLOOTGETMISC (nugget|ingot|(?!bar of)\bbar\b|jadeite|kyanite|bark|parchment|\bdira\b|papyrus|tablet|vellum|\bscroll\b|\broll\b|ostracon|leaf|\brune\b)
   matchre RETURN In the|nothing|What
 	put look in my %boxitem
 	matchwait
 
 BOXLOOTGETMISC:
   var itemtoget $1
-  gosub GETITEM %itemtoget
+  gosub GETITEM %itemtoget in my %boxitem
   gosub STOWITEM %itemtoget
   #put #echo >Log Yellow Found a %itemtoget!
   goto BOXLOOTCHECK
@@ -8271,7 +8337,7 @@ DISARM:
   matchwait
 
 DISARM2Q:
-  var disarmtype quick
+  var disarmtype careful
   goto DISARM2
   
 DISARM2C:
@@ -8334,7 +8400,7 @@ PICK:
   matchwait
     
 PICK2Q:
-  var picktype quick
+  var picktype careful
   goto PICK2
   
 PICK2C:
@@ -9289,6 +9355,7 @@ ATTACKACMCOMBO:
   var argument $0
 ATTACKACMCOMBOMAIN:
   matchre ATTACKACMCOMBOMAIN %waitstringgood
+  match ATTACKACMCOMBOMAIN You must recover your position before attempting another maneuver so quickly.
   matchre ATTACKACMCBADNEWS %waitstringbad
   #match ATTACKACMCRETURN Roundtime:
   matchre ATTACKACMCRETURN ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
@@ -10328,7 +10395,7 @@ APPRAISE:
   matchwait 5
   var timeoutsub APPRAISE
   if %appsaveitem != "none" then var timeoutcommand %appsaveitem bundle quick
-  else var timeoutcommand bundle quick
+  else var timeoutcommand appraise bundle quick
 	goto TIMEOUT
   
 APPRET:
@@ -10857,6 +10924,15 @@ Base.ListExtract.Loop.Trim:
   eval %Base.NounListVar replacere ("%%Base.NounListVar", "\|[\w'-]+ ", "|")
   if contains("%%Base.NounListVar", " ") then goto Base.ListExtract.Loop.Trim
 	return
+
+TAPNOUN:
+  var tap $0
+  eval tap replace("%tap", " ", "|"
+  eval taplength count("%tap","|")
+  #echo taplength: %taplength
+  if %taplength > 0 then var nountap %tap(%taplength)
+  else var nountap %tap(0)
+  return
 
 TAPSHORTEN:
   var tap $0
