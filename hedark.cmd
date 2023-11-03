@@ -17,10 +17,7 @@ var badloot \S+ kelp|\S+ rockweed|\S+ \S+ rockweed|piece of \S+ sharkskin|\S+ ro
 
 var goodloot infuser stone|potency crystal|\S+ powder|.* cloth|.* stack|.* leather|.* bar|.* nugget|.* fragment|.* lump|.* tear|.* shard|.* ingot|.* pebble|.* rock|.* stone|.* boulder|.* deed|bulging pouch|small pouch|%lootkeeplist
 
-var searchlist 7|8|13|17|18|19|20|21|22|23|24|25|26|.37|38|45|47|96|97|103|102|101|100|99|98|103|105|106|107|108|109|110|111|112|113|114|115|116|250|117|118|119|120|121|122
-
-var searchlist 3|8|11|12|13|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|37|49|50|51|52|53|54|55|56|73|77|78|74|75|76|79|80|81|82|83|84|85|86|87|88|89
-
+var searchlist 8|10|11|12|13|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|37|49|50|51|52|53|54|55|56|77|78|73|74|76|79|80|81|82|83|84|85|86|87|88|89|90
 
 var needshealing 0
 #var timetofind 0
