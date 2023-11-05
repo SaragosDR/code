@@ -9,13 +9,8 @@ action var needshealing 1 when Unfortunately, your wounds make it impossible for
 var searchlist 8|10|11|12|13|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|37|49|50|51|52|53|54|55|56|77|78|73|74|76|79|80|81|82|83|84|85|86|87|88|89|90
 
 var needshealing 0
-#var timetofind 0
 var startroom 3
-var wins 0
-var keptwins 0
 
-
-  echo lootkeeplist: %lootkeeplist
 gosub STOWALL
 gosub LOCATIONCHECK
 

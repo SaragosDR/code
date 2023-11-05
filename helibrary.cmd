@@ -1,5 +1,5 @@
 
-action put #echo >Log Yellow [%scripttag] TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent when A good positive attitude never hurts\.
+action var averagecost %totalspent; math averagecost divide %prizeskept; put #echo >Log Yellow [%scripttag] TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent // Average cost per kept prize: %average cost when A good positive attitude never hurts\.
 action var lodgedstring $0 when You have a .* lodged
 
 if ("%scripttag" != "DARK") then
@@ -158,6 +158,7 @@ GETHEALED:
     put whisper %healbotname Heal me, please.
     waitfor "All clean."
   }
+  var needshealing 0
   gosub MOVE docks
   gosub WHISTLEDOLPHIN
   put #mapper reset
