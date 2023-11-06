@@ -31,6 +31,7 @@ MAIN:
   var onstage 0
   var onweb 0
   var finished 0
+  gosub STOWALL
   if %gotime != 1 then gosub JOINLISTWAIT
   gosub GOROOM amp
   gosub GOROOM area

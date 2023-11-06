@@ -21,6 +21,7 @@ MAIN:
     gosub GETHEALED
   }
   if !contains("$roomobjs", "the Darkbox") then gosub FINDDARKBOX
+  gosub STOWALL
   gosub PLAYDARKBOX
   goto MAIN
   exit

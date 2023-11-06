@@ -22,6 +22,7 @@ else
 }
 
 var storage 0
+var dolphinpause 0
 var healbot NO
 var healbotroom 204
 var healbotname Maorn
@@ -35,7 +36,7 @@ var totalspent 0
 if {"$charactername" = "Saragos") then
 {
   var storage haversack
-  var healbot YES
+  var healbot NO
   var healbotroom 204
   var healbotname Maorn
 }
@@ -56,7 +57,11 @@ LOCATIONCHECK:
 	  {
 	    gosub MOVE docks
 	    gosub WHISTLEDOLPHIN
-	    put #mapper reset
+      if (%dolphinpause > 0) then
+      {
+        pause %dolphinpause
+      }
+      put #mapper reset
 	  }
 	  else
 	  {
@@ -116,7 +121,11 @@ HANDLELOOT:
   var costperkeptprize %totalspent
   math costperkeptprize / %prizeskept
   
-  gosub TAPSHORTEN $righthand
+  if ("$righthand" != "Empty") then gosub TAPSHORTEN $righthand
+  else
+  {
+    if ("$lefthand" != "Empty") then gosub TAPSHORTEN $lefthand
+  }
   
   if matchre("%lootreceived", "%badlootlist") then
   {
@@ -142,7 +151,7 @@ HANDLELOOT:
     put #echo >Log Yellow [%scripttag]: Won %lootreceived!  On the lootlist, keeping.  TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent.
     if (%storage != 0) then gosub PUTITEM %shorttap in my %storage
     else gosub STOWALL
-    if $righthand != "Empty" then
+    if ($righthand != "Empty") then
     {
       put #echo >Log Yellow [%scripttag]: Won %lootreceived!  Cannot store!  Exiting!
       exit
@@ -192,6 +201,10 @@ GETHEALED:
   var needshealing 0
   gosub MOVE docks
   gosub WHISTLEDOLPHIN
+  if (%dolphinpause > 0) then
+  {
+    pause %dolphinpause
+  }
   put #mapper reset
   put #echo >Log [%scripttag]: Healing complete.
   return
@@ -231,9 +244,9 @@ WHISTLEDOLPHIN:
   matchwait
   
 WHISTLEWAIT:
-  match RETURN With a final burst of speed, your dolphin arrives at the docks where a Merelew guard reaches down to fish you out of the water. 
+  #match RETURN With a final burst of speed, your dolphin arrives at the docks where a Merelew guard reaches down to fish you out of the water. 
+  match RETURN [Andreshlew, South Dock]
   matchwait
-  return
   
 HEALERUSEP:
   pause

@@ -48,6 +48,7 @@ MAIN:
 		}
   }
   gosub LOCATIONCHECK
+  gosub STOWALL
 	gosub GRABBOX
 	if %needsheal = 1 then goto MAIN
 	gosub MOVE 150
