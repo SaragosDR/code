@@ -36,7 +36,7 @@ var totalspent 0
 if {"$charactername" = "Saragos") then
 {
   var storage haversack
-  var healbot NO
+  var healbot YES
   var healbotroom 204
   var healbotname Maorn
 }
@@ -168,6 +168,11 @@ GETHEALED:
   put #echo >Log [%scripttag]: Getting healed.
   gosub MOVE dolphin
   gosub GOCORRAL
+  if (%dolphinpause > 0) then
+  {
+    pause %dolphinpause
+  }
+  put #mapper reset
   put #echo Yellow healbot: %healbot
   if ("%healbot" != "YES") then
   {
@@ -231,9 +236,8 @@ GOCORRAL:
   echo didn't catch!
   
 CORRALWAIT:
-  match RETURN With a final burst of speed, your dolphin arrives at the docks where a Merelew guard reaches down to fish you out of the water.
-  matchwait 20
-  return
+  match RETURN [The Crossing Docks, South End]
+  matchwait
   
 WHISTLEDOLPHINP:
   pause
