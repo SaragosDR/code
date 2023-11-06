@@ -38,7 +38,6 @@ MAIN:
   if %onweb != 1 then gosub WEBWAIT
   gosub RUBWEB
   gosub KICKWEB
-  math totalattempts add 1
   gosub HANDLELOOT
 	gosub MOVE %startroom
   pause 30
@@ -84,20 +83,17 @@ JOINLISTP:
   pause
 JOINLIST:
   matchre JOINLISTP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
-  match RETURN The seedy monger looks up to you and says, "Good.  You're registered.
+  match JOINLISTGOOD The seedy monger looks up to you and says, "Good.  You're registered.
   match RETURN The seedy monger looks up at you and exclaims, "But you are already registered!"
   match RETURN The seedy monger looks up at you and exclaims, "It's already your turn, head to the stage!"
   match OUTOFMONEY As you reach to pay for your order, you realize you don't have enough money.
   put join list
   matchwait
 
-JOINLISTGOODP:
-  pause
 JOINLISTGOOD:
-  matchre JOINLISTGOODP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
-  match RETURN Registration List for Stupid Terrestrian Tricks
-  put read list
-  matchwait
+  math totalattempts add 1
+  math totalspent add 500
+  return
 
 RUBWEBP:
   pause

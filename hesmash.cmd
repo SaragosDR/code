@@ -52,7 +52,6 @@ MAIN:
 	if %needsheal = 1 then goto MAIN
 	gosub MOVE 150
 	gosub BREAKSHELL
-	gosub HANDLELOOT
   goto MAIN
 
 GRABBOXLOOP:
@@ -82,14 +81,17 @@ OUTOFMONEY:
   goto GRABBOX
 
 GRABSTOW:
+  math totalspent add 1000
   gosub STOWALL
   goto GRABBOX
 
 GRABWOUND:
+  math totalspent add 1000
   var needsheal 1
   return
 
 GRABNO:
+  math totalspent add 1000
   goto GRABBOX
 
 BREAKSHELLP:
@@ -97,9 +99,15 @@ BREAKSHELLP:
 BREAKSHELL:
   math totalattempts add 1
   matchre BREAKSHELLP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
-  match RETURN Leaning back, you begin to float in the waist deep water.
+  matchre BREAKSHELLGOOD The shell gives way, leaving you with
+  matchre RETURN A .* shell finally breaks open, but it was empty!
+  matchre RETURN You lose hold of a .* shell\.
   match RETURN Break what?
   put break my shell
   matchwait
+  
+BREAKSHELLGOOD:
+  gosub HANDLELOOT
+  return
   
   

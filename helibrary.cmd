@@ -1,6 +1,8 @@
 
-action put #echo >Log Yellow [%scripttag] TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent when A good positive attitude never hurts\.
+action var winpercentage %totalprizes; math winpercentage / %totalattempts; math winpercentage * 100; var keptpercentage %prizeskept; math keptpercentage / %totalattempts; math keptpercentage * 100; var costperkeptprize %totalspent; math costperkeptprize / %prizeskept; put #echo >Log Yellow [%scripttag] TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent // WinPercentage: %winpercentage% -- KeptPercentage: %keptpercentage% -- Cost/Kept Prize: %costperkeptprize. when A good positive attitude never hurts\.
 action var lodgedstring $0 when You have a .* lodged
+
+var badmaterials khaddar
 
 if ("%scripttag" != "DARK") then
 {
@@ -14,7 +16,7 @@ else
   var gems4 opal|pearl|pebble|peridot|quartz|ruby|sapphire|spinel|star-stone|(waermodi|lasmodi|sjatmal|lantholite) stones|sunstone|talon|tanzanite|tooth|topaz|tourmaline|tsavorite|turquoise|zircon
   var allgems %gems1|%gems2|%gems3|%gems4|%gems5
 
-  #var badloot \S+ kelp|\S+ rockweed|\S+ \S+ rockweed|piece of \S+ sharkskin|\S+ root|\S+ flowers|shark's tooth|burlap cloth|felt cloth|bear-pelt moccasins threaded with white leather laces|cobalt-blue leather belt studded with iron|doeskin moccasins threaded with brown leather laces|embossed leather belt with a gold-washed buckle|fawn-brown leather belt decorated with steel studs|green leather eye patch|light grey leather belt studded with circles of polished amber|pleated deep green wool breeches cross-gartered from ankle to knee with brown leather|purple leather eye patch|seal-pelt moccasins threaded with black leather laces|bear tooth necklace strung on a leather thong|gryphon feather necklace strung on a leather thong|leatherfoot steak
+  var badlootlist \S+ kelp|\S+ rockweed|\S+ \S+ rockweed|piece of \S+ sharkskin|\S+ root|\S+ flowers|shark's tooth|burlap cloth|felt cloth|bear-pelt moccasins threaded with white leather laces|cobalt-blue leather belt studded with iron|doeskin moccasins threaded with brown leather laces|embossed leather belt with a gold-washed buckle|fawn-brown leather belt decorated with steel studs|green leather eye patch|light grey leather belt studded with circles of polished amber|pleated deep green wool breeches cross-gartered from ankle to knee with brown leather|purple leather eye patch|seal-pelt moccasins threaded with black leather laces|bear tooth necklace strung on a leather thong|gryphon feather necklace strung on a leather thong|leatherfoot steak|yelith root|ocarina|cambrinth .*|black linen shirt with carved amethyst buttons|black silk surcoat with the crest of the Bards' Guild|pair of pastel pink leather ankle boots decorated with pewter chains
 
   var lootkeeplist infuser stone|potency crystal|\S+ powder|.* cloth|.* stack|.* leather|.* bar|.* nugget|.* fragment|.* lump|.* tear|.* shard|.* ingot|.* pebble|.* rock|.* stone|.* boulder|.* deed|bulging pouch|small pouch
 }
@@ -35,14 +37,14 @@ if {"$charactername" = "Saragos") then
   var storage haversack
   var healbot YES
   var healbotroom 204
-  var healbotname Aransa
+  var healbotname Maorn
 }
 if {"$charactername" = "Navesi") then
 {
   var storage cylinder
   var healbot YES
   var healbotroom 204
-  var healbotname Aransa
+  var healbotname Maorn
 }
 
 goto HELIBEND
@@ -62,10 +64,13 @@ LOCATIONCHECK:
 		  exit
 	  }
 	}
-	if ($roomid != %startroom) then
+	if ("%scripttag" != "DARK") then
 	{
-		gosub MOVE %startroom
-	}
+    if ($roomid != %startroom) then
+    {
+      gosub MOVE %startroom
+    }
+  }
 	return
 
 REMOVELODGED:
@@ -102,13 +107,39 @@ REMOVELODGEDLOOP:
 
 HANDLELOOT:
   math totalprizes add 1
-  if $righthand = "Empty" then gosub SWAP
+  var winpercentage %totalprizes
+  math winpercentage / %totalattempts
+  math winpercentage * 100
+  var keptpercentage %prizeskept
+  math keptpercentage / %totalattempts
+  math keptpercentage * 100
+  var costperkeptprize %totalspent
+  math costperkeptprize / %prizeskept
+  
   gosub TAPSHORTEN $righthand
+  
+  if matchre("%lootreceived", "%badlootlist") then
+  {
+    put #echo >Log [%scripttag]: Won %lootreceived!  On the bad lootlist, dumping.
+    gosub DUMPITEM %shorttap
+    return
+  }
+
+  if ("%scripttag" = "DARK") then
+  {
+    if matchre("%lootreceived", "%allgems") then
+    {
+      gosub STOWITEM %shorttap
+      put #echo >Log [%scripttag]: Won %lootreceived!  It's a gem, stowing.
+      return
+    }
+  }
+  
   pause .5
   if matchre("%lootreceived", "%lootkeeplist") then
   {
-    put #echo >Log Yellow [%scripttag]: Won %lootreceived!  On the lootlist, keeping.  TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent
     math prizeskept add 1
+    put #echo >Log Yellow [%scripttag]: Won %lootreceived!  On the lootlist, keeping.  TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent.
     if (%storage != 0) then gosub PUTITEM %shorttap in my %storage
     else gosub STOWALL
     if $righthand != "Empty" then
@@ -158,6 +189,7 @@ GETHEALED:
     put whisper %healbotname Heal me, please.
     waitfor "All clean."
   }
+  var needshealing 0
   gosub MOVE docks
   gosub WHISTLEDOLPHIN
   put #mapper reset
