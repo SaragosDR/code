@@ -42,7 +42,7 @@ if {"$charactername" = "Saragos") then
 }
 if {"$charactername" = "Navesi") then
 {
-  var storage cylinder
+  var storage duffel
   var healbot YES
   var healbotroom 204
   var healbotname Maorn
