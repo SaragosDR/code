@@ -1,6 +1,6 @@
 include library.cmd
 
-action var healing 1; var healtarget $1 when (\S+) whispers, "Heal me, please\."
+action var healing 1; var healtarget $1 when (\S+) taps you lightly on the shoulder\.
 action var nowounds 1 when \.\.\. no injuries to speak of\.
 
 var regeneratemana 24
@@ -48,7 +48,7 @@ EMPATHMONITOR:
   if (%nowounds = 0) then goto EMPATHMONITOR
   else
   {
-    put whisper %healtarget All clean.
+    put shake hand %healtarget
     var healing 0
     var nowounds 0
     return

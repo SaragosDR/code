@@ -200,8 +200,8 @@ GETHEALED:
   else
   {
     gosub MOVE %healbotroom
-    put whisper %healbotname Heal me, please.
-    waitfor "All clean."
+    put tap %healbotname
+    waitfor %healbotname shakes your hand.
   }
   var needshealing 0
   gosub MOVE docks

@@ -65,7 +65,7 @@ GRABBOXP:
   pause
 GRABBOX:
   matchre GRABBOXP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
-  match RETURN You pick up
+  match GRABBOXGOOD You pick up
   match GRABWOUND As you pick up a shell, claws emerge from its opening.  They quickly clamp down hard on your hand, causing you to drop the shell.  OUCH!
   match GRABWOUND An attendant in an otter costume exclaims, "You should clean your hands before you eat!".
   match GRABSTOW You're going to need your right hand free to do that.
@@ -81,28 +81,38 @@ OUTOFMONEY:
   gosub MOVE %startroom
   goto GRABBOX
 
+GRABBOXGOOD:
+  math totalattempts add 1
+  math totalspent add 1000
+  return
+
 GRABSTOW:
+  math totalattempts add 1
   math totalspent add 1000
   gosub STOWALL
   goto GRABBOX
 
 GRABWOUND:
+  math totalattempts add 1
   math totalspent add 1000
   var needsheal 1
   return
 
 GRABNO:
+  math totalattempts add 1
   math totalspent add 1000
   goto GRABBOX
 
 BREAKSHELLP:
   pause
 BREAKSHELL:
-  math totalattempts add 1
   matchre BREAKSHELLP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
   matchre BREAKSHELLGOOD The shell gives way, leaving you with
   matchre RETURN A .* shell finally breaks open, but it was empty!
   matchre RETURN You lose hold of a .* shell\.
+  matchre RETURN A .* shell explodes, embedding fragments directly into your .*\.
+  match RETURN The repeated bashing begins to grow more and more painful until you stop.
+  matchre RETURN A sharp edge of .* shell nicks your abdomen.  Ouch!  Having made no progress, you toss the shell away\.
   match RETURN Break what?
   put break my shell
   matchwait
