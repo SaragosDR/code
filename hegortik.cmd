@@ -20,7 +20,7 @@ LOOKSTANDMAIN:
   matchre LOOKRETURN On the .* you see (.*)\.
   match RETURN I could not find what you were referring to.  
   match RETURN You see nothing unusual.
-  put look on %looklocation
+  put look on %looklocation stand
   matchwait
 
 LOOKRETURN:
