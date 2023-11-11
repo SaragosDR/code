@@ -24,11 +24,6 @@ MAIN:
     {
       gosub MOVE 35
       gosub REMOVELODGED
-      #if $SpellTimer.Regenerate.active != 1 then
-      #{
-      #  put .p reg %regenmana
-		  #  waitfor PCASTING COMPLETE!
-      #}
       if (($SpellTimer.Heal.active != 1) || ($SpellTimer.Heal.duration < 2)) then
       {
         put .p heal %healmana
@@ -39,7 +34,7 @@ MAIN:
   }
   else
   {
-		if %needsheal = 1 then
+		if (%needsheal = 1) then
 		{
 			gosub MOVE 35
 			gosub REMOVELODGED
@@ -50,16 +45,11 @@ MAIN:
   gosub LOCATIONCHECK
   gosub STOWALL
 	gosub GRABBOX
-	if %needsheal = 1 then goto MAIN
+	if (%needsheal = 1) then goto MAIN
 	gosub MOVE 150
 	gosub BREAKSHELL
   goto MAIN
 
-GRABBOXLOOP:
-  if %shellcount >= %grabtotal then return  
-  gosub GRABBOX
-  math shellcount add 1
-  goto GRABBOXLOOP
 
 GRABBOXP:
   pause
@@ -82,6 +72,7 @@ OUTOFMONEY:
   goto GRABBOX
 
 GRABBOXGOOD:
+  put #echo Yellow here!
   math totalattempts add 1
   math totalspent add 1000
   return
