@@ -72,7 +72,6 @@ OUTOFMONEY:
   goto GRABBOX
 
 GRABBOXGOOD:
-  put #echo Yellow here!
   math totalattempts add 1
   math totalspent add 1000
   return

@@ -213,6 +213,7 @@ TAILORMAIN:
   match AWL One leather piece is too thick for the needle to penetrate and needs holes punched in it.
   match AWL A critical section of leather needs holes punched into it so more thread can secure it.
   match CUT With the measuring complete, now it is time to cut away more of the fabric with scissors.
+  match CUT With the measuring complete, now it is time to cut away more of the leather with scissors.
   match PINS Two layers of the fabric won't cooperate and could use some pins to align them.
   match PINS The leather keeps bending apart and could use some pins to keep it together.
   match PINS Two pieces of the leather won't cooperate and could use some pins to align them.
