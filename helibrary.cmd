@@ -63,7 +63,7 @@ goto HELIBEND
 LOCATIONCHECK:
 	if ($zoneid != 62022) then
 	{
-	  if $zoneid = 1 then
+	  if ($zoneid = 1) then
 	  {
 	    gosub MOVE docks
 	    gosub WHISTLEDOLPHIN
