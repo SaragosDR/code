@@ -220,6 +220,7 @@ TAILORMAIN:
   match SEW Roundtime
   match SLICKSTONE The fabric develops wrinkles from all the handling and could use a quick ironing.
   match SLICKSTONE A deep crease develops along the fabric, bunching it together awkwardly.
+  match YARDSTICK The leather's dimensions appear to have shifted and could benefit from some remeasuring.
   match YARDSTICK The fabric's dimensions appear to have shifted and could benefit from some remeasuring.
   
   match NEWTHREAD The needles need to have thread put on them before they can be used for sewing.  You think you can STUDY them to learn more.
