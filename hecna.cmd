@@ -4,7 +4,7 @@ include helibrary.cmd
 
 action var lootreceived $1 when Among your winnings you find (.*), which is now in your (right|left) hand!
 var betamount 5001
-var startroom 250
+var startroom 98
 var suits anchor|crown|heart|ship|trident
 eval suitcount count("%suits", "|")
 

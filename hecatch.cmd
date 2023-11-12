@@ -2,9 +2,9 @@ include library.cmd
 include helibrary.cmd
 
 var critterlist shark|tigerfish|barracuda|piranha|bloodfish
-var toprooms 80|81|82|83|84|85|86|87|88|89|90
+var toprooms 56|57|58|59|60|61|62|63|64
 var bottomrooms 73|
-var shrineroom 80
+var shrineroom 56
 
 action put #echo >Log Yellow Caught one!  Won $1. when The helper places (.*) in your hand.
 

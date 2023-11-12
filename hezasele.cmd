@@ -4,7 +4,7 @@ include craftlibrary.cmd
 include helibrary.cmd
 
 var nouns lump|shard|nugget|bar|leather|cloth|dye|deed|stack|fragment
-var searchlist 3|8|10|11|12|13|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|37|49|50|51|52|53|54|55|56|77|78|73|74|76|79|80|81|82|83|84|85|86|87|88|89|90|341
+var searchlist 3|8|10|11|12|13|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|131
 var startroom 3
 var tool.room 913
 var part.room 913
@@ -32,6 +32,7 @@ var pins pins
 var slickstone slickstone
 var yardstick yardstick
 var knittingneedles knitting needles
+var awl awl
 
 
 action var taskitem $1; var taskcount $2; var taskcomplete $3; var taskremaining $2; math taskremaining subtract $3 when In particular, she wanted you to craft (.*) and indicated that (\d+) would suffice\.  So far, you have returned (\d+) to her\.
@@ -47,7 +48,7 @@ timer clear
 timer start
 
 MAIN:  
-  if (($zoneid != 1) && ($zoneid != 6439)) then
+  if (($zoneid != 1) && ($zoneid != 62022)) then
   {
     put #echo Yellow Not in Crossing or Andreshlew!  Exiting!
     exit
@@ -68,7 +69,7 @@ MAIN:
 
     if (%taskremaining > 0) then
     {
-      if ($zoneid = 6439) then
+      if ($zoneid = 62022) then
       {
         gosub MOVE dolphin
         gosub GOCORRAL
@@ -96,9 +97,9 @@ MAIN:
         var discipline tailoring
         var product straps
         var yards 5
-        var material linen
+        var material rat-pelt
         var materialnoun leather
-        var materialnum 7
+        var materialnum 14
       }
       if (%tasknoun = "outfit") then
       {
@@ -237,7 +238,7 @@ DONECOUNT:
   return
 
 REPAIR:
-  if ($zoneid = 6439) then
+  if ($zoneid = 62022) then
   {
     gosub MOVE dolphin
     gosub GOCORRAL
@@ -365,6 +366,15 @@ OUTOFMONEY:
   gosub HECOINWITHDRAW 10 platinum kronars
   gosub MOVE %startroom
   goto GETTASK
+
+GETINSTRUCTIONSP:
+  pause
+GETINSTRUCTIONS:
+  pause .1
+  match GETINSTRUCTIONSP %waitstring
+  match RETURN Seamstress Zasele frowns.  She holds up one of her signs while handing you
+  put ask zasele for instructions
+  matchwait
 
 TURNINPRODUCT:
   gosub GETITEM %tasknoun from my %craftingstorage

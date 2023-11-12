@@ -9,7 +9,7 @@ action var needsheal 1 when eval $bleeding = 1
 
 var grabtotal 10
 
-var startroom 149
+var startroom 79
 var regenmana 9
 
 var empathheal 1
@@ -36,7 +36,7 @@ MAIN:
   {
 		if (%needsheal = 1) then
 		{
-			gosub MOVE 35
+			gosub MOVE 80
 			gosub REMOVELODGED
 			gosub GETHEALED
 			var needsheal 0

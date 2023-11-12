@@ -55,7 +55,16 @@ ZASELECRAFTING:
 ZASELECRAFTINGMAIN:
   if (%craftcount >= %quantity) then return
   gosub GETITEM %product instructions
-  #Seamstress Zasele frowns.  She holds up one of her signs while handing you some knitted outfit instructions:
+  if ("$righthandnoun" != "instructions") then
+  {
+    gosub LOCATIONCHECK
+    gosub FINDZASELENEW
+    gosub GETINSTRUCTIONS
+    gosub STOWALL
+    gosub MOVE docks
+    gosub GOCORRAL
+    gosub MOVE %workroom
+  }
   gosub STUDYINSTRUCTIONS
   gosub PUTITEM my instructions in my %craftingstorage
   gosub GETITEM my %material %materialnoun in %craftingstorage
@@ -151,6 +160,14 @@ TAILORP:
   pause
 TAILORMAIN:
   #GETTINGTOOLS
+  if ("%craftaction" = "awl") then
+  {
+    if ("$righthandnoun" != "awl") then
+    {
+      if ("$righthand" != "Empty") then gosub PUTITEM my $righthandnoun in my %craftingstorage
+      gosub GETITEM %awl in my %craftingstorage
+    }
+  }
   if ("%craftaction" = "cut") then
   {
     if ("$righthandnoun" != "scissors") then
@@ -193,8 +210,11 @@ TAILORMAIN:
   }
   #MATCHES
   matchre TAILORP %waitstring
+  match AWL One leather piece is too thick for the needle to penetrate and needs holes punched in it.
   match CUT With the measuring complete, now it is time to cut away more of the fabric with scissors.
   match PINS Two layers of the fabric won't cooperate and could use some pins to align them.
+  match PINS The leather keeps bending apart and could use some pins to keep it together.
+  match PINS Two pieces of the leather won't cooperate and could use some pins to align them.
   match PINS The fabric keeps folding back and could use some pins to keep it straight.
   match SEW Roundtime
   match SLICKSTONE The fabric develops wrinkles from all the handling and could use a quick ironing.
@@ -207,14 +227,19 @@ TAILORMAIN:
   #ACTIONS
 	if ("%craftaction" = "cut") then
 	{
-	  if (%firstcut = 1) then put cut my cloth with my %scissors
+	  if (%firstcut = 1) then put cut my %materialnoun with my %scissors
     else put cut my %product with my %scissors
   }
+  if ("%craftaction" = "awl") then put poke my %product with my %awl
   if ("%craftaction" = "pins") then put poke my %product with my %pins
   if ("%craftaction" = "sew") then put push my %product with my %sewingneedles
   if ("%craftaction" = "slickstone") then put rub my %product with my %slickstone
   if ("%craftaction" = "yardstick") then put measure my %product with my %yardstick
   matchwait
+
+AWL:
+  var craftaction awl
+  goto TAILORMAIN
 
 CUT:
   var craftaction cut
@@ -247,10 +272,10 @@ NEWTHREAD:
   if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
   gosub DUMPITEM %product
   gosub CRAFTINGORDER 6
-  put thread on my needles
+  put put thread on my needles
   gosub GETITEM %product
   if ($roomid != %workroom) then gosub MOVE %workroom
-
+  goto TAILORMAIN
 
 #####FORGING_SUBS#####
 FORGE:

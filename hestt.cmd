@@ -18,7 +18,7 @@ action var finished 1 when You manage to escape the bonds holding you against th
 
 #One of the thugs escorts you back to the waiting area, putting a smooth linen napkin embroidered with Eluned's Glory blossoms at each corner in your right hand.
 
-var startroom 307
+var startroom 114
 var bucketroom 35
 
 

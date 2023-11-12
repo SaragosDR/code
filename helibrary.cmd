@@ -61,7 +61,7 @@ if {"$charactername" = "Itusumera") then
 goto HELIBEND
 
 LOCATIONCHECK:
-	if ($zoneid != 6439) then
+	if ($zoneid != 62022) then
 	{
 	  if $zoneid = 1 then
 	  {
