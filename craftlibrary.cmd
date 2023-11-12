@@ -61,7 +61,7 @@ ZASELECRAFTINGMAIN:
     gosub FINDZASELENEW
     gosub GETINSTRUCTIONS
     gosub STOWALL
-    gosub MOVE docks
+    gosub MOVE dolphin
     gosub GOCORRAL
     gosub MOVE %workroom
   }
