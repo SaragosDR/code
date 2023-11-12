@@ -36,7 +36,7 @@ MAIN:
   {
 		if (%needsheal = 1) then
 		{
-			gosub MOVE 80
+			gosub MOVE 35
 			gosub REMOVELODGED
 			gosub GETHEALED
 			var needsheal 0
@@ -46,7 +46,7 @@ MAIN:
   gosub STOWALL
 	gosub GRABBOX
 	if (%needsheal = 1) then goto MAIN
-	gosub MOVE 150
+	gosub MOVE 80
 	gosub BREAKSHELL
   goto MAIN
 
