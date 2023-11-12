@@ -7,18 +7,19 @@ var sewingneedles sewing needles
 var pins pins
 var slickstone slickstone
 var yardstick yardstick
+var knittingneedles knitting needles
 var craftingcontainer crafting satchel
 
 if_1 then
 {
-  var discipline tailoring
+  var discipline knitting
   var quantity %1
   var product %2
-  material %3
-  var materialnoun cloth
+  var material %3
+  var materialnoun yarn
 
   gosub STOWALL
-  if ((%product = "netting") || (%product = "rope") || (%product = "straps")) then gosub ZASELECRAFTING
+  if (%product = "outfit") then gosub ZASELECRAFTING
   else gosub CRAFTING
 }
 else 
@@ -26,5 +27,3 @@ else
   put #echo mono Syntax: .sew <quantity> <product> <material>
 }
 exit
-
-

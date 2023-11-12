@@ -4,7 +4,7 @@ include craftlibrary.cmd
 include helibrary.cmd
 
 var nouns lump|shard|nugget|bar|leather|cloth|dye|deed|stack|fragment
-var searchlist 8|10|11|12|13|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|37|49|50|51|52|53|54|55|56|77|78|73|74|76|79|80|81|82|83|84|85|86|87|88|89|90|341
+var searchlist 3|8|10|11|12|13|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|37|49|50|51|52|53|54|55|56|77|78|73|74|76|79|80|81|82|83|84|85|86|87|88|89|90|341
 var startroom 3
 var tool.room 913
 var part.room 913
@@ -13,7 +13,7 @@ var drop.room 266
 
 var suppliesroom 914
 var workroom 745
-var dumproom 35
+var repairroom 925
 var repairer Rangu
 
 
@@ -31,7 +31,7 @@ var sewingneedles sewing needles
 var pins pins
 var slickstone slickstone
 var yardstick yardstick
-var kittingneedles knitting needles
+var knittingneedles knitting needles
 
 
 action var taskitem $1; var taskcount $2; var taskcomplete $3; var taskremaining $2; math taskremaining subtract $3 when In particular, she wanted you to craft (.*) and indicated that (\d+) would suffice\.  So far, you have returned (\d+) to her\.
@@ -102,31 +102,54 @@ MAIN:
       }
       if (%tasknoun = "outfit") then
       {
-        var discipline tailoring
+        var discipline knitting
         var product outfit
         var yards 12
         var material wool
         var materialnoun yarn
         var materialnum 13
       }
-      var yardsneeded %yards
-      math yardsneeded * %taskremaining
-      var ordersneeded %yardsneeded
-      var ordersmodulus %yardsneeded
-      math ordersmodulus modulus 10
-      if (%ordersmodulus > 0) then
+      if ("%discipline" = "tailoring") then
       {
-        math ordersneeded + 10
-        math ordersneeded - %ordersmodulus
+        var yardsneeded %yards
+        math yardsneeded * %taskremaining
+        var ordersneeded %yardsneeded
+        var ordersmodulus %yardsneeded
+        math ordersmodulus modulus 10
+        if (%ordersmodulus > 0) then
+        {
+          math ordersneeded + 10
+          math ordersneeded - %ordersmodulus
+        }
+        math ordersneeded / 10
+        echo yardsneeded: %yardsneeded
+        echo ordersneeded: %ordersneeded
+       
+        if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
+        gosub STOWALL
+        gosub ORDERLOOP %materialnum %ordersneeded %materialnoun
+        gosub COMBINEALL
       }
-      math ordersneeded / 10
-      echo yardsneeded: %yardsneeded
-      echo ordersneeded: %ordersneeded
-     
-      if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
-      gosub STOWALL
-      gosub ORDERLOOP %materialnum %ordersneeded %materialnoun
-      gosub COMBINEALL
+      if ("%discipline" = "knitting") then
+      {
+        var yardsneeded %yards
+        math yardsneeded * %taskremaining
+        var ordersneeded %yardsneeded
+        var ordersmodulus %yardsneeded
+        math ordersmodulus modulus 100
+        if (%ordersmodulus > 0) then
+        {
+          math ordersneeded + 100
+          math ordersneeded - %ordersmodulus
+        }
+        math ordersneeded / 100
+        put #echo Yellow yardsneeded: %yardsneeded
+        put #echo Yellow ordersneeded: %ordersneeded
+       
+        if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
+        gosub STOWALL
+        gosub ORDERLOOP %materialnum %ordersneeded %materialnoun
+      }
       gosub STOWALL
       #if (%repair = "YES") then gosub REPAIR
       if ($roomid != %workroom) then gosub MOVE %workroom
@@ -151,6 +174,9 @@ MAIN:
         goto MAIN
       }
       if ($roomid != %dumproom) then gosub MOVE %dumproom
+      gosub PROCESSSACK
+      gosub GETITEM my %tasknoun instructions
+      gosub DUMPITEM my %tasknoun instructions
     }
   }
   else
@@ -211,12 +237,12 @@ DONECOUNT:
   return
 
 REPAIR:
-  if $zoneid != 1 then
+  if ($zoneid = 6439) then
   {
-    gosub leavespider
+    gosub MOVE dolphin
+    gosub GOCORRAL
   }
-  var roomtarget %repair.room
-  gosub MOVE
+  gosub MOVE %repairroom
   eval maxitemsrepair count("%repairlist","|")	
   var currentrepairitem -1
   echo repairlist: %repairlist
@@ -275,17 +301,6 @@ GIVETICKET:
 WAITREPAIR:
 	pause 60
 	goto GIVETICKET
-
-GETMATERIALS:
-  if $zoneid != 1 then
-  {
-    gosub leavespider
-  }
-  var roomtarget %supply.room
-  gosub MOVE
-  if %crafttype = "sew" then gosub purchase.assemble
-  gosub purchase.material
-  RETURN
   
 
 FINDZASELENEW:
@@ -339,8 +354,17 @@ GETTASK2:
   matchwait
 
 GETTASKACCEPT:
+  match OUTOFMONEY You rummage around in your pockets and quickly realize you don't have that much.  Seamstress Zasele looks at you knowingly, and shrugs.  She holds up a small, recently painted sign:
+  match RETURN Seamstress Zasele smiles warmly and holds out an open hand and lifts a weathered sign with the other:
   put accept task
   return
+
+OUTOFMONEY:
+  var startroom $roomid
+  gosub MOVE teller
+  gosub HECOINWITHDRAW 10 platinum kronars
+  gosub MOVE %startroom
+  goto GETTASK
 
 TURNINPRODUCT:
   gosub GETITEM %tasknoun from my %craftingstorage
@@ -377,88 +401,5 @@ GOODTASK:
   var goodtask 1
   RETURN
 
-PROCESSSACK:
-  gosub OPENITEM woven sack
-  var boxitem woven sack
-  gosub BOXFILLPOUCH
-  gosub BOXCOINGET
-  put look in my sack
-  pause 1
-  eval rewardmat replace("%sacklist", ",", "|")
-  eval itemcount count("%rewardmat", "|")
-  var parsecount 0
-  var parsesuccess 0
-  gosub SACKPARSE  
-  if %parsesuccess = 1 then
-  {
-    var rewardmat %rewardmat(%parsecount)
-    put #echo %alertwindow Found %rewardmat!
-    gosub TAPNOUN %rewardmat
-    var rewardmatnoun %tapnoun 
-    gosub GETITEM %rewardmatnoun in my sack
-    gosub PUTITEM my %rewardmatnoun in my %craftingstorage
-    gosub DUMPITEM my woven sack
-  }
-  else
-  {
-    put #echo %alertwindow Could not identify main reward.  Stowing sack for later inspection.
-    gosub STOWALL
-  }
-  RETURN
-  
-SACKPARSE:
-  if %parsecount > %itemcount then return
-  if matchre("%rewardmat", "%nouns") then
-  {
-    var parsesuccess 1
-    return
-  }
-  math parsecount add 1
-  goto SACKPARSE
 
-FILLPOUCHP:
-  pause
-FILLPOUCH:
-  matchre FILLPOUCHP \.\.\.wait|type ahead|stunned|while entangled in a web.
-  matchre BADFILL The gem pouch is too full to fit any more gems!
-  matchre RETURN You have to be holding or wearing the woven sack to do that\.|There aren't any gems in the woven sack\.
-  put fill %gempouch with my sack
-  matchwait
 
-BADFILL:
-  put #flash
-  put #play JustArrived
-  put #echo %alertwindow Gem pouch full!
-  exit
-
-GETCOINSP:
-  pause
-GETCOINS:
-  matchre GETCOINSP \.\.\.wait|type ahead|stunned|while entangled in a web.
-  matchre GETCOINS You pick up
-  matchre RETURN What were you referring to?
-  put get coin
-  matchwait
-  
-PUTALL:
-  if $righthand != "Empty" then
-  {
-    var putitemname $righthand
-    var putlocation my %craftingstorage
-    gosub PUTITEM
-  }
-  if $lefthand != "Empty" then
-  {
-    var putitemname $lefthand
-    var putlocation my %craftingstorage
-    gosub PUTITEM
-  }
-  return
-
-GOPATHP:
-  pause
-GOPATH:
-  matchRE GOPATHP \.\.\.wait|type ahead|stunned|while entangled in a web.
-  matchre RETURN Out of the corner of your eye, you spy 
-  put go path
-  matchwait

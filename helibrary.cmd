@@ -2,6 +2,8 @@
 action var winpercentage %totalprizes; math winpercentage / %totalattempts; math winpercentage * 100; var keptpercentage %prizeskept; math keptpercentage / %totalattempts; math keptpercentage * 100; var costperkeptprize %totalspent; math costperkeptprize / %prizeskept; put #echo >Log Yellow [%scripttag] TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent // WinPercentage: %winpercentage% -- KeptPercentage: %keptpercentage% -- Cost/Kept Prize: %costperkeptprize. when A good positive attitude never hurts\.
 action var lodgedstring $0 when You have a .* lodged
 
+var sacknouns lump|shard|nugget|bar|leather|cloth|dye|deed|stack|fragment
+
 var badmaterials khaddar
 
 if ("%scripttag" != "DARK") then
@@ -26,6 +28,7 @@ var dolphinpause 0
 var healbot NO
 var healbotroom 204
 var healbotname Maorn
+var dumproom 35
 
 var premium -1
 var totalattempts 0
@@ -156,8 +159,16 @@ HANDLELOOT:
   {
     math prizeskept add 1
     put #echo >Log Yellow [%scripttag]: Won %lootreceived!  On the lootlist, keeping.  TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent.
-    if (%storage != 0) then gosub PUTITEM %shorttap in my %storage
-    else gosub STOWALL
+    if (matchre ("%lootreceived", "dark green sack made of desiccated kelp") then
+    {
+      if ($roomid != %dumproom) then gosub MOVE %dumproom
+      gosub PROCESSSACK
+    }
+    else
+    {
+      if (%storage != 0) then gosub PUTITEM %shorttap in my %storage
+      else gosub STOWALL    
+    }
     if ($righthand != "Empty") then
     {
       put #echo >Log Yellow [%scripttag]: Won %lootreceived!  Cannot store!  Exiting!
@@ -291,5 +302,49 @@ HECOINWITHDRAW:
 	matchre RETURN ^The clerk counts out
 	put withdraw $0
 	matchwait
+
+PROCESSSACK:
+  if ("%scripttag" = "ZASELE") then var sackname woven sack
+  else var sackname green sack
+  gosub OPENITEM %sackname
+  var boxitem %sackname
+  gosub BOXFILLPOUCH
+  gosub BOXCOINGET
+  var sackfail 0
+  var sacksuccess 0
+  gosub SACKLOOT
+  if ((%sacksuccess = 1) && (%sackfail = 0)) then
+  { 
+    gosub DUMPITEM my %sackname
+  }
+  else
+  {
+    put #echo >Log Yellow [%scripttag] Could not identify main sack reward.  Stowing sack for later inspection.
+    gosub STOWALL
+  }
+  return
+
+SACKLOOTP:
+  pause
+SACKLOOT:
+	matchre SACKLOOTP \.\.\.wait|type ahead|stunned|while entangled in a web\.
+  matchre SACKLOOTMATS (%sacknouns)
+  matchre RETURN In the|nothing|What
+	put look in my %sackname
+	matchwait
+  
+SACKLOOTMATS:
+  var itemtoget $1
+  gosub GETITEM %itemtoget in my sack
+  if ("%lefthand" = "Empty") then
+  {
+    var sackfail 1
+    return
+  }
+  var sacksuccess 1
+  put #echo >Log Yellow [%scripttag] Found $lefthand!
+  gosub STOWITEM %itemtoget
+  goto SACKLOOT
+
 
 HELIBEND:

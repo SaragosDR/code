@@ -3700,7 +3700,8 @@ SWAPP:
   pause
 SWAP:
   matchre SWAPP %waitstring
-  matchre RETURN You move|You have nothing to swap!
+  match RETURN You move
+  match You have nothing to swap!
   matchre SWAPINJURED Your (right|left) hand is too injured to do that\.
   matchre SWAPNERVES Will alone cannot conquer the paralysis that has wracked your body\.
   put swap

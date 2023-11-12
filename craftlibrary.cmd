@@ -55,13 +55,15 @@ ZASELECRAFTING:
 ZASELECRAFTINGMAIN:
   if (%craftcount >= %quantity) then return
   gosub GETITEM %product instructions
+  #Seamstress Zasele frowns.  She holds up one of her signs while handing you some knitted outfit instructions:
   gosub STUDYINSTRUCTIONS
   gosub PUTITEM my instructions in my %craftingstorage
   gosub GETITEM my %material %materialnoun in %craftingstorage
   gosub SWAP
   gosub TAPNOUN %product
   var product %nountap
-  gosub TAILOR
+  if ("%discipline" = "tailoring") then gosub TAILOR
+  if ("%discipline" = "knitting") then gosub KNIT
   gosub STOW right
   gosub PUTITEM %product in %craftingstorage
   math craftcount add 1
@@ -76,6 +78,67 @@ STUDYINSTRUCTIONS:
   match RETURN You now feel ready to begin the crafting process.
   put study instructions
   matchwait
+
+
+#####KNITTING_SUBS#####
+KNIT:
+  var firstcut 1
+  var craftaction knitknit
+  goto KNITMAIN
+
+KNITP:
+  pause
+KNITMAIN:
+  #GETTINGTOOLS
+  if ("%craftaction" = "knitknit") then
+  {
+    if ("$righthandnoun" != "needles") then
+    {
+      if ("$righthand" != "Empty") then gosub PUTITEM my $righthandnoun in my %craftingstorage
+      gosub GETITEM %knittingneedles in my %craftingstorage
+    }
+  }
+  #MATCHES
+  matchre KNITP %waitstring
+  match KNITTURN Now the needles must be turned
+  match KNITTURN Some ribbing should be added
+  match KNITPUSH Next the needles must be pushed
+  match KNITPUSH ready to be pushed
+  match KNITPUSH the pattern is uneven and off by one
+  match KNITCAST The garment is nearly complete and now must be cast off
+  match KNITKNIT Roundtime:
+  match RETURN You add a row of double stitches to
+  #ACTIONS
+	if ("%craftaction" = "knitknit") then
+	{
+	  if (%firstcut = 1) then put knit my yarn with my %knittingneedles
+    else put knit my %knittingneedles
+  }
+  if ("%craftaction" = "knitcast") then put cast my %knittingneedles
+  if ("%craftaction" = "knitpush") then put push my %knittingneedles
+  if ("%craftaction" = "knitturn") then put turn my %knittingneedles
+  matchwait
+
+KNITKNIT:
+  if (%firstcut = 1) then
+  {
+    var firstcut 0
+    gosub STOWITEM %material %materialnoun
+  }
+  var craftaction knitknit
+  goto KNITMAIN
+
+KNITPUSH:
+  var craftaction knitpush
+  goto KNITMAIN
+
+KNITTURN:
+  var craftaction knitturn
+  goto KNITMAIN
+  
+KNITCAST:
+  var craftaction knitcast
+  goto KNITMAIN
 
 
 #####TAILORING_SUBS#####
@@ -166,7 +229,7 @@ SEW:
   {
     var firstcut 0
     gosub STOWITEM my %scissors
-    gosub GETITEM %material cloth
+    gosub GETITEM %material %materialnoun
     gosub STOW right
   }
   var craftaction sew
