@@ -1193,5 +1193,67 @@ GIVEMASTERLOGMAIN:
   put give my logbook to %givemaster
   matchwait
 
-  
+
+#####REPAIR#####
+
+CRAFTREPAIRLOOP:
+  var repairer $1
+  var craft $2
+  var currentrepairitem -1
+  eval maxitemsrepair count("%%craftrepairlist","|")
+  goto CRAFTREPAIRLOOPMAIN
+CRAFTREPAIRLOOPMAIN:
+  math currentrepairitem add 1
+  if ((%currentrepairitem > %maxitemsrepair) || ("%repairlist" = "")) then
+  {
+    #echo No valid list.
+    return
+  }
+  gosub GETITEM my %%craftrepairlist(%currentrepairitem)
+  pause .5
+  if ("$righthand" != "Empty") then gosub CRAFTGIVETOOL
+  goto CRAFTREPAIRLOOPMAIN
+
+CRAFTGIVETOOLP:
+  pause
+CRAFTGIVETOOL:
+  matchre CRAFTGIVETOOLSP %waitstring
+  matchre NOMONEY You will need more coin if I am to be repairing that!
+  matchre CRAFTGIVETOOLSTOW |I will not repair something that isn't broken|I'm sorry, but I don't work on those.|Lucky for you!  That isn't damaged!|Read the sign on the wall!|There isn't a scratch on that,|Read the hide on the wall, please|Read the sign please\!|The apprentice repairman frowns and says|Please don't lose the ticket|Please don't lose this ticket|\w+ smiles and says
+  match RETURN What is it you're trying to give\?
+  put give %repairer
+  matchwait
+
+CRAFTGIVETOOLSTOW:
+  #pause .5
+  gosub STOWITEM $righthand
+  RETURN
+
+CRAFTTICKETLOOP:
+  var ticketstring $0
+  goto CRAFTTICKETLOOPMAIN		
+		
+CRAFTTICKETLOOPMAIN:
+  gosub GETITEM %ticketstring ticket
+  if ((matchre("$righthandnoun", "ticket")) || (matchre("$righthandnoun", "ticket"))) then
+  else
+  {
+    #echo No ticket!  Moving on.
+    return
+  }
+  gosub GIVETICKET
+  gosub PUTITEM $righthand in my %craftingstorage
+  goto CRAFTTICKETLOOPMAIN
+
+GIVETICKET:
+  matchre RETURN ^You hand (%repairer) your ticket and are handed back|After a moment, he returns and hands you
+	matchre CRAFTWAITREPAIR ^\w* smiles and says
+	match GIVETICKET What is it you're trying to give?
+	put give %repairer
+	matchwait
+
+CRAFTWAITREPAIR:
+	pause 60
+	goto GIVETICKET
+
 CRAFTLIBEND:
