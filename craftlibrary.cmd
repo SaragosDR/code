@@ -73,6 +73,7 @@ ZASELECRAFTINGMAIN:
     gosub MOVE dolphin
     gosub GOCORRAL
     gosub MOVE %workroom
+    gosub GETITEM %product instructions
   }
   gosub STUDYINSTRUCTIONS
   gosub PUTITEM my instructions in my %craftingstorage
@@ -191,7 +192,7 @@ TAILORMAIN:
     {
       if ("$righthand" != "Empty") then gosub PUTITEM my $righthandnoun in my %craftingstorage
       gosub GETITEM %pins in my %craftingstorage
-      if ("$righthand" != "pins") then gosub NEWPINS
+      if ("$righthandnoun" != "pins") then gosub NEWPINS
     }
   }
   if ("%craftaction" = "sew") then
@@ -283,9 +284,9 @@ YARDSTICK:
 
 NEWPINS:
   if ($roomid != %toolroom) then gosub MOVE %toolroom
-  gosub DUMPITEM %product
+  #gosub DUMPITEM %product
   gosub CRAFTINGORDER 5
-  gosub PUTITEM pins in my %craftingstorage
+  #gosub PUTITEM pins in my %craftingstorage
   if ($roomid != %workroom) then gosub MOVE %workroom
   goto TAILORMAIN
 
