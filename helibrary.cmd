@@ -36,12 +36,40 @@ var totalprizes 0
 var prizeskept 0
 var totalspent 0
 
+
+var craftingstorage haversack
+
 if {"$charactername" = "Saragos") then
 {
   var storage haversack
   var healbot YES
   var healbotroom 204
   var healbotname Maorn
+  
+  var craftingstorage crafting satchel
+  var scissors scissors
+  var sewingneedles sewing needles
+  var slickstone Sunderstone slickstone
+  var yardstick tel'athi yardstick
+  var knittingneedles knitting needles
+  var awl awl 
+  var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
+}
+if {"$charactername" = "Isrenar") then
+{
+  var storage haversack
+  var healbot YES
+  var healbotroom 204
+  var healbotname Maorn
+  
+  var craftingstorage crafting satchel
+  var scissors scissors
+  var sewingneedles sewing needles
+  var slickstone Sunderstone slickstone
+  var yardstick tel'athi yardstick
+  var knittingneedles knitting needles
+  var awl awl 
+  var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
 }
 if {"$charactername" = "Navesi") then
 {

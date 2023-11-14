@@ -12,16 +12,6 @@ var repairroom 925
 var repairer Rangu
 
 var craftingstorage haversack
-var scissors scissors
-var sewingneedles sewing needles
-var pins pins
-var slickstone slickstone
-var yardstick yardstick
-var knittingneedles knitting needles
-var awl awl
-var repair YES
-var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
-
 
 action var taskitem $1; var taskcount $2; var taskcomplete $3; var taskremaining $2; math taskremaining subtract $3 when In particular, she wanted you to craft (.*) and indicated that (\d+) would suffice\.  So far, you have returned (\d+) to her\.
 action put $1 when Seamstress Zasele goes (\w+)\.
@@ -29,13 +19,14 @@ action put $1 when Seamstress Zasele goes (\w+)\.
 timer clear
 timer start
 
+gosub STOWALL
+
 MAIN:  
   if (($zoneid != 1) && ($zoneid != 62022)) then
   {
     put #echo Yellow Not in Crossing or Andreshlew!  Exiting!
     exit
   }
-  gosub STOWALL
   gosub TASKCHECK
   #checking_task_status
   if (%goodtask = 1) then
@@ -109,9 +100,10 @@ MAIN:
         echo ordersneeded: %ordersneeded
        
         if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
-        gosub STOWALL
+        #gosub STOWALL
         gosub ORDERLOOP %materialnum %ordersneeded %materialnoun
         gosub COMBINEALL
+        gosub PUTITEM %material %materialnoun in my %craftingstorage
       }
       if ("%discipline" = "knitting") then
       {
@@ -130,16 +122,15 @@ MAIN:
         put #echo Yellow ordersneeded: %ordersneeded
        
         if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
-        gosub STOWALL
+        #gosub STOWALL
         gosub ORDERLOOP %materialnum %ordersneeded %materialnoun
       }
-      gosub STOWALL
-      if (%repair = "YES") then
-      {
-        if ($roomid != %repairroom) then gosub MOVE %repairroom
-        gosub CRAFTREPAIRLOOP Rangu outfitting
-        gosub CRAFTTICKETLOOP Rangu
-      }
+      #gosub STOWALL
+      #REPAIR
+      if ($roomid != %repairroom) then gosub MOVE %repairroom
+      gosub CRAFTREPAIRLOOP Rangu outfitting
+      gosub CRAFTTICKETLOOP Rangu
+      
       if ($roomid != %workroom) then gosub MOVE %workroom
       
       var quantity %taskremaining
@@ -180,7 +171,7 @@ MAIN:
     gosub FINDZASELENEW
   }
 	gosub GETTASK
-	gosub STOWALL
+	gosub PUTITEM my instructions in my %craftingstorage
 	goto MAIN
   
  

@@ -7,7 +7,16 @@ var bellows bellows
 var oil oil
 var rod stirring rod
 
-var disciplines weaponsmithing|armorsmithing|blacksmithing|tailoring
+var scissors scissors
+var sewingneedles sewing needles
+var pins pins
+var slickstone slickstone
+var yardstick yardstick
+var knittingneedles knitting needles
+var awl awl
+var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
+
+var disciplines weaponsmithing|armorsmithing|blacksmithing|tailoring|knitting
 var difficulties easy|challenging|hard
 
 goto CRAFTLIBEND
@@ -60,7 +69,7 @@ ZASELECRAFTINGMAIN:
     gosub LOCATIONCHECK
     gosub FINDZASELENEW
     gosub GETINSTRUCTIONS
-    gosub STOWALL
+    gosub PUTITEM instructions in my %craftingstorage
     gosub MOVE dolphin
     gosub GOCORRAL
     gosub MOVE %workroom
@@ -73,7 +82,7 @@ ZASELECRAFTINGMAIN:
   var product %nountap
   if ("%discipline" = "tailoring") then gosub TAILOR
   if ("%discipline" = "knitting") then gosub KNIT
-  gosub STOW right
+  gosub PUTITEM $righthand in my %craftingstorage
   gosub PUTITEM %product in %craftingstorage
   math craftcount add 1
   goto ZASELECRAFTINGMAIN
@@ -132,7 +141,7 @@ KNITKNIT:
   if (%firstcut = 1) then
   {
     var firstcut 0
-    gosub STOWITEM %material %materialnoun
+    gosub PUTITEM %material %materialnoun in my %craftingstorage
   }
   var craftaction knitknit
   goto KNITMAIN
@@ -182,6 +191,7 @@ TAILORMAIN:
     {
       if ("$righthand" != "Empty") then gosub PUTITEM my $righthandnoun in my %craftingstorage
       gosub GETITEM %pins in my %craftingstorage
+      if ("$righthand" != "pins") then gosub NEWPINS
     }
   }
   if ("%craftaction" = "sew") then
@@ -256,9 +266,9 @@ SEW:
   if (%firstcut = 1) then
   {
     var firstcut 0
-    gosub STOWITEM my %scissors
+    gosub PUTITEM my %scissors in my %craftingstorage
     gosub GETITEM %material %materialnoun
-    gosub STOW right
+    gosub PUTITEM %material %materialnoun in my %craftingstorage
   }
   var craftaction sew
   goto TAILORMAIN
@@ -269,6 +279,14 @@ SLICKSTONE:
   
 YARDSTICK:
   var craftaction yardstick
+  goto TAILORMAIN
+
+NEWPINS:
+  if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
+  gosub DUMPITEM %product
+  gosub CRAFTINGORDER 5
+  gosub PUTITEM pins in my %craftingstorage
+  if ($roomid != %workroom) then gosub MOVE %workroom
   goto TAILORMAIN
 
 NEWTHREAD:
@@ -1111,10 +1129,18 @@ CRAFTINGORDERMAIN:
   matchre CRAFTINGORDERP %waitstring
   match RETURN [You may purchase items from the shopkeeper with ORDER #]
   match CRAFTINGORDERMAIN The attendant says, "You can purchase
+  match CRAFTINGORDERNOMONEY The attendant shrugs and says, "Ugh, you don't have enough coins to purchase
   match RETURN The attendant takes some coins from you and hands you
   put order %craftingorderstring
   matchwait
 
+CRAFTINGORDERNOMONEY:
+  var startroom $roomid
+  gosub MOVE teller
+  gosub COINWITHDRAW 10 platinum kronars
+  gosub MOVE %startroom
+  goto CRAFTINGORDER
+  
 
 #####BOOK_SUBS#####
 TURNBOOK:
@@ -1226,7 +1252,7 @@ CRAFTGIVETOOL:
 
 CRAFTGIVETOOLSTOW:
   #pause .5
-  gosub STOWITEM $righthand
+  gosub PUTITEM $righthand in my %craftingstorage
   RETURN
 
 CRAFTTICKETLOOP:
