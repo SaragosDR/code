@@ -46,7 +46,7 @@ if {"$charactername" = "Saragos") then
   var healbotroom 204
   var healbotname Maorn
   
-  var workroom 745
+  var workroom 264
   var craftingstorage crafting satchel
   var scissors scissors
   var sewingneedles sewing needles
@@ -76,9 +76,20 @@ if {"$charactername" = "Isrenar") then
 if {"$charactername" = "Navesi") then
 {
   var storage duffel
-  var healbot YES
+  var healbot NO
   var healbotroom 204
   var healbotname Maorn
+
+  var workroom 264
+  var craftingstorage crafting satchel
+  var scissors scissors
+  var sewingneedles sewing needles
+  var slickstone slickstone
+  var yardstick yardstick
+  var knittingneedles knitting needles
+  var awl awl 
+  var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
+
 }
 if {"$charactername" = "Itusumera") then
 {
@@ -86,6 +97,17 @@ if {"$charactername" = "Itusumera") then
   var healbot NO
   var healbotroom 204
   var healbotname Maorn
+
+  var workroom 745
+  var craftingstorage crafting satchel
+  var scissors scissors
+  var sewingneedles sewing needles
+  var slickstone slickstone
+  var yardstick yardstick
+  var knittingneedles knitting needles
+  var awl awl 
+  var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
+
 }
 
 goto HELIBEND
