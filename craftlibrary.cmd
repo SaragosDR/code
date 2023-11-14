@@ -282,7 +282,7 @@ YARDSTICK:
   goto TAILORMAIN
 
 NEWPINS:
-  if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
+  if ($roomid != %toolroom) then gosub MOVE %toolroom
   gosub DUMPITEM %product
   gosub CRAFTINGORDER 5
   gosub PUTITEM pins in my %craftingstorage

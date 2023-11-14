@@ -36,7 +36,7 @@ var totalprizes 0
 var prizeskept 0
 var totalspent 0
 
-
+var workroom 745
 var craftingstorage haversack
 
 if {"$charactername" = "Saragos") then
@@ -46,6 +46,7 @@ if {"$charactername" = "Saragos") then
   var healbotroom 204
   var healbotname Maorn
   
+  var workroom 745
   var craftingstorage crafting satchel
   var scissors scissors
   var sewingneedles sewing needles
@@ -62,6 +63,7 @@ if {"$charactername" = "Isrenar") then
   var healbotroom 204
   var healbotname Maorn
   
+  var workroom 745
   var craftingstorage crafting satchel
   var scissors scissors
   var sewingneedles sewing needles
@@ -80,7 +82,7 @@ if {"$charactername" = "Navesi") then
 }
 if {"$charactername" = "Itusumera") then
 {
-  var storage duffel
+  var storage tote
   var healbot NO
   var healbotroom 204
   var healbotname Maorn
