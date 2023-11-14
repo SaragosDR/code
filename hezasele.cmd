@@ -11,8 +11,6 @@ var toolroom 913
 var repairroom 925
 var repairer Rangu
 
-var craftingstorage haversack
-
 action var taskitem $1; var taskcount $2; var taskcomplete $3; var taskremaining $2; math taskremaining subtract $3 when In particular, she wanted you to craft (.*) and indicated that (\d+) would suffice\.  So far, you have returned (\d+) to her\.
 action put $1 when Seamstress Zasele goes (\w+)\.
 

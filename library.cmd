@@ -3256,7 +3256,7 @@ OPENITEMP:
   pause
 OPENITEMMAIN:
   matchre OPENITEMP %waitstring
-  matchre RETURN You open the|That is already open\.|You open your|You open an
+  matchre RETURN You open the|That is already open\.|You open your|You open an|The green sack feels momentarily heavier as you open it\.
   put open %openitemstring
   matchwait 5
 	var timeoutsub OPENITEMMAIN

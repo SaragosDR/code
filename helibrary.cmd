@@ -50,7 +50,7 @@ if {"$charactername" = "Saragos") then
   var craftingstorage crafting satchel
   var scissors scissors
   var sewingneedles sewing needles
-  var slickstone Sunderstone slickstone
+  var slickstone polished slickstone
   var yardstick tel'athi yardstick
   var knittingneedles knitting needles
   var awl awl 
