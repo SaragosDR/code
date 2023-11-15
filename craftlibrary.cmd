@@ -123,9 +123,10 @@ KNITMAIN:
   match KNITTURN Some ribbing should be added
   match KNITPUSH Next the needles must be pushed
   match KNITPUSH ready to be pushed
-  match KNITPUSH the pattern is uneven and off by one
+  #match KNITPUSH Upon finishing you realize the pattern is uneven and off by one
   match KNITCAST The garment is nearly complete and now must be cast off
   match KNITKNIT Roundtime:
+  match KNITKNIT The needles doesn't appear suitable for working on an unfinished
   match RETURN The needles doesn't appear suitable for working on
   match RETURN You add a row of double stitches to
   #ACTIONS
@@ -149,14 +150,29 @@ KNITKNIT:
   goto KNITMAIN
 
 KNITPUSH:
+  if (%firstcut = 1) then
+  {
+    var firstcut 0
+    gosub PUTITEM %material %materialnoun in my %craftingstorage
+  }
   var craftaction knitpush
   goto KNITMAIN
 
 KNITTURN:
+  if (%firstcut = 1) then
+  {
+    var firstcut 0
+    gosub PUTITEM %material %materialnoun in my %craftingstorage
+  }
   var craftaction knitturn
   goto KNITMAIN
   
 KNITCAST:
+  if (%firstcut = 1) then
+  {
+    var firstcut 0
+    gosub PUTITEM %material %materialnoun in my %craftingstorage
+  }
   var craftaction knitcast
   goto KNITMAIN
 
