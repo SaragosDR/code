@@ -270,7 +270,7 @@ GETTASKACCEPT:
   match OUTOFMONEY You rummage around in your pockets and quickly realize you don't have that much.  Seamstress Zasele looks at you knowingly, and shrugs.  She holds up a small, recently painted sign:
   match RETURN Seamstress Zasele smiles warmly and holds out an open hand and lifts a weathered sign with the other:
   put accept task
-  return
+  matchwait
 
 OUTOFMONEY:
   var startroom $roomid
