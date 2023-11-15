@@ -174,23 +174,25 @@ MAIN:
   
  
 COMBINEALL:
-  matchre COMBINEALL ^You get
-  match COMBINEALL2 You need a free hand to pick that up.
-  matchre COMBINEALL3 What were you referring to?
-  send get %material %materialnoun in my %craftingstorage
-  matchwait
+  gosub GETITEM %material %materialnoun in my %craftingstorage
+  if (("$righthand" != "Empty") && ("lefthand" != "Empty")) then
+  {
+    gosub COMBINE
+  }
+  else
+  {
+    gosub PUTITEM %material %materialnoun in my %craftingstorage
+    return
+  }
+  goto COMBINEALL
   
-COMBINEALL2:
-	matchre COMBINEALL3 too large
-	matchre COMBINEALL You must be holding|You combine
+  
+COMBINE:
+	matchre RETURN too large
+	matchre RETURN You must be holding|You combine
 	put combine my %material %materialnoun with my other %material %materialnoun
 	matchwait
 
-COMBINEALL3:
-  matchre RETURN You put|What were you referring to?
-  put put my %material %materialnoun in my %craftingstorage
-  matchwait
- 
 
 COUNTPRODUCTS:
   matchre GOODCOUNT You see nothing unusual.

@@ -126,6 +126,7 @@ KNITMAIN:
   match KNITPUSH the pattern is uneven and off by one
   match KNITCAST The garment is nearly complete and now must be cast off
   match KNITKNIT Roundtime:
+  match RETURN The needles doesn't appear suitable for working on
   match RETURN You add a row of double stitches to
   #ACTIONS
 	if ("%craftaction" = "knitknit") then
