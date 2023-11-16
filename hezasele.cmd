@@ -296,9 +296,10 @@ TURNINPRODUCT:
     var badturnin 1
     return
   }
-  
+
 GOTPRODUCT:
   pause 1
+  match GOTPRODUCT What is it you're trying to give?
   match RETURN Seamstress Zasele hands you a woven sack.
   matchre TURNINPRODUCT Zasele holds up her fingers 
   matchre BADPRODUCT Seamstress Zasele inspects the|Seamstress Zasele ignores your offer.
