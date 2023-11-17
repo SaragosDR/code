@@ -9,7 +9,7 @@ var commonleathers amber-scale|antelope-skin|azure-scale|badger-pelt|bison-hide|
 var commonmetals brass|bronze|coal|copper|covellite|highsteel|iron|lead|nickel|oravir|pewter|platinum|silver|steel|tin|gold|zinc
 var commonstones alabaster|andesite|basalt|breccia|dolomite|gabbro|granite|jade|limestone|marble|obsidian|onyx|pumice|quartzite|sandstone|schist|serpentine|soapstone|travertine
 var commonwoods alder|apple|ash|aspen|balsa|bamboo|birch|cedar|cypress|elm|fir|hemlock|larch|mahogany|mangrove|maple|moabi|oak|pine|spruce|teak|walnut|willow
-var commonmats |%commoncloths|%commonleathers|%commonmetals|%commonstones|%commonwoods|
+var commonmats |%commonbones|%commoncloths|%commonleathers|%commonmetals|%commonstones|%commonwoods|
 
 
 var badmaterials khaddar
@@ -413,13 +413,13 @@ SACKLOOT:
 SACKLOOTMATS:
   var itemtoget $1
   gosub GETITEM %itemtoget in my sack
-  if ("%lefthand" = "Empty") then
+  if ("$lefthand" = "Empty") then
   {
     var sackfail 1
     return
   }
   var sacksuccess 1
-  gosub TAPADJECTIVE $righthand
+  gosub TAPADJECTIVE $lefthand
   echo adjtap: %adjtap
   if contains("%commonmats", "|%adjtap|") then
   {
