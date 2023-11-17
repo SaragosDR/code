@@ -3256,11 +3256,11 @@ OPENITEMP:
   pause
 OPENITEMMAIN:
   matchre OPENITEMP %waitstring
-  matchre RETURN You open the|That is already open\.|You open your|You open an|The green sack feels momentarily heavier as you open it\.
+  matchre RETURN That is already open\.|You open|The green sack feels momentarily heavier as you open it\.
   put open %openitemstring
   matchwait 5
 	var timeoutsub OPENITEMMAIN
-	var timeoutcommand %openitemstring
+	var timeoutcommand open %openitemstring
 	goto TIMEOUT
 
 PLATRINGP:
