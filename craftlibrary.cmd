@@ -738,6 +738,7 @@ COMBINEALLMAIN:
 COMBINE:
 	matchre RETURN too large
 	matchre RETURN You must be holding|You combine
+	match RETURN The spool is not large enough to combine both threads.
 	put combine my %combineadj %combinenoun with my other %combineadj %combinenoun
 	matchwait
 

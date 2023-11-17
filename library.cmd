@@ -10926,6 +10926,17 @@ Base.ListExtract.Loop.Trim:
   if contains("%%Base.NounListVar", " ") then goto Base.ListExtract.Loop.Trim
 	return
 
+TAPADJECTIVE:
+  var tap $0
+  eval tap replace("%tap", " ", "|"
+  eval taplength count("%tap","|")
+  echo tap: %tap
+  echo taplength: %taplength
+  if (%taplength = 2) then var adjtap %tap(0) %tap(1)
+  if (%taplength = 1) then var adjtap %tap(0)
+  if (%taplength = 0) then var adjtap
+  return
+
 TAPNOUN:
   var tap $0
   eval tap replace("%tap", " ", "|"
