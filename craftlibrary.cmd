@@ -127,6 +127,7 @@ KNITMAIN:
   match KNITCAST The garment is nearly complete and now must be cast off
   match KNITKNIT Roundtime:
   match KNITKNIT The needles doesn't appear suitable for working on an unfinished
+  matchre KNITUNFINISHED You are already knitting an .*\.  You must finish this before starting another project\.
   match RETURN The needles doesn't appear suitable for working on
   match RETURN You add a row of double stitches to
   #ACTIONS
@@ -139,6 +140,12 @@ KNITMAIN:
   if ("%craftaction" = "knitpush") then put push my %knittingneedles
   if ("%craftaction" = "knitturn") then put turn my %knittingneedles
   matchwait
+  
+KNITUNFINISHED:
+  var firstcut 0
+  gosub PUTITEM %material %materialnoun in my %craftingstorage
+  var craftaction knitknit
+  goto KNITMAIN
 
 KNITKNIT:
   if (%firstcut = 1) then
@@ -708,8 +715,53 @@ TURNCRUC:
    match SMELT Roundtime
    put turn crucible with my %rod
    matchwait
-   
-   
+
+#####MATERIAL_SUBS#####
+
+COMBINEALL:
+  var combineadj $1
+  var combinenoun $2
+  goto COMBINEALLMAIN
+COMBINEALLMAIN:
+  gosub GETITEM %combineadj %combinenoun in my %craftingstorage
+  echo righthand: $righthand   lefthand: $lefthand
+  if (("$righthand" = "Empty") || ("$lefthand" = "Empty")) then gosub GETITEM %combineadj %combinenoun in my %craftingstorage
+  if (("$righthand" != "Empty") && ("$lefthand" != "Empty")) then gosub COMBINE
+  else
+  {
+    gosub PUTITEM %combineadj %combinenoun in my %craftingstorage
+    return
+  }
+  goto COMBINEALLMAIN
+  
+  
+COMBINE:
+	matchre RETURN too large
+	matchre RETURN You must be holding|You combine
+	put combine my %combineadj %combinenoun with my other %combineadj %combinenoun
+	matchwait
+
+
+COUNT:
+  var counttotal 0
+  var counttarget $0
+  goto COUNTMAIN
+COUNTP:
+  pause
+COUNTMAIN:
+  matchre COUNTP %waitstring
+  matchre COUNTRETURN About (\d+) volumes of material make up the \w+ bar\.
+  matchre COUNTRETURN About (\d+) volumes of material make up the \w+ lump\.
+  matchre COUNTRETURN You count out (\d+) yards of material there\.
+  matchre COUNTRETURN You count out (\d+) pieces of material there.
+  match RETURN I could not find what you were referring to.
+  put count $0
+  matchwait
+
+COUNTRETURN:
+  var counttotal $1
+  return
+
 #####SOCIETY_SUBS#####
 
 FINDMASTER:

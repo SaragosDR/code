@@ -4,6 +4,8 @@ include craftlibrary.cmd
 include helibrary.cmd
 
 var nouns lump|shard|nugget|bar|leather|cloth|dye|deed|stack|fragment
+var commonwoods alder|apple|ash|aspen|balsa|bamboo|birch|cedar|cypress|elm|fir|hemlock|larch|mahogany|mangrove|maple|moabi|oak|pine|spruce|teak|walnut|willow
+var commonbones badger|barghest|bear|
 var searchlist 3|8|10|11|12|13|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|131
 
 var suppliesroom 914
@@ -85,6 +87,10 @@ MAIN:
       {
         var yardsneeded %yards
         math yardsneeded * %taskremaining
+        gosub COMBINEALL %material %materialnoun
+        if (("$righthand" != "Empty") && ("$lefthand" != "Empty")) then gosub PUTITEM %material %materialnoun in my %craftingstorage
+        gosub COUNT %material %materialnoun in my %craftingstorage
+        math yardsneeded - %counttotal
         var ordersneeded %yardsneeded
         var ordersmodulus %yardsneeded
         math ordersmodulus modulus 10
@@ -97,16 +103,20 @@ MAIN:
         echo yardsneeded: %yardsneeded
         echo ordersneeded: %ordersneeded
        
-        if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
-        #gosub STOWALL
-        gosub ORDERLOOP %materialnum %ordersneeded %materialnoun
-        gosub COMBINEALL
-        gosub PUTITEM %material %materialnoun in my %craftingstorage
+        if (%ordersneeded > 0) then
+        {
+          if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
+          gosub ORDERLOOP %materialnum %ordersneeded %materialnoun
+          gosub COMBINEALL %material %materialnoun
+          gosub PUTITEM %material %materialnoun in my %craftingstorage
+        }
       }
       if ("%discipline" = "knitting") then
       {
         var yardsneeded %yards
         math yardsneeded * %taskremaining
+        gosub COUNT %material %materialnoun in my %craftingstorage
+        math yardsneeded - %counttotal
         var ordersneeded %yardsneeded
         var ordersmodulus %yardsneeded
         math ordersmodulus modulus 100
@@ -118,12 +128,14 @@ MAIN:
         math ordersneeded / 100
         put #echo Yellow yardsneeded: %yardsneeded
         put #echo Yellow ordersneeded: %ordersneeded
-       
-        if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
-        #gosub STOWALL
-        gosub ORDERLOOP %materialnum %ordersneeded %materialnoun
+         
+        if (%ordersneeded > 0) then
+        {
+          if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
+          gosub ORDERLOOP %materialnum %ordersneeded %materialnoun
+          gosub COMBINEALL %material %materialnoun
+        }
       }
-      #gosub STOWALL
       #REPAIR
       if ($roomid != %repairroom) then gosub MOVE %repairroom
       gosub CRAFTREPAIRLOOP Rangu outfitting
@@ -171,27 +183,6 @@ MAIN:
 	gosub GETTASK
 	gosub PUTITEM my instructions in my %craftingstorage
 	goto MAIN
-  
- 
-COMBINEALL:
-  gosub GETITEM %material %materialnoun in my %craftingstorage
-  if (("$righthand" != "Empty") && ("lefthand" != "Empty")) then
-  {
-    gosub COMBINE
-  }
-  else
-  {
-    gosub PUTITEM %material %materialnoun in my %craftingstorage
-    return
-  }
-  goto COMBINEALL
-  
-  
-COMBINE:
-	matchre RETURN too large
-	matchre RETURN You must be holding|You combine
-	put combine my %material %materialnoun with my other %material %materialnoun
-	matchwait
 
 
 COUNTPRODUCTS:

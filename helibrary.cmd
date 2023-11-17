@@ -2,7 +2,7 @@
 action var winpercentage %totalprizes; math winpercentage / %totalattempts; math winpercentage * 100; var keptpercentage %prizeskept; math keptpercentage / %totalattempts; math keptpercentage * 100; var costperkeptprize %totalspent; math costperkeptprize / %prizeskept; put #echo >Log Yellow [%scripttag] TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent // WinPercentage: %winpercentage% -- KeptPercentage: %keptpercentage% -- Cost/Kept Prize: %costperkeptprize. when A good positive attitude never hurts\.
 action var lodgedstring $0 when You have a .* lodged
 
-var sacknouns lump|shard|nugget|bar|leather|cloth|dye|deed|stack|fragment
+var sacknouns lump|fragment|shard|tear|nugget|bar|ingot|leather|cloth|dye|deed|stack
 
 var badmaterials khaddar
 
@@ -63,7 +63,7 @@ if {"$charactername" = "Isrenar") then
   var healbotroom 204
   var healbotname Maorn
   
-  var workroom 745
+  var workroom 292
   var craftingstorage crafting satchel
   var scissors scissors
   var sewingneedles sewing needles
@@ -98,7 +98,7 @@ if {"$charactername" = "Itusumera") then
   var healbotroom 204
   var healbotname Maorn
 
-  var workroom 745
+  var workroom 292
   var craftingstorage crafting satchel
   var scissors scissors
   var sewingneedles sewing needles
@@ -107,8 +107,25 @@ if {"$charactername" = "Itusumera") then
   var knittingneedles knitting needles
   var awl awl 
   var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
-
 }
+if {"$charactername" = "Chyral") then
+{
+  var storage carryall
+  var healbot no
+  var healbotroom 204
+  var healbotname Maorn
+  
+  var workroom 192
+  var craftingstorage crafting satchel
+  var scissors scissors
+  var sewingneedles sewing needles
+  var slickstone sunderstone slickstone
+  var yardstick detailed yardstick
+  var knittingneedles knitting needles
+  var awl awl 
+  var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
+}
+var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
 
 goto HELIBEND
 
