@@ -25,7 +25,6 @@ ENTERSALES:
   matchwait
 
 ENTERGOSILVERSTEEL:
-  echo Ignoring!
   goto ENTERSALES
 
 ENTERGO:
