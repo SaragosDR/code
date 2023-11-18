@@ -48,6 +48,7 @@ SHOPWINDOW:
 SHOPSTAND:
   var shopstand $0
 SHOPSTANDMAIN:
+  matchre SHOPSTANDMAIN ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head
   match SHOPSTANDEMPTY There's nothing for sale attached to the
   match RETURN [Type SHOP [GOOD] or click an item to see some details about it.]
   match RETURN I could not find what you were referring to.
