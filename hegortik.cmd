@@ -20,8 +20,8 @@ exit
 ENTERSALES:
   match RETURN [Limited Treasures, Sales Floor]
   match ENTERGOSILVERSTEEL went through a silversteel door.
-  match ENTERGOCURT went through a curtained door.
-  matchre ENTERGO went through a (.*) door\.
+  matchre ENTERGOCURT ^((?!smiles|frowns|ponders)[\w']+ ){1,4}went through a curtained door\.$
+  matchre ENTERGO ^((?!smiles|frowns|ponders)[\w']+ ){1,4}went through a (.*) door\.$
   matchwait
 
 ENTERGOSILVERSTEEL:
@@ -38,13 +38,13 @@ ENTERGOCURT:
 ENTERROOM:
   var doorstring $0
 ENTERROOMMAIN:
-  matchre ENTERROOMMAIN ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head
+  matchre ENTERROOMMAIN ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|^Between the ringing in your head
   match RETURN [Limited Treasures, Sales Floor]
   put go %doorstring door
   matchwait
 
 SHOPWINDOW:
-  matchre SHOPROOM ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head
+  matchre SHOPROOM ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|^Between the ringing in your head
   match RETURN The following items contain goods for sale:
   match RETURN There is nothing to buy here.
   put shop window
@@ -53,7 +53,7 @@ SHOPWINDOW:
 SHOPSTAND:
   var shopstand $0
 SHOPSTANDMAIN:
-  matchre SHOPSTANDMAIN ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head
+  matchre SHOPSTANDMAIN ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|^Between the ringing in your head
   match SHOPSTANDEMPTY There's nothing for sale attached to the
   match RETURN [Type SHOP [GOOD] or click an item to see some details about it.]
   match RETURN I could not find what you were referring to.
