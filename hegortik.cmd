@@ -1,5 +1,5 @@
-action math numshop add 1;var stand%numshop $2 $3 when ^  (a|an) (\w+) (\w+)$
-action math numshop add 1;var stand%numshop $3 $4 when ^  (a|an) (\w+) (\w+) (\w+)$
+action math numshop add 1;var stand%numshop $2 $3 when ^  (a|an|some) (\w+) (\w+)$
+action math numshop add 1;var stand%numshop $3 $4 when ^  (a|an|some) (\w+) (\w+) (\w+)$
 action var platconvert $2;math platconvert divide 1000; put #echo >Log Yellow %stand%shopstand: $1 - %platconvert when ^  (.*) for (\d+) copper Kronars$
 action put #echo >Log Yellow %stand%shopstand: $1 - $2 when ^  (.*) for (\d+) platinum Kronars$
 
@@ -28,15 +28,21 @@ ENTERGOSILVERSTEEL:
   goto ENTERSALES
 
 ENTERGO:
-  put go $1 door
-  delay .1
+  gosub ENTERROOM $1
   return 
  
 ENTERGOCURT:
-  put go curtained door
-  delay .1
+  gosub ENTERROOM curtained door
   return
- 
+  
+ENTERROOM:
+  var doorstring $0
+ENTERROOMMAIN:
+  matchre ENTERROOMMAIN ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head
+  match RETURN [Limited Treasures, Sales Floor]
+  put go %doorstring door
+  matchwait
+
 SHOPWINDOW:
   matchre SHOPROOM ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head
   match RETURN The following items contain goods for sale:
