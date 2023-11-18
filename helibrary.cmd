@@ -419,16 +419,18 @@ SACKLOOTMATS:
     return
   }
   var sacksuccess 1
-  gosub TAPADJECTIVE $lefthand
+  if ("$righthandnoun" = "sack") then var prizehand left
+  else var prizehand right
+  gosub TAPADJECTIVE $%prizehandhand
   echo adjtap: %adjtap
   if contains("%commonmats", "|%adjtap|") then
   {
-    put #echo >Log [%scripttag] Dumping $lefthand - common.
-    gosub DUMPITEM %itemtoget
+    put #echo >Log [%scripttag] Dumping $%prizehandhand - common.
+    gosub DUMPITEM my %itemtoget
   }
   else
   {
-    put #echo >Log Yellow [%scripttag] Found $lefthand!
+    put #echo >Log Yellow [%scripttag] Found $%prizehandhand!
     gosub STOWITEM %itemtoget
   }
   goto SACKLOOT
