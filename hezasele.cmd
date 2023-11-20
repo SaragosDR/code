@@ -209,7 +209,11 @@ FINDZASELENEW:
   eval searchlength count("%searchlist", "|")
   gosub FINDZASELELOOP
   if (contains("$roomobjs", "Seamstress Zasele")) then echo FOUND HER!
-  else echo DIDN'T FIND IT!
+  else
+  {
+    echo DIDN'T FIND HER!
+    goto FINDZASELENEW
+  }
   return
   
 FINDZASELELOOP:

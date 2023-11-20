@@ -1,59 +1,22 @@
-
-action var winpercentage %totalprizes; math winpercentage / %totalattempts; math winpercentage * 100; var keptpercentage %prizeskept; math keptpercentage / %totalattempts; math keptpercentage * 100; var costperkeptprize %totalspent; math costperkeptprize / %prizeskept; put #echo >Log Yellow [%scripttag] TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent // WinPercentage: %winpercentage% -- KeptPercentage: %keptpercentage% -- Cost/Kept Prize: %costperkeptprize. when A good positive attitude never hurts\.
-action var lodgedstring $0 when You have a .* lodged
-
-var sacknouns lump|shard|nugget|bar|leather|cloth|dye|deed|stack|fragment
-var commonbones badger-bone|barghest-bone|bear-bone|bison-bone|bobcat-bone|cougar-bone|crocodile-bone|deer-bone|frog-bone|ghoul-bone|goblin-bone|jackal-bone|kobold-bone|lava drake-bone|leucro-bone|prereni-bone|rat-bone|reaver-bone|rotting-bone|serpent-bone|sluagh-bone|snow goblin-bone|stalker-bone|troll-bone|wolf-bone|zombie-bone
-var commoncloths burlap|cotton|felt|linen|silk|wool
-var commonleathers amber-scale|antelope-skin|azure-scale|badger-pelt|bison-hide|ape-pelt|black goblin-skin|black leucro pelt|black-hide|blood wolf-pelt|boar hide|bobcat pelt|bronze leucro-hide|brown poloh'izh-hide|caracal-pelt|cave-troll|clouded arzumos pelt|cougar-pelt|crimson-scale|damaska boar hide|dark-scale|deer-skin|eel-skin|frog-skin|ghoul-skin|goblin-skin|gargoyle-hide|hound-pelt|green-scale|grey-scale|gryphon-pelt|horse-hide|jackal-pelt|kobold-skin|la'tami-hide|lava drake-hide|hound-pelt|blue-scale|marble-hide|ogre-skin|pivuh-skin|prereni-skin|quartz-hide|rat-pelt|reaver-pelt|red-leucro|red-scale|salt-encrusted|serpent-skin|salswar-hide|sharkskin|sheepskin|silver-leucro|sluagh-hide|snow goblin-hide|stalker-pelt|storm-bull|troll-skin|trollkin-hide|viper-skin|warcat-pelt|white-pelt|wolf-pelt|zombie-skin
-var commonmetals brass|bronze|coal|copper|covellite|highsteel|iron|lead|nickel|oravir|pewter|platinum|silver|steel|tin|gold|zinc
-var commonstones alabaster|andesite|basalt|breccia|dolomite|gabbro|granite|jade|limestone|marble|obsidian|onyx|pumice|quartzite|sandstone|schist|serpentine|soapstone|travertine
-var commonwoods alder|apple|ash|aspen|balsa|bamboo|birch|cedar|cypress|elm|fir|hemlock|larch|mahogany|mangrove|maple|moabi|oak|pine|spruce|teak|walnut|willow
-var commonmats |%commonbones|%commoncloths|%commonleathers|%commonmetals|%commonstones|%commonwoods|
-
-
-var badmaterials khaddar
-
-if ("%scripttag" != "DARK") then
-{
-  var lootkeeplist cloth lootbag instructions|cloth lootpouch instructions|dark green sack made of dessicated kelp|dark green sack made of desiccated kelp|(fibrous|folded|tiny|carved) .* icon of .*|faintly glowing starstone|glass octahedron|piece of iridescent .* seaglass|sea-blue vial|sea-green potion|small sea serpent totem|tiny iridescent cube|translucent conch shell inlaid with .* swirls|dramatic.*cloak fastened with a.*clasp|ornate \S+ ring|compact .* textbook bound with a .* cover|water-stained treasure map|elaborately dressed .* puppet with .* eyes|miniature .* doll dressed in .* robes|porcelain toy .* clothed in .* vestments|burnished .* wheel painted with colorful sea creatures|sleek .* lootpouch fastened with a .* leviathan|polished .* wand topped with a .* starfish|iridescent .* filaments strung with .* stars|folding .* chair with a .* cushioned seat|miniature polar bear with round .* eyes|.* thigh pouch|.* robes|.* skirt|length of .* fabric|latticed .* picnic basket tied with|slim.*codex|large.*tome patterend with stylized.*sigils|feathery.*fronds|small.*trident|sylized.*wave|tapered crown of miniature.*tridents|lacquered.*band set with.*clownfish|slender.*eyebrow ring dangling.*sigil|fragile.*blossom with delicate.*petals|fragile blown-glass sphere cradled within a twisted.*frame|pilgrim's badge sculpted with the emblem of|sea urchin mirror with.*gliding along the spines|small.*treasure chest set with.*embellishments|competition miniature Merelew soldier wielding a tiny.*trident|repair case of polished.*with.*fittings|seaglass bottle of chilled zuoganaas insulated with.*kelp fronds|.*contract marked with the crest of the Traders' Guild|tarina|.*instructions|.*ice skates|infuser stone|potency crystal|seaglass-tipped arrows|seaglass-tipped bolts|.*torque|large .* tome patterned with stylized .* sigils
-}
-else
-{
-  var gems1 agate|alexandrite|amber|amethyst|andalusite|aquamarine|bead|beryl|bloodgem|bloodstone|carnelian|chrysoberyl|carnelian|chalcedony
-  var gems2 chrysoberyl|chrysoprase|citrine|coral|crystal|diamond|diopside|emerald|egg|eggcase|garnet|gem|goldstone|glossy malachite
-  var gems3 (chunk of|some|piece of).*granite|hematite|iolite|ivory|jade|jasper|kunzite|lapis lazuli|malachite stone|minerals|moonstone|morganite|onyx
-  var gems4 opal|pearl|pebble|peridot|quartz|ruby|sapphire|spinel|star-stone|(waermodi|lasmodi|sjatmal|lantholite) stones|sunstone|talon|tanzanite|tooth|topaz|tourmaline|tsavorite|turquoise|zircon
-  var allgems %gems1|%gems2|%gems3|%gems4|%gems5
-
-  var badlootlist \S+ kelp|\S+ rockweed|\S+ \S+ rockweed|piece of \S+ sharkskin|\S+ root|\S+ flowers|shark's tooth|burlap cloth|felt cloth|bear-pelt moccasins threaded with white leather laces|cobalt-blue leather belt studded with iron|doeskin moccasins threaded with brown leather laces|embossed leather belt with a gold-washed buckle|fawn-brown leather belt decorated with steel studs|green leather eye patch|light grey leather belt studded with circles of polished amber|pleated deep green wool breeches cross-gartered from ankle to knee with brown leather|purple leather eye patch|seal-pelt moccasins threaded with black leather laces|bear tooth necklace strung on a leather thong|gryphon feather necklace strung on a leather thong|leatherfoot steak|yelith root|ocarina|cambrinth .*|black linen shirt with carved amethyst buttons|black silk surcoat with the crest of the Bards' Guild|pair of .* leather ankle boots decorated with .* chains|skullcap crafted of .* with colorful beadwork|black linen shirt with carved lapis lazuli buttons|jadice flowers|low-slung pair of billowy sapphire-blue gauze pants gathered close at the ankles|some heavy pearl-grey wool pants with rolled-up cuffs|black silk surcoat with the crest of the Rangers' Guild on the front|some soft .* linen trousers edged with black piping|a clay whistle in the shape of a bird|some pleated turquoise wool breeches cross-gartered from ankle to knee with pink silk cords|a pale blue leather belt decorated with copper studs
-
-  var lootkeeplist infuser stone|potency crystal|\S+ powder|.* cloth|.* stack|.* leather|.* bar|.* nugget|.* fragment|.* lump|.* tear|.* shard|.* ingot|.* pebble|.* rock|.* stone|.* boulder|.* deed|bulging pouch|small pouch
-}
-
 var storage 0
 var dolphinpause 0
-var healbot NO
-var healbotroom 204
-var healbotname Maorn
 var dumproom 35
-
-var premium -1
-var totalattempts 0
-var totalprizes 0
-var prizeskept 0
-var totalspent 0
-
 var workroom 745
 var craftingstorage haversack
 
+var healbot NO
+var healbotroom 204
+var healbotname Maorn
+
+var savedyes NO
+
 if {"$charactername" = "Saragos") then
 {
-  var storage haversack
   var healbot YES
   var healbotroom 204
   var healbotname Maorn
   
+  var storage gearbag
   var workroom 264
   var craftingstorage crafting satchel
   var scissors scissors
@@ -62,78 +25,66 @@ if {"$charactername" = "Saragos") then
   var yardstick tel'athi yardstick
   var knittingneedles knitting needles
   var awl awl 
-  var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
 }
 if {"$charactername" = "Isrenar") then
 {
-  var storage haversack
-  var healbot YES
-  var healbotroom 204
-  var healbotname Maorn
-  
+  var storage haversack  
   var workroom 292
   var craftingstorage crafting satchel
-  var scissors scissors
-  var sewingneedles sewing needles
   var slickstone Sunderstone slickstone
   var yardstick tel'athi yardstick
-  var knittingneedles knitting needles
-  var awl awl 
-  var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
 }
 if {"$charactername" = "Navesi") then
 {
   var storage duffel
-  var healbot NO
-  var healbotroom 204
-  var healbotname Maorn
-
   var workroom 264
   var craftingstorage crafting satchel
-  var scissors scissors
-  var sewingneedles sewing needles
-  var slickstone slickstone
-  var yardstick yardstick
-  var knittingneedles knitting needles
-  var awl awl 
-  var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
-
 }
 if {"$charactername" = "Itusumera") then
 {
   var storage tote
-  var healbot NO
-  var healbotroom 204
-  var healbotname Maorn
-
   var workroom 292
   var craftingstorage crafting satchel
-  var scissors scissors
-  var sewingneedles sewing needles
-  var slickstone slickstone
-  var yardstick yardstick
-  var knittingneedles knitting needles
-  var awl awl 
-  var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
 }
 if {"$charactername" = "Chyral") then
 {
   var storage carryall
-  var healbot no
-  var healbotroom 204
-  var healbotname Maorn
-  
   var workroom 192
   var craftingstorage crafting satchel
-  var scissors scissors
-  var sewingneedles sewing needles
   var slickstone sunderstone slickstone
   var yardstick detailed yardstick
-  var knittingneedles knitting needles
-  var awl awl 
-  var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
 }
 var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
+
+if ("%scripttag" != "DARK") then
+{
+  var lootkeeplist cloth lootbag instructions|cloth lootpouch instructions|dark green sack made of dessicated kelp|dark green sack made of desiccated kelp|(fibrous|folded|tiny|carved) .* icon of .*|faintly glowing starstone|glass octahedron|piece of iridescent .* seaglass|sea-blue vial|sea-green potion|small sea serpent totem|tiny iridescent cube|translucent conch shell inlaid with .* swirls|dramatic.*cloak fastened with a.*clasp|ornate \S+ ring|compact .* textbook bound with a .* cover|water-stained treasure map|elaborately dressed .* puppet with .* eyes|miniature .* doll dressed in .* robes|porcelain toy .* clothed in .* vestments|burnished .* wheel painted with colorful sea creatures|sleek .* lootpouch fastened with a .* leviathan|polished .* wand topped with a .* starfish|iridescent .* filaments strung with .* stars|folding .* chair with a .* cushioned seat|miniature polar bear with round .* eyes|.* thigh pouch|.* robes|.* skirt|length of .* fabric|latticed .* picnic basket tied with|slim.*codex|large.*tome patterend with stylized.*sigils|feathery.*fronds|small.*trident|sylized.*wave|tapered crown of miniature.*tridents|lacquered.*band set with.*clownfish|slender.*eyebrow ring dangling.*sigil|fragile.*blossom with delicate.*petals|fragile blown-glass sphere cradled within a twisted.*frame|pilgrim's badge sculpted with the emblem of|sea urchin mirror with.*gliding along the spines|small.*treasure chest set with.*embellishments|competition miniature Merelew soldier wielding a tiny.*trident|repair case of polished.*with.*fittings|seaglass bottle of chilled zuoganaas insulated with.*kelp fronds|.*contract marked with the crest of the Traders' Guild|tarina|.*instructions|.*ice skates|infuser stone|potency crystal|seaglass-tipped arrows|seaglass-tipped bolts|.*torque|large .* tome patterned with stylized .* sigils
+}
+else
+{
+  var badlootlist \S+ kelp|\S+ rockweed|\S+ \S+ rockweed|piece of \S+ sharkskin|\S+ root|\S+ flowers|shark's tooth|burlap cloth|felt cloth|bear-pelt moccasins threaded with white leather laces|cobalt-blue leather belt studded with iron|doeskin moccasins threaded with brown leather laces|embossed leather belt with a gold-washed buckle|fawn-brown leather belt decorated with steel studs|green leather eye patch|light grey leather belt studded with circles of polished amber|pleated deep green wool breeches cross-gartered from ankle to knee with brown leather|purple leather eye patch|seal-pelt moccasins threaded with black leather laces|bear tooth necklace strung on a leather thong|gryphon feather necklace strung on a leather thong|leatherfoot steak|yelith root|ocarina|cambrinth .*|black linen shirt with carved amethyst buttons|black silk surcoat with the crest of the Bards' Guild|pair of .* leather ankle boots decorated with .* chains|skullcap crafted of .* with colorful beadwork|black linen shirt with carved lapis lazuli buttons|jadice flowers|low-slung pair of billowy sapphire-blue gauze pants gathered close at the ankles|some heavy pearl-grey wool pants with rolled-up cuffs|black silk surcoat with the crest of the Rangers' Guild on the front|some soft .* linen trousers edged with black piping|a clay whistle in the shape of a bird|some pleated turquoise wool breeches cross-gartered from ankle to knee with pink silk cords|a pale blue leather belt decorated with copper studs
+
+  var lootkeeplist infuser stone|potency crystal|\S+ powder|.* cloth|.* stack|.* leather|.* bar|.* nugget|.* fragment|.* lump|.* tear|.* shard|.* ingot|.* pebble|.* rock|.* stone|.* boulder|.* deed|bulging pouch|small pouch
+}
+
+var commonbones badger-bone|barghest-bone|bear-bone|bison-bone|bobcat-bone|cougar-bone|crocodile-bone|deer-bone|frog-bone|ghoul-bone|goblin-bone|jackal-bone|kobold-bone|lava drake-bone|leucro-bone|prereni-bone|rat-bone|reaver-bone|rotting-bone|serpent-bone|sluagh-bone|snow goblin-bone|stalker-bone|troll-bone|wolf-bone|zombie-bone
+var commoncloths burlap|cotton|felt|linen|silk|wool
+var commonleathers amber-scale|antelope-skin|azure-scale|badger-pelt|bison-hide|ape-pelt|black goblin-skin|black leucro pelt|black-hide|blood wolf-pelt|boar hide|bobcat pelt|bronze leucro-hide|brown poloh'izh-hide|caracal-pelt|cave-troll|clouded arzumos pelt|cougar-pelt|crimson-scale|damaska boar hide|dark-scale|deer-skin|eel-skin|frog-skin|ghoul-skin|goblin-skin|gargoyle-hide|hound-pelt|green-scale|grey-scale|gryphon-pelt|horse-hide|jackal-pelt|kobold-skin|la'tami-hide|lava drake-hide|hound-pelt|blue-scale|marble-hide|ogre-skin|pivuh-skin|prereni-skin|quartz-hide|rat-pelt|reaver-pelt|red-leucro|red-scale|salt-encrusted|serpent-skin|salswar-hide|sharkskin|sheepskin|silver-leucro|sluagh-hide|snow goblin-hide|stalker-pelt|storm-bull|troll-skin|trollkin-hide|viper-skin|warcat-pelt|white-pelt|wolf-pelt|zombie-skin
+var commonmetals brass|bronze|coal|copper|covellite|highsteel|iron|lead|nickel|oravir|pewter|platinum|silver|steel|tin|gold|zinc
+var commonstones alabaster|andesite|basalt|breccia|dolomite|gabbro|granite|jade|limestone|marble|obsidian|onyx|pumice|quartzite|sandstone|schist|serpentine|soapstone|travertine
+var commonwoods alder|apple|ash|aspen|balsa|bamboo|birch|cedar|cypress|elm|fir|hemlock|larch|mahogany|mangrove|maple|moabi|oak|pine|spruce|teak|walnut|willow
+var commonmats |%commonbones|%commoncloths|%commonleathers|%commonmetals|%commonstones|%commonwoods|
+
+action var winpercentage %totalprizes; math winpercentage / %totalattempts; math winpercentage * 100; var keptpercentage %prizeskept; math keptpercentage / %totalattempts; math keptpercentage * 100; var costperkeptprize %totalspent; math costperkeptprize / %prizeskept; put #echo >Log Yellow [%scripttag] TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent // WinPercentage: %winpercentage% -- KeptPercentage: %keptpercentage% -- Cost/Kept Prize: %costperkeptprize. when A good positive attitude never hurts\.
+action var lodgedstring $0 when You have a .* lodged
+
+var premium -1
+var totalattempts 0
+var totalprizes 0
+var prizeskept 0
+var totalspent 0
+eval savedyes toupper(%savedyes)
+
 
 goto HELIBEND
 
@@ -421,6 +372,14 @@ SACKLOOTMATS:
   var sacksuccess 1
   if ("$righthandnoun" = "sack") then var prizehand left
   else var prizehand right
+  if ("%savedyes" = "NO") then
+  {
+    if ("$%prizehandhandnoun" = "dye") then
+    {
+      put #echo >Log [%scripttag] Dumping $%prizehandhand - dye.
+      gosub DUMPITEM my %itemtoget    
+    }
+  }
   gosub TAPADJECTIVE $%prizehandhand
   echo adjtap: %adjtap
   if contains("%commonmats", "|%adjtap|") then
