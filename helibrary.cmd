@@ -334,6 +334,13 @@ HECOINWITHDRAW:
 PROCESSSACK:
   if ("%scripttag" = "ZASELE") then var sackname woven sack
   else var sackname green sack
+  if ("$lefthandnoun" = "sack") then gosub SWAP
+  if ("$lefthand" != "Empty") then gosub PUTITEM $lefthand in my %storage
+  if ("$lefthand" != "Empty") then
+  {
+    put #echo >Log Yellow Problem in clearing the left hand for processing the sack!  Please address!
+    exit
+  }
   gosub OPENITEM %sackname
   var boxitem %sackname
   gosub BOXFILLPOUCH
@@ -362,35 +369,32 @@ SACKLOOT:
 	matchwait
   
 SACKLOOTMATS:
-  var itemtoget $1
-  gosub GETITEM %itemtoget in my sack
+  gosub GETITEM $1 in my sack
   if ("$lefthand" = "Empty") then
   {
     var sackfail 1
     return
   }
   var sacksuccess 1
-  if ("$righthandnoun" = "sack") then var prizehand left
-  else var prizehand right
   if ("%savedyes" = "NO") then
   {
-    if ("$%prizehandhandnoun" = "dye") then
+    if ("$lefthandnoun" = "dye") then
     {
-      put #echo >Log [%scripttag] Dumping $%prizehandhand - dye.
-      gosub DUMPITEM my %itemtoget    
+      put #echo >Log [%scripttag] Dumping $lefthand - dye.
+      gosub DUMPITEM my $lefthand    
     }
   }
-  gosub TAPADJECTIVE $%prizehandhand
+  gosub TAPADJECTIVE $lefthand
   echo adjtap: %adjtap
   if contains("%commonmats", "|%adjtap|") then
   {
-    put #echo >Log [%scripttag] Dumping $%prizehandhand - common.
-    gosub DUMPITEM my %itemtoget
+    put #echo >Log [%scripttag] Dumping $lefthand - common.
+    gosub DUMPITEM my $lefthand
   }
   else
   {
-    put #echo >Log Yellow [%scripttag] Found $%prizehandhand!
-    gosub STOWITEM %itemtoget
+    put #echo >Log Yellow [%scripttag] Found $lefthand!
+    gosub STOWITEM my $lefthand
   }
   goto SACKLOOT
 
