@@ -3,8 +3,9 @@ action math numshop add 1;var stand%numshop $3 $4 when ^  (a|an|some) (\w+) (\w+
 action var platconvert $2;math platconvert divide 1000; put #echo >Log Yellow %stand%shopstand: $1 - %platconvert when ^  (.*) for (\d+) copper Kronars$
 action put #echo >Log Yellow %stand%shopstand: $1 - $2 when ^  (.*) for (\d+) platinum Kronars$
 
-if ("$roomname" != "Limited Treasures, Sales Floor") then gosub ENTERSALES
 var numshop 0
+
+if ("$roomname" != "Limited Treasures, Sales Floor") then gosub ENTERSALES
 gosub SHOPWINDOW
 if (%numshop > 0) then gosub SHOPSTAND 1
 if (%numshop > 1) then gosub SHOPSTAND 2
