@@ -36,13 +36,13 @@ if {"$charactername" = "Isrenar") then
 }
 if {"$charactername" = "Navesi") then
 {
-  var storage duffel
+  var storage gamebag
   var workroom 264
   var craftingstorage crafting satchel
 }
 if {"$charactername" = "Itusumera") then
 {
-  var storage tote
+  var storage gamebag
   var workroom 292
   var craftingstorage crafting satchel
 }
