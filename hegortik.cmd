@@ -3,7 +3,7 @@ action math numshop add 1;var stand%numshop $3 $4 when ^  (a|an|some) (\w+) (\w+
 action var platconvert $2;math platconvert divide 1000; put #echo >Log Yellow %stand%shopstand: $1 - %platconvert when ^  (.*) for (\d+) copper Kronars$
 action put #echo >Log Yellow %stand%shopstand: $1 - $2 when ^  (.*) for (\d+) platinum Kronars$
 
-gosub ENTERSALES
+if ("$roomname" != "Limited Treasures, Sales Floor") then gosub ENTERSALES
 var numshop 0
 gosub SHOPWINDOW
 if (%numshop > 0) then gosub SHOPSTAND 1
@@ -32,7 +32,7 @@ ENTERGO:
   return 
  
 ENTERGOCURT:
-  gosub ENTERROOM curtained door
+  gosub ENTERROOM curtained
   return
   
 ENTERROOM:
@@ -47,6 +47,7 @@ SHOPWINDOW:
   matchre SHOPROOM ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|^Between the ringing in your head
   match RETURN The following items contain goods for sale:
   match RETURN There is nothing to buy here.
+  match RETURN [Type SHOP [ITEM] to see what's on it or SHOP WINDOW.]
   put shop window
   matchwait
   
