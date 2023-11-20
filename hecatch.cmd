@@ -7,15 +7,22 @@ var roomcount 8
 
 var shrineroom 56
 
-action put #echo >Log Yellow Caught one!  Won $1. when The helper places (.*) in your hand.
+action put #echo >Log Yellow Caught one!  Won $1. when The helper places (.*) in your hand\.
 
 gosub STOWALL
+if (("$righthand") = "Empty") && ("$lefthand" = "Empty")) then
+else
+{
+  put #echo Yellow Could not empty hands!  Address and restart script!
+  put #play JustArrived
+  exit
+}
   
 MAIN:
   if ("$righthand" = "Empty") then
   {
     put look
-    if matchre("$roomobjs", "%critterlist") then
+    if matchre("$roomobjs", "\b%critterlist\b") then
     {
       var critter $0
       echo critter: %critter
@@ -30,7 +37,10 @@ MAIN:
       goto MAIN
     }
   }
-  if ("$righthand" != "Empty") then gosub MOVE %shrineroom
+  if ("$righthand" != "Empty") then
+  {
+    if ($roomid != %shrineroom) then gosub MOVE %shrineroom
+  }
   if ("$righthand" != "Empty") then gosub PUTCRITTER
   pause .1
   goto MAIN
@@ -73,6 +83,12 @@ PUTSUCCESS:
   gosub TAPSHORTEN $righthand
   if (%storage != 0) then gosub PUTITEM %shorttap in my %storage
   else gosub STOWALL
+  if ("$righthand" != "Empty") then
+  {
+    put #echo Yellow Could not empty hands!  Address and restart script!
+    put #play JustArrived
+    exit
+  }
   return
 
   #The barracuda evades the grab and dashes north!

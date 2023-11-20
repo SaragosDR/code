@@ -376,12 +376,13 @@ SACKLOOTMATS:
     return
   }
   var sacksuccess 1
+  gosub TAPSHORTEN $lefthand
   if ("%savedyes" = "NO") then
   {
     if ("$lefthandnoun" = "dye") then
     {
       put #echo >Log [%scripttag] Dumping $lefthand - dye.
-      gosub DUMPITEM my $lefthand    
+      gosub DUMPITEM my %shorttap   
     }
   }
   gosub TAPADJECTIVE $lefthand
@@ -389,12 +390,12 @@ SACKLOOTMATS:
   if contains("%commonmats", "|%adjtap|") then
   {
     put #echo >Log [%scripttag] Dumping $lefthand - common.
-    gosub DUMPITEM my $lefthand
+    gosub DUMPITEM my %shorttap
   }
   else
   {
     put #echo >Log Yellow [%scripttag] Found $lefthand!
-    gosub STOWITEM my $lefthand
+    gosub STOWITEM my %shorttap
   }
   goto SACKLOOT
 
