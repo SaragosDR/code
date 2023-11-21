@@ -47,7 +47,8 @@ MAIN:
 
 CRITTERSEARCH:
   if (%searchcount > %roomcount) then return
-  if ($roomid != %critterrooms(%searchcount) then gosub MOVE %critterrooms(%searchcount)
+  if ($roomid != %critterrooms(%searchcount)) then gosub MOVE %critterrooms(%searchcount)
+  #put #echo >Log %critterrooms(%searchcount)  searchcount: %searchcount  roomcount: %roomcount
   put look
   if (matchre("$roomobjs", "%critterlist")) then return
   else
