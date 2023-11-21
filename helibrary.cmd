@@ -67,6 +67,7 @@ else
   var lootkeeplist infuser stone|potency crystal|\S+ powder|.* cloth|.* stack|.* leather|.* bar|.* nugget|.* fragment|.* lump|.* tear|.* shard|.* ingot|.* pebble|.* rock|.* stone|.* boulder|.* deed|bulging pouch|small pouch
 }
 
+var sacknouns lump|shard|nugget|bar|leather|cloth|dye|deed|stack|fragment
 var commonbones badger-bone|barghest-bone|bear-bone|bison-bone|bobcat-bone|cougar-bone|crocodile-bone|deer-bone|frog-bone|ghoul-bone|goblin-bone|jackal-bone|kobold-bone|lava drake-bone|leucro-bone|prereni-bone|rat-bone|reaver-bone|rotting-bone|serpent-bone|sluagh-bone|snow goblin-bone|stalker-bone|troll-bone|wolf-bone|zombie-bone
 var commoncloths burlap|cotton|felt|linen|silk|wool
 var commonleathers amber-scale|antelope-skin|azure-scale|badger-pelt|bison-hide|ape-pelt|black goblin-skin|black leucro pelt|black-hide|blood wolf-pelt|boar hide|bobcat pelt|bronze leucro-hide|brown poloh'izh-hide|caracal-pelt|cave-troll|clouded arzumos pelt|cougar-pelt|crimson-scale|damaska boar hide|dark-scale|deer-skin|eel-skin|frog-skin|ghoul-skin|goblin-skin|gargoyle-hide|hound-pelt|green-scale|grey-scale|gryphon-pelt|horse-hide|jackal-pelt|kobold-skin|la'tami-hide|lava drake-hide|hound-pelt|blue-scale|marble-hide|ogre-skin|pivuh-skin|prereni-skin|quartz-hide|rat-pelt|reaver-pelt|red-leucro|red-scale|salt-encrusted|serpent-skin|salswar-hide|sharkskin|sheepskin|silver-leucro|sluagh-hide|snow goblin-hide|stalker-pelt|storm-bull|troll-skin|trollkin-hide|viper-skin|warcat-pelt|white-pelt|wolf-pelt|zombie-skin
@@ -335,7 +336,11 @@ PROCESSSACK:
   if ("%scripttag" = "ZASELE") then var sackname woven sack
   else var sackname green sack
   if ("$lefthandnoun" = "sack") then gosub SWAP
-  if ("$lefthand" != "Empty") then gosub PUTITEM $lefthand in my %storage
+  if ("$lefthand" != "Empty") then
+  {
+    gosub TAPSHORTEN $lefthand
+    gosub PUTITEM my %shorttap in my %storage
+  }
   if ("$lefthand" != "Empty") then
   {
     put #echo >Log Yellow Problem in clearing the left hand for processing the sack!  Please address!
@@ -373,6 +378,8 @@ SACKLOOTMATS:
   if ("$lefthand" = "Empty") then
   {
     var sackfail 1
+    #put #echo >Log Red badleft: $lefthand
+    #put #echo >Log Red badright: $righthand
     return
   }
   var sacksuccess 1
@@ -382,7 +389,8 @@ SACKLOOTMATS:
     if ("$lefthandnoun" = "dye") then
     {
       put #echo >Log [%scripttag] Dumping $lefthand - dye.
-      gosub DUMPITEM my %shorttap   
+      gosub DUMPITEM my %shorttap
+      goto SACKLOOT
     }
   }
   gosub TAPADJECTIVE $lefthand
