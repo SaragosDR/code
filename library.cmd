@@ -4798,7 +4798,7 @@ FACENEXT:
 FACEP:
 	pause
 FACE:
-	if %avoidshock = "YES" then
+	if ("%avoidshock" = "YES") then
 	{
 	  gosub TARGETSELECT
 	  var facebrawlfail 0
@@ -4811,12 +4811,13 @@ FACE:
 	  var mobnum 0
 	  var mobpos 0
 	  gosub FACEASSESS
-	  if mob = 0 then
+	  if (%mob = 0) then
 	  {
+	    var goodtarget 0
 	    var badface 1
 	    return
 	  }
-	  if "%mobpos" = "Facing" then return
+	  if ("%mobpos" = "Facing") then return
     if contains("flanking|behind|advancing","%mobpos") then
     {
       gosub FACETARGET %Ordinal(%mobnum) %mob
@@ -4835,7 +4836,7 @@ FACE:
 FACEASSESSP:
   pause
 FACEASSESS:
-	if $monstercount < 2 then return
+	if ($monstercount < 1) then return
   matchre FACEASSESSP %waitstring
 	matchre FACEVALUES ^An? .*(\b\w+(?:\S+)?\b) \((\d+):.*\) is (facing|flanking|behind|advancing on|moving to flank|moving behind) you at
 	match FACEASSESSRETURN A good positive attitude never hurts.
@@ -5450,7 +5451,7 @@ STAND:
   if (($prone = 1) || ($sitting = 1) || ($kneeling = 1)) then
   {
 		matchre RETURN You are already standing.|You stand back up.|You stand up in the water.
-		matchre STAND The weight of all your possessions prevents you from standing.|You are so unbalanced you cannot manage to stand.
+		matchre STAND ^The weight of all your possessions prevents you from standing\.$|^You are so unbalanced you cannot manage to stand\.$|^You are overburdened and cannot manage to stand\.$
 		match RETURN You're unconscious!
 		matchre STANDP %waitstring
 		put stand

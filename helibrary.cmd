@@ -48,7 +48,7 @@ if {"$charactername" = "Itusumera") then
 }
 if {"$charactername" = "Chyral") then
 {
-  var storage carryall
+  var storage gearbag
   var workroom 192
   var craftingstorage crafting satchel
   var slickstone sunderstone slickstone

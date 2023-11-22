@@ -112,10 +112,10 @@ else
 
 
 MAINTASKLOOP:
-  if %firstrun = 1 then
+  if (%firstrun = 1) then
   {
     var firstrun 0
-    gosub AUTO 
+    gosub AUTO
     gosub STAND 
   }
   echo halfling1: $halfling1
@@ -256,7 +256,7 @@ AUTO:
 
 ABAD:
   #echo goodtask: %goodtask
-  if %goodtask >= 10 then
+  if (%goodtask >= 10) then
   {
     put #echo >Conversation Task complete - killing!
     return
@@ -305,12 +305,13 @@ ABUILD:
 
 ALAND:
   var roomnum 0
+  var tasknum 10
   goto LANDMARKS
 
 TASK:
   send task
   pause .5
-  if %goodtask >= %tasknum then
+  if (%goodtask >= %tasknum) then
   {
     put #echo >Conversation Task complete - %task!
     return
@@ -318,7 +319,7 @@ TASK:
   gosub ROOMTEST
   var roomtargettest $roomid
   math roomtargettest add 1
-  if %roomtarget > 425 then var roomtargettest 3
+  if (%roomtarget > 425) then var roomtargettest 3
   gosub MOVE %roomtargettest
   if %task = "mice" then gosub WAVE
   if %task = "pull" then gosub PULL
@@ -341,8 +342,7 @@ PULLP:
   pause
 PULL:
   matchre PULLP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
-  matchre PULLRETURN Getting down on your hands and knees, you manage to really get in and clear out the weeds.|You pull and pull on the weeds, but they're very stubborn and after a while you have to give up.|You pull on some of the weeds and manage to get a whole bunch of them cleared away from the corn.|You scrabble futily at the weeds with your hands.  They're probably too tough here.|You pull and pull on the weeds, but they're very stubborn and after a while you have to give up.|You pull out some of the weeds in the area without harming the corn.|You pull at what looks like a few weeds, but then realize that it's actually a weird looking corn plant, so you stop.|You've already tried to pull the weeds around here.  You should move to a different area.|You diligently grab at the grassy weeds between the stalks of corn, clearing some out.
-  matchre PULLRETURN You pull at some of the weeds, but misjudge the strength of the stalks and a small portion suddenly comes loose in your hands, sending you toppling backwards!
+  matchre PULLRETURN Getting down on your hands and knees, you manage to really get in and clear out the weeds.|You pull and pull on the weeds, but they're very stubborn and after a while you have to give up.|You pull on some of the weeds and manage to get a whole bunch of them cleared away from the corn.|You scrabble futilely at the weeds with your hands.  They're probably too tough here.|You pull and pull on the weeds, but they're very stubborn and after a while you have to give up.|You pull out some of the weeds in the area without harming the corn.|You pull at what looks like a few weeds, but then realize that it's actually a weird looking corn plant, so you stop.|You've already tried to pull the weeds around here.  You should move to a different area.|You diligently grab at the grassy weeds between the stalks of corn, clearing some out\.|You pull at some of the weeds, but misjudge the strength of the stalks and a small portion suddenly comes loose in your hands, sending you toppling backwards\!
   put pull weed
   matchwait
 
@@ -496,6 +496,11 @@ SCREAM:
   matchwait
 
 LANDMARKS:
+  if (%goodtask >= %tasknum) then
+  {
+    put #echo >Conversation Task complete - %task!
+    return
+  }
   gosub MOVE %roomlist(%roomnum)
   gosub TOUCHLAND
   math roomnum add 1

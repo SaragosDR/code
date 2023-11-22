@@ -2,6 +2,8 @@ include library.cmd
 
 #Your target pattern dissipates because the lava drake is dead, but the main spell remains intact.
 
+action var var goodtarget 0 when (balance|balanced|imbalanced|unbalanced)\]
+action var goodtarget 0 when You turn to face
 
 if ("$roomname" = "Duskruin, Antechamber") then
 {
@@ -243,25 +245,26 @@ timer clear
 timer start
 
 
-  if_1 then
+if_1 then
+{
+  var specifictarget 1
+  var killtarget %1
+  eval killtarget tolower(%killtarget)
+}
+else
+{
+  if (%duskruin = 1) then
   {
     var specifictarget 1
-    var killtarget %1
-    eval killtarget tolower(%killtarget)
   }
   else
   {
-    if (%duskruin = 1) then
-    {
-      var specifictarget 1
-    }
-    else
-    {
-      var killtarget 0
-      var specifictarget 0
-      gosub FACE
-    }
+    var killtarget 0
+    var specifictarget 0
+    gosub FACE
+    if (%goodtarget = 1) then var killtarget %mob
   }
+}
 
 if %killadvance = "YES" then gosub ADV
 MAINLOOP:
@@ -305,7 +308,7 @@ MAINLOOP:
     gosub KILLSTATUSCHECK
   }
   #DB
-  if %dragonsbreath = "YES" then
+  if (%dragonsbreath = "YES") then
   {
     gosub DBLOGIC
     gosub KILLSTATUSCHECK
@@ -317,17 +320,17 @@ MAINLOOP:
     gosub KILLSTATUSCHECK
   }
   #DEBIL_TM
-  if ((%killdb = "YES") || (%killtm = "YES")) then
+  if (("%killdb" = "YES") || ("%killtm" = "YES")) then
   {
-    if ((%killtm = "YES") && (%killdb = "YES")) then
+    if (("%killtm" = "YES") && ("%killdb" = "YES")) then
     {
-      if ((%lastspell = 0) || (%lastspell = "2")) then gosub DEBILPREP
+      if ((%lastspell = 0) || (%lastspell = 2)) then gosub DEBILPREP
       else gosub TMPREP
     }
     else
     {
-      if %killtm = "YES" then gosub TMPREP
-      if %killdb = "YES" then gosub DEBILPREP
+      if ("%killtm" = "YES") then gosub TMPREP
+      if ("%killdb" = "YES") then gosub DEBILPREP
     }
     gosub KILLSTATUSCHECK
   }
@@ -428,7 +431,6 @@ BOWSTANCECHECK:
   return  
 
 DEBILPREP:  
-  gosub TARGETCHECK
   if %goodtarget = 0 then return
   if %casting != 1 then
   {
@@ -448,8 +450,7 @@ DEBILPREP:
   return
  
 TMPREP:
-  gosub TARGETCHECK
-  if %goodtarget = 0 then return
+  if (%goodtarget = 0) then return
   if (%casting != 1) then
   {
     var spellprepping %killtmspell
@@ -468,67 +469,7 @@ TMPREP:
     #else var ctoverridevar %killtarget
   }
   return 
-  
-TARGETCHECK:
-  var goodtarget 0
-  if (%specifictarget = 0) then
-  {
-    if (%killtarget = 0) then
-    {
-      gosub ASSESS
-      goto TARGETCHECK
-    }
-    else
-    {
-      eval monlistlen length("$monsterlist")
-      if %monlistlen > 0 then var goodtarget 1
-      else var goodtarget 0
-      return
-    }
-  }
-  if %specifictarget = 1 then
-  {
-    var goodtarget 0
-    #put #echo Yellow monsterlist: $monsterlist
-    #echo killtarget: %killtarget
-    if matchre("$monsterlist", "%killtarget") then var goodtarget 1
-    if matchre("$roomplayers", "%killtarget") then var goodtarget 1
-  }
-  return
-  
-ASSESS:
-	matchre SET_ASSESS are facing [?:a|an](.*)(?:\(\d\)\s)
-	matchre SET_ASSESS are behind [?:a|an](.*)(?:\(\d\)\s)
-	matchre SET_ASSESS are flanking [?:a|an](.*)(?:\(\d\)\s)
-	matchre SET_ASSESS are moving to flank [?:a|an](.*)(?:\(\d\)\s)
-  matchre SET_ASSESS are facing (.*) at (melee|pole|missile) range.
-	matchre SET_ASSESS are behind (.*) at (melee|pole|missile) range.
-	matchre SET_ASSESS are flanking (.*) at (melee|pole|missile) range.
-	matchre SET_ASSESS are moving to flank (.*) at (melee|pole|missile) range.
-	match ASSESSBAD A good positive attitude never hurts.
-	put assess
-	put yes
-	matchwait 3
-
-ASSESSBAD:
-  var nextassess %t
-  math nextassess add 2
-  var killtarget 0
-  return
-
-SET_ASSESS:
-  var pvparray $1
- 	eval pvparray replace("%pvparray", " ", "|")
-  eval arraylen count("%pvparray", "|")
-  if %arraylen > 0 then
-  {
-    eval killtarget element("%pvparray", %arraylen)
-	}
-	else var killtarget $1
-	#put #echo Yellow killtarget: %killtarget
-	var nextassess %t
-  math nextassess add 6
-	return
+    
   
 CLEANCASTINGLOGIC:
   if (%prepped != 1) then
@@ -703,8 +644,6 @@ BGLOGIC:
   }
   else
   {
-    gosub TARGETCHECK
-    #echo goodtarget: %goodtarget
     if %goodtarget = 0 then return 
     var bggesture wave
     var bgmon %killtarget
@@ -728,7 +667,6 @@ DBLOGIC:
   }
   else
   {
-    gosub TARGETCHECK
     if %goodtarget = 0 then return  
     if %dbready = 1 then
     {
@@ -741,7 +679,6 @@ DBLOGIC:
 MABLOGIC:
   if %mabload = 1 then
   {
-    gosub TARGETCHECK
     if %goodtarget = 1 then
     {
       gosub BALLISTALOAD
@@ -787,11 +724,32 @@ KILLSTATUSCHECK:
   #ASSESS
   if (%specifictarget = 0) then
   {
-    if (%t >= %nextassess) then 
+    if ((%specifictarget != 1) && (%goodtarget != 1)) then
     {
-      gosub ASSESS
+      if (%t >= %nextassess) then
+      {
+        if ($monstercount > 0) then
+        {
+          gosub FACE
+          if (%goodtarget = 1) then var killtarget %mob
+          else
+          {
+            var nextassess %t
+            math nextassess add 2
+          }
+        }
+      }
     }
   }
+  else
+  {
+    var goodtarget 0
+    #put #echo Yellow monsterlist: $monsterlist
+    #echo killtarget: %killtarget
+    if matchre("$monsterlist", "%killtarget") then var goodtarget 1
+    if matchre("$roomplayers", "%killtarget") then var goodtarget 1
+  }
+  #KILLRETREAT
   if %killretreat = "YES" then
   {
     if %melee = 1 then
@@ -847,6 +805,7 @@ KILLSTATUSCHECK:
     {
       if (%t > %nextsearch) then
       {
+        var goodtarget 0
         gosub LOOT
         gosub LOOTCHECK
         var nextsearch %t
