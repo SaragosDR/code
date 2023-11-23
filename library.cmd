@@ -4839,6 +4839,7 @@ FACEASSESS:
 	if ($monstercount < 1) then return
   matchre FACEASSESSP %waitstring
 	matchre FACEVALUES ^An? .*(\b\w+(?:\S+)?\b) \((\d+):.*\) is (facing|flanking|behind|advancing on|moving to flank|moving behind) you at
+	matchre FACEVALUES ^.*(\b\w+(?:\S+)?\b) \((\d+):.*\) is (facing|flanking|behind|advancing on|moving to flank|moving behind) you at
 	match FACEASSESSRETURN A good positive attitude never hurts.
 	put assess
 	put yes
@@ -4888,7 +4889,7 @@ FACEINVALID:
   return
 	
 FACEDEAD:
-  if %avoidshock = "YES" then
+  if (%avoidshock = "YES") then
   {
     put look
     pause 1
@@ -4899,7 +4900,7 @@ FACEDEAD:
   var goodtarget 0
   var badface 1
   var deadcheck 1
-  gosub MONTEST
+  #gosub MONTEST
   put look
   pause .5
   return
