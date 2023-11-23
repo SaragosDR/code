@@ -1,22 +1,49 @@
-action math numshop add 1;var stand%numshop $2 $3 when ^  (a|an|some) (\w+) (\w+)$
-action math numshop add 1;var stand%numshop $3 $4 when ^  (a|an|some) (\w+) (\w+) (\w+)$
+action math numshop add 1;var stand%numshop $1 $2 when ^  (?:a|an|some) (\w+) (\w+)$
+action math numshop add 1;var stand%numshop $2 $3 when ^  (?:a|an|some) (\w+) (\w+) (\w+)$
 action var platconvert $2;math platconvert divide 1000; put #echo >Log Yellow %stand%shopstand: $1 - %platconvert when ^  (.*) for (\d+) copper Kronars$
-action put #echo >Log Yellow %stand%shopstand: $1 - $2 when ^  (.*) for (\d+) platinum Kronars$
+action put #echo >Log Yellow %stand%shopstand: $1 - $2 when ^  (.*) for ([\w\.]+) platinum Kronars$
 
 var numshop 0
 
 if ("$roomname" != "Limited Treasures, Sales Floor") then gosub ENTERSALES
 gosub SHOPWINDOW
-if (%numshop > 0) then gosub SHOPSTAND 1
-if (%numshop > 1) then gosub SHOPSTAND 2
-if (%numshop > 2) then gosub SHOPSTAND 3
-if (%numshop > 3) then gosub SHOPSTAND 4
-if (%numshop > 4) then gosub SHOPSTAND 5
-if (%numshop > 5) then gosub SHOPSTAND 6
-if (%numshop > 6) then gosub SHOPSTAND 7
-if (%numshop > 7) then gosub SHOPSTAND 8
-if (%numshop > 8) then gosub SHOPSTAND 9
+gosub SHOPLOOP
 exit
+
+
+
+SHOPLOOP:
+  var shoploopcount 1
+SHOPLOOPMAIN:
+  if (%shoploopcount > %numshop) then return
+  if (%numshop >= %shoploopcount) then
+  {
+    gosub NUMBERSTANDLOOP %shoploopcount
+    if (%numberstand = 1) then gosub SHOPSTAND first %shoploopcount
+    if (%numberstand = 2) then gosub SHOPSTAND second %shoploopcount
+    if (%numberstand = 3) then gosub SHOPSTAND third %shoploopcount
+    if (%numberstand = 4) then gosub SHOPSTAND fourth %shoploopcount
+    if (%numberstand = 5) then gosub SHOPSTAND fifth %shoploopcount
+    if (%numberstand = 6) then gosub SHOPSTAND sixth %shoploopcount
+    if (%numberstand = 7) then gosub SHOPSTAND seventh %shoploopcount
+    if (%numberstand = 8) then gosub SHOPSTAND eighth %shoploopcount
+    if (%numberstand = 9) then gosub SHOPSTAND ninth %shoploopcount
+  }
+  math shoploopcount add 1
+  goto SHOPLOOPMAIN
+
+NUMBERSTANDLOOP:
+  var numberstand 1
+  var currentstand $0
+  var nsloopcount 1
+NUMBERSTANDLOOPMAIN:
+  if (%nsloopcount >= %currentstand) then return
+  if ("%stand%nsloopcount" = "%stand%currentstand") then
+  {
+    math numberstand add 1
+  }
+  math nsloopcount add 1
+  goto NUMBERSTANDLOOPMAIN
 
 ENTERSALES:
   match RETURN [Limited Treasures, Sales Floor]
@@ -53,13 +80,14 @@ SHOPWINDOW:
   matchwait
   
 SHOPSTAND:
-  var shopstand $0
+  var standpos $1
+  var shopstand $2
 SHOPSTANDMAIN:
   matchre SHOPSTANDMAIN ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|^Between the ringing in your head
   match SHOPSTANDEMPTY There's nothing for sale attached to the
   match RETURN [Type SHOP [GOOD] or click an item to see some details about it.]
   match RETURN I could not find what you were referring to.
-  put shop %stand%shopstand
+  put shop %standpos %stand%shopstand
   matchwait
   
 SHOPSTANDEMPTY:
