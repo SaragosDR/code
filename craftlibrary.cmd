@@ -1309,6 +1309,7 @@ CRAFTREPAIRLOOPMAIN:
   gosub GETITEM my %%craftrepairlist(%currentrepairitem)
   pause .5
   if ("$righthand" != "Empty") then gosub CRAFTGIVETOOL
+  if ("$righthandnoun" = "ticket") then gosub PUTITEM my ticket in my %craftingstorage
   goto CRAFTREPAIRLOOPMAIN
 
 CRAFTGIVETOOLP:
@@ -1316,8 +1317,10 @@ CRAFTGIVETOOLP:
 CRAFTGIVETOOL:
   matchre CRAFTGIVETOOLSP %waitstring
   matchre NOMONEY You will need more coin if I am to be repairing that!
-  matchre CRAFTGIVETOOLSTOW |I will not repair something that isn't broken|I'm sorry, but I don't work on those.|Lucky for you!  That isn't damaged!|Read the sign on the wall!|There isn't a scratch on that,|Read the hide on the wall, please|Read the sign please\!|The apprentice repairman frowns and says|Please don't lose the ticket|Please don't lose this ticket|\w+ smiles and says
+  matchre CRAFTGIVETOOLSTOW I will not repair something that isn't broken|I'm sorry, but I don't work on those.|Lucky for you!  That isn't damaged!|Read the sign on the wall!|There isn't a scratch on that,|Read the hide on the wall, please|Read the sign please\!|The apprentice repairman frowns and says|Please don't lose the ticket|Please don't lose this ticket|\w+ smiles and says
+  matchre CRAFTGIVETOOL ^\w+ looks over the \w+ and says
   match RETURN What is it you're trying to give\?
+  matchre RETURN You hand \w+ \d+ (?:Kronars|Lirums|Dokoras) and he gives you back a repair ticket.
   put give %repairer
   matchwait
 
@@ -1342,9 +1345,14 @@ CRAFTTICKETLOOPMAIN:
   gosub PUTITEM $righthand in my %craftingstorage
   goto CRAFTTICKETLOOPMAIN
 
+GIVETICKETP:
+  pause
 GIVETICKET:
+  matchre GIVETICKETP %waitstring
   matchre RETURN ^You hand (%repairer) your ticket and are handed back|After a moment, he returns and hands you
 	matchre CRAFTWAITREPAIR ^\w* smiles and says
+	matchre CRAFTWAITREPAIR ^\w* grumbles\, \"Well that isn't gonna be done for another
+	matchre GIVETICKETP ^\w+ grumbles, \"Well that is almost done, just give me a few more moments here\.\"
 	match GIVETICKET What is it you're trying to give?
 	put give %repairer
 	matchwait

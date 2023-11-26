@@ -232,9 +232,9 @@ action var bgdone 1;put #var SpellTimer.BlufmorGaraen.active 0 when You point at
 action var dbready 1 when You feel ready for more firebreathing.
 action var dbready 0 when You sharply inhale, drawing upon
 action var dbready 0 when Your throat is too sore to breathe fire again so soon!
-action var mabload 1 when A .* ballista.* shudders slightly
-action var mabload 0 when The .* ballista is already loaded
-action var mabload 0 when You lay your hand upon the .* ballista
+action var mabload 1 when ^A .* ballista.* shudders slightly
+action var mabload 0 when ^The .* ballista is already loaded
+action var mabload 0 when ^You lay your hand upon the .* ballista
 action var melee 1 when closes to melee range on you!
 action var melee 1 when are (facing|are behind|are flanking|are moving to flank) [?:a|an](.*)(?:\(\d\)\s)at melee range\.
 action var melee 1 Match! when is (facing|behind|flanking|moving to flank) you at melee range\.
@@ -760,7 +760,7 @@ KILLSTATUSCHECK:
   }
   if %killtmfocus = "YES" then
   {
-    if matchre ("$righthandnoun", "%tmfocusitem") then
+    if (matchre ("$righthand", "%tmfocusitem")) then
     else
     {
       gosub STOW right
