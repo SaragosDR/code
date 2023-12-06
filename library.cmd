@@ -127,7 +127,8 @@ VARCHECKS:
   
   if !matchre("$m%checkmodecustommovement", "\b(YES|NO)\b") then put #var m%checkmodecustommovement NO
   if !matchre("$m%checkmodekillbeforemove", "\b(YES|NO)\b") then put #var m%checkmodekillbeforemove YES
-  if !matchre("$m%checkmodemovetimeout", "\b(YES|NO)\b") then put #var m%checkmodemovetimeout 300
+  if $m%checkmodemovetimeout > 0 then
+  else put #var m%checkmodemovetimeout 300
   if !matchre("$m%checkmodecombatpreset", "%combatpresetlist") then put #var m%checkmodecombatpreset none
   if !matchre("$m%checkmodepresetpremium", "\b(YES|NO|ONLY)\b") then put #var m%checkmodepresetpremium NO
   if ("$m%checkmodecombatpreset" != "none") then
@@ -879,8 +880,8 @@ VARCHECKS:
       put #var m%checkmodemove NO
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 453|454|455|456|457|458|459|460|461|462|463|465|467|466
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 453|454|455|456|457|458|459|460|461|462|463|465|467|466|575|576|577|578|579
+      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 454|455|456|457|458|459|460|461|462|463|465|467|466|453
+      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 454|455|456|457|458|459|460|461|462|463|465|467|466|453|575|576|577|578|579
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 575|576|577|578|579
       put #var m%checkmodebugoutroom 382
     }
@@ -892,7 +893,7 @@ VARCHECKS:
       put #var m%checkmodemove NO
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 480|481|482|483|484|485|486|487|511|512
+      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 481|482|483|484|485|486|487|511|512|480
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 480|481|482|483|484|485|486|487|511|512|575|576|577|578|579
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 575|576|577|578|579
       put #var m%checkmodebugoutroom 382
@@ -2593,111 +2594,59 @@ STATUSCHECK:
     }
   }
   #STANDING
-  if %scriptmode = 1 then
+  if (%scriptmode = 1) then
   {
-    if $sitting = 1 then gosub STAND
-    if $kneeling = 1 then gosub STAND
-    if $prone = 1 then gosub STAND
+    if ($sitting = 1) then gosub STAND
+    if ($kneeling = 1) then gosub STAND
+    if ($prone = 1) then gosub STAND
   }
-  if %buffingonly != 1 then
+  #AUTOUPKEEP
+  if ((%autoupkeep = "YES") && (%buffingonly != 1) && (%scriptmode = 1)) then
   {
-    #BLEEDING
-    if (($bleeding = 1) && (%scriptmode = 1)) then
+    gosub AUTOUPKEEPCHECKS
+    if (%goupkeep = 1) then
     {
-      if %auonbleed = "YES" then
-      {
-        var autype bleed
-        var goupkeep 1
-      }
-      if %t > %nextbleed then gosub BLEEDCHECK
+      if ((%upkeepactive != 1) && (%movetrainactive != 1)) then gosub AUTOUPKEEPLOGIC
     }
-    #BURDEN
-    if ((%auonburden = "YES") && (%autoupkeep = "YES") && (%scriptmode = 1)) then
+  }
+  #COLLECTAMMO
+  if ((%scriptmode = 1) && (%buffingonly != 1) then
+  {
+    gosub COLLECTINGAMMO
+    if %feetcheck = 1 then
     {
-      #echo t: %t
-      #echo nextburdencheck: %nextburdencheck
-      if %t > %nextburdencheck then
-      {
-        gosub BURDENCHECK
-        pause 1
-        #put #echo Yellow encumbrance: %encumbrance
-        #put #echo Yellow auburdennum: %auburdennum
-        if %encumbrance >= %auburdennum then
-        {
-          var goupkeep 1
-          var autype burden
-        }
-        var nextburdencheck %t
-        math nextburdencheck add 120
-      }
+      var feetcheck 0
+      gosub STOWFEET
     }
-    #NERVES
-    if ((%autoupkeep = "YES" ) && (%auonnerves = "YES") && (%scriptmode = 1)) then
+  }
+  #DEAD_MONSTER
+  if ((%scriptmode = 1) && (%buffingonly != 1)) then
+  {
+    gosub MONTEST
+    if %tmdead = 1 then
     {
-      if %t > %nextnervecheck then
+      if %casting = 1 then
       {
-        var badnerves 0
-        action (nerves) on
-        gosub HEALTHCHECK
-        pause 1
-        action (nerves) off
-        var nextnervecheck %t
-        math nextnervecheck add 120
-        if %badnerves = 1 then
+        if %tmcast = 1 then gosub RETARGET
+      }
+      var tmdead 0
+    }
+    if %eotbrel = "YES" then
+    {
+      if $SpellTimer.EyesoftheBlind.active = 1 then
+      {
+        if %t > %nexteotbrel then
         {
-          var goupkeep 1
-          var autype nerves
-          var badnerves 0
+          gosub RELINVIS
+          var nexteotbrel %t
+          math nexteotbrel add 30
         }
       }
     }
-    #AUTOUPKEEP
-    if ((%autoupkeep = "YES") && (%scriptmode = 1)) then
-    {
-      if %goupkeep = 1 then
-      {
-        if ((%upkeepactive != 1) && (%movetrainactive != 1)) then gosub AUTOUPKEEPLOGIC
-      }
-    }
-    #COLLECTAMMO
-    if %scriptmode = 1 then gosub COLLECTINGAMMO
-    if %scriptmode = 1 then
-    {
-      if %feetcheck = 1 then
-      {
-        var feetcheck 0
-        gosub STOWFEET
-      }
-    }
-    #DEAD_MONSTER
-    if %scriptmode = 1 then
-    {
-      gosub MONTEST
-      if %tmdead = 1 then
-      {
-        if %casting = 1 then
-        {
-          if %tmcast = 1 then gosub RETARGET
-        }
-        var tmdead 0
-      }
-      if %eotbrel = "YES" then
-      {
-        if $SpellTimer.EyesoftheBlind.active = 1 then
-        {
-          if %t > %nexteotbrel then
-          {
-            gosub RELINVIS
-            var nexteotbrel %t
-            math nexteotbrel add 30
-          }
-        }
-      }
-      if %aimready = 1 then gosub FIRE
-    }
+    if %aimready = 1 then gosub FIRE
   }
   #TARGET_SELECTION
-  if ((%scriptmode = 1) && (%upkeepactive != 1) && (%movetrainactive != 1)) then
+  if ((%scriptmode = 1) && (%buffingonly != 1) && (%upkeepactive != 1) && (%movetrainactive != 1)) then
   {
     if (%goodtarget = 0) then
     {
@@ -2706,13 +2655,13 @@ STATUSCHECK:
     }
   }
   #BARBARIAN
-  if $guild = "Barbarian" then
+  if ("$guild" = "Barbarian") then
   {
     gosub BARBBUFFLOGIC
     gosub BARBROARLOGIC
   }
   #KHRI
-  if $guild = "Thief" then
+  if ("$guild" = "Thief") then
   {
     gosub KHRILOGIC
   }
@@ -2760,9 +2709,8 @@ STATUSCHECK:
     }
   }
   #SPELL_CANCEL
-  if %scancel = 1 then
-  {
-    var scancel 0
+  if (%scancel = 1) then
+  { 
     gosub SPELLCANCEL
   }
   #SPELL_PREPPING
@@ -2771,7 +2719,66 @@ STATUSCHECK:
   if %casting = 1 then gosub CASTINGLOGIC
   return
 
-
+AUTOUPKEEPCHECKS:
+  if ("%auonhealth" = "YES") then
+  {
+    if ($health <= $auhealthnum) then
+    {
+      var goupkeep 1
+      var autype health
+    }
+  }
+  #BLEEDING
+  if ("%auonbleed" = "YES") then
+  {
+    if ($bleeding = 1) then
+    {
+      var autype bleed
+      var goupkeep 1
+    }
+    if %t > %nextbleed then gosub BLEEDCHECK
+  }
+  #BURDEN
+  if (%auonburden = "YES") then
+  {
+    #echo t: %t
+    #echo nextburdencheck: %nextburdencheck
+    if %t > %nextburdencheck then
+    {
+      gosub BURDENCHECK
+      pause 1
+      #put #echo Yellow encumbrance: %encumbrance
+      #put #echo Yellow auburdennum: %auburdennum
+      if %encumbrance >= %auburdennum then
+      {
+        var goupkeep 1
+        var autype burden
+      }
+      var nextburdencheck %t
+      math nextburdencheck add 120
+    }
+  }
+  #NERVES
+  if (%auonnerves = "YES") then
+  {
+    if (%t > %nextnervecheck) then
+    {
+      var badnerves 0
+      action (nerves) on
+      gosub HEALTHCHECK
+      pause 1
+      action (nerves) off
+      var nextnervecheck %t
+      math nextnervecheck add 120
+      if (%badnerves = 1) then
+      {
+        var goupkeep 1
+        var autype nerves
+        var badnerves 0
+      }
+    }
+  }
+  return
 
 #==============GENERAL_SUBS==============  
 
@@ -3345,9 +3352,9 @@ SHEATHEHANDP:
   pause
 SHEATHEHANDMAIN:
   matchre SHEATHEHANDP %waitstring
-  matchre SHEATHEBAD Sheathe your
+  matchre SHEATHEBAD ^Sheathe your .* where\?$
   matchre RETURN Sheathe what?|You sheathe|You hang|You secure|You easily strap|Sheathing a
-  if %sheathehandstring = "right" then var sheatheitemstring $righthandnoun
+  if ("%sheathehandstring" = "right") then var sheatheitemstring $righthandnoun
   else var sheatheitemstring $lefthandnoun
   put sheathe %sheatheitemstring
   matchwait 5
@@ -3356,7 +3363,8 @@ SHEATHEHANDMAIN:
 	goto TIMEOUT
 
 SHEATHEBAD:
-  if %stowhand = "right" then gosub STOWITEM $righthandnoun
+  var cleanstow 1
+  if ("%stowhand" = "right") then gosub STOWITEM $righthandnoun
   else gosub STOWITEM $lefthandnoun
   gosub STOWITEM
   return
@@ -3394,24 +3402,26 @@ STOW:
 STOWP:
   pause
 STOWMAIN:
-  if %stowhandstring = "left" then
+  if ("%stowhandstring" = "left") then
   {
     if ("$lefthand" = "Empty") then return
   }
-  if %stowhandstring = "right" then
+  if ("%stowhandstring" = "right") then
   {
     if ("$righthand" = "Empty") then return
   }
-  var stowcustomsuccess 0
-  gosub STOWCUSTOM $%stowhandstringhand
-  #echo stowcustomsuccess: %stowcustomsuccess
-  if %stowcustomsuccess = 1 then return
+  if (%cleanstow != 1) then
+  {
+    var stowcustomsuccess 0
+    gosub STOWCUSTOM $%stowhandstringhand
+    if %stowcustomsuccess = 1 then return
+  }
+  var cleanstow 0
   matchre STOWP %waitstring
   matchre STOWFAIL ^That's too heavy to go in there\!|^There isn't any more room in the \w+ for that\.|^There's no room in the \w+\.
-  #matchre STOWFAIL ^You try to stuff your|^You think the .* pouch is too full to fit another gem into\.
   matchre STOWSKINBAD You try to stuff your
   matchre STOWGEMBAD You think the .* pouch is too full to fit another gem into\.
-  matchre STOWUNLOAD You need to unload|You should unload
+  matchre STOWUNLOAD ^You need to unload|^You should unload the .* first\.$
   match STOWSTOPPLAY You should stop playing before you do that.
   matchre STOWCOIL The \S+ rope is too long, even after stuffing it, to fit in the
   matchre RETURN You put your|Stow what\?|You open your pouch|You stop as|What were you referring to?|You think the gem pouch|You stop as you realize|You easily strap your
@@ -3648,14 +3658,19 @@ STOWITEM:
 STOWITEMP:
   pause
 STOWITEMMAIN:
-  var stowcustomsuccess 0
-  gosub STOWCUSTOM %stowitemstring
-  if %stowcustomsuccess = 1 then return
+  if (%cleanstow != 1) then
+  {
+    var stowcustomsuccess 0
+    gosub STOWCUSTOM %stowitemstring
+    if (%stowcustomsuccess = 1) then return
+  }
+  var cleanstow 0
   matchre STOWITEMP %waitstring
   match STOWITEMSTOPPLAY You should stop playing before you do that.
   matchre STOWITEMFAIL ^That's too heavy to go in there\!|^There isn't any more room in the \w+ for that\.|^There's no room in the \w+\.
   matchre STOWRETURN You put your|You sling|You attach|You open your pouch|You stop as
   match RETURN Stow what?  Type 'STOW HELP' for details.
+  matchre STOWITEMUNLOAD ^You should unload the .* first\.$
   match STOWITEMMAINFULL You need a free hand to pick that up.
   put stow %stowitemstring
   matchwait 5
@@ -3690,6 +3705,15 @@ STOWITEMFAIL2:
   put #play Advance
   pause 5
   goto STOWITEMFAIL2
+
+STOWITEMUNLOAD:
+  if ("$lefthand" != "Empty") then
+  {
+		gosub STOW left
+  }
+  gosub UNLOAD
+  gosub STOWALL
+  return
 
 
 STOWITEMMAINFULL:
@@ -4290,7 +4314,7 @@ ADVP:
 ADV:
   if %avoidshock = "YES" then gosub TARGETSELECT
   matchre FACE You stop advancing|You have lost sight|advance towards?
-  matchre ADVRETURN to melee range|already at melee|You are already advancing|You begin to 
+  matchre ADVRETURN to melee range|already at melee|You are already advancing|You begin to|^The .* is already quite dead\.$
   matchre ADVP %waitstring
   match ADVSTAND You had better stand up first.
   put advance
@@ -4312,25 +4336,26 @@ ANALYZEP:
   pause
 ANALYZE:
   var lasthit 1
-  matchre ANASUCC You fail to find any holes|Your analysis reveals a slight|You reveal a tiny weakness|You reveal a small|Your analysis reveals a small|Your analysis reveals a moderate|Your analysis reveals a good|Your analysis reveals a substantial|Your analysis reveals a large|Your analysis reveals a great|Your analysis reveals an exceptional|You reveal a moderate|You reveal a slight
-  matchre RETURN Your analysis reveals a massive
-	matchre ANAADV ^You must be closer
-	match ANAFACE There is nothing else to face!
-  match ANAFACENEXT Analyze what?
-  matchre ANALYZE ^You fail to find any
   matchre ANALYZEP %waitstring
+  matchre ANAADV ^You must be closer
+  match ANAFACE There is nothing else to face!
+  match ANAFACENEXT Analyze what?
   matchre ANAFLYING is flying too high for you to attack.|is flying far too high to hit with your fists\.
-
   matchre ANAPRONE You should stand up first.
-  matchre RETURN Face what?
+  matchre RETURN Face what?  
+  
+  matchre ANALYZEAGAIN You fail to find any holes|Your analysis reveals a slight|You reveal a tiny weakness|You reveal a small|Your analysis reveals a small|Your analysis reveals a moderate|Your analysis reveals a good|Your analysis reveals a substantial|Your analysis reveals a large|Your analysis reveals a great|Your analysis reveals an exceptional|You reveal a moderate|You reveal a slight
+	matchre ANALYZEAGAIN ^You fail to find any
+  matchre RETURN Your analysis reveals a massive
   put analyze
   matchwait 5
 	var timeoutsub ANALYZE
   var timeoutcommand analyze
 	goto TIMEOUT
 
-ANASUCC:
-  gosub STATUSCHECK
+ANALYZEAGAIN:
+  gosub AUTOUPKEEPCHECKS
+  if (%goupkeep = 1) then return
   goto ANALYZE
 
 ANAPRONE:
@@ -4339,7 +4364,7 @@ ANAPRONE:
 
 ANAFLYING:
   gosub FACE
-  if %badface = 1 then
+  if (%badface = 1) then
   {
     var badface 0
     return
@@ -5775,7 +5800,6 @@ CASTRESET:
   var splittingmana 0
   var splitcount 0
   var multicast 0
-  var badcast 0
   var scancel 0
   var ctoverride 0
   var omcast 0
@@ -5940,47 +5964,38 @@ CASTCLEANUPSIMPLE:
   exit
   
 CASTCLEANUPMAIN:
-  if %badcast = 1 then
+  if (%scancel = 1) then
   {
-    #put #flash
-    #put #play Echo
-    #put #echo Yellow Alarm: Bad cast via Trigger!
-    if %harnmana > 0 then gosub RELMANA
-    goto CASTRESET
+    gosub SPELLCANCEL
   }
-  if %symbiosis = 1 then
+  if (%symbiosis = 1) then
   {
     gosub PREPSYMBIOSIS
     gosub RELSYMBIOSIS
   }
-  if $Attunement.LearningRate > 33 then var attunelock 1
-  if $Arcana.LearningRate > 33 then var arcanalock 1
-  if %spellprepping = "db" then var dbready 1
-	if %spellprepping = "ignite" then
+  if ($Attunement.LearningRate > 33) then var attunelock 1
+  if ($Arcana.LearningRate > 33) then var arcanalock 1
+  if ("%spellprepping" = "db") then var dbready 1
+	if ("%spellprepping" = "ignite") then
 	{
-	  if %buffing != 1 then gosub RELNSPELL ignite
-	  if %ignitestow = 1 then
+	  if (%buffing != 1) then gosub RELNSPELL ignite
+	  if (%ignitestow = 1) then
 	  {
 	    var ignitestow 0
 	    var stowitem %ignitebackup
 	    gosub STOWITEM
 	  }
 	}
-	if %spellprepping = "iots" then put invoke circle
-  if %spellprepping = "mab" then
+  if ("%spellprepping" = "mab") then
 	{
 	  send prep cantrip r s
 	  send gesture ballista
 	  pause 1
 	  gosub BALLISTARUB
 	}
-  if %spellprepping = "shadowling" then gosub INVOKESHADOW
-	if %spellprepping = "tks" then
-	{
-  	gosub GETITEM %tktitem
-    gosub PUTITEM %tktitem in %storage
-	}
-	if %spellprepping = "tkt" then
+	if ("%spellprepping" = "iots") then put invoke circle
+  if ("%spellprepping" = "shadowling") then gosub INVOKESHADOW
+	if (("%spellprepping" = "tkt") || ("%spellprepping" = "tks")) then
 	{
   	gosub GETITEM %tktitem
     gosub STOWITEM %tktitem
@@ -5994,8 +6009,9 @@ CASTCLEANUPMAIN:
 
 
 SPELLCANCEL:
-  if %harnmana > 0 then gosub RELMANA
-  if $preparedspell != "None" then gosub RELSPELL
+  var scancel 0
+  if (%harnmana > 0) then gosub RELMANA
+  if ("$preparedspell" != "None") then gosub RELSPELL
   gosub CASTRESET
   return
 
@@ -6413,7 +6429,7 @@ CASTLOOT:
 	
 CASTBAD:
 	if $preparedspell != "None" then gosub RELSPELL
-  if %harnmana > 0 then gosub RELMANA
+  if (%harnmana > 0) then gosub RELMANA
 	goto CASTRESET
 
 CASTFACE:

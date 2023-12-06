@@ -89,7 +89,7 @@ var rareleathers demonscale|firecat-skin|inkhorne-skin|jaguar-pelt|mammoth-hide|
 var specialleathers bark-hide|cloud-white|corrugated-hide|crusty bark-hide|dark dragon-scale|desumos-pelt|diamond-hide|droluger-hide|korograth|morgawr|punka|seal-pelt|shadowleaf
 var leathers %rareleathers|%specialleathers
 var materials %metals|%stones|%bones|%woods|%cloths|%leathers
-var materialsnouns leather|hide|ingot|bar|shard|tear|nugget|stick|branch|limb|log|thick log|cloth|stack|pebble|stone|small rock|large rock|boulder|deed
+var materialsnouns leather|hide|ingot|bar|fragment|shard|tear|nugget|stick|branch|limb|log|thick log|cloth|stack|pebble|stone|small rock|large rock|boulder|deed
 var nuggetmaterials brass|bronze|coal|copper|covellite|iron|lead|nickel|oravir|pewter|platinum|silver|steel|tin|gold|zinc|electrum|darkstone
 
 
@@ -136,11 +136,16 @@ action var ready 1 when You feel fully prepared to cast your spell.
 action var ready 1 when Your formation of a targeting pattern
 action var ready 1 when Your target pattern has finished forming around the area.
 
+action var ready 0;var scancel 1 when Currently lacking the skill
+action var ready 0;var scancel 1 when You don't have a spell prepared!
+action var ready 0;var scancel 1 when You can't cast that on anyone else!
+action var ready 0;var scancel 1 when You strain, but are too
 action var ready 0;var scancel 1 when Your concentration slips for a moment, and your spell is lost.
 action var ready 0;var scancel 1 when Your target pattern dissipates because
 action var ready 0;var scancel 1 when Your pattern dissipates with the loss of your target.
 action var ready 0;var scancel 1 when You have lost the spell you were preparing.
 #action var ready 0;var scancel 1 when You let your concentration lapse and feel the spell's energies dissipate.
+
 action var bgdone 1;put #var SpellTimer.BlufmorGaraen.active 0 when The winds encircling your forearms disperse.
 action var heavytmready 1 when You feel sufficiently recovered to craft another major manifestation of offensive magic.
 action var heavytmready 0 when You are still too fatigued from your previous efforts to manifest another major feat of offensive magic.
@@ -169,11 +174,6 @@ action var symbiosis 0 when You pause for a moment as the details of the (.+) sy
 action var symbiosis 0 when You release the (.+) symbiosis.
 action var symbiosis 0 when Familiar streams of magic blend
 action var symbiosis 0 when symbiosis from your memory?
-action var badcast 1 when Currently lacking the skill
-action var badcast 1 when You don't have a spell prepared!
-action var badcast 1 when Your target pattern dissipates because
-action var badcast 1 when You can't cast that on anyone else!
-action var badcast 1 when You strain, but are too
 action put #var Time.isKatambaUp 0;echo Fixing time! when Katamba is on the wrong side of Elanthia and is not visible.
 action put #var Time.isXibarUp 0 when Xibar is on the wrong side of Elanthia and is not visible.
 action put #var Time.isYavashUp 0 when Yavash is on the wrong side of Elanthia and is not visible.
@@ -215,6 +215,8 @@ action var tmove1 $1;var tmove2 $2;var tmove3 $3;var tmove4 $4 when can be infli
 action var tmove1 $1;var tmove2 $2;var tmove3 $3;var tmove4 $4;var tmove5 $5 when can be inflicted by landing an? (\S+)\, an? (\S+)\, an? (\S+)\, an? (\S+) and an? (\S+)\.
 action var analyzedone 1 when can be inflicted upon the enemy
 action var analyzedone 1 when opening already being exploited 
+#You reveal a moderate weakness in a young wyvern's defense.
+#action var analyzedone 1 when Your analysis reveals a massive opening already being exploited in .* defenses\.
 action var tacticsdone 1 when Utilizing good tactics
 action var tacticsdone 1 when Utilizing flawless tactics
 action var tacticsdone 1 when You can no longer see openings
@@ -1863,7 +1865,6 @@ STATUSVARLOAD:
   var askclass 0
   var askstudent 0
   var movetrainactive 0
-  var badcast 0
   var balance solidly
   var barmace 0
   var bastardsword 0
@@ -2686,12 +2687,12 @@ COMBATLOOP:
     gosub PERCSELF
   }
   #RELEASE_MANA_SPELLS
-  if %firstrel = 1 then
+  if (%firstrel = 1) then
   {
     if (("$guild" = "Thief") || ("$guild" = "Barbarian")) then
     else
     {  
-      if %spell = "YES" then
+      if ("%spell" = "YES") then
       {
         if ((%spell1symb = "YES") || (%spell2symb = "YES") || (%spell3symb = "YES") || (%symbiosisbuff = "YES")) then
         {
@@ -11349,9 +11350,9 @@ MOVECHOOSE:
       gosub EANALYZE
       var eanalyzetype flame
     }
-    if %expertmax = 0 then gosub EXPERTSET
-    if %expertdone = 1 then goto MOVECHOOSE
-    if %lasthit = 1 then
+    if (%expertmax = 0) then gosub EXPERTSET
+    if (%expertdone = 1) then goto MOVECHOOSE
+    if (%lasthit = 1) then
     {
       math emovenum add 1
       if %emovenum > %expertmax then
@@ -11427,7 +11428,7 @@ MOVECHOOSE:
 					gosub OFFHANDCHOOSE
 					#echo offhandlowest - %offhandlowest: %offhandlowestms
 					#echo goodoffhand: %goodoffhand
-					if %goodoffhand = 1 then
+					if (%goodoffhand = 1) then
 					{
 						gosub STOW %oppositehand
 						gosub WIELD %oppositehand %%offhandlowestweapon
@@ -11578,7 +11579,7 @@ ACMLOGIC:
 				if (%t >= %nextacmdoublestrike) then
 				{
 					gosub OFFHANDCHOOSE
-					if %goodoffhand = 1 then
+					if (%goodoffhand = 1) then
 					{
 						gosub STOW right
 						gosub WIELD right %%offhandlowestweapon
@@ -11623,6 +11624,7 @@ OFFHANDCHOOSE:
   }
   eval offhandlistlength length("%offhandlist")
   eval offhandlistitems count("%offhandlist", "|")
+  #put #echo Yellow offhandlist: %offhandlist
   #echo offhandlistlength: %offhandlistlength
   #echo offhandlist: %offhandlist
   #echo offhandlistitems: %offhandlistitems
@@ -11634,7 +11636,9 @@ OFFHANDCHOOSE:
   var offhandlowest 0
   gosub OFFHANDCHOOSELOOP
   #echo offhandlowest - %offhandlowest: %offhandlowestms
-  if offhandlowest != 0 then var goodoffhand 1
+  if (%offhandlowest != 0) then var goodoffhand 1
+  #echo offhandlowest: %offhandlowest
+  #put #echo Yellow Goodoffhand: %goodoffhand
   return
 
 OFFHANDCHOOSELOOP:
