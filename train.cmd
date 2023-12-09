@@ -9,7 +9,7 @@ include custom.cmd
 #ScriptMode -1 = Help
 #ScriptMode 0 = NonCombat
 #ScriptMode 1 = Combat
-#ScriptMode 2 = BUffing
+#ScriptMode 2 = Buffing
 #ScriptMode 3 = Upkeep
 #ScriptMode 4 = Burgle
 
@@ -3291,13 +3291,13 @@ NONCOMBATLOOP:
 
 BUFFINGONLYLOOP:
   var buffingonly 1
-  if ($guild = "Thief") then
+  if ("$guild" = "Thief") then
   {
     var khridebil NO
     gosub KHRILOGIC
     var khridebil $khridebil
   }
-  if ($guild = "Barbarian") then gosub BARBBUFFLOGIC
+  if ("$guild" = "Barbarian") then gosub BARBBUFFLOGIC
   if (%firstperc = 1) then
   {
     var firstperc 0
@@ -3306,11 +3306,11 @@ BUFFINGONLYLOOP:
   #NECROSAFETY
   if ($guild = "Necromancer") then
   {
-    if %riteofgrace = "YES" then
+    if ("%riteofgrace" = "YES") then
     {
-      if $SpellTimer.RiteofGrace.active != 1 then
+      if ($SpellTimer.RiteofGrace.active != 1) then
       {
-        if %casting != 1 then  
+        if (%casting != 1) then  
         {
           gosub RELCYCLIC
           gosub PERCSELF
@@ -3346,7 +3346,7 @@ BUFFINGONLYLOOP:
   if (%anybuff = 0) then
   {
     gosub DEVICEBUFFLOGIC
-    if %scriptmode = 2 then goto DONEBUFFING
+    if (%scriptmode = 2) then goto DONEBUFFING
     if ((%scriptmode = 1) || (%scriptmode = 3)) then
     {
       var buffingonly 0
@@ -3451,16 +3451,16 @@ UPKEEPLOGIC:
   #GEMPOUCH_SELLING
   if ("%gemsell" = "YES") then
   {
-    if ($guild = "Trader") then
+    if ("$guild" = "Trader") then
     {
-      if (%appraiser != "none") then
+      if ("%appraiser" != "none") then
       {
         var financedsell 0
         gosub GEMSELLLOGIC
       }
       else
       {
-        if (%financedappraiser != "none") then
+        if ("%financedappraiser" != "none") then
         {
           var financedsell 1
           gosub GEMSELLLOGIC
@@ -8643,17 +8643,24 @@ NONCOMBATLOGIC:
 			var movetrainperformactive 1
 		}
 	}
-	if %burgle = "YES" then
+	if ("%burgle" = "YES") then
 	{
-		if %t >= %nextburgle then
+	  if (($Athletics.Ranks < 1750) || ($Locksmithing.Ranks < 1750) || ($Thievery.Ranks < 1750) || ($Stealth.Ranks < 1750)) then
 		{
-			gosub BURGLERECALL
-			if %t >= %nextburgle then
-			{
-				var movetrainactive 1
-				var movetrainburgleactive 1
-			}
-		} 
+      if (%t >= %nextburgle) then
+      {
+        gosub BURGLERECALL
+        if (%t >= %nextburgle) then
+        {
+          var movetrainactive 1
+          var movetrainburgleactive 1
+        }
+      }
+    }
+    else
+    {
+	    var movetrainburgleactive 0
+	  }
 	}
 
 	#TRADING_SELL_TASKS

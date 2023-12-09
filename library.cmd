@@ -2654,21 +2654,28 @@ STATUSCHECK:
       else gosub FACE
     }
   }
-  #BARBARIAN
-  if ("$guild" = "Barbarian") then
+  #BUFFING_COMBAT_ONLY
+  if (%scriptmode = 1) then 
   {
-    gosub BARBBUFFLOGIC
-    gosub BARBROARLOGIC
+    if (%buffingonly != 1) then
+    {
+      #BARBARIAN
+      if ("$guild" = "Barbarian") then
+      {
+        gosub BARBBUFFLOGIC
+        gosub BARBROARLOGIC
+      }
+      #KHRI
+      if ("$guild" = "Thief") then
+      {
+        gosub KHRILOGIC
+      }
+      #DEVICE_BUFFS       
+      gosub DEVICEBUFFLOGIC
+    }
   }
-  #KHRI
-  if ("$guild" = "Thief") then
-  {
-    gosub KHRILOGIC
-  }
-  #DEVICE_BUFFS
-  gosub DEVICEBUFFLOGIC
   #ALFAR_COMMAND
-  if %alfarcommand = 1 then
+  if (%alfarcommand = 1) then
   {
     var warriorcommand behavior aggressive
     gosub COMMANDWARRIOR
@@ -2689,9 +2696,9 @@ STATUSCHECK:
     }
   }
   #SPELL_WAIT_CHECK
-  if %preptimewait > 0 then
+  if (%preptimewait > 0) then
   {
-    if %preptime > 0 then
+    if (%preptime > 0) then
     {
       #echo preptime: %preptime
       #echo preptimewait: %preptimewait
@@ -2701,7 +2708,7 @@ STATUSCHECK:
       math preptimewaittest add %preptimewait
       #echo preptimewaittest: %preptimewaittest
       #echo t: %t
-      if %t >= %preptimewaittest then
+      if (%t >= %preptimewaittest) then
       {
         #put #echo Yellow Past!
         var ready 1
@@ -2714,9 +2721,9 @@ STATUSCHECK:
     gosub SPELLCANCEL
   }
   #SPELL_PREPPING
-  if %scriptmode = 1 then gosub MAINSPELLLOGIC
+  if (%scriptmode = 1) then gosub MAINSPELLLOGIC
   #CASTING
-  if %casting = 1 then gosub CASTINGLOGIC
+  if (%casting = 1) then gosub CASTINGLOGIC
   return
 
 AUTOUPKEEPCHECKS:
@@ -7300,6 +7307,11 @@ EXITVAULT:
   move go door
   move go arch
   move out
+  if ($zoneid = 67) then
+  {
+    move east
+    put #mapper reset
+  }
   return
 
 

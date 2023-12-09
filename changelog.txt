@@ -1,3 +1,24 @@
+12/08/2023
+Updated Scripts: train, library
+Updated many IF statements to include better bracketing for more fault tolerance.
+Refined code in Statuscheck sub to prevent things from firing when they shouldn't, such as activating wands during the alerts only option.
+Added some redundancy to wand usage.
+Added a workaround to a Genie map issue in the Shard vaults.
+
+12/05/2023
+Updated Scripts: train, library
+Some changes to stow and sheathe functions for more fault tolerance in the case where you try to sheathe a weapon that DR doesn't know where to put.
+Added more fault tolerance to stowing a loaded weapon.
+Fixed a bug that caused the MoveTimeout variable not be able to be changed from 300 seconds.
+Added missing text to Advance sub.
+Tweaks to engagement function to avoid some weirdness in target choice.
+Bugfixes to ACM logic to properly account for no valid second weapon to Doublestrike with because they're all capped.
+Lowered a poor spawn room in priority in the p3-wyvernsyoung and the p3-wyvernsjuve hunting area.
+Merged the two different methods of dealing with a spell that fails/needs to be canceled into one and cleaned up the code.
+Significantly cleaned up main Statuscheck sub and AutoUpkeep-related code.
+Autoupkeep should now be able to trigger when the need happens in the middle of Tactics analyzing.
+
+
 09/03/23
 Updated Scripts: train, library, set
 
