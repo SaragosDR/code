@@ -290,13 +290,6 @@ SET:
     if tolower("%1") = "weapon14" then goto PRIORSET
     if tolower("%1") = "offhand" then goto YESNOSET
     if tolower("%1") = "acms" then goto YESNOSET
-    if tolower("%1") = "cleave" then goto YESNOSET
-    if tolower("%1") = "crash" then goto YESNOSET
-    if tolower("%1") = "doublestrike" then goto YESNOSET
-    if tolower("%1") = "impale" then goto YESNOSET
-    if tolower("%1") = "palmstrike" then goto YESNOSET
-    if tolower("%1") = "powershot" then goto YESNOSET
-    if tolower("%1") = "twirl" then goto YESNOSET
     if tolower("%1") = "weaponnum" then
     {
       if matchre("%2", "\b(1|2|3|4|5|6|7|8|9|10|11|12|13|14)\b") then
@@ -1984,6 +1977,22 @@ CYCLICSET:
   }  
 
 
+REGCYCLICSET:
+  eval setvar tolower(%1)
+  eval input tolower(%2) 
+  if contains("%allcyclics", "|%input|") then
+  { 
+    put #var %setvar %input
+    put #var save
+    goto VARDISPLAY
+  }
+  else
+  {
+    put #echo mono Not setup for that cyclic!
+    put #echo mono Valid Cyclics: %cyclics
+    goto END
+  } 
+
 
 VARDISPLAY:
   put #echo mono Changed %setvar to %input.
@@ -2204,15 +2213,7 @@ DISPLAYCOMBAT:
 	gosub OUTPUT Weapon6 Weapon13
   gosub OUTPUT Weapon7 Weapon14
   gosub OUTPUT Offhand
-  put #echo
 	gosub OUTPUT ACMs
-	gosub OUTPUT Cleave
-	gosub OUTPUT Crash
-	gosub OUTPUT Doublestrike
-	gosub OUTPUT Impale
-	gosub OUTPUT Palmstrike
-	gosub OUTPUT Powershot
-	gosub OUTPUT Twirl
 	put #echo
 	gosub OUTPUT SEWeapon SEOffhand
 	gosub OUTPUT SECombo
@@ -2971,6 +2972,7 @@ DISPLAYMOVEMENT:
       gosub OUTPUT FindRoom
       gosub OUTPUT FindRoomList
       gosub OUTPUT BugoutRoom
+      gosub OUTPUT NearestPortalTown
     }
     else
     {
@@ -2984,6 +2986,7 @@ DISPLAYMOVEMENT:
       gosub OUTPUTGRAY FindRoom
       gosub OUTPUTGRAY FindRoomList
       gosub OUTPUTGRAY BugoutRoom
+      gosub OUTPUTGRAY NearestPortalTown
     }
   }
   put #echo
@@ -2993,12 +2996,10 @@ DISPLAYMOVEMENT:
   put #echo
   put #echo mono =================== Upkeep Movement ===================
 	put #echo
-	gosub OUTPUT UpkeepTown
-	put #echo Gray mono Options: %townpresetlist
+	gosub OUTPUT UpkeepTown (%townpresetlist)
 	gosub OUTPUT PremiumRing
 	gosub OUTPUT PremiumRingItem
-	gosub OUTPUT NearestPortalTown
-	put #echo Gray mono Options: %townportalpresetlist
+	#gosub OUTPUT NearestPortalTown (%townportalpresetlist)
 	put #echo
 	gosub OUTPUT VaultTown
   gosub OUTPUT AmmoBuyTown (%ammopresetlist)
@@ -3200,13 +3201,6 @@ VARCOPYCOMBAT:
   
   put #var m%destoffhand $m%sourceoffhand
   put #var m%destacms $m%sourceacms
-  put #var m%destcleave $m%sourcecleave
-  put #var m%destcrash $m%sourcecrash
-  put #var m%destdoublestrike $m%sourcedoublestrike
-  put #var m%destimpale $m%sourceimpale
-  put #var m%destpalmstrike $m%sourcepalmstrike
-  put #var m%destpowershot $m%sourcepowershot
-  put #var m%desttwirl $m%sourcetwirl
   
   put #var m%destseoffhand $m%sourceseoffhand
   put #var m%destsecombo $m%sourcesecombo

@@ -145,6 +145,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 237|238|239|240|245|243|244|765|241|242|246|247|441|442|443|444|445|446|447|448|449|450|451|452|453
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 441|442|443|444|445|446|447|448|449|450|451|452|453
       put #var m%checkmodebugoutroom 52
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-deathsquirrels") then
     {
@@ -156,6 +157,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 515|516|517|518|519|520|521|522|523|524|525|526|527|528|529|530|531|532|533|534
       put #var m%checkmodebugoutroom 514
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-muskhogs") then
     {
@@ -167,6 +169,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 18|43|44|45|46|47|73|74|75|76
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-goblins") then
     {
@@ -178,6 +181,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 52|68|69|70|71|72|55|65|66|67|56|57|58|59
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-fellhogs") then
     {
@@ -189,6 +193,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 60|61|62|63|64
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-badgers") then
     {
@@ -203,6 +208,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 297|296|26|27|28|29|30|31|32|33|34|35|269|270|272|38|40
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 270|272|38|40
       put #var m%checkmodebugoutroom 247
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-origami") then
     {
@@ -217,6 +223,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 258|257|259|260|261|262|263|264|265|266|788|789|790|791
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 788|789|790|791
       put #var m%checkmodebugoutroom 480
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-pothanits") then
     {
@@ -231,6 +238,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 291|274|275|44|276|277|290|279|278|48|49
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 278|48|49
       put #var m%checkmodebugoutroom 247
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-giantwasps") then
     {
@@ -242,6 +250,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 24|25|26|27|28|29|30|31|32
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-trollkin") then
     {
@@ -256,6 +265,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 280|286|287|288|289|64|65|298|59|58|285|67|68|69|283|282|284|281
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 283|282|284|281
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-cougarsgrendels") then
     {
@@ -268,6 +278,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 21|22|23|24|25|26|27|28|29
       put #var m%checkmodebugoutroom 4
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-woodtrolls") then
     {
@@ -280,6 +291,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 30|31|32|33|34
       put #var m%checkmodebugoutroom 4
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-grasseels") then
     {
@@ -293,6 +305,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 228|229|230|231|232|233|234|235|236|237
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 234|235|236|237
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-animateditems") then
     {
@@ -307,6 +320,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 70|71|72|73|74|75|76|77|78|79|80|81|82
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 70|71|72|73|74|75|76|77|78|79|80|81|82
       put #var m%checkmodebugoutroom 62
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-beisswurms") then
     {
@@ -318,6 +332,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 31|32|33|34|36|36|37
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-cavebears") then
     {
@@ -329,6 +344,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 50|48|49|52|53|52|51|53|55|56|54|57|59|58
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-copperheads") then
     {
@@ -340,6 +356,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 131|132|133|134
       put #var m%checkmodebugoutroom 8
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-rocktrolls") then
     {
@@ -351,6 +368,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 441|442|443|444|445|446|447|448|449|450|451|452|453|454|455|456|457|458|459|460
       put #var m%checkmodebugoutroom 480
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-endrusserpents") then
     {
@@ -363,6 +381,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 147|148|149|150|151|152|153|154|155
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-snowbeasts") then
     {
@@ -375,6 +394,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 15|16|17|18|19|20|32|31|34|30|33|29|28|24|23|25|26|27
       put #var m%checkmodebugoutroom 97
+      put #var m%checkmodenearestportaltown leth
     }
     if ("$m%checkmodecombatpreset" = "p1-crocodiles") then
     {
@@ -386,6 +406,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 52
       put #var m%checkmodebugoutroom 3
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-direbears") then
     {
@@ -399,6 +420,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 317|316|315|324|314|321|322|323
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 321|322|323
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-vipers") then
     {
@@ -412,6 +434,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 42|43|44|45|46|47|48|49|55|56|149|150|151|152|153|154|155|156|157|158|159|160
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 149|150|151|152|153|154|155|156|157|158|159|160
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-leucros") then
     {
@@ -425,6 +448,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 6|7|8|9|10|11|20|19|16|11|12|15|18|21|22|17|14|13|50|51|52|53|54
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 50|51|52|53|54
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-guardians") then
     {
@@ -438,6 +462,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 66|67|68|69|70|78|77|76|75|74|73|72|71|65
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-warklins") then
     {
@@ -451,6 +476,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 39|40|41|42|43|44|45|46|47|117|118|119|120|121
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 117|118|119|120|121
       put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p1-scuttlers") then
     {
@@ -463,6 +489,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 209|210|211|212|213
       put #var m%checkmodebugoutroom 97
+      put #var m%checkmodenearestportaltown leth
     }
     if ("$m%checkmodecombatpreset" = "p1-stormbulls") then
     {
@@ -474,6 +501,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97
       put #var m%checkmodebugoutroom 32
+      put #var m%checkmodenearestportaltown leth
     }
     if ("$m%checkmodecombatpreset" = "p1-lavadrakes") then
     {
@@ -487,6 +515,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 189|190|191|192|193|194|195|300|301|302|303|304|305
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 300|301|302|303|304|305
       put #var m%checkmodebugoutroom 49
+      put #var m%checkmodenearestportaltown crossing
     }
     if ("$m%checkmodecombatpreset" = "p2-brocketdeeryoung") then
     {
@@ -498,6 +527,8 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 104|105|146|147
+      put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown langenfirth
     }
     if ("$m%checkmodecombatpreset" = "p2-marauders") then
     {
@@ -508,6 +539,8 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 16|17|18|19|25|26|27|28|29
+      put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown theren
     }
     #25
     if ("$m%checkmodecombatpreset" = "p2-swamptrolls") then
@@ -520,6 +553,8 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 39|108|109|110|111|80|82|83|84
+      put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown langenfirth
     }
     if ("$m%checkmodecombatpreset" = "p2-piruatiserpents") then
     {
@@ -533,6 +568,8 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 55|56|57|58|51|53|54|
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 55|56|57|58|51|53|54|131|132|133|134
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 131|132|133|134
+      put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown riverhaven
     }
     if ("$m%checkmodecombatpreset" = "p2-brocketdeer") then
     {
@@ -544,6 +581,8 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 148|149|150|151
+      put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown langenfirth
     }
     if ("$m%checkmodecombatpreset" = "p2-brocketdeerelder") then
     {
@@ -555,6 +594,8 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 155|154|153|152
+      put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown langenfirth
     }
     if ("$m%checkmodecombatpreset" = "p2-gryphonsbaby") then
     {
@@ -566,6 +607,8 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 90|91|92
+      put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown theren
     }
     if ("$m%checkmodecombatpreset" = "p2-gryphonsyoung") then
     {
@@ -577,6 +620,8 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 93|116|117|118|119
+      put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown theren
     }
     if ("$m%checkmodecombatpreset" = "p2-seordmaors") then
     {
@@ -587,6 +632,8 @@ VARCHECKS:
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 77|78|79|76|204
+      put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown theren
     }
     if ("$m%checkmodecombatpreset" = "p3-snippets") then
     {
@@ -598,7 +645,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 711|712|713|714|715|716
       put #var m%checkmodebugoutroom 128
-      
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-rocktrolls1") then
     {
@@ -611,6 +658,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 35|36|37|38|39|40|41|42|43|44|45|46|47
       put #var m%checkmodebugoutroom 28
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-snowbeasts") then
     {
@@ -622,6 +670,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 167|168|169|170|171
       put #var m%checkmodebugoutroom 128
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-rocktrolls2") then
     {
@@ -634,6 +683,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 8|9|10|11|12|13|14
       put #var m%checkmodebugoutroom 28
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-gargoyles") then
     {
@@ -645,6 +695,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 173|174|178|179|180|181|182|183|184|185|186|187|188|189|190
       put #var m%checkmodebugoutroom 128
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-eidolonsteeds") then
     {
@@ -657,6 +708,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 52|53|54|55|56|57|58|59|60|61|62|205|74|68|69|70|71|72
       put #var m%checkmodebugoutroom 28
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-crocodiles") then
     {
@@ -669,6 +721,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 184|183|185|186|187
       put #var m%checkmodebugoutroom 28
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-sylphs") then
     {
@@ -680,6 +733,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 717|718|719|720|721
       put #var m%checkmodebugoutroom 128
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-gryphons") then
     {
@@ -691,6 +745,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 234|235|236|237|238|239|240|241|242|243
       put #var m%checkmodebugoutroom 382
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-quartzgargoyles") then
     {
@@ -703,6 +758,8 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 65|66|67|68|69|70|71|72|73|74|75
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 65|66|67|68|69|70|71|72|73|74|75
+      put #var m%checkmodebugoutroom 1
+      put #var m%checkmodenearestportaltown none
     }
     if ("$m%checkmodecombatpreset" = "p3-prereniyoung") then
     {
@@ -716,6 +773,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 656|657|658|659|660|662
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 660|662
       put #var m%checkmodebugoutroom 128
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-redleucros") then
     {
@@ -728,6 +786,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 5|6|7|8|9|10|11|12|13|14
       put #var m%checkmodebugoutroom 2
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-goldenpards") then
     {
@@ -742,6 +801,7 @@ VARCHECKS:
       #if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 656|657|658|659|660|662
       #if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 660|662
       put #var m%checkmodebugoutroom 382
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-prereni") then
     {
@@ -755,6 +815,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 664|665|666|661|663
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 661|663
       put #var m%checkmodebugoutroom 128
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-windbags") then
     {
@@ -766,6 +827,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 722|723|724|725|726|727|728|729
       put #var m%checkmodebugoutroom 128
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-windbags2") then
     {
@@ -777,6 +839,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 731|732|730|733|734|735|736
       put #var m%checkmodebugoutroom 128
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-frostcrones") then
     {
@@ -788,6 +851,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 722|723|724|725|726|727|728|729
       put #var m%checkmodebugoutroom 128
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-prerenielder") then
     {
@@ -801,6 +865,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 667|668|669|679|680
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 679|680
       put #var m%checkmodebugoutroom 128
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-cloudrats") then
     {
@@ -812,6 +877,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 607|608|609|610|611|612
       put #var m%checkmodebugoutroom 382
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-dragonpriests") then
     {
@@ -823,6 +889,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 154|155|156|157|158|159|160|161|162|163|164|165|166|167
       put #var m%checkmodebugoutroom 382
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-beltunumshi") then
     {
@@ -834,6 +901,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 616|617|618|619|620|621|622|623|624|625|626|627|628
       put #var m%checkmodebugoutroom 382
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-adanfblood") then
     {
@@ -846,6 +914,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 139|140|141|142|143|144|210|209|145|146|147|148|149|150
       put #var m%checkmodebugoutroom 28
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-adanfspirit") then
     {
@@ -858,6 +927,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 16|15|14|13|12|27|11|10|28|9|8|26|17|18|19|20|21
       put #var m%checkmodebugoutroom 2
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-stormbulls") then
     {
@@ -871,6 +941,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 597|598|599|600|601|602|603|604|605
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 603|604|605
       put #var m%checkmodebugoutroom 382
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-wyvernsjuve") then
     {
@@ -884,6 +955,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 454|455|456|457|458|459|460|461|462|463|465|467|466|453|575|576|577|578|579
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 575|576|577|578|579
       put #var m%checkmodebugoutroom 382
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-wyvernsyoung") then
     {
@@ -893,10 +965,11 @@ VARCHECKS:
       put #var m%checkmodemove NO
       put #var m%checkmodetargetroom 0
       put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 481|482|483|484|485|486|487|511|512|480
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 480|481|482|483|484|485|486|487|511|512|575|576|577|578|579
+      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 482|483|484|485|486|487|511|512|480|481
+      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 482|483|484|485|486|487|511|512|480|481|575|576|577|578|579
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 575|576|577|578|579
       put #var m%checkmodebugoutroom 382
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-wyvernsadult") then
     {
@@ -908,6 +981,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 468|469|470|471|472|473|479|474|475|476|477|478
       put #var m%checkmodebugoutroom 382
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-adanfsorcs") then
     {
@@ -920,6 +994,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 151|152|153|154|155|156|157|158|159|160
       put #var m%checkmodebugoutroom 28
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p3-adanfblades") then
     {
@@ -932,6 +1007,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 163|164|165|166|167|168|169|170|171|172|173|174|175|176
       put #var m%checkmodebugoutroom 28
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze1") then
     {
@@ -943,6 +1019,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152
       put #var m%checkmodebugoutroom 16
+      put #var m%checkmodenearestportaltown merkresh
     }
     if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze2") then
     {
@@ -954,6 +1031,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 156|157|158|159|160|161|162|163|164|165|166|167|168
       put #var m%checkmodebugoutroom 16
+      put #var m%checkmodenearestportaltown merkresh
     }
     if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze3") then
     {
@@ -965,6 +1043,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 34|35|36|37
       put #var m%checkmodebugoutroom 16
+      put #var m%checkmodenearestportaltown merkresh
     }
     if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze4") then
     {
@@ -976,6 +1055,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 103|104|105|106|107
       put #var m%checkmodebugoutroom 16
+      put #var m%checkmodenearestportaltown merkresh
     }
     if ("$m%checkmodecombatpreset" = "p4-armadillosjuve") then
     {
@@ -989,6 +1069,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 383|384|385|386|387|388|389|403|404|405|406|407|408
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 403|404|405|406|407|408
       put #var m%checkmodebugoutroom 150
+      put #var m%checkmodenearestportaltown merkresh
     }
     if ("$m%checkmodecombatpreset" = "p4-armadillosadult") then
     {
@@ -1002,6 +1083,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 1|2|3|4|5|6|7|8|9|10|11|415|416|417|418
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 415|416|417|418
       put #var m%checkmodebugoutroom 150
+      put #var m%checkmodenearestportaltown merkresh
     }
     if ("$m%checkmodecombatpreset" = "p4-armadilloselder") then
     {
@@ -1015,6 +1097,7 @@ VARCHECKS:
       if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 391|392|393|394|395|396|397|398|399|400|401|402|410|411|412|413|414
       if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 410|411|412|413|414
       put #var m%checkmodebugoutroom 150
+      put #var m%checkmodenearestportaltown merkresh
     }
     if ("$m%checkmodecombatpreset" = "p5-fuliginmoths") then
     {
@@ -1026,6 +1109,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 637|638|639|640|641|642
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     #185
     if ("$m%checkmodecombatpreset" = "p5-voidmoths") then
@@ -1038,6 +1122,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 643|644|645|646|647|648
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     #195
     if ("$m%checkmodecombatpreset" = "p5-shadowmoths") then
@@ -1050,6 +1135,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 649|650|651|652|653|654
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-maidenstress") then
     {
@@ -1061,6 +1147,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 246|247|248|249|250|251|252|253|254
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-matronstress") then
     {
@@ -1072,6 +1159,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 255|256|257|258|259|260|261|262|263|264|265
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-dryads") then
     {
@@ -1083,6 +1171,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 283|284|285|286|287|288|289|290
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-nyads1") then
     {
@@ -1094,6 +1183,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 267|266|268|269|270|271|272|273
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-blightogres1") then
     {
@@ -1105,6 +1195,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 296|297|298|299
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-nyads2") then
     {
@@ -1116,6 +1207,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 274|277|281|276|275|279|280|278|282
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-blightogres2") then
     {
@@ -1127,6 +1219,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 312|311|308|305|309|310|307|306
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-iceadders") then
     {
@@ -1138,6 +1231,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 435|434|428|429|430|427|426|425|424|423|422|421|432|433|431|437|445|446|447|448|449|441|442|443|444
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-marblegargoyles") then
     {
@@ -1149,6 +1243,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 435|434|428|429|430|427|426|425|424|423|422|421|432|433|431|437|445|446|447|448|449|441|442|443|444
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-dpcrones") then
     {
@@ -1160,6 +1255,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 317|318|319|320|321|322
       put #var m%checkmodebugoutroom 265
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p5-mountaingiants") then
     {
@@ -1171,6 +1267,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 317|318|319|320|321|322
       put #var m%checkmodebugoutroom 26
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p5-shalswars") then
     {
@@ -1182,6 +1279,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 435|434|428|429|430|427|426|425|424|423|422|421|432|433|431|437|445|446|447|448|449|441|442|443|444
       put #var m%checkmodebugoutroom 265
+      put #var m%checkmodenearestportaltown shard
     }
     if ("$m%checkmodecombatpreset" = "p5-stompers") then
     {
@@ -1193,6 +1291,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 560|561|562|563|564|565
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-maulers") then
     {
@@ -1204,6 +1303,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 566|567|568|569|570|571
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
     if ("$m%checkmodecombatpreset" = "p5-blackapes") then
     {
@@ -1215,6 +1315,7 @@ VARCHECKS:
       put #var m%checkmodefindroom YES
       put #var m%checkmodefindroomlist 164|165|166|167|168|169|170|171|172|173|174|175|176|177|178|179|180|181|182|183|184|185|186|187|188|189|190|191|192|193|194|195|196|197|198|199|200|201|202|203|204|205|206|207|208|209|210
       put #var m%checkmodebugoutroom 14
+      put #var m%checkmodenearestportaltown hibarnhvidar
     }
   }
   if $m%checkmodezone > -1 then
@@ -1328,6 +1429,7 @@ VARCHECKS:
   else put #var m%checkmodeammomin 100
   if !matchre("$m%checkmodelockpickbuy", "\b(YES|NO)\b") then put #var m%checkmodelockpickbuy NO
   if !def(m%checkmodelockpickstacker) then put #var m%checkmodelockpickstacker lockpick ring
+  if !def(m%checkmodelockpickitem) then put #var m%checkmodelockpickitem stout lockpick
   if !matchre("$m%checkmodeboxpopping", "\b(YES|NO)\b") then put #var m%checkmodeboxpopping NO
   if !matchre("$m%checkmodedismantletype", "\b(none|bash|bunny|caravan|chomp|claw|crush|fire|focus|jump|pray|press|roar|salvage|shriek|slam|slip|stomp|thump|tinker|whistle)\b") then put #var m%checkmodedismantletype none
   
@@ -1389,13 +1491,6 @@ VARCHECKS:
   if !matchre("$m%checkmodeweapon14", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon14 BRAWL
   if !matchre("$m%checkmodeoffhand", "\b(YES|NO)\b") then put #var m%checkmodeoffhand YES
   if !matchre("$m%checkmodeacms", "\b(YES|NO)\b") then put #var m%checkmodeacms NO
-  if !matchre("$m%checkmodecleave", "\b(YES|NO)\b") then put #var m%checkmodecleave YES
-  if !matchre("$m%checkmodecrash", "\b(YES|NO)\b") then put #var m%checkmodecrash YES
-  if !matchre("$m%checkmodedoublestrike", "\b(YES|NO)\b") then put #var m%checkmodedoublestrike YES
-  if !matchre("$m%checkmodeimpale", "\b(YES|NO)\b") then put #var m%checkmodeimpale YES
-  if !matchre("$m%checkmodepalmstrike", "\b(YES|NO)\b") then put #var m%checkmodepalmstrike YES
-  if !matchre("$m%checkmodepowershot", "\b(YES|NO)\b") then put #var m%checkmodepowershot YES
-  if !matchre("$m%checkmodetwirl", "\b(YES|NO)\b") then put #var m%checkmodetwirl YES
   
   if !def(m%checkmodeseweapon) then put #var m%checkmodeseweapon scimitar
   if !matchre("$m%checkmodeseoffhand", "\b(YES|NO)\b") then put #var m%checkmodeseoffhand YES
@@ -2410,7 +2505,7 @@ NEWTOWNPRESET:
 		var rtmove NO
 		if (%towntype = "upkeep") then var upkeepzone 13
 		if (%towntype = "burgle") then var rttargetroom 0
-		if (%towntype = "perform") then var rttargetroom 0
+		if (%towntype = "perform") then var rttargetroom 55
 	}
 	if ("%towncheck" = "kaerna") then
 	{
@@ -7917,7 +8012,7 @@ BOXGET:
   {
     var boxitem $1 $2
     gosub GETITEM %boxitem
-    if %lootalerts = "YES" then put #echo %alertwindow [Treasure]: Found a box!
+    #if %lootalerts = "YES" then put #echo %alertwindow [Treasure]: Found a box!
     gosub PUTITEM my %boxitem in my %boxstorage
     if (%putsucceed = 0) then
     {

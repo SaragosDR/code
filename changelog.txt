@@ -1,3 +1,12 @@
+12/09/2023
+Updated Scripts: train, library, set
+Removed variables for individual ACM's.  They will all be controlled by the single ACM variable.
+Changed Dirge performing room.
+Added "Blithering bovine" teaching message to speech whitelist.
+NearestPortalTown variable has been removed from the non-custom display, as it is now included in hunting area presets.
+Basic lockpick purchasing during upkeep has been added for the Crossing via the LockpickBuy, LockpickStacker, and LockpickItem variables.  Expect further refinements here.
+
+
 12/08/2023
 Updated Scripts: train, library
 Updated many IF statements to include better bracketing for more fault tolerance.

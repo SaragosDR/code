@@ -373,7 +373,7 @@ ALERTINIT:
   
   if %speechalerts = "YES" then
   { 
-    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows
+    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "
@@ -2056,6 +2056,7 @@ MAINVARLOAD:
   var ammomin $m%varsetammomin
   var lockpickbuy $m%varsetlockpickbuy
   var lockpickstacker $m%varsetlockpickstacker
+  var lockpickitem $m%varsetlockpickitem
   var boxpopping $m%varsetboxpopping
   var dismantletype $m%varsetdismantletype
   
@@ -2086,13 +2087,6 @@ MAINVARLOAD:
   eval weapon14 tolower("$m%varsetweapon14")
   var offhand $m%varsetoffhand
   var acms $m%varsetacms
-  var cleave $m%varsetcleave
-  var crash $m%varsetcrash
-  var doublestrike $m%varsetdoublestrike
-  var impale $m%varsetimpale
-  var palmstrike $m%varsetpalmstrike
-  var powershot $m%varsetpowershot
-  var twirl $m%varsettwirl
   var seoffhand $m%varsetseoffhand
   var secombo $m%varsetsecombo
   var leoffhand $m%varsetleoffhand
@@ -3499,6 +3493,11 @@ UPKEEPLOGIC:
   {
     if ("%appraiser" != "none") then gosub BARSELLLOGIC
   }
+  #LOCKPICK_BUYING
+  if ("%lockpickbuy" = "YES") then
+  {
+    gosub LOCKPICKBUYLOGIC
+  }
   #BOX_POPPING
   if ("%boxpopping" = "YES") then
   {
@@ -3715,6 +3714,8 @@ UPKEEPSET:
     var townname crossing
     var ammoroom weapon
     var ammozone 1
+    var lockpickroom locksmith
+    var lockpickzone 1
     var hastasks
     var taskgiver Mags
     var boxpoproom 105
@@ -4830,6 +4831,71 @@ AMMOCONVERTMAIN:
   put #echo Yellow %ammotypetotalcount: %%ammotypetotalcount   AmmoMin: %ammomin
   return
 
+
+LOCKPICKBUYLOGIC:
+  var boughtlockpick 0
+  if (%multizone = 1) then
+	{
+		var upkeepzone %lockpickzone
+		gosub UPKEEPZONEMOVE
+	}
+	gosub MOVE %lockpickroom
+	
+	gosub LOCKPICKCOUNT
+  put echo lockpicksneeded: %lockpicksneeded
+  if (%lockpicksneeded > 0) then gosub LOCKPICKBUY
+	return
+
+LOCKPICKBUY: 
+  var lockbuycount 0
+  goto LOCKPICKBUYLOOP
+LOCKPICKBUYLOOP:
+  if (%lockbuycount > %lockpicksneeded) then return
+  gosub BUY %lockpickitem
+  gosub PUTITEM my lockpick in my %lockpickstacker
+  if (%putsucceed = 0) then
+  {
+    gosub DUMPITEM lockpick
+    return
+  }
+  math lockbuycount add 1
+  goto LOCKPICKBUYLOOP
+  
+LOCKPICKCOUNTP:
+  pause
+LOCKPICKCOUNT:
+  var lockpicksneeded 0
+  matchre LOCKPICKCOUNTP %waitstring
+  matchre LOCKPICKCOUNTFULL The \w+ \w+ looks to be holding (\d+) lockpicks and it appears to be full\.
+  matchre LOCKPICKCOUNTGOOD The \w+ \w+ looks to be holding (\d+) lockpicks and it might hold an additional (\d+)\.
+  matchre LOCKPICKCOUNTEMPTY The \w+ \w+ is empty but you think (\d+) lockpicks would probably fit\.
+  matchre LOCKPICKCOUNTBAD It looks like a \w+ \w+\.
+  match BADLOCKPICKSTACKER I could not find what you were referring to.
+  put glance my %lockpickstacker
+  matchwait
+  
+LOCKPICKCOUNTFULL:  
+  var lockpickscurrent $1
+  var lockpicksneeded 0
+  return
+  
+LOCKPICKCOUNTGOOD:
+  var lockpickscurrent $1
+  var lockpicksneeded $2
+  return
+
+LOCKPICKCOUNTEMPTY:
+  var lockpicktotal $1
+  var lockpicksneeded %lockpicktotal
+  return
+  
+LOCKPICKCOUNTBAD:
+  var lockpicksneeded -1
+  return
+
+BADLOCKPICKSTACKER:
+  
+  return
 
 UPKEEPZONEMOVE:
   if $zoneid = %upkeepzone then return
@@ -11501,29 +11567,23 @@ ACMLOGIC:
   var usingacm 0
   if (%hand = "right") then
 	{
-		if (%cleave = "YES") then
-		{
-			if ((%weapontype = "se") || (%weapontype = "le") || (%weapontype = "the")) then
-			{
-				if %t >= %nextacmcleave then
-				{
-					var acmtype cleave 
-					var usingacm 1
-				}
-			}
-		}
-		if (%crash = "YES") then
-		{
-			if ((%weapontype = "sb") || (%weapontype = "lb") || (%weapontype = "thb")) then
-			{
-				if (%t >= %nextacmcrash) then
-				{
-					var acmtype crash
-					var usingacm 1
-				}
-			}
-		}
-		if ((%impale = "YES") && (%weapontype = "pole")) then
+    if ((%weapontype = "se") || (%weapontype = "le") || (%weapontype = "the")) then
+    {
+      if %t >= %nextacmcleave then
+      {
+        var acmtype cleave 
+        var usingacm 1
+      }
+    }
+    if ((%weapontype = "sb") || (%weapontype = "lb") || (%weapontype = "thb")) then
+    {
+      if (%t >= %nextacmcrash) then
+      {
+        var acmtype crash
+        var usingacm 1
+      }
+    }
+		if (%weapontype = "pole") then
 		{
 			if (%t >= %nextacmimpale) then
 			{
@@ -11531,7 +11591,7 @@ ACMLOGIC:
 				var usingacm 1
 			}
 		}
-		if ((%palmstrike = "YES") && (%weapontype = "brawl")) then
+		if (%weapontype = "brawl") then
 		{
 			if (%t >= %nextacmpalmstrike then
 			{
@@ -11539,7 +11599,7 @@ ACMLOGIC:
 				var usingacm 1
 			}
 		}
-		if ((%twirl = "YES") && (%weapontype = "stave")) then
+		if (%weapontype = "stave") then
 		{
 			if (%t >= %nextacmtwirl) then
 			{
@@ -11547,7 +11607,7 @@ ACMLOGIC:
 				var usingacm 1
 			}
 		}
-		if ((%doublestrike = "YES") && (%offhand = "YES")) then
+		if (%offhand = "YES") then
 		{
 			if ((%weapontype = "sb") || (%weapontype = "lb") || (%weapontype = "se") || (%weapontype = "le") || ((%weapontype = "stave") && (%staveoffhand = "YES"))) then
 			{
@@ -11579,7 +11639,7 @@ ACMLOGIC:
 	}
 	else
 	{
-		if ((%doublestrike = "YES") && (%offhand = "YES")) then
+		if (%offhand = "YES") then
 		{
 			if ((%weapontype = "sb") || (%weapontype = "lb") || (%weapontype = "se") || (%weapontype = "le") || ((%weapontype = "stave") && (%staveoffhand = "YES"))) then
 			{
