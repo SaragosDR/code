@@ -1,3 +1,10 @@
+12/14/2023
+Updated Scripts: train, library, set
+Bugfixes to skinning/FA decisionmaking that would cause skinning to stop happening after a while at certain rank combinations.
+Code cleanup in the critter looting logic.
+Weapon repair no longer relies on a list that you have to set - it simply attempts to repair all the weapons that you have variable names for.  RepairList variable removed.
+
+
 12/09/2023
 Updated Scripts: train, library, set
 Removed variables for individual ACM's.  They will all be controlled by the single ACM variable.

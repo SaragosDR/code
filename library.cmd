@@ -1409,7 +1409,6 @@ VARCHECKS:
   }
   if !matchre("$m%checkmodeautopath", "\b(YES|NO|PREMIUM)\b") then put #var m%checkmodeautopath YES
   if !matchre("$m%checkmoderepair", "\b(YES|NO)\b") then put #var m%checkmoderepair NO
-  if !def(m%checkmoderepairlist) then put #var m%checkmoderepairlist scimitar|nightstick
   if !matchre("$m%checkmodebundlesell", "\b(YES|NO)\b") then put #var m%checkmodebundlesell NO
   if !matchre("$m%checkmodebundlevault", "\b(YES|NO)\b") then put #var m%checkmodebundlevault NO
   if (($m%checkmodebundlevault = "YES") && ($m%checkmodebundlesell = "YES")) then put #var m%checkmodebundlesell NO
@@ -8782,7 +8781,7 @@ NRITUAL:
       }
     }
   }
-  if %dissect = "YES" then
+  if ("%dissect" = "YES") then
   {
     if matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
     {

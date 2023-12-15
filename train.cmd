@@ -2039,7 +2039,7 @@ MAINVARLOAD:
   var exchange $m%varsetexchange
   var autopath $m%varsetautopath
   var repair $m%varsetrepair
-  var repairlist $m%varsetrepairlist
+  var repairlist $m%varsetseweapon|$m%varsetleweapon|$m%varsettheweapon|$m%varsetsbweapon|$m%varsetlbweapon|$m%varsetthbweapon|$m%varsetstaveweapon|$m%varsetpoleweapon|$m%varsetltweapon|$m%varsethtweapon
   var bundlesell $m%varsetbundlesell
   var bundlevault $m%varsetbundlevault
   var vaultmove $m%varsetvaultmove
@@ -3496,7 +3496,10 @@ UPKEEPLOGIC:
   #LOCKPICK_BUYING
   if ("%lockpickbuy" = "YES") then
   {
-    gosub LOCKPICKBUYLOGIC
+    if ("%lockpickbuytown" != "%townname") then
+    {
+      gosub LOCKPICKBUYLOGIC
+    }
   }
   #BOX_POPPING
   if ("%boxpopping" = "YES") then
@@ -3514,22 +3517,22 @@ UPKEEPLOGIC:
     if (("%townname" = "%ammobuytown") && (%ammoroom != 0)) then gosub AMMOBUYLOGIC
   }
   #REPAIR
-  if %repair = "YES" then gosub REPAIRLOGIC
-  if %minmoney > 0 then gosub MINMONEYLOGIC 
-  if $zoneid = 4 then
+  if ("%repair" = "YES") then gosub REPAIRLOGIC
+  if (%minmoney > 0) then gosub MINMONEYLOGIC 
+  if ($zoneid = 4) then
   {
     gosub MOVE crossing
   }
-  if %upkeependroom != 0 then
+  if (%upkeependroom != 0) then
   {
-    if %multizone = 1 then
+    if (%multizone = 1) then
 		{
 		  var upkeepzone %upkeependroomzone
 		  gosub UPKEEPZONEMOVE
 		}
     gosub MOVE %upkeependroom
     #DIRTCOLLECTING
-    if %dirtstacker = "YES" then
+    if ("%dirtstacker" = "YES") then
     {
       gosub DIRTSTACKERLOGIC
     }
@@ -4427,24 +4430,24 @@ REPAIRMOVE:
   if ((matchre("$roomobjs" "%repairer")) || (matchre("$roomdesc" "%repairer"))) then
   else
   {
-    if %repairer = "Lakyan" then
+    if ("%repairer" = "Lakyan") then
     {
-      if $roomid = 55 then return
+      if ($roomid = 55) then return
     }
-    if %multizone = 1 then
+    if (%multizone = 1) then
     {
       var upkeepzone %repairerzone
       gosub UPKEEPZONEMOVE
     }
     #REPAIRER_MOVES
-    if %repairer = "Raven" then var gosub MOVE 318
+    if ("%repairer" = "Raven") then var gosub MOVE 318
     {
       else
       {
-        if %repairer = "Krrikt'k" then gosub MOVE 319
+        if ("%repairer" = "Krrikt'k") then gosub MOVE 319
         else
         {
-					if %repairer = "repairman" then gosub MOVE 55
+					if ("%repairer" = "repairman") then gosub MOVE 55
 					else gosub MOVE %repairer
         }
       }
@@ -11839,34 +11842,44 @@ MONTEST:
     var deadcheck 0
     if matchre ("$roomobjs", "(%ritualcritters) ((which|that) appears dead|\(dead\))") then
     {
-      if "$guild" = "Necromancer" then gosub NRITUAL
+      if ("$guild" = "Necromancer") then gosub NRITUAL
       else
       {
-        if ("%dissect" = "YES") then
+        if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
         {
-          if $First_Aid.LearningRate > 33 then var firstaidlock 1
-          if $First_Aid.LearningRate < 21 then var firstaidlock 0
-          if $First_Aid.Ranks >= 1750 then var firstaidlock 1
-          if ((%firstaidlock = 0) && ("%skinning" = "YES")) then
+          if ($First_Aid.LearningRate > 33) then var firstaidlock 1
+          if ($First_Aid.LearningRate < 21) then var firstaidlock 0
+          if ($First_Aid.Ranks >= 1750) then var firstaidlock 1   
+          if ("%dissect" = "YES") then
           {
-            if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
+            if ("%skinning" = "YES") then
             {
-              if ($Skinning.Ranks >= 1750) then gosub DISSECTLOGIC
+              if (%firstaidlock = 1) then gosub SKINNINGLOGIC
               else
               {
-                if ($Skinning.LearningRate > $First_Aid.LearningRate) then gosub DISSECTLOGIC
+                if ($Skinning.Ranks >= 1750) then gosub DISSECTLOGIC
+                else
+                {
+                  if ($Skinning.LearningRate > $First_Aid.LearningRate) then gosub DISSECTLOGIC
+                  else gosub SKINNINGLOGIC
+                }
               }
             }
-            else gosub DISSECTLOGIC 
+            else
+            {
+              if (%firstaidlock = 0) then gosub DISSECTLOGIC
+            }
           }
-          else gosub DISSECTLOGIC
+          else
+          {
+            if ("%skinning" = "YES") then gosub SKINNINGLOGIC
+          }
+        }
+        else
+        {
+          if (("%dissect" = "YES") && (%firstaidlock = 0)) then gosub DISSECTLOGIC
         }
       }
-    } 
-    
-    if matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
-    {
-      if %skinning = "YES" then gosub SKINNINGLOGIC
     }
     
     if matchre("$roomobjs", "(%critters) ((which|that) appears dead|\(dead\))") then
@@ -11883,30 +11896,30 @@ MONTEST:
   return
 
 DISSECTLOGIC:
-  var dissected 1
+  #var dissected 1
   if matchre ("$roomobjs", "(\w+) ((which|that) appears dead|\(dead\))") then var ritualmonster $1
   gosub DISSECT
   return
 
 SKINNINGLOGIC:
   pause .5
-  if %necroskin = 1 then
+  if (%necroskin = 1) then
   {
     var necroskin 0
     return
   }
-  if %dissected = 1 then
-  {
-    var dissected 0
-    return
-  }
-  if %skinning = "NO" then return
+  #if (%dissected = 1) then
+  #{
+  #  var dissected 0
+  #  return
+  #}
+  if ("%skinning" = "NO") then return
   
   var badskin 0
   var noskin 0
   if (%arrange > 0) then
   {
-    if $Skinning.LearningRate >= 30 then
+    if ($Skinning.LearningRate >= 30) then
     {
       if %arrangeforpart = "YES" then
       {

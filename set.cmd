@@ -184,25 +184,6 @@ SET:
       }
     }
     if tolower("%1") = "repair" then goto YESNOSET
-    if tolower("%1") = "repairlist" then
-    {
-      var setvar repairlist  
-      var input %2
-      if_3 then var input %input %3
-      if_4 then var input %input %4
-      if_5 then var input %input %5
-      if_6 then var input %input %6
-      if_7 then var input %input %7
-      if_8 then var input %input %8
-      if_9 then
-      {
-        echo String too long!
-        exit
-      }
-      put #var m$varset%setvar %input
-      put #var save
-      goto VARDISPLAY
-    }
     if tolower("%1") = "bundlesell" then goto YESNOSET
     if tolower("%1") = "bundlevault" then goto YESNOSET
     if tolower("%1") = "bundlerope" then goto TEXTSET
@@ -2137,8 +2118,7 @@ DISPLAYUPKEEP:
 	put #echo
 	gosub OUTPUT AutoPath (yes|no|premium)
 	gosub OUTPUT Repair
-	gosub OUTPUT RepairList
-  gosub OUTPUT BundleSell
+	gosub OUTPUT BundleSell
   gosub OUTPUT BundleVault
   gosub OUTPUT VaultMove
   gosub OUTPUT BundleRope
@@ -2245,12 +2225,6 @@ DISPLAYCOMBAT:
 	gosub OUTPUT BowWorn
 	gosub OUTPUT SlingWeapon SlingAmmo
 	gosub OUTPUT Collectammo
-	put #echo
-	if $guild = "Warrior Mage" then
-	{
-	  gosub OUTPUT PlatRing
-	  gosub OUTPUT PlatRingItem
-	}
 	put #echo
   gosub OUTPUT ArmorCheck
   gosub OUTPUT ShieldItem
@@ -2818,6 +2792,12 @@ DISPLAYGUILD:
       put #echo mono CALAddMana: $m$varsetcaladdmana
       put #echo
       put #echo mono IgniteBackup: $m$varsetignitebackup
+      put #echo
+      if ("$guild" = "Warrior Mage") then
+      {
+        gosub OUTPUT PlatRing
+        gosub OUTPUT PlatRingItem
+      }
     }
     math buffloop add 1
   }
@@ -3152,7 +3132,6 @@ VARCOPYUPKEEP:
   put #var m%destexchange $m%sourceexchange
   put #var m%destautopath $m%sourceautopath
   put #var m%destrepair $m%sourcerepair
-  put #var m%destrepairlist $m%sourcerepairlist
   put #var m%destbundlesell $m%sourcebundlesell
   put #var m%destbundlevault $m%sourcebundlevault
   put #var m%destvaultmove $m%sourcevaultmove
@@ -3245,9 +3224,6 @@ VARCOPYCOMBAT:
   put #var m%destslingweapon $m%sourceslingweapon
   put #var m%destslingammo $m%sourceslingammo
   put #var m%destcollectammo $m%sourcecollectammo
-  
-  put #var m%destplatring $m%sourceplatring
-  put #var m%destplatringitem $m%sourceplatringitem
   
   put #var m%destarmorcheck $m%sourcearmorcheck
   put #var m%destarmornum $m%sourcearmornum
@@ -3931,6 +3907,8 @@ VARCOPYGUILD:
   put #var m%destcalspell $m%sourcecalspell
   put #var m%destcalprepmana $m%sourcecalprepmana
   put #var m%destcaladdmana $m%sourcecaladdmana
+  put #var m%destplatring $m%sourceplatring
+  put #var m%destplatringitem $m%sourceplatringitem
   put #var save
   return
   
