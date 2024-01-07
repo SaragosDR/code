@@ -2698,6 +2698,7 @@ STATUSCHECK:
   if ((%autoupkeep = "YES") && (%buffingonly != 1) && (%scriptmode = 1)) then
   {
     gosub AUTOUPKEEPCHECKS
+    #echo goupkeep: %goupkeep
     if (%goupkeep = 1) then
     {
       if ((%upkeepactive != 1) && (%movetrainactive != 1)) then gosub AUTOUPKEEPLOGIC
@@ -2821,9 +2822,11 @@ STATUSCHECK:
   return
 
 AUTOUPKEEPCHECKS:
+  #put #echo Yellow auonhealth: %auonhealth
   if ("%auonhealth" = "YES") then
   {
-    if ($health <= $auhealthnum) then
+    #put #echo Yellow health: $health <= auhealthnum: %auhealthnum
+    if ($health <= %auhealthnum) then
     {
       var goupkeep 1
       var autype health
@@ -2837,7 +2840,7 @@ AUTOUPKEEPCHECKS:
       var autype bleed
       var goupkeep 1
     }
-    if %t > %nextbleed then gosub BLEEDCHECK
+    if (%t > %nextbleed) then gosub BLEEDCHECK
   }
   #BURDEN
   if (%auonburden = "YES") then
@@ -2850,7 +2853,7 @@ AUTOUPKEEPCHECKS:
       pause 1
       #put #echo Yellow encumbrance: %encumbrance
       #put #echo Yellow auburdennum: %auburdennum
-      if %encumbrance >= %auburdennum then
+      if (%encumbrance >= %auburdennum) then
       {
         var goupkeep 1
         var autype burden
@@ -3453,7 +3456,7 @@ SHEATHEHANDP:
   pause
 SHEATHEHANDMAIN:
   matchre SHEATHEHANDP %waitstring
-  matchre SHEATHEBAD ^Sheathe your .* where\?$
+  matchre SHEATHEBAD ^Sheathe your .* where\?$|There's no room in the
   matchre RETURN Sheathe what?|You sheathe|You hang|You secure|You easily strap|Sheathing a
   if ("%sheathehandstring" = "right") then var sheatheitemstring $righthandnoun
   else var sheatheitemstring $lefthandnoun
@@ -6415,7 +6418,7 @@ CAST:
   if %spellprepping = "hyh" then var casttarget male offense
   if %spellprepping = "om" then var casttarget orb
   if %spellprepping = "rits" then var casttarget %ritstype
-  if %spellprepping = "shadowling" then put release shadowling
+  #if %spellprepping = "shadowling" then put release shadowling
   if %spellprepping = "tks" then
 	{
 	  if matchre ("$roomobjs", "%tktitem") then
