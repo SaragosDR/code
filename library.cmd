@@ -26,7 +26,7 @@ var townvaultpresetlist none|muspari|theren|riverhaven|dirge|crossing|leth|shard
 var townportalpresetlist none|muspari|therenborough|langenfirth|riverhaven|crossing|leth|shard|hibarnhvidar|ainghazal|ratha|mriss|aesry
 var pawnpresetlist none|crossing|riverhaven|shard|hibarnhvidar
 var ammopresetlist none|crossing|shard|ratha
-var lockpickpresetlist none|crossing|shard
+var lockpickpresetlist none|crossing|shard|riverhaven
 
 var Ordinal none|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth
 var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.
@@ -1390,8 +1390,10 @@ VARCHECKS:
   if !matchre("$m%checkmodeauonhealth", "\b(YES|NO)\b") then put #var m%checkmodeauonhealth NO
   if $m%checkmodeauhealthnum >= 0 then
   else put #var m%checkmodeauhealthnum 80
-  if !matchre("$m%checkmodeauonbleed", "\b(YES|NO)\b") then put #var m%checkmodeauonbleed NO
-  if !matchre("$m%checkmodeauonnerves", "\b(YES|NO)\b") then put #var m%checkmodeauonnerves NO
+  if !matchre("$m%checkmodeauonbleed", "\b(YES|NO)\b") then put #var m%checkmodeauonbleed YES
+  if !matchre("$m%checkmodeauonpoison", "\b(YES|NO)\b") then put #var m%checkmodeauonpoison YES
+  if !matchre("$m%checkmodeauonfire", "\b(YES|NO)\b") then put #var m%checkmodeauonfire YES
+  if !matchre("$m%checkmodeauonnerves", "\b(YES|NO)\b") then put #var m%checkmodeauonnerves YES
   if !matchre("$m%checkmodeauonburden", "\b(YES|NO)\b") then put #var m%checkmodeauonburden NO
   if $m%checkmodeauburdennum >= 0 then
   else put #var m%checkmodeauburdennum 3
@@ -1431,6 +1433,12 @@ VARCHECKS:
   if !def(m%checkmodelockpickitem) then put #var m%checkmodelockpickitem stout lockpick
   if !matchre("$m%checkmodeboxpopping", "\b(YES|NO)\b") then put #var m%checkmodeboxpopping NO
   if !matchre("$m%checkmodedismantletype", "\b(none|bash|bunny|caravan|chomp|claw|crush|fire|focus|jump|pray|press|roar|salvage|shriek|slam|slip|stomp|thump|tinker|whistle)\b") then put #var m%checkmodedismantletype none
+  if !matchre("$m%checkmodeboxpopbuff", "\b(none|drum|hol|mt)\b") then put #var m%checkmodeboxpopbuff none
+  if $m%checkmodeboxpopbuffprepmana >= 0 then
+  else put #var m%checkmodeboxpopbuffprepmana 1
+  if $m%checkmodeboxpopbuffaddmana >= 0 then
+  else put #var m%checkmodeboxpopbuffaddmana 0
+  
   
   if !matchre("$m%checkmodeappfocus", "\b(YES|NO)\b") then put #var m%checkmodeappfocus NO
   if !def(m%checkmodeappfocusitem) then put #var m%checkmodeappfocusitem shark
@@ -1645,6 +1653,24 @@ VARCHECKS:
   if !matchre("$m%checkmodeinstclean", "\b(YES|NO)\b") then put #var m%checkmodeinstclean NO
   if !def(m%checkmodeinstcleancloth) then put #var m%checkmodeinstcleancloth cloth
   if !def(m%checkmodesongtype) then put #var m%checkmodesongtype scales
+  
+  if !matchre("$m%checkmodecrafting", "\b(YES|NO)\b") then put #var m%checkmodecrafting NO
+  if !def(m%checkmodecraftingstorage) then put #var m%checkmodecraftingstorage crafting satchel
+  if !matchre("$m%checkmodeforging", "\b(YES|NO)\b") then put #var m%checkmodeforging NO
+  if !matchre("$m%checkmodeforgingdifficulty", "\b(easy|challenging|hard)\b") then put #var m%checkmodeforgingdifficulty challenging
+  if !def(m%checkmodeforgingmaterial) then put #var m%checkmodeforgingmaterial bronze
+  if !def(m%checkmodeawl) then put #var m%checkmodeawl awl
+  if !def(m%checkmodebellows) then put #var m%checkmodebellows leather bellows
+  if !def(m%checkmodehammer) then put #var m%checkmodehammer diagonal-peen hammer
+  if !def(m%checkmodeknittingneedles) then put #var m%checkmodeknittingneedles knitting needles
+  if !def(m%checkmodescissors) then put #var m%checkmodescissors scissors
+  if !def(m%checkmodesewingneedles) then put #var m%checkmodesewingneedles sewing needles
+  if !def(m%checkmodeshovel) then put #var m%checkmodeshovel curved shovel
+  if !def(m%checkmodeslickstone) then put #var m%checkmodeslickstone slickstone
+  if !def(m%checkmoderod) then put #var m%checkmoderod stirring rod
+  if !def(m%checkmodetongs) then put #var m%checkmodetongs tongs
+  if !def(m%checkmodeyardstick) then put #var m%checkmodeyardstick yardstick
+
   
   #MAGIC
   if !matchre("$m%checkmodeattune", "\b(YES|NO)\b") then put #var m%checkmodeattune YES
@@ -2862,18 +2888,27 @@ AUTOUPKEEPCHECKS:
       math nextburdencheck add 120
     }
   }
-  #NERVES
-  if (%auonnerves = "YES") then
+  #NERVES_POISON
+  if (("%auonnerves" = "YES") || ("%auonpoison" = "YES") || ("%auonfire" = "YES")) then
   {
-    if (%t > %nextnervecheck) then
+    if (%t > %nexthealthcheck) then
     {
       var badnerves 0
+      var poisoned 0
+      var onfire 0
       action (nerves) on
+      action (poison) on
+      action (onfire) on
       gosub HEALTHCHECK
       pause 1
       action (nerves) off
-      var nextnervecheck %t
-      math nextnervecheck add 120
+      action (poison) off
+      action (onfire) off
+      var nexthealthcheck %t
+      math nexthealthcheck add 120
+    }
+    if ("%auonnerves" = "YES") then
+    {
       if (%badnerves = 1) then
       {
         var goupkeep 1
@@ -2881,6 +2916,24 @@ AUTOUPKEEPCHECKS:
         var badnerves 0
       }
     }
+    if ("%auonpoison" = "YES") then
+    {
+      if (%poisoned = 1) then
+      {
+        var goupkeep 1
+        var autype poison
+        var poisoned 0
+      }
+    }
+    if ("%auonfire" = "YES") then
+    {
+      if (%onfire = 1) then
+      {
+        var goupkeep 1
+        var autype fire
+        var poisoned 0
+      }
+    }   
   }
   return
 
@@ -2959,7 +3012,10 @@ TIMEOUT:
     put #play JustArrived
     if %timeoutcount >= 10 then
     {
-      if %bugout = "YES" then goto BUGOUT
+      if ("%bugout" = "YES") then
+      {
+        goto BUGOUT
+      }
     }
 	}
 	goto %timeoutsub
@@ -3108,7 +3164,9 @@ BUYMAIN:
   matchre BUYP %waitstring
   match BUYP Ragge exclaims, "Slow down!  Slow down!  Do you see any Halfling assistants in the shop?  I can only process one order at a time."
   matchre RETURN Brother Durantine nods slowly|Friar Othorp grins broadly|Sister Nongwen smiles and nods|Sister Imadrail smiles and nods|The sales clerk hands you your
-  matchre BUYOFFER Ragge sighs.  "Despite the rarity of this lockpick, I'm prepared to offer it to you for (\d+) kronars."
+  matchre BUYOFFER Ragge sighs.  "Despite the rarity of this lockpick, I'm prepared to offer it to you for (\d+) kronars\."
+  matchre BUYOFFER Kilam says, "I'll give that to you for (\d+) dokoras\."
+  matchre BUYOFFER Ss'Thran smiles, baring his fangs. "Ahh, the lockpick\.  That'll cost you (\d+) lirums\."
   match RETURN You realize you don't have that much.
   put order %buytarget
   matchwait 5
@@ -3126,6 +3184,9 @@ BUYOFFERMAINP:
 BUYOFFERMAIN:
   matchre BUYOFFERMAINP %waitstring
   match RETURN Ragge hands over your lockpick.
+  match RETURN Kilam hands over your purchase.
+  match RETURN Ss'Thran hands you
+  matchre RETURN ^(\w+) hands over your .*\.
   put offer $1
   matchwait
   return
@@ -3795,7 +3856,7 @@ STOWITEMFAIL:
   put #echo >$alertwindow Yellow Tried to stow %stowitemstring, but failed because it's too heavy or won't fit!  Please address!
   put #flash
   put #play Advance
-  if %bugout = "YES" then
+  if ("%bugout" = "YES") then
   {
     if (%buggingout = 1) then return
     var bugoutnostow 1
@@ -4859,7 +4920,7 @@ BOWNOAMMO:
   }
   else
   {
-    if %bugout = "YES" then goto BUGOUT
+    if ("%bugout" = "YES") then goto BUGOUT
     else goto BOWNOAMMO2
   }
 
@@ -7000,7 +7061,7 @@ PREPBADHEAVYTM:
   return
 
 PREPBADUNKNOWN:
-  if %bugout = "YES" then
+  if ("%bugout" = "YES") then
   {
     put #echo %alertwindow [Magic] Tried to prep a spell you don't know!  Bugging out.
     put #flash
@@ -7312,6 +7373,7 @@ BUYLOOP:
 ENTERVAULTP:
   pause
 ENTERVAULT:
+  #if ($zoneid = 67) then move go door
   matchre ENTERVAULTP %waitstring
   matchre ENTERVAULTNONE The attendant says, "Hey bub, are you lost?|The attendant says, "Hey lady, are you lost?
   matchre ENTERVAULTPAY The Dwarven attendant grabs you by the wrist\.|The attendant catches your arm and says,
@@ -7406,6 +7468,7 @@ EXITVAULT:
   move out
   if ($zoneid = 67) then
   {
+    move out
     move east
     put #mapper reset
   }
@@ -7646,7 +7709,7 @@ BUNDLEMAKENOROPE:
   put #echo >$alertwindow Yellow Out of bundling ropes!  Please address!
   put #flash
   put #play Advance
-  if %bugout = "YES" then goto BUGOUT
+  if (%bugout = "YES") then goto BUGOUT
   else goto BUNDLEMAKENOROPE2
 
 BUNDLEMAKENOROPE2:
@@ -7951,7 +8014,7 @@ GEMPOUCHNONE:
   put #echo >$alertwindow Yellow Out of gem pouches!  Please address!
   put #flash
   put #play Advance
-  if %bugout = "YES" then goto BUGOUT
+  if (%bugout = "YES") then goto BUGOUT
   else goto GEMPOUCHNONE2
 
 GEMPOUCHNONE2:
@@ -8217,7 +8280,7 @@ ARMORCHECK:
       {
         put #echo %alertwindow Yellow [Armor]: Could not wear shield!  Please address!
         put #echo Yellow Could not wear shield!  Please address!
-        if %bugout = "YES" then goto BUGOUT
+        if ("%bugout" = "YES") then goto BUGOUT
         else goto ARMORPROBLEM
       }
     }
@@ -8225,7 +8288,7 @@ ARMORCHECK:
     {
       put #echo %alertwindow Yellow [Armor]: Could not find shield to wear!  Please address!
       put #echo Yellow Could not find shield to wear!  Please address!
-      if %bugout = "YES" then goto BUGOUT
+      if ("%bugout" = "YES") then goto BUGOUT
       else goto ARMORPROBLEM
     } 
   }
@@ -8250,7 +8313,7 @@ ARMORCHECK:
       {
         put #echo %alertwindow Yellow [Armor]: Could not wear parry stick!  Please address!
         put #echo Yellow Could not wear parry stick!  Please address!
-        if %bugout = "YES" then goto BUGOUT
+        if ("%bugout" = "YES") then goto BUGOUT
         else goto ARMORPROBLEM
       }
     }
@@ -8258,7 +8321,7 @@ ARMORCHECK:
     {
       put #echo %alertwindow Yellow [Armor]: Could not find parry stick to wear!  Please address!
       put #echo Yellow Could not find parry stick to wear!  Please address!
-      if %bugout = "YES" then goto BUGOUT
+      if ("%bugout" = "YES") then goto BUGOUT
       else goto ARMORPROBLEM
     } 
   }
@@ -8283,7 +8346,7 @@ ARMORCHECK:
       {
         put #echo %alertwindow Yellow [Armor]: Could not wear knuckles!  Please address!
         put #echo Yellow Could not wear knuckles!  Please address!
-        if %bugout = "YES" then goto BUGOUT
+        if ("%bugout" = "YES") then goto BUGOUT
         else goto ARMORPROBLEM
       }
     }
@@ -8291,7 +8354,7 @@ ARMORCHECK:
     {
       put #echo %alertwindow Yellow [Armor]: Could not find knuckles to wear!  Please address!
       put #echo Yellow Could not find knuckles to wear!  Please address!
-      if %bugout = "YES" then goto BUGOUT
+      if ("%bugout" = "YES") then goto BUGOUT
       else goto ARMORPROBLEM
     } 
   }
@@ -8329,7 +8392,7 @@ ARMORCHECKLOOP:
       {
         put #echo %alertwindow Yellow [Armor]: Could not wear Armor %armorloop!  Please address!
         put #echo Yellow Could not wear Armor %armorloop!  Please address!
-        if %bugout = "YES" then goto BUGOUT
+        if ("%bugout" = "YES") then goto BUGOUT
         else goto ARMORPROBLEM
       }
     }
@@ -8337,7 +8400,7 @@ ARMORCHECKLOOP:
     {
       put #echo %alertwindow Yellow [Armor]: Could not find Armor %armorloop to wear!  Please address!
       put #echo Yellow Could not find Armor %armorloop to wear!  Please address!
-      if %bugout = "YES" then goto BUGOUT
+      if ("%bugout" = "YES") then goto BUGOUT
       else goto ARMORPROBLEM
     } 
   }
@@ -8427,6 +8490,7 @@ BOXSTORAGECHECK:
 	matchre BOXSTORAGECHECKP \.\.\.wait|type ahead|stunned|while entangled in a web\.
 	matchre BOXSTORAGECHECKYES (%boxes)
   matchre RETURN In the|nothing|What
+  match RETURN I could not find what you were referring to.
 	put look in my %boxstorage
 	matchwait
   

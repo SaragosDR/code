@@ -145,6 +145,8 @@ SET:
     if tolower("%1") = "auonhealth" then goto YESNOSET
     if tolower("%1") = "auhealthnum" then goto TEXTSET
     if tolower("%1") = "auonbleed" then goto YESNOSET
+    if tolower("%1") = "auonpoison" then goto YESNOSET
+    if tolower("%1") = "auonfire" then goto YESNOSET
     if tolower("%1") = "auonnerves" then goto YESNOSET
     if tolower("%1") = "auonburden" then goto YESNOSET
     if tolower("%1") = "auonammo" then goto YESNOSET
@@ -250,6 +252,24 @@ SET:
     if tolower("%1") = "lockpickitem" then goto TEXTSET
     if tolower("%1") = "boxpopping" then goto YESNOSET
     if tolower("%1") = "dismantletype" then goto TEXTSET
+    if tolower("%1") = "boxpopbuff" then
+    {
+      if matchre("%2", "\b(none|drum|hol|mt)\b") then
+      {  
+        var setvar boxpopbuff
+        var input %2  
+        put #var m$varset%setvar %input
+        put #var save
+        goto VARDISPLAY
+      }
+      else
+      {
+        put #echo mono You can only set 1-14 weapons!
+        goto END
+      }
+    }
+    if tolower("%1") = "boxpopbuffprepmana" then goto TEXTSET
+    if tolower("%1") = "boxpopbuffaddmana" then goto TEXTSET
     if tolower("%1") = "spiderfeed" then goto YESNOSET
     if tolower("%1") = "incense" then goto TEXTSET
     if tolower("%1") = "stancemain" then goto TEXTSET
@@ -950,8 +970,25 @@ SET:
     if tolower("%1") = "tmfocusstorage" then goto YESNOSET
     if tolower("%1") = "tmfocuscontainer" then goto TEXTSET
     if tolower("%1") = "combatsanowret" then goto YESNOSET
-    if tolower("%1") = "noncomsanowret" then goto YESNOSET
+    if tolower("%1") = "noncomsanowret" then goto YESNOSET    
     if tolower("%1") = "sanowretitem" then goto TEXTSET
+    if tolower("%1") = "crafting" then goto YESNOSET
+    if tolower("%1") = "craftingstorage" then goto TEXTSET
+    if tolower("%1") = "forging" then goto YESNOSET
+    if tolower("%1") = "forgingdifficulty" then goto TEXTSET
+    if tolower("%1") = "forgingmaterial" then goto TEXTSET
+    if tolower("%1") = "awl" then goto TEXTSET
+    if tolower("%1") = "bellows" then goto TEXTSET
+    if tolower("%1") = "hammer" then goto TEXTSET
+    if tolower("%1") = "knittingneedles" then goto TEXTSET
+    if tolower("%1") = "scissors" then goto TEXTSET
+    if tolower("%1") = "sewingneedles" then goto TEXTSET
+    if tolower("%1") = "shovel" then goto TEXTSET
+    if tolower("%1") = "slickstone" then goto TEXTSET
+    if tolower("%1") = "rod" then goto TEXTSET
+    if tolower("%1") = "tongs" then goto TEXTSET
+    if tolower("%1") = "yardstick" then goto TEXTSET
+    
     if tolower("%1") = "research" then goto YESNOSET
     if tolower("%1") = "gafprepmana" then goto TEXTSET 
     if tolower("%1") = "gafaddmana" then goto TEXTSET
@@ -2109,6 +2146,8 @@ DISPLAYUPKEEP:
 	gosub OUTPUT AutoUpkeep
 	gosub OUTPUT AUOnHealth AUHealthNum
   gosub OUTPUT AUOnBleed
+  gosub OUTPUT AUOnPoison
+  gosub OUTPUT AUOnFire
   gosub OUTPUT AUOnNerves
   gosub OUTPUT AUOnBurden AUBurdenNum
   gosub OUTPUT AUOnAmmo
@@ -2139,6 +2178,12 @@ DISPLAYUPKEEP:
   gosub OUTPUT LockpickItem
   gosub OUTPUT BoxPopping
   gosub OUTPUT DismantleType
+  if (("$guild" != "Barbarian") && ("$guild" != "Thief")) then
+  {
+    gosub OUTPUT BoxPopBuff (none|drum|hol|mt)
+    gosub OUTPUT BoxPopBuffPrepMana
+    gosub OUTPUT BoxPopBuffAddMana
+  }
   put #echo
 	gosub OUTPUT AppFocus
   gosub OUTPUT AppFocusItem
@@ -2328,9 +2373,21 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT SongType
   gosub OUTPUT ClimbingRope ClimbingRopeName
   gosub OUTPUT ClimbingRopeHum HumSong
+  gosub OUTPUT NonComSanowret
   put #echo
-  put #echo mono NonComSanowret: $m$varsetnoncomsanowret
+  gosub OUTPUT Crafting
+  gosub OUTPUT CraftingStorage
+  gosub OUTPUT Forging
+  gosub OUTPUT ForgingDifficulty
+  gosub OUTPUT ForgingMaterial
   put #echo
+	gosub OUTPUT awl bellows
+	gosub OUTPUT hammer knittingneedles
+	gosub OUTPUT scissors sewingneedles
+	gosub OUTPUT shovel slickstone
+	gosub OUTPUT rod tongs
+	gosub OUTPUT yardstick
+	put #echo
 	gosub OUTPUT Research
 	gosub OUTPUT GAFPrepMana GAFAddMana
   put #echo mono ResearchNum: $m$varsetresearchnum
@@ -3123,6 +3180,8 @@ VARCOPYUPKEEP:
   put #var m%destauonhealth $m%sourceauonhealth
   put #var m%destauhealthnum $m%sourceauhealthnum
   put #var m%destauonbleed $m%sourceauonbleed
+  put #var m%destauonpoison $m%sourceauonpoison
+  put #var m%destauonfire $m%sourceauonfire
   put #var m%destauonnerves $m%sourceauonnerves
   put #var m%destauonburden $m%sourceauonburden
   put #var m%destauburdennum $m%sourceauburdennum
@@ -3150,6 +3209,9 @@ VARCOPYUPKEEP:
   put #var m%destlockpickitem $m%sourcelockpickitem
   put #var m%destboxpopping $m%sourceboxpopping
   put #var m%destdismantletype $m%sourcedismantletype
+  put #var m%destboxpopbuff $m%sourceboxpopbuff
+  put #var m%destboxpopbuffprepmana $m%sourceboxpopbuffprepmana
+  put #var m%destboxpopbuffaddmana $m%sourceboxpopbuffaddmana
   put #var m%destspiderfeed $m%sourcespiderfeed
   put #var m%destappfocus $m%sourceappfocus
   put #var m%destappfocusitem $m%sourceappfocusitem
@@ -3437,6 +3499,23 @@ VARCOPYNONCOMBAT:
   put #var m%destclimbingropehum $m%sourceclimbingropehum
   put #var m%desthumsong $m%sourcehumsong
   
+  put #var m%destcrafting $m%sourcecrafting
+  put #var m%destcraftingstorage $m%sourcecraftingstorage
+  put #var m%destforging $m%sourceforging
+  put #var m%destforgingdifficulty $m%sourceforgingdifficulty
+  put #var m%destforgingmaterial $m%sourceforgingmaterial
+  put #var m%destawl $m%sourceawl
+  put #var m%destbellows $m%sourcebellows
+  put #var m%desthammer $m%sourcehammer
+  put #var m%destknittingneedles $m%sourceknittingneedles
+  put #var m%destscissors $m%sourcescissors
+	put #var m%destsewingneedles $m%sourcesewingneedles
+	put #var m%destshovel $m%sourceshovel
+	put #var m%destslickstone $m%sourceslickstone
+	put #var m%destrod $m%sourcerod
+	put #var m%desttongs $m%sourcetongs
+	put #var m%destyardstick $m%sourceyardstick
+	
   put #var save
   return
 

@@ -248,6 +248,15 @@ action (nerves) var badnerves 1 when severe paralysis of the entire body
 action (nerves) var badnerves 1 when complete paralysis of the entire body
 action (nerves) off
 
+#POISON
+action (poison) var poisoned 1 when You have a (critically|dangerously|seriously|mildly) poisoned (.*)\.
+action (poison) off
+
+#FIRE
+#A juvenile wyvern breathes a stream of fire directly at you!  The flames *WHOOSH* around your back, setting it on fire!  You can smell the strong scent of naphtha in the wyvern's breath fueling the flames further.
+action (onfire) var onfire 1 when Your right hand is on fire\.
+action (onfire) off
+
 #ENCUMBRANCE
 action (encumbrance) var encumbrance 0 when Encumbrance : None
 action (encumbrance) var encumbrance 1 when Encumbrance : Light Burden
@@ -492,8 +501,11 @@ ALERTINIT:
   }  
   if ((%bugout = "YES") && (%scriptmode = 1)) then
   {
-    action if %buggingout = 0 then goto BUGOUT when eval $health <= $bugoutnum
-    if $bugoutonbleed = "YES" then action if %buggingout = 0 then goto BUGOUT when eval $bleeding = 1
+    action if (%buggingout = 0) then goto BUGOUT; put #echo %alertwindow Yellow [Bugout]: Bugging out due to low health! when eval $health <= $bugoutnum
+    if ($bugoutonbleed = "YES") then
+    {
+      action if (%buggingout = 0) then goto BUGOUT;put #echo %alertwindow Yellow [Bugout]: Bugging out due to bleeding! when eval $bleeding = 1
+    }
   }
   if %autoupkeep = "YES" then
   { 
@@ -526,7 +538,7 @@ ALERTINIT:
   {
     if ((%bugout = "YES") && (%scriptmode = 1)) then
     {
-      action if %buggingout = 0 then goto BUGOUT; if $concentration < %lastconc then put #play Echo; if $concentration < %lastconc then put #flash; if $concentration < %lastconc then put #echo %alertwindow Yellow [Khri]: Possible Khri crash.  Please investigate!; var lastconc $concentration when eval $concentration <= 10
+      action if %buggingout = 0 then goto BUGOUT; if $concentration < %lastconc then put #play Echo; if $concentration < %lastconc then put #flash; if $concentration < %lastconc then put #echo %alertwindow Yellow [Khri]: Possible Khri crash.  Bugging out!; var lastconc $concentration when eval $concentration <= 10
     }
     else
     {
@@ -1773,7 +1785,7 @@ STATUSVARLOAD:
   var nextlootmanip 0
   var nextmanip 0
   var nextmontest 0
-  var nextnervecheck 0
+  var nexthealthcheck 0
   var nextnvstealth 0
   var nextom 0
   var nextpathway 0
@@ -2030,6 +2042,8 @@ MAINVARLOAD:
   var auonhealth $m%varsetauonhealth
   var auhealthnum $m%varsetauhealthnum
   var auonbleed $m%varsetauonbleed
+  var auonpoison $m%varsetauonpoison
+  var auonfire $m%varsetauonfire
   var auonnerves $m%varsetauonnerves
   var auonburden $m%varsetauonburden
   var auburdennum $m%varsetauburdennum
@@ -2059,18 +2073,15 @@ MAINVARLOAD:
   var lockpickitem $m%varsetlockpickitem
   var boxpopping $m%varsetboxpopping
   var dismantletype $m%varsetdismantletype
+  var boxpopbuff $m%varsetboxpopbuff
+  var boxpopbuffprepmana $m%varsetboxpopbuffprepmana
+  var boxpopbuffaddmana $m%varsetboxpopbuffaddmana
   
   var spiderfeed $m%varsetspiderfeed
   var incense $m%varsetincense
-  var burglestorage $m%varsetburglestorage
-  var burgletool $m%varsetburgletool
-  var burglepickitem $m%varsetburglepickitem
-  var burglepickworn $m%varsetburglepickworn
-  var burgleropeitem $m%varsetburgleropeitem
-  var burglemaxgrabs $m%varsetburglemaxgrabs
-  var burgleloot $m%varsetburgleloot
-  var burglekeeplist $m%varsetburglekeeplist
-  var burglepawn $m%varsetburglepawn
+ 
+ 
+  
   eval weapon1 tolower("$m%varsetweapon1")
   eval weapon2 tolower("$m%varsetweapon2")
   eval weapon3 tolower("$m%varsetweapon3")
@@ -2294,14 +2305,6 @@ MAINVARLOAD:
   var appraisetimer $m%varsetappraisetimer
   var appsaveitem $m%varsetappsaveitem
   var appsaveitemstorage $m%varsetappsaveitemstorage
-  var perform $m%varsetperform
-  var songtype $m%varsetsongtype
-  var instrument $m%varsetinstrument
-  var instrumentworn $m%varsetinstrumentworn
-  var instrumenthands $m%varsetinstrumenthands
-  var instrumentassess $m%varsetinstrumentassess
-  var instclean $m%varsetinstclean
-  var instcleancloth $m%varsetinstcleancloth
   var compendium $m%varsetcompendium
   var compendiumtimer $m%varsetcompendiumtimer
   var textbook $m%varsettextbook
@@ -2311,6 +2314,40 @@ MAINVARLOAD:
   
   var noncombat $m%varsetnoncombat
   var burgle $m%varsetburgle
+  var burglestorage $m%varsetburglestorage
+  var burgletool $m%varsetburgletool
+  var burglepickitem $m%varsetburglepickitem
+  var burglepickworn $m%varsetburglepickworn
+  var burgleropeitem $m%varsetburgleropeitem
+  var burglemaxgrabs $m%varsetburglemaxgrabs
+  var burgleloot $m%varsetburgleloot
+  var burglekeeplist $m%varsetburglekeeplist
+  var burglepawn $m%varsetburglepawn
+  var perform $m%varsetperform
+  var songtype $m%varsetsongtype
+  var instrument $m%varsetinstrument
+  var instrumentworn $m%varsetinstrumentworn
+  var instrumenthands $m%varsetinstrumenthands
+  var instrumentassess $m%varsetinstrumentassess
+  var instclean $m%varsetinstclean
+  var instcleancloth $m%varsetinstcleancloth
+  var crafting $m%varsetcrafting
+  var craftingstorage $m%varsetcraftingstorage
+  var forging $m%varsetforging
+  var forgingdifficulty $m%varsetforgingdifficulty
+  var forgingmaterial $m%varsetforgingmaterial
+  var awl $m%varsetawl
+  var bellows $m%varsetbellows
+  var hammer $m%varsethammer
+  var knittingneedles $m%varsetknittingneedles
+  var scissors $m%varsetscissors
+  var sewingneedles $m%varsetsewingneedles
+  var shovel $m%varsetshovel
+  var slickstone $m%varsetslickstone
+  var rod $m%varsetrod
+  var tongs $m%varsettongs
+  var yardstick $m%varsetyardstick
+  
   var burglepreset $m%varsetburglepreset
   var burglepawnpreset $m%varsetburglepawnpreset
   var performpreset $m%varsetperformpreset
@@ -3496,7 +3533,7 @@ UPKEEPLOGIC:
   #LOCKPICK_BUYING
   if ("%lockpickbuy" = "YES") then
   {
-    if ("%lockpickbuytown" != "%townname") then
+    if ("%lockpickbuytown" = "%townname") then
     {
       gosub LOCKPICKBUYLOGIC
     }
@@ -3760,6 +3797,7 @@ UPKEEPSET:
     var almsbox 1
     var almsboxitem almsbox
     var boxpoproom 272
+    var lockpickroom locksmith
   }
   #ROSSMANS
   if $zoneid = 34a then
@@ -3816,6 +3854,7 @@ UPKEEPSET:
     var hasvault 1
     var hasbank 1
     var upkeependroom 1
+    var boxpoproom 131
   }
   #LETH
   if $zoneid = 61 then
@@ -3828,6 +3867,7 @@ UPKEEPSET:
     var currency Kronar
     var hasvault 1
     var upkeependroom 58
+    var boxpoproom 227
   }
   #ILAYA
   if $zoneid = 112 then
@@ -3839,6 +3879,7 @@ UPKEEPSET:
     var furrier Knain
     var appraiser Elven appraiser
     var upkeependroom 28
+    var boxpoproom 190
   }
   #SHARD
   if (($zoneid = 66) || ($zoneid = 67) || ($zoneid = 68) || ($zoneid = 69)) then
@@ -3873,6 +3914,8 @@ UPKEEPSET:
     var ammozone 67
     var boxpoproom 131
     var boxpopzone 67
+    var lockpickroom locksmith
+    var lockpickzone 67
   }
   #RATHA
   if $zoneid = 90 then
@@ -3890,6 +3933,7 @@ UPKEEPSET:
     var upkeependroom 1
     var pawnshop Paedraig
     var ammoroom general
+    var boxpoproom 558
   }
   #AESRY
   if $zoneid = 99 then
@@ -3905,6 +3949,7 @@ UPKEEPSET:
     var hasbank 1
     var currency Lirum
     var upkeependroom 1
+    var boxpoproom 144
   }
   #KRESH    
   if $zoneid = 107 then
@@ -3919,6 +3964,7 @@ UPKEEPSET:
     var hasvault 1
     var currency Lirum
     var upkeependroom 17
+    var boxpoproom 10
   }
   #HIB
   if $zoneid = 116 then
@@ -3935,6 +3981,7 @@ UPKEEPSET:
     var hasvault 1
     var upkeependroom 105
     var pawnshop Relf
+    var boxpoproom 258
   }
   #RAVENS_POINT
   if $zoneid = 123 then
@@ -3959,6 +4006,7 @@ UPKEEPSET:
     var furrier Gudthar
     var currency Dokora
     var upkeependroom 24
+    var boxpoproom 523
   }
   #FANG_COVE
   if $zoneid = 150 then
@@ -3985,9 +4033,10 @@ UPKEEPSET:
     #}
     var mrep Lakyan
     var lrep Lakyan
-    if $Time.isDay = 1 then
+    if ($Time.isDay = 1) then
     {
-      if (($Time.timeOfDay = "dawn") || ($Time.timeOfDay = "dusk") || ($Time.timeOfDay = "early morning")} then
+      #($Time.timeOfDay = "dawn") || 
+      if (($Time.timeOfDay = "dusk") || ($Time.timeOfDay = "early morning")} then
       {
         var furrier attendant
       }
@@ -4029,6 +4078,8 @@ AUTOUPKEEPLOGIC:
   if ("%autype" = "burden") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to burden of %encumbrance.
   if ("%autype" = "bleed") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to bleeding.
   if ("%autype" = "nerves") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to nerve damage.
+  if ("%autype" = "poison") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to poison.
+  if ("%autype" = "onfire") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to being on fire.
   if ("%autype" = "wounds") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to significant wounds.
   if ("%autype" = "hands") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to missing hand(s).
   if ("%autype" = "ammo") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to running out of ammo.
@@ -4315,7 +4366,67 @@ BOXPOPPINGLOGIC:
   gosub BOXSTORAGECHECK
   if (%foundboxes = 1) then
   {
-    if ($roomid != 11) then gosub MOVE 11
+    if (("$guild" != "Thief") && ("$guild" != "Barbarian") then
+    {
+      echo boxpopbuff: %boxpopbuff
+      if ("%boxpopbuff" != "none") then
+      {
+        if ("%boxpopbuff" = "drum") then
+        {
+          if (($SpellTimer.DrumsoftheSnake.active = 0) || ($SpellTimer.DrumsoftheSnake.duration < 2)) then
+          {
+            if %casting = 1 then
+            {
+              gosub RELSPELL
+              gosub RELSYMBIOSIS
+            }
+            var spellprepping drum
+            var prepmana %boxpopbuffprepmana
+            var addmana %boxpopbuffaddmana
+            var casting 1
+            gosub CASTINGLOGIC
+            waitfor You feel fully prepared to cast your spell.
+            gosub CASTINGLOGIC
+          }
+        }
+        if ("%boxpopbuff" = "hol") then
+        {
+          if (($SpellTimer.HandsofLirisa.active = 0) || ($SpellTimer.HandsofLirisa.duration < 2)) then
+          {
+            if %casting = 1 then
+            {
+              gosub RELSPELL
+              gosub RELSYMBIOSIS
+            }
+            var spellprepping hol
+            var prepmana %boxpopbuffprepmana
+            var addmana %boxpopbuffaddmana
+            var casting 1
+            gosub CASTINGLOGIC
+            waitfor You feel fully prepared to cast your spell.
+            gosub CASTINGLOGIC
+          }
+        }
+        if ("%boxpopbuff" = "mt") then
+        {
+          if (($SpellTimer.MachinistsTouch.active = 0) || ($SpellTimer.MachinistsTouch.duration < 2)) then
+          {
+            if %casting = 1 then
+            {
+              gosub RELSPELL
+              gosub RELSYMBIOSIS
+            }
+            var spellprepping mt
+            var prepmana %boxpopbuffprepmana
+            var addmana %boxpopbuffaddmana
+            var casting 1
+            gosub CASTINGLOGIC
+            waitfor You feel fully prepared to cast your spell.
+            gosub CASTINGLOGIC
+          }
+        }
+      }
+    }
     if ("$guild" = "Thief") then
     {
       gosub KHRISTOP
@@ -4326,9 +4437,16 @@ BOXPOPPINGLOGIC:
     var boxindex 0
     gosub BOXPOPPINGLOOP
     put #echo %alertwindow Yellow Box popping ended.
-    if ("$guild" = "Thief") then
+    if (("$guild" = "Thief") || ("$guild" = "Barbarian") then
     {
-      gosub KHRISTOP sight plunder safe focus hasten
+      if ("$guild" = "Thief") then
+      {
+        gosub KHRISTOP sight plunder safe focus hasten
+      }
+    }
+  }
+  return
+      }
     }
     gosub ARMORCHECK
     if ($standing != 1) then gosub STAND
@@ -4837,6 +4955,10 @@ LOCKPICKBUYLOGIC:
 		gosub UPKEEPZONEMOVE
 	}
 	gosub MOVE %lockpickroom
+  if ($zoneid = 67) then
+  {
+    if ($roomid != 383) then gosub MOVE %lockpickroom
+  }
 	
 	gosub LOCKPICKCOUNT
   put echo lockpicksneeded: %lockpicksneeded
@@ -6122,7 +6244,7 @@ BURGLEKHRI:
   return
 
 BURGLERFCAST:
-  if %burglerf = "YES" then
+  if ("%burglerf" = "YES") then
   {
     if (($SpellTimer.RefractiveField.active = 0) || ($SpellTimer.RefractiveField.duration < 2)) then
     {
@@ -10099,7 +10221,7 @@ BUFFLOGIC:
   #PIERCING_GAZE
   if %casting != 1 then
   {
-    if %piercinggaze = "YES" then
+    if ("%piercinggaze" = "YES") then
     {
       if ((($SpellTimer.PiercingGaze.active = 1) && ($SpellTimer.PiercingGaze.duration < %buffbuffer)) || ($SpellTimer.PiercingGaze.active != 1)) then
       {
