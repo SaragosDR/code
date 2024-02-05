@@ -3957,6 +3957,7 @@ WEARARMOR:
 WEARARMORP:
   pause
 WEARARMORMAIN:
+  if ("%weararmoritem" = "none") then goto WEARARMORGOOD
   matchre WEARARMORP %waitstring
   matchre WEARARMORGOOD ^You are already wearing that\.|^You slide|^You put|^You slip|^You work
   matchre RETURN ^I could not find what you were referring to\.|^Wear what\?
