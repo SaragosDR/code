@@ -3959,10 +3959,14 @@ WEARARMORP:
 WEARARMORMAIN:
   if ("%weararmoritem" = "none") then goto WEARARMORGOOD
   matchre WEARARMORP %waitstring
-  matchre WEARARMORGOOD ^You are already wearing that\.|^You slide|^You put|^You slip|^You work
+  matchre WEARARMORGOOD ^You slide|^You put|^You slip|^You work
+  match WEARARMORGOOD You are already wearing that.
   matchre RETURN ^I could not find what you were referring to\.|^Wear what\?
   put wear my %weararmoritem
-  matchwait
+  matchwait 5
+  var timeoutsub WEARARMOR
+  var timeoutcommand wear my %weararmoritem
+	goto TIMEOUT
 
 WEARARMORGOOD:
   var weararmorworn 1
