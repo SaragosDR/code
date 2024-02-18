@@ -5995,7 +5995,7 @@ BURGLETOOLGET:
     {
       var burgletoolchosen pick
       gosub GETITEM %burglepickitem
-      if ("$righthandnoun" = "lockpick") then
+      if ("$righthandnoun" != "lockpick") then
       {
         put #echo %alertwindow Yellow Could not get the lockpick for burgling!  Please investigate!
       }
@@ -6005,7 +6005,7 @@ BURGLETOOLGET:
   {
     var burgletoolchosen rope
     gosub GETITEM %burgleropeitem
-    if ("$righthandnoun" = "rope") then
+    if ("$righthandnoun" != "rope") then
     {
       put #echo %alertwindow Yellow Could not get the rope for burgling!  Please investigate!
     }
