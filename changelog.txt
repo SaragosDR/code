@@ -1,3 +1,11 @@
+02/17/2024
+Updated Scripts: train, library, set, craft, craftlibrary
+Box popping and lockpick buying now properly report in the upkeep output string.
+Changed how lockpicks are counted in lockpick buying to accomodate older lockpick rings.
+Several additional checks to burgling code to help track down any issues.
+Lots and lots of work on crafting.  Craft script now plugs into the variables created by Set.
+
+
 02/04/2024
 Updated Scripts: train, library, set
 New Upkeep variables: AUOnPoison and AUOnFire.  Helpful for hunting wyverns.  Only applies to location poisons until I can get text for nerve poisons.
