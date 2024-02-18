@@ -8820,7 +8820,7 @@ NONCOMBATLOGIC:
 	{
 	  if (($Athletics.Ranks < 1750) || ($Locksmithing.Ranks < 1750) || ($Thievery.Ranks < 1750) || ($Stealth.Ranks < 1750)) then
 		{
-      if ((%t >= %nextburgle) && (%killbeforeleave != 1) then
+      if ((%t >= %nextburgle) && (%killbeforeleave != 0) then
       {
         gosub BURGLERECALL
         if (%t >= %nextburgle) then
