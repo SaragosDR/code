@@ -1,25 +1,235 @@
-var storage rucksack
-var craftingstorage crafting satchel
-var hammer diagonal-peen hammer
-var tongs tongs
-var shovel shovel
-var bellows bellows
-var oil oil
-var rod stirring rod
 
-var scissors scissors
-var sewingneedles sewing needles
-var pins pins
-var slickstone slickstone
-var yardstick yardstick
-var knittingneedles knitting needles
-var awl awl
 var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
-
 var disciplines weaponsmithing|armorsmithing|blacksmithing|tailoring|knitting
 var difficulties easy|challenging|hard
 
+action var product $2; var quantity $3; var quality $4; var timelimit $5 when \w+ shuffles through some notes and says, "Alright, this is an order for (a|an|some) (.*)\. I need (\d+) (finely-crafted|of superior quality|of exceptional quality), made from any material and due in (\d+) roisaen\.
+#Juln shuffles through some notes and says, "Alright, this is an order for thick metal tinker's tools. I need 4 of superior quality, made from any material and due in 165 roisaen.  Please complete the items, bundle them with your logbook and then give me the logbook to complete this order.  Good luck!"
+action var chapter $1 when You seem to recall this item being somewhere in chapter (\d+) of the instruction book\.
+action var volume $1 when \(1\) refined metal ingot \((\d+) volume\)
+action var polelong $1 when \((\d+)\) finished long wooden pole
+action var poleshort $1 when \((\d+)\) finished short wooden pole
+action var haft $1 when \((\d+)\) finished wooden haft
+action var hilt $1 when \((\d+)\) finished wooden hilt
+action var cordshort $1 when \((\d+)\) finished short leather cord
+action var handle $1 when \((\d+)\) finished metal shield handle
+action var boss $1 when \((\d+)\) finished metal shield boss
+action var padlarge $1 when \((\d+)\) finished large cloth padding
+action var padsmall $1 when \((\d+)\) finished small cloth padding
+action var backinglarge $1 when \((\d+)\) finished large leather backing
+action var backingsmall $1 when \((\d+)\) finished small leather backing
+
+action math expenses add $1; echo expenses: %expenses; var currency $2 when The attendant says, "You can purchase \w+ \w+ \w+ \w+ for (\d+) (Kronars|Lirums|Dokoras)\.
+action math expenses add $1; echo expenses: %expenses; var currency $2 when You decide to purchase the \w+, and pay the sales clerk (\d+) (Kronars|Lirums|Dokoras)\.
+action var revenue $1; echo revenue: %revenue; var currency $2 when You hand \w+ your logbook and bundled items, and are given (\d+) (Kronars|Lirums|Dokoras) in return\.
+
 goto CRAFTLIBEND
+
+#####VARIABLE_SUBS#####
+AREAVARINIT:
+  #SHARD
+  if ($zoneid = 67) then
+  {
+    if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then
+    {
+      var mastername Serric
+      var masterrange 644|645|649|650|653|654|655|658|646|661|800
+      var suppliesroom 658
+      var bulkroom 800
+      var toolroom 653
+      var partsroom 653
+      var repairroom 650
+      var cruciblerange 659|656|651|647
+      var anvilrange 660|657|652|648
+    }
+  }
+  #HIB
+  if ($zoneid = 116) then
+  {
+    if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then
+    {
+      var mastername Juln
+      var masterrange 401|402|403|404|405|406|407|408|409|410|411|412|413
+      var suppliesroom 409
+      var bulkroom 0
+      var toolroom 407
+      var partsroom 407
+      var repairroom 402
+      var cruciblerange 403|404|405|406
+      var anvilrange 410|411|412|413
+    }
+  }
+  return
+
+CRAFTVARLOAD:
+  var crafting $m%varsetcrafting
+  var craftingstorage $m%varsetcraftingstorage
+  var forging $m%varsetforging
+  var forgingdifficulty $m%varsetforgingdifficulty
+  var forgingmaterial $m%varsetforgingmaterial
+  var forgingprivateroom $m%varsetforgingprivateroom
+  var forgingmaxvolumes $m%varsetforgingmaxvolumes  
+  var forgingmaxquantity $m%varsetforgingmaxquantity
+  var forgingsmelting $m%varsetforgingsmelting
+  
+  var awl $m%varsetawl
+  var bellows $m%varsetbellows
+  var hammer $m%varsethammer
+  var knittingneedles $m%varsetknittingneedles
+  var scissors $m%varsetscissors
+  var sewingneedles $m%varsetsewingneedles
+  var shovel $m%varsetshovel
+  var slickstone $m%varsetslickstone
+  var rod $m%varsetrod
+  var tongs $m%varsettongs
+  var yardstick $m%varsetyardstick
+  return
+
+#####WORKORDER_SUBS#####
+
+WORKORDER:
+  #ACQUIRE_TASK
+  var expenses 0
+  var revenue 0
+  var mindstatebegin $Forging.LearningRate
+  var timebegin $gametime
+  gosub FINDMASTER
+  gosub TASKACQUIRE
+  gosub PUTITEM %discipline book in %craftingstorage
+  put #echo Yellow Work Order: %quantity %product %quality in %timelimit roisaen.
+  put #echo Yellow Volumes: %totalvolume
+  put #echo Yellow CordLong: %totalcordlong.....CordShort: %totalcordshort
+  put #echo Yellow Hafts: %totalhaft.....Hilts: %totalhilt
+  put #echo Yellow Long Poles: %totalpolelong.....Short Poles: %totalpoleshort
+  put #echo Yellow Handles: %totalhandle.....Bosses: %totalboss
+  put #echo Yellow PadLarge: %totalpadlarge.....PadSmall: %totalpadsmall
+  put #echo Yellow BackingLarge: %totalbackinglarge.....BackingSmall: %totalbackingsmall
+  
+  #MATERIALS_PURCHASE
+  #CHECKING_EXISTING_INGOT
+  var goodingot 0
+  gosub INGOTCHECK
+  if (%goodingot != 1) then
+  {
+    #PURCHASING_INGOTS
+    var ingotsused 0
+    gosub ORDERBULK
+    if (%smelting = 1) then gosub ORDERMATERIALS
+    if (%ingotsused = 0) then
+    {
+      put #echo Yellow Could not find a combination of ingots to use when smelting is %smelting.
+      exit
+    }
+  }
+  else
+  {
+    var ingotsused 1
+    put #echo Yellow Had a big enough ingot already!
+  }
+  #PURCHASING_PARTS
+  gosub ORDERPARTS
+  
+  #SMELTING
+  put #echo Yellow IngotsUsed: %ingotsused
+  if (%ingotsused > 1) then
+  {
+    if (%smelting = 1) then
+    {
+      gosub FINDCRUCIBLE
+      if (%foundcrucible = 0) then
+      {
+        put #echo Yellow No free crucibles!
+        put store default %storage
+        exit
+      }
+      gosub SMELTPUT %material
+      gosub SMELT
+    }
+    else
+    {
+      put #echo Yellow needed more than one ingot, but smelting is turned off!
+      put store default %storage
+      exit
+    }
+  }
+  #CRAFTING
+  gosub FINDANVIL
+  if (%foundanvil = 0) then
+  {
+    put #echo Yellow No free anvils!
+    put store default %storage
+    exit
+  }
+  gosub GETITEM %discipline book
+  gosub CRAFTING
+  gosub FINDMASTER  
+  gosub GETITEM logbook from my %craftingstorage
+  put #echo righthandnoun: $righthandnoun
+  if (!matchre("$righthandnoun", "logbook")) then
+  {
+    put #echo %alertwindow Yellow Could not find logbook!  Ending crafting.
+    put #echo Yellow Could not find logbook!  Ending crafting.
+    exit
+  }
+  gosub GIVEMASTERLOG %mastername
+  gosub PUTITEM logbook in my %craftingstorage
+  put #echo Yellow Crafting complete!
+  var profit %revenue
+  math profit subtract %expenses
+  var mindstatetotal $Forging.LearningRate
+  math mindstatetotal subtract %mindstatebegin
+  var timetotal $gametime
+  math timetotal subtract %timebegin
+  put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material.  Revenue: %revenue - Expenses: %expenses = Profit: %profit.  Mindstates gained: %mindstatetotal in %timetotal seconds.
+  return
+
+INGOTCHECK:
+  gosub GETITEM %material ingot in my %craftingstorage
+  if ("$righthand" = "Empty") then return
+  action (ingotcheck) var ingotvolume $1 when About (\d+) volume of metal was used in this item's construction\.
+  gosub ANALYZECRAFT %material ingot
+  action (ingotcheck) off
+  put #echo Yellow ingotvolume: %ingotvolume
+  if (%ingotvolume >= %totalvolume) then
+  {
+    gosub PUTITEM ingot in my %craftingstorage
+    var goodingot 1
+    return
+  }
+  else
+  {
+    gosub FINDCRUCIBLE
+    gosub DUMPITEM %material ingot
+    goto INGOTCHECK
+  }
+
+COUNTINGOT:
+  var ingotcount 0
+COUNTINGOTP:
+  pause
+COUNTINGOTMAIN:
+  matchre COUNTINGOTPO %waitstring
+  matchre COUNTINGOTGOOD About (\d+) volumes of material make up the \w+ ingot\.
+  matchre COUNTINGOTGOOD About (\d+) volume of material make up the \w+ ingot\.
+  
+  put count my ingot
+  matchwait
+  
+COUNTINGOTGOOD:
+  var ingotcount $0
+  return
+
+ANALYZECRAFT:
+  var analyzestring $0
+  goto ANALYZECRAFTMAIN
+ANALYZECRAFTP:
+  pause
+ANALYZECRAFTMAIN:
+  matchre ANALYZECRAFTP %waitstring
+  match RETURN Roundtime:
+  put analyze my %analyzestring
+  matchwait
+
 
 #####CORE_CRAFTING#####
 CRAFTING:
@@ -215,7 +425,7 @@ TAILORMAIN:
     if ("$righthandnoun" != "pins") then
     {
       if ("$righthand" != "Empty") then gosub PUTITEM my $righthandnoun in my %craftingstorage
-      gosub GETITEM %pins in my %craftingstorage
+      gosub GETITEM straight pins in my %craftingstorage
       if ("$righthandnoun" != "pins") then gosub NEWPINS
     }
   }
@@ -269,7 +479,7 @@ TAILORMAIN:
     else put cut my %product with my %scissors
   }
   if ("%craftaction" = "awl") then put poke my %product with my %awl
-  if ("%craftaction" = "pins") then put poke my %product with my %pins
+  if ("%craftaction" = "pins") then put poke my %product with my straight pins
   if ("%craftaction" = "sew") then put push my %product with my %sewingneedles
   if ("%craftaction" = "slickstone") then put rub my %product with my %slickstone
   if ("%craftaction" = "yardstick") then put measure my %product with my %yardstick
@@ -310,7 +520,7 @@ NEWPINS:
   if ($roomid != %toolroom) then gosub MOVE %toolroom
   #gosub DUMPITEM %product
   gosub CRAFTINGORDER 5
-  #gosub PUTITEM pins in my %craftingstorage
+  #gosub PUTITEM straight pins in my %craftingstorage
   if ($roomid != %workroom) then gosub MOVE %workroom
   goto TAILORMAIN
 
@@ -769,7 +979,7 @@ FINDMASTER:
   var findmastercount 0
   var foundmaster 0
   eval masterrangecount count("%masterrange", "|")
-  echo masterrangecount: %masterrangecount
+  #echo masterrangecount: %masterrangecount
   if (!matchre("$roomobjs", "Forging Society Master")) then gosub FINDMASTERLOOP
   return
 
@@ -1341,24 +1551,24 @@ CRAFTTICKETLOOPMAIN:
     #echo No ticket!  Moving on.
     return
   }
-  gosub GIVETICKET
+  gosub GIVETICKETCRAFT
   gosub PUTITEM $righthand in my %craftingstorage
   goto CRAFTTICKETLOOPMAIN
 
-GIVETICKETP:
+GIVETICKETCRAFTP:
   pause
-GIVETICKET:
-  matchre GIVETICKETP %waitstring
+GIVETICKETCRAFT:
+  matchre GIVETICKETCRAFTP %waitstring
   matchre RETURN ^You hand (%repairer) your ticket and are handed back|After a moment, he returns and hands you
 	matchre CRAFTWAITREPAIR ^\w* smiles and says
 	matchre CRAFTWAITREPAIR ^\w* grumbles\, \"Well that isn't gonna be done for another
-	matchre GIVETICKETP ^\w+ grumbles, \"Well that is almost done, just give me a few more moments here\.\"
-	match GIVETICKET What is it you're trying to give?
+	matchre GIVETICKETCRAFTP ^\w+ grumbles, \"Well that is almost done, just give me a few more moments here\.\"
+	match GIVETICKETCRAFT What is it you're trying to give?
 	put give %repairer
 	matchwait
 
 CRAFTWAITREPAIR:
 	pause 60
-	goto GIVETICKET
+	goto GIVETICKETCRAFT
 
 CRAFTLIBEND:

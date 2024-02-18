@@ -4,6 +4,7 @@
 ########################################
 
 include library.cmd
+include craftlibrary.cmd
 include custom.cmd
 
 #ScriptMode -1 = Help
@@ -538,7 +539,7 @@ ALERTINIT:
   {
     if ((%bugout = "YES") && (%scriptmode = 1)) then
     {
-      action if %buggingout = 0 then goto BUGOUT; if $concentration < %lastconc then put #play Echo; if $concentration < %lastconc then put #flash; if $concentration < %lastconc then put #echo %alertwindow Yellow [Khri]: Possible Khri crash.  Bugging out!; var lastconc $concentration when eval $concentration <= 10
+      action if %buggingout = 0 then goto BUGOUT; if $concentration < %lastconc then put #play Echo; if $concentration < %lastconc then put #flash; if $concentration < %lastconc then put #echo %alertwindow Yellow [Khri]: Possible Khri crash.  Bugging!; var lastconc $concentration when eval $concentration <= 10
     }
     else
     {
@@ -1664,11 +1665,12 @@ SETUP:
   gosub MAINVARLOAD
   gosub MULTIVARLOAD
   gosub GUILDVARLOAD
-  if %multitrain != "YES" then gosub COMMANDPARSE
+  if ("%multitrain" != "YES") then gosub COMMANDPARSE
   else var scriptmode 1
   gosub ALERTINIT
   gosub WEAPONVARLOAD
-  gosub MAGICVARLOAD 
+  gosub MAGICVARLOAD
+  gosub CRAFTVARLOAD 
   gosub VALIDROOMCHECK
   return
 
@@ -3665,7 +3667,7 @@ UPKEEPLOGIC:
   if ((%bundlevault = "YES") || (%gemvault = "YES")) then
   {
     if %hasvault = 0 then var outputtext %outputtext, no vault at this location
-    if %hasvault = -1 then var outputtext %outputtext, not your preferred vault town
+    if %hasvault = -1 then var outputtext %outputtext, not your vault town
     else
     {
       if %bundlevault = "YES" then
@@ -3685,6 +3687,21 @@ UPKEEPLOGIC:
     if (%boughtammo = 1) then var outputtext %outputtext, topped up on ammo
     else var outputtext %outputtext, did not need ammo
   }
+  if ("%lockpickbuy" = "YES") then
+  {
+    if ("%lockpickbuytown" = "%townname") then
+    {
+      if (%boughtlockpick = 1) then var outputtext %outputtext, bought lockpicks
+      else var outputtext %outputtext, did not need lockpicks
+    }
+    else var outputtext %outputtext, not your lockpick town
+  }
+  if ("%boxpopping" = "YES") then
+  {
+    if (%poppedboxes = 1) then var outputtext %outputtext, popped boxes
+    if (%poppedboxes = 0) then var outputtext %outputtext, no boxes to pop
+    if (%poppedboxes = -1) then var outputtext %outputtext, not a valid town to pop boxes in
+  }
   if ((%exchange = "YES") && (%hasbank = 1)) then var outputtext %outputtext, exchanged extra cash
   if ((%minmoney > 0) && (%hasbank = 1)) then var outputtext %outputtext, deposited cash, kept MinMoney
   if (("$guild" = "Paladin") && (%tithe = "YES") && (%almsbox = 1)) then
@@ -3692,7 +3709,7 @@ UPKEEPLOGIC:
     if %tithesuccess = 1 then var outputtext %outputtext, successfully tithed
     else var outputtext %outputtext, unable to tithe
   }
-  if %appfocus = "YES" then
+  if ("%appfocus" = "YES") then
   {
     if %appfocusdone = 1 then var outputtext %outputtext, performed app focus
     else var outputtext %outputtext, app Focus not complete
@@ -4353,6 +4370,7 @@ HEALERUSE:
 
 #####LOCKSMITHING_LOGIC#####
 BOXPOPPINGLOGIC:
+  var poppedboxes -1
   if (%boxpoproom = 0) then return
   if ($roomid != %boxpoproom) then
   {
@@ -4366,6 +4384,7 @@ BOXPOPPINGLOGIC:
   gosub BOXSTORAGECHECK
   if (%foundboxes = 1) then
   {
+    var poppedboxes 1
     if (("$guild" != "Thief") && ("$guild" != "Barbarian") then
     {
       echo boxpopbuff: %boxpopbuff
@@ -4444,6 +4463,10 @@ BOXPOPPINGLOGIC:
         gosub KHRISTOP sight plunder safe focus hasten
       }
     }
+  }
+  else
+  {
+    var poppedboxes 0
   }
   return
       }
@@ -4649,11 +4672,15 @@ REPAIRLIST:
   else var actualrepairer %repairer
   matchre REPAIRLISTP %waitstring
   matchre NOMONEY You will need more coin if I am to be repairing that!
-  matchre REPAIRLISTSTOW I will not repair something that isn't broken|I'm sorry, but I don't work on those.|Lucky for you!  That isn't damaged!|Read the sign on the wall!|There isn't a scratch on that,|Read the hide on the wall, please|Please don't lose the ticket|Please don't lose this ticket|Read the sign please\!|The apprentice repairman frowns and says|\w+ smiles and says
+  matchre REPAIRLISTSTOW I will not repair something that isn't broken|I'm sorry, but I don't work on those.|Lucky for you!  That isn't damaged!|Read the sign on the wall!|There isn't a scratch on that,|Read the hide on the wall, please|Please don't lose the ticket|Please don't lose this ticket|Read the sign please\!|The apprentice repairman frowns and says|\w+ smiles and says|Lakyan frowns and says, "I don't repair those here\."
   match REPAIRLIST What is it you're trying to give?
   put give %actualrepairer
   put give %actualrepairer
-  matchwait
+  matchwait 5
+  var timeoutsub REPAIRLIST
+  var timeoutcommand give %actualrepairer
+	goto TIMEOUT
+
 
 REPAIRLISTSTOW:
   gosub STOWALL
@@ -4978,6 +5005,7 @@ LOCKPICKBUYLOOP:
     return
   }
   math lockbuycount add 1
+  var boughtlockpick 1
   goto LOCKPICKBUYLOOP
   
 LOCKPICKCOUNTP:
@@ -4990,8 +5018,11 @@ LOCKPICKCOUNT:
   matchre LOCKPICKCOUNTEMPTY The \w+ \w+ is empty but you think (\d+) lockpicks would probably fit\.
   matchre LOCKPICKCOUNTBAD It looks like a \w+ \w+\.
   match BADLOCKPICKSTACKER I could not find what you were referring to.
-  put glance my %lockpickstacker
-  matchwait
+  put appraise my %lockpickstacker
+  matchwait 5
+  var timeoutsub LOCKPICKCOUNT
+  var timeoutcommand appraise my %lockpickstacker
+	goto TIMEOUT
   
 LOCKPICKCOUNTFULL:  
   var lockpickscurrent $1
@@ -5013,7 +5044,9 @@ LOCKPICKCOUNTBAD:
   return
 
 BADLOCKPICKSTACKER:
-  
+  put #echo %alertwindow [Upkeep]: Unable to find lockpick stacker.  Turning off lockpick buying!
+  var lockpickbuy NO
+  put #var m%varsetlockpickbuy NO
   return
 
 UPKEEPZONEMOVE:
@@ -5832,10 +5865,10 @@ BURGLELOGIC:
   gosub BURGLETOOLGET
   gosub BURGLEGUARDCHECK
   if %scriptmode = 4 then gosub UPKEEPSET
-  gosub BURGLESTART
+  gosub BURGLE
   if %justice != 1 then goto BURGLEEND
   if %arrested != 0 then goto BURGLEARRESTED
-  gosub BURGLETOOLSTOW
+  gosub STOWALL
   gosub BURGLELOOP
   gosub BURGLELEAVE
   if %arrested = 0 then gosub BURGLEEXIT
@@ -5942,56 +5975,43 @@ BURGLEGUARDCHECK:
   else return
   goto BURGLEGUARDCHECK
 
-BURGLESTARTP:
-  pause
-BURGLESTART:
-  if (($invisible = 0) && ($hidden = 0)) then gosub HIDE
-  matchre BURGLESTARTP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
-  match RETURN You make short work of the lock on the window and slip inside.
-  match RETURN You scale up the side of a wall, quickly slipping inside.
-  match RETURN With aid from your group, you scale up the side of a wall, quickly disabling the lock on the window and slip inside, leaving a rope for your group to follow.
-  match RETURN Before you really realize what's going on, your hands are firmly bound behind you and you are marched off.
-  match BURGLEBAD You don't see any likely marks in the area.
-  put burgle
-  matchwait
 
 BURGLETOOLGET:
-  if $Locksmithing.Ranks >= 1750 then var burgletoolchosen rope
+  if ($Locksmithing.Ranks >= 1750) then var burgletoolchosen rope
   else
   {
-    if $Athletics.Ranks >= 1750 then var burgletoolchosen pick
+    if ($Athletics.Ranks >= 1750) then var burgletoolchosen pick
   }
-  if %burgletool = "rope" then var burgletoolchosen rope
-  if %burgletool = "pick" then var burgletoolchosen pick
-  if %burgletool = "both" then
+  if ("%burgletool" = "rope") then var burgletoolchosen rope
+  if ("%burgletool" = "pick") then var burgletoolchosen pick
+  if ("%burgletool" = "both") then
   {
-    if $Locksmithing.LearningRate < $Athletics.LearningRate then var burgletoolchosen pick
+    if ($Locksmithing.LearningRate < $Athletics.LearningRate) then var burgletoolchosen pick
     else var burgletoolchosen rope
   }
-  if %burgletoolchosen = "pick" then
+  if ("%burgletoolchosen" = "pick") then
   {
-    if %burglepickworn != "YES" then
+    if ("%burglepickworn" != "YES") then
     {
       var burgletoolchosen pick
       gosub GETITEM %burglepickitem
+      if ("$righthandnoun" = "lockpick") then
+      {
+        put #echo %alertwindow Yellow Could not get the lockpick for burgling!  Please investigate!
+      }
     }
   }
-  if %burgletoolchosen = "rope" then 
+  if ("%burgletoolchosen" = "rope") then 
   {
     var burgletoolchosen rope
     gosub GETITEM %burgleropeitem
-    #if $righthandnoun = "rope" then gosub UNCOILROPE
+    if ("$righthandnoun" = "rope") then
+    {
+      put #echo %alertwindow Yellow Could not get the rope for burgling!  Please investigate!
+    }
   }
   return
-
-BURGLETOOLSTOW:
-  #if %burgletoolchosen = "rope" then gosub COILROPE
-  gosub STOWALL
-  return
-
-BURGLEBAD:
-  var justice 0
-  return
+  
 
 BURGLELOOP:
   if %grabs >= %burglemaxgrabs then var footsteps 1
@@ -6153,38 +6173,6 @@ BURGLEKEEPLISTCHECK:
   math miscgetcounter add 1
   goto BURGLEKEEPLISTCHECK
 
-
-BURGLESTEALP:
-  pause
-BURGLESTEAL:
-  matchre BURGLESTEALP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
-  match RETURN Roundtime
-  matchre RETURN I could not find what you were referring to\.|You've already picked the counter clean\.
-  put search %surface
-  matchwait
-
-BURGLERECALLP:
-  pause
-BURGLERECALL:
-  matchre BURGLERECALLP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
-  match BURGLERECALLGOOD The heat has died down from your last caper.
-  matchre RETURN You should wait at least \d* roisaen for the heat to die down\.
-  put burgle recall
-  matchwait
-
-BURGLERECALLGOOD:
-  if (($Athletics.Ranks >= 1750) && ($Locksmithing.Ranks >= 1750) && ($Thievery.Ranks >= 1750) && ($Stealth.Ranks >= 1750)) then var burgleready 0
-  else var burgleready 1
-  return
-
-BURGLEEXITP:
-  pause
-BURGLEEXIT:
-  matchre BURGLEEXITP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
-  match RETURN You take a moment to reflect on the caper you just pulled as you slip out the kitchen window...
-  match RETURN Just as you get clear of the window, you see a guard approaching.  Too late now.
-  put go window
-  matchwait
 
 BURGLEARRESTED:
   if %arrested = 1 then
@@ -8817,7 +8805,7 @@ NONCOMBATLOGIC:
 	var movetrainburgleactive 0
 	var movetrainsellactive 0
 	var movetraintasksactive 0
-	if %perform = "YES" then
+	if ("%perform" = "YES") then
 	{
 		if $Performance.LearningRate > 20 then var performlock 1
 		if $Performance.LearningRate < 4 then var performlock 0
@@ -8832,7 +8820,7 @@ NONCOMBATLOGIC:
 	{
 	  if (($Athletics.Ranks < 1750) || ($Locksmithing.Ranks < 1750) || ($Thievery.Ranks < 1750) || ($Stealth.Ranks < 1750)) then
 		{
-      if (%t >= %nextburgle) then
+      if ((%t >= %nextburgle) && (%killbeforeleave != 1) then
       {
         gosub BURGLERECALL
         if (%t >= %nextburgle) then
@@ -8868,7 +8856,7 @@ NONCOMBATLOGIC:
 	}
 	
 	#EXECUTING_NONCOMBAT_TRAIN
-	if %movetrainactive = 1 then
+	if (%movetrainactive = 1) then
 	{
 	  #KILL_BEFORE_MOVE
 	  if ("%killbeforemove" = "YES") then
@@ -8885,7 +8873,7 @@ NONCOMBATLOGIC:
         }
       }
       ##KILL_NEXT
-      if %killbeforeleave != 1 then return
+      if (%killbeforeleave != 1) then return
 		  var killbeforeleave -1
 		}
 		
@@ -12200,9 +12188,9 @@ BUGOUT:
 
 BUGOUTLOOP:
   #gosub BUGOUTCUSTOM
-  if $bleeding = 1 then
+  if ($bleeding = 1) then
   {
-    if %t > %nextbleed then gosub BLEEDCHECK
+    if (%t > %nextbleed) then gosub BLEEDCHECK
   }
   pause 1
   goto BUGOUTLOOP

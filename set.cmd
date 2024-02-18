@@ -977,6 +977,11 @@ SET:
     if tolower("%1") = "forging" then goto YESNOSET
     if tolower("%1") = "forgingdifficulty" then goto TEXTSET
     if tolower("%1") = "forgingmaterial" then goto TEXTSET
+    if tolower("%1") = "forgingrepair" then goto YESNOSET
+    if tolower("%1") = "forgingprivateroom" then goto YESNOSET
+    if tolower("%1") = "forgingmaxvolumes" then goto TEXTSET
+    if tolower("%1") = "forgingmaxquantity" then goto TEXTSET
+    if tolower("%1") = "forgingsmelting" then goto YESNOSET
     if tolower("%1") = "awl" then goto TEXTSET
     if tolower("%1") = "bellows" then goto TEXTSET
     if tolower("%1") = "hammer" then goto TEXTSET
@@ -2380,6 +2385,11 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT Forging
   gosub OUTPUT ForgingDifficulty
   gosub OUTPUT ForgingMaterial
+  gosub OUTPUT ForgingRepair
+  gosub OUTPUT ForgingPrivateRoom
+  gosub OUTPUT ForgingMaxVolumes
+  gosub OUTPUT ForgingMaxQuantity
+  gosub OUTPUT ForgingSmelting
   put #echo
 	gosub OUTPUT awl bellows
 	gosub OUTPUT hammer knittingneedles
@@ -3504,6 +3514,11 @@ VARCOPYNONCOMBAT:
   put #var m%destforging $m%sourceforging
   put #var m%destforgingdifficulty $m%sourceforgingdifficulty
   put #var m%destforgingmaterial $m%sourceforgingmaterial
+  put #var m%destforgingrepair $m%sourceforgingrepair
+  put #var m%destforgingprivateroom $m%sourceforgingprivateroom
+  put #var m%destforgingmaxvolumes $m%sourceforgingmaxvolumes
+  put #var m%destforgingmaxquantity $m%sourceforgingmaxquantity
+  put #var m%destforgingsmelting $m%sourceforgingsmelting
   put #var m%destawl $m%sourceawl
   put #var m%destbellows $m%sourcebellows
   put #var m%desthammer $m%sourcehammer

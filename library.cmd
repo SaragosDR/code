@@ -1659,6 +1659,13 @@ VARCHECKS:
   if !matchre("$m%checkmodeforging", "\b(YES|NO)\b") then put #var m%checkmodeforging NO
   if !matchre("$m%checkmodeforgingdifficulty", "\b(easy|challenging|hard)\b") then put #var m%checkmodeforgingdifficulty challenging
   if !def(m%checkmodeforgingmaterial) then put #var m%checkmodeforgingmaterial bronze
+  if !matchre("$m%checkmodeforgingrepair", "\b(YES|NO)\b") then put #var m%checkmodeforgingrepair YES
+  if !matchre("$m%checkmodeforgingprivateroom", "\b(YES|NO)\b") then put #var m%checkmodeforgingprivateroom NO
+  if $m%checkmodeforgingmaxvolumes >= 0 then
+  else put #var m%checkmodeforgingmaxvolumes 200
+  if $m%checkmodeforgingmaxquantity >= 0 then
+  else put #var m%checkmodeforgingmaxquantity 4
+  if !matchre("$m%checkmodeforgingsmelting", "\b(YES|NO)\b") then put #var m%checkmodeforgingsmelting YES
   if !def(m%checkmodeawl) then put #var m%checkmodeawl awl
   if !def(m%checkmodebellows) then put #var m%checkmodebellows leather bellows
   if !def(m%checkmodehammer) then put #var m%checkmodehammer diagonal-peen hammer
@@ -3053,6 +3060,86 @@ RECONNECTLOOP:
   goto RECONNECTLOOP
 
 
+####THIEVERY_SUBS####
+
+BURGLEP:
+  pause
+BURGLE:
+  if (($invisible = 0) && ($hidden = 0)) then gosub HIDE
+  matchre BURGLEP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
+  match BURGLEPICKRETURN You make short work of the lock on the window and slip inside.
+  match BURGLEATHRETURN You scale up the side of a wall, quickly slipping inside.
+  match RETURN With aid from your group, you scale up the side of a wall, quickly disabling the lock on the window and slip inside, leaving a rope for your group to follow.
+  match RETURN Before you really realize what's going on, your hands are firmly bound behind you and you are marched off.
+  match BURGLENOTOOL And how were you planning to get in?
+  match BURGLEBAD You don't see any likely marks in the area.
+  put burgle
+  matchwait 5
+  var timeoutsub BURGLE
+  var timeoutcommand burgle
+	goto TIMEOUT
+
+BURGLEATHRETURN:
+  if ("%burgletoolchosen" = "pick") then
+  {
+    put #echo %alertwindow Yellow Climbed to burgle when you were meant to use a pick!  Please investigate!
+  }
+  return
+  
+BURGLEPICKRETURN:
+  if ("%burgletoolchosen" = "rope") then
+  {
+    put #echo %alertwindow Yellow Picked to burgle when you were meant to use a rope!  Please investigate!
+  }
+  return
+
+BURGLENOTOOL:
+  if (("%burgletoolchosen" = "rope") || ("%burgletoolchosen" = "pick")) then
+  {
+    put #echo %alertwindow Yellow Failed to burgle because you had no tool!  Turning off burgling.  Please investigate.
+    var burgle NO
+    put #var burgle NO
+  }
+  return
+
+BURGLEBAD:
+  var justice 0
+  return
+
+
+BURGLESTEALP:
+  pause
+BURGLESTEAL:
+  matchre BURGLESTEALP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
+  match RETURN Roundtime
+  matchre RETURN I could not find what you were referring to\.|You've already picked the counter clean\.
+  put search %surface
+  matchwait
+
+
+BURGLERECALLP:
+  pause
+BURGLERECALL:
+  matchre BURGLERECALLP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
+  match BURGLERECALLGOOD The heat has died down from your last caper.
+  matchre RETURN You should wait at least \d* roisaen for the heat to die down\.
+  put burgle recall
+  matchwait
+
+BURGLERECALLGOOD:
+  if (($Athletics.Ranks >= 1750) && ($Locksmithing.Ranks >= 1750) && ($Thievery.Ranks >= 1750) && ($Stealth.Ranks >= 1750)) then var burgleready 0
+  else var burgleready 1
+  return
+
+
+BURGLEEXITP:
+  pause
+BURGLEEXIT:
+  matchre BURGLEEXITP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
+  match RETURN You take a moment to reflect on the caper you just pulled as you slip out the kitchen window...
+  match RETURN Just as you get clear of the window, you see a guard approaching.  Too late now.
+  put go window
+  matchwait
 
 
 MARKP:
@@ -3920,7 +4007,11 @@ SWAPNERVES:
   }
   else
   {
-    if ("%bugout" = "YES") then goto BUGOUT
+    if ("%bugout" = "YES") then
+    {
+      put #echo >$alertwindow Yellow Tried to swap weapons, but you're too injured!  Please address!
+      goto BUGOUT
+    }
     else goto SWAPTOOINJURED
   }
 
@@ -9094,7 +9185,7 @@ TASKGIVEMAGS:
   matchwait 5
   var timeoutsub TASKGIVEMAGS
   var timeoutcommand give mags
-	goto TIMEOU
+	goto TIMEOUT
   
 TASKGIVEGOOD:
   var givingdone 1
