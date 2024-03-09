@@ -1,3 +1,15 @@
+03/08/2024
+Updated Scripts: train, library, set, craft, craftlibrary, workorder
+Forging is implemented!  Check the NonCombat section for related variables and the Movement section to choose where to forge at.  Currently, only Crossing, Shard, Hibarnhvidar, and Mer'kresh forges are implemented.
+
+Additional checks put in to help the script properly recognize when you've died.
+Changed collecting to use new COLLECT PRACTICE.
+Burgle, Pawn, and Perform town variables have been renamed as part of a simplification of movement mechanics.  Please reset these variables after updating.
+None is now no longer an option for town settings, and Crossing is the default.  This is part of a broader move into relying on the presets and not manual settings for movement, as the presets are working very well.
+More bugfixes to repair ticket code in Fang Cove.
+Script will now ensure that the container specified in the Storage variable is your default container at launch.
+
+
 02/17/2024
 Updated Scripts: train, library, set, craft, craftlibrary
 Box popping and lockpick buying now properly report in the upkeep output string.

@@ -974,8 +974,10 @@ SET:
     if tolower("%1") = "sanowretitem" then goto TEXTSET
     if tolower("%1") = "crafting" then goto YESNOSET
     if tolower("%1") = "craftingstorage" then goto TEXTSET
+    if tolower("%1") = "craftingstorageinportal" then goto YESNOSET
     if tolower("%1") = "forging" then goto YESNOSET
     if tolower("%1") = "forgingdifficulty" then goto TEXTSET
+    if tolower("%1") = "forgingdiscipline" then goto TEXTSET
     if tolower("%1") = "forgingmaterial" then goto TEXTSET
     if tolower("%1") = "forgingrepair" then goto YESNOSET
     if tolower("%1") = "forgingprivateroom" then goto YESNOSET
@@ -1120,11 +1122,11 @@ SET:
         goto END
       }
     }
-    if tolower("%1") = "burglepreset" then
+    if tolower("%1") = "burgletown" then
     {
-      if (matchre("%2", "\b(%townburglepresetlist)\b")) then
+      if (matchre("%2", "\b(%burgletownlist)\b")) then
       {  
-        var setvar burglepreset
+        var setvar burgletown
         eval input tolower(%2)  
         put #var m$varset%setvar %input
         put #var save
@@ -1132,15 +1134,15 @@ SET:
       }
       else
       {
-        put #echo mono You can only choose from %townburglepresetlist.
+        put #echo mono You can only choose from %burgletownlist.
         goto END
       }
     }
-    if tolower("%1") = "pawnpreset" then
+    if tolower("%1") = "pawntown" then
     {
-      if (matchre("%2", "\b(%pawnpresetlist)\b")) then
+      if (matchre("%2", "\b(%pawntownlist)\b")) then
       {  
-        var setvar pawnpreset
+        var setvar pawntown
         eval input tolower(%2)  
         put #var m$varset%setvar %input
         put #var save
@@ -1148,15 +1150,15 @@ SET:
       }
       else
       {
-        put #echo mono You can only choose from %pawnpresetlist.
+        put #echo mono You can only choose from %pawntownlist.
         goto END
       }
     }
-    if tolower("%1") = "performpreset" then
+    if tolower("%1") = "performtown" then
     {
-      if (matchre("%2", "\b(%townperformpresetlist)\b")) then
+      if (matchre("%2", "\b(%performtownlist)\b")) then
       {  
-        var setvar performpreset
+        var setvar performtown
         eval input tolower(%2)  
         put #var m$varset%setvar %input
         put #var save
@@ -1164,7 +1166,23 @@ SET:
       }
       else
       {
-        put #echo mono You can only choose from %townperformpresetlist.
+        put #echo mono You can only choose from %performtownlist.
+        goto END
+      }
+    }
+    if (tolower("%1") = "forgingtown") then
+    {
+      if (matchre("%2", "\b(%forgingtownlist)\b")) then
+      {  
+        var setvar forgingtown
+        eval input tolower(%2)  
+        put #var m$varset%setvar %input
+        put #var save
+        goto VARDISPLAY
+      }
+      else
+      {
+        put #echo mono You can only choose from %forgingtownlist.
         goto END
       }
     }  
@@ -2295,7 +2313,7 @@ DISPLAYCOMBAT2:
   put #echo mono  ================== Combat 2 ===================
   put #echo mono =================== Mode: $varset ===================
 	put #echo mono ===============================================
-  put #echo mono NonComDelay: $m$varsetnoncomdelay    (delays skills that require retreating until after weapons have advanced sufficiently)
+  gosub OUTPUT NonComDelay (delays skills that require retreating until after weapons have advanced sufficiently)
   put #echo mono Appraise: $m$varsetappraise
   put #echo mono AppraiseTarget: $m$varsetappraisetarget     (bundle, or creature)
   put #echo mono AppraiseTimer: $m$varsetappraisetimer     (in seconds, min is 75)
@@ -2344,7 +2362,7 @@ DISPLAYNONCOMBAT:
 	put #echo
   gosub OUTPUT Burgle
 	gosub OUTPUT BurgleStorage
-  put #echo mono BurgleTool: $m$varsetburgletool    (pick, rope, or both, which chooses tool based on learningrates.)  
+	gosub OUTPUT BurgleTool (pick, rope, or both, which chooses tool based on learningrates)  
   gosub OUTPUT BurglePickItem BurglePickWorn
   gosub OUTPUT BurgleRopeItem
   gosub OUTPUT BurgleMaxGrabs
@@ -2382,8 +2400,10 @@ DISPLAYNONCOMBAT:
   put #echo
   gosub OUTPUT Crafting
   gosub OUTPUT CraftingStorage
+  gosub OUTPUT CraftingStorageInPortal (CraftingStorage container stored in portal when not direclty in use)
   gosub OUTPUT Forging
   gosub OUTPUT ForgingDifficulty
+  gosub OUTPUT ForgingDiscipline
   gosub OUTPUT ForgingMaterial
   gosub OUTPUT ForgingRepair
   gosub OUTPUT ForgingPrivateRoom
@@ -3054,12 +3074,10 @@ DISPLAYMOVEMENT:
   put #echo
   put #echo mono =================== NonCombat Movement ===================
   put #echo
-  gosub OUTPUT BurglePreset
-  put #echo Gray mono Options: %townburglepresetlist
-	gosub OUTPUT PawnPreset
-	put #echo Gray mono Options: %pawnpresetlist
-  gosub OUTPUT PerformPreset
-  put #echo Gray mono Options: %townperformpresetlist
+  gosub OUTPUT BurgleTown (%burgletownlist)
+	gosub OUTPUT PawnTown (%pawntownlist)
+  gosub OUTPUT PerformTown (%performtownlist)
+  gosub OUTPUT ForgingTown (%forgingtownlist)
   put #echo
   return
 
@@ -3098,7 +3116,7 @@ OUTPUT:
   {
     eval parenthesesnum count("$2", "(")
     if (%parenthesesnum = 0) then
-    { 
+    {
       eval spacenum count("$0", " ")
       var displayvar2 $2
       eval lowervar2 tolower("%displayvar2")
@@ -3115,7 +3133,11 @@ OUTPUT:
     }
     else
     {
-      put #echo mono %displayvar: %actualvar     $2
+      var helpoutput $0
+      #put #echo Yellow helpoutput: %helpoutput
+      eval helpoutput replace("%helpoutput", "$1", "")
+      #put #echo Yellow helpoutput: %helpoutput
+      put #echo mono %displayvar: %actualvar     %helpoutput
     }
   }
   else put #echo mono %displayvar: %actualvar
@@ -3357,9 +3379,10 @@ VARCOPYMOVEMENT:
   put #var m%destvaulttown $m%sourcevaulttown
   put #var m%destammobuytown $m%sourceammobuytown
   put #var m%destlockpickbuytown $m%sourcelockpickbuytown
-  put #var m%destburglepreset $m%sourceburglepreset
-  put #var m%destpawnpreset $m%sourcepawnpreset
-  put #var m%destperformpreset $m%sourceperformpreset
+  put #var m%destburgletown $m%sourceburgletown
+  put #var m%destpawntown $m%sourcepawntown
+  put #var m%destperformtown $m%sourceperformtown
+  put #var m%destforgingtown $m%sourceforgingtown
   put #var save
   return
   
@@ -3511,8 +3534,10 @@ VARCOPYNONCOMBAT:
   
   put #var m%destcrafting $m%sourcecrafting
   put #var m%destcraftingstorage $m%sourcecraftingstorage
+  put #var m%destcraftingstorageinportal $m%sourcecraftingstorageinportal
   put #var m%destforging $m%sourceforging
   put #var m%destforgingdifficulty $m%sourceforgingdifficulty
+  put #var m%destforgingdiscipline $m%sourceforgingdifscipline
   put #var m%destforgingmaterial $m%sourceforgingmaterial
   put #var m%destforgingrepair $m%sourceforgingrepair
   put #var m%destforgingprivateroom $m%sourceforgingprivateroom

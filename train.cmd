@@ -377,18 +377,15 @@ ALERTINIT:
   if %alertwindow = "Main" then var alertwindow
   else var alertwindow >%alertwindow
   ##AWARENESS_TRIGGERS##
-  #action put #flash; put #play Body;put #echo %alertwindow Yellow [Health]: Dead; goto DEADWAIT when eval $dead = 1
-  #action put #flash; put #play Body;put #echo %alertwindow Yellow [Health]: Disconnected; goto DEADWAIT when eval $connected = 0
-  
-  
   if %speechalerts = "YES" then
   { 
     var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,
-    var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"
+    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,
+    var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "
     var hespeech A voice on the wind whispers|A pair of Merelew guards assist you into the water|The libik (?:shouts|yells),|The seedy monger looks up to you and|The Monger's voice booms out,|The Monger's booming voice comes from the booth,|One of the attendants glances at you and says,|One of the monger's assistants addresses you, saying,|^An attendant in an otter costume exclaims|\w+ chants, "C'mon! I feel the luck of Eluned smiling on you all!
-    var speechwhitelist %generalspeech|%ferryspeech|%monsterspeech|%spellspeech|%hespeech
+    var speechwhitelist %generalspeech|%craftingspeech|%ferryspeech|%monsterspeech|%spellspeech|%hespeech
     var namementionwhitelist Welcome back, (Sir|Madam)|Farewell, (Sir|Madam)|Take care, (Sir|Madam)|Thanks,|Thank you very much,
     action (speech) var speechspeaker $1; var speechtext $2; var speechdiff2 %t; math speechdiff2 subtract %lastspeech; var speechdiff %speechdiff2 when ^(?!%speechwhitelist)(.{0,40}).*\, "(?!Say Ahh!)(.+)"
     action (speech) put #echo %alertwindow Yellow [Speech] %speechspeaker...; put #play Speech; put #flash; var lastspeech %t when eval %speechdiff >= 1
@@ -493,7 +490,8 @@ ALERTINIT:
     action put #flash; put #play JustArrived;put #echo %alertwindow Yellow [Health]: Stunned when stunning you
     action put #flash; put #play JustArrived;put #echo %alertwindow [Health]: Stunned when dealing you a vicious stun.
     #action put #flash; put #play JustArrived;put #echo %alertwindow [Health]: Stunned when You are still stunned.
-    action put #flash; put #play Body;put #echo %alertwindow Yellow [Health]: Dead; #send avoid all;#flash; goto DEADWAIT when ^Your death cry echoes in your brain
+    action put #flash; put #play Body;put #echo %alertwindow Yellow [Health]: Dead; #send avoid all;#flash; goto DEADLOGIC when ^Your death cry echoes in your brain
+    action put #flash; put #play Body; put #echo %alertwindow Yellow [Health]: Dead; goto DEADLOGIC when DEAD> 
     action if $health < %lasthealth then put #flash; if $health < %lasthealth then put #play Advance; if $health < %lasthealth then put #echo %alertwindow Yellow [Health]: Low Health; var lasthealth $health when eval $health <= %healthalertnum
     action put #flash; put #play Advance;put #echo %alertwindow Yellow [Health]: Infection;var infection 1;var nexthealcheck 0 when You feel a wave of nausea rising from your gut as you notice a sickly green fluid oozing from
     action put #flash; put #play Advance;put #echo %alertwindow Yellow [Health]: Infection - Infection;var infection 1;var nexthealcheck 0 when Your wounds are infected.
@@ -1726,6 +1724,7 @@ STATUSVARLOAD:
   var empathylock 0
   var expertlock 0
   var firstaidlock 0
+  var forginglock 0
   var locksmithinglock 0
   var offhandlock 0
   var outdoorlock 0
@@ -1818,6 +1817,7 @@ STATUSVARLOAD:
   var nextwhistle 0
   var nextwind 0
   var nextspelltracking 0
+  var privateroomuntil 0
   var gbuff1next 0
   var gbuff2next 0
   var gbuff3next 0
@@ -1926,6 +1926,7 @@ STATUSVARLOAD:
   var firstmanip 1
   var firstrel 1
   var firstskinfatrain 1
+  var firststoragecheck 1
   var firststowall 1
   var firstteach 1
   var fissure 0
@@ -2001,6 +2002,7 @@ STATUSVARLOAD:
   var usingbow 0
   var usingdebiltm 0
   var usingexpert 0
+  var usingprivateroom 0
   var usingstealth 0
   var usingtactics 0
   var waricon 0
@@ -2036,7 +2038,6 @@ MAINVARLOAD:
   var premiumringitem $m%varsetpremiumringitem
   var nearestportaltown $m%varsetnearestportaltown
   
-  var ammopreset $m%varsetammopreset
   var vaulttown $m%varsetvaulttown
   var ammobuytown $m%varsetammobuytown
   var lockpickbuytown $m%varsetlockpickbuytown
@@ -2350,9 +2351,10 @@ MAINVARLOAD:
   var tongs $m%varsettongs
   var yardstick $m%varsetyardstick
   
-  var burglepreset $m%varsetburglepreset
-  var burglepawnpreset $m%varsetburglepawnpreset
-  var performpreset $m%varsetperformpreset
+  var burgletown $m%varsetburgletown
+  var burglepawntown $m%varsetburglepawntown
+  var performtown $m%varsetperformtown
+  var forgingtown $m%varsetforgingtown
   
   var buffnum $m%varsetbuffnum
   if %buffnum > 0 then var buff1 $m%varsetbuff1
@@ -2703,6 +2705,27 @@ COMBATLOOP:
   {
     gosub MULTITRAINLOGIC
   }
+  #STORAGE_CHECK
+  if (%firststoragecheck = 1) then
+  {
+    gosub STOREDEFAULT %storage
+    var firststoragecheck 0
+    if (%storedefaultsuccess = 0) then
+    {
+      put #echo Yellow Could not find default storage container %rucksack!  Exiting.
+      put #echo %alertwindow Yellow [TRAIN]: Could not find default storage container %rucksack!  Exiting.
+      exit
+    }
+    if ("%craftingstorageinportal" = "YES") then
+    {
+      gosub FINDITEM %craftingstorage
+      if (%finditemfound = 1) then
+      {
+        gosub REMITEM %craftingstorage
+        gosub PUTITEM %craftingstorage in my portal
+      }
+    }
+  }
   if (("%armorcheck" = "YES") && (%firstarmorcheck = 0)) then gosub ARMORCHECK
   if %firststowall = 1 then
   {
@@ -2732,9 +2755,9 @@ COMBATLOOP:
           gosub SYMBCLEAR
         }
       }
-      if %necrosafety = "YES" then
+      if ("%necrosafety" = "YES") then
       {
-        if $SpellTimer.RiteofGrace.active = 1 then
+        if ($SpellTimer.RiteofGrace.active = 1) then
         {
           gosub RELMANA
           gosub RELSPELL
@@ -3114,7 +3137,7 @@ NONCOMBATLOOP:
           gosub SYMBCLEAR
         }
       }
-      if %necrosafety = "YES" then
+      if ("%necrosafety" = "YES") then
       {
         gosub RELMANA
         gosub RELSPELL
@@ -4722,8 +4745,8 @@ GIVETICKET:
   else var actualrepairer %repairer
   matchre RETURN ^You hand (%repairer) your ticket and are handed back|After a moment, he returns and hands you
 	matchre WAITREPAIR Well that is almost done|Well that isn't gonna be done for another|That's not ready yet
-	match WAITREPAIR The apprentice repairman shakes his head.  "That's not ready yet, sir.  Check your ticket for the estimated time, and please be patient."
 	match WAITREPAIR An apprentice repairman shakes his head.  "Sorry, sir, but I'm just heading out.  Mr. Osmandikar or Mr. Lakyan should be available to assist you shortly."
+	match WAITREPAIR The apprentice repairman shakes his head.  "That's not ready yet, sir.  Check your ticket for the estimated time, and please be patient."
 	matchre WAITREPAIR ^\w* smiles and says
 	match GIVETICKET What is it you're trying to give?
 	put give %actualrepairer
@@ -5579,6 +5602,32 @@ MTPERFORMLOOP:
   if (%movetrainperformactive = 0) then return
   goto MTPERFORMLOOP
 
+MTFORGING:
+  var workorder 1
+  var difficulty %forgingdifficulty
+  var discipline %forgingdiscipline
+  var material %forgingmaterial
+  gosub CRAFTVARLOAD
+  gosub AREAVARINIT
+  gosub CRAFTINGSTART
+  if (%workorderbail = 1) then return
+  gosub CRAFTREPAIR
+  put #echo Yellow Crafting %difficulty %discipline work order in %material.
+  put #echo %alertwindow Yellow [Craft]: Crafting %difficulty %discipline work order in %material.
+  goto MTFORGINGLOOP
+
+MTFORGINGLOOP:
+  gosub WORKORDER
+  if (%workorderbail = 1) then return
+  put #echo Yellow $Forging.LearningRate
+  if (($Forging.LearningRate < 25) && ("%forging" = "YES")) then goto MTFORGINGLOOP
+  else
+  {
+    gosub CRAFTINGEND
+    var movetrainforgingactive 0
+    return
+  }
+
 
 ###LOGIC###
 ABUFFINGLOOP:
@@ -5854,14 +5903,14 @@ BURGLELOGIC:
   unvar priorexit(library)
         
   gosub BURGLERECALL
-  if %burgleready = 0 then goto BURGLEEND
+  if (%burgleready = 0) then goto BURGLEEND
   gosub JUSTICECHECK
   if %justice != 1 then goto BURGLEEND
   gosub STOWALL
   gosub STOWFEET
-  if "$guild" = "Thief" then gosub BURGLEKHRI
-  if "$guild" = "Moon Mage" then gosub BURGLERFCAST
-  if "$guild" = "Necromancer" then gosub BURGLEEOTBCAST
+  if ("$guild" = "Thief") then gosub BURGLEKHRI
+  if ("$guild" = "Moon Mage") then gosub BURGLERFCAST
+  if ("$guild" = "Necromancer") then gosub BURGLEEOTBCAST
   gosub BURGLETOOLGET
   gosub BURGLEGUARDCHECK
   if %scriptmode = 4 then gosub UPKEEPSET
@@ -5897,7 +5946,7 @@ BURGLEPAWNLOGIC:
     echo burglelootlistnum: %burglelootlistnum
     if ((%burglelootlist(0) != "") || (%burglelootlistnum > 0)) then
     {
-      gosub NEWTOWNPRESET %pawnpreset pawn
+      gosub NEWTOWNPRESET %pawntown pawn
       gosub ROOMTRAVEL
       var pawncounter 0
       var burglepawnsold 0
@@ -6436,18 +6485,18 @@ COLLECTLOGIC:
   {
     if %evenleastnum < 7 then return
   }
-  if $Outdoorsmanship.LearningRate > 32 then var outdoorlock 1
-  if $Outdoorsmanship.LearningRate < 20 then var outdoorlock 0
-  if $Outdoorsmanship.Ranks >= 1750 then var outdoorlock 1
-  if %outdoorlock = 0 then
+  if ($Outdoorsmanship.LearningRate > 32) then var outdoorlock 1
+  if ($Outdoorsmanship.LearningRate < 20) then var outdoorlock 0
+  if ($Outdoorsmanship.Ranks >= 1750) then var outdoorlock 1
+  if (%outdoorlock = 0) then
   {
-    if %t >= %nextcollect then
+    if (%t >= %nextcollect) then
     {
       math nextcollect set %t
   	  math nextcollect add %outdoortimer
       gosub COLLECT
-      if $Outdoorsmanship.LearningRate > 33 then var outdoorlock 1
-      gosub KICK
+      if ($Outdoorsmanship.LearningRate > 33) then var outdoorlock 1
+      #gosub KICK
     }
   }
   return
@@ -7735,7 +7784,7 @@ MAINSPELLLOGIC:
     #CYCLICS
     if ((%cyclic = "YES") || (%cyctm = "YES") || (%cycdebil = "YES")) then
     {
-      if %cyclicpriorty != "YES" then
+      if ("%cyclicpriorty" != "YES") then
       {
         gosub SPELLCYCLOGIC
         if %casting = 1 then return
@@ -8805,17 +8854,7 @@ NONCOMBATLOGIC:
 	var movetrainburgleactive 0
 	var movetrainsellactive 0
 	var movetraintasksactive 0
-	if ("%perform" = "YES") then
-	{
-		if $Performance.LearningRate > 20 then var performlock 1
-		if $Performance.LearningRate < 4 then var performlock 0
-		if $Performance.Ranks >= 1750 then var performlock 1
-		if %performlock != 1 then
-		{
-			var movetrainactive 1
-			var movetrainperformactive 1
-		}
-	}
+  #BURGLE_CHECKING
 	if ("%burgle" = "YES") then
 	{
 	  if (($Athletics.Ranks < 1750) || ($Locksmithing.Ranks < 1750) || ($Thievery.Ranks < 1750) || ($Stealth.Ranks < 1750)) then
@@ -8835,7 +8874,35 @@ NONCOMBATLOGIC:
 	    var movetrainburgleactive 0
 	  }
 	}
-
+	#PERFORM_CHECKING
+	if ("%perform" = "YES") then
+	{
+		if ($Performance.LearningRate > 20) then var performlock 1
+		if ($Performance.LearningRate < 4) then var performlock 0
+		if ($Performance.Ranks >= 1750) then var performlock 1
+		if (%performlock != 1) then
+		{
+			var movetrainactive 1
+			var movetrainperformactive 1
+		}
+	}
+  #CRAFT_CHECKING
+	if ("%crafting" = "YES") then
+	{
+	  #FORGING_CHECKING
+    if ("%forging" = "YES") then
+    {
+      if ($Forging.LearningRate > 20) then var forginglock 1
+      if ($Forging.LearningRate < 4) then var forginglock 0
+      if ($Forging.Ranks >= 1750) then var forginglock 1
+      if (%forginglock != 1) then
+      {
+        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to forge at Forging.LearningRate: $Forging.LearningRate
+        var movetrainactive 1
+        var movetrainforgingactive 1
+      }
+    }
+  }
 	#TRADING_SELL_TASKS
 	if ("$guild" = "Trader") then
 	{ 
@@ -8879,21 +8946,48 @@ NONCOMBATLOGIC:
 		
 		#STARTING_NONCOMBAT_TRAIN
 		put #echo %alertwindow [NonCombat]: Leaving combat to train.
+		
+		#BURGLING
 		if (%movetrainburgleactive) = 1 then
 		{
 			gosub DEEPSLEEP
 			gosub LEAVEROOM
-			gosub NEWTOWNPRESET %burglepreset burgle
+			gosub NEWTOWNPRESET %burgletown burgle
 			gosub ROOMTRAVEL
 			gosub STOWALL
 			gosub AWAKE
-			#BURGLING
 			gosub BURGLELOGIC
 			gosub BURGLERECALL
 			var movetrainburgleactive 0
 			gosub RELINVIS
 			#BURGLE_PAWN
-			if %burglepawn = "YES" then gosub BURGLEPAWNLOGIC
+			if ("%burglepawn" = "YES") then gosub BURGLEPAWNLOGIC
+		}
+		
+	  #PERFORMANCE
+		if (%movetrainperformactive = 1) then
+		{
+			gosub DEEPSLEEP
+		  gosub LEAVEROOM
+		  gosub NEWTOWNPRESET %performtown perform
+			var firstclean 0   
+			gosub ROOMTRAVEL
+			gosub AWAKE
+			gosub STOWALL
+			gosub MTPERFORMLOOP
+		}
+		
+		#FORGING
+		if (%movetrainforgingactive = 1) then
+		{
+			gosub DEEPSLEEP
+		  gosub LEAVEROOM
+		  gosub NEWTOWNPRESET %forgingtown forging
+			var firstclean 0   
+			gosub ROOMTRAVEL
+			gosub AWAKE
+			gosub STOWALL
+			gosub MTFORGING
 		}
     
     #TRADING_SELL
@@ -8932,20 +9026,6 @@ NONCOMBATLOGIC:
       gosub AWAKE
       gosub TASKLOGIC
     }
-
-		#PERFORMANCE
-		#put #echo Yellow movetrainperformactive: %movetrainperformactive
-		if (%movetrainperformactive = 1) then
-		{
-			gosub DEEPSLEEP
-		  gosub LEAVEROOM
-		  gosub NEWTOWNPRESET %performpreset perform
-			var firstclean 0   
-			gosub ROOMTRAVEL
-			gosub AWAKE
-			gosub STOWALL
-			gosub MTPERFORMLOOP
-		}
 					
 		#RETURNING_TO_COMBAT
 		put #echo Yellow Returning to combat!

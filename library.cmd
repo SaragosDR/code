@@ -18,15 +18,18 @@ var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p
 var combatpresetp5 p5-maidenstress|p5-matronstress|p5-dryads|p5-nyads1|p5-blightogres1|p5-nyads2|p5-blightogres2|p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-blackapes|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
 var combatpresetlist none|%combatpresetp1|%combatpresetp2|%combatpresetp3|%combatpresetp4|%combatpresetp5
 
-var townperformpresetlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|fangcove|shard|hibarnhvidar|boarclan|ratha|merkresh|mriss
-var townburglepresetlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|shard|hibarnhvidar|boarclan|ratha|merkresh|mriss
-var townpresetlist none|muspari|theren|rossman|riverhaven|dirge|kaerna|crossing|leth|ilaya|fangcove|shard|fangcove|hibarnhvidar|boarclan|ratha|merkresh
+
+var townpresetlist muspari|theren|rossman|riverhaven|dirge|kaerna|crossing|leth|ilaya|fangcove|shard|fangcove|hibarnhvidar|boarclan|ratha|merkresh
 #|aesry|merkresh|jeihrem
-var townvaultpresetlist none|muspari|theren|riverhaven|dirge|crossing|leth|shard|fangcove|hibarnhvidar|boarclan|ratha|aesry|merkresh|jeihrem
-var townportalpresetlist none|muspari|therenborough|langenfirth|riverhaven|crossing|leth|shard|hibarnhvidar|ainghazal|ratha|mriss|aesry
-var pawnpresetlist none|crossing|riverhaven|shard|hibarnhvidar
-var ammopresetlist none|crossing|shard|ratha
-var lockpickpresetlist none|crossing|shard|riverhaven
+var townvaultpresetlist muspari|theren|riverhaven|dirge|crossing|leth|shard|fangcove|hibarnhvidar|boarclan|ratha|aesry|merkresh|jeihrem
+var townportalpresetlist muspari|therenborough|langenfirth|riverhaven|crossing|leth|shard|hibarnhvidar|ainghazal|ratha|mriss|aesry
+var ammopresetlist crossing|shard|ratha
+var lockpickpresetlist crossing|shard|riverhaven
+
+var burgletownlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|shard|hibarnhvidar|boarclan|ratha|merkresh|mriss
+var pawntownlist none|crossing|riverhaven|shard|hibarnhvidar
+var performtownlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|fangcove|shard|hibarnhvidar|boarclan|ratha|merkresh|mriss
+var forgingtownlist none|crossing|shard|merkresh|hibarnhvidar
 
 var Ordinal none|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth
 var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.
@@ -1358,13 +1361,13 @@ VARCHECKS:
   }
   if !matchre("$m%checkmodeupkeeptown", "\b(%townpresetlist)\b") then put #var m%checkmodeupkeeptown crossing
   
-  if !matchre("$m%checkmodeammopreset", "\b(%ammopresetlist)\b") then put #var m%checkmodeammopreset none
-  if !matchre("$m%checkmodevaulttown", "\b(%townvaultpresetlist)\b") then put #var m%checkmodevaulttown none
-  if !matchre("$m%checkmodeammobuytown", "\b(%ammopresetlist)\b") then put #var m%checkmodeammobuytown none
-  if !matchre("$m%checkmodelockpickbuytown", "\b(%lockpickpresetlist)\b") then put #var m%checkmodelockpickbuytown none
-  if !matchre("$m%checkmodeburglepreset", "\b(%townburglepresetlist)\b") then put #var m%checkmodeburglepreset none
-  if !matchre("$m%checkmodepawnpreset", "\b(%pawnpresetlist)\b") then put #var m%checkmodepawnpreset none
-  if !matchre("$m%checkmodeperformpreset", "\b(%townperformpresetlist)\b") then put #var m%checkmodeperformpreset none
+  if !matchre("$m%checkmodevaulttown", "\b(%townvaultpresetlist)\b") then put #var m%checkmodevaulttown Crossing
+  if !matchre("$m%checkmodeammobuytown", "\b(%ammopresetlist)\b") then put #var m%checkmodeammobuytown Crossing
+  if !matchre("$m%checkmodelockpickbuytown", "\b(%lockpickpresetlist)\b") then put #var m%checkmodelockpickbuytown Crossing
+  if !matchre("$m%checkmodeburgletown", "\b(%burgletownlist)\b") then put #var m%checkmodeburgletown Crossing
+  if !matchre("$m%checkmodepawntown", "\b(%pawntownlist)\b") then put #var m%checkmodepawntown Crossing
+  if !matchre("$m%checkmodeperformtown", "\b(%performtownlist)\b") then put #var m%checkmodeperformtown Crossing
+  if !matchre("$m%checkmodeforgingtown", "\b(%forgingtownlist)\b") then put #var m%checkmodeforgingtown crossing
   
   #DEATH_DISCO
   if !matchre("$deathaction", "\b(logout|alert)\b") then put #var deathaction logout
@@ -1656,8 +1659,10 @@ VARCHECKS:
   
   if !matchre("$m%checkmodecrafting", "\b(YES|NO)\b") then put #var m%checkmodecrafting NO
   if !def(m%checkmodecraftingstorage) then put #var m%checkmodecraftingstorage crafting satchel
+  if !matchre("$m%checkmodecraftingstorageinportal", "\b(YES|NO)\b") then put #var m%checkmodecraftingstorageinportal NO
   if !matchre("$m%checkmodeforging", "\b(YES|NO)\b") then put #var m%checkmodeforging NO
   if !matchre("$m%checkmodeforgingdifficulty", "\b(easy|challenging|hard)\b") then put #var m%checkmodeforgingdifficulty challenging
+  if !matchre("$m%checkmodeforgingdiscipline", "\b(weaponsmithing|armorsmithing|blacksmithing)\b") then put #var m%checkmodeforgingdiscipline weaponsmithing
   if !def(m%checkmodeforgingmaterial) then put #var m%checkmodeforgingmaterial bronze
   if !matchre("$m%checkmodeforgingrepair", "\b(YES|NO)\b") then put #var m%checkmodeforgingrepair YES
   if !matchre("$m%checkmodeforgingprivateroom", "\b(YES|NO)\b") then put #var m%checkmodeforgingprivateroom NO
@@ -2496,6 +2501,7 @@ NEWTOWNPRESET:
 		if (%towntype = "upkeep") then var upkeepzone 47
 		if (%towntype = "burgle") then var rttargetroom 0
 		if (%towntype = "perform") then var rttargetroom 0
+		if (%towntype = "forging") then var rttargetroom 0
 		if (%towntype = "pawn") then var rttargetroom 0
 	}
   if ("%towncheck" = "theren") then
@@ -2558,7 +2564,7 @@ NEWTOWNPRESET:
 		if (%towntype = "upkeep") then var upkeepzone 1
 		if (%towntype = "burgle") then var rttargetroom 388
 		if (%towntype = "perform") then var rttargetroom 227
-	  if (%towntype = "pawn") then var rttargetroom Cormyn
+		if (%towntype = "pawn") then var rttargetroom Cormyn
 	}
 	if ("%towncheck" = "leth") then
 	{
@@ -2599,8 +2605,9 @@ NEWTOWNPRESET:
 		var rtmove NO
 		if (%towntype = "upkeep") then var upkeepzone 67
 		if (%towntype = "burgle") then var rttargetroom 194
-		if (%towntype = "perform") then var rttargetroom 180
 		if (%towntype = "pawn") then var rttargetroom Aelik
+		if (%towntype = "perform") then var rttargetroom 180
+		if (%towntype = "forging") then var rttargetroom forging
 	}
 	if ("%towncheck" = "hibarnhvidar") then
 	{
@@ -2612,6 +2619,7 @@ NEWTOWNPRESET:
 		if (%towntype = "burgle") then var rttargetroom 439
 		if (%towntype = "perform") then var rttargetroom 442
 		if (%towntype = "pawn") then var rttargetroom Relf
+		if (%towntype = "forging") then var rttargetroom forging
 	}
 	if ("%towncheck" = "boarclan") then
 	{
@@ -2880,7 +2888,7 @@ AUTOUPKEEPCHECKS:
   {
     #echo t: %t
     #echo nextburdencheck: %nextburdencheck
-    if %t > %nextburdencheck then
+    if (%t > %nextburdencheck) then
     {
       gosub BURDENCHECK
       pause 1
@@ -2953,8 +2961,8 @@ EXIT:
 
 RPLAYERSCRUB:
   eval roomplayers replace("%roomplayers", " who has coalesced into a battle of light and shadow, each warring for dominance", "") 
-  eval roomplayers replace("%roomplayers", " and ", ", "
-  eval roomplayers replace("%roomplayers", ", ", "|"
+  eval roomplayers replace("%roomplayers", " and ", ", ")
+  eval roomplayers replace("%roomplayers", ", ", "|")
   eval roomplayers replace("%roomplayers", "Also here: ", "")
   eval roomplayers replace("%roomplayers", ".", "")
   eval roomplayers replace("%roomplayers", "a webbed ", "")
@@ -3289,6 +3297,22 @@ BUNDLEPULL:
   var timeoutcommand pull my bundle
 	goto TIMEOUT
 
+
+CLOSEITEM:
+  var openitemstring $0
+  goto OPENITEMMAIN
+CLOSEITEMP:
+  pause
+CLOSEITEMMAIN:
+  matchre CLOSEITEMP %waitstring
+  matchre RETURN What were you referring to?|You close your|That is already closed\.
+  put close %closeitemstring
+  matchwait 5
+	var timeoutsub OPENITEMMAIN
+	var timeoutcommand close %closeitemstring
+	goto TIMEOUT
+
+
 COILROPEP:
   pause
 COILROPE:
@@ -3553,6 +3577,7 @@ PUTITEMMAIN:
 	match RETURN That's too heavy to go in there!
 	matchre RETURN You just can't get the .* to fit in the .*\, no matter how you arrange it\.
   matchre PUTITEMSTOW A bored-looking Human boy raises an eyebrow in your direction.
+  matchre RETURN The anvil already has a \w+ ingot on it\.
 	put put %putitemstring
 	matchwait 5
 	var timeoutsub PUTITEMMAIN
@@ -3631,6 +3656,27 @@ SLIPITEM:
 	var timeoutsub SLIPITEM
 	var timeoutcommand slip my %putitemname in %putlocation
 	goto TIMEOUT
+
+
+STOREDEFAULT:
+  var storedefaultsuccess 0
+  var storedefaultitemstring $0
+  goto STOREDEFAULTMAIN
+STOREDEFAULTP:
+  pause
+STOREDEFAULTMAIN:
+  matchre STOREDEFAULTP %waitstring
+  matchre STOREDEFAULTGOOD You will now use your .* to store any items you haven't categorized\.
+  match RETURN I could not find that container.
+  put store default %storedefaultitemstring
+  matchwait 5
+	var timeoutsub STOREDEFAULT
+	var timeoutcommand store default %storedefaultitemstring
+	goto TIMEOUT
+
+STOREDEFAULTGOOD:
+  var storedefaultsuccess 1
+  return
 
 STORE:
   var storestring $0
@@ -4023,23 +4069,25 @@ SWAPTOOINJURED:
   goto SWAPTOOINJURED
   return
 
-TAPARMOR:
-  var taparmoritem $0
-  var taparmorworn 0
-  goto TAPARMORMAIN
-TAPARMORP:
+FINDITEM:
+  var finditemitem $0
+  var finditemfound 0
+  goto FINDITEMMAIN
+FINDITEMP:
   pause
-TAPARMORMAIN:
-  matchre TAPARMORP %waitstring
-  matchre TAPARMORGOOD ^You tap .* that you are wearing\.|^A faltering wisp of light dances around you, bubbling out a token amount of water\.  The .* needs more time to build up a charge\.|^A ribbon of light darts around you, leaving a trail of elemental water in its wake\.  It quckly forms a pressurized sphere of water that explodes outward\!
-  matchre RETURN ^I could not find what you were referring to\.|^You tap .* that you are holding\.|^You tap .* inside your .*\.|^I don't think that's such a good idea\.|^Tap what\?
-  put tap my %taparmoritem
-  matchwait
+FINDITEMMAIN:
+  matchre FINDITEMP %waitstring
+  matchre FINDITEMGOOD ^You tap .* that you are wearing\.|^A faltering wisp of light dances around you, bubbling out a token amount of water\.  The .* needs more time to build up a charge\.|^A ribbon of light darts around you, leaving a trail of elemental water in its wake\.  It quckly forms a pressurized sphere of water that explodes outward\!
+  matchre RETURN ^I could not find what you were referring to\.|^You tap .* that you are holding\.|^You tap .* inside your .*\.|^I don't think that's such a good idea\.|^Tap what\?|I could not find that container\.
+  put tap my %finditemitem
+  matchwait 5
+  var timeoutsub FINDITEM
+  var timeoutcommand tap my %finditemitem
+	goto TIMEOUT
 
-TAPARMORGOOD:
-  var taparmorworn 1
+FINDITEMGOOD:
+  var finditemfound 1
   return
-
 
 WEARARMOR:
   var weararmoritem $0
@@ -7332,9 +7380,9 @@ RELCYCLICP:
 	pause
 RELCYCLIC:
   #put #echo Yellow Release cyclic.
-	if $guild = "Barbarian" then return
-	if $guild = "Thief" then return
-	if $guild = "Necromancer" then
+	if ("$guild" = "Barbarian") then return
+	if ("$guild" = "Thief") then return
+	if ("$guild" = "Necromancer") then
 	{
 	  if ((%necrosafety = "YES") && ((%riteofgrace = "YES")) then
 	  {
@@ -10073,13 +10121,14 @@ COLLECTP:
 	pause
 COLLECT:
 	matchre COLLECTP %waitstring
+	matchre RETURN You begin exploring the area, searching for .*\.  In almost no time, you manage to identify \d+ of them but leave them where they are, undisturbed\.
 	matchre RETURN /You manage to collect|The room is too cluttered to find anything here!|You find something dead and lifeless, is this what you were looking for?|Searching and searching, you fail to find anything./
 	match COLLECTR You cannot collect anything while in combat!
 	matchre RETURN You forage around|You wander around and|You begin to forage/
 	matchre RETURN You are sure you knew what you were looking for|You are certain you could find what you were looking for/|As you rummage around|You are certain you could find
 	match BADCOLLECT You survey the area and realize that any collecting efforts would be futile.
 	match FULLHANDS You really need to have at least one hand free to properly collect something.
-	put collect %collectitem
+	put collect %collectitem practice
 	matchwait 5
 	var timeoutsub COLLECT
   var timeoutcommand collect %collectitem
