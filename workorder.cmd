@@ -20,7 +20,7 @@ if_1 then
   if_2 then
   {
     if_3 then
-    {
+    {  var revenue 0
       if (matchre("%2", "%difficulties") then var difficulty %2
       else
       {
@@ -53,11 +53,12 @@ else
 var varset $varset
 gosub CRAFTVARLOAD
 var storage $m%varsetstorage
-var alertwindow >$m%varsetalertwindow
+var alertwindow >$alertwindow
 
 var workorder 1
 gosub AREAVARINIT
 gosub STOWALL
+
 #CRAFTING_STORAGE
 gosub CRAFTINGSTART
 if (%workorderbail = 1) then return
@@ -68,7 +69,7 @@ put #echo %alertwindow Yellow Crafting %difficulty %discipline work order in %ma
 
 MAIN:
   gosub WORKORDER
-  if (%workorderbail = 1) then return
+  if (%workorderbail = 1) then exit
   if ($Forging.LearningRate < 25) then goto MAIN
   else
   {

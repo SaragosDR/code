@@ -5610,8 +5610,8 @@ MTFORGING:
   gosub CRAFTVARLOAD
   gosub AREAVARINIT
   gosub CRAFTINGSTART
-  if (%workorderbail = 1) then return
   gosub CRAFTREPAIR
+  if (%workorderbail = 1) then return
   put #echo Yellow Crafting %difficulty %discipline work order in %material.
   put #echo %alertwindow Yellow [Craft]: Crafting %difficulty %discipline work order in %material.
   goto MTFORGINGLOOP
@@ -5620,7 +5620,11 @@ MTFORGINGLOOP:
   gosub WORKORDER
   if (%workorderbail = 1) then return
   put #echo Yellow $Forging.LearningRate
-  if (($Forging.LearningRate < 25) && ("%forging" = "YES")) then goto MTFORGINGLOOP
+  if (($Forging.LearningRate < 25) && ("%forging" = "YES")) then
+  {
+    gosub CRAFTVARLOAD
+    goto MTFORGINGLOOP
+  }
   else
   {
     gosub CRAFTINGEND
@@ -9580,9 +9584,11 @@ ROOMTRAVEL:
 			if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
 		}
   }
+  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
   if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then
   {
     gosub MOVE %rttargetroom
+    if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then goto ROOMTRAVEL
   }
   if ("%rtfindroom" = "YES") then gosub FINDROOMLOGIC
   return

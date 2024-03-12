@@ -3300,7 +3300,7 @@ BUNDLEPULL:
 
 CLOSEITEM:
   var openitemstring $0
-  goto OPENITEMMAIN
+  goto CLOSEITEMMAIN
 CLOSEITEMP:
   pause
 CLOSEITEMMAIN:
@@ -3570,8 +3570,7 @@ PUTITEMP:
 	pause
 PUTITEMMAIN:
 	matchre PUTITEMP %waitstring
-	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.
-
+	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.|That is far too hot to touch\!
 	matchre PUTRETURN You put|You drop|You briefly twist the top off of|Raffle Attendant Tizzeg examines your ticket and exclaims|A bored-looking Human boy says
 	match PUTITEMSTOW There's no room in the
 	match RETURN That's too heavy to go in there!
@@ -7819,7 +7818,7 @@ BUNDLEADJUST:
   matchre BUNDLEADJUSTP %waitstring 
   matchre RETURN You adjust your tight bundle so that you can more easily
   matchre BUNDLEADJUST You adjust your tight bundle to make it neat and compact
-  put adjust bundle
+  put adjust my bundle
   matchwait 5
 	var timeoutsub BUNDLEADJUST
   var timeoutcommand adjust my bundle

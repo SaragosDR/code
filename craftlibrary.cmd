@@ -21,9 +21,8 @@ action var backingsmall $1 when \((\d+)\) finished small leather backing
 action math expenses add $1; var currency $2 when The attendant says, "You can purchase (?:a|an|some) \w+ \w+ \w+ for (\d+) (Kronars|Lirums|Dokoras)\.
 action math expenses add $1; var currency $2 when The attendant says, "You can purchase (?:a|an|some) \w+ \w+ for (\d+) (Kronars|Lirums|Dokoras)\.
 action math expenses add $1; var currency $2 when You decide to purchase the \w+, and pay the sales clerk (\d+) (Kronars|Lirums|Dokoras)\.
-action math expenses add $1; var currency $2 when The sentry holds out his hand, saying, "That'll be (\d+) (Kronars|Lirums|Dokoras), (?:sir|ma'am)\."
-#You approach a guarded archway.  The sentry holds out his hand, saying, "That'll be 13392 Dokoras, sir."  You hand over the coins.  The sentry nods and allows you to pass.
-#action math expenses add $1 when You approach a guarded archway\.  The sentry holds out his hand, saying, "That'll be (\d+) (Kronars|Lirums|Dokoras), sir\."  You hand over the coins\.  The sentry nods and allows you to pass\.
+action math expenses add $1; var currency $2 when The sentry holds out (?:his|her) hand, saying, "That'll be (\d+) (Kronars|Lirums|Dokoras), (?:sir|madam)\."
+action math expenses add $1; var currency $2 when You hand the clerk (\d+) (Kronars|Lirums|Dokoras) and (?:he|she) gives you back a repair ticket\.
 action var revenue $1; var currency $2 when You hand \w+ your logbook and bundled items, and are given (\d+) (Kronars|Lirums|Dokoras) in return\.
 
 goto CRAFTLIBEND
@@ -37,7 +36,7 @@ AREAVARINIT:
     if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then
     {
       var mastername Yalda
-      var masterrange 644|645|649|650|653|654|655|658|646|661|800
+      var masterrange 865|902|960|961|905|962|963|906|1021
       var suppliesroom 906
       var bulkroom 1021
       var toolroom 905
@@ -136,6 +135,10 @@ CRAFTVARLOAD:
   var yardstick $m%varsetyardstick
   
   var workorderbail 0
+  var expenses 0
+  var revenue 0
+  var mindstatebegin $Forging.LearningRate
+  var timebegin $gametime
   if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then var crafttype forging
   var forgingrepairlist %bellows|%hammer|%shovel|%rod|%tongs
   var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
@@ -152,8 +155,8 @@ CRAFTINGABORT:
 
 CRAFTINGEND:
   put store default %storage
-  gosub PUTITEM my $righthandnoun in my %craftingstorage
-  gosub PUTITEM my $lefthandnoun in my %craftingstorage
+  if ("$righthand" != "Empty") then gosub PUTITEM my $righthandnoun in my %craftingstorage
+  if ("$lefthand" != "Empty") then gosub PUTITEM my $lefthandnoun in my %craftingstorage
   gosub CLOSEITEM my %craftingstorage
   if ("%craftingstorageinportal" = "YES") then
   {
@@ -192,11 +195,6 @@ CRAFTINGSTART:
 
 WORKORDER:
   #ACQUIRE_TASK
-  var expenses 0
-  var revenue 0
-  var workorderbail 0
-  var mindstatebegin $Forging.LearningRate
-  var timebegin $gametime
   gosub FINDMASTER
   gosub TASKACQUIRE
   if (%workorderbail = 1) then return
@@ -285,8 +283,8 @@ WORKORDER:
     }
     else
     {
-      put #echo Yellow No free anvils!
-      put store default %storage
+      put #echo %alertwindow Yellow [CRAFT]: No free anvils!  Stopping forging!
+      gosub CRAFTINGABORT
       return
     }
   }
@@ -316,9 +314,12 @@ WORKORDER:
   math mindstatetotal subtract %mindstatebegin
   var timetotal $gametime
   math timetotal subtract %timebegin
+  var timetotalmod %timetotal
+  math timetotalmod modulus 6
+  math timetotal subtract %timetotalmod
   var timetotalminutes %timetotal
   math timetotalminutes / 60
-  put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material.  Revenue: %revenue - Expenses: %expenses = Profit: %profit.  Mindstates gained: %mindstatetotal in %timetotalminutes minutes.
+  put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material.  Revenue: %revenue - Expenses: %expenses = Profit: %profit %currency.  Mindstates gained: %mindstatetotal in %timetotalminutes minutes.
   return
 
 CRAFTREPAIR:
@@ -1051,6 +1052,11 @@ SMELTPUTLOOP:
   if ("$righthand" != "Empty") then
   {
     gosub PUTITEM %smeltmaterial %smeltnoun in crucible
+    if ("$righthand" != "Empty") then
+    {
+      gosub TILTCRUC
+      gosub PUTITEM %smeltmaterial %smeltnoun in crucible
+    }
     goto SMELTPUTLOOP
   }
   else
@@ -1115,6 +1121,15 @@ SMELTSHOVEL:
   put push fuel with my %shovel
   matchwait
 
+TILTCRUCP:
+  pause
+TILTCRUC:
+  matchre TILTCRUCP %waitstring
+  match TILTCRUC You grab the crucible's side and prepare to dump it out.
+  match RETURN You grab one side of the crucible and pour the hot metal into a slag collecting bin.
+  matchwait
+
+
 TURNCRUCP:
   pause
 TURNCRUC:
@@ -1176,14 +1191,21 @@ FINDMASTER:
   var findmastercount 0
   var foundmaster 0
   eval masterrangecount count("%masterrange", "|")
-  #echo masterrangecount: %masterrangecount
-  if (!matchre("$roomobjs", "Forging Society Master")) then gosub FINDMASTERLOOP
-  return
+  #put #echo Yellow masterrangecount: %masterrangecount
+  if (matchre("$roomobjs", "Forging Society Master")) then return
+  if (matchre("$roomobjs", "Forging Society Mistress")) then return
+  put #echo Yellow Not in the starting room, looking for master.
+  gosub FINDMASTERLOOP
 
 FINDMASTERLOOP:
   if (%findmastercount > %masterrangecount) then return
   gosub MOVE %masterrange(%findmastercount)
   if (matchre("$roomobjs", "Forging Society Master")) then
+  {
+    var foundmaster 1
+    return
+  }
+  if (matchre("$roomobjs", "Forging Society Mistress")) then
   {
     var foundmaster 1
     return
@@ -1231,8 +1253,8 @@ FINDANVILLOOP:
   goto FINDANVILLOOP
 
 GOPRIVATEROOM:
-  match RETURN You approach a guarded archway.  The sentry holds out his hand, saying,
-  match RETURN You approach a guarded archway.  The sentry nods and allows you to pass.
+  match RETURN You approach .*\.  The sentry holds out (his|her) hand, saying,
+  matchre RETURN You approach .*\.  The sentry nods and allows you to pass\.
   put go $0
   matchwait
 
@@ -1241,6 +1263,7 @@ GOPRIVATEROOM:
 TASKACQUIRE:
   if (("$righthandnoun" != "logbook") && ("$lefthandnoun" != "logbook")) then gosub GETITEM logbook
   gosub LOGBOOKASK %mastername %difficulty %discipline
+  if (%workorderbail = 1) then return
   gosub PUTITEM logbook in %craftingstorage
   pause .5
   eval product replace("%product", "a ", "")
@@ -1279,9 +1302,13 @@ TASKACQUIRE:
   var padsmall 0
   var backinglarge 0
   var backingsmall 0
-  action var productcheck $4 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (a|an|some)? (.*)    \=\-
+  #action var productcheck $4 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (a|an|some)? (.*)    \=\-
+  action var productcheck $3 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (.*)    \=\-
   gosub READBOOK my %discipline book
   pause 1
+  eval productcheck replace("%productcheck", "a ", "")
+  eval productcheck replace("%productcheck", "an ", "")
+  eval productcheck replace("%productcheck", "some ", "")
   echo product: %product
   echo productcheck: %productcheck
   if ("%product" != "%productcheck") then
@@ -1687,6 +1714,7 @@ LOGBOOKASKMAIN:
   matchre RETURN \w+ shuffles through some notes and says
   match LOGBOOKASKFIND To whom are you speaking?
   match LOGBOOKASKUNTIE You realize you have items bundled with the logbook, and should untie them before getting a new work order.
+  match LOGBOOKBAD You realize this isn't your logbook, and stop.  Maybe you should study it for more information.
   put ask %masterstring for %jobstring work
   matchwait
 
@@ -1721,6 +1749,11 @@ LOGBOOKBUNDLEMAIN:
 LOGBOOKBUNDLEBAD:
   put #echo Yellow Made an item of inferior quality!
   put #echo %alertwindow Yellow Made an item of inferior quality!
+  return
+
+LOGBOOKBAD:
+  put #echo %alertwindow Yellow [CRAFT]: You have a logbook that's not bonded to you!  Stopping forging.
+  gosub CRAFTINGABORT
   return
 
 GIVEMASTERLOG:
@@ -1807,7 +1840,7 @@ GIVETICKETCRAFT:
 	goto TIMEOUT
 
 GIVETICKETCRAFTWAIT:
-  pause 7
+  pause 30
   goto GIVETICKETCRAFT
 
 CRAFTWAITREPAIR:
