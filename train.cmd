@@ -9588,7 +9588,7 @@ ROOMTRAVEL:
   if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then
   {
     gosub MOVE %rttargetroom
-    if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then goto ROOMTRAVEL
+    #if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then goto ROOMTRAVEL
   }
   if ("%rtfindroom" = "YES") then gosub FINDROOMLOGIC
   return
