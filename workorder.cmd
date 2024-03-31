@@ -29,6 +29,7 @@ if_1 then
       }
       var material %3
       put #echo Yellow Crafting %difficulty %discipline work orders in %material.
+      put #echo %alertwindow Yellow Crafting %difficulty %discipline work order in %material.
     }
     else
     {
@@ -63,9 +64,6 @@ gosub STOWALL
 gosub CRAFTINGSTART
 if (%workorderbail = 1) then return
 gosub CRAFTREPAIR
-
-put #echo Yellow Crafting %difficulty %discipline work order in %material.
-put #echo %alertwindow Yellow Crafting %difficulty %discipline work order in %material.
 
 MAIN:
   gosub WORKORDER

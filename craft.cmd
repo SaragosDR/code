@@ -15,17 +15,9 @@ if_1 then
     goto HELPDISPLAY
   }
   if_2 then
-  {
-    if_3 then
-    else
-    {
-      put #echo Must specify a material.
-      goto HELPDISPLAY
-    }
-  }
   else
   {
-    put #echo Must specify an item.
+    put #echo Must specify an material.
     goto HELPDISPLAY
   }
 }
@@ -34,8 +26,7 @@ else
   goto HELPDISPLAY
 }
 var discipline %1
-var product %2
-var material %3
+var material %2
 
 
 var varset $varset
@@ -44,6 +35,7 @@ var storage $m%varsetstorage
 var alertwindow >$m%varsetalertwindow
 
 var workorder 0
+var quantity 1
 gosub AREAVARINIT
 gosub STOWALL
 
@@ -54,8 +46,8 @@ MAIN:
   exit
   
 HELPDISPLAY:
-  put #echo mono Syntax: .craft <discipline> <item> <material>
-  put #echo mono Should start in front of an anvil.
+  put #echo mono Syntax: .craft <discipline> <material>
+  put #echo mono Should start in front of an anvil for forging.
   put #echo mono Crafting book should start turned to the correct page.
-  put #echo mono Ingot should be in your crafting storage.
+  put #echo mono Material should be in your crafting storage.
   exit

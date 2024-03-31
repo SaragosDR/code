@@ -102,7 +102,30 @@ SETDEFAULTS:
 
 VARCHECKS:
   #GENERAL 
-  if !matchre("$preimum", "\b(YES|NO)\b") then put #var premium NO
+  #DEATH_DISCO
+  if !matchre("$deathaction", "\b(logout|alert)\b") then put #var deathaction logout
+  if !matchre("$disconnectaction", "\b(reconnect|quit)\b") then put #var disconnectaction reconnect
+  
+  #ALERTS
+  if !matchre("$alertwindow", "\b(Main|Log|Conversation)\b") then put #var alertwindow Log
+  if !matchre("$healthalerts", "\b(YES|NO)\b") then put #var healthalerts YES
+  if !matchre("$healthalertnum", "\b(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99)\b") then put #var healthalertnum 85
+  if !matchre("$nervealerts", "\b(YES|NO)\b") then put #var nervealerts YES
+  if !matchre("$sorceryalerts", "\b(YES|NO)\b") then put #var sorceryalerts YES
+  if !matchre("$speechalerts", "\b(YES|NO)\b") then put #var speechalerts YES
+  if !matchre("$arrivalalerts", "\b(YES|NO)\b") then put #var arrivalalerts NO
+  if !matchre("$emotealerts", "\b(YES|NO)\b") then put #var emotealerts YES
+  if !matchre("$gmalerts", "\b(YES|NO)\b") then put #var gmalerts YES
+  if !matchre("$pvpalerts", "\b(YES|NO)\b") then put #var pvpalerts YES
+  if !matchre("$pvpstealthalerts", "\b(YES|NO)\b") then put #var pvpstealthalerts NO
+  if !matchre("$inventoryalerts", "\b(YES|NO)\b") then put #var inventoryalerts YES
+  if !matchre("$paranoiaalerts", "\b(YES|NO)\b") then put #var paranoiaalerts NO
+  if !matchre("$bugout", "\b(YES|NO)\b") then put #var bugout NO
+  if $bugoutnum > 0 then
+  else put #var bugoutnum 1
+  if !matchre("$bugoutonbleed", "\b(YES|NO)\b") then put #var bugoutonbleed NO
+  if !matchre("$bugoutonsend", "\b(YES|NO)\b") then put #var bugoutonsend YES
+  
   if !matchre("$m%checkmodealmanac", "\b(YES|NO)\b") then put #var m%checkmodealmanac NO
   if !def(m%checkmodealmanacitem) then put #var m%checkmodealmanacitem almanac
   if !matchre("$m%checkmodealmanacalerts", "\b(YES|NO)\b") then put #var m%checkmodealmanacalerts NO
@@ -121,10 +144,6 @@ VARCHECKS:
   if !matchre("$m%checkmodemovewhistle", "\b(YES|NO)\b") then put #var m%checkmodemovewhistle NO
   if !matchre("$m%checkmodemovescream", "\b(YES|NO)\b") then put #var m%checkmodemovescream NO
   if !matchre("$m%checkmodemovevanish", "\b(YES|NO)\b") then put #var m%checkmodemovevanish NO
-  if !matchre("$m%checkmodebugout", "\b(YES|NO)\b") then put #var m%checkmodebugout NO
-  if $m%checkmodebugoutnum > 0 then
-  else put #var m%checkmodebugoutnum 1
-  if !matchre("$m%checkmodebugoutonbleed", "\b(YES|NO)\b") then put #var m%checkmodebugoutonbleed NO
   if $m%checkmodebugoutroom > 0 then
   else put #var m%checkmodebugoutroom 1
   
@@ -1369,25 +1388,6 @@ VARCHECKS:
   if !matchre("$m%checkmodeperformtown", "\b(%performtownlist)\b") then put #var m%checkmodeperformtown Crossing
   if !matchre("$m%checkmodeforgingtown", "\b(%forgingtownlist)\b") then put #var m%checkmodeforgingtown crossing
   
-  #DEATH_DISCO
-  if !matchre("$deathaction", "\b(logout|alert)\b") then put #var deathaction logout
-  if !matchre("$disconnectaction", "\b(reconnect|quit)\b") then put #var disconnectaction reconnect
-  
-  #ALERTS
-  if !matchre("$alertwindow", "\b(Main|Log|Conversation)\b") then put #var alertwindow Log
-  if !matchre("$healthalerts", "\b(YES|NO)\b") then put #var healthalerts YES
-  if !matchre("$healthalertnum", "\b(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99)\b") then put #var healthalertnum 85
-  if !matchre("$nervealerts", "\b(YES|NO)\b") then put #var nervealerts YES
-  if !matchre("$sorceryalerts", "\b(YES|NO)\b") then put #var sorceryalerts YES
-  if !matchre("$speechalerts", "\b(YES|NO)\b") then put #var speechalerts YES
-  if !matchre("$arrivalalerts", "\b(YES|NO)\b") then put #var arrivalalerts NO
-  if !matchre("$emotealerts", "\b(YES|NO)\b") then put #var emotealerts YES
-  if !matchre("$gmalerts", "\b(YES|NO)\b") then put #var gmalerts YES
-  if !matchre("$pvpalerts", "\b(YES|NO)\b") then put #var pvpalerts YES
-  if !matchre("$pvpstealthalerts", "\b(YES|NO)\b") then put #var pvpstealthalerts NO
-  if !matchre("$inventoryalerts", "\b(YES|NO)\b") then put #var inventoryalerts YES
-  if !matchre("$paranoiaalerts", "\b(YES|NO)\b") then put #var paranoiaalerts NO
-  
   #UPKEEP
   if !matchre("$m%checkmodeautoupkeep", "\b(YES|NO)\b") then put #var m%checkmodeautoupkeep NO
   if !matchre("$m%checkmodeauonhealth", "\b(YES|NO)\b") then put #var m%checkmodeauonhealth NO
@@ -1659,7 +1659,7 @@ VARCHECKS:
   
   if !matchre("$m%checkmodecrafting", "\b(YES|NO)\b") then put #var m%checkmodecrafting NO
   if !def(m%checkmodecraftingstorage) then put #var m%checkmodecraftingstorage crafting satchel
-  if !matchre("$m%checkmodecraftingstorageinportal", "\b(YES|NO)\b") then put #var m%checkmodecraftingstorageinportal NO
+  if !matchre("$m%checkmodecraftingstoragelocation", "\b(none|portal|vault)\b") then put #var m%checkmodecraftingstoragelocation none
   if !matchre("$m%checkmodeforging", "\b(YES|NO)\b") then put #var m%checkmodeforging NO
   if !matchre("$m%checkmodeforgingdifficulty", "\b(easy|challenging|hard)\b") then put #var m%checkmodeforgingdifficulty challenging
   if !matchre("$m%checkmodeforgingdiscipline", "\b(weaponsmithing|armorsmithing|blacksmithing)\b") then put #var m%checkmodeforgingdiscipline weaponsmithing
@@ -1671,10 +1671,20 @@ VARCHECKS:
   if $m%checkmodeforgingmaxquantity >= 0 then
   else put #var m%checkmodeforgingmaxquantity 4
   if !matchre("$m%checkmodeforgingsmelting", "\b(YES|NO)\b") then put #var m%checkmodeforgingsmelting YES
+  if !matchre("$m%checkmodeoutfitting", "\b(YES|NO)\b") then put #var m%checkmodeoutfitting NO
+  if !matchre("$m%checkmodeoutfittingdifficulty", "\b(easy|challenging|hard)\b") then put #var m%checkmodeoutfittingdifficulty challenging
+    #if tolower("%1") = "outfittingcloth" then goto TEXTSET
+    #if tolower("%1") = "outfittingleather" then goto TEXTSET
+  if !matchre("$m%checkmodeoutfittingrepair", "\b(YES|NO)\b") then put #var m%checkmodeoutfittingrepair YES
+  if $m%checkmodeoutfittingmaxyards >= 0 then
+  else put #var m%checkmodeoutfittingmaxyards 100
+  if $m%checkmodeoutfittingmaxquantity >= 0 then
+  else put #var m%checkmodeoutfittingmaxquantity 4  
   if !def(m%checkmodeawl) then put #var m%checkmodeawl awl
   if !def(m%checkmodebellows) then put #var m%checkmodebellows leather bellows
   if !def(m%checkmodehammer) then put #var m%checkmodehammer diagonal-peen hammer
   if !def(m%checkmodeknittingneedles) then put #var m%checkmodeknittingneedles knitting needles
+  if !def(m%checkmodepliers) then put #var m%checkmodepliers pliers
   if !def(m%checkmodescissors) then put #var m%checkmodescissors scissors
   if !def(m%checkmodesewingneedles) then put #var m%checkmodesewingneedles sewing needles
   if !def(m%checkmodeshovel) then put #var m%checkmodeshovel curved shovel
@@ -3751,11 +3761,11 @@ STOWFAIL2:
 STOWUNLOADP:
   pause
 STOWUNLOAD:
-  if (%stowhandstring = "left") then
+  if ("%stowhandstring" = "left") then
   {
     gosub SWAP
   }
-  if $lefthand != "Empty" then
+  if ("$lefthand" != "Empty") then
   {
 		gosub STOW left
   }
@@ -4444,7 +4454,7 @@ UNLOADP:
   pause
 UNLOAD:
   matchre UNLOADP %waitstring
-  matchre RETURN You unload|isn't loaded!|You remain concealed by your surroundings
+  matchre RETURN You unload|isn't loaded!|You remain concealed by your surroundings|You don't have a ranged weapon to unload\.
   put unload
   matchwait 5
   var timeoutsub UNLOAD
@@ -4506,7 +4516,8 @@ WIELDMAIN:
   matchre WIELDP %waitstring
   matchre RETURN You draw out your|You're already holding|You draw your
   matchre WIELDGET You can't seem|You find it difficult to wield|Your (right|left) hand is too injured to draw
-  match WIELDBOND Wield what?
+  #match WIELDBOND Wield what?
+  match RETURN Wield what?
   match WIELDSTOW You need to have your
   matchre WIELDREM You'll need to remove it first!|You're wearing
   put wield %wieldhandstring %wielditemstring
@@ -11313,9 +11324,12 @@ PREMIUMRINGBAD:
   var goodring 0
   return
 
+PREMIUMRINGBACK:
+  var premringleaving $0
+  goto PREMIUMRINGBACKMAIN
 PREMIUMRINGBACKP:
   pause
-PREMIUMRINGBACK:
+PREMIUMRINGBACKMAIN:
   matchre PREMIUMRINGBACKP %waitstring
   matchre RETURN The world grows blurry and indistinct for a moment.  You look around and find yourself at...
   match RETURN You need to be in Fang Cove to do that!
@@ -11323,11 +11337,19 @@ PREMIUMRINGBACK:
   put pull %premiumringitem
   matchwait
 
+PREMGOODRETURN:
+  var goodring 1
+  return
+
 PREMBADRETURN:
+  if ("%premringleaving" = "portal") then
+  {
+    var goodring 0
+    return
+  }
   put #echo %alertwindow Yellow [UPKEEP]: Unable to return yet due to premium ring timer.  Waiting and retrying.
   pause 60
   goto PREMIUMRINGBACK
-
 
 # REPLACE input:
 #               v-no quotes, yes %

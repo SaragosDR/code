@@ -129,12 +129,13 @@ SET:
     if tolower("%1") = "arrivalalerts" then goto REGYESNOSET
     if tolower("%1") = "gmalerts" then goto REGYESNOSET
     if tolower("%1") = "paranoiaalerts" then goto REGYESNOSET
+    if tolower("%1") = "bugout" then goto REGYESNOSET
+    if tolower("%1") = "bugoutnum" then goto REGTEXTSET
+    if tolower("%1") = "bugoutonbleed" then goto REGYESNOSET
+    if tolower("%1") = "bugoutonsend" then goto REGYESNOSET
     if tolower("%1") = "pvpalerts" then goto REGYESNOSET
     if tolower("%1") = "pvpstealthalerts" then goto REGYESNOSET
     if tolower("%1") = "inventoryalerts" then goto REGYESNOSET
-    if tolower("%1") = "bugout" then goto YESNOSET
-    if tolower("%1") = "bugoutnum" then goto TEXTSET
-    if tolower("%1") = "bugoutonbleed" then goto YESNOSET
     if tolower("%1") = "bugoutroom" then goto TEXTSET
     if tolower("%1") = "autoupkeep" then goto YESNOSET
     if tolower("%1") = "aumoveshard" then goto YESNOSET
@@ -974,7 +975,7 @@ SET:
     if tolower("%1") = "sanowretitem" then goto TEXTSET
     if tolower("%1") = "crafting" then goto YESNOSET
     if tolower("%1") = "craftingstorage" then goto TEXTSET
-    if tolower("%1") = "craftingstorageinportal" then goto YESNOSET
+    if tolower("%1") = "craftingstoragelocation" then goto TEXTSET
     if tolower("%1") = "forging" then goto YESNOSET
     if tolower("%1") = "forgingdifficulty" then goto TEXTSET
     if tolower("%1") = "forgingdiscipline" then goto TEXTSET
@@ -984,11 +985,19 @@ SET:
     if tolower("%1") = "forgingmaxvolumes" then goto TEXTSET
     if tolower("%1") = "forgingmaxquantity" then goto TEXTSET
     if tolower("%1") = "forgingsmelting" then goto YESNOSET
+    if tolower("%1") = "outfitting" then goto YESNOSET
+    if tolower("%1") = "outfittingdifficulty" then goto TEXTSET
+    if tolower("%1") = "outfittingcloth" then goto TEXTSET
+    if tolower("%1") = "outfittingleather" then goto TEXTSET
+    if tolower("%1") = "outfittingrepair" then goto YESNOSET
+    if tolower("%1") = "outfittingmaxyards" then goto TEXTSET
+    if tolower("%1") = "outfittingmaxquantity" then goto YESNOSET
     if tolower("%1") = "awl" then goto TEXTSET
     if tolower("%1") = "bellows" then goto TEXTSET
     if tolower("%1") = "hammer" then goto TEXTSET
     if tolower("%1") = "knittingneedles" then goto TEXTSET
     if tolower("%1") = "scissors" then goto TEXTSET
+    if tolower("%1") = "pliers" then goto TEXTSET
     if tolower("%1") = "sewingneedles" then goto TEXTSET
     if tolower("%1") = "shovel" then goto TEXTSET
     if tolower("%1") = "slickstone" then goto TEXTSET
@@ -2132,8 +2141,12 @@ DISPLAYGENERAL:
 	gosub REGOUTPUT PvPAlerts
 	gosub REGOUTPUT PvPStealthAlerts
 	gosub REGOUTPUT ArrivalAlerts
-	put #echo
   gosub REGOUTPUT ParanoiaAlerts
+  put #echo
+  gosub REGOUTPUT Bugout
+  gosub REGOUTPUT BugoutNum
+  gosub REGOUTPUT BugoutOnBleed
+  gosub REGOUTPUT BugoutOnSend
   put #echo
 	gosub OUTPUT Almanac AlmanacItem
 	gosub OUTPUT AlmanacAlerts
@@ -2399,8 +2412,8 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT NonComSanowret
   put #echo
   gosub OUTPUT Crafting
-  gosub OUTPUT CraftingStorage
-  gosub OUTPUT CraftingStorageInPortal (CraftingStorage container stored in portal when not direclty in use)
+  gosub OUTPUT CraftingStorage (should have length at least 15 spans to accomodate all supplies)
+  gosub OUTPUT CraftingStorageLocation (CraftingStorage container stored in portal/vault when not direclty in use)
   gosub OUTPUT Forging
   gosub OUTPUT ForgingDifficulty
   gosub OUTPUT ForgingDiscipline
@@ -2410,13 +2423,20 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT ForgingMaxVolumes
   gosub OUTPUT ForgingMaxQuantity
   gosub OUTPUT ForgingSmelting
+  gosub OUTPUT Outfitting
+  gosub OUTPUT OutfittingDifficulty
+  gosub OUTPUT OutfittingCloth
+  gosub OUTPUT OutfittingLeather
+  gosub OUTPUT OutfittingRepair
+  gosub OUTPUT OutfittingMaxYards
+  gosub OUTPUT OutfittingMaxQuantity
   put #echo
 	gosub OUTPUT awl bellows
 	gosub OUTPUT hammer knittingneedles
-	gosub OUTPUT scissors sewingneedles
-	gosub OUTPUT shovel slickstone
-	gosub OUTPUT rod tongs
-	gosub OUTPUT yardstick
+	gosub OUTPUT pliers scissors
+	gosub OUTPUT sewingneedles shovel
+	gosub OUTPUT slickstone rod
+	gosub OUTPUT tongs yardstick
 	put #echo
 	gosub OUTPUT Research
 	gosub OUTPUT GAFPrepMana GAFAddMana
@@ -3009,10 +3029,6 @@ DISPLAYMOVEMENT:
   put #echo
   #put #echo mono MoveClenchShard: $m$varsetmoveclenchshard
   #put #echo mono ShardItem: $m$varsetsharditem
-  gosub OUTPUT Bugout
-  gosub OUTPUT BugoutNum
-  gosub OUTPUT BugoutOnBleed
-  put #echo
   gosub OUTPUT CustomMovement
   gosub OUTPUT KillBeforeMove
   gosub OUTPUT MoveTimeout
@@ -3348,10 +3364,6 @@ VARCOPYGENERAL:
   return
   
 VARCOPYMOVEMENT:
-  put #var m%destbugout $m%sourcebugout
-  put #var m%destbugoutnum $m%sourcebugoutnum
-  put #var m%destbugoutonbleed $m%sourcebugoutonbleed
-
   put #var m%destcustommovement $m%sourcecustommovement
   put #var m%destkillbeforemove $m%sourcekillbeforemove
   put #var m%destmovetimeout $m%sourcemovetimeout
@@ -3534,7 +3546,7 @@ VARCOPYNONCOMBAT:
   
   put #var m%destcrafting $m%sourcecrafting
   put #var m%destcraftingstorage $m%sourcecraftingstorage
-  put #var m%destcraftingstorageinportal $m%sourcecraftingstorageinportal
+  put #var m%destcraftingstoragelocation $m%sourcecraftingstoragelocation
   put #var m%destforging $m%sourceforging
   put #var m%destforgingdifficulty $m%sourceforgingdifficulty
   put #var m%destforgingdiscipline $m%sourceforgingdifscipline
@@ -3544,10 +3556,18 @@ VARCOPYNONCOMBAT:
   put #var m%destforgingmaxvolumes $m%sourceforgingmaxvolumes
   put #var m%destforgingmaxquantity $m%sourceforgingmaxquantity
   put #var m%destforgingsmelting $m%sourceforgingsmelting
+  put #var m%destoutfitting $m%sourceoutfitting
+  put #var m%destoutfittingdifficulty $m%sourceoutfittingdifficulty
+  put #var m%destoutfittingleather $m%sourceoutfittingleather
+  put #var m%destoutfittingcloth $m%sourceoutfittingcloth
+  put #var m%destoutfittingrepair $m%sourceoutfittingrepair
+  put #var m%destoutfittingmaxyards $m%sourceoutfittingmaxyards
+  put #var m%destoutfittingmaxquantity $m%sourceoutfittingmaxquantity
   put #var m%destawl $m%sourceawl
   put #var m%destbellows $m%sourcebellows
   put #var m%desthammer $m%sourcehammer
   put #var m%destknittingneedles $m%sourceknittingneedles
+  put #var m%destpliers $m%sourcespliers
   put #var m%destscissors $m%sourcescissors
 	put #var m%destsewingneedles $m%sourcesewingneedles
 	put #var m%destshovel $m%sourceshovel

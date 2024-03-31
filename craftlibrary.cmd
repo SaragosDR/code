@@ -1,17 +1,21 @@
-
-var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
-var disciplines weaponsmithing|armorsmithing|blacksmithing|tailoring|knitting
+var disciplines weaponsmithing|armorsmithing|blacksmithing|tailoring
 var difficulties easy|challenging|hard
 
-action var product $1; var quantity $2; var quality $3; var timelimit $4 when \w+ shuffles through some notes and says, "Alright, this is an order for(?:a|an|some)? ?(.*)\. I need (\d+) (finely-crafted|of superior quality|of exceptional quality), made from any material and due in (\d+) roisaen\.
+action var product $1; var quantity $2; var quality $3; var timelimit $4 when \w+ shuffles through some notes and says, "Alright, this is an order for(?:a|an|some)? ?(.*)\. I need (\d+) (finely-crafted|of superior quality|of exceptional quality), made from any (?:material|leather|fabric) and due in (\d+) roisaen\.
+
 action var chapter $1 when You seem to recall this item being somewhere in chapter (\d+) of the instruction book\.
 action var volume $1 when \(1\) refined metal ingot \((\d+) volume\)
+action var yards $1; var materialnoun cloth when \(1\) finished fabric cloth \((\d+) yards\)
+action var yards $1; var materialnoun leather when \(1\) refined leather material \((\d+) yards\)
+
 action var polelong $1 when \((\d+)\) finished long wooden pole
 action var poleshort $1 when \((\d+)\) finished short wooden pole
 action var haft $1 when \((\d+)\) finished wooden haft
 action var hilt $1 when \((\d+)\) finished wooden hilt
 action var cordshort $1 when \((\d+)\) finished short leather cord
+action var cordlong $1 when \((\d+)\) finished long leather cord
 action var handle $1 when \((\d+)\) finished metal shield handle
+action var handleleather $1 when \((\d+)\) finished leather shield handle
 action var boss $1 when \((\d+)\) finished metal shield boss
 action var padlarge $1 when \((\d+)\) finished large cloth padding
 action var padsmall $1 when \((\d+)\) finished small cloth padding
@@ -36,7 +40,7 @@ AREAVARINIT:
     if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then
     {
       var mastername Yalda
-      var masterrange 865|902|960|961|905|962|963|906|1021
+      var masterrange 961|960|903|904|902|865|906|1021|905|962|963 
       var suppliesroom 906
       var bulkroom 1021
       var toolroom 905
@@ -47,6 +51,19 @@ AREAVARINIT:
       var anvilrange 962|963|907|908|909
       var privateforge 906
       var privateforgedoor stone door
+    }
+    if ("%discipline" = "tailoring") then
+    {
+      var mastername Milline
+      var masterrange 873|910|911|912|913|914|915|916
+      var suppliesroom 914
+      var bulkroom 0
+      var toolroom 913
+      var partsroom 0
+      var repairroom 9114
+      var repairname clerk
+      var workroom 917
+      #var workrooms 917|918|919|920|921|922|923|924
     }
   }
   #SHARD
@@ -105,13 +122,24 @@ AREAVARINIT:
       var privateforge 402
       var privateforgedoor battered doors
     }
+    if ("%discipline" = "tailoring") then
+    {
+      var mastername Master
+      var masterrange 474|466|467|468|469|470|471|472|473
+      var suppliesroom 471
+      var bulkroom 0
+      var toolroom 473
+      var partsroom 0
+      var repairroom 473
+      var repairname clerk
+    }
   }
   return
 
 CRAFTVARLOAD:
   var crafting $m%varsetcrafting
   var craftingstorage $m%varsetcraftingstorage
-  var craftingstorageinportal $m%varsetcraftingstorageinportal
+  var craftingstoragelocation $m%varsetcraftingstoragelocation
   var forging $m%varsetforging
   var forgingdifficulty $m%varsetforgingdifficulty
   var forgingmaterial $m%varsetforgingmaterial
@@ -122,10 +150,19 @@ CRAFTVARLOAD:
   var forgingmaxquantity $m%varsetforgingmaxquantity
   var forgingsmelting $m%varsetforgingsmelting
   
+  var outfitting $m%varsetoutfitting
+  var outfittingdifficulty $m%varsetoutfittingdifficulty
+  var outfittingcloth $m%varsetoutfittingcloth
+  var outfittingleather $m%varsetoutfittingleather
+  var outfittingrepair $m%varsetoutfittingrepair
+  var outfittingmaxquantity $m%varsetoutfittingmaxquantity
+  var outfittingmaxyards $m%varsetoutfittingmaxyards
+  
   var awl $m%varsetawl
   var bellows $m%varsetbellows
   var hammer $m%varsethammer
   var knittingneedles $m%varsetknittingneedles
+  var pliers $m%varsetpliers
   var scissors $m%varsetscissors
   var sewingneedles $m%varsetsewingneedles
   var shovel $m%varsetshovel
@@ -140,6 +177,7 @@ CRAFTVARLOAD:
   var mindstatebegin $Forging.LearningRate
   var timebegin $gametime
   if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then var crafttype forging
+  if ("%discipline" = "tailoring") then var crafttype outfitting
   var forgingrepairlist %bellows|%hammer|%shovel|%rod|%tongs
   var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
   
@@ -158,7 +196,7 @@ CRAFTINGEND:
   if ("$righthand" != "Empty") then gosub PUTITEM my $righthandnoun in my %craftingstorage
   if ("$lefthand" != "Empty") then gosub PUTITEM my $lefthandnoun in my %craftingstorage
   gosub CLOSEITEM my %craftingstorage
-  if ("%craftingstorageinportal" = "YES") then
+  if ("%craftingstoragelocation" = "portal") then
   {
     gosub REMITEM %craftingstorage
     gosub PUTITEM %craftingstorage in my portal
@@ -169,7 +207,16 @@ CRAFTINGSTART:
   gosub FINDITEM %craftingstorage
   if (%finditemfound = 0) then
   {
-    if ("%craftingstorageinportal" = "YES") then
+    if ("%craftingstoragelocation" = "vault") then
+    {
+      if ("%forgingtown" != "%vaulttown") then
+      {
+        put #echo %alertwindow Yellow CraftingStorageLocation is Vault, but VaultTown != ForgingTown!  Ending crafting.
+        gosub CRAFTINGABORT
+        return
+      }
+    }
+    if ("%craftingstoragelocation" = "portal") then
     {
       put look in my portal
       gosub GETITEM %craftingstorage in my portal
@@ -199,72 +246,91 @@ WORKORDER:
   gosub TASKACQUIRE
   if (%workorderbail = 1) then return
   gosub PUTITEM %discipline book in %craftingstorage
-  put #echo Yellow Work Order: %quantity %product %quality in %timelimit roisaen.
-  put #echo Yellow Volumes: %totalvolume
-  put #echo Yellow CordLong: %totalcordlong.....CordShort: %totalcordshort
-  put #echo Yellow Hafts: %totalhaft.....Hilts: %totalhilt
-  put #echo Yellow Long Poles: %totalpolelong.....Short Poles: %totalpoleshort
-  put #echo Yellow Handles: %totalhandle.....Bosses: %totalboss
-  put #echo Yellow PadLarge: %totalpadlarge.....PadSmall: %totalpadsmall
-  put #echo Yellow BackingLarge: %totalbackinglarge.....BackingSmall: %totalbackingsmall
-  
+  if ("%crafttype" = "forging") then
+  {
+    put #echo Yellow Work Order: %quantity %product %quality in %timelimit roisaen.
+    put #echo Yellow Volumes: %totalvolume
+    put #echo Yellow CordLong: %totalcordlong.....CordShort: %totalcordshort
+    put #echo Yellow Hafts: %totalhaft.....Hilts: %totalhilt
+    put #echo Yellow Long Poles: %totalpolelong.....Short Poles: %totalpoleshort
+    put #echo Yellow Handles: %totalhandle.....Bosses: %totalboss
+    put #echo Yellow PadLarge: %totalpadlarge.....PadSmall: %totalpadsmall
+    put #echo Yellow BackingLarge: %totalbackinglarge.....BackingSmall: %totalbackingsmall
+  }
+  if ("%crafttype" = "outfitting") then
+  {
+    put #echo Yellow Work Order: %quantity %product %quality in %timelimit roisaen.
+    put #echo Yellow Yards: %totalyards
+    put #echo Yellow CordLong: %totalcordlong.....HandleLeather: %totalhandleleather
+    put #echo Yellow PadLarge: %totalpadlarge.....PadSmall: %totalpadsmall
+    exit
+  }
   #MATERIALS_PURCHASE
-  #CHECKING_EXISTING_INGOT
-  var goodingot 0
-  gosub INGOTCHECK
-  if (%goodingot != 1) then
+  if ("%crafttype" = "outfitting") then
   {
-    #PURCHASING_INGOTS
-    var ingotsused 0
-    gosub ORDERBULK
-    if ("%forgingsmelting" = "YES") then gosub ORDERMATERIALS
-    if (%ingotsused = 0) then
+    #CHECKING_EXISTING_MATERIAL
+    
+  }
+  if ("%crafttype" = "forging") then
+  {
+    #CHECKING_EXISTING_INGOT
+    var goodingot 0
+    gosub INGOTCHECK
+    if (%goodingot != 1) then
     {
-      put #echo Yellow Could not find a combination of ingots to use when smelting is %forgingsmelting.  Turning off forging.
-      gosub CRAFTINGABORT
-      return
-    }
-  }
-  else
-  {
-    var ingotsused 1
-    put #echo Yellow Had a big enough ingot already!
-  }
-  #PURCHASING_PARTS
-  gosub ORDERPARTS
-  
-  #PURCHASING_OIL
-  gosub COUNTOIL
-  put #echo oilcount: %oilcount
-  put #echo quantity: %quantity
-  if (%oilcount < %quantity) then
-  {
-      if ($roomid != %partsroom) then gosub MOVE %toolroom
-      gosub CRAFTINGORDER 6
-      gosub PUTITEM my oil in my %craftingstorage
-  }
-
-  #SMELTING
-  put #echo Yellow IngotsUsed: %ingotsused
-  if (%ingotsused > 1) then
-  {
-    if ("%forgingsmelting" = "YES") then
-    {
-      gosub FINDCRUCIBLE
-      if (%foundcrucible = 0) then
+      #PURCHASING_INGOTS
+      var ingotsused 0
+      gosub ORDERBULK
+      if ("%forgingsmelting" = "YES") then gosub ORDERMATERIALS
+      if (%ingotsused = 0) then
       {
-        put #echo Yellow No free crucibles!
-        put store default %storage
+        put #echo Yellow Could not find a combination of ingots to use when smelting is %forgingsmelting.  Turning off forging.
+        gosub CRAFTINGABORT
         return
       }
-      gosub SMELTPUT %material
-      gosub SMELT
     }
     else
     {
-      put #echo Yellow needed more than one ingot, but smelting is turned off!  Turning off crafting.
-      gosub CRAFTINGABORT
-      return
+      var ingotsused 1
+      put #echo Yellow Had a big enough ingot already!
+    }
+    #PURCHASING_PARTS
+    gosub ORDERPARTS
+    
+    #PURCHASING_OIL
+    gosub COUNTOIL
+    put #echo oilcount: %oilcount
+    put #echo quantity: %quantity
+    if (%oilcount < %quantity) then
+    {
+        if ($roomid != %partsroom) then gosub MOVE %toolroom
+        gosub CRAFTINGORDER 6
+        gosub PUTITEM my oil in my %craftingstorage
+    }
+
+    #SMELTING
+    put #echo Yellow IngotsUsed: %ingotsused
+    if (%ingotsused > 1) then
+    {
+      if ("%forgingsmelting" = "YES") then
+      {
+        gosub FINDCRUCIBLE
+        if (%foundcrucible = 0) then
+        {
+          put #echo Yellow No free crucibles!
+          put store default %storage
+          return
+        }
+        gosub SMELTPUT %material
+        gosub SMELT
+      }
+      else
+      {
+        put #echo Yellow Needed more than one ingot, but smelting is turned off!  Turning off crafting.
+        put #echo %alertwindow Yellow Needed more than one ingot, but smelting is turned off!  Turning off crafting.
+        gosub CRAFTINGABORT
+        return
+      }
     }
   }
   #CRAFTING
@@ -289,6 +355,13 @@ WORKORDER:
     }
   }
   gosub GETITEM %discipline book
+  if ((!matchre("$righthandnoun", "book")) && (!matchre("$lefthandnoun", "book"))) then
+  {
+    put #echo Yellow Could not find %discipline book!  Turning off crafting.
+    put #echo %alertwindow Yellow Could not find %discipline book!  Turning off crafting.
+    gosub CRAFTINGABORT
+    return
+  }
   gosub CRAFTING
   if (%usingprivateroom = 1) then
   {
@@ -338,6 +411,26 @@ CRAFTREPAIR:
   }
   return
 
+FABRICCHECK:
+  gosub GETITEM %material %materialnoun in my %craftingstorage
+  if ("$righthand" = "Empty") then return
+  action (materialcheck) var materialyards $1 when About (\d+) volume of metal was used in this item's construction\.
+  gosub ANALYZECRAFT %material %materialnoun
+  action (materialcheck) off
+  put #echo Yellow ingotvolume: %ingotvolume
+  if (%ingotvolume >= %totalvolume) then
+  {
+    gosub PUTITEM ingot in my %craftingstorage
+    var goodingot 1
+    return
+  }
+  else
+  {
+    gosub FINDCRUCIBLE
+    gosub DUMPITEM %material ingot
+    goto INGOTCHECK
+  }
+
 INGOTCHECK:
   gosub GETITEM %material ingot in my %craftingstorage
   if ("$righthand" = "Empty") then return
@@ -383,7 +476,7 @@ COUNTOILMAIN:
   matchre COUNTOILGOOD The oil has (\d+) uses remaining\.
   matchre COUNTOILGOOD The oil has (\d+) use remaining\.
   match RETURN I could not find what you were referring to.
-  put count my oil
+  put count my oil in my %craftingstorage
   matchwait
   
 COUNTOILGOOD:
@@ -408,6 +501,28 @@ CRAFTING:
 CRAFTINGMAIN:
   if (%craftcount >= %quantity) then return
   gosub GETITEM %discipline book
+  if ((!matchre("$righthandnoun", "book")) && (!matchre("$lefthandnoun", "book"))) then
+  {
+    put #echo Yellow Could not find %discipline book!  Turning off crafting.
+    put #echo %alertwindow Yellow Could not find %discipline book!  Turning off crafting.
+    gosub CRAFTINGABORT
+    return
+  }
+  if (%workorder != 1 ) then
+  {
+    action (pageread) on
+    action (pageread) var productcheck $3 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (.*)    \=\-
+    if ("%discipline" = "tailoring") then
+    {
+      action (pageread) var materialnoun $1 when \(\d+\) (?:finished|refined) fabric (cloth|yarn) \(\d+ yards\)
+    }
+    gosub READBOOK my %discipline book
+    gosub TAPNOUN %productcheck
+    var product %nountap
+    action (pageread) off
+    #echo product: %product
+    #echo materialnoun: %materialnoun
+  }
   gosub STUDYBOOK my %discipline book
   gosub PUTITEM %discipline book in %craftingstorage
   gosub TAPNOUN %product
@@ -427,6 +542,8 @@ CRAFTINGMAIN:
   }
   if ("%discipline" = "tailoring") then
   {
+    gosub GETITEM my %material %materialnoun in %craftingstorage
+    gosub SWAP
     gosub TAILOR
   }
   if (%workorder = 1) then
@@ -440,7 +557,7 @@ CRAFTINGMAIN:
   else
   {
     gosub STOW right
-    gosub PUTITEM %product in %craftingstorage
+    #gosub PUTITEM %product in %craftingstorage
   }
   math craftcount add 1
   goto CRAFTINGMAIN
@@ -721,6 +838,7 @@ ANVILCHECKMAIN:
   matchre ANVILCHECKP %waitstring
   match ANVILCHECKCLEAN The anvil's surface looks clean and ready for forging.
   matchre ANVILCHECKINGOT On the iron anvil you see a \w+ ingot\.
+  matchre ANVILCHECKDIRTY On the iron anvil you see (a|an|some).* unfinished .*\.
   put look on anvil
   matchwait
 
@@ -732,6 +850,20 @@ ANVILCHECKINGOT:
   var cleananvil 2
   return
 
+ANVILCHECKDIRTY:
+  gosub ANVILCLEAN
+  goto ANVILCHECK
+
+
+ANVILCLEANP:
+  pause
+ANVILCLEAN:
+  match ANVILCLEAN [Do you really want to clean off the anvil?  Clean it one more time to destroy the contents.]
+  match RETURN You stop working and clean off the anvil's surface, discarding
+  put clean anvil
+  matchwait
+  
+  
 FORGE:
   var firstpound 1
   var craftaction pound
@@ -785,7 +917,7 @@ FORGEMAIN:
   }
   if ("%craftaction" = "pliers") then    
   {
-    if (("$righthandnoun" != "pliers") && ("$lefthandnoun" != "pliers")) then gosub GETITEM pliers in my %craftingstorage
+    if (("$righthandnoun" != "pliers") && ("$lefthandnoun" != "pliers")) then gosub GETITEM %pliers in my %craftingstorage
   }
   if ("%craftaction" = "oil") then    
   {
@@ -828,7 +960,7 @@ FORGEMAIN:
   }
   if ("%craftaction" = "bellows") then put push my bellows
 	if ("%craftaction" = "shovel") then put push fuel with my shovel
-	if ("%craftaction" = "oil") then put pour my oil on my %product
+	if ("%craftaction" = "oil") then put pour oil on my %product
 	if ("%craftaction" = "turntongs") then put turn %product on anvil with my tongs
 	if ("%craftaction" = "quench") then put push tub
 	if ("%craftaction" = "grind") then put push grindstone with my %product
@@ -1192,23 +1324,47 @@ FINDMASTER:
   var foundmaster 0
   eval masterrangecount count("%masterrange", "|")
   #put #echo Yellow masterrangecount: %masterrangecount
-  if (matchre("$roomobjs", "Forging Society Master")) then return
-  if (matchre("$roomobjs", "Forging Society Mistress")) then return
+  if ("%crafttype" = "forging") then
+  {
+    if (matchre("$roomobjs", "Forging Society Master")) then return
+    if (matchre("$roomobjs", "Forging Society Mistress")) then return
+  }
+  if ("%crafttype" = "outfitting") then
+  {
+    if (matchre("$roomobjs", "Outfitting Society Master")) then return
+    if (matchre("$roomobjs", "Outfitting Society Mistress")) then return
+  }
   put #echo Yellow Not in the starting room, looking for master.
   gosub FINDMASTERLOOP
 
 FINDMASTERLOOP:
   if (%findmastercount > %masterrangecount) then return
   gosub MOVE %masterrange(%findmastercount)
-  if (matchre("$roomobjs", "Forging Society Master")) then
+  if ("%crafttype" = "forging") then
   {
-    var foundmaster 1
-    return
+    if (matchre("$roomobjs", "Forging Society Master")) then
+    {
+      var foundmaster 1
+      return
+    }
+    if (matchre("$roomobjs", "Forging Society Mistress")) then
+    {
+      var foundmaster 1
+      return
+    }
   }
-  if (matchre("$roomobjs", "Forging Society Mistress")) then
+  if ("%crafttype" = "outfitting") then
   {
-    var foundmaster 1
-    return
+    if (matchre("$roomobjs", "Outfitting Society Master")) then
+    {
+      var foundmaster 1
+      return
+    }
+    if (matchre("$roomobjs", "Outfitting Society Mistress")) then
+    {
+      var foundmaster 1
+      return
+    }
   }
   math findmastercount add 1
   goto FINDMASTERLOOP
@@ -1261,54 +1417,78 @@ GOPRIVATEROOM:
 
 
 TASKACQUIRE:
-  if (("$righthandnoun" != "logbook") && ("$lefthandnoun" != "logbook")) then gosub GETITEM logbook
+  if (("$righthandnoun" != "logbook") && ("$lefthandnoun" != "logbook")) then gosub GETITEM %crafttype logbook
+  if (("$righthandnoun" != "logbook") && ("$lefthandnoun" != "logbook")) then
+  {
+    put #echo Yellow Could not find %crafttype logbook!  Turning off crafting.
+    put #echo %alertwindow Yellow Could not find %crafttype logbook!  Turning off crafting.
+    gosub CRAFTINGABORT
+    return
+  }
+  var materialnoun 0
   gosub LOGBOOKASK %mastername %difficulty %discipline
   if (%workorderbail = 1) then return
   gosub PUTITEM logbook in %craftingstorage
   pause .5
-  eval product replace("%product", "a ", "")
-  eval product replace("%product", "an ", "")
-  eval product replace("%product", "some ", "")
+  #eval product replace("%product", "a ", "")
+  #eval product replace("%product", "an ", "")
+  #eval product replace("%product", "some ", "")
   echo product: %product
   echo quantity: %quantity
   echo timelimit: %timelimit
   echo chapter: %chapter
   
   gosub GETITEM %discipline book
+  if ((!matchre("$righthandnoun", "book")) && (!matchre("$lefthandnoun", "book"))) then
+  {
+    put #echo Yellow Could not find %discipline book!  Turning off crafting.
+    put #echo %alertwindow Yellow Could not find %discipline book!  Turning off crafting.
+    gosub CRAFTINGABORT
+    return
+  }
   gosub TURNBOOK chapter %chapter
-  echo product: %product
+  #echo product: %product
   var page 0
-  action (pageread) var page $1; action (pageread) off when Page (\d+)\:\s*(a|an|some)? (%product)
+  #action (pageread) var page $1; action (pageread) off when Page (\d+)\:\s*(a|an|some)? (%product)
+  action (pageread) var page $1; action (pageread) off when Page (\d+)\: (%product)
   gosub READBOOK my %discipline book
-  pause .5
+  pause 1
   echo page: %page
   if (%page = 0) then
   {
     put #echo %alertwindow Yellow Failed to select a proper page!  Please investigate, turning off forging!
+    put #echo Yellow Failed to select a proper page!  Please investigate, turning off forging!
     gosub CRAFTINGABORT
     return
   }
   gosub TURNBOOK page %page
-  var volume 0
-  var haft 0
-  var hilt 0
-  var cordlong 0
-  var cordshort 0
-  var polelong 0
-  var poleshort 0
-  var handle 0
-  var boss 0
-  var padlarge 0
-  var padsmall 0
-  var backinglarge 0
-  var backingsmall 0
+  if ("%crafttype" = "forging") then
+  {
+    var volume 0
+    var haft 0
+    var hilt 0
+    var cordlong 0
+    var cordshort 0
+    var polelong 0
+    var poleshort 0
+    var handle 0
+    var boss 0
+    var padlarge 0
+    var padsmall 0
+    var backinglarge 0
+    var backingsmall 0
+  }
+  if ("%crafttype" = "outfitting") then
+  {
+    var padlarge 0
+    var padsmall 0
+    var cordlong 0
+    var handleleather 0
+  }
   #action var productcheck $4 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (a|an|some)? (.*)    \=\-
   action var productcheck $3 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (.*)    \=\-
   gosub READBOOK my %discipline book
   pause 1
-  eval productcheck replace("%productcheck", "a ", "")
-  eval productcheck replace("%productcheck", "an ", "")
-  eval productcheck replace("%productcheck", "some ", "")
   echo product: %product
   echo productcheck: %productcheck
   if ("%product" != "%productcheck") then
@@ -1321,48 +1501,91 @@ TASKACQUIRE:
     put #echo Yellow Could not properly calculate quantities!
     exit
   }
-  
-  #TASK_OUTPUT
-  var totalvolume %volume
-  math totalvolume * %quantity
-  var totalcordshort %cordshort
-  math totalcordshort * %quantity
-  var totalcordlong %cordlong
-  math totalcordlong * %quantity
-  var totalhaft %haft
-  math totalhaft * %quantity
-  var totalhilt %hilt
-  math totalhilt * %quantity
-  var totalpolelong %polelong
-  math totalpolelong * %quantity
-  var totalpoleshort %poleshort
-  math totalpoleshort * %quantity
-  var totalhandle %handle
-  math totalhandle * %quantity
-  var totalboss %boss
-  math totalboss * %quantity
-  var totalpadlarge %padlarge
-  math totalpadlarge * %quantity
-  var totalpadsmall %padsmall
-  math totalpadsmall * %quantity
-  var totalbackinglarge %backinglarge
-  math totalbackinglarge * %quantity
-  var totalbackingsmall %backingsmall
-  math totalbackingsmall * %quantity
-  if (%forgingmaxquantity != 0) then
+  eval product replace("%product", "a ", "")
+  eval product replace("%product", "an ", "")
+  eval product replace("%product", "some ", "")
+  #MATERIAL_CALCULATIONS
+  if ("%crafttype" = "outfitting") then
   {
-    if (%quantity > %forgingmaxquantity) then
+    echo materialnoun: %materialnoun
+    echo yards: %yards
+    echo padlarge: %padlarge
+    echo padsmall: %padsmall
+    echo cordlong: %cordlong
+    echo handleleather: %handleleather
+  }
+  if ("%crafttype" = "outfitting") then
+  {
+    var totalyards %yards
+    math totalyards * %quantity
+    var totalcordlong %cordlong
+    math totalcordlong * %quantity
+    var totalhandleleather %handleleather
+    math totalhandleleather * %quantity
+    var totalpadlarge %padlarge
+    math totalpadlarge * %quantity
+    var totalpadsmall %padsmall
+    math totalpadsmall * %quantity
+    if (%outfittingmaxquantity != 0) then
     {
-      put #echo Yellow Quantity greater than ForgingMaxQuantity.  Trying again.
-      goto TASKACQUIRE
+      if (%quantity > %outfittingmaxquantity) then
+      {
+        put #echo Yellow Quantity greater than OutfittingMaxQuantity.  Trying again.
+        goto TASKACQUIRE
+      }
+    }
+    if (%outfittingmaxyards != 0) then
+    {
+      if (%totalyards > %outfittingmaxyards) then
+      {
+        put #echo Yellow Volumes needed greater than OutfittingMaxYards.  Trying again.
+        goto TASKACQUIRE
+      }
     }
   }
-  if (%forgingmaxvolumes != 0) then
+  if ("%crafttype" = "forging") then
   {
-    if (%totalvolume > %forgingmaxvolumes) then
+    var totalvolume %volume
+    math totalvolume * %quantity
+    var totalcordshort %cordshort
+    math totalcordshort * %quantity
+    var totalcordlong %cordlong
+    math totalcordlong * %quantity
+    var totalhaft %haft
+    math totalhaft * %quantity
+    var totalhilt %hilt
+    math totalhilt * %quantity
+    var totalpolelong %polelong
+    math totalpolelong * %quantity
+    var totalpoleshort %poleshort
+    math totalpoleshort * %quantity
+    var totalhandle %handle
+    math totalhandle * %quantity
+    var totalboss %boss
+    math totalboss * %quantity
+    var totalpadlarge %padlarge
+    math totalpadlarge * %quantity
+    var totalpadsmall %padsmall
+    math totalpadsmall * %quantity
+    var totalbackinglarge %backinglarge
+    math totalbackinglarge * %quantity
+    var totalbackingsmall %backingsmall
+    math totalbackingsmall * %quantity
+    if (%forgingmaxquantity != 0) then
     {
-      put #echo Yellow Volumes needed greater than ForgingMaxVolumes.  Trying again.
-      goto TASKACQUIRE
+      if (%quantity > %forgingmaxquantity) then
+      {
+        put #echo Yellow Quantity greater than ForgingMaxQuantity.  Trying again.
+        goto TASKACQUIRE
+      }
+    }
+    if (%forgingmaxvolumes != 0) then
+    {
+      if (%totalvolume > %forgingmaxvolumes) then
+      {
+        put #echo Yellow Volumes needed greater than ForgingMaxVolumes.  Trying again.
+        goto TASKACQUIRE
+      }
     }
   }
   return  

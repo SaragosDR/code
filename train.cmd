@@ -379,8 +379,8 @@ ALERTINIT:
   ##AWARENESS_TRIGGERS##
   if %speechalerts = "YES" then
   { 
-    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,
-    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,
+    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,
+    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "
@@ -431,9 +431,9 @@ ALERTINIT:
     action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 waves a hand in front of your face. when ^(\S+) waves a hand in front of your face.
     action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 winks. when ^(\S+) winks
   }
-  if %gmalerts = "YES" then
+  if ("%gmalerts" = "YES") then
   {
-    action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: SEND $1 when ^SEND(.*)
+    action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: SEND [$1] $2 when ^SEND\[(\w+)\] (.*)
     action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: Question Asked when .*\* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \*(.*)
     action (questionlooker) put #class +questionreader -questionlooker when ^.(\s*(?:\*\s)+\s*).$
     action (questionreader) put #class -questionreader +questionlooker; put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: Question - $1 when ^\s*(.*\?.*)$
@@ -498,12 +498,16 @@ ALERTINIT:
     action var nexthealcheck 0 when You try to creep out of hiding but your injuries cause you to stumble and crash to the ground!
     action var nexthealcheck 0 when Your (.+) is too injured for you to do that.
   }  
-  if ((%bugout = "YES") && (%scriptmode = 1)) then
+  if (("%bugout" = "YES") && (%scriptmode = 1)) then
   {
-    action if (%buggingout = 0) then goto BUGOUT; put #echo %alertwindow Yellow [Bugout]: Bugging out due to low health! when eval $health <= $bugoutnum
-    if ($bugoutonbleed = "YES") then
+    action if (%buggingout = 0) then goto BUGOUT; put #echo %alertwindow Yellow [Bugout]: Bugging out due to low health! when eval $health <= %bugoutnum
+    if ("%bugoutonbleed" = "YES") then
     {
       action if (%buggingout = 0) then goto BUGOUT;put #echo %alertwindow Yellow [Bugout]: Bugging out due to bleeding! when eval $bleeding = 1
+    }
+    if ("%bugoutonsend" = "YES") then
+    {
+      action put #echo %alertwindow Yellow [GM]: SEND [$1] $2; put #echo %alertwindow Yellow [Bugout]: Bugging out due to GM SEND!;goto BUGOUT when ^SEND\[(\w+)\] (.*)
     }
   }
   if %autoupkeep = "YES" then
@@ -2022,9 +2026,10 @@ STATUSVARLOAD:
   return
 
 MAINVARLOAD:
-  var bugout $m%varsetbugout
-  var bugoutnum $m%varsetbugoutnum
-  var bugoutonbleed $m%varsetbugoutonbleed
+  var bugout $bugout
+  var bugoutnum $bugoutnum
+  var bugoutonbleed $bugoutonbleed
+  var bugoutonsend $bugoutonsend
   var bugoutroom $m%varsetbugoutroom
   var killbeforemove $m%varsetkillbeforemove
   var movetimeout $m%varsetmovetimeout
@@ -2716,7 +2721,7 @@ COMBATLOOP:
       put #echo %alertwindow Yellow [TRAIN]: Could not find default storage container %rucksack!  Exiting.
       exit
     }
-    if ("%craftingstorageinportal" = "YES") then
+    if ("%craftingstoragelocation" = "portal") then
     {
       gosub FINDITEM %craftingstorage
       if (%finditemfound = 1) then
@@ -5610,6 +5615,7 @@ MTFORGING:
   gosub CRAFTVARLOAD
   gosub AREAVARINIT
   gosub CRAFTINGSTART
+  if (%workorderbail = 1) then return
   gosub CRAFTREPAIR
   if (%workorderbail = 1) then return
   put #echo Yellow Crafting %difficulty %discipline work order in %material.
@@ -9572,7 +9578,30 @@ ROOMTRAVEL:
 		{
 			if ("%rttravel" = "YES") then
 			{
+			  if ("$zoneid" = "150") then
+			  {
+          #FANGCOVE
+          var fangcovevist 0
+          if ("%premiumring" = "YES") then
+          {
+            gosub LEAVEROOM
+            gosub PREMIUMRINGBACK portal
+            if (%goodring != 1) then
+            {
+              #FANGCOVE_PORTAL
+              gosub MOVE portal
+              move go exit portal
+            }    
+          }
+          else
+          {
+            #FANGCOVE_PORTAL
+            gosub MOVE portal
+            move go exit portal
+          }
+			  }
 				gosub TRAVEL %rttraveldest
+			  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
 			}
 			if ("%rtmove" = "YES") then
 			{
@@ -9581,7 +9610,6 @@ ROOMTRAVEL:
 				eval mlcount count("%rtmovelist","|")
 				gosub MOVELOOP 
 			}
-			if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
 		}
   }
   if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
