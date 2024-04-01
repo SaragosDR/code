@@ -3,13 +3,6 @@
 #
 # Korya's Duskruin Maze Do-er Version 1.2
 #
-
-#
-# Usage: Open the Automapper window before entering the maze.
-# Click New Map, Record, and Allow Duplicate Labels
-# Have dueling slip/rat token in your hand.
-# Run the script, follow instructions if outside the maze
-#
 # Updated by Saragos
 #  Added a command line option for incidentals only - .maze inc
 #  Added a look at the beginning to make sure the first exits are set.
@@ -20,6 +13,15 @@
 #  Search counting will now only decrement if you actually find something.
 #  Script will now report anything it finds to the log window, not just a pet.
 #  At the 5 minutes remaining warning, script will now just search for incidentals.
+#  Added up/down movement options for testing purposes and just in case it's ever needed.
+
+
+#
+# Usage: Open the Automapper window before entering the maze.
+# Click New Map, Record, and Allow Duplicate Labels
+# Have dueling slip/rat token in your hand.
+# Run the script, follow instructions if outside the maze
+#
 
 
 ######################## USER VARIABLES ##############################
@@ -48,7 +50,7 @@ action put #echo >Log yellow Map reset!; goto START when (no longer certain of y
 action math RESET add 1 when ^Shaking off the momentary surprise
 action math RESET add 1 when longer certain of your directions\!$
 action math RESET add 1 when scurries off before you can catch it\!$
-action put #echo >Log yellow WARNING! 5 minutes left! when ^You only have about 5 minutes left in the labyrinth\!
+action put #echo >Log yellow WARNING! 5 minutes left!; var INCIDENTAL 1; VAR PET 0; goto START when ^You only have about 5 minutes left in the labyrinth\!
 action var WARNING 1 when ^You only have about 5 minutes
 action var FOUND 1 when claiming your new pet\.$
 action var NEWEXITS $1 when ^(Obvious exits.*)
@@ -130,7 +132,7 @@ START:
 NEW_ROOM:
   gosub clear
   if matchre ("$roomname","Duskruin, Darkened Antechamber") then goto END_SEARCH
-  if %WARNING != 0 then gosub CHECK_TIMER
+  #if %WARNING != 0 then gosub CHECK_TIMER
   eval EXITS replacere("%NEWEXITS","\, ","|")
   eval EXITS replacere("%EXITS","(^Obvious (exits|paths)\: |\.)","")
 
@@ -372,7 +374,7 @@ return
 
 
 CHECK_TIMER:
-  if %WARNING = 1 then
+  if (%WARNING = 1) then
   {
     var INCIDENTAL 1
     var PET 0

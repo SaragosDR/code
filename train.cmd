@@ -9601,7 +9601,6 @@ ROOMTRAVEL:
           }
 			  }
 				gosub TRAVEL %rttraveldest
-			  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
 			}
 			if ("%rtmove" = "YES") then
 			{
@@ -9610,6 +9609,10 @@ ROOMTRAVEL:
 				eval mlcount count("%rtmovelist","|")
 				gosub MOVELOOP 
 			}
+			if ("%rttravel" = "YES") then
+			{
+			  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
+		  }
 		}
   }
   if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
