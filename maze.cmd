@@ -46,15 +46,19 @@ var DEBUG 0
 
 ############################# SETUP ##################################
 
-action put #echo >Log yellow Map reset!; goto START when (no longer certain of your directions\!$|^Shaking off the momentary surprise|scurries off before you can catch it\!$)
-action math RESET add 1 when ^Shaking off the momentary surprise
-action math RESET add 1 when longer certain of your directions\!$
-action math RESET add 1 when scurries off before you can catch it\!$
+#action put #echo >Log yellow Map reset!; math RESET add 1; goto START when (no longer certain of your directions\!$|^Shaking off the momentary surprise|scurries off before you can catch it\!$)
+#action math RESET add 1 when ^Shaking off the momentary surprise
+#action math RESET add 1 when longer certain of your directions\!$
+#action math RESET add 1 when scurries off before you can catch it\!$
+action put #echo >Log yellow Map reset!; math RESET add 1; goto START when (no longer certain of your directions\!$|^Shaking off the momentary surprise)
 action put #echo >Log yellow WARNING! 5 minutes left!; var INCIDENTAL 1; VAR PET 0; goto START when ^You only have about 5 minutes left in the labyrinth\!
 action var WARNING 1 when ^You only have about 5 minutes
+action put #echo >Log Found $1! when ^You search around and find (.*)!
 action var FOUND 1 when claiming your new pet\.$
 action var NEWEXITS $1 when ^(Obvious exits.*)
 action var NEWEXITS $1 when ^(Obvious paths.*)
+
+var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.
 
 var DIR northwest|north|northeast|east|southeast|south|southwest|west|up|down
 var PREV_DIR southeast|south|southwest|west|northwest|north|northeast|east|down|up
@@ -299,27 +303,32 @@ DO_SEARCH:
   return
 
 SEARCHP:
+  put #echo >Log SearchP
   pause
 SEARCH:
+  put #echo >Log Searching...
   matchre SEARCHP ^\.\.\.wait|^Sorry\,|^You are still stunned|^You are so overburdened|^You are already
   match SEARCHNOPUPPY You search around the area and find a small puppy, but it scurries off before you can catch it!
   matchre SEARCHRETURN You search around and find (.*)!
+  matchre PET_FOUND ^You search around the area and find (.*)!  The (?:.*) scampers toward you and nuzzles your foot, quickly deciding you're its new owner.  As you reach for the puppy, it scrambles into a wooden crate with (.*), which is its home.  You pick them both up, claiming your new pet\.$
   match RETURN You've recently searched this area, try again in a bit or try somewhere else.
-  matchre PET_FOUND claiming your new pet\.$
   put search
   matchwait
-  
+
 SEARCHNOPUPPY:
+  #put #echo >Log SearchNoPuppy
   math SEARCHCOUNT subtract 1
   put #echo >Log No puppy found.  %SEARCHCOUNT searches left!
   return
   
 SEARCHRETURN:
+  #put #echo >Log SearchReturn
   math SEARCHCOUNT subtract 1
-  put #echo >Log Found $1!  %SEARCHCOUNT searches left!
+  put #echo >Log %SEARCHCOUNT searches left!
   return
 
 PET_FOUND:
+  #put #echo >Log PetFound
   math SEARCHCOUNT subtract 1
   put #flash
   put #echo
@@ -327,7 +336,7 @@ PET_FOUND:
   put #echo lime Found a pet!
   put #echo
   put #echo
-  put #echo >Log yellow Pet found in room $roomid! -- Total moves: %TOTAL -- Maze resets: %RESET
+  put #echo >Log yellow Pet found ($1) in room $roomid! -- Total moves: %TOTAL -- Maze resets: %RESET
   put #echo >Log %SEARCHCOUNT searches left!
   gosub TIME
   var PET 0
