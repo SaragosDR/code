@@ -8610,80 +8610,104 @@ KHRIVARRESET:
   return
 
 SPELLVARRESET:
-  if %buff = "YES" then
+  if ("%buff" = "YES") then
   {
     var resettype buff
     var resetcount 1
     gosub SPELLVARRESETLOOP
-    #OTHER_SPELLS_THAT_MIGHT_NEED_RESETTING
-    if "$guild" = "Bard" then
-    {
-      if %eilliescry = "YES" then
-      {
-        put #var SpellTimer.EilliesCry.active 0
-        put #var SpellTimer.EilliesCry.duration 0
-      }
-      if %misdirection = "YES" then
-      {
-        put #var SpellTimer.Misdirection.active 0
-        put #var SpellTimer.Misdirection.duration 0
-      }
-    } 
-    if "$guild" = "Cleric" then
-    {
-      if %osrelmeraud = "YES" then
-      {
-        put #var SpellTimer.OsrelMeraud.active 0
-        put #var SpellTimer.OsrelMeraud.duration 0
-      }
-    }
-    if "$guild" = "Empath" then
-    {
-      if %absolution = "YES" then
-      {
-        put #var SpellTimer.Absolution.active 0
-        put #var SpellTimer.Absolution.duration 0
-      }
-      if %curedisease = "YES" then
-      {
-        put #var SpellTimer.CureDisease.active 0
-        put #var SpellTimer.CureDisease.duration 0
-      }
-      if %heal = "YES" then
-      {
-        put #var SpellTimer.Heal.active 0
-        put #var SpellTimer.Heal.duration 0
-      }
-      if %iztouch = "YES" then
-      {
-        put #var SpellTimer.IcutuZaharenela.active 0
-        put #var SpellTimer.IcutuZaharenela.duration 0
-      }
-    }
-    if "$guild" = "Moon Mage" then
-    {
-      put #var SpellTimer.PiercingGaze.active 0
-      put #var SpellTimer.PiercingGaze.duration 0
-    }
-    if "$guild" = "Necromancer" then
-    {
-      if %riteofgrace = "YES" then
-      {
-        put #var SpellTimer.RiteofGrace.active 0
-        put #var SpellTimer.RiteofGrace.duration 0
-      }
-      if %siphonvit = "YES" then
-      {
-        put #var SpellTimer.SiphonVitality.active 0
-        put #var SpellTimer.SiphonVitality.duration 0    
-      }
-    }
-    echo Buff variables reset.
   }
-  if %astro = "YES" then 
+  #CYCLICS
+  if ("%cyclic" = "YES") then
+  {
+    if (%spellcnum > 0) then
+    {
+      put #var %spellc1var.active 0
+      put #var %spellc1var.duration 0
+    }
+    if (%spellcnum > 1) then
+    {
+      put #var %spellc2var.active 0
+      put #var %spellc2var.duration 0
+    }
+    if (%spellcnum > 2) then
+    {
+      put #var %spellc3var.active 0
+      put #var %spellc3var.duration 0
+    }
+  }
+  if ("%cyctm" = "YES") then
+  {
+    put #var %spellc4var.active 0
+    put #var %spellc4var.duration 0
+  }
+  if ("%cycdebil" = "YES") then
+  {
+    put #var %spellc5var.active 0
+    put #var %spellc5var.duration 0
+  }
+    
+  #OTHER_SPELLS_THAT_MIGHT_NEED_RESETTING
+  if "$guild" = "Bard" then
+  {
+    if %eilliescry = "YES" then
+    {
+      put #var SpellTimer.EilliesCry.active 0
+      put #var SpellTimer.EilliesCry.duration 0
+    }
+    if %misdirection = "YES" then
+    {
+      put #var SpellTimer.Misdirection.active 0
+      put #var SpellTimer.Misdirection.duration 0
+    }
+  } 
+  if "$guild" = "Cleric" then
+  {
+    if %osrelmeraud = "YES" then
+    {
+      put #var SpellTimer.OsrelMeraud.active 0
+      put #var SpellTimer.OsrelMeraud.duration 0
+    }
+  }
+  if "$guild" = "Empath" then
+  {
+    if %absolution = "YES" then
+    {
+      put #var SpellTimer.Absolution.active 0
+      put #var SpellTimer.Absolution.duration 0
+    }
+    if %curedisease = "YES" then
+    {
+      put #var SpellTimer.CureDisease.active 0
+      put #var SpellTimer.CureDisease.duration 0
+    }
+    if %heal = "YES" then
+    {
+      put #var SpellTimer.Heal.active 0
+      put #var SpellTimer.Heal.duration 0
+    }
+    if %iztouch = "YES" then
+    {
+      put #var SpellTimer.IcutuZaharenela.active 0
+      put #var SpellTimer.IcutuZaharenela.duration 0
+    }
+  }
+  if "$guild" = "Moon Mage" then
   {
     put #var SpellTimer.PiercingGaze.active 0
     put #var SpellTimer.PiercingGaze.duration 0
+  }
+  if "$guild" = "Necromancer" then
+  {
+    if %riteofgrace = "YES" then
+    {
+      put #var SpellTimer.RiteofGrace.active 0
+      put #var SpellTimer.RiteofGrace.duration 0
+    }
+    if %siphonvit = "YES" then
+    {
+      put #var SpellTimer.SiphonVitality.active 0
+      put #var SpellTimer.SiphonVitality.duration 0    
+    }
   }
   return
 
