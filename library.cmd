@@ -11333,6 +11333,7 @@ PREMIUMRINGBACKMAIN:
   matchre PREMIUMRINGBACKP %waitstring
   matchre RETURN The world grows blurry and indistinct for a moment.  You look around and find yourself at...
   match RETURN You need to be in Fang Cove to do that!
+  match RETURN The metal band pulses weakly, but nothing else happens.
   matchre PREMBADRETURN cannot do that again yet\.
   put pull %premiumringitem
   matchwait

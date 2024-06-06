@@ -1,6 +1,6 @@
 ########################################
 ###Training scripts by player of Saragos.
-###Last Updated: 04/13/2023
+###Last Updated: 06/05/2024
 ########################################
 
 include library.cmd
@@ -44,7 +44,7 @@ var specialmanipulate tress
 var skinnableundead1 ice adder|adder skeleton|enraged tusky|fell hog|ghoul|ghoul crow|gremlin|grendel|lach|mastiff|mey|misshapen germish'din
 var skinnableundead2 mutant togball|reaver|shadow hound|squirrel|steed|zombie kobold headhunter|zombie kobold savage
 
-var construct ashu hhinvi|beltunumshi|boggle|bone amalgam|clay archer|clay mage|clay soldier|clockwork assistant|gam chaga|glass construct|(granite|marble|onyx|quartz) gargoyle|lachmate|lava drake|miniscule (fork|griddle|knife|lid|pan|plate|pot|spoon|teapot)|origami \S+|(alabaster|andesite|breccia|dolomite|marble|obsidian|quartzite|rock) guardian|rough-hewn doll
+var construct ashu hhinvi|beltunumshi|boggle|bone amalgam|clay archer|clay mage|clay soldier|clockwork assistant|gam chaga|glass construct|(granite|marble|onyx|quartz) gargoyle|lachmate|miniscule (fork|griddle|knife|lid|pan|plate|pot|spoon|teapot)|origami \S+|(alabaster|andesite|breccia|dolomite|marble|obsidian|quartzite|rock) guardian|rough-hewn doll
 var skinnableconstruct Endrus serpent|(granite|marble|onyx|quartz) gargoyle|lava drake|marble gargoyle|snippet|sylph|windbag
 
 var invasioncritters bone amalgam|bone warrior|brine shark|cloud eel|Drogorian stormrider|Elpalzi (bowyer|deadeye|dissident|fomenter|hunter|incendiary|instigator|malcontent|malcontent|partisan|rebel|sharpshooter|toxophilite)|flea-ridden beast|putrefying shambler|revivified mutt|shambling horror|skeletal peon|thunder eel|transmogrified oaf|Asketian harbinger|giant adder|wind wretch|wind hag|North Wind banshee|blight locust|murder crow|mantrap|clockwork monstrosity|rafflesia|Black Fang watcher
@@ -380,7 +380,7 @@ ALERTINIT:
   if %speechalerts = "YES" then
   { 
     var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,
-    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,
+    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "
@@ -2711,35 +2711,20 @@ COMBATLOOP:
     gosub MULTITRAINLOGIC
   }
   #STORAGE_CHECK
-  if (%firststoragecheck = 1) then
-  {
-    gosub STOREDEFAULT %storage
-    var firststoragecheck 0
-    if (%storedefaultsuccess = 0) then
-    {
-      put #echo Yellow Could not find default storage container %rucksack!  Exiting.
-      put #echo %alertwindow Yellow [TRAIN]: Could not find default storage container %rucksack!  Exiting.
-      exit
-    }
-    if ("%craftingstoragelocation" = "portal") then
-    {
-      gosub FINDITEM %craftingstorage
-      if (%finditemfound = 1) then
-      {
-        gosub REMITEM %craftingstorage
-        gosub PUTITEM %craftingstorage in my portal
-      }
-    }
-  }
-  if (("%armorcheck" = "YES") && (%firstarmorcheck = 0)) then gosub ARMORCHECK
-  if %firststowall = 1 then
+  if (%firststowall = 1) then
   {
     gosub STOWALL
     var firststowall 0
   }
-  if %firstperc = 1 then
+  if (%firststoragecheck = 1) then
   {
-    if "$guild" = "Moon Mage" then
+    var firststoragecheck 0
+    gosub STORAGECHECKLOGIC
+  }
+  if (("%armorcheck" = "YES") && (%firstarmorcheck = 0)) then gosub ARMORCHECK
+  if (%firstperc = 1) then
+  {
+    if ("$guild" = "Moon Mage") then
     {
       var mmnextperc %t
       math mmnextperc add 300
@@ -2774,7 +2759,7 @@ COMBATLOOP:
     var firstrel 0
   }
   #AWAKE_AND_RPAS
-  if %firstawake = 1 then
+  if (%firstawake = 1) then
   {
     gosub AWAKE
     var firstawake 0
@@ -2783,16 +2768,16 @@ COMBATLOOP:
     pause 1
     action (rpa) off
   }
+  #MOVETRAIN
+  if (%noncombat = "YES") then
+  {
+    gosub NONCOMBATLOGIC
+  }
   #LOCATION_VERIFICATION
   if (("$zoneid" != "%zone") || (!contains("|%findroomlist|", "|$roomid|"))) then
   {
     gosub ROOMTRAVELCOMBAT
     gosub STATUSCHECK
-  }
-  #MOVETRAIN
-  if %noncombat = "YES" then
-  {
-    gosub NONCOMBATLOGIC
   }
   #SANCTUARY_CHECK
   if $SpellTimer.Sanctuary.active = 1 then
@@ -8088,7 +8073,7 @@ CYCFINDER:
   }
   #TM_DEBIL
   if ((%combatperforming = 1) || (%scriptmode = 0)) then return
-  if (%cyctm = "YES") then
+  if ("%cyctm" = "YES") then
   {
     if ($Targeted_Magic.LearningRate < %cycfindleast) then
     {
@@ -8109,7 +8094,7 @@ CYCFINDER:
       }
     }
   }
-  if (%cycdebil = "YES") then
+  if ("%cycdebil" = "YES") then
   {
     if ($Debilitation.LearningRate < %cycfindleast) then
     {
@@ -8998,6 +8983,8 @@ NONCOMBATLOGIC:
 			gosub AWAKE
 			gosub STOWALL
 			gosub MTFORGING
+			gosub STOWALL
+      gosub STORAGECHECKLOGIC
 		}
     
     #TRADING_SELL
@@ -9053,6 +9040,26 @@ NONCOMBATLOGIC:
 		put #echo %alertwindow [NonCombat]: Returned from NonCombat training.
 	}  
   return
+  
+STORAGECHECKLOGIC:
+  gosub STOREDEFAULT %storage
+  if (%storedefaultsuccess = 0) then
+  {
+    put #echo Yellow Could not find default storage container %rucksack!  Exiting.
+    put #echo %alertwindow Yellow [TRAIN]: Could not find default storage container %rucksack!  Exiting.
+    exit
+  }
+  if ("%craftingstoragelocation" = "portal") then
+  {
+    gosub FINDITEM %craftingstorage
+    if (%finditemfound = 1) then
+    {
+      gosub REMITEM %craftingstorage
+      gosub PUTITEM %craftingstorage in my portal
+    }
+  }
+  return
+  
 
 TEACHINGLOGIC:
   if length("%teachtargets") = 0 then return
@@ -12101,6 +12108,13 @@ MONTEST:
         {
           if (("%dissect" = "YES") && (%firstaidlock = 0)) then gosub DISSECTLOGIC
         }
+      }
+    }
+    else
+    {
+      if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
+      {
+        if ("%skinning" = "YES") then gosub SKINNINGLOGIC
       }
     }
     

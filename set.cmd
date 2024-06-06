@@ -2413,7 +2413,7 @@ DISPLAYNONCOMBAT:
   put #echo
   gosub OUTPUT Crafting
   gosub OUTPUT CraftingStorage (should have length at least 15 spans to accomodate all supplies)
-  gosub OUTPUT CraftingStorageLocation (CraftingStorage container stored in portal/vault when not direclty in use)
+  gosub OUTPUT CraftingStorageLocation (CraftingStorage container stored in portal|vault|none when not direclty in use)
   gosub OUTPUT Forging
   gosub OUTPUT ForgingDifficulty
   gosub OUTPUT ForgingDiscipline

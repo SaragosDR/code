@@ -171,6 +171,7 @@ CRAFTVARLOAD:
   var tongs $m%varsettongs
   var yardstick $m%varsetyardstick
   
+  var restartorder 0
   var workorderbail 0
   var expenses 0
   var revenue 0
@@ -303,9 +304,9 @@ WORKORDER:
     put #echo quantity: %quantity
     if (%oilcount < %quantity) then
     {
-        if ($roomid != %partsroom) then gosub MOVE %toolroom
-        gosub CRAFTINGORDER 6
-        gosub PUTITEM my oil in my %craftingstorage
+      if ($roomid != %partsroom) then gosub MOVE %toolroom
+      gosub CRAFTINGORDER 6
+      gosub PUTITEM my oil in my %craftingstorage
     }
 
     #SMELTING
@@ -363,6 +364,11 @@ WORKORDER:
     return
   }
   gosub CRAFTING
+  if (%restartorder = 1) then
+  {
+    var restartorder 0
+    goto WORKORDER
+  }
   if (%usingprivateroom = 1) then
   {
     gosub MOVEROOMS go %privateforgedoor
@@ -464,7 +470,7 @@ COUNTINGOTMAIN:
   matchwait
   
 COUNTINGOTGOOD:
-  var ingotcount $0
+  var ingotcount $1
   return
 
 COUNTOIL:
@@ -480,7 +486,7 @@ COUNTOILMAIN:
   matchwait
   
 COUNTOILGOOD:
-  var oilcount $0
+  var oilcount $1
   return
 
 ANALYZECRAFT:
@@ -539,6 +545,7 @@ CRAFTINGMAIN:
     gosub GETITEM my %material ingot in %craftingstorage
     gosub PUTITEM my %material ingot on anvil
     gosub FORGE
+    if (%restartorder = 1) then return
   }
   if ("%discipline" = "tailoring") then
   {
@@ -925,6 +932,7 @@ FORGEMAIN:
     if (("$righthandnoun" != "%product") && ("$lefthandnoun" != "%product")) then gosub GETITEM %product on anvil
   }
   matchre FORGEP %waitstring
+  match RESTARTWORKORDER You need a larger volume of metal to continue crafting.
   match SHOVEL As you complete working the fire dies down and needs more fuel.
   match SHOVEL As you complete working the fire dies down and appears to need some more fuel.
   matchre TURNTONGS You notice the .* would benefit from some soft reworking.
@@ -940,17 +948,20 @@ FORGEMAIN:
 	match POUND Roundtime
   match OIL With grinding complete, the metal now needs protection by pouring oil on it.
   match OIL The worked metal looks to be in need of some oil to preserve and protect it.
+  matchre OILBAD You don't know how to do that\.|You can't pour a flask of oil\!
 	matchre ASSEMBLEHAFT You need another finished wooden haft to continue crafting
   matchre ASSEMBLEHILT You need another finished wooden hilt to continue crafting
   matchre ASSEMBLESHORTCORD You need another finished short leather cord to continue crafting
+  matchre ASSEMBLELONGCORD You need another finished long leather cord to continue crafting
   matchre ASSEMBLELPOLE You need another finished long wooden pole to continue crafting
   matchre ASSEMBLESPOLE You need another finished short wooden pole to continue crafting
   match ASSEMBLELPAD The links appear ready to be woven into and around a cloth padding.
   matchre ASSEMBLESPAD You need another finished small cloth padding to continue crafting .*\.
   matchre ASSEMBLELBACK You need another finished large leather backing to continue crafting .*\.
   matchre ASSEMBLESBACK You need another finished small leather backing to continue crafting .*\.
-  matchre GRIND The .* now appears ready for grinding and polishing on a grinding wheel.
+  matchre GRIND The .* now appears ready for grinding and polishing on a grinding wheel\.
 	match FORGEMAIN I could not find what you were referring to.
+	match OILRETURN You unwrap the cloth protecting your oil,
 	#ACTIONS
 	if ("%craftaction" = "pound") then
 	{
@@ -961,18 +972,22 @@ FORGEMAIN:
   if ("%craftaction" = "bellows") then put push my bellows
 	if ("%craftaction" = "shovel") then put push fuel with my shovel
 	if ("%craftaction" = "oil") then put pour oil on my %product
+	if ("%craftaction" = "oil2") then put pour oil on %product
 	if ("%craftaction" = "turntongs") then put turn %product on anvil with my tongs
 	if ("%craftaction" = "quench") then put push tub
 	if ("%craftaction" = "grind") then put push grindstone with my %product
 	if ("%craftaction" = "pliers") then put pull my %product with my pliers
   matchwait
-  
+
+RESTARTWORKORDER:
+  var restartorder 1
+  return
+
+OILRETURN:
+  gosub PUTITEM my oil in my %craftingstorage
+  return
+
 POUND:
-  if ("%craftaction" = "oil") then
-  {
-    gosub PUTITEM my oil in my %craftingstorage
-    return
-  }
   if ("%craftaction" = "bellows") then
   {
     if (("$righthandnoun" = "bellows") || ("$lefthandnoun" = "bellows")) then gosub PUTITEM my bellows in my %craftingstorage
@@ -1045,6 +1060,15 @@ OIL:
     if (("$righthandnoun" = "tongs") || ("$lefthandnoun" = "tongs")) then gosub PUTITEM my tongs in my %craftingstorage
   }
   var craftaction oil
+  goto FORGEMAIN
+  
+OILBAD:
+  if (("%craftaction" = "pound") || ("%craftaction" = "quench") || ("%craftaction" = "turntongs")) then
+  {
+    if (("$righthandnoun" = "hammer") || ("$lefthandnoun" = "hammer")) then gosub PUTITEM my hammer in my %craftingstorage
+    if (("$righthandnoun" = "tongs") || ("$lefthandnoun" = "tongs")) then gosub PUTITEM my tongs in my %craftingstorage
+  }
+  var craftaction oil2
   goto FORGEMAIN
 
 PLIERS:
@@ -1986,9 +2010,13 @@ GIVEMASTERLOGP:
 GIVEMASTERLOGMAIN:
   matchre GIVEMASTERLOGP %waitstring
   matchre RETURN You hand \w+ your logbook and bundled items, and are given \d+ \w+ in return\.
+  matchre GIVEMASTERLOGBAD What is it you're trying to give?
   put give my logbook to %givemaster
   matchwait
 
+GIVEMASTERLOGBAD:
+  gosub FINDMASTER
+  GOTO givemasterlog
 
 #####REPAIR#####
 
@@ -2052,7 +2080,7 @@ GIVETICKETCRAFT:
   match RETURN You hand the clerk your ticket and are handed back
 	matchre CRAFTWAITREPAIR ^\w* smiles and says
 	matchre CRAFTWAITREPAIR ^\w* grumbles\, \"Well that isn't gonna be done for another
-	matchre CRAFTWAITREPAIR (A|An) \w+ clerk says politely, "That won't be done for another
+	matchre CRAFTWAITREPAIR (A|An).* clerk says politely, "That won't be done for another
 	matchre GIVETICKETCRAFTWAIT (A|An).* clerk says politely, "That is almost done, just give me a few more moments here."
 	matchre GIVETICKETCRAFTWAIT ^\w+ grumbles, \"Well that is almost done, just give me a few more moments here\.\"
 	match GIVETICKETCRAFT What is it you're trying to give?
