@@ -962,6 +962,9 @@ FORGEMAIN:
   matchre GRIND The .* now appears ready for grinding and polishing on a grinding wheel\.
 	match FORGEMAIN I could not find what you were referring to.
 	match OILRETURN You unwrap the cloth protecting your oil,
+	match OILRETURN You unwrap the cloth surrounding the oil,
+	match OILRETURN Tipping the oil to one side, you dampen a cloth with the syrupy black mixture.
+	match OILRETURN After applying some of the oil to the rag,
 	#ACTIONS
 	if ("%craftaction" = "pound") then
 	{
