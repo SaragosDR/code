@@ -254,8 +254,9 @@ action (poison) var poisoned 1 when You have a (critically|dangerously|seriously
 action (poison) off
 
 #FIRE
-#A juvenile wyvern breathes a stream of fire directly at you!  The flames *WHOOSH* around your back, setting it on fire!  You can smell the strong scent of naphtha in the wyvern's breath fueling the flames further.
-action (onfire) var onfire 1 when Your right hand is on fire\.
+action var onfire 1 when A \w+ \w+ breathes a stream of fire directly at you!  The flames *WHOOSH* around your (.*), setting it on fire!  You can smell the strong scent of naphtha in the wyvern's breath fueling the flames further\.
+
+action (onfire) var onfire 1 when Your (.*) is on fire\.
 action (onfire) off
 
 #ENCUMBRANCE
@@ -380,7 +381,7 @@ ALERTINIT:
   if %speechalerts = "YES" then
   { 
     var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,
-    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,
+    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "
@@ -1452,6 +1453,7 @@ NECROONLY:
   var siphonvitaddmana $m%varsetsiphonvitaddmana
   var siphonvitnum $m%varsetsiphonvitnum
   
+  var materialnum -1
   if "$guild" = "Necromancer" then
   {
     if %necrosafety = "YES" then
@@ -3262,23 +3264,11 @@ NONCOMBATLOOP:
     gosub ATTUNELOGIC
 	  gosub STATUSCHECK
   }
-  #RESEARCH_CHECKING
-  if %research = "YES" then
-  {  
-    if %researchtype = -1 then
-    {
-      gosub RESEARCHCHECK
-      pause 1
-      echo Researching: %researching
-      echo Researchtype: %researchtype
-      echo RProjectActive: %rprojectactive
-    }
-  }
   #SPELLCASTING
 	gosub MAINSPELLLOGICNC
 	gosub STATUSCHECK
   #RESEARCH
-	if %research = "YES" then
+	if ("%research" = "YES") then
   {
     if %casting != 1 then
     { 
@@ -5751,7 +5741,8 @@ APPLOGIC:
         {
           gosub GETITEM %appsaveitem bundle in %appsaveitemstorage
         }
-        gosub APPRAISE
+        if %appsaveitem != "none" then gosub APPRAISE %appsaveitem bundle quick
+        else gosub APPRAISE bundle quick
         if $Appraisal.LearningRate > 33 then var appraiselock 1
         math nextapp set %t
         math nextapp add %appraisetimer
@@ -7340,15 +7331,24 @@ INVESTLOGIC:
   return
 
 RESEARCHLOGIC:
+  #RESEARCH_CHECKING
+  if %researchtype = -1 then
+  {
+    gosub RESEARCHSTATUS
+    pause 1
+    echo Researching: %researching
+    echo Researchtype: %researchtype
+    echo RProjectActive: %rprojectactive
+  }
+
+  
   if $SpellTimer.GaugeFlow.active = 1 then
   {
     if %rprojectactive = 1 then
     {
       if %researching = 0 then
       {
-        var rprojectactive 1
-        var researching 1
-        gosub RESEARCHING
+        gosub RESEARCH %researchtype
       }
     }
     else
@@ -7358,9 +7358,7 @@ RESEARCHLOGIC:
         gosub RESEARCHCHOOSE
         if %researchtype != "none" then
         {
-          var researching 1
-          var rprojectactive 1
-          gosub RESEARCHING
+          gosub RESEARCH %researchtype
         }
       }
     }
@@ -7538,23 +7536,7 @@ RESEARCHCHOOSELOOP:
   if %researchtype%researchcount = "road" then return
   goto RESEARCHCHOOSELOOP
 
-RESEARCHCHECKP:
-  pause
-RESEARCHCHECK:
-  matchre RESEARCHINGP ...wait|type ahead|stunned|while entangled in a web.
-  matchre RETURN You're not researching anything!|You believe that|You have completed
-  put research status
-  matchwait
-
-
-RESEARCHINGP:
-  pause
-RESEARCHING:
-  matchre RESEARCHINGP ...wait|type ahead|stunned|while entangled in a web.
-	matchre RESEARCHING there is still more to learn
-	matchre RETURN You tentatively reach out and begin|You are already busy at research!|You confidently begin|You require some special means of|You begin to bend the mana streams
-	put research %researchtype 300
-	matchwait
+	
 	
 MAINSPELLLOGIC:
   if (("$guild" = "Barbarian") || ("$guild" = "Thief")) then return
@@ -8966,6 +8948,43 @@ NONCOMBATLOGIC:
 		#STARTING_NONCOMBAT_TRAIN
 		put #echo %alertwindow [NonCombat]: Leaving combat to train.
 		
+	  #TRADING_SELL
+    if (%movetrainsellactive = 1) then
+		{
+      gosub DEEPSLEEP
+      gosub LEAVEROOM
+      var rtzone 1
+      var rttravel YES
+      var rttraveldest %tradingselltown
+      var rtmove NO
+      var rtmovelist none
+      var rttargetroom 0
+      var rtfindroom NO
+      gosub ROOMTRAVEL
+      gosub STOWALL
+      gosub AWAKE
+      var foundsellitem 0
+      gosub TRADINGSELLLOGIC
+    }
+    
+    #TRADING_TASKS
+    if (%movetraintasksactive = 1) then
+		{
+      gosub DEEPSLEEP
+      gosub LEAVEROOM
+      var rtzone 1
+      var rttravel YES
+      var rttraveldest crossing
+      var rtmove NO
+      var rtmovelist none
+      var rttargetroom mags
+      var rtfindroom NO
+      gosub ROOMTRAVEL
+      gosub STOWALL
+      gosub AWAKE
+      gosub TASKLOGIC
+    }
+		
 		#BURGLING
 		if (%movetrainburgleactive) = 1 then
 		{
@@ -9010,44 +9029,7 @@ NONCOMBATLOGIC:
 			gosub STOWALL
       gosub STORAGECHECKLOGIC
 		}
-    
-    #TRADING_SELL
-    if (%movetrainsellactive = 1) then
-		{
-      gosub DEEPSLEEP
-      gosub LEAVEROOM
-      var rtzone 1
-      var rttravel YES
-      var rttraveldest %tradingselltown
-      var rtmove NO
-      var rtmovelist none
-      var rttargetroom 0
-      var rtfindroom NO
-      gosub ROOMTRAVEL
-      gosub STOWALL
-      gosub AWAKE
-      var foundsellitem 0
-      gosub TRADINGSELLLOGIC
-    }
-    
-    #TRADING_TASKS
-    if (%movetraintasksactive = 1) then
-		{
-      gosub DEEPSLEEP
-      gosub LEAVEROOM
-      var rtzone 1
-      var rttravel YES
-      var rttraveldest crossing
-      var rtmove NO
-      var rtmovelist none
-      var rttargetroom mags
-      var rtfindroom NO
-      gosub ROOMTRAVEL
-      gosub STOWALL
-      gosub AWAKE
-      gosub TASKLOGIC
-    }
-					
+    					
 		#RETURNING_TO_COMBAT
 		put #echo Yellow Returning to combat!
 		var movetrainactive 0
@@ -12095,7 +12077,14 @@ MONTEST:
     var deadcheck 0
     if matchre ("$roomobjs", "(%ritualcritters) ((which|that) appears dead|\(dead\))") then
     {
-      if ("$guild" = "Necromancer") then gosub NRITUAL
+      if ("$guild" = "Necromancer") then
+      {
+        gosub NRITUAL
+        if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
+        {
+          if ("%skinning" = "YES") then gosub SKINNINGLOGIC
+        }
+      }
       else
       {
         if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
@@ -12300,6 +12289,10 @@ LEAVEROOM:
     {
       gosub RELCYCLIC
       gosub PERCSELF
+    }
+    if ($SpellTimer.PhilosophersPreservation.active) = 1 then
+    {
+      gosub RELNSPELL php
     }
   }
   else

@@ -44,6 +44,12 @@ if_1 then
       var difficulty $m$varsetforgingdifficulty
       var material $m$varsetforgingmaterial
     }
+    if ("%discipline" = "tailoring") then
+    {
+      var difficulty $m$varsetoutfittingdifficulty
+      var cloth $m$varsetoutfittingcloth
+      var leather $m$varsetoutfittingleather
+    }
   }
 }
 else

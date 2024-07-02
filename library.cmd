@@ -1380,12 +1380,12 @@ VARCHECKS:
   }
   if !matchre("$m%checkmodeupkeeptown", "\b(%townpresetlist)\b") then put #var m%checkmodeupkeeptown crossing
   
-  if !matchre("$m%checkmodevaulttown", "\b(%townvaultpresetlist)\b") then put #var m%checkmodevaulttown Crossing
-  if !matchre("$m%checkmodeammobuytown", "\b(%ammopresetlist)\b") then put #var m%checkmodeammobuytown Crossing
-  if !matchre("$m%checkmodelockpickbuytown", "\b(%lockpickpresetlist)\b") then put #var m%checkmodelockpickbuytown Crossing
-  if !matchre("$m%checkmodeburgletown", "\b(%burgletownlist)\b") then put #var m%checkmodeburgletown Crossing
-  if !matchre("$m%checkmodepawntown", "\b(%pawntownlist)\b") then put #var m%checkmodepawntown Crossing
-  if !matchre("$m%checkmodeperformtown", "\b(%performtownlist)\b") then put #var m%checkmodeperformtown Crossing
+  if !matchre("$m%checkmodevaulttown", "\b(%townvaultpresetlist)\b") then put #var m%checkmodevaulttown crossing
+  if !matchre("$m%checkmodeammobuytown", "\b(%ammopresetlist)\b") then put #var m%checkmodeammobuytown crossing
+  if !matchre("$m%checkmodelockpickbuytown", "\b(%lockpickpresetlist)\b") then put #var m%checkmodelockpickbuytown crossing
+  if !matchre("$m%checkmodeburgletown", "\b(%burgletownlist)\b") then put #var m%checkmodeburgletown crossing
+  if !matchre("$m%checkmodepawntown", "\b(%pawntownlist)\b") then put #var m%checkmodepawntown crossing
+  if !matchre("$m%checkmodeperformtown", "\b(%performtownlist)\b") then put #var m%checkmodeperformtown crossing
   if !matchre("$m%checkmodeforgingtown", "\b(%forgingtownlist)\b") then put #var m%checkmodeforgingtown crossing
   
   #UPKEEP
@@ -1673,8 +1673,8 @@ VARCHECKS:
   if !matchre("$m%checkmodeforgingsmelting", "\b(YES|NO)\b") then put #var m%checkmodeforgingsmelting YES
   if !matchre("$m%checkmodeoutfitting", "\b(YES|NO)\b") then put #var m%checkmodeoutfitting NO
   if !matchre("$m%checkmodeoutfittingdifficulty", "\b(easy|challenging|hard)\b") then put #var m%checkmodeoutfittingdifficulty challenging
-    #if tolower("%1") = "outfittingcloth" then goto TEXTSET
-    #if tolower("%1") = "outfittingleather" then goto TEXTSET
+  if !def(m%checkmodeoutfittingcloth) then put #var m%checkmodeoutfittingcloth burlap
+  if !def(m%checkmodeoutfittingleather) then put #var m%checkmodeoutfittingleather cougar-pelt
   if !matchre("$m%checkmodeoutfittingrepair", "\b(YES|NO)\b") then put #var m%checkmodeoutfittingrepair YES
   if $m%checkmodeoutfittingmaxyards >= 0 then
   else put #var m%checkmodeoutfittingmaxyards 100
@@ -6726,7 +6726,7 @@ CAST:
 	  }
 	}
   matchre CASTP %waitstring
-	matchre CASTCLEANUP You gesture.|You gesture at|You wave your hand|With a wave of your hand|You roll your hands in an elliptical|You clasp your hands together|You cup your hand before|You clap your hands once|Your spell|You press your fist|You reach with your fist toward the ground.|You speak a few words of righteousness|You whisper|Tendrils of flame|You make a holy gesture|You close your eyes and take several slow|You clench your hands into fists and grit your teeth|You don't think you can manage to ignite another weapon at the moment.|The flames dancing along your fingertips|Mentally steeling yourself in preparation for|You shudder involuntarily|You release an accompaniment of elemental|You thrust your (right|left) arm before you, fingers splayed\.|With a wave of your hand, your vitality is fully restored\.|You strike your heel against the ground|A sense of calm focus|Roundtime|Your heart skips a beat as your spell|You clench your fists, pressing your fingernails painfully into your flesh\.|You place your hands on your temples\.|You raise your fist toward the sun\.|You raise your hand in an imaginary toast to Glythtide\.|You drop briefly to one knee as you firmly press your palms into the ground\.|You steeple your fingers together to channel the spell's energies\.|You close your eyes and focus on the old hero, Lirisa\.|You swear
+	matchre CASTCLEANUP You gesture.|You gesture at|You wave your hand|With a wave of your hand|You roll your hands in an elliptical|You clasp your hands together|You cup your hand before|You clap your hands once|Your spell|You press your fist|You reach with your fist toward the ground.|You speak a few words of righteousness|You whisper|Tendrils of flame|You make a holy gesture|You close your eyes and take several slow|You clench your hands into fists and grit your teeth|You don't think you can manage to ignite another weapon at the moment.|The flames dancing along your fingertips|Mentally steeling yourself in preparation for|You shudder involuntarily|You release an accompaniment of elemental|You thrust your (right|left) arm before you, fingers splayed\.|With a wave of your hand, your vitality is fully restored\.|You strike your heel against the ground|A sense of calm focus|Roundtime|Your heart skips a beat as your spell|You clench your fists, pressing your fingernails painfully into your flesh\.|You place your hands on your temples\.|You raise your fist toward the sun\.|You raise your hand in an imaginary toast to Glythtide\.|You drop briefly to one knee as you firmly press your palms into the ground\.|You steeple your fingers together to channel the spell's energies\.|You close your eyes and focus on the old hero, Lirisa\.|You swear|With a chirurgeon's care, you press your fingertips against the side of your neck\.
 	matchre CASTBAD Currently lacking the skill|You don't have a spell prepared!|Your target pattern dissipates because|You can't cast that on anyone else!|You strain, but are too|The spell pattern resists the influx|I could not find what you were referring to.|You must specify one of the thirteen planets\.|The spell pattern resists the influx of .* mana and fails completely\.|You attempt to quiet your mind, focusing on your planar link\.|Steadying your breath, you briefly point one arm up and the other towards the ground, forming a conduit through your body\.
 	#match CASTFACE You can't cast that at yourself!
 	#matchre CASTLOOT is already dead, so that's a bit pointless.
@@ -7130,7 +7130,7 @@ PERCP:
 PERC:
 	if (($guild = "Barbarian") || ($guild = "Thief")) then return
   matchre PERCP %waitstring
-  matchre RETURN Roundtime:|You are a bit too busy performing to do that.|You aren't trained in the ways of magic.
+  matchre RETURN Roundtime:|You are a bit too busy performing to do that.|You aren't trained in the ways of magic.|Something in the area is interfering with your ability to perceive power\.
   put perceive
   matchwait 5
 	var timeoutsub PERC
@@ -7190,7 +7190,8 @@ PREPSPELL:
 	matchre RETURN You trace a|You raise your|You raise an|You begin chanting|With rigid|With meditative|With calm|With tense|You mutter|You briskly utter a few sharp words|Darkly gleaming motes of
 	match RETURN As you attempt to prepare the spell, a sense of overwhelming peace washes over you.
 	matchre RETURN You begin to hum|You begin your enchante|The first gentle notes|With a sharp cut to your voice|Low, hummed tones form|You begin to chant a mesmerizing|With a resounding "POP"|You begin to sing, a gentle|Wrapped in winter|You weave a soft|Slow, rich tones|Though softly humming|In a low tone you|The wailing of lost souls|Turning your focus solemnly inward|You hear the slow, rich tones of|as you trace your finger along mana|Images of streaking stars falling from the heavens flash across your vision|With great force, you slap your hands together|You direct your attention toward the heavens|You whistle an intricate sequence|A radiant glow wreathes your hands|A strong wind swirls around you|Glowing geometric patterns arc between|Light withdraws from around you|Calmly reaching out with one hand,|In one fluid motion, you bring your palms|You start frantically flailing your hands|Shadow and light collide wildly around|You gaze skyward and trace the planetary|You spin about wildly, whirling around with a feral|Throwing your head back, you release a savage roar|You gaze at your hands, touching your thumb to each|Accompanied with a flash of light, you clap your hands|Droplets of water coalesce around your fingertips|Turning your head slightly and gazing directly|Inhaling deeply, you adopt a cyclical rhythm in your breaths|You clasp your silvery-white flame shrouded hands together|Focusing intently, you slice seven straight lines through|You exhale softly, your breath flowing into a shimmering cloud|You inhale sharply, invoking the
-	matchre PREPREL you're already preparing|You have already fully prepared|You are already preparing
+	matchre SPELLCANCEL you're already preparing|You have already fully prepared|You are already preparing
+	match SPELLCANCEL Something in the area interferes with your spell preparations.
 	match PREPPLAYING You should stop playing before you do that.
 	match PREPBADUNKNOWN You have no idea how to cast that spell.
 	if %prepmana != 0 then var prepstring %spellprepping %prepmana
@@ -7283,6 +7284,7 @@ PREPTAR:
   matchre SPELLCANCEL You are not engaged to anything, so you must specify a target to focus on!|You cannot target
 	matchre RETURN You begin to weave mana lines into
 	matchre PREPTARREL you're already preparing|You have already fully prepared|You are already preparing
+	matchre SPELLCANCEL Something in the area interferes with your spell preparations.
 	matchre PREPTARP %waitstring
   if %ctoverride = 1 then var targetstring %spellprepping %prepmana %ctoverridevar
   else var targetstring %spellprepping %prepmana
@@ -7295,6 +7297,43 @@ PREPTAR:
 PREPTARREL:
   gosub RELSPELL
   goto PREPTAR
+
+
+RESEARCHSTATUSP:
+  pause
+RESEARCHSTATUS:
+  matchre RESEARCHSTATUSP ...wait|type ahead|stunned|while entangled in a web.
+  matchre RETURN You're not researching anything!|You believe that|You have completed
+  put research status
+  matchwait 5
+  var timeoutsub RESEARCHSTATUS
+  var timeoutcommand research status
+	goto TIMEOUT
+
+
+
+RESEARCH:
+  var researchstring $1
+  goto RESEARCHMAIN
+RESEARCHP:
+  pause
+RESEARCHMAIN:
+  var researching 1
+  var rprojectactive 1
+  matchre RESEARCHP ...wait|type ahead|stunned|while entangled in a web.
+	matchre RESEARCHMAIN there is still more to learn
+	match RESEARCHREL You realize that your prepared spell would interfere with your magical research.
+	matchre RETURN You tentatively reach out and begin|You are already busy at research!|You confidently begin|You require some special means of|You begin to bend the mana streams|With some trepidation, you begin to push the mana streams
+	put research %researchstring 300
+	matchwait 5
+  var timeoutsub RESEARCHMAIN
+  var timeoutcommand research %researchstring 300
+	goto TIMEOUT
+
+RESEARCHREL:
+  gosub RELSPELL
+  goto RESEARCHMAIN
+
 
 RETARGETP:
   pause
@@ -7366,7 +7405,7 @@ RELNSPELLP:
   pause
 RELNSPELLMAIN:
 	matchre RELNSPELLP %waitstring
-  matchre RETURN Your body is no longer imbued with Fire\.|The Earth energy flows from your body, returning to its rightful place in the ground beneath your feet\.|You feel the energy of|The warm feeling in your hand goes away\.|The refractive field surrounding you fades away.|Your corruption fades, revealing you to the world once more\.|Release what?
+  matchre RETURN Your body is no longer imbued with Fire\.|The Earth energy flows from your body, returning to its rightful place in the ground beneath your feet\.|You feel the energy of|The warm feeling in your hand goes away\.|The refractive field surrounding you fades away.|Your corruption fades, revealing you to the world once more\.|Release what?|An unpleasant sensation jolts through your body as your synthetic reinforcement becomes unthreaded, leaving you feeling weakened as well as slower\.
   put release %relnspellstring
   matchwait 5
 	var timeoutsub RELNSPELL
@@ -7620,6 +7659,10 @@ EXITVAULT:
   move go door
   move go arch
   move out
+  if ($zoneid = 1) then
+  {
+    move out
+  }
   if ($zoneid = 67) then
   {
     move out
@@ -8978,9 +9021,10 @@ NSAFETYCHECK:
 
 
 NRITUAL:
+  var necroskin 0
   if matchre ("$roomobjs", "(\w+) ((which|that) appears dead|\(dead\))") then var ritualmonster $1
-  if %preserve = "YES" then gosub PRESERVE
-  if %devour = "YES" then
+  if ("%preserve" = "YES") then gosub PRESERVE
+  if ("%devour" = "YES") then
   {
     if $SpellTimer.Devour.active != 1 then
     {
@@ -8998,30 +9042,30 @@ NRITUAL:
         var charged 0
         var harnessed 0
         gosub DEVOURLOOP
+        var necroskin 1
         return
       }
     }
   }
   if ("%dissect" = "YES") then
   {
-    if matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
+    if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
     {
-      if $Skinning.LearningRate > $Thanatology.LearningRate then
+      if ($Skinning.LearningRate > $Thanatology.LearningRate) then
       {
         gosub NECRODISSECT
         var necroskin 1
       }
     }
-    else
-    {
-      gosub NECRODISSECT
-      var necroskin 1
-    }
   }
   else
   {
-    if %harvest = "YES" then
+    if ("%harvest" = "YES") then
     {
+      if (%materialnum = -1) then
+      {
+      
+      }
       if matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
       {
         if $Skinning.LearningRate > $Thanatology.LearningRate then
@@ -9102,7 +9146,7 @@ HARVEST2:
   goto HARVEST
 
 HARVESTDISP:
-  if %harveststore = "YES" then
+  if ("%harveststore" = "YES") then
   {
     gosub COUNTMATERIAL
     if %materialnum > %harveststorenum then goto HARVESTDROP
@@ -9134,7 +9178,7 @@ PRESERVE:
   matchre RETURN This ritual may only be performed on a creature's corpse.|Roundtime:|A skinned creature is worthless for your purposes.|This corpse has already been preserved.|Rituals do not work upon constructs.
   put perform preserve on %ritualmonster
   matchwait 5
-	var timeoutsub DISSECT
+	var timeoutsub PRESERVE
   var timeoutcommand perform preserve on %ritualmonster
 	goto TIMEOUT
 
@@ -10730,19 +10774,20 @@ WINDTRET:
   gosub RETREAT
   goto WINDTRICK
   
+APPRAISE:
+  var appraisestring $0
+  goto APPRAISEMAIN
 APPRAISEP:
   pause
-APPRAISE:
+APPRAISEMAIN:
   matchre APPRAISEP %waitstring
   match APPRET You cannot appraise that when you are in combat!
   matchre RETURN Roundtime:|Appraise what\?|You need to be either holding it or wearing it\.|You try to sneak out of combat
   match RETURN Appraise what?  Type APPRAISE HELP for more information.
-  if %appsaveitem != "none" then put appraise %appsaveitem bundle quick
-  else put appraise bundle quick
+  put appraise %appraisestring
   matchwait 5
   var timeoutsub APPRAISE
-  if %appsaveitem != "none" then var timeoutcommand %appsaveitem bundle quick
-  else var timeoutcommand appraise bundle quick
+  var timeoutcommand appraise %appraisestring
 	goto TIMEOUT
   
 APPRET:

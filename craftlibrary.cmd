@@ -49,6 +49,7 @@ AREAVARINIT:
       var repairname clerk
       var cruciblerange 960|903|961|904
       var anvilrange 962|963|907|908|909
+      var bucketroom 0
       var privateforge 906
       var privateforgedoor stone door
     }
@@ -63,6 +64,9 @@ AREAVARINIT:
       var repairroom 9114
       var repairname clerk
       var workroom 917
+      var bucketroom 921
+      #var privateforge 906
+      #var privateforgedoor stone door
       #var workrooms 917|918|919|920|921|922|923|924
     }
   }
@@ -261,16 +265,28 @@ WORKORDER:
   if ("%crafttype" = "outfitting") then
   {
     put #echo Yellow Work Order: %quantity %product %quality in %timelimit roisaen.
-    put #echo Yellow Yards: %totalyards
-    put #echo Yellow CordLong: %totalcordlong.....HandleLeather: %totalhandleleather
+    put #echo Yellow Yards: %totalyards.....MaterialNoun: %materialnoun
+    #put #echo Yellow CordLong: %totalcordlong.....HandleLeather: %totalhandleleather
     put #echo Yellow PadLarge: %totalpadlarge.....PadSmall: %totalpadsmall
-    exit
   }
   #MATERIALS_PURCHASE
   if ("%crafttype" = "outfitting") then
   {
     #CHECKING_EXISTING_MATERIAL
+    if ("%materialnoun" = "cloth") then var material %outfittingcloth
+    if ("%materialnoun" = "leather") then var material %outfittingleather
+    var goodfabric 0
+    gosub FABRICCHECK
+    if (%goodfabric != 1) then
+    {
+      #PURCHASING_MATERIAL
+      
     
+      #PURCHASING_PARTS
+      #gosub ORDERPARTS
+    
+    }
+    exit
   }
   if ("%crafttype" = "forging") then
   {
@@ -418,24 +434,24 @@ CRAFTREPAIR:
   return
 
 FABRICCHECK:
+  gosub COMBINEALL %material %materialnoun
   gosub GETITEM %material %materialnoun in my %craftingstorage
   if ("$righthand" = "Empty") then return
-  action (materialcheck) var materialyards $1 when About (\d+) volume of metal was used in this item's construction\.
-  gosub ANALYZECRAFT %material %materialnoun
-  action (materialcheck) off
-  put #echo Yellow ingotvolume: %ingotvolume
-  if (%ingotvolume >= %totalvolume) then
+  gosub COUNT my %material %materialnoun
+  var fabricyards %counttotal
+  put #echo Yellow fabricyards: %fabricyards
+  put #echo Yellow totalyards: %totalyards
+  if (%fabricyards >= %totalyards) then
   {
-    gosub PUTITEM ingot in my %craftingstorage
-    var goodingot 1
-    return
+    gosub PUTITEM %materialnoun in my %craftingstorage
+    var goodfabric 1
   }
   else
   {
-    gosub FINDCRUCIBLE
-    gosub DUMPITEM %material ingot
-    goto INGOTCHECK
+    #gosub MOVEROOM %bucketroom
+    #gosub DUMPITEM %material %materialnoun
   }
+  return
 
 INGOTCHECK:
   gosub GETITEM %material ingot in my %craftingstorage
@@ -1332,6 +1348,7 @@ COUNTP:
   pause
 COUNTMAIN:
   matchre COUNTP %waitstring
+  match COUNTRETURN You count out (\d+) yards of material there\.
   matchre COUNTRETURN About (\d+) volumes of material make up the \w+ bar\.
   matchre COUNTRETURN About (\d+) volumes of material make up the \w+ lump\.
   matchre COUNTRETURN You count out (\d+) yards of material there\.
