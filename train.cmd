@@ -1,6 +1,6 @@
 ########################################
 ###Training scripts by player of Saragos.
-###Last Updated: 06/05/2024
+###Last Updated: 07/02/2024
 ########################################
 
 include library.cmd
