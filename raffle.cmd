@@ -1,11 +1,11 @@
 
 include library.cmd
 
-action var tickettime 1 when Attendant Tizzeg places a roll of raffle tickets out on a small counter.
-action var buckettime 1 when Raffle Attendant Tizzeg exclaims, "Congratulations to all our winners!
-action goto END when Raffle Attendant Tizzeg exclaims, "Congratulations to all our winners!  Please put your winning tickets on the counter to claim your prize.  That will be our last raffle for the evening.  Thank you for participating!"
+action var tickettime 1 when Attendant (\w+) places a roll of raffle tickets out on a (.*) counter.
+action var buckettime 1 when Raffle Attendant (\w+) exclaims, "Congratulations to all our winners!
+action goto END when Raffle Attendant (\w+) exclaims, "Congratulations to all our winners!  Please put your winning tickets on the counter to claim your prize.  That will be our last raffle for the evening.  Thank you for participating!"
 action var claimtime 1;put #play Echo when $charactername's name appears on the result board!
-action put #echo >Conversation You won $1! when Raffle Attendant Tizzeg examines your ticket and exclaims, "Congratulations!"  He smiles broadly as he takes the ticket and hands you (.+)\.
+action put #echo >Conversation You won $1! when Raffle Attendant (\w+) examines your ticket and exclaims, "Congratulations!"  He smiles broadly as he takes the ticket and hands you (.+)\.
 
 
 if ((matchre("$righthandnoun", "ticket")) || (matchre("$righthandnoun", "ticket"))) then var tickettime 0
