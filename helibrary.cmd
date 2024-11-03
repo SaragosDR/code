@@ -16,7 +16,7 @@ if {"$charactername" = "Saragos") then
   var healbotroom 204
   var healbotname Maorn
   
-  var storage gearbag
+  var storage haversack
   var workroom 264
   var craftingstorage crafting satchel
   var scissors scissors
@@ -85,7 +85,6 @@ var totalprizes 0
 var prizeskept 0
 var totalspent 0
 eval savedyes toupper(%savedyes)
-
 
 goto HELIBEND
 
@@ -160,19 +159,22 @@ HANDLELOOT:
   var costperkeptprize %totalspent
   math costperkeptprize / %prizeskept
   
-  if ("$righthand" != "Empty") then gosub TAPSHORTEN $righthand
-  else
+  if (("$righthand" != "Empty") || ("$lefthand" != "Empty")) then
   {
-    if ("$lefthand" != "Empty") then gosub TAPSHORTEN $lefthand
+    if ("$righthand" != "Empty") then gosub TAPSHORTEN $righthand
+    else
+    {
+      if ("$lefthand" != "Empty") then gosub TAPSHORTEN $lefthand
+    }
+    
+    if matchre("%lootreceived", "%badlootlist") then
+    {
+      put #echo >Log [%scripttag]: Won %lootreceived!  On the bad lootlist, dumping.
+      gosub DUMPITEM %shorttap
+      return
+    }
   }
   
-  if matchre("%lootreceived", "%badlootlist") then
-  {
-    put #echo >Log [%scripttag]: Won %lootreceived!  On the bad lootlist, dumping.
-    gosub DUMPITEM %shorttap
-    return
-  }
-
   if ("%scripttag" = "DARK") then
   {
     if matchre("%lootreceived", "%allgems") then
