@@ -10,41 +10,36 @@ var healbotname Maorn
 
 var savedyes NO
 
+var storage haversack
+var craftingstorage crafting satchel
+var awl $awl
+var knittingneedles $knittingneedles
+var scissors $scissors
+var sewingneedles $sewingneedles
+var slickstone $slickstone
+var yardstick $yardstick
+
 if {"$charactername" = "Saragos") then
 {
   var healbot YES
   var healbotroom 204
   var healbotname Maorn
   
-  var storage haversack
   var workroom 264
-  var craftingstorage crafting satchel
-  var scissors scissors
-  var sewingneedles sewing needles
-  var slickstone polished slickstone
-  var yardstick tel'athi yardstick
-  var knittingneedles knitting needles
-  var awl awl 
 }
 if {"$charactername" = "Isrenar") then
 {
-  var storage haversack  
   var workroom 292
-  var craftingstorage crafting satchel
-  var slickstone Sunderstone slickstone
-  var yardstick tel'athi yardstick
 }
 if {"$charactername" = "Navesi") then
 {
   var storage gamebag
   var workroom 264
-  var craftingstorage crafting satchel
 }
 if {"$charactername" = "Itusumera") then
 {
   var storage gamebag
   var workroom 292
-  var craftingstorage crafting satchel
 }
 if {"$charactername" = "Chyral") then
 {
@@ -70,7 +65,7 @@ else
 var sacknouns lump|shard|nugget|bar|leather|cloth|dye|deed|stack|fragment
 var commonbones badger-bone|barghest-bone|bear-bone|bison-bone|bobcat-bone|cougar-bone|crocodile-bone|deer-bone|frog-bone|ghoul-bone|goblin-bone|jackal-bone|kobold-bone|lava drake-bone|leucro-bone|prereni-bone|rat-bone|reaver-bone|rotting-bone|serpent-bone|sluagh-bone|snow goblin-bone|stalker-bone|troll-bone|wolf-bone|zombie-bone
 var commoncloths burlap|cotton|felt|linen|silk|wool
-var commonleathers amber-scale|antelope-skin|azure-scale|badger-pelt|bison-hide|ape-pelt|black goblin-skin|black leucro pelt|black-hide|blood wolf-pelt|boar hide|bobcat pelt|bronze leucro-hide|brown poloh'izh-hide|caracal-pelt|cave-troll|clouded arzumos pelt|cougar-pelt|crimson-scale|damaska boar hide|dark-scale|deer-skin|eel-skin|frog-skin|ghoul-skin|goblin-skin|gargoyle-hide|hound-pelt|green-scale|grey-scale|gryphon-pelt|horse-hide|jackal-pelt|kobold-skin|la'tami-hide|lava drake-hide|hound-pelt|blue-scale|marble-hide|ogre-skin|pivuh-skin|prereni-skin|quartz-hide|rat-pelt|reaver-pelt|red-leucro|red-scale|salt-encrusted|serpent-skin|salswar-hide|sharkskin|sheepskin|silver-leucro|sluagh-hide|snow goblin-hide|stalker-pelt|storm-bull|troll-skin|trollkin-hide|viper-skin|warcat-pelt|white-pelt|wolf-pelt|zombie-skin
+var commonleathers amber-scale|antelope-skin|azure-scale|badger-pelt|bison-hide|ape-pelt|black goblin-skin|black leucro pelt|black-hide|blood wolf-pelt|boar hide|bobcat-pelt|bronze leucro-hide|brown poloh'izh-hide|caracal-pelt|cave-troll|clouded arzumos pelt|cougar-pelt|crimson-scale|crocodile-skin|damaska boar hide|dark-scale|deer-skin|eel-skin|frog-skin|ghoul-skin|goblin-hide|goblin-skin|gargoyle-hide|hound-pelt|green-scale|grey-scale|gryphon-pelt|horse-hide|jackal-pelt|kobold-skin|la'tami-hide|lava drake-hide|hound-pelt|blue-scale|marble-hide|ogre-skin|pivuh-skin|prereni-skin|quartz-hide|rat-pelt|reaver-pelt|red-leucro|red-scale|salt-encrusted|serpent-skin|salswar-hide|sharkskin|sheepskin|silver-leucro|sluagh-hide|snow goblin-hide|stalker-pelt|storm-bull|troll-skin|trollkin-hide|viper-skin|warcat-pelt|white-pelt|wolf-pelt|zombie-skin
 var commonmetals brass|bronze|coal|copper|covellite|highsteel|iron|lead|nickel|oravir|pewter|platinum|silver|steel|tin|gold|zinc
 var commonstones alabaster|andesite|basalt|breccia|dolomite|gabbro|granite|jade|limestone|marble|obsidian|onyx|pumice|quartzite|sandstone|schist|serpentine|soapstone|travertine
 var commonwoods alder|apple|ash|aspen|balsa|bamboo|birch|cedar|cypress|elm|fir|hemlock|larch|mahogany|mangrove|maple|moabi|oak|pine|spruce|teak|walnut|willow

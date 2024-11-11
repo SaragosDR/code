@@ -231,7 +231,7 @@ GETTASK:
   match GETTASKP To whom are you speaking?
   matchre WAITTASK Seamstress Zasele says, "I am sorry, you must wait before I can give you a task."
   matchre TURNINPRODUCT Seamstress Zasele looks at you and says,
-  matchre GETTASKCHOOSE Seamstress Zasele beams
+  matchre GETTASKACCEPT Seamstress Zasele beams
   matchre GETTASK2 Seamstress Zasele looks hopeful
   match GETTASKREFUSED "Word has traveled.  You are unreliable.
   put ask zasele for task
