@@ -1,7 +1,11 @@
-action math numshop add 1;var stand%numshop $1 $2 when ^  (?:a|an|some) (\w+) (\w+)$
-action math numshop add 1;var stand%numshop $2 $3 when ^  (?:a|an|some) (\w+) (\w+) (\w+)$
-action var platconvert $2;math platconvert divide 1000; put #echo >Log Yellow %stand%shopstand: $1 - %platconvert when ^  (.*) for (\d+) copper Kronars$
+action (shop) math numshop add 1;var stand%numshop $1 $2 when ^  (?:a|an|some) (\w+) (\w+)$
+action (shop) math numshop add 1;var stand%numshop $2 $3 when ^  (?:a|an|some) (\w+) (\w+) (\w+)$
+action var platconvert $2;math platconvert divide 10000; put #echo >Log Yellow %stand%shopstand: $1 - %platconvert when ^  (.*) for (\d+) copper Kronars$
+action var platconvert $2;math platconvert divide 1000; put #echo >Log Yellow %stand%shopstand: $1 - %platconvert when ^  (.*) for ([\w\.]+) bronze Kronars$
+action var platconvert $2;math platconvert divide 100; put #echo >Log Yellow %stand%shopstand: $1 - %platconvert when ^  (.*) for ([\w\.]+) silver Kronars$
+action var platconvert $2;math platconvert divide 10; put #echo >Log Yellow %stand%shopstand: $1 - %platconvert when ^  (.*) for ([\w\.]+) gold Kronars$
 action put #echo >Log Yellow %stand%shopstand: $1 - $2 when ^  (.*) for ([\w\.]+) platinum Kronars$
+action (shop) off
 
 var numshop 0
 
@@ -72,6 +76,7 @@ ENTERROOMMAIN:
   matchwait
 
 SHOPWINDOW:
+  action (shop) on
   matchre SHOPROOM ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|^Between the ringing in your head
   match RETURN The following items contain goods for sale:
   match RETURN There is nothing to buy here.
