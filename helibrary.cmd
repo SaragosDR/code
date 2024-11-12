@@ -29,17 +29,55 @@ if {"$charactername" = "Saragos") then
 }
 if {"$charactername" = "Isrenar") then
 {
-  var workroom 292
+  var workroom 291
 }
 if {"$charactername" = "Navesi") then
 {
-  var storage gamebag
   var workroom 264
+  var storage haversack
+  var craftingstorage crafting satchel
+  var awl awl
+  var knittingneedles knitting needles
+  var scissors scissors
+  var sewingneedles sewing needles
+  var slickstone slickstone
+  var yardstick yardstick
 }
 if {"$charactername" = "Itusumera") then
 {
-  var storage gamebag
+  var workroom 291
+  var storage lootsack
+  var craftingstorage crafting satchel
+  var awl awl
+  var knittingneedles knitting needles
+  var scissors scissors
+  var sewingneedles sewing needles
+  var slickstone slickstone
+  var yardstick yardstick
+}
+if {"$charactername" = "Eyuve") then
+{
   var workroom 292
+  var storage lootsack
+  var craftingstorage crafting satchel
+  var awl awl
+  var knittingneedles knitting needles
+  var scissors scissors
+  var sewingneedles sewing needles
+  var slickstone slickstone
+  var yardstick yardstick
+}
+if {"$charactername" = "Ysei") then
+{
+  var workroom 292
+  var storage lootsack
+  var craftingstorage crafting satchel
+  var awl awl
+  var knittingneedles knitting needles
+  var scissors scissors
+  var sewingneedles sewing needles
+  var slickstone slickstone
+  var yardstick yardstick
 }
 if {"$charactername" = "Chyral") then
 {
