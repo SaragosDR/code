@@ -2,7 +2,6 @@ var storage 0
 var dolphinpause 0
 var dumproom 35
 var workroom 745
-var craftingstorage haversack
 
 var healbot NO
 var healbotroom 204
@@ -10,8 +9,7 @@ var healbotname Maorn
 
 var savedyes NO
 
-var storage haversack
-var craftingstorage crafting satchel
+var craftingstorage $craftingstorage
 var awl $awl
 var knittingneedles $knittingneedles
 var scissors $scissors
@@ -25,11 +23,22 @@ if {"$charactername" = "Saragos") then
   var healbotroom 204
   var healbotname Maorn
   
+  var storage haversack  
+  var workroom 264
+}
+if {"$charactername" = "Sorhhn") then
+{
+  var healbot YES
+  var healbotroom 204
+  var healbotname Maorn
+  
+  var storage haversack  
   var workroom 264
 }
 if {"$charactername" = "Isrenar") then
 {
-  var workroom 291
+  var workroom 292
+  var storage haversack
 }
 if {"$charactername" = "Navesi") then
 {
@@ -81,11 +90,15 @@ if {"$charactername" = "Ysei") then
 }
 if {"$charactername" = "Chyral") then
 {
-  var storage gearbag
-  var workroom 192
-  var craftingstorage crafting satchel
+  var storage satchel
+  var workroom 524
+  var craftingstorage satchel
   var slickstone sunderstone slickstone
   var yardstick detailed yardstick
+  var scissors scissors
+  var knittingneedles knitting needles
+  var awl awl
+  var sewingneedles sewing needles
 }
 var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
 
@@ -231,7 +244,7 @@ HANDLELOOT:
     else
     {
       if (%storage != 0) then gosub PUTITEM %shorttap in my %storage
-      else gosub STOWALL    
+      else gosub STOWITEM my %shorttap    
     }
     if ($righthand != "Empty") then
     {
@@ -374,7 +387,8 @@ PROCESSSACK:
   if ("$lefthand" != "Empty") then
   {
     gosub TAPSHORTEN $lefthand
-    gosub PUTITEM my %shorttap in my %storage
+    if (%storage != 0) then gosub PUTITEM %shorttap in my %storage
+    else gosub STOWITEM my %shorttap
   }
   if ("$lefthand" != "Empty") then
   {
@@ -395,7 +409,8 @@ PROCESSSACK:
   else
   {
     put #echo >Log Yellow [%scripttag] Could not identify main sack reward.  Stowing sack for later inspection.
-    gosub STOWALL
+    if (%storage != 0) then gosub PUTITEM my %sackname in my %storage
+    else gosub STOWITEM my %sackname
   }
   return
 
@@ -438,7 +453,7 @@ SACKLOOTMATS:
   else
   {
     put #echo >Log Yellow [%scripttag] Found $lefthand!
-    gosub STOWITEM my %shorttap
+    gosub PUTITEM my %shorttap in my %storage
   }
   goto SACKLOOT
 
