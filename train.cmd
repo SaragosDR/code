@@ -1,6 +1,7 @@
 ########################################
 ###Training scripts by player of Saragos.
-###Last Updated: 07/02/2024
+###Version 2.0
+###Last Updated: 03/11/2025
 ########################################
 
 include library.cmd
@@ -32,19 +33,22 @@ var undead4 tress|spirit|ur hhrki'izh|telga orek|wir dinego|zombie(?!\s)|zombie 
 
 var skinnablemonsters1 angiswaerd hatchling|antelope|arbelog|armadillo|armored warklin|arzumo|asaren celpeze|badger|barghest|basilisk|\bbear\b|beisswurm|bison|black ape|blademaster
 var skinnablemonsters2 blight ogre|blood warrior|bloodfish|\bboa\b|\bboar\b|bobcat|boobrie|brocket deer|burrower|caiman|caracal|carcal|cave troll
-var skinnablemonsters3 cinder beast|cougar|\bcrab\b|crayfish|crocodile|\bdeer\b|dobek moruryn|faenrae stalker|firecat|\bfrog\b|giant blight bat
+var skinnablemonsters3 cinder beast|cougar|\bcrab\b|crayfish|crocodile|\bdeer\b|dobek moruryn|ember bull|faenrae stalker|firecat|\bfrog\b|giant blight bat
 var skinnablemonsters4 goblin|grass eel|\bgrub\b|gryphon|Isundjen conjurer|jackal|kartais|kashika serpent|kobold|la'heke|larva|la'tami|leucro
 var skinnablemonsters5 marbled angiswaerd|merrows|\bmoda\b|\bmoth\b|mottled westanuryn|musk hog|\bpard\b|peccary|piruati serpent|pivuh|poloh'izh|pothanit|prereni|\bram\b
 var skinnablemonsters6 \brat\b|retan dolomar|rock troll|scaly seordmaor|shadow beast|shadow mage|shalswar|silverfish|sinuous elsralael|skunk|S'lai scout
 var skinnablemonsters7 sleek hele'la|sluagh|snowbeast|sorcerer|\bsow\b|spider|spirit dancer|storm bull|suw bizar|treehopper toad|trollkin|\bunyn\b|viper|vulture|vykathi harvester
 var skinnablemonsters8 vykathi soldier|warcat|warklin mauler|\bwasp\b|\bwolf\b|\bworm\b|juvenile wyvern|adult wyvern|young wyvern
 
+#var monsterskins adan'f tail barb|black marble hide|fuligin moth antenna|reddish-black scale|wyvern claw
+var monsterskins 0
+
 var specialmanipulate tress
 
 var skinnableundead1 ice adder|adder skeleton|enraged tusky|fell hog|ghoul|ghoul crow|gremlin|grendel|lach|mastiff|mey|misshapen germish'din
 var skinnableundead2 mutant togball|reaver|shadow hound|squirrel|steed|zombie kobold headhunter|zombie kobold savage
 
-var construct ashu hhinvi|beltunumshi|boggle|bone amalgam|clay archer|clay mage|clay soldier|clockwork assistant|gam chaga|glass construct|(granite|marble|onyx|quartz) gargoyle|lachmate|miniscule (fork|griddle|knife|lid|pan|plate|pot|spoon|teapot)|origami \S+|(alabaster|andesite|breccia|dolomite|marble|obsidian|quartzite|rock) guardian|rough-hewn doll
+var construct ashu hhinvi|beltunumshi|boggle|bone amalgam|clay archer|clay mage|clay soldier|clockwork assistant|gam chaga|glass construct|(granite|marble|onyx|quartz) gargoyle|ice archon|lachmate|miniscule (fork|griddle|knife|lid|pan|plate|pot|spoon|teapot)|origami \S+|(alabaster|andesite|breccia|dolomite|marble|obsidian|quartzite|rock) guardian|rough-hewn doll
 var skinnableconstruct Endrus serpent|(granite|marble|onyx|quartz) gargoyle|lava drake|marble gargoyle|snippet|sylph|windbag
 
 var invasioncritters bone amalgam|bone warrior|brine shark|cloud eel|Drogorian stormrider|Elpalzi (bowyer|deadeye|dissident|fomenter|hunter|incendiary|instigator|malcontent|malcontent|partisan|rebel|sharpshooter|toxophilite)|flea-ridden beast|putrefying shambler|revivified mutt|shambling horror|skeletal peon|thunder eel|transmogrified oaf|Asketian harbinger|giant adder|wind wretch|wind hag|North Wind banshee|blight locust|murder crow|mantrap|clockwork monstrosity|rafflesia|Black Fang watcher
@@ -94,6 +98,12 @@ var materialsnouns leather|hide|ingot|bar|fragment|shard|tear|nugget|stick|branc
 var nuggetmaterials brass|bronze|coal|copper|covellite|iron|lead|nickel|oravir|pewter|platinum|silver|steel|tin|gold|zinc|electrum|darkstone
 
 
+#JUSTICE_TRIGGERS
+action put #echo %alertwindow Yellow Charged with forbidden practices in $1!  Please investigate! when "Burn him!  Burn him!"  You hear the cries echo around you as everyone in the vicinity suddenly moves away, giving you a wide berth!  It goes without saying you'll be wanted for forbidden practices in City of (\w+) now\.
+action put #echo %alertwindow Yellow Arrested in Hibarnhvidar! when "Stop right there!"  The shout reverberates through the area as the Gwaerd charges towards you\.  "You're under arrest!"
+action put #echo %alertwindow Yellow Arrested in Shard! when Sentinel Neharon glances at you, and a look of recognition crosses his face\.  He calmly prepares a spell, then gestures at you!  A sparkling cloud of silver motes envelops your body like a mist of stars\.  You are stunned by the haze of Holy energy whorling around you!  As you pass out, you see Neharon standing over you\.
+#The judge gazes down at you with stern eyes, "Saragos, you stand before this court accused of endangering the public.  Though the evidence against you is considerable, final judgement has not yet been reached.  How do you plead?"
+
 #RESEARCH_TRIGGERS
 action var appfocusdone 1; var appfocusing 0; var rprojectactive 0; var researching 0 when ^Breakthrough!
 action var appfousdone 1; var appfocusing 0; var rprojectactive 0; var researching 0 when You are already under the effects of an appraisal focus\.
@@ -134,6 +144,7 @@ action var askstudent $1; var askclass $2 when (\S+) whispers, "OOC: teachme (\S
 action var currentcyc 0;var nextcyc 0 when The mental strain of initiating a cyclic spell
 action var currentcyc 0;var nextcyc 0 when You suddenly feel drained as your cyclic spell siphons the last of your energy.
 action var ready 1 when You feel fully prepared to cast your spell.
+action var ready 1 when Your spell pattern snaps into shape with little preparation!
 action var ready 1 when Your formation of a targeting pattern
 action var ready 1 when Your target pattern has finished forming around the area.
 
@@ -254,10 +265,9 @@ action (poison) var poisoned 1 when You have a (critically|dangerously|seriously
 action (poison) off
 
 #FIRE
-action var onfire 1 when A \w+ \w+ breathes a stream of fire directly at you!  The flames *WHOOSH* around your (.*), setting it on fire!  You can smell the strong scent of naphtha in the wyvern's breath fueling the flames further\.
-
-action (onfire) var onfire 1 when Your (.*) is on fire\.
-action (onfire) off
+action var onfire 1 when ^A \w+ \w+ breathes a stream of fire directly at you!  The flames *WHOOSH* around your (.*), setting it on fire!  You can smell the strong scent of naphtha in the wyvern's breath fueling the flames further\.
+action var onfire 1 when ^You pretend not to notice as the flames consume your (.*)!
+action var onfire 1 when ^Your (.*) is on fire\.
 
 #ENCUMBRANCE
 action (encumbrance) var encumbrance 0 when Encumbrance : None
@@ -357,20 +367,15 @@ var modestart 0
 var multitrain NO
 
 var scriptmodename %1
-var scriptmodemod 0
-if matchre("%scriptmodemod", "1|2") then
-{
-  if %scriptmodemod > 2 then var scriptmodemod 1  
-  var varset %scriptmodemod
-}
-else var varset $varset
+var scriptmode -1
+
+var varset 1
+gosub COMMANDPARSE
 gosub SETUP
+gosub COMMANDVARLOAD
+
 goto MAINLOOP
 #######
-
-
-
-
 
 
 
@@ -378,16 +383,16 @@ ALERTINIT:
   if %alertwindow = "Main" then var alertwindow
   else var alertwindow >%alertwindow
   ##AWARENESS_TRIGGERS##
-  if %speechalerts = "YES" then
+  if (%speechalerts = "YES") then
   { 
-    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,
-    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out
+    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,|The apprentice repairman looks over|A youthful attendant hands you some bundling rope and says,|You hand the apprentice repairman|The apprentice repairman smiles and says
+    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
-    var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "
+    var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "|The shadowling exclaims,
     var hespeech A voice on the wind whispers|A pair of Merelew guards assist you into the water|The libik (?:shouts|yells),|The seedy monger looks up to you and|The Monger's voice booms out,|The Monger's booming voice comes from the booth,|One of the attendants glances at you and says,|One of the monger's assistants addresses you, saying,|^An attendant in an otter costume exclaims|\w+ chants, "C'mon! I feel the luck of Eluned smiling on you all!
     var speechwhitelist %generalspeech|%craftingspeech|%ferryspeech|%monsterspeech|%spellspeech|%hespeech
-    var namementionwhitelist Welcome back, (Sir|Madam)|Farewell, (Sir|Madam)|Take care, (Sir|Madam)|Thanks,|Thank you very much,
+    var namementionwhitelist Welcome back, (Sir|Madam)|Farewell, (Sir|Madam)|Take care, (Sir|Madam)|Thanks,|Thank you very much,|Searching methodically through the shelves, you finally manage to locate the jar labeled
     action (speech) var speechspeaker $1; var speechtext $2; var speechdiff2 %t; math speechdiff2 subtract %lastspeech; var speechdiff %speechdiff2 when ^(?!%speechwhitelist)(.{0,40}).*\, "(?!Say Ahh!)(.+)"
     action (speech) put #echo %alertwindow Yellow [Speech] %speechspeaker...; put #play Speech; put #flash; var lastspeech %t when eval %speechdiff >= 1
     action (speech) put #echo %alertwindow Yellow [Speech]: Name mention.; put #play Speech; put #flash when \"(?!%namementionwhitelist).*$charactername.*\"
@@ -435,6 +440,7 @@ ALERTINIT:
   if ("%gmalerts" = "YES") then
   {
     action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: SEND [$1] $2 when ^SEND\[(\w+)\] (.*)
+    action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: PAGE when \[PAGE!\] \w+, a member of staff is trying to get your attention.  Please respond!
     action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: Question Asked when .*\* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \*(.*)
     action (questionlooker) put #class +questionreader -questionlooker when ^.(\s*(?:\*\s)+\s*).$
     action (questionreader) put #class -questionreader +questionlooker; put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: Question - $1 when ^\s*(.*\?.*)$
@@ -454,7 +460,7 @@ ALERTINIT:
     action put #beep;put #echo %alertwindow Yellow Alarm: Script when old hag
     action put #beep;put #echo %alertwindow Yellow Alarm: Script when mouse
   }
-  if %almanacalerts = "YES" then
+  if (%almanacalerts = "YES") then
   {
     action put #echo %alertwindow [Almanac]: $2. when ^You set about studying your (.*) intently.  You believe you've learned something significant about (.+)!
   }
@@ -509,9 +515,10 @@ ALERTINIT:
     if ("%bugoutonsend" = "YES") then
     {
       action put #echo %alertwindow Yellow [GM]: SEND [$1] $2; put #echo %alertwindow Yellow [Bugout]: Bugging out due to GM SEND!;goto BUGOUT when ^SEND\[(\w+)\] (.*)
+      action put #echo %alertwindow Yellow [GM]: PAGE; put #echo %alertwindow Yellow [Bugout]: Bugging out due to GM PAGE!;goto BUGOUT when ^\[PAGE!\] \w+, a member of staff is trying to get your attention.  Please respond!
     }
   }
-  if %autoupkeep = "YES" then
+  if (%autoupkeep = "YES") then
   { 
     if %auonhealth = "YES" then action var goupkeep 1;var autype health when eval $health <= $auhealthnum
     if %auonhealth = "YES" then action var goupkeep 1;var autype wounds when You try to creep out of hiding but your injuries cause you to stumble and crash to the ground!
@@ -530,11 +537,17 @@ ALERTINIT:
     action put #flash; put #play Echo;put #echo %alertwindow [Nerves]: Nerve Damage when The mana you were holding dissipates.
   }
   #SORCERY_ALARMS
-  if %sorceryalerts = "YES" then
+  if ("%sorceryalerts" = "YES") then
   {
+    #The spell pattern resists the influx of Elemental mana as a strange itching sensation builds under your skin.  Geysers of uncontrolled mana suddenly erupt from your flesh, illuminating the surroundings in an excruciating display of blue-black fire!
+    
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Nerve damage due to backlash. when The spell pattern resists the influx of (.+) mana though you are able to channel the worst of the backlash into your nervous system.
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Burned skin due to backlash. when Geysers of uncontrolled mana suddenly erupt from your flesh, illuminating the surroundings in an excruciating display of blue-black fire!
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Lost scrolls due to backlash. when The spell pattern resists the influx of unfocused mana, overloading your arcane senses and rendering you magically inert\.
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Stunned due to backlash. when The spell pattern resists the influx of .* mana though the backlash leaves you stunned\!
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Attunement dulled due to backlash. when The spell pattern resists the influx of .* mana.  You are able to contain the backlash but doing so leaves your attunement to the mana streams dulled\.
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Hand exploded due to backlash. when An instant rush of black and blue fire explodes into being, consuming your (left|right) hand and turning it into ash\!
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Hand exploded due to backlash. when An instant rush of black and blue fire explodes into being, consuming your (left|right) hand and turning it into ash!
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Both hands exploded due to backlash. when An instant rush of black and blue fire explodes into being, consuming your outstretched limbs and turning them into ash!
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Spell failed due to backlash. when The spell pattern resists the influx of .* mana and fails completely\.
     #The spell pattern resists the influx of Life mana, and a strange burning sensation backwashes from the spell pattern into your body.
   }  
@@ -584,6 +597,26 @@ ALERTINIT:
 
 
 GUILDVARLOAD:
+  if (("$guild" = "Warrior Mage") || ("$guild" = "Bard")) then
+  {
+    var nativemana 1
+  }
+  if (("$guild" = "Cleric") || ("$guild" = "Paladin")) then
+  {
+    var nativemana 2
+  }
+  if (("$guild" = "Empath") || ("$guild" = "Ranger")) then
+  {
+    var nativemana 3
+  }
+  if (("$guild" = "Moon Mage") || ("$guild" = "Trader")) then
+  {
+    var nativemana 4
+  }
+  if ("$guild" = "Necromancer") then
+  {
+    var nativemana 5
+  }
   if "$guild" = "Barbarian" then gosub BARBARIANONLY
   if "$guild" = "Bard" then gosub BARDONLY
   if "$guild" = "Cleric" then gosub CLERICONLY
@@ -597,594 +630,566 @@ GUILDVARLOAD:
   if "$guild" = "Warrior Mage" then gosub WARMAGEONLY
   return
 
+
+COMMANDVARLOAD:
+  if (tolower("%scriptmodename") = "noncombat") then
+  {
+    var scriptmode 0
+    echo Out of Combat Training!
+    var outdoortimer 0
+    var textbooktimer 0
+    if ((%research = "YES") && (%spell = YES)) then var research NO
+    var autoupkeep NO
+    var bugout NO
+    put #echo >$alertwindow Began noncombat training in Mode %varset.
+  }
+  if tolower("%scriptmodename") = "climb" then
+  {
+    echo
+    echo ================Climb Practice===============
+    echo
+    var scriptmode 0
+    var outdoor NO
+    var perform YES
+    var pathway NO
+    var outdoor NO
+    var hunting NO
+    var spellprepping NO
+    var cyclic NO
+    var appfocus NO
+    if_2 then
+    {
+      var climbobject %2
+      var climbing YES
+      echo ClimbObject: %climbobject
+    }
+    else var climbing NO
+    var bugout NO
+    var autoupkeep NO
+  }
+  if tolower("%scriptmodename") = "devotion" then
+  {
+    echo
+    echo ================Devotion===============
+    echo
+    var scriptmode 0
+    var buffingonly 0
+    var devotiononly 1
+    var cyclic NO
+    var buff NO
+    var gbuff NO
+    var pathway NO
+    var weapons NO
+    var outdoor NO
+    var spell NO
+    var debil NO
+    var tm NO
+    var attune NO
+    var hunting NO
+    var perform NO
+    var appraise NO
+    var astro NO
+    var textbook NO
+    var harnessing YES
+    var perchealth NO
+    var bugout NO
+    var speechalerts NO
+    var emotealerts NO
+    var noncomsanowret NO
+    var windboard NO
+    var locksmithbox NO
+    var skinfatrainer NO
+    var autoupkeep NO
+  }
+  if tolower("%scriptmodename") = "quiet" then
+  {
+    echo
+    echo ================Quiet Training===============
+    echo
+    var scriptmode 0
+    var speechalerts NO
+    var emotealerts NO
+    var weapons NO
+    var outdoor NO
+    var spell NO
+    var debil NO
+    var tm NO
+    var attune YES
+    var textbook NO
+    var hunting NO
+    var perform NO
+    var buff NO
+    var perform NO
+    var astro NO
+    var bugout NO
+    var cycdebil NO
+    var cyctm NO
+    var windboard NO
+    var locksmithbox NO
+    var skinfatrainer NO
+    var autoupkeep NO
+  }
+  if tolower("%scriptmodename") = "silent" then
+  {
+    echo
+    echo ================Silent Training===============
+    echo
+    var scriptmode 0
+    var speechalerts NO
+    var weapons NO
+    var outdoor NO
+    var spell NO
+    var debil NO
+    var tm NO
+    var attune YES
+    var cyclic NO
+    var textbook NO
+    var hunting NO
+    var perform NO
+    var buff NO
+    var perform NO
+    var astro NO
+    var bugout NO
+    var noncomsanowret NO
+    var windboard NO
+    var locksmithbox NO
+    var skinfatrainer NO
+    var autoupkeep NO
+    var almanac NO
+  }
+  if tolower("%scriptmodename") = "nort" then
+  {
+    echo
+    echo ================No-RT Training===============
+    echo
+    var scriptmode 0
+    var buffingonly 0
+    #var cyclic YES
+    var cyctm NO
+    var cycdebil NO
+    var buff NO
+    var gbuff NO
+    var textbook NO
+    var pathway NO
+    var weapons NO
+    var outdoor NO
+    var spell NO
+    var debil NO
+    var tm NO
+    var attune NO
+    var hunting NO
+    var perform NO
+    var appraise NO
+    var astro NO
+    var perchealth NO
+    var bugout NO
+    #var noncomsanowret NO
+    var windboard NO
+    var locksmithbox NO
+    var skinfatrainer NO
+    var almanac NO
+    var ejournal NO
+    var research NO
+    var autoupkeep NO
+  }
+  if tolower("%scriptmodename") = "magic" then
+  {
+    echo
+    echo ================Magic===============
+    echo
+    var scriptmode 0
+    var buffingonly 0
+    #var cyclic YES
+    var buff NO
+    var gbuff NO
+    var textbook NO
+    var pathway NO
+    var weapons NO
+    var outdoor NO
+    var spell YES
+    var debil NO
+    var tm NO
+    var attune YES
+    var hunting NO
+    var perform NO
+    var appraise NO
+    var astro NO
+    var research NO
+    var bugout NO
+    var noncomsanowret NO
+    var windboard NO
+    var locksmithbox NO
+    var skinfatrainer NO
+    var autoupkeep NO
+  }
+  if tolower("%scriptmodename") = "music" then
+  {
+    echo
+    echo ================Music===============
+    echo
+    var scriptmode 0
+    var buffingonly 0
+    var buff NO
+    var gbuff NO
+    var weapons NO
+    var outdoor NO
+    var spell NO
+    var debil NO
+    var tm NO
+    var perform YES
+    var appraise YES
+    var research NO
+    var bugout NO
+    var autoupkeep NO
+  }
+  if tolower("%scriptmodename") = "research" then
+  {
+    echo
+    echo ================Research===============
+    echo
+    var scriptmode 0
+    var buffingonly 0
+    var cyclic NO
+    var buff NO
+    var gbuff NO
+    var textbook NOs
+    var pathway NO
+    var weapons NO
+    var outdoor NO
+    var spell NO
+    var debil NO
+    var tm NO
+    var attune NO
+    var hunting NO
+    var perform NO
+    var appraise NO
+    var astro NO
+    var bugout NO
+    var noncomsanowret NO
+    var windboard NO
+    var locksmithbox NO
+    var skinfatrainer NO
+    var autoupkeep NO
+    var almanac NO
+    var speechalerts NO
+    var emotealerts NO
+    var research YES
+    if_2 then
+    {
+      if_3 then var researchtype1 %2 %3
+      else var researchtype1 %2
+      if !contains("|%researches", "|%researchtype1|") then
+      {
+        echo Research option must be one of: %researches!
+        exit
+      }
+      var researchnum 1
+    }
+  }
+  if tolower("%scriptmodename") = "teach" then
+  {
+    echo
+    echo ================Teaching===============
+    echo
+    var scriptmode 0
+    var buffingonly 0
+    var cyclic NO
+    var buff NO
+    var gbuff NO
+    var textbook NO
+    var pathway NO
+    var weapons NO
+    var outdoor NO
+    var spell NO
+    var debil NO
+    var tm NO
+    var attune NO
+    var hunting NO
+    var perform NO
+    var appraise NO
+    var astro NO
+    var research NO
+    var teaching YES
+    var teachingonly 1
+    var bugout NO
+    var noncomsanowret NO
+    var windboard NO
+    var locksmithbox NO
+    var skinfatrainer NO
+    var autoupkeep NO
+  }
+  if tolower("%scriptmodename") = "focus" then
+  {
+    echo
+    echo ================Appraise Focus===============
+    echo
+    var appfocusonly 1
+    var scriptmode 0
+    var buffingonly 0
+    var cyclic NO
+    var buff NO
+    var gbuff NO
+    var textbook NO
+    var pathway YES
+    var weapons NO
+    var outdoor NO
+    var spell NO
+    var debil NO
+    var tm NO
+    var attune NO
+    var hunting NO
+    var perform NO
+    var appraise NO
+    var astro NO
+    var research NO
+    var appfocus YES
+    var bugout NO
+    var noncomsanowret NO
+    var windboard NO
+    var locksmithbox NO
+    var skinfatrainer NO
+    var autoupkeep NO
+    var almanac NO
+    var ejournal NO
+  }
+  if tolower("%scriptmodename") = "buff" then
+  {
+    var scriptmode 2
+    var speechalerts NO
+    var emotealerts NO
+    if_2 then
+    {
+      #echo 2: %2
+      if %2 > 0 then var buffbuffer %2
+    }
+    put #echo >$alertwindow Began buffing in Mode %varset.
+  }
+  if tolower("%scriptmodename") = "gbuff" then
+  {
+    echo
+    echo ================Group Buffing===============
+    echo
+    var scriptmode 2
+    var buffingonly 1
+    var cyclic NO
+    var buff NO
+    var gbuff YES
+    var pathway NO
+    var weapons NO
+    var outdoor NO
+    var spell NO
+    var debil NO
+    var tm NO
+    var attune NO
+    var hunting NO
+    var perform NO
+    var appraise NO
+    var astro NO
+    var textbook NO
+    #var harnessing YES
+    var straightcast NO
+    var perchealth NO
+    var bugout NO
+    var speechalerts NO
+    var emotealerts NO
+    var appfocus NO
+    var noncomsanowret NO
+    var teaching NO
+    var research NO
+    var almanac NO
+    var ejournal NO
+    var windboard NO
+    var locksmithbox NO
+    var skinfatrainer NO
+    var autoupkeep NO
+  }
+  if tolower("%scriptmodename") = "upkeep" then
+  {
+    echo
+    echo ================Upkeep===============
+    echo
+    var scriptmode 3
+    var perchealth NO
+    var bugout NO
+    var healthalerts NO
+    var speechalerts NO
+    var emotealerts NO
+    var healthalertnum 0
+    var autoupkeep NO
+    var armorcheck NO
+  }
+  if tolower("%scriptmodename") = "burgle" then
+  {
+    echo
+    echo ================Burgle===============
+    echo
+    var scriptmode 4
+    var perchealth NO
+    var bugout NO
+    var healthalerts NO
+    var speechalerts NO
+    var emotealerts NO
+    var healthalertnum 0
+    var autoupkeep NO
+  }
+  if tolower("%scriptmodename") = "multi" then
+  {
+    echo
+    echo ================MultiTrain===============
+    echo
+    var scriptmode 1
+    var multitrain YES
+    put #echo >$alertwindow Began combat training in MultiTrain Mode.
+  }
+  if tolower("%scriptmodename") = "alerts" then
+  {
+    echo
+    echo ================Alerts Only===============
+    echo
+    var scriptmode 0
+    var cyclic NO
+    var buff NO
+    var gbuff NO
+    var osrelmeraud NO
+    var spell NO
+    var debil NO
+    var tm NO
+    var pathway NO
+    var weapons NO
+    var outdoor NO
+    var attune NO
+    var hunting NO
+    var perform NO
+    var appraise NO
+    var astro NO
+    var textbook NO
+    var harnessing NO
+    var perchealth NO
+    var bugout NO
+    var healthalerts YES
+    var speechalerts YES
+    var emotealerts YES
+    var gmalerts YES
+    var noncomsanowret NO
+    var teaching NO
+    var research NO
+    var almanac NO
+    var ejournal NO
+    var almanacalerts NO
+    var windboard NO
+    var locksmithbox NO
+    var skinfatrainer NO
+    var autoupkeep NO
+    var auonbleed NO
+    var auonburden NO
+    var alertsonly 1
+  }
+  gosub CUSTOMSETS
+  return
+
+
+
 COMMANDPARSE:
+  var commandvars 0
   if_1 then
   {  
+    var varset 1
     if tolower("%scriptmodename") = "help" then goto MAINHELP
-    if tolower("%scriptmodename") = "bugout" then
-    {
-      var bugout $bugout
-      var bugoutroom $bugoutroom
-      goto BUGOUT
-    }
-    if tolower("%scriptmodename") = "combat" then
+    if ((tolower("%scriptmodename") = "1") || (tolower("%scriptmodename") = "2")) then
     {
       var scriptmode 1
       gosub TITLE
-      put #echo mono Combat Training!
-      put #echo >$alertwindow Began combat training in Mode %varset.
-    }
-    if tolower("%scriptmodename") = "noncombat" then
-    {
-      gosub TITLE
-      var scriptmode 0
-      echo Out of Combat Training!
-      var outdoortimer 0
-      var compendiumtimer 0
-      var textbooktimer 0
-      if ((%research = "YES") && (%spell = YES)) then var research NO
-      var autoupkeep NO
-      var bugout NO
-      put #echo >$alertwindow Began noncombat training in Mode %varset.
-    }
-    if tolower("%scriptmodename") = "climb" then
-    {
-      echo
-      echo ================Climb Practice===============
-      echo
-      var scriptmode 0
-      var outdoor NO
-      var perform YES
-      var pathway NO
-      var outdoor NO
-      var hunting NO
-      var spellprepping NO
-      var cyclic NO
-      var appfocus NO
-      if_2 then
+      if ("%1" = "2") then
       {
-        var climbobject %2
-        var climbing YES
-        echo ClimbObject: %climbobject
+        var varset 2
+        put #echo mono Train script beginning in Mode %varset.
+        put #echo >$alertwindow [Train]: Train script beginning in Mode %varset.
       }
-      else var climbing NO
-      var bugout NO
-      var autoupkeep NO
-    }
-    if tolower("%scriptmodename") = "devotion" then
-    {
-      gosub TITLE
-      echo
-      echo ================Devotion===============
-      echo
-      var scriptmode 0
-      var buffingonly 0
-      var devotiononly 1
-      var cyclic NO
-      var buff NO
-      var abuff NO
-      var gbuff NO
-      var pathway NO
-      var weapons NO
-      var outdoor NO
-      var spell NO
-      var debil NO
-      var tm NO
-      var attune NO
-      var hunting NO
-      var perform NO
-      var appraise NO
-      var astro NO
-      var compendium NO
-      var textbook NO
-      var harnessing YES
-      var perchealth NO
-      var bugout NO
-      var speechalerts NO
-      var emotealerts NO
-      var noncomsanowret NO
-      var windboard NO
-      var locksmithbox NO
-      var skinfatrainer NO
-      var autoupkeep NO
-    }
-    if tolower("%scriptmodename") = "quiet" then
-    {
-      gosub TITLE
-      echo
-      echo ================Quiet Training===============
-      echo
-      var scriptmode 0
-      var speechalerts NO
-      var emotealerts NO
-      var weapons NO
-      var outdoor NO
-      var spell NO
-      var debil NO
-      var tm NO
-      var attune YES
-      var compendium NO
-      var textbook NO
-      var hunting NO
-      var perform NO
-      var buff NO
-      var abuff NO
-      var perform NO
-      var astro NO
-      var bugout NO
-      var cycdebil NO
-      var cyctm NO
-      var windboard NO
-      var locksmithbox NO
-      var skinfatrainer NO
-      var autoupkeep NO
-    }
-    if tolower("%scriptmodename") = "silent" then
-    {
-      gosub TITLE
-      echo
-      echo ================Silent Training===============
-      echo
-      var scriptmode 0
-      var speechalerts NO
-      var weapons NO
-      var outdoor NO
-      var spell NO
-      var debil NO
-      var tm NO
-      var attune YES
-      var cyclic NO
-      var compendium NO
-      var textbook NO
-      var hunting NO
-      var perform NO
-      var buff NO
-      var abuff NO
-      var perform NO
-      var astro NO
-      var bugout NO
-      var noncomsanowret NO
-      var windboard NO
-      var locksmithbox NO
-      var skinfatrainer NO
-      var autoupkeep NO
-      var almanac NO
-    }
-    if tolower("%scriptmodename") = "nort" then
-    {
-      gosub TITLE
-      echo
-      echo ================No-RT Training===============
-      echo
-      var scriptmode 0
-      var buffingonly 0
-      #var cyclic YES
-      var cyctm NO
-      var cycdebil NO
-      var buff NO
-      var abuff NO
-      var gbuff NO
-      var compendium NO
-      var textbook NO
-      var pathway NO
-      var weapons NO
-      var outdoor NO
-      var spell NO
-      var debil NO
-      var tm NO
-      var attune NO
-      var hunting NO
-      var perform NO
-      var appraise NO
-      var astro NO
-      var perchealth NO
-      var bugout NO
-      #var noncomsanowret NO
-      var windboard NO
-      var locksmithbox NO
-      var skinfatrainer NO
-      var almanac NO
-      var ejournal NO
-      var research NO
-      var autoupkeep NO
-    }
-    if tolower("%scriptmodename") = "magic" then
-    {
-      gosub TITLE
-      echo
-      echo ================Magic===============
-      echo
-      var scriptmode 0
-      var buffingonly 0
-      #var cyclic YES
-      var buff NO
-      var abuff NO
-      var gbuff NO
-      var compendium NO
-      var textbook NO
-      var pathway NO
-      var weapons NO
-      var outdoor NO
-      var spell YES
-      var debil NO
-      var tm NO
-      var attune YES
-      var hunting NO
-      var perform NO
-      var appraise NO
-      var astro NO
-      var research NO
-      var bugout NO
-      var noncomsanowret NO
-      var windboard NO
-      var locksmithbox NO
-      var skinfatrainer NO
-      var autoupkeep NO
-    }
-    if tolower("%scriptmodename") = "music" then
-    {
-      gosub TITLE
-      echo
-      echo ================Music===============
-      echo
-      var scriptmode 0
-      var buffingonly 0
-      var buff NO
-      var abuff NO
-      var gbuff NO
-      var weapons NO
-      var outdoor NO
-      var spell NO
-      var debil NO
-      var tm NO
-      var perform YES
-      var appraise YES
-      var research NO
-      var bugout NO
-      var autoupkeep NO
-    }
-    if tolower("%scriptmodename") = "research" then
-    {
-      gosub TITLE
-      echo
-      echo ================Research===============
-      echo
-      var scriptmode 0
-      var buffingonly 0
-      var cyclic NO
-      var buff NO
-      var abuff NO
-      var gbuff NO
-      var compendium NO
-      var textbook NOs
-      var pathway NO
-      var weapons NO
-      var outdoor NO
-      var spell NO
-      var debil NO
-      var tm NO
-      var attune NO
-      var hunting NO
-      var perform NO
-      var appraise NO
-      var astro NO
-      var bugout NO
-      var noncomsanowret NO
-      var windboard NO
-      var locksmithbox NO
-      var skinfatrainer NO
-      var autoupkeep NO
-      var almanac NO
-      var speechalerts NO
-      var emotealerts NO
-      var research YES
-      if_2 then
+      else
       {
-        if_3 then var researchtype1 %2 %3
-        else var researchtype1 %2
-        if !contains("|%researches", "|%researchtype1|") then
-        {
-          echo Research option must be one of: %researches!
-          exit
-        }
-        var researchnum 1
+        var varset 1
+        put #echo mono Train script beginning in Mode %varset.
+        put #echo >$alertwindow [Train]: Train script beginning in Mode %varset.
       }
     }
-    if tolower("%scriptmodename") = "teach" then
+    else
     {
-      gosub TITLE
-      echo
-      echo ================Teaching===============
-      echo
-      var scriptmode 0
-      var buffingonly 0
-      var cyclic NO
-      var buff NO
-      var abuff NO
-      var gbuff NO
-      var compendium NO
-      var textbook NO
-      var pathway NO
-      var weapons NO
-      var outdoor NO
-      var spell NO
-      var debil NO
-      var tm NO
-      var attune NO
-      var hunting NO
-      var perform NO
-      var appraise NO
-      var astro NO
-      var research NO
-      var teaching YES
-      var teachingonly 1
-      var bugout NO
-      var noncomsanowret NO
-      var windboard NO
-      var locksmithbox NO
-      var skinfatrainer NO
-      var autoupkeep NO
-    }
-    if tolower("%scriptmodename") = "focus" then
-    {
-      gosub TITLE
-      echo
-      echo ================Appraise Focus===============
-      echo
-      var appfocusonly 1
-      var scriptmode 0
-      var buffingonly 0
-      var cyclic NO
-      var buff NO
-      var abuff NO
-      var gbuff NO
-      var compendium NO
-      var textbook NO
-      var pathway YES
-      var weapons NO
-      var outdoor NO
-      var spell NO
-      var debil NO
-      var tm NO
-      var attune NO
-      var hunting NO
-      var perform NO
-      var appraise NO
-      var astro NO
-      var research NO
-      var appfocus YES
-      var bugout NO
-      var noncomsanowret NO
-      var windboard NO
-      var locksmithbox NO
-      var skinfatrainer NO
-      var autoupkeep NO
-      var almanac NO
-      var ejournal NO
-    }
-    if tolower("%scriptmodename") = "buff" then
-    {
-      var scriptmode 2
-      var speechalerts NO
-      var emotealerts NO
-      if_2 then
+      if ((tolower("%scriptmodename") = "1") || (tolower("%scriptmodename") = "2") || (tolower("%scriptmodename") = "research") || (tolower("%scriptmodename") = "teach") || (tolower("%scriptmodename") = "focus") || (tolower("%scriptmodename") = "buff")) || (tolower("%scriptmodename") = "gbuff") || (tolower("%scriptmodename") = "upkeep") || (tolower("%scriptmodename") = "burgle") || (tolower("%scriptmodename") = "multi") || (tolower("%scriptmodename") = "alerts") || (tolower("%scriptmodename") = "noncombat") || (tolower("%scriptmodename") = "climb") || (tolower("%scriptmodename") = "devotion") || (tolower("%scriptmodename") = "quiet") || (tolower("%scriptmodename") = "silent") || (tolower("%scriptmodename") = "nort") || (tolower("%scriptmodename") = "magic") || (tolower("%scriptmodename") = "music")) then
       {
-        #echo 2: %2
-        if %2 > 0 then var buffbuffer %2
+        var varset 1
+        put #echo mono Train script beginning.
+        put #echo >$alertwindow [Train]: Train script beginning.
       }
-      put #echo >$alertwindow Began buffing in Mode %varset.
+      else
+      {
+        put #echo mono Invalid script option.
+        put #echo
+        goto MAINHELP
+      }
     }
-    if tolower("%scriptmodename") = "gbuff" then
-    {
-      gosub TITLE
-      echo
-      echo ================Group Buffing===============
-      echo
-      var scriptmode 2
-      var buffingonly 1
-      var cyclic NO
-      var buff NO
-      var abuff NO
-      var gbuff YES
-      var pathway NO
-      var weapons NO
-      var outdoor NO
-      var spell NO
-      var debil NO
-      var tm NO
-      var attune NO
-      var hunting NO
-      var perform NO
-      var appraise NO
-      var astro NO
-      var compendium NO
-      var textbook NO
-      #var harnessing YES
-      var straightcast NO
-      var perchealth NO
-      var bugout NO
-      var speechalerts NO
-      var emotealerts NO
-      var appfocus NO
-      var noncomsanowret NO
-      var teaching NO
-      var research NO
-      var almanac NO
-      var ejournal NO
-      var windboard NO
-      var locksmithbox NO
-      var skinfatrainer NO
-      var autoupkeep NO
-    }
-    if tolower("%scriptmodename") = "upkeep" then
-    {
-      gosub TITLE
-      echo
-      echo ================Upkeep===============
-      echo
-      var scriptmode 3
-      var perchealth NO
-      var bugout NO
-      var healthalerts NO
-      var speechalerts NO
-      var emotealerts NO
-      var healthalertnum 0
-      var autoupkeep NO
-    }
-    if tolower("%scriptmodename") = "upkeeptest" then
-    {
-      gosub TITLE
-      echo
-      echo ================Upkeep Route Testing===============
-      echo
-      var scriptmode 3
-      var upkeeptest 1
-      var perchealth NO
-      var bugout NO
-      var healthalerts NO
-      var speechalerts NO
-      var emotealerts NO
-      var healthalertnum 0
-      var autoupkeep YES
-      var minmoney 0
-      var exchange NO
-      var repair NO
-      var autopath NO
-      var bundlesell NO
-      var bundlevault NO
-      var vaultmove NO
-      var bundlerope 0
-      var appfocus NO
-      var spiderfeed NO
-      var autoupkeep NO
-    }
-    if tolower("%scriptmodename") = "burgle" then
-    {
-      gosub TITLE
-      echo
-      echo ================Burgle===============
-      echo
-      var scriptmode 4
-      var perchealth NO
-      var bugout NO
-      var healthalerts NO
-      var speechalerts NO
-      var emotealerts NO
-      var healthalertnum 0
-      var autoupkeep NO
-    }
-    if tolower("%scriptmodename") = "multi" then
-    {
-      gosub TITLE
-      echo
-      echo ================MultiTrain===============
-      echo
-      var scriptmode 1
-      var multitrain YES
-      put #echo >$alertwindow Began combat training in MultiTrain Mode.
-    }
-    if tolower("%scriptmodename") = "alerts" then
-    {
-      gosub TITLE
-      echo
-      echo ================Alerts Only===============
-      echo
-      var scriptmode 0
-      var cyclic NO
-      var buff NO
-      var abuff NO
-      var gbuff NO
-      var osrelmeraud NO
-      var spell NO
-      var debil NO
-      var tm NO
-      var pathway NO
-      var weapons NO
-      var outdoor NO
-      var attune NO
-      var hunting NO
-      var perform NO
-      var appraise NO
-      var astro NO
-      var compendium NO
-      var textbook NO
-      var harnessing NO
-      var perchealth NO
-      var bugout NO
-      var healthalerts YES
-      var speechalerts YES
-      var emotealerts YES
-      var gmalerts YES
-      var noncomsanowret NO
-      var teaching NO
-      var research NO
-      var almanac NO
-      var ejournal NO
-      var almanacalerts NO
-      var windboard NO
-      var locksmithbox NO
-      var skinfatrainer NO
-      var autoupkeep NO
-      var auonbleed NO
-      var auonburden NO
-      var alertsonly 1
-    }
-    gosub CUSTOMSETS
   }
-  #else goto MAINHELP
-  if %scriptmode = -1 then goto MAINHELP
+  else
+  {
+    var scriptmode 1
+    gosub TITLE
+    var varset 1
+    put #echo mono Train script beginning.
+    put #echo >$alertwindow [Train]: Train script beginning.
+  }
   return
 
 BARBARIANONLY:
-  var warhorn $m%varsetwarhorn
-  var warhornitem $m%varsetwarhornitem
-  var expertise $m%varsetexpertise
-  var whirlwind $m%varsetwhirlwind
-  var dualload $m%varsetdualload
-  var mininnerfire $m%varsetmininnerfire
-  var berserkava $m%varsetberserkava
-  var avafatigue $m%varsetavafatigue
-  var berserkfamine $m%varsetberserkfamine
-  var faminevit $m%varsetfaminevit
-  var meditatestaunch $m%varsetmeditatestaunch
-  var expaccuracy $m%varsetexpaccuracy
-  var expdamage $m%varsetexpdamage
-  var berserkblizzard $m%varsetberserkblizzard
-  var berserkcyclone $m%varsetberserkcyclone
-  var berserkdrought $m%varsetberserkdrought
-  var berserkearthquake $m%varsetberserkearthquake
-  var berserkflashflood $m%varsetberserkflashflood
-  var berserkhurricane $m%varsetberserkhurricane
-  var berserklandslide $m%varsetberserklandslide
-  var landslidetraining $m%varsetlandslidetraining
-  var berserktornado $m%varsetberserktornado
-  var tornadotraining $m%varsettornadotraining
-  var berserktsunami $m%varsetberserktsunami
-  var tsunamibackup $m%varsettsunamibackup
-  var berserkvolcano $m%varsetberserkvolcano
-  var berserkwildfire $m%varsetberserkwildfire
-  var bearform $m%varsetbearform
-  var buffaloform $m%varsetbuffaloform
-  var dragonform $m%varsetdragonform
-  var eagleform $m%varseteagleform
-  var monkeyform $m%varsetmonkeyform
-  var owlform $m%varsetowlform
-  var pantherform $m%varsetpantherform
-  var piranhaform $m%varsetpiranhaform
-  var pythonform $m%varsetpythonform
-  var wolverineform $m%varsetwolverineform
-  var meditatebastion $m%varsetmeditatebastion
-  var meditatecontemplation $m%varsetmeditatecontemplation
-  var meditateserenity $m%varsetmeditateserenity
-  var meditatetenacity $m%varsetmeditatetenacity
-  var roaranger $m%varsetroaranger
-  var roarembrace $m%varsetroarembrace
-  var roarkuniyo $m%varsetroarkuniyo
-  var roarrage $m%varsetroarrage
-  var roarscreech $m%varsetroarscreech
-  var roarshriek $m%varsetroarshriek
-  var roarwail $m%varsetroarwail
+  var expertise $expertise
+  var expaccuracy $expaccuracy
+  var expdamage $expdamage
+  var whirlwind $whirlwind
+  var dualload $dualload
+  var warhorn $warhorn
+  var warhornitem $warhornitem
+  
+  var mininnerfire $mininnerfire
+  var berserkava $berserkava
+  var avafatigue $avafatigue
+  var berserkfamine $berserkfamine
+  var faminevit $faminevit
+  var meditatestaunch $meditatestaunch
+  var berserkblizzard $berserkblizzard
+  var berserkcyclone $berserkcyclone
+  var berserkdrought $berserkdrought
+  var berserkearthquake $berserkearthquake
+  var berserkflashflood $berserkflashflood
+  var berserkhurricane $berserkhurricane
+  var berserklandslide $berserklandslide
+  var landslidetraining $landslidetraining
+  var berserktornado $berserktornado
+  var tornadotraining $tornadotraining
+  var berserktsunami $berserktsunami
+  var berserkvolcano $berserkvolcano
+  var berserkwildfire $berserkwildfire
+  var bearform $bearform
+  var buffaloform $buffaloform
+  var dragonform $dragonform
+  var eagleform $eagleform
+  var monkeyform $monkeyform
+  var owlform $owlform
+  var pantherform $pantherform
+  var piranhaform $piranhaform
+  var pythonform $pythonform
+  var wolverineform $wolverineform
+  var meditatebastion $meditatebastion
+  var meditatecontemplation $meditatecontemplation
+  var meditateserenity $meditateserenity
+  var meditatetenacity $meditatetenacity
+  var roaranger $roaranger
+  var roarembrace $roarembrace
+  var roarkuniyo $roarkuniyo
+  var roarrage $roarrage
+  var roarscreech $roarscreech
+  var roarshriek $roarshriek
+  var roarwail $roarwail
   var tsunamiweapon %seweapon|%leweapon|%theweapon|%sbweapon|%lbweapon|%thbweapon|%staveweapon|%poleweapon
+  
+  
   
   var expertdone 1
   var expertpause 0
@@ -1216,47 +1221,48 @@ BARBARIANONLY:
 
 
 BARDONLY:
-  var whistlepiercing $m%varsetwhistlepiercing
-  var eilliescry $m%varseteilliescry
-  var eilliescryprepmana $m%varseteilliescryprepmana
-  var eilliescryaddmana $m%varseteilliescryaddmana
+  var whistlepiercing $whistlepiercing
+  var movewhistle $movewhistle
+  var movescream $movescream
+  var eilliescry $eilliescry
+  var eilliescrymana $eilliescrymana
   return
 
 CLERICONLY:
   #action var osrelmeraud NO; put #echo %alertwindow Yellow [BUffing]: Unable to find an orb to cast OM on.  Turning off OM use. when Crackling blue essence swirls over your hands, unable to reach the .+ orb.
-  var osrelmeraud $m%varsetosrelmeraud
-  var omprepmana $m%varsetomprepmana
-  var omaddmana $m%varsetomaddmana
-  var ombuffnum $m%varsetombuffnum
-  var ombuff1 $m%varsetombuff1
-  var ombuff2 $m%varsetombuff2
-  var ombuff3 $m%varsetombuff3
-  var ombuff4 $m%varsetombuff4
-  var ombuff5 $m%varsetombuff5
-  var ombuff6 $m%varsetombuff6
-  var ombuff7 $m%varsetombuff7
-  var ombuff8 $m%varsetombuff8
-  var theurgy $m%varsettheurgy
-  var pray $m%varsetpray
-  var praydeity $m%varsetpraydeity
-  var meraudcommune $m%varsetmeraudcommune
-  var elunedcommune $m%varsetelunedcommune
-  var tamsinecommune $m%varsettamsinecommune
-  var dance $m%varsetdance
-  var recite $m%varsetrecite
-  var anloralpin $m%varsetanloralpin
-  var anloralpinitem $m%varsetanloralpinitem    
-  var pilgrimbadge $m%varsetpilgrimbadge
-  var pilgrimbadgeitem $m%varsetpilgrimbadgeitem
-  var prayermat $m%varsetprayermat
-  var prayermatitem $m%varsetprayermatitem
-  var dirtstacker $m%varsetdirtstacker
-  var dirtstackeritem $m%varsetdirtstackeritem
-  var lighter $m%varsetlighter
-  var lighteritem $m%varsetlighteritem
-  var watercontainer $m%varsetwatercontainer
-  var blessdelay $m%varsetblessdelay
-  var hyhcast $m%varsethyhcast
+  var theurgy $theurgy
+  var pray $pray
+  var praydeity $praydeity
+  var meraudcommune $meraudcommune
+  var elunedcommune $elunedcommune
+  var tamsinecommune $tamsinecommune
+  var dance $dance
+  var recite $recite
+  var anloralpin $anloralpin
+  var anloralpinitem $anloralpinitem    
+  var pilgrimbadge $pilgrimbadge
+  var pilgrimbadgeitem $pilgrimbadgeitem
+  var prayermat $prayermat
+  var prayermatitem $prayermatitem
+  var dirtstacker $dirtstacker
+  var dirtstackeritem $dirtstackeritem
+  var lighter $lighter
+  var lighteritem $lighteritem
+  var watercontainer $watercontainer
+  var blessdelay $blessdelay
+  var hyhcast $hyhcast
+  var osrelmeraud $osrelmeraud
+  var omprepmana $omprepmana
+  var omaddmana $omaddmana
+  var ombuffnum $ombuffnum
+  var ombuff1 $ombuff1
+  var ombuff2 $ombuff2
+  var ombuff3 $ombuff3
+  var ombuff4 $ombuff4
+  var ombuff5 $ombuff5
+  var ombuff6 $ombuff6
+  var ombuff7 $ombuff7
+  var ombuff8 $ombuff8
   var spellvarscount 0
   gosub OMSPELLVARSLOOP
   
@@ -1296,30 +1302,29 @@ CLERICONLY:
   return
 
 EMPATHONLY:
-  var avoidshock $m%varsetavoidshock
-  var perchealth $m%varsetperchealth
-  var manipulate $m%varsetmanipulate
-  var paralysis $m%varsetparalysis
-  var paralysisprepmana $m%varsetparalysisprepmana
-  var paralysisaddmana $m%varsetparalysisaddmana
-  var vitheal $m%varsetvitheal
-  var vithealnum $m%varsetvithealnum
-  var vithealprepmana $m%varsetvithealprepmana
-  var vithealaddmana $m%varsetvithealaddmana
-  var heal $m%varsetheal
-  var healprepmana $m%varsethealprepmana
-  var healaddmana $m%varsethealaddmana
-  var curedisease $m%varsetcuredisease
-  var cdprepmana $m%varsetcdprepmana
-  var cdaddmana $m%varsetcdaddmana
-  var adcheal $m%varsetadcheal
-  var adcdisease $m%varsetadcdisease
-  var adcpoison $m%varsetadcpoison
-  var absolution $m%varsetabsolution
-  var absolutionprepmana $m%varsetabsolutionprepmana
-  var iztouch $m%varsetiztouch
-  var izprepmana $m%varsetizprepmana
-  var iztimer $m%varsetiztimer
+  var avoidshock $avoidshock
+  var perchealth $perchealth
+  var manipulate $manipulate
+  var paralysis $paralysis
+  var paralysismana $paralysismana
+  var vitheal $vitheal
+  var vithealmana $vithealmana
+  var heal $heal
+  var healmana $healmana
+  var curedisease $curedisease
+  var curediseasemana $curediseasemana
+  var flushpoisons $flushpoisons
+  var flushpoisonsmana $flushpoisonsmana
+  var adcheal $adcheal
+  var adcdisease $adcdisease
+  var adcpoison $adcpoison
+  var upkeepregen $upkeepregen
+  var upkeepregenmana $upkeepregenmana
+  var absolution $absolution
+  var absolutionmana $absolutionmana
+  var iztouch $iztouch
+  var izmana $izmana
+  var iztimer $iztimer
   
   var nextiztouch 0
   var nexthealcast 0
@@ -1333,20 +1338,18 @@ EMPATHONLY:
   return
 
 MOONMAGEONLY:
-  var astro $m%varsetastro
-  var astrotimer $m%varsetastrotimer
-  var predictiontool $m%varsetpredictiontool
-  var predictiontoolitem $m%varsetpredictiontoolitem
-  var tktitem $m%varsettktitem
-  var shadowlingnoun $m%varsetshadowlingnoun
-  var piercinggaze $m%varsetpiercinggaze
-  var pgprepmana $m%varsetpgprepmana
-  var pgaddmana $m%varsetpgaddmana
-  var mindshout $m%varsetmindshout
-  var mindshoutprepmana $m%varsetmindshoutprepmana
-  var mindshoutaddmana $m%varsetmindshoutaddmana
-  var burglerf $m%varsetburglerf
-  var burglerfdelay $m%varsetburglerfdelay
+  var astro $astro
+  var astrotimer $astrotimer
+  var predictiontool $predictiontool
+  var predictiontoolitem $predictiontoolitem
+  var tktitem $tktitem
+  var shadowlingnoun $shadowlingnoun
+  var piercinggaze $piercinggaze
+  var piercinggazemana $piercinggazemana
+  var mindshout $mindshout
+  var mindshoutmana $mindshoutmana
+  var burglerf $burglerf
+  var burglerfdelay $burglerfdelay
   
   var iotsscan 0
   var nextastro 0
@@ -1434,24 +1437,24 @@ MOONMAGEONLY:
   return
 
 NECROONLY:
-  var necrostate $m%varsetnecrostate
-  var necrosafety $m%varsetnecrosafety
-  var necrowhitelist $m%varsetnecrowhitelist
-  var riteofgrace $m%varsetriteofgrace
-  var rogprepmana $m%varsetrogprepmana
-  var rogcycle $m%varsetrogcycle
-  var preserve $m%varsetpreserve
-  var harvest $m%varsetharvest
-  var harveststore $m%varsetharveststore
-  var harveststorenum $m%varsetharveststorenum
-  var devour $m%varsetdevour
-  var devourprepmana $m%varsetdevourprepmana
-  var devouraddmana $m%varsetdevouraddmana
-  var eotbrel $m%varseteotbrel
-  var siphonvit $m%varsetsiphonvit
-  var siphonvitprepmana $m%varsetsiphonvitprepmana
-  var siphonvitaddmana $m%varsetsiphonvitaddmana
-  var siphonvitnum $m%varsetsiphonvitnum
+  var necrostate $necrostate
+  var necrosafety $necrosafety
+  var necrowhitelist $necrowhitelist
+  var riteofgrace $riteofgrace
+  var rogprepmana $rogprepmana
+  var rogcycle $rogcycle
+  var preserve $preserve
+  var harvest $harvest
+  var harveststore $harveststore
+  var harveststorenum $harveststorenum
+  var devour $devour
+  var devourprepmana $devourprepmana
+  var devouraddmana $devouraddmana
+  var eotbrel $eotbrel
+  var siphonvit $siphonvit
+  var siphonvitprepmana $siphonvitprepmana
+  var siphonvitaddmana $siphonvitaddmana
+  var siphonvitnum $siphonvitnum
   
   var materialnum -1
   if "$guild" = "Necromancer" then
@@ -1467,13 +1470,13 @@ NECROONLY:
   return
 
 PALADINONLY:
-  var smite $m%varsetsmite
-  var tithe $m%varsettithe
-  var anloralpin $m%varsetanloralpin
-  var anloralpinitem $m%varsetanloralpinitem    
-  var pilgrimbadge $m%varsetpilgrimbadge
-  var pilgrimbadgeitem $m%varsetpilgrimbadgeitem
-  var watercontainer $m%varsetwatercontainer
+  var smite $smite
+  var tithe $tithe
+  var anloralpin $anloralpin
+  var anloralpinitem $anloralpinitem    
+  var pilgrimbadge $pilgrimbadge
+  var pilgrimbadgeitem $pilgrimbadgeitem
+  var watercontainer $watercontainer
   return
 
 RANGERONLY:
@@ -1481,84 +1484,86 @@ RANGERONLY:
   action var pounceready 1 when You think you have the strength to pounce upon prey once again\.
   action var pounceready 0 when You're too tired from the last time you pounced on some prey\.
   
-  var pounce $m%varsetpounce
-  var snipe $m%varsetsnipe
-  var dualload $m%varsetdualload
-  var ritstype $m%varsetritstype
+  var pounce $pounce
+  var snipe $snipe
+  var dualload $dualload
+  var ritstype $ritstype
   
   var pounceready 1
   return
 
 THIEFONLY: 
-  var dualload $m%varsetdualload
-  var snipe $m%varsetsnipe
-  var backstab $m%varsetbackstab
-  var khrimax $m%varsetkhrimax
-  var khriadaptation $m%varsetkhriadaptation
-  var khriavoidance $m%varsetkhriavoidance
-  var khricunning $m%varsetkhricunning
-  var khridampen $m%varsetkhridampen
-  var khridarken $m%varsetkhridarken
-  var khriendure $m%varsetkhriendure
-  var khrielusion $m%varsetkhrielusion
-  var khrisevanescence $m%varsetkhrievanescence
-  var khriflight $m%varsetkhriflight
-  var khrifright $m%varsetkhrifright
-  var khrifocus $m%varsetkhrifocus
-  var khriharrier $m%varsetkhriharrier
-  var khrihasten $m%varsetkhrihasten
-  var khriinsight $m%varsetkhriinsight
-  var khriplunder $m%varsetkhriplunder
-  var khrisagacity $m%varsetkhrisagacity
-  var khrisensing $m%varsetkhrisensing
-  var khriserenity $m%varsetkhriserenity
-  var khrishadowstep $m%varsetkhrishadowstep
-  var khrisight $m%varsetkhrisight
-  var khristeady $m%varsetkhristeady
-  var khristrike $m%varsetkhristrike
-  var khriguile $m%varsetkhriguile
-  var khriprowess $m%varsetkhriprowess
-  var khriterrify $m%varsetkhriterrify
-  var khridebil $m%varsetkhridebil
-  var khridebiltype $m%varsetkhridebiltype
+  var dualload $dualload
+  var snipe $snipe
+  var backstab $backstab
+  var khrimax $khrimax
+  var khriadaptation $khriadaptation
+  var khriavoidance $khriavoidance
+  var khricunning $khricunning
+  var khridampen $khridampen
+  var khridarken $khridarken
+  var khriendure $khriendure
+  var khrielusion $khrielusion
+  var khrisevanescence $khrievanescence
+  var khriflight $khriflight
+  var khrifright $khrifright
+  var khrifocus $khrifocus
+  var khriharrier $khriharrier
+  var khrihasten $khrihasten
+  var khriinsight $khriinsight
+  var khriplunder $khriplunder
+  var khrisagacity $khrisagacity
+  var khrisensing $khrisensing
+  var khriserenity $khriserenity
+  var khrishadowstep $khrishadowstep
+  var khrisight $khrisight
+  var khristeady $khristeady
+  var khristrike $khristrike
+  var khriguile $khriguile
+  var khriprowess $khriprowess
+  var khriterrify $khriterrify
+  var khridebil $khridebil
+  var khridebiltype $khridebiltype
   
-  var burglethiefbin $m%varsetburglethiefbin
-  var burglekhrihasten $m%varsetburglekhrihasten
-  var burglekhriplunder $m%varsetburglekhriplunder
-  var burglekhrisilence $m%varsetburglekhrisilence
-  var burglekhrislight $m%varsetburglekhrislight
+  var burglethiefbin $burglethiefbin
+  var burglekhrihasten $burglekhrihasten
+  var burglekhriplunder $burglekhriplunder
+  var burglekhrisilence $burglekhrisilence
+  var burglekhrislight $burglekhrislight
   
-  var boxpopkhrifocus $m%varsetboxpopkhrifocus
-  var boxpopkhrihasten $m%varsetboxpopkhrihasten
-  var boxpopkhriplunder $m%varsetboxpopkhriplunder
-  var boxpopkhrisafe $m%varsetboxpopkhrisafe
-  var boxpopkhrisight $m%varsetboxpopkhrisight
+  var boxpopkhrifocus $boxpopkhrifocus
+  var boxpopkhrihasten $boxpopkhrihasten
+  var boxpopkhriplunder $boxpopkhriplunder
+  var boxpopkhrisafe $boxpopkhrisafe
+  var boxpopkhrisight $boxpopkhrisight
+  
+  var invest $invest
+  var tradingsell $tradingsell
+  var tradingselltown $tradingselltown
+  var tradingsellsource $tradingsellsource
+  var tradingtasks $tradingtasks
   return
 
 TRADERONLY:
   action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) (.*)s\.
   action var quantity $1 when You need to turn in (\d*) more\.
-  
-  var invest $m%varsetinvest
-  var tradingsell $m%varsettradingsell
-  var tradingselltown $m%varsettradingselltown
-  var tradingsellsource $m%varsettradingsellsource
-  var tradingtasks $m%varsettradingtasks
+  var ignitebackup $ignitebackup
+  var summoning $summoning
+  var summonweapon $summonweapon
+  var summonweapontimer $summonweapontimer
+  var pathway $pathway
+  var pathwaytype $pathwaytype
+  var domain $domain
+  var domaintype $domaintype
+  var chargeafterlock $chargeafterlock
+  var calspell $calspell
+  var calprepmana $calprepmana
+  var caladdmana $caladdmana
+
   return
 
 WARMAGEONLY:
-  var ignitebackup $m%varsetignitebackup
-  var summoning $m%varsetsummoning
-  var summonweapon $m%varsetsummonweapon
-  var summonweapontimer $m%varsetsummonweapontimer
-  var pathway $m%varsetpathway
-  var pathwaytype $m%varsetpathwaytype
-  var domain $m%varsetdomain
-  var domaintype $m%varsetdomaintype
-  var chargeafterlock $m%varsetchargeafterlock
-  var calspell $m%varsetcalspell
-  var calprepmana $m%varsetcalprepmana
-  var caladdmana $m%varsetcaladdmana
+
   
   var igniteweapon %seweapon|%leweapon|%theweapon|%sbweapon|%lbweapon|%thbweapon|%staveweapon|%poleweapon|%ltweapon|%htweapon
   action var elecharge 1 when You sense nothing out of the ordinary\.
@@ -1578,6 +1583,1270 @@ WARMAGEONLY:
   var elecharge -1
   return
 
+HUNTINGVARLOAD:
+  if ("%huntingarea" != "none") then
+  {
+    if ("%huntingarea" = "p1-shiprats") then
+    {
+      var zone 1
+      var travel YES
+      var traveldest crossing
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 238|239|240|245|243|244|765|241|242|246|247
+      if ("%huntingpremium" = "YES") then var findroomlist 237|238|239|240|245|243|244|765|241|242|246|247|441|442|443|444|445|446|447|448|449|450|451|452|453
+      if ("%huntingpremium" = "ONLY") then var findroomlist 441|442|443|444|445|446|447|448|449|450|451|452|453
+      var bugoutroom 52
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-deathsquirrels") then
+    {
+      var zone 7
+      var travel YES
+      var traveldest arthe
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 515|516|517|518|519|520|521|522|523|524|525|526|527|528|529|530|531|532|533|534
+      var bugoutroom 514
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-muskhogs") then
+    {
+      var zone 4
+      var travel YES
+      var traveldest wolf
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 18|43|44|45|46|47|73|74|75|76
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-goblins") then
+    {
+      var zone 4
+      var travel YES
+      var traveldest wolf
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 52|68|69|70|71|72|55|65|66|67|56|57|58|59
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-fellhogs") then
+    {
+      var zone 4
+      var travel YES
+      var traveldest wolf
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 60|61|62|63|64
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-badgers") then
+    {
+      var zone 6
+      var travel YES
+      var traveldest crossing
+      var move YES
+      var movelist north gate
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 297|296|26|27|28|29|30|31|32|33|34|35|269
+      if ("%huntingpremium" = "YES") then var findroomlist 297|296|26|27|28|29|30|31|32|33|34|35|269|270|272|38|40
+      if ("%huntingpremium" = "ONLY") then var findroomlist 270|272|38|40
+      var bugoutroom 247
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-origami") then
+    {
+      var zone 7
+      var travel YES
+      var traveldest kaerna
+      var move NO
+      var movelist 0
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 258|257|259|260|261|262|263|264|265|266
+      if ("%huntingpremium" = "YES") then var findroomlist 258|257|259|260|261|262|263|264|265|266|788|789|790|791
+      if ("%huntingpremium" = "ONLY") then var findroomlist 788|789|790|791
+      var bugoutroom 480
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-pothanits") then
+    {
+      var zone 6
+      var travel YES
+      var traveldest crossing
+      var move YES
+      var movelist north gate
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 291|274|275|44|276|277|290|279
+      if ("%huntingpremium" = "YES") then var findroomlist 291|274|275|44|276|277|290|279|278|48|49
+      if ("%huntingpremium" = "ONLY") then var findroomlist 278|48|49
+      var bugoutroom 247
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-giantwasps") then
+    {
+      var zone 4
+      var travel YES
+      var traveldest wolf
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 24|25|26|27|28|29|30|31|32
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-trollkin") then
+    {
+      var zone 6
+      var travel YES
+      var traveldest crossing
+      var move YES
+      var movelist north gate
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 280|286|287|288|289|64|65|298|59|58|285|67|68|69
+      if ("%huntingpremium" = "YES") then var findroomlist 280|286|287|288|289|64|65|298|59|58|285|67|68|69|283|282|284|281
+      if ("%huntingpremium" = "ONLY") then var findroomlist 283|282|284|281
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-cougarsgrendels") then
+    {
+      var zone 7a
+      var travel YES
+      var traveldest kaerna
+      var move YES
+      var movelist vineyard
+      var targetroom 0
+      var findroom YES
+      var findroomlist 21|22|23|24|25|26|27|28|29
+      var bugoutroom 4
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-woodtrolls") then
+    {
+      var zone 7a
+      var travel YES
+      var traveldest kaerna
+      var move YES
+      var movelist vineyard
+      var targetroom 0
+      var findroom YES
+      var findroomlist 30|31|32|33|34
+      var bugoutroom 4
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-grasseels") then
+    {
+      var zone 4
+      var travel YES
+      var traveldest wolf
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 228|229|230|231|232|233
+      if ("%huntingpremium" = "YES") then var findroomlist 228|229|230|231|232|233|234|235|236|237
+      if ("%huntingpremium" = "ONLY") then var findroomlist 234|235|236|237
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-animateditems") then
+    {
+      var zone 7a
+      var travel YES
+      var traveldest kaerna
+      var move YES
+      var movelist baearholt
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 0
+      if ("%huntingpremium" = "YES") then var findroomlist 70|71|72|73|74|75|76|77|78|79|80|81|82
+      if ("%huntingpremium" = "ONLY") then var findroomlist 70|71|72|73|74|75|76|77|78|79|80|81|82
+      var bugoutroom 62
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-beisswurms") then
+    {
+      var zone 10
+      var travel YES
+      var traveldest stone
+      var move NO
+      var targetroom 07
+      var findroom YES
+      var findroomlist 31|32|33|34|36|36|37
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-cavebears") then
+    {
+      var zone 10
+      var travel YES
+      var traveldest stone
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 50|48|49|52|53|52|51|53|55|56|54|57|59|58
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-copperheads") then
+    {
+      var zone 9b
+      var travel YES
+      var traveldest sorrow
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 131|132|133|134
+      var bugoutroom 8
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-rocktrolls") then
+    {
+      var zone 7
+      var travel YES
+      var traveldest kaerna
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 441|442|443|444|445|446|447|448|449|450|451|452|453|454|455|456|457|458|459|460
+      var bugoutroom 480
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-endrusserpents") then
+    {
+      var zone 60
+      var travel YES
+      var traveldest leth
+      var move YES
+      var movelist str1
+      var targetroom 0
+      var findroom YES
+      var findroomlist 147|148|149|150|151|152|153|154|155
+      var bugoutroom 14
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-snowbeasts") then
+    {
+      var zone 62
+      var travel YES
+      var traveldest leth
+      var move YES
+      var movelist str2
+      var targetroom 0
+      var findroom YES
+      var findroomlist 15|16|17|18|19|20|32|31|34|30|33|29|28|24|23|25|26|27
+      var bugoutroom 97
+      var nearestportaltown leth
+    }
+    if ("%huntingarea" = "p1-crocodiles") then
+    {
+      var zone 7
+      var travel YES
+      var traveldest caravansary
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 52
+      var bugoutroom 3
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-direbears") then
+    {
+      var zone 4
+      var travel YES
+      var traveldest wolf
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 317|316|315|324|314
+      if ("%huntingpremium" = "YES") then var findroomlist 317|316|315|324|314|321|322|323
+      if ("%huntingpremium" = "ONLY") then var findroomlist 321|322|323
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-vipers") then
+    {
+      var zone 11
+      var travel YES
+      var traveldest vipers
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 42|43|44|45|46|47|48|49|55|56
+      if ("%huntingpremium" = "YES") then var findroomlist 42|43|44|45|46|47|48|49|55|56|149|150|151|152|153|154|155|156|157|158|159|160
+      if ("%huntingpremium" = "ONLY") then var findroomlist 149|150|151|152|153|154|155|156|157|158|159|160
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-leucros") then
+    {
+      var zone 11
+      var travel YES
+      var traveldest vipers
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 6|7|8|9|10|11|20|19|16|11|12|15|18|21|22|17|14|13
+      if ("%huntingpremium" = "YES") then var findroomlist 6|7|8|9|10|11|20|19|16|11|12|15|18|21|22|17|14|13|50|51|52|53|54
+      if ("%huntingpremium" = "ONLY") then var findroomlist 50|51|52|53|54
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-guardians") then
+    {
+      var zone 11
+      var travel YES
+      var traveldest vipers
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 66|67|68|69|70|78|77|76|75|74|73|72|71|65
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    #45
+    if ("%huntingarea" = "p1-giantbears") then
+    {
+      var zone 7
+      var travel YES
+      var traveldest kaerna
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 810|811|812|813
+      if ("%huntingpremium" = "YES") then var findroomlist 810|811|812|813|821|822
+      if ("%huntingpremium" = "ONLY") then var findroomlist 821|822
+      var bugoutroom 355
+      var nearestportaltown crossing
+    }
+    #63
+    if ("%huntingarea" = "p1-emberbulls") then
+    {
+      var zone 7
+      var travel YES
+      var traveldest kaerna
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 828|829|830|831|832|833|834|835|836
+      if ("%huntingpremium" = "YES") then var findroomlist 828|829|830|831|832|833|834|835|836
+      if ("%huntingpremium" = "ONLY") then var findroomlist 834|835|836
+      var bugoutroom 355
+      var nearestportaltown crossing
+    }
+    #63
+    if ("%huntingarea" = "p1-onyxgargoyles") then
+    {
+      var zone 7
+      var travel YES
+      var traveldest kaerna
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 814|815|816|817|818|819|820
+      if ("%huntingpremium" = "YES") then var findroomlist 814|815|816|817|818|819|820|823|824|825|826
+      if ("%huntingpremium" = "ONLY") then var findroomlist 823|824|825|826
+      var bugoutroom 355
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-warklins") then
+    {
+      var zone 10
+      var travel YES
+      var traveldest stone
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 39|40|41|42|43|44|45|46|47
+      if ("%huntingpremium" = "YES") then var findroomlist 39|40|41|42|43|44|45|46|47|117|118|119|120|121
+      if ("%huntingpremium" = "ONLY") then var findroomlist 117|118|119|120|121
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-scuttlers") then
+    {
+      var zone 62
+      var travel YES
+      var traveldest leth
+      var move YES
+      var movelist str2
+      var targetroom 0
+      var findroom YES
+      var findroomlist 209|210|211|212|213
+      var bugoutroom 97
+      var nearestportaltown leth
+    }
+    if ("%huntingarea" = "p1-stormbulls") then
+    {
+      var zone 112
+      var travel YES
+      var traveldest ilaya
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97
+      var bugoutroom 32
+      var nearestportaltown leth
+    }
+    if ("%huntingarea" = "p1-lavadrakes") then
+    {
+      var zone 13
+      var travel YES
+      var traveldest dirge
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 189|190|191|192|193|194|195
+      if ("%huntingpremium" = "YES") then var findroomlist 189|190|191|192|193|194|195|300|301|302|303|304|305
+      if ("%huntingpremium" = "ONLY") then var findroomlist 300|301|302|303|304|305
+      var bugoutroom 49
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p2-brocketdeeryoung") then
+    {
+      var zone 40a
+      var travel YES
+      var traveldest langenfirth
+      var move YES
+      var movelist siksraja
+      var targetroom 0
+      var findroom YES
+      var findroomlist 104|105|146|147
+      var bugoutroom 1
+      var nearestportaltown langenfirth
+    }
+    if ("%huntingarea" = "p2-marauders") then
+    {
+      var zone 41
+      var travel YES
+      var traveldest fornsted
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 16|17|18|19|25|26|27|28|29
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
+    #25
+    if ("%huntingarea" = "p2-swamptrolls") then
+    {
+      var zone 31
+      var travel YES
+      var traveldest haven
+      var move YES
+      var movelist egate 
+      var targetroom 0
+      var findroom YES
+      var findroomlist 39|108|109|110|111|80|82|83|84
+      var bugoutroom 1
+      var nearestportaltown langenfirth
+    }
+    if ("%huntingarea" = "p2-piruatiserpents") then
+    {
+      var zone 31
+      var travel YES
+      var traveldest haven
+      var move YES
+      var movelist egate 
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 55|56|57|58|51|53|54|
+      if ("%huntingpremium" = "YES") then var findroomlist 55|56|57|58|51|53|54|131|132|133|134
+      if ("%huntingpremium" = "ONLY") then var findroomlist 131|132|133|134
+      var bugoutroom 1
+      var nearestportaltown riverhaven
+    }
+    if ("%huntingarea" = "p2-brocketdeer") then
+    {
+      var zone 40a
+      var travel YES
+      var traveldest langenfirth
+      var move NO
+      var movelist siksraja
+      var targetroom 0
+      var findroom YES
+      var findroomlist 148|149|150|151
+      var bugoutroom 1
+      var nearestportaltown langenfirth
+    }
+    if ("%huntingarea" = "p2-brocketdeerelder") then
+    {
+      var zone 40a
+      var travel YES
+      var traveldest langenfirth
+      var move YES
+      var movelist siksraja
+      var targetroom 0
+      var findroom YES
+      var findroomlist 155|154|153|152
+      var bugoutroom 1
+      var nearestportaltown langenfirth
+    }
+    if ("%huntingarea" = "p2-gryphonsbaby") then
+    {
+      var zone 34
+      var travel YES
+      var traveldest rossman
+      var move YES
+      var movelist gryphons|49
+      var targetroom 0
+      var findroom YES
+      var findroomlist 90|91|92
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
+    if ("%huntingarea" = "p2-gryphonsyoung") then
+    {
+      var zone 34
+      var travel YES
+      var traveldest rossman
+      var move YES
+      var movelist gryphons|49
+      var targetroom 0
+      var findroom YES
+      var findroomlist 93|116|117|118|119
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
+    if ("%huntingarea" = "p2-seordmaors") then
+    {
+      var zone 41
+      var travel YES
+      var traveldest fornsted
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 77|78|79|76|204
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
+    if ("%huntingarea" = "p3-snippets") then
+    {
+      var zone 66
+      var travel YES
+      var traveldest fayrin
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 711|712|713|714|715|716
+      var bugoutroom 128
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-rocktrolls1") then
+    {
+      var zone 68
+      var travel YES
+      var traveldest ylono
+      var move YES
+      var movelist move out|sgate
+      var targetroom 0
+      var findroom YES
+      var findroomlist 35|36|37|38|39|40|41|42|43|44|45|46|47
+      var bugoutroom 28
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-snowbeasts") then
+    {
+      var zone 66
+      var travel YES
+      var traveldest fayrin
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 167|168|169|170|171
+      var bugoutroom 128
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-rocktrolls2") then
+    {
+      var zone 68
+      var travel YES
+      var traveldest ylono
+      var move YES
+      var movelist move out|sgate
+      var targetroom 0
+      var findroom YES
+      var findroomlist 8|9|10|11|12|13|14
+      var bugoutroom 28
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-gargoyles") then
+    {
+      var zone 66
+      var travel YES
+      var traveldest fayrin
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 173|174|178|179|180|181|182|183|184|185|186|187|188|189|190
+      var bugoutroom 128
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-eidolonsteeds") then
+    {
+      var zone 68
+      var travel YES
+      var traveldest ylono
+      var move YES
+      var movelist move out|sgate
+      var targetroom 0
+      var findroom YES
+      var findroomlist 52|53|54|55|56|57|58|59|60|61|62|205|74|68|69|70|71|72
+      var bugoutroom 28
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-crocodiles") then
+    {
+      var zone 68
+      var travel YES
+      var traveldest ylono
+      var move YES
+      var movelist move out|sgate
+      var targetroom 0
+      var findroom YES
+      var findroomlist 184|183|185|186|187
+      var bugoutroom 28
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-sylphs") then
+    {
+      var zone 66
+      var travel YES
+      var traveldest fayrin
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 717|718|719|720|721
+      var bugoutroom 128
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-gryphons") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 234|235|236|237|238|239|240|241|242|243
+      var bugoutroom 382
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-quartzgargoyles") then
+    {
+      var zone 150
+      var travel YES
+      var traveldest fangcove
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 
+      if ("%huntingpremium" = "YES") then var findroomlist 65|66|67|68|69|70|71|72|73|74|75
+      if ("%huntingpremium" = "ONLY") then var findroomlist 65|66|67|68|69|70|71|72|73|74|75
+      var bugoutroom 1
+      var nearestportaltown none
+    }
+    if ("%huntingarea" = "p3-prereniyoung") then
+    {
+      var zone 66
+      var travel YES
+      var traveldest fayrin
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 656|657|658|659
+      if ("%huntingpremium" = "YES") then var findroomlist 656|657|658|659|660|662
+      if ("%huntingpremium" = "ONLY") then var findroomlist 660|662
+      var bugoutroom 128
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-redleucros") then
+    {
+      var zone 65
+      var travel YES
+      var traveldest fayrin
+      var move YES
+      var movelist undergondola
+      var targetroom 0
+      var findroom YES
+      var findroomlist 5|6|7|8|9|10|11|12|13|14
+      var bugoutroom 2
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-goldenpards") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 87|107|108|109|110|111|112|113|114|115|129|130|131|132
+      #if ("%huntingpremium" = "NO") then var findroomlist 656|657|658|659
+      #if ("%huntingpremium" = "YES") then var findroomlist 656|657|658|659|660|662
+      #if ("%huntingpremium" = "ONLY") then var findroomlist 660|662
+      var bugoutroom 382
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-prereni") then
+    {
+      var zone 66
+      var travel YES
+      var traveldest fayrin
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 664|665|666
+      if ("%huntingpremium" = "YES") then var findroomlist 664|665|666|661|663
+      if ("%huntingpremium" = "ONLY") then var findroomlist 661|663
+      var bugoutroom 128
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-windbags") then
+    {
+      var zone 66
+      var travel YES
+      var traveldest fayrin
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 722|723|724|725|726|727|728|729
+      var bugoutroom 128
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-windbags2") then
+    {
+      var zone 66
+      var travel YES
+      var traveldest fayrin
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 731|732|730|733|734|735|736
+      var bugoutroom 128
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-frostcrones") then
+    {
+      var zone 66
+      var travel YES
+      var traveldest fayrin
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 722|723|724|725|726|727|728|729
+      var bugoutroom 128
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-prerenielder") then
+    {
+      var zone 66
+      var travel YES
+      var traveldest fayrin
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 667|668|669
+      if ("%huntingpremium" = "YES") then var findroomlist 667|668|669|679|680
+      if ("%huntingpremium" = "ONLY") then var findroomlist 679|680
+      var bugoutroom 128
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-cloudrats") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 607|608|609|610|611|612
+      var bugoutroom 382
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-dragonpriests") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 154|155|156|157|158|159|160|161|162|163|164|165|166|167
+      var bugoutroom 382
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-beltunumshi") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 616|617|618|619|620|621|622|623|624|625|626|627|628
+      var bugoutroom 382
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-adanfblood") then
+    {
+      var zone 68
+      var travel YES
+      var traveldest ylono
+      var move YES
+      var movelist move out|sgate
+      var targetroom 0
+      var findroom YES
+      var findroomlist 139|140|141|142|143|144|210|209|145|146|147|148|149|150
+      var bugoutroom 28
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-adanfspirit") then
+    {
+      var zone 68a
+      var travel YES
+      var traveldest ylono
+      var move YES
+      var movelist move out|sgate|ice caves
+      var targetroom 0
+      var findroom YES
+      var findroomlist 16|15|14|13|12|27|11|10|28|9|8|26|17|18|19|20|21
+      var bugoutroom 31
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-malchata") then
+    {
+      var zone 66
+      var travel YES
+      var traveldest fayrin
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 488|489|490|491|492|493|494|485|486|487|479|480|481|482|483|484|473|474|475|476|477|478|479|469|470|471|472|468|467|464|465|466
+      var bugoutroom 128
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-stormbulls") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 597
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 597|598|599|600|601|602
+      if ("%huntingpremium" = "YES") then var findroomlist 597|598|599|600|601|602|603|604|605
+      if ("%huntingpremium" = "ONLY") then var findroomlist 603|604|605
+      var bugoutroom 382
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-wyvernsjuve") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 454|455|456|457|458|459|460|461|462|463|465|467|466|453
+      if ("%huntingpremium" = "YES") then var findroomlist 454|455|456|457|458|459|460|461|462|463|465|467|466|453|575|576|577|578|579
+      if ("%huntingpremium" = "ONLY") then var findroomlist 575|576|577|578|579
+      var bugoutroom 382
+      var nearestportaltown shard
+      var monsterskin wyvern claw
+    }
+    if ("%huntingarea" = "p3-wyvernsyoung") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 482|483|484|485|486|487|511|512|480|481
+      if ("%huntingpremium" = "YES") then var findroomlist 482|483|484|485|486|487|511|512|480|481|575|576|577|578|579
+      if ("%huntingpremium" = "ONLY") then var findroomlist 575|576|577|578|579
+      var bugoutroom 382
+      var nearestportaltown shard
+      var monsterskin wyvern claw
+    }
+    if ("%huntingarea" = "p3-wyvernsadult") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 468|469|470|471|472|473|479|474|475|476|477|478
+      var bugoutroom 382
+      var nearestportaltown shard
+      var monsterskin wyvern claw
+    }
+    if ("%huntingarea" = "p3-icearchons") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 498|499|500|501|506|509|510|502|503|504|505|507|508
+      var bugoutroom 382
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p3-adanfsorcs") then
+    {
+      var zone 68
+      var travel YES
+      var traveldest ylono
+      var move YES
+      var movelist move out|sgate
+      var targetroom 0
+      var findroom YES
+      var findroomlist 151|152|153|154|155|156|157|158|159|160|161|162
+      var bugoutroom 28
+      var nearestportaltown shard
+      var monsterskin reddish-black scale
+    }
+    if ("%huntingarea" = "p3-adanfblades") then
+    {
+      var zone 68
+      var travel YES
+      var traveldest ylono
+      var move YES
+      var movelist move out|sgate
+      var targetroom 0
+      var findroom YES
+      var findroomlist 163|164|165|166|167|168|169|170|171|172|173|174|175|176
+      var bugoutroom 28
+      var nearestportaltown shard
+      var monsterskin adan'f tail barb
+    }
+    if ("%huntingarea" = "p4-merkreshcelpeze1") then
+    {
+      var zone 107
+      var travel YES
+      var traveldest merkresh
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152
+      var bugoutroom 16
+      var nearestportaltown merkresh
+    }
+    if ("%huntingarea" = "p4-merkreshcelpeze2") then
+    {
+      var zone 107
+      var travel YES
+      var traveldest merkresh
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 156|157|158|159|160|161|162|163|164|165|166|167|168
+      var bugoutroom 16
+      var nearestportaltown merkresh
+    }
+    if ("%huntingarea" = "p4-merkreshcelpeze3") then
+    {
+      var zone 107
+      var travel YES
+      var traveldest merkresh
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 34|35|36|37
+      var bugoutroom 16
+      var nearestportaltown merkresh
+    }
+    if ("%huntingarea" = "p4-merkreshcelpeze4") then
+    {
+      var zone 107
+      var travel YES
+      var traveldest merkresh
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 103|104|105|106|107
+      var bugoutroom 16
+      var nearestportaltown merkresh
+    }
+    if ("%huntingarea" = "p4-armadillosjuve") then
+    {
+      var zone 108
+      var travel YES
+      var traveldest mriss
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 383|384|385|386|387|388|389
+      if ("%huntingpremium" = "YES") then var findroomlist 383|384|385|386|387|388|389|403|404|405|406|407|408
+      if ("%huntingpremium" = "ONLY") then var findroomlist 403|404|405|406|407|408
+      var bugoutroom 150
+      var nearestportaltown merkresh
+    }
+    if ("%huntingarea" = "p4-armadillosadult") then
+    {
+      var zone 108
+      var travel YES
+      var traveldest mriss
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 1|2|3|4|5|6|7|8|9|10|11
+      if ("%huntingpremium" = "YES") then var findroomlist 1|2|3|4|5|6|7|8|9|10|11|415|416|417|418
+      if ("%huntingpremium" = "ONLY") then var findroomlist 415|416|417|418
+      var bugoutroom 150
+      var nearestportaltown merkresh
+    }
+    if ("%huntingarea" = "p4-armadilloselder") then
+    {
+      var zone 108
+      var travel YES
+      var traveldest mriss
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 391|392|393|394|395|396|397|398|399|400|401|402
+      if ("%huntingpremium" = "YES") then var findroomlist 391|392|393|394|395|396|397|398|399|400|401|402|410|411|412|413|414
+      if ("%huntingpremium" = "ONLY") then var findroomlist 410|411|412|413|414
+      var bugoutroom 150
+      var nearestportaltown merkresh
+    }
+    if ("%huntingarea" = "p5-fuliginmoths") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 637|638|639|640|641|642
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+      var monsterskin fuligin moth antenna
+    }
+    #185
+    if ("%huntingarea" = "p5-voidmoths") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 643|644|645|646|647|648
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    #195
+    if ("%huntingarea" = "p5-shadowmoths") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 649|650|651|652|653|654
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    if ("%huntingarea" = "p5-maidenstress") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 246|247|248|249|250|251|252|253|254
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    if ("%huntingarea" = "p5-matronstress") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 255|256|257|258|259|260|261|262|263|264|265
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    if ("%huntingarea" = "p5-dryads") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 283|284|285|286|287|288|289|290
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    if ("%huntingarea" = "p5-nyads1") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 267|266|268|269|270|271|272|273
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    if ("%huntingarea" = "p5-blightogres1") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 296|297|298|299
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    if ("%huntingarea" = "p5-nyads2") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 274|277|281|276|275|279|280|278|282
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    if ("%huntingarea" = "p5-blightogres2") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 312|311|308|305|309|310|307|306
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    if ("%huntingarea" = "p5-iceadders") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 435|434|428|429|430|427|426|425|424|423|422|421|432|433|431|437|445|446|447|448|449|441|442|443|444
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    if ("%huntingarea" = "p5-marblegargoyles") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 374|396|397|398|399|400|401|402|403|404|405|406|407|408|409|410|411|412|413|414|415|416|417|418
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+      var monsterskin black marble hide
+    }
+    if ("%huntingarea" = "p5-dpcrones") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 317|318|319|320|321|322
+      var bugoutroom 265
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p5-mountaingiants") then
+    {
+      var zone 123
+      var travel YES
+      var traveldest raven
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 317|318|319|320|321|322
+      var bugoutroom 26
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p5-shalswars") then
+    {
+      var zone 69
+      var travel YES
+      var traveldest wyvern
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 435|434|428|429|430|427|426|425|424|423|422|421|432|433|431|437|445|446|447|448|449|441|442|443|444
+      var bugoutroom 265
+      var nearestportaltown shard
+    }
+    if ("%huntingarea" = "p5-stompers") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 560|561|562|563|564|565
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    if ("%huntingarea" = "p5-maulers") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 566|567|568|569|570|571
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+    if ("%huntingarea" = "p5-blackapes") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 164|165|166|167|168|169|170|171|172|173|174|175|176|177|178|179|180|181|182|183|184|185|186|187|188|189|190|191|192|193|194|195|196|197|198|199|200|201|202|203|204|205|206|207|208|209|210
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
+  }
+  return
+
 MAGICVARLOAD:
   if (("$guild" = "Thief") || ("$guild" = "Barbarian")) then
   {
@@ -1592,10 +2861,6 @@ MAGICVARLOAD:
   else
   {
     #MAGIC_USER_SETUP
-    if %abuff = "YES" then
-    {
-      var abufflist %abuff1|%abuff2|%abuff3|%abuff4|%abuff5|%abuff6|%abuff7|%abuff8
-    }
     if %buff = "YES" then
     {
       var bufflist %buff1|%buff2|%buff3|%buff4|%buff5|%buff6|%buff7|%buff8
@@ -1625,6 +2890,114 @@ MAGICVARLOAD:
   var spellname %wand4spell
   gosub SPELLIDENT
   var wand4var %spellvar
+
+  #SPELL_SKILLS
+  gosub SPELLSTATCHECK %spell1
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spell1skill sorcery
+  else
+  {
+    if contains("%augmentation", "|%spell1|") then var spell1skill augmentation
+    if contains("%utility", "|%spell1|") then var spell1skill utility
+    if contains("%warding", "|%spell1|") then var spell1skill warding
+  }
+  gosub SPELLSTATCHECK %spell2
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spell2skill sorcery
+  else
+  {
+    if contains("%augmentation", "|%spell2|") then var spell2skill augmentation
+    if contains("%utility", "|%spell2|") then var spell2skill utility
+    if contains("%warding", "|%spell2|") then var spell2skill warding
+  }
+  gosub SPELLSTATCHECK %spell3
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spell3skill sorcery
+  else
+  {
+    if contains("%augmentation", "|%spell3|") then var spell3skill augmentation
+    if contains("%utility", "|%spell3|") then var spell3skill utility
+    if contains("%warding", "|%spell3|") then var spell3skill warding
+  }
+  gosub SPELLSTATCHECK %spell4
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spell4skill sorcery
+  else
+  {
+    if contains("%augmentation", "|%spell4|") then var spell4skill augmentation
+    if contains("%utility", "|%spell4|") then var spell4skill utility
+    if contains("%warding", "|%spell4|") then var spell4skill warding
+  }
+  #echo spell1skill: %spell1skill
+  #echo spell2skill: %spell2skill
+  #echo spell3skill: %spell3skill
+  #echo spell4skill: %spell4skill
+  
+  #CYCLICS_SKILLS
+  gosub SPELLSTATCHECK %spellc1
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spellc1skill sorcery
+  else
+  {
+    if contains("%augmentation", "|%spellc1|") then var spellc1skill augmentation
+    if contains("%utility", "|%spellc1|") then var spellc1skill utility
+    if contains("%warding", "|%spellc1|") then var spellc1skill warding
+  }
+  gosub SPELLSTATCHECK %spellc2
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spellc2skill sorcery
+  else
+  {
+    if contains("%augmentation", "|%spellc2|") then var spellc2skill augmentation
+    if contains("%utility", "|%spellc2|") then var spellc2skill utility
+    if contains("%warding", "|%spellc2|") then var spellc2skill warding
+  }
+  gosub SPELLSTATCHECK %spellc3
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spellc3skill sorcery
+  else
+  {
+    if contains("%augmentation", "|%spellc3|") then var spellc3skill augmentation
+    if contains("%utility", "|%spellc3|") then var spellc3skill utility
+    if contains("%warding", "|%spellc3|") then var spellc3skill warding
+  }
+  gosub SPELLSTATCHECK %spellc4
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spellc4skill sorcery
+  else
+  {
+    if contains("%augmentation", "|%spellc4|") then var spellc4skill augmentation
+    if contains("%utility", "|%spellc4|") then var spellc4skill utility
+    if contains("%warding", "|%spellc4|") then var spellc4skill warding
+  }
+  #echo spellc1skill: %spellc1skill
+  #echo spellc2skill: %spellc2skill
+  #echo spellc3skill: %spellc3skill
+  #echo spellc4skill: %spellc4skill
+  #PERFORM_CYCLICS
+  gosub SPELLSTATCHECK %pspellc1
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var pspellc1skill sorcery
+  else
+  {
+    if contains("%augmentation", "|%pspellc1|") then var pspellc1skill augmentation
+    if contains("%utility", "|%pspellc1|") then var pspellc1skill utility
+    if contains("%warding", "|%pspellc1|") then var pspellc1skill warding
+  }
+  gosub SPELLSTATCHECK %pspellc2
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var pspellc2skill sorcery
+  else
+  {
+    if contains("%augmentation", "|%pspellc2|") then var pspellc2skill augmentation
+    if contains("%utility", "|%pspellc2|") then var pspellc2skill utility
+    if contains("%warding", "|%pspellc2|") then var pspellc2skill warding
+  }
+  gosub SPELLSTATCHECK %pspellc3
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var pspellc3skill sorcery
+  else
+  {
+    if contains("%augmentation", "|%pspellc3|") then var pspellc3skill augmentation
+    if contains("%utility", "|%pspellc3|") then var pspellc3skill utility
+    if contains("%warding", "|%pspellc3|") then var pspellc3skill warding
+  }
+  
+  gosub SPELLSTATCHECK %spelltm
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var tmskill sorcery
+  else var tmskill tm
+  gosub SPELLSTATCHECK %spelldebil
+  if ((%spellmana != %nativemana) && (%spellmana != 0) then var debilskill sorcery
+  else var debilskill debil
   return
 
 WEAPONVARLOAD:
@@ -1669,12 +3042,11 @@ SETUP:
   gosub MAINVARLOAD
   gosub MULTIVARLOAD
   gosub GUILDVARLOAD
-  if ("%multitrain" != "YES") then gosub COMMANDPARSE
-  else var scriptmode 1
   gosub ALERTINIT
   gosub WEAPONVARLOAD
   gosub MAGICVARLOAD
-  gosub CRAFTVARLOAD 
+  gosub HUNTINGVARLOAD
+  gosub CRAFTVARLOAD
   gosub VALIDROOMCHECK
   return
 
@@ -1688,8 +3060,9 @@ MAINHELP:
 	put #echo
 	echo Options are:
 	echo TRAIN COMBAT - Combat training.
-	echo TRAIN NONCOMBAT - Out-of-combat training.
+  echo TRAIN COMBAT 2 - Combat training using Mode 2 variables.
 	echo TRAIN MULTI - Multi-Variable Set training.
+  echo TRAIN NONCOMBAT - Out-of-combat training.
 	echo TRAIN UPKEEP - Performs upkeep while inside a town.
 	echo
 	echo TRAIN QUIET - Quiet, but not silent training for RP situations.
@@ -1708,9 +3081,6 @@ MAINHELP:
 	echo TRAIN BUFF <minutes> - Casting personal buffs only.  Spells with durations remaining below <minutes> will be recast.
   echo TRAIN GBUFF	- Casting group buffs only.
   #if "$guild" = "Cleric" then echo TRAIN OMBUFF - Casts OM and casts buffs inside it.
-	echo
-  echo TRAIN UPKEEPTEST - Runs the AutoUpkeep route for testing purposes.
-  echo TRAIN BUGOUTTEST - Runs the Bugout route for testing purposes.
   echo
 	echo SET DISPLAY - displays current settings,
 	echo SET <variable> <value> - Changes script variables.
@@ -1762,6 +3132,8 @@ STATUSVARLOAD:
   var weapon14lock 0
 
   #TIMING_VARIABLES
+  var buffbuffer 2
+  var castingthrottle 1
   var nextacmcleave 0
   var nextacmcrash 0
   var nextacmdoublestrike 0
@@ -1871,6 +3243,7 @@ STATUSVARLOAD:
   var armortype 0
   var baddisarm 0
   var badface 0
+  var boxespoppedtotal 0
   var bugoutnostow 0
   var alertsonly 0
   var shieldworn 0
@@ -1884,7 +3257,7 @@ STATUSVARLOAD:
   var armor6worn 0
   var askclass 0
   var askstudent 0
-  var movetrainactive 0
+  var noncombatactive 0
   var balance solidly
   var barmace 0
   var bastardsword 0
@@ -1944,7 +3317,6 @@ STATUSVARLOAD:
   var heavytmready 1
   var hhriste 0
   var humming 0
-  var scriptmode -1
   var invoked 0
   var infection 0
   var justice -1
@@ -1968,17 +3340,20 @@ STATUSVARLOAD:
   var playing 0
   var prepped 0
   var preptime 0
-  var preptimewait 0
   var ready 0
   var researching 0
   var rprojectactive 0
   var researchtype -1
   var sanowretready 1
   var scancel 0
+  var scriptarea 0
+  var scriptareachange 0
   var sorted 0
   var spell1count 0
   var spell2count 0
   var spell3count 0
+  var spelldifficulty -1
+  var spellpercent 100
   var splittingmana 0
   var stance 0
   var stealthcount 0
@@ -2032,602 +3407,442 @@ MAINVARLOAD:
   var bugoutnum $bugoutnum
   var bugoutonbleed $bugoutonbleed
   var bugoutonsend $bugoutonsend
-  var bugoutroom $m%varsetbugoutroom
-  var killbeforemove $m%varsetkillbeforemove
-  var movetimeout $m%varsetmovetimeout
-  var autoupkeep $m%varsetautoupkeep
-  var moveclenchshard $m%varsetmoveclenchshard
-  var movewhistle $m%varsetmovewhistle
-  var movescream $m%varsetmovescream
-  var movevanish $m%varsetmovevanish
-  var upkeeptown $m%varsetupkeeptown
-  var premiumring $m%varsetpremiumring
-  var premiumringitem $m%varsetpremiumringitem
-  var nearestportaltown $m%varsetnearestportaltown
+  var killbeforemove $killbeforemove
+  var movetimeout $movetimeout
+  var prefergroup $prefergroup
+  var huntingpremium $huntingpremium
+  var premiumring $premiumring
+  var premiumringitem $premiumringitem
   
-  var vaulttown $m%varsetvaulttown
-  var ammobuytown $m%varsetammobuytown
-  var lockpickbuytown $m%varsetlockpickbuytown
+  if ($varset = 1) then var huntingarea $huntingarea
+  else var huntingarea $huntingaream2
+  if ($varset = 1) then var upkeeptown $upkeeptown
+  else var upkeeptown $upkeeptownm2
+  if ($varset = 1) then var burgletown $burgletown
+  else var burgletown $burgletownm2
+  if ($varset = 1) then var pawntown $pawntown
+  else var pawntown $pawntownm2
+  if ($varset = 1) then var performtown $performtown
+  else var performtown $performtownm2
+  if ($varset = 1) then var forgingtown $forgingtown
+  else var forgingtown $forgingtownm2
   
-  var auonhealth $m%varsetauonhealth
-  var auhealthnum $m%varsetauhealthnum
-  var auonbleed $m%varsetauonbleed
-  var auonpoison $m%varsetauonpoison
-  var auonfire $m%varsetauonfire
-  var auonnerves $m%varsetauonnerves
-  var auonburden $m%varsetauonburden
-  var auburdennum $m%varsetauburdennum
-  var auonammo $m%varsetauonammo
-  var auonboxes $m%varsetauonboxes
-  var minmoney $m%varsetminmoney
-  var exchange $m%varsetexchange
-  var autopath $m%varsetautopath
-  var repair $m%varsetrepair
-  var repairlist $m%varsetseweapon|$m%varsetleweapon|$m%varsettheweapon|$m%varsetsbweapon|$m%varsetlbweapon|$m%varsetthbweapon|$m%varsetstaveweapon|$m%varsetpoleweapon|$m%varsetltweapon|$m%varsethtweapon
-  var bundlesell $m%varsetbundlesell
-  var bundlevault $m%varsetbundlevault
-  var vaultmove $m%varsetvaultmove
-  var bundlerope $m%varsetbundlerope
-  var gemsell $m%varsetgemsell
-  var gemvault $m%varsetgemvault
-  var gempouches $m%varsetgempouches
-  var nuggetsell $m%varsetnuggetsell
-  var barsell $m%varsetbarsell
+  var movevanish $movevanish
+
   
-  var ammobuy $m%varsetammobuy
-  var ammobuylist $m%varsetammobuylist
-  var ammocontainer $m%varsetammocontainer
-  var ammomin $m%varsetammomin
-  var lockpickbuy $m%varsetlockpickbuy
-  var lockpickstacker $m%varsetlockpickstacker
-  var lockpickitem $m%varsetlockpickitem
-  var boxpopping $m%varsetboxpopping
-  var dismantletype $m%varsetdismantletype
-  var boxpopbuff $m%varsetboxpopbuff
-  var boxpopbuffprepmana $m%varsetboxpopbuffprepmana
-  var boxpopbuffaddmana $m%varsetboxpopbuffaddmana
+  var autoupkeep $autoupkeep
+  var auonhealth $auonhealth
+  var auhealthnum $auhealthnum
+  var auonbleed $auonbleed
+  var auonpoison $auonpoison
+  var auonfire $auonfire
+  var auonnerves $auonnerves
+  var auonburden $auonburden
+  var auburdennum $auburdennum
+  var auonammo $auonammo
+  var auonboxes $auonboxes
+  var minmoney $minmoney
+  var exchange $exchange
+  var autopath $autopath
+  var repair $repair
+  var repairlist $seweapon|$leweapon|$theweapon|$sbweapon|$lbweapon|$thbweapon|$staveweapon|$poleweapon|$ltweapon|$htweapon
+  var vaulttown $vaulttown
+  var bundlesell $bundlesell
+  var bundlevault $bundlevault
+  var vaultmove $vaultmove
+  var bundlerope $bundlerope
+  var gemsell $gemsell
+  var gemvault $gemvault
+  var gempouches $gempouches
+  var nuggetsell $nuggetsell
+  var barsell $barsell
+  var ammobuy $ammobuy
+  var ammobuytown $ammobuytown
+  var ammobuylist $ammobuylist
+  var ammocontainer $ammocontainer
+  var ammomin $ammomin
+  var lockpickbuy $lockpickbuy
+  var lockpickbuytown $lockpickbuytown
+  var lockpickstacker $lockpickstacker
+  var lockpickitem $lockpickitem
+  var boxpopping $boxpopping
+  var skeletonkey $skeletonkey
+  var bucketitem $bucketitem
+  var dismantletype $dismantletype
+  var boxpopbuff $boxpopbuff
+  var boxpopbuffprepmana $boxpopbuffprepmana
+  var boxpopbuffaddmana $boxpopbuffaddmana
+  var spiderfeed $spiderfeed
+  var incense $incense
   
-  var spiderfeed $m%varsetspiderfeed
-  var incense $m%varsetincense
  
- 
+  #COMBAT 
+  if (%varset = 1) then var weapons $weapons
+  else var weapons $weaponsm2
+  #WEAPONLIST
+  if (%varset = 1) then var weaponlist $weaponlist
+  else var weaponlist $weaponlistm2
+  eval weaponnum count("%weaponlist", "|")
+  math weaponnum add 1
+  gosub WEAPONLOADLOOP
+  #WEAPONLIST_END
+  var stancemain $stancemain
+  var lowestfirst $lowestfirst
+  var killafterlock $killafterlock
   
-  eval weapon1 tolower("$m%varsetweapon1")
-  eval weapon2 tolower("$m%varsetweapon2")
-  eval weapon3 tolower("$m%varsetweapon3")
-  eval weapon4 tolower("$m%varsetweapon4")
-  eval weapon5 tolower("$m%varsetweapon5")
-  eval weapon6 tolower("$m%varsetweapon6")
-  eval weapon7 tolower("$m%varsetweapon7")
-  eval weapon8 tolower("$m%varsetweapon8")
-  eval weapon9 tolower("$m%varsetweapon9")
-  eval weapon10 tolower("$m%varsetweapon10")
-  eval weapon11 tolower("$m%varsetweapon11")
-  eval weapon12 tolower("$m%varsetweapon12")
-  eval weapon13 tolower("$m%varsetweapon13")
-  eval weapon14 tolower("$m%varsetweapon14")
-  var offhand $m%varsetoffhand
-  var acms $m%varsetacms
-  var seoffhand $m%varsetseoffhand
-  var secombo $m%varsetsecombo
-  var leoffhand $m%varsetleoffhand
-  var sboffhand $m%varsetsboffhand
-  var lboffhand $m%varsetlboffhand
-  var staveoffhand $m%varsetstaveoffhand
-  var seweapon $m%varsetseweapon
-  var leweapon $m%varsetleweapon
-  var theweapon $m%varsettheweapon
-  var sbweapon $m%varsetsbweapon
-  var lbweapon $m%varsetlbweapon
-  var thbweapon $m%varsetthbweapon
-  var staveweapon $m%varsetstaveweapon
-  var staveworn $m%varsetstaveworn
-  var stavetied $m%varsetstavetied
-  var poleweapon $m%varsetpoleweapon
-  var poleworn $m%varsetpoleworn
-  var poletied $m%varsetpoletied
-  var polecombo $m%varsetpolecombo
-  var bastardsworditem $m%varsetbastardsworditem
-  var barmaceitem $m%varsetbarmaceitem
-  var holyiconitem $m%varsetholyiconitem
-  var risteitem $m%varsetristeitem
-  var hhristeitem $m%varsethhristeitem
-  var xbowweapon $m%varsetxbowweapon
-  var bowweapon $m%varsetbowweapon
-  var ltweapon $m%varsetltweapon
-  var htweapon $m%varsethtweapon
-  var xbowammo $m%varsetxbowammo
-  var xbowworn $m%varsetxbowworn
-  var bowammo $m%varsetbowammo
-  var bowworn $m%varsetbowworn
-  var slingweapon $m%varsetslingweapon
-  var slingammo $m%varsetslingammo
-  var collectammo $m%varsetcollectammo
+  var offhand $offhand
+  var acms $acms
+  var seweapon $seweapon
+  var seoffhand $seoffhand
+  var secombo $secombo
+  var leweapon $leweapon
+  var leoffhand $leoffhand
+  var theweapon $theweapon
+  var sbweapon $sbweapon
+  var sboffhand $sboffhand
+  var lbweapon $lbweapon
+  var lboffhand $lboffhand
+  var thbweapon $thbweapon
+  var staveweapon $staveweapon
+  var staveoffhand $staveoffhand
+  var staveworn $staveworn
+  var stavetied $stavetied
+  var poleweapon $poleweapon
+  var poleworn $poleworn
+  var poletied $poletied
+  var polecombo $polecombo
+  var bastardsworditem $bastardsworditem
+  var barmaceitem $barmaceitem
+  var holyiconitem $holyiconitem
+  var risteitem $risteitem
+  var hhristeitem $hhristeitem
+  var ltweapon $ltweapon
+  var ltoffhand $ltoffhand
+  var ltbond $ltbond
+  var ltverb $ltverb
+  var htweapon $htweapon
+  var htoffhand $htoffhand
+  var htbond $htbond
+  var htverb $htverb
+
+  var xbowweapon $xbowweapon
+  var bowweapon $bowweapon
+  
+  var xbowammo $xbowammo
+  var xbowworn $xbowworn
+  var bowammo $bowammo
+  var bowworn $bowworn
+  var slingweapon $slingweapon
+  var slingammo $slingammo
+  var collectammo $collectammo
+  
+  var armorcheck $armorcheck
+  var shielditem $shielditem
+  var parrystickitem $parrystickitem
+  var armornum $armornum
+  var armor1item $armor1item
+  var armor2item $armor2item
+  var armor3item $armor3item
+  var armor4item $armor4item
+  var armor5item $armor5item
+  var armor6item $armor6item
+  var knucklesitem $knucklesitem
+  
+  var attune $attune
+  var recall $recall
+  var hunting $hunting
+  var huntingtimer $huntingtimer
+  if (%varset = 1) then var stealth $stealth
+  else var stealth $stealthm2
+  if (%varset = 1) then var tactics $tactics
+  else var tactics $tacticsm2
+  var retreatdelay $retreatdelay
+  var appraise $appraise
+  var appraisetarget $appraisetarget
+  var appraisetimer $appraisetimer
+  var appsaveitem $appsaveitem
+  var appsaveitemstorage $appsaveitemstorage
+  var outdoor $outdoor
+  var outdoortimer $outdoortimer
+  var collectitem $collectitem
+  var textbook $textbook
+  var textbooktimer $textbooktimer
+  var textbookitem $textbookitem
+  var textbooklist $textbooklist
+  var teaching $teaching
+  var teachtargets $teachtargets
+  var teachskill $teachskill
+  
+  var combatsanowret $combatsanowret
+  var sanowretitem $sanowretitem
   
   #GENERAL
-  var almanac $m%varsetalmanac
-  var almanacitem $m%varsetalmanacitem
-  var almanacalerts $m%varsetalmanacalerts
-  var ejournal $m%varsetejournal
-  var ejournalitem $m%varsetejournalitem
-  var ejournalstates $m%varsetejournalstates
-  var tarantula $m%varsettarantula
-  var tarantulaitem $m%varsettarantulaitem
-  var tarantulaskill1 $m%varsettarantulaskill1
-  var tarantulaskill2 $m%varsettarantulaskill2
-  var findroom $m%varsetfindroom
-  var findroomlist $m%varsetfindroomlist
-  var findroomzone $m%varsetfindroomzone
-  var frwhitelist $m%varsetfrwhitelist
-  var frblacklist $m%varsetfrblacklist
-  var frprefergroup $m%varsetfrprefergroup
-  var zone $m%varsetzone
-  var travel $m%varsettravel
-  var traveldest $m%varsettraveldest
-  var move $m%varsetmove
-  var movelist $m%varsetmovelist
-  var targetroom $m%varsettargetroom
+  
+  var whitelist $whitelist
+  var blacklist $blacklist
+  
+  var almanac $almanac
+  var almanacitem $almanacitem
+  var almanacalerts $almanacalerts
+  var ejournal $ejournal
+  var ejournalitem $ejournalitem
+  var ejournalstates $ejournalstates
+  var tarantula $tarantula
+  var tarantulaitem $tarantulaitem
+  var tarantulaskill1 $tarantulaskill1
+  var tarantulaskill2 $tarantulaskill2
+  var locksmithboxitem $locksmithboxitem
+  var locksmithboxtimer $locksmithboxtimer
+  var skinfatrainer $skinfatrainer
+  var skinfatrainertimer $skinfatrainertimer
+  var skinfatraineritem $skinfatraineritem
+  var windboard $windboard
+  var windboardtimer $windboardtimer
+  var windboardtrick $windboardtrick
+  var windboardcharge $windboardcharge
   
   #LOOT
-  var storage $m%varsetstorage
-  var lootalerts $m%varsetlootalerts
-  var loottype $m%varsetloottype
-  var lootalldead $m%varsetlootalldead
-  var collectcoin $m%varsetcollectcoin
-  var collectscroll $m%varsetcollectscroll
-  var collectmaps $m%varsetcollectmaps
-  var collectnuggets $m%varsetcollectnuggets
-  var collectbars $m%varsetcollectbars
-  var collectmaterials $m%varsetcollectmaterials
-  var collectgem $m%varsetcollectgem
-  var savegwethstones $m%varsetsavegwethstones
-  var collectboxes $m%varsetcollectboxes
-  var boxstorage $m%varsetboxstorage
-  var misckeeplist $m%varsetmisckeeplist
-  var skinning $m%varsetskinning
-  var arrange $m%varsetarrange
-  var arrangeforpart $m%varsetarrangeforpart
-  var skinafterlock $m%varsetskinafterlock
-  var dropskins $m%varsetdropskins
-  var dissect $m%varsetdissect
-  
-  var htbond $m%varsethtbond
-  var htverb $m%varsethtverb
-  var htoffhand $m%varsethtoffhand
-  var ltbond $m%varsetltbond
-  var ltverb $m%varsetltverb
-  var ltoffhand $m%varsetltoffhand
-  var platring $m%varsetplatring
-  var platringitem $m%varsetplatringitem
-  var weaponnum $m%varsetweaponnum
-  var lowestfirst $m%varsetlowestfirst
-  var killafterlock $m%varsetkillafterlock
-  var stealth $m%varsetstealth
-  var locksmithbox $m%varsetlocksmithbox
-  var locksmithboxitem $m%varsetlocksmithboxitem
-  var locksmithboxtimer $m%varsetlocksmithboxtimer
-  var skinfatrainer $m%varsetskinfatrainer
-  var skinfatrainertimer $m%varsetskinfatrainertimer
-  var skinfatraineritem $m%varsetskinfatraineritem
-  var climbingrope $m%varsetclimbingrope
-  var climbingropename $m%varsetclimbingropename
-  var climbingropehum $m%varsetclimbingropehum
-  var humsong $m%varsethumsong
-  var windboard $m%varsetwindboard
-  var windboardcharge $windboardcharge
-  var windboardtrick $m%varsetwindboardtrick
-  var windboardtimer $m%varsetwindboardtimer
-  var appfocus $m%varsetappfocus
-  var appfocusitem $m%varsetappfocusitem
-  var recall $m%varsetrecall
-  var tactics $m%varsettactics
-  var tacticsweapons $m%varsettacticsweapons
+  var storage $storage
+  var boxstorage $boxstorage
+  var lootalerts $lootalerts
+  var lootalldead $lootalldead
+  var collectboxes $collectboxes
+  var collectcoin $collectcoin
+  var collectscroll $collectscroll
+  var collectmaps $collectmaps
+  var collectnuggets $collectnuggets
+  var collectbars $collectbars
+  var collectmaterials $collectmaterials
+  var collectgem $collectgem
+  var savegwethstones $savegwethstones
+  var misckeeplist $misckeeplist
+  var skinafterlock $skinafterlock
+  var dropskins $dropskins
+  if (%varset = 1) then
+  {
+    var loottype $loottype
+    var skinning $skinning
+    var arrange $arrange
+    var arrangeforpart $arrangeforpart
+    var dissect $dissect
+  }
+  else
+  {
+    var loottype $loottypem2
+    var skinning $skinningm2
+    var arrange $arrangem2
+    var arrangeforpart $arrangeforpartm2
+    var dissect $dissectm2
+  }
+      
+  var platring $platring
+  var platringitem $platringitem
+  var locksmithbox $locksmithbox
 
   
-  var teaching $m%varsetteaching
-  var teachtargets $m%varsetteachtargets
-  var teachskill $m%varsetteachskill
-  var teachtargetnum $m%varsetteachtargetnum
-  var teachtarget1 $m%varsetteachtarget1
-  var teachtarget2 $m%varsetteachtarget2
-  var teachtarget3 $m%varsetteachstarget3
-  var teacher $m%varsetteacher
-  var weapons $m%varsetweapons
-  var stancemain $m%varsetstancemain
-  var noncomdelay $m%varsetnoncomdelay
-  var outdoor $m%varsetoutdoor
-  var outdoortimer $m%varsetoutdoortimer
-  var collectitem $m%varsetcollectitem
-  var hunting $m%varsethunting
-  var huntingtimer $m%varsethuntingtimer
-  var debil $m%varsetdebil
-  var debilskill $m%varsetdebilskill
-  var maxdebil $m%varsetmaxdebil
-  var tm $m%varsettm
-  var tmskill $m%varsettmskill
-  var maxtm $m%varsetmaxtm
-  var cyclic $m%varsetcyclic
-  var cyclicbuff $m%varsetcyclicbuff
-  var cyctm $m%varsetcyctm
-  var cycdebil $m%varsetcycdebil
-  var tmdbprior $m%varsettmdbprior
-  var spell $m%varsetspell
-  var attune $m%varsetattune
-  var minconcentration $m%varsetminconcentration
-  var combatsanowret $m%varsetcombatsanowret
-  var noncomsanowret $m%varsetnoncomsanowret
-  var sanowretitem $m%varsetsanowretitem
-  var buff $m%varsetbuff
-  var abuff $m%varsetabuff
-  var gbuff $m%varsetgbuff
-  var gbufftarget $m%varsetgbufftarget
-  var buffbuffer $m%varsetbuffbuffer
-  var postbuffperc $m%varsetpostbuffperc
-  var spelltracking $m%varsetspelltracking
+  var appfocus $appfocus
+  var appfocusitem $appfocusitem
+  
+  
+  var gbuff $gbuff
+  var gbufftarget $gbufftarget
 
-  var cambrinth $m%varsetcambrinth
-  var dedicatedcambrinth $m%varsetdedicatedcambrinth
-  var research $m%varsetresearch
-  var gafprepmana $m%varsetgafprepmana
-  var gafaddmana $m%varsetgafaddmana
-  var researchnum $m%varsetresearchnum
-  var researchtype1 $m%varsetresearchtype1
-  var researchtype2 $m%varsetresearchtype2
-  var researchtype3 $m%varsetresearchtype3
-  var researchtype4 $m%varsetresearchtype4
-  var researchtype5 $m%varsetresearchtype5
-  var harnessing $m%varsetharnessing
-  var harnessmax $m%varsetharnessmax
-  var chargemax $m%varsetchargemax
-  var minmana $m%varsetminmana
-  var castingthrottle $m%varsetcastingthrottle
-  var straightcast $m%varsetstraightcast
-  var cambitem1 $m%varsetcambitem1
-  var cambitems $m%varsetcambitems
-  var cambitem1mana $m%varsetcambitem1mana
-  var cambitem1worn $m%varsetcambitem1worn
-  var cambitem2 $m%varsetcambitem2
-  var cambitem2mana $m%varsetcambitem2mana
-  var cambitem2worn $m%varsetcambitem2worn
-  var ritualfocus $m%varsetritualfocus
-  var ritualfocusstorage $m%varsetritualfocusstorage
-  var ritualfocusworn $m%varsetritualfocusworn
-  var ritualfocuscontainer $m%varsetritualfocuscontainer
-  var tmfocus $m%varsettmfocus
-  var tmfocusitem $m%varsettmfocusitem
+  var gafmana $gafmana
+  var researchnum $researchnum
+  var researchtype1 $researchtype1
+  var researchtype2 $researchtype2
+  var researchtype3 $researchtype3
+  var researchtype4 $researchtype4
+  var researchtype5 $researchtype5
   
-  var tmfocusstorage $m%varsettmfocusstorage
-  var tmfocusworn $m%varsettmfocusworn
-  var tmfocuscontainer $m%varsettmfocuscontainer
-  var armorcheck $m%varsetarmorcheck
-  var shielditem $m%varsetshielditem
-  var parrystickitem $m%varsetparrystickitem
-  var armornum $m%varsetarmornum
-  var armor1item $m%varsetarmor1item
-  var armor2item $m%varsetarmor2item
-  var armor3item $m%varsetarmor3item
-  var armor4item $m%varsetarmor4item
-  var armor5item $m%varsetarmor5item
-  var armor6item $m%varsetarmor6item
-  var knucklesitem $m%varsetknucklesitem
-  var appraise $m%varsetappraise
-  var appraisetarget $m%varsetappraisetarget
-  var appraisetimer $m%varsetappraisetimer
-  var appsaveitem $m%varsetappsaveitem
-  var appsaveitemstorage $m%varsetappsaveitemstorage
-  var compendium $m%varsetcompendium
-  var compendiumtimer $m%varsetcompendiumtimer
-  var textbook $m%varsettextbook
-  var textbooktimer $m%varsettextbooktimer
-  var textbookitem $m%varsettextbookitem
-  var textbooklist $m%varsettextbooklist
+  #MAGIC
+  var minconcentration $minconcentration
+  var minmana $minmana
+  var straightcast $straightcast
+  var difficulty1percent $difficulty1percent
+  var difficulty2percent $difficulty2percent
+  var difficulty3percent $difficulty3percent
+  var difficulty4percent $difficulty4percent
+  var difficulty5percent $difficulty5percent
+  var harnessmax $harnessmax
+  var harnessing $harnessing
+  var cambrinth $cambrinth
+  var dedicatedcambrinth $dedicatedcambrinth  
+  var cambitems $cambitems
+  var cambitem1 $cambitem1
+  var cambitem1mana $cambitem1mana
+  var cambitem1worn $cambitem1worn
+  var cambitem2 $cambitem2
+  var cambitem2mana $cambitem2mana
+  var cambitem2worn $cambitem2worn
+  var ritualfocus $ritualfocus
+  var ritualfocusstorage $ritualfocusstorage
+  var ritualfocusworn $ritualfocusworn
+  var ritualfocuscontainer $ritualfocuscontainer
+  var tmfocus $tmfocus
+  var tmfocusitem $tmfocusitem
+  var tmfocusstorage $tmfocusstorage
+  var tmfocusworn $tmfocusworn
+  var tmfocuscontainer $tmfocuscontainer
+  var tattoo $tattoo
+  var tattootype $tattootype
+  var tattoospell $tattoospell
+  var tattooprepmana $tattooprepmana
+ 
+  if ($varset = 1) then var spell $spell
+  else var spell $spellm2
+  if ($varset = 1) then var spellnum $spellnum
+  else var spellnum $spellnumm2
+  var spell1 $spell1
+  var spell1mana $spell1mana
+  var spell1symb $spell1symb
+  var spell2 $spell2
+  var spell2mana $spell2mana
+  var spell2symb $spell2symb
+  var spell3 $spell3
+  var spell3mana $spell3mana
+  var spell3symb $spell3symb
+  var spell4 $spell4
+  var spell4mana $spell4mana
+  var spell4symb $spell4symb
+  var tmdbprior $tmdbprior
+  if ($varset = 1) then var tm $tm
+  else var tm $tmm2
+  var spelltm $spelltm
+  var spelltmmana $spelltmmana
+  if ($varset = 1) then var debil $debil
+  else var debil $debilm2
+  var spelldebil $spelldebil
+  var spelldebilmana $spelldebilmana
+  if ($varset = 1) then var cyclic $cyclic
+  else var var cyclic $cyclicm2
+  var cyclicbuff $cyclicbuff
+  var spellcnum $spellcnum
+  if ($varset = 1) then var spellcnum $spellcnum
+  else var var spellcnum $spellcnumm2
+  var spellc1 $spellc1
+  var spellc1prepmana $spellc1prepmana
+  var spellc2 $spellc2
+  var spellc2prepmana $spellc2prepmana
+  var spellc3 $spellc3
+  var spellc3prepmana $spellc3prepmana
+  if ($varset = 1) then var cyctm $cyctm
+  else var cyctm $cyctmm2
+  var spellcyctm $spellcyctm
+  var spellcyctmmana $spellcyctmmana
+  if ($varset = 1) then var cycdebil $cycdebil
+  else var cycdebil $cycdebilm2
+  var spellcycdebil $spellcycdebil
+  var spellcycdebilmana $spellcycdebilmana
+  var buff $buff
+  var buffnum $buffnum
+  var buff1 $buff1
+  var buff1mana $buff1mana
+  var buff2 $buff2
+  var buff2mana $buff2mana
+  var buff3 $buff3
+  var buff3mana $buff3mana
+  var buff4 $buff4
+  var buff4mana $buff4mana
+  var buff5 $buff5
+  var buff5mana $buff5mana
+  var buff6 $buff6
+  var buff6mana $buff6mana
+  var buff7 $buff7
+  var buff7mana $buff7mana
+  var buff8 $buff8
+  var buff8mana $buff8mana
+  var buff9 $buff9
+  var buff9mana $buff9mana
+  var buff10 $buff10
+  var buff10mana $buff10mana
+  var buff11 $buff11
+  var buff11mana $buff11mana
+  var buff12 $buff12
+  var buff12mana $buff12mana
+  var buff13 $buff13
+  var buff13mana $buff13mana
+  var buff14 $buff14
+  var buff14mana $buff14mana
+  var buff15 $buff15
+  var buff15mana $buff15mana
+  var buff16 $buff16
+  var buff16mana $buff16mana
+  var symbiosisbuff $symbiosisbuff
+  var symbiosisspell $symbiosisspell
+  var symbiosismana $symbiosismana
+  var misdirection $misdirection
+  var misdirectionmana $misdirectionmana
+  var tattoobuff $tattoobuff
+  var tattooaddmana $tattooaddmana
+  var wandbuff $wandbuff
+  var wandstorage $wandstorage
+  var wandbuffnum $wandbuffnum
+  var wand1item $wand1item
+  var wand1num $wand1num
+  var wand1spell $wand1spell
+  var wand2item $wand2item
+  var wand2num $wand2num
+  var wand2spell $wand2spell
+  var wand3item $wand3item
+  var wand3num $wand3num
+  var wand3spell $wand3spell
+  var wand4item $wand4item
+  var wand4num $wand4num
+  var wand4spell $wand4spell  
   
-  var noncombat $m%varsetnoncombat
-  var burgle $m%varsetburgle
-  var burglestorage $m%varsetburglestorage
-  var burgletool $m%varsetburgletool
-  var burglepickitem $m%varsetburglepickitem
-  var burglepickworn $m%varsetburglepickworn
-  var burgleropeitem $m%varsetburgleropeitem
-  var burglemaxgrabs $m%varsetburglemaxgrabs
-  var burgleloot $m%varsetburgleloot
-  var burglekeeplist $m%varsetburglekeeplist
-  var burglepawn $m%varsetburglepawn
-  var perform $m%varsetperform
-  var songtype $m%varsetsongtype
-  var instrument $m%varsetinstrument
-  var instrumentworn $m%varsetinstrumentworn
-  var instrumenthands $m%varsetinstrumenthands
-  var instrumentassess $m%varsetinstrumentassess
-  var instclean $m%varsetinstclean
-  var instcleancloth $m%varsetinstcleancloth
-  var crafting $m%varsetcrafting
-  var craftingstorage $m%varsetcraftingstorage
-  var forging $m%varsetforging
-  var forgingdifficulty $m%varsetforgingdifficulty
-  var forgingmaterial $m%varsetforgingmaterial
-  var awl $m%varsetawl
-  var bellows $m%varsetbellows
-  var hammer $m%varsethammer
-  var knittingneedles $m%varsetknittingneedles
-  var scissors $m%varsetscissors
-  var sewingneedles $m%varsetsewingneedles
-  var shovel $m%varsetshovel
-  var slickstone $m%varsetslickstone
-  var rod $m%varsetrod
-  var tongs $m%varsettongs
-  var yardstick $m%varsetyardstick
+  var debilassist $debilassist
+  var dbanum $dbanum
+  var dbalist $dbalist
+  var dbaspell1 $dbaspell1
+  var dbaspell1mana $dbaspell1mana
+  var dbaspell2 $dbaspell2
+  var dbaspell2mana $dbaspell2mana
+  var dbaspell3 $dbaspell3
+  var dbaspell3mana $dbaspell3mana
+  var performcyclic $performcyclic
+  var pspellcnum $pspellcnum
+  var pspellc1 $pspellc1
+  var pspellc1prepmana $pspellc1prepmana
+  var pspellc2 $pspellc2
+  var pspellc2prepmana $pspellc2prepmana
+  var pspellc3 $pspellc3
+  var pspellc3prepmana $pspellc3prepmana    
   
-  var burgletown $m%varsetburgletown
-  var burglepawntown $m%varsetburglepawntown
-  var performtown $m%varsetperformtown
-  var forgingtown $m%varsetforgingtown
+  var gbuffnum $gbuffnum
+  if %gbuffnum > 0 then var gbuff1 $gbuff1
+  if %gbuffnum > 0 then var gbuff1prepmana $gbuff1prepmana
+  if %gbuffnum > 0 then var gbuff1addmana $gbuff1addmana
+  if %gbuffnum > 0 then var gbuff1duration $gbuff1duration
+  if %gbuffnum > 1 then var gbuff2 $gbuff2
+  if %gbuffnum > 1 then var gbuff2prepmana $gbuff2prepmana
+  if %gbuffnum > 1 then var gbuff2addmana $gbuff2addmana
+  if %gbuffnum > 1 then var gbuff2duration $gbuff2duration
+  if %gbuffnum > 2 then var gbuff3 $gbuff3
+  if %gbuffnum > 2 then var gbuff3prepmana $gbuff3prepmana
+  if %gbuffnum > 2 then var gbuff3addmana $gbuff3addmana
+  if %gbuffnum > 2 then var gbuff3duration $gbuff3duration
+  if %gbuffnum > 3 then var gbuff4 $gbuff4
+  if %gbuffnum > 3 then var gbuff4prepmana $gbuff4prepmana
+  if %gbuffnum > 3 then var gbuff4addmana $gbuff4addmana
+  if %gbuffnum > 3 then var gbuff4duration $gbuff4duration
+  if %gbuffnum > 4 then var gbuff5 $gbuff5
+  if %gbuffnum > 4 then var gbuff5prepmana $gbuff5prepmana
+  if %gbuffnum > 4 then var gbuff5addmana $gbuff5addmana
+  if %gbuffnum > 4 then var gbuff5duration $gbuff5duration
+  if %gbuffnum > 5 then var gbuff6 $gbuff6
+  if %gbuffnum > 5 then var gbuff6prepmana $gbuff6prepmana
+  if %gbuffnum > 5 then var gbuff6addmana $gbuff6addmana
+  if %gbuffnum > 5 then var gbuff6duration $gbuff6duration
+  if %gbuffnum > 6 then var gbuff7 $gbuff7
+  if %gbuffnum > 6 then var gbuff7prepmana $gbuff7prepmana
+  if %gbuffnum > 6 then var gbuff7addmana $gbuff7addmana
+  if %gbuffnum > 6 then var gbuff7duration $gbuff7duration
+  if %gbuffnum > 7 then var gbuff8 $gbuff8
+  if %gbuffnum > 7 then var gbuff8prepmana $gbuff8prepmana
+  if %gbuffnum > 7 then var gbuff8addmana $gbuff8addmana
+  if %gbuffnum > 7 then var gbuff8duration $gbuff8duration
   
-  var buffnum $m%varsetbuffnum
-  if %buffnum > 0 then var buff1 $m%varsetbuff1
-  if %buffnum > 0 then var buff1prepmana $m%varsetbuff1prepmana
-  if %buffnum > 0 then var buff1addmana $m%varsetbuff1addmana
-  if %buffnum > 0 then var buff1prepwait $m%varsetbuff1prepwait
-  if %buffnum > 1 then var buff2 $m%varsetbuff2
-  if %buffnum > 1 then var buff2prepmana $m%varsetbuff2prepmana
-  if %buffnum > 1 then var buff2addmana $m%varsetbuff2addmana
-  if %buffnum > 1 then var buff2prepwait $m%varsetbuff2prepwait
-  if %buffnum > 2 then var buff3 $m%varsetbuff3
-  if %buffnum > 2 then var buff3prepmana $m%varsetbuff3prepmana
-  if %buffnum > 2 then var buff3addmana $m%varsetbuff3addmana
-  if %buffnum > 2 then var buff3prepwait $m%varsetbuff3prepwait
-  if %buffnum > 3 then var buff4 $m%varsetbuff4
-  if %buffnum > 3 then var buff4prepmana $m%varsetbuff4prepmana
-  if %buffnum > 3 then var buff4addmana $m%varsetbuff4addmana
-  if %buffnum > 3 then var buff4prepwait $m%varsetbuff4prepwait
-  if %buffnum > 4 then var buff5 $m%varsetbuff5
-  if %buffnum > 4 then var buff5prepmana $m%varsetbuff5prepmana
-  if %buffnum > 4 then var buff5addmana $m%varsetbuff5addmana
-  if %buffnum > 4 then var buff5prepwait $m%varsetbuff5prepwait
-  if %buffnum > 5 then var buff6 $m%varsetbuff6
-  if %buffnum > 5 then var buff6prepmana $m%varsetbuff6prepmana
-  if %buffnum > 5 then var buff6addmana $m%varsetbuff6addmana
-  if %buffnum > 5 then var buff6prepwait $m%varsetbuff6prepwait
-  if %buffnum > 6 then var buff7 $m%varsetbuff7
-  if %buffnum > 6 then var buff7prepmana $m%varsetbuff7prepmana
-  if %buffnum > 6 then var buff7addmana $m%varsetbuff7addmana
-  if %buffnum > 6 then var buff7prepwait $m%varsetbuff7prepwait
-  if %buffnum > 7 then var buff8 $m%varsetbuff8
-  if %buffnum > 7 then var buff8prepmana $m%varsetbuff8prepmana
-  if %buffnum > 7 then var buff8addmana $m%varsetbuff8addmana
-  if %buffnum > 7 then var buff8prepwait $m%varsetbuff8prepwait
-  if %buffnum > 8 then var buff9 $m%varsetbuff9
-  if %buffnum > 8 then var buff9prepmana $m%varsetbuff9prepmana
-  if %buffnum > 8 then var buff9addmana $m%varsetbuff9addmana
-  if %buffnum > 8 then var buff9prepwait $m%varsetbuff9prepwait
-  if %buffnum > 9 then var buff10 $m%varsetbuff10
-  if %buffnum > 9 then var buff10prepmana $m%varsetbuff10prepmana
-  if %buffnum > 9 then var buff10addmana $m%varsetbuff10addmana
-  if %buffnum > 9 then var buff10prepwait $m%varsetbuff10prepwait
-  if %buffnum > 10 then var buff11 $m%varsetbuff11
-  if %buffnum > 10 then var buff11prepmana $m%varsetbuff11prepmana
-  if %buffnum > 10 then var buff11addmana $m%varsetbuff11addmana
-  if %buffnum > 10 then var buff11prepwait $m%varsetbuff11prepwait
-  if %buffnum > 11 then var buff12 $m%varsetbuff12
-  if %buffnum > 11 then var buff12prepmana $m%varsetbuff12prepmana
-  if %buffnum > 11 then var buff12addmana $m%varsetbuff12addmana
-  if %buffnum > 11 then var buff12prepwait $m%varsetbuff12prepwait
-  if %buffnum > 12 then var buff13 $m%varsetbuff13
-  if %buffnum > 12 then var buff13prepmana $m%varsetbuff13prepmana
-  if %buffnum > 12 then var buff13addmana $m%varsetbuff13addmana
-  if %buffnum > 12 then var buff13prepwait $m%varsetbuff13prepwait
-  if %buffnum > 13 then var buff14 $m%varsetbuff14
-  if %buffnum > 13 then var buff14prepmana $m%varsetbuff14prepmana
-  if %buffnum > 13 then var buff14addmana $m%varsetbuff14addmana
-  if %buffnum > 13 then var buff14prepwait $m%varsetbuff14prepwait
-  if %buffnum > 14 then var buff15 $m%varsetbuff15
-  if %buffnum > 14 then var buff15prepmana $m%varsetbuff15prepmana
-  if %buffnum > 14 then var buff15addmana $m%varsetbuff15addmana
-  if %buffnum > 14 then var buff15prepwait $m%varsetbuff15prepwait
-  if %buffnum > 15 then var buff16 $m%varsetbuff16
-  if %buffnum > 15 then var buff16prepmana $m%varsetbuff16prepmana
-  if %buffnum > 15 then var buff16addmana $m%varsetbuff16addmana
-  if %buffnum > 15 then var buff16prepwait $m%varsetbuff16prepwait
-  var abuffnum $m%varsetabuffnum
-  if %abuffnum > 0 then var abuff1 $m%varsetabuff1
-  if %abuffnum > 0 then var abuff1prepmana $m%varsetabuff1prepmana
-  if %abuffnum > 0 then var abuff1addmana $m%varsetabuff1addmana
-  if %abuffnum > 1 then var abuff2 $m%varsetabuff2
-  if %abuffnum > 1 then var abuff2prepmana $m%varsetabuff2prepmana
-  if %abuffnum > 1 then var abuff2addmana $m%varsetabuff2addmana
-  if %abuffnum > 2 then var abuff3 $m%varsetabuff3
-  if %abuffnum > 2 then var abuff3prepmana $m%varsetabuff3prepmana
-  if %abuffnum > 2 then var abuff3addmana $m%varsetabuff3addmana
-  if %abuffnum > 3 then var abuff4 $m%varsetabuff4
-  if %abuffnum > 3 then var abuff4prepmana $m%varsetabuff4prepmana
-  if %abuffnum > 3 then var abuff4addmana $m%varsetabuff4addmana
-  if %abuffnum > 4 then var abuff5 $m%varsetabuff5
-  if %abuffnum > 4 then var abuff5prepmana $m%varsetabuff5prepmana
-  if %abuffnum > 4 then var abuff5addmana $m%varsetabuff5addmana
-  if %abuffnum > 5 then var abuff6 $m%varsetabuff6
-  if %abuffnum > 5 then var abuff6prepmana $m%varsetabuff6prepmana
-  if %abuffnum > 5 then var abuff6addmana $m%varsetabuff6addmana
-  if %abuffnum > 6 then var abuff7 $m%varsetabuff7
-  if %abuffnum > 6 then var abuff7prepmana $m%varsetabuff7prepmana
-  if %abuffnum > 6 then var abuff7addmana $m%varsetabuff7addmana
-  if %abuffnum > 7 then var abuff8 $m%varsetabuff8
-  if %abuffnum > 7 then var abuff8prepmana $m%varsetabuff8prepmana
-  if %abuffnum > 7 then var abuff8addmana $m%varsetabuff8addmana
-  var gbuffnum $m%varsetgbuffnum
-  if %gbuffnum > 0 then var gbuff1 $m%varsetgbuff1
-  if %gbuffnum > 0 then var gbuff1prepmana $m%varsetgbuff1prepmana
-  if %gbuffnum > 0 then var gbuff1addmana $m%varsetgbuff1addmana
-  if %gbuffnum > 0 then var gbuff1duration $m%varsetgbuff1duration
-  if %gbuffnum > 1 then var gbuff2 $m%varsetgbuff2
-  if %gbuffnum > 1 then var gbuff2prepmana $m%varsetgbuff2prepmana
-  if %gbuffnum > 1 then var gbuff2addmana $m%varsetgbuff2addmana
-  if %gbuffnum > 1 then var gbuff2duration $m%varsetgbuff2duration
-  if %gbuffnum > 2 then var gbuff3 $m%varsetgbuff3
-  if %gbuffnum > 2 then var gbuff3prepmana $m%varsetgbuff3prepmana
-  if %gbuffnum > 2 then var gbuff3addmana $m%varsetgbuff3addmana
-  if %gbuffnum > 2 then var gbuff3duration $m%varsetgbuff3duration
-  if %gbuffnum > 3 then var gbuff4 $m%varsetgbuff4
-  if %gbuffnum > 3 then var gbuff4prepmana $m%varsetgbuff4prepmana
-  if %gbuffnum > 3 then var gbuff4addmana $m%varsetgbuff4addmana
-  if %gbuffnum > 3 then var gbuff4duration $m%varsetgbuff4duration
-  if %gbuffnum > 4 then var gbuff5 $m%varsetgbuff5
-  if %gbuffnum > 4 then var gbuff5prepmana $m%varsetgbuff5prepmana
-  if %gbuffnum > 4 then var gbuff5addmana $m%varsetgbuff5addmana
-  if %gbuffnum > 4 then var gbuff5duration $m%varsetgbuff5duration
-  if %gbuffnum > 5 then var gbuff6 $m%varsetgbuff6
-  if %gbuffnum > 5 then var gbuff6prepmana $m%varsetgbuff6prepmana
-  if %gbuffnum > 5 then var gbuff6addmana $m%varsetgbuff6addmana
-  if %gbuffnum > 5 then var gbuff6duration $m%varsetgbuff6duration
-  if %gbuffnum > 6 then var gbuff7 $m%varsetgbuff7
-  if %gbuffnum > 6 then var gbuff7prepmana $m%varsetgbuff7prepmana
-  if %gbuffnum > 6 then var gbuff7addmana $m%varsetgbuff7addmana
-  if %gbuffnum > 6 then var gbuff7duration $m%varsetgbuff7duration
-  if %gbuffnum > 7 then var gbuff8 $m%varsetgbuff8
-  if %gbuffnum > 7 then var gbuff8prepmana $m%varsetgbuff8prepmana
-  if %gbuffnum > 7 then var gbuff8addmana $m%varsetgbuff8addmana
-  if %gbuffnum > 7 then var gbuff8duration $m%varsetgbuff8duration
-  var spellnum $m%varsetspellnum
-  if $m%varsetspellnum > 0 then
-  {
-    var spell1 $m%varsetspell1
-    var skill1 $m%varsetskill1
-    var spell1prepmana $m%varsetspell1prepmana
-    var spell1addmana $m%varsetspell1addmana
-    var spell1prepwait $m%varsetspell1prepwait
-    var spell1symb $m%varsetspell1symb
-    var spell1tattoo $m%varsetspell1tattoo
-  }
-  if $m%varsetspellnum > 1 then
-  {
-    var spell2 $m%varsetspell2
-    var skill2 $m%varsetskill2
-    var spell2prepmana $m%varsetspell2prepmana
-    var spell2addmana $m%varsetspell2addmana
-    var spell2prepwait $m%varsetspell2prepwait
-    var spell2symb $m%varsetspell2symb
-    var spell2tattoo $m%varsetspell2tattoo
-  }
-  if $m%varsetspellnum > 2 then
-  {
-    var spell3 $m%varsetspell3
-    var skill3 $m%varsetskill3
-    var spell3prepmana $m%varsetspell3prepmana
-    var spell3addmana $m%varsetspell3addmana
-    var spell3prepwait $m%varsetspell3prepwait
-    var spell3symb $m%varsetspell3symb
-    var spell3tattoo $m%varsetspell3tattoo
-  }
-  if $m%varsetspellnum > 3 then
-  {
-    var spell4 $m%varsetspell4
-    var skill4 $m%varsetskill4
-    var spell4prepmana $m%varsetspell4prepmana
-    var spell4addmana $m%varsetspell4addmana
-    var spell4prepwait $m%varsetspell4prepwait
-    var spell4symb $m%varsetspell4symb
-    var spell4tattoo $m%varsetspell4tattoo
-  }
-  var spelltm $m%varsetspelltm
-  var spelltmprepmana $m%varsetspelltmprepmana
-  var spelltmaddmana $m%varsetspelltmaddmana
-  var spelltmprepwait $m%varsetspelltmprepwait
-  var spelltmtattoo $m%varsetspelltmtattoo
-  var spelldb $m%varsetspelldb
-  var spelldbtattoo $m%varsetspelldbtattoo
-  var spelldbprepmana $m%varsetspelldbprepmana
-  var spelldbaddmana $m%varsetspelldbaddmana
-  var spelldbprepwait $m%varsetspelldbprepwait
-  var misdirection $m%varsetmisdirection
-  var misdirectionprepmana $m%varsetmisdirectionprepmana
-  var misdirectionaddmana $m%varsetmisdirectionaddmana
-  var symbiosisbuff $m%varsetsymbiosisbuff
-  var symbiosisspell $m%varsetsymbiosisspell
-  var symbiosisprepmana $m%varsetsymbiosisprepmana
-  var symbiosisaddmana $m%varsetsymbiosisaddmana
-  var symbiosisprepwait $m%varsetsymbiosisprepwait
-  var tattoobuff $m%varsettattoobuff
-  var tattootype $m%varsettattootype
-  var tattoospell $m%varsettattoospell
-  var tattooaddmana $m%varsettattooaddmana
-  var tattooprepwait $m%varsettattooprepwait
-  var wandbuff $m%varsetwandbuff
-  var wandstorage $m%varsetwandstorage
-  var wandbuffnum $m%varsetwandbuffnum
-  var wand1item $m%varsetwand1item
-  var wand1num $m%varsetwand1num
-  var wand1spell $m%varsetwand1spell
-  var wand2item $m%varsetwand2item
-  var wand2num $m%varsetwand2num
-  var wand2spell $m%varsetwand2spell
-  var wand3item $m%varsetwand3item
-  var wand3num $m%varsetwand3num
-  var wand3spell $m%varsetwand3spell
-  var wand4item $m%varsetwand4item
-  var wand4num $m%varsetwand4num
-  var wand4spell $m%varsetwand4spell
-  
-  
-  var spellcnum $m%varsetspellcnum
-  if $m%varsetspellcnum > 0 then
-  {
-    var spellc1 $m%varsetspellc1
-    var skillc1 $m%varsetskillc1
-    var spellc1skill $m%varsetspellc1skill
-    var spellc1prepmana $m%varsetspellc1prepmana
-  }
-  if $m%varsetspellcnum > 1 then
-  {
-    var spellc2 $m%varsetspellc2
-    var skillc2 $m%varsetskillc2
-    var spellc2skill $m%varsetspellc2skill
-    var spellc2prepmana $m%varsetspellc2prepmana
-  }
-  if $m%varsetspellcnum > 1 then
-  {
-    var spellc3 $m%varsetspellc3
-    var skillc3 $m%varsetskillc3
-    var spellc3skill $m%varsetspellc3skill
-    var spellc3prepmana $m%varsetspellc3prepmana
-  }
-  var debilassist $m%varsetdebilassist
-  var dbanum $m%varsetdbanum
-  var dbalist $m%varsetdbalist
-  var dbaspell1 $m%varsetdbaspell1
-  var dbaspell1prepmana $m%varsetdbaspell1prepmana
-  var dbaspell1addmana $m%varsetdbaspell1addmana
-  var dbaspell2 $m%varsetdbaspell2
-  var dbaspell2prepmana $m%varsetdbaspell2prepmana
-  var dbaspell2addmana $m%varsetdbaspell2addmana
-  var dbaspell3 $m%varsetdbaspell3
-  var dbaspell3prepmana $m%varsetdbaspell3prepmana
-  var dbaspell3addmana $m%varsetdbaspell3addmana
-  var performcyclic $m%varsetperformcyclic
-  var pspellcnum $m%varsetpspellcnum
-  if $m%varsetpspellcnum > 0 then
-  {
-    var pspellc1 $m%varsetpspellc1
-    var pskillc1 $m%varsetpskillc1
-    var pspellc1pskill $m%varsetpspellc1pskill
-    var pspellc1prepmana $m%varsetpspellc1prepmana
-  }
-  if $m%varsetpspellcnum > 1 then
-  {
-    var pspellc2 $m%varsetpspellc2
-    var pskillc2 $m%varsetpskillc2
-    var pspellc2pskill $m%varsetpspellc2pskill
-    var pspellc2prepmana $m%varsetpspellc2prepmana
-  }
-  if $m%varsetpspellcnum > 1 then
-  {
-    var pspellc3 $m%varsetpspellc3
-    var pskillc3 $m%varsetpskillc3
-    var pspellc3pskill $m%varsetpspellc3pskill
-    var pspellc3prepmana $m%varsetpspellc3prepmana
-  }
-  var spellctm $m%varsetspellctm
-  var spellctmprepmana $m%varsetspellctmprepmana
-  var spellcdb $m%varsetspellcdb
-  var spellcdbprepmana $m%varsetspellcdbprepmana
   if %cambitems < 1 then var cambitems 1
   if %cambitems > 1 then
   {
@@ -2642,6 +3857,47 @@ MAINVARLOAD:
       var totalcamb 0
     }
   }
+
+  #NONCOMBAT
+  if ($varset = 1) then var noncombat $noncombat
+  else var noncombat $noncombatm2
+  if ($varset = 1) then var burgle $burgle
+  else var burgle $burglem2
+  if ($varset = 1) then var perform $perform
+  else var perform $performm2
+  if ($varset = 1) then var crafting $crafting
+  else var crafting $craftingm2
+  if ($varset = 1) then var forging $forging
+  else var forging $forgingm2
+  if ($varset = 1) then var outfitting $outfitting
+  else var outfitting $outfittingm2
+  if ($varset = 1) then var research $research
+  else var research $researchm2
+  
+  var burglestorage $burglestorage
+  var burgletool $burgletool
+  var burglepickitem $burglepickitem
+  var burglepickworn $burglepickworn
+  var burgleropeitem $burgleropeitem
+  var burglemaxgrabs $burglemaxgrabs
+  var burgleloot $burgleloot
+  var burglekeeplist $burglekeeplist
+  var burglepawn $burglepawn
+  
+  var songtype $songtype
+  var instrument $instrument
+  var instrumentworn $instrumentworn
+  var instrumenthands $instrumenthands
+  var instrumentassess $instrumentassess
+  var instclean $instclean
+  var instcleancloth $instcleancloth
+  var climbingrope $climbingrope
+  var climbingropename $climbingropename
+  var climbingropehum $climbingropehum
+  var humsong $humsong
+  var noncomsanowret $noncomsanowret
+
+  
   var deathaction $deathaction
   var disconnectaction $disconnectaction
   var alertwindow $alertwindow
@@ -2658,6 +3914,18 @@ MAINVARLOAD:
   var inventoryalerts $inventoryalerts
   var paranoiaalerts $paranoiaalerts
   return
+
+WEAPONLOADLOOP:
+  var weaponloadloopcount 0
+WEAPONLOADLOOPMAIN:
+  if (%weaponloadloopcount >= %weaponnum) then return
+  var weaponactual %weaponloadloopcount
+  math weaponactual add 1
+  var weapon%weaponactual %weaponlist(%weaponloadloopcount)
+  #echo weapon%weaponactual %weapon%weaponactual
+  math weaponloadloopcount add 1
+  goto WEAPONLOADLOOPMAIN
+
 
 MULTIVARLOAD:
   #MULTITRAIN
@@ -2676,24 +3944,13 @@ MULTIVARLOAD:
 ###MAIN LOOP###
 MAINLOOP:
   if %scriptmode = 0 then goto NONCOMBATLOOP
-  if %scriptmode = 1 then
-  {
-    goto COMBATLOOP
-  }
+  if %scriptmode = 1 then goto COMBATLOOP
   if %scriptmode = 2 then goto BUFFINGONLYLOOP
   if %scriptmode = 3 then
   {
-    if %upkeeptest = 1 then
-    {
-      var autype test
-      gosub AUTOUPKEEPLOGIC
-    }
-    else
-    {
-      gosub UPKEEPLOGIC
-      put #flash
-      put #play NewRank
-    }
+    gosub UPKEEPLOGIC
+    put #flash
+    put #play NewRank
     exit
   }
   if %scriptmode = 4 then
@@ -2706,81 +3963,390 @@ MAINLOOP:
   }
   exit
 
-COMBATLOOP:
+NEWNONCOMBATCHECKS:
+  var noncombatactive 0
+  var noncombatperformactive 0
+  var noncombatburgleactive 0
+  var noncombatsellactive 0
+  var noncombattasksactive 0
+  #BURGLE_CHECKING
+  if ("%burgle" = "YES") then
+  {
+    if (($Athletics.Ranks < 1750) || ($Locksmithing.Ranks < 1750) || ($Thievery.Ranks < 1750) || ($Stealth.Ranks < 1750)) then
+    {
+      if ((%t >= %nextburgle) && (%killbeforeleave != 0) then
+      {
+        gosub BURGLERECALL
+        if (%t >= %nextburgle) then
+        {
+          var scriptareachange noncombat
+          var noncombatactive 1
+          var noncombatburgleactive 1
+        }
+      }
+    }
+    else
+    {
+      var noncombatburgleactive 0
+    }
+  }
+  #PERFORM_CHECKING
+  if ("%perform" = "YES") then
+  {
+    if ($Performance.LearningRate > 20) then var performlock 1
+    if ($Performance.LearningRate < 4) then var performlock 0
+    if ($Performance.Ranks >= 1750) then var performlock 1
+    if (%performlock != 1) then
+    {
+      var scriptareachange noncombat
+      var noncombatactive 1
+      var noncombatperformactive 1
+    }
+  }
+  #CRAFT_CHECKING
+  if ("%crafting" = "YES") then
+  {
+    #FORGING_CHECKING
+    if ("%forging" = "YES") then
+    {
+      if ($Forging.LearningRate > 20) then var forginglock 1
+      if ($Forging.LearningRate < 4) then var forginglock 0
+      if ($Forging.Ranks >= 1750) then var forginglock 1
+      if (%forginglock != 1) then
+      {
+        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to forge at Forging.LearningRate: $Forging.LearningRate
+        var scriptareachange noncombat
+        var noncombatactive 1
+        var noncombatforgingactive 1
+      }
+    }
+  }
+  #TRADING_SELL_TASKS
+  if ("$guild" = "Trader") then
+  { 
+    #put #echo >Log Yellow tradingsell: %tradingsell
+    if (("%tradingsell" = "YES") || ("%tradingtasks" = "YES")) then
+    {
+      if $Trading.LearningRate > 28 then var tradinglock 1
+      if $Trading.LearningRate < 4 then var tradinglock 0
+      if $Trading.Ranks >= 1750 then var tradinglock 1
+      #put #echo >Log Yellow tradinglock: %tradinglock
+      if (%tradinglock != 1) then
+      {
+        var scriptareachange noncombat
+        var noncombatactive 1
+        if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var noncombatsellactive 1
+        if ("%tradingtasks" = "YES") then var noncombattasksactive 1
+      }
+    }
+  }
+  return
+
+NEWAREADECISION:
   #MULTITRAIN
-  if %multitrain = "YES" then
+  if ("%multitrain" = "YES") then
   {
     gosub MULTITRAINLOGIC
   }
-  #STORAGE_CHECK
-  if (%firststowall = 1) then
+  if ((%autoupkeep = "YES") && (%buffingonly != 1) && (%scriptmode = 1)) then
   {
-    gosub STOWALL
-    var firststowall 0
+    gosub AUTOUPKEEPCHECKS
   }
-  if (%firststoragecheck = 1) then
+  if ("%scriptareachange" != "0") then return
+  if ("%scriptarea" = "0") then
   {
-    var firststoragecheck 0
-    gosub STORAGECHECKLOGIC
-  }
-  if (("%armorcheck" = "YES") && (%firstarmorcheck = 0)) then gosub ARMORCHECK
-  if (%firstperc = 1) then
-  {
-    if ("$guild" = "Moon Mage") then
+    if (%goupkeep = 1) then
     {
-      var mmnextperc %t
-      math mmnextperc add 300
+      if (("%autype" = "bleed") || ("%autype" = "wounds")) then
+      {
+        if (("$guild = "Empath") && ("$SpellTimer.Heal.active = 1)) then
+        {
+          var goupkeep 0
+          return
+        }
+      }
+      if ("%autype" = "poison") then
+      {
+        if (("$guild = "Empath") && ("$SpellTimer.FlushPoisons.active = 1)) then
+        {
+          var goupkeep 0
+          return
+        }
+      }
+      var scriptareachange upkeep
+      return
     }
-    var firstperc 0
-    gosub PERCSELF
+    if ("%noncombat" = "YES") then
+    {
+      gosub NEWNONCOMBATCHECKS
+      if (%noncombatactive = 1) then
+      {
+        var scriptareachange noncombat
+        return
+      }
+    }
+    var scriptareachange combat
   }
-  #RELEASE_MANA_SPELLS
-  if (%firstrel = 1) then
+  if ("%scriptarea" = "upkeep") then
   {
-    if (("$guild" = "Thief") || ("$guild" = "Barbarian")) then
+    if (%upkeepactive = 0) then
+    {
+      if ("%noncombat" = "YES") then
+      {
+        gosub NEWNONCOMBATCHECKS
+        if (%noncombatactive = 1) then
+        {
+          var scriptareachange noncombat
+          return
+        }
+      }
+      var scriptareachange combat
+      return
+    }
+    else return
+  }
+  if ("%scriptarea" = "noncombat") then
+  {
+    #echo noncombatactive: %noncombatactive
+    if (%noncombatactive = 0) then
+    {
+      if (%goupkeep = 1) then
+      {
+        var scriptareachange upkeep
+        return
+      }
+      var scriptareachange combat
+      return
+    }
     else
-    {  
-      if ("%spell" = "YES") then
+    {
+      ###this is where upkeep from noncombat goes
+      if (%goupkeep = 1) then
       {
-        if ((%spell1symb = "YES") || (%spell2symb = "YES") || (%spell3symb = "YES") || (%symbiosisbuff = "YES")) then
-        {
-          gosub SYMBCLEAR
-        }
+        var noncombatactive 0
+        var scriptareachange upkeep
+        return
       }
-      if ("%necrosafety" = "YES") then
-      {
-        if ($SpellTimer.RiteofGrace.active = 1) then
-        {
-          gosub RELMANA
-          gosub RELSPELL
-        }
-        else gosub RELALL
-      }
-      else gosub RELALL
     }
-    var firstrel 0
   }
-  #AWAKE_AND_RPAS
-  if (%firstawake = 1) then
+  if ("%scriptarea" = "combat") then
   {
-    gosub AWAKE
-    var firstawake 0
-    action (rpa) on
-    put rpa check
-    pause 1
-    action (rpa) off
+    if (%goupkeep = 1) then
+    {
+      var scriptareachange upkeep
+      return
+    }
+    if ("%noncombat" = "YES") then
+    {
+      gosub NEWNONCOMBATCHECKS
+      if (%noncombatactive = 1) then
+      {
+        var scriptareachange noncombat
+        return
+      }
+    }
   }
-  #MOVETRAIN
-  if (%noncombat = "YES") then
+  return
+
+NEWAREAMOVEMENT:
+  #put #echo Yellow NEWAREAMOVEMENT
+  #put #echo scriptarea: %scriptarea
+  #put #echo scriptareachange: %scriptareachange
+  
+  #JUST_CHECKING_AREA
+  #put #echo Yellow scriptareachange: %scriptareachange
+  if ("%scriptareachange" = "0") then
   {
-    gosub NONCOMBATLOGIC
+    #put #echo Yellow scriptarea: %scriptarea
+    #COMBAT_MOVEMENT
+    if ("%scriptarea" = "combat") then
+    {
+      if ("%huntingarea" != "none") then
+      {
+        #put #echo Yellow zoneid: $zoneid  zone: %zone
+        if (("$zoneid" != "%zone") || (!contains("|%findroomlist|", "|$roomid|"))) then
+        {
+          gosub ROOMTRAVELCOMBAT
+          gosub STATUSCHECK
+        }
+      }
+    }
+    #NONCOMBAT_MOVEMENT
+    if ("%scriptarea" = "noncombat") then
+    {
+      #gosub NEWNONCOMBATLOGIC
+    }
+    #UPKEEP_MOVEMENT
+    if ("%scriptarea" = "upkeep") then
+    {
+      if ("$zoneid" != "%upkeepzone") then
+      {
+        gosub ROOMTRAVELUPKEEP
+      }
+    }
   }
-  #LOCATION_VERIFICATION
-  if (("$zoneid" != "%zone") || (!contains("|%findroomlist|", "|$roomid|"))) then
+  else
   {
-    gosub ROOMTRAVELCOMBAT
-    gosub STATUSCHECK
+    #COMING_FROM_COMBAT
+    if ("%scriptarea" = "combat") then
+    {
+      if ("%scriptareachange" = "noncombat") then
+      {     
+        #KILL_BEFORE_MOVE
+        if ("%killbeforemove" = "YES") then
+        {
+          #CHECKING_FOR_MONSTERS
+          if (%killbeforeleave = -1) then
+          {
+            gosub MONSTERARRAY
+            if !matchre("%monsterarray", "%critters") then var killbeforeleave 1
+            else
+            {
+              var killbeforeleave 0
+              put #echo %alertwindow Waiting for kill before leaving for NonCombat.
+            }
+          }
+          ##KILL_NEXT
+          if (%killbeforeleave != 1) then return
+          var killbeforeleave -1
+          put #echo %alertwindow [Train]: Ended Combat training.
+        }
+        else
+        {
+          put #echo %alertwindow [Train]: Ended Combat training.
+        }
+      }
+    }
+    #COMING_FROM_UPKEEP
+    if ("%scriptarea" = "upkeep") then
+    {
+      action (speech) on
+      action (emote) on
+      var upkeepactive 0
+      var goupkeep 0
+      gosub LEAVEROOM
+      if ("%upkeeptown" = "fangcove") then
+      {
+        if (%fangcovevisit = 1) then
+        {
+          put #echo Yellow premium ring going back!
+          gosub PREMIUMRINGBACK
+          put #mapper reset
+          pause 1
+        }
+        else
+        {
+          if (%fangcovevisit > 1) then
+          {
+            put #echo Yellow Going back through portal!
+            gosub MOVE portal
+            move go exit portal
+          }
+        }
+      }
+      put #echo %alertwindow [Train]: Completed Upkeep.
+    }
+    #COMING_FROM_NONCOMBAT
+    if ("%scriptarea" = "noncombat") then
+    {
+      put #echo Yellow Noncombat ended!
+      put #echo %alertwindow [Train]: Ended NonCombat training.
+      var noncombatactive 0
+      gosub DEEPSLEEP    
+    } 
+    
+    #GOING_TO_COMBAT
+    if ("%scriptareachange" = "combat") then
+    {
+      if ("%scriptarea" = "0") then put #echo %alertwindow [Train]: Starting training in %scriptareachange.
+      else put #echo %alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
+      var scriptareachange 0
+      var scriptarea combat
+      if ((%scriptmode != 3) && ("$guild" != "Barbarian") && ("$guild" != "Thief")) then
+      {
+        if (("$zoneid" = "%zone") && (contains("|%findroomlist|", "|$roomid|"))) then
+        else
+        {
+          put #echo %alertwindow [Combat]: Buffing before combat.
+          gosub BUFFINGONLYLOOP
+        }
+      }
+      if %rpastatus = 0 then gosub RPATOGGLE
+      if ("%huntingarea" != "none") then
+      {
+        if (("$zoneid" != "%zone") || (!contains("|%findroomlist|", "|$roomid|"))) then
+        {
+          gosub ROOMTRAVELCOMBAT
+          gosub STATUSCHECK
+        }
+      }
+      gosub AWAKE
+    }
+    #GOING_TO_NONCOMBAT
+    if ("%scriptareachange" = "noncombat") then
+    {
+      if ("%scriptarea" = "0") then put #echo %alertwindow [Train]: Starting training in %scriptareachange.
+      else put #echo %alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
+      var scriptareachange 0
+      var scriptarea noncombat
+      var noncombatactive 1
+      if (%rpastatus = 1) then gosub RPATOGGLE
+      gosub NEWNONCOMBATLOGIC
+      put #echo >$alertwindow Ending noncombat.
+      gosub NEWAREADECISION
+      goto NEWAREAMOVEMENT
+    }
+    #GOING_TO_UPKEEP
+    if ("%scriptareachange" = "upkeep") then
+    {
+      if ("%scriptarea" = "0") then put #echo %alertwindow [Train]: Starting training in %scriptareachange.
+      else put #echo %alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
+      var scriptareachange 0
+      var scriptarea upkeep
+      var goupkeep 0
+      var upkeepactive 1
+      #MESSAGING
+      put #echo Yellow AUType: %autype
+      if ("%autype" = "health") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to low health.
+      if ("%autype" = "fire") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to being on fire.
+      if ("%autype" = "burden") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to burden of %encumbrance.
+      if ("%autype" = "bundle") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to lacking space for bundle.
+      if ("%autype" = "gem") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to lacking gem pouches.
+      if ("%autype" = "bleed") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to bleeding.
+      if ("%autype" = "nerves") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to nerve damage.
+      if ("%autype" = "poison") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to poison.
+      if ("%autype" = "onfire") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to being on fire.
+      if ("%autype" = "wounds") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to significant wounds.
+      if ("%autype" = "hands") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to missing hand(s).
+      if ("%autype" = "ammo") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to running out of ammo.
+      if ("%autype" = "boxes") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to lacking space for boxes.
+      if ("%autype" = "manual") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to manual trigger.
+      if ("%autype" = "test") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep to test the route.
+      gosub DEEPSLEEP
+      if (%rpastatus = 1) then gosub RPATOGGLE
+    	if $invisible = 1 then gosub RELINVIS
+    	gosub LEAVEROOM
+    	put #echo Yellow starting travel
+    	gosub ROOMTRAVELUPKEEP
+    	if ("$guild" = "Barbarian") then
+      {
+        gosub BERSERKSTOPALL
+        gosub FORMSTOPALL
+      }
+      #UPKEEP
+      gosub UPKEEPLOGIC
+      gosub NEWAREADECISION
+      goto NEWAREAMOVEMENT
+    }
   }
+  return
+  
+  
+COMBATLOOP:
+  #AREADECISION_MOVEMENT
+  gosub NEWAREADECISION
+  gosub NEWAREAMOVEMENT
+  
   #SANCTUARY_CHECK
   if $SpellTimer.Sanctuary.active = 1 then
   {
@@ -2872,9 +4438,9 @@ COMBATLOOP:
     }
   }
   #WEAPONS
-  if %weapons = "YES" then
+  if ("%weapons" = "YES") then
   {
-    if $monstercount > 0 then
+    if ($monstercount > 0) then
     {
       gosub WEAPONLOGIC
     }
@@ -3050,7 +4616,7 @@ COMBATLOOP:
     }
   }
   #COLLECTING
-  if %outdoor = "YES" then
+  if %collect = "YES" then
   {
     #echo Collecting.
     if %buffing = 0 then
@@ -3060,18 +4626,6 @@ COMBATLOOP:
       {
         #echo Not using tactics or expertise.
         gosub COLLECTLOGIC
-      }
-    }
-    gosub STATUSCHECK
-  }
-  #COMPENDIUM
-  if %compendium = "YES" then
-  {
-    if %buffing = 0 then
-    {
-      if ((%usingtactics != 1) && (%usingexpert != 1)) then
-      {
-        gosub COMPLOGIC
       }
     }
     gosub STATUSCHECK
@@ -3281,12 +4835,6 @@ NONCOMBATLOOP:
     gosub SANOWRETLOGIC
     gosub STATUSCHECK
   }
-	#COMPENDIUM
-	if %compendium = "YES" then
-	{
-	  gosub COMPLOGIC
-    gosub STATUSCHECK
-  }
   #TEXTBOOK
 	if %textbook = "YES" then
 	{
@@ -3300,7 +4848,7 @@ NONCOMBATLOOP:
 	  gosub STATUSCHECK
 	}
   #COLLECTING
-  if %outdoor = "YES" then
+  if %collect = "YES" then
   {
     gosub COLLECTLOGIC
     gosub STATUSCHECK
@@ -3323,6 +4871,72 @@ NONCOMBATLOOP:
   pause 1
   gosub STATUSCHECK
   goto NONCOMBATLOOP
+
+
+SCRIPTBEGINCHECKS:
+  #STORAGE_CHECK
+  if (%firststowall = 1) then
+  {
+    gosub STOWALL
+    var firststowall 0
+  }
+  if (%firststoragecheck = 1) then
+  {
+    var firststoragecheck 0
+    gosub STORAGECHECKLOGIC
+  }
+  if (("%armorcheck" = "YES") && (%firstarmorcheck = 0)) then
+  {
+    gosub ARMORCHECK
+  }
+  #FIRSTPERC
+  if (%firstperc = 1) then
+  {
+    if ("$guild" = "Moon Mage") then
+    {
+      var mmnextperc %t
+      math mmnextperc add 300
+    }
+    var firstperc 0
+    gosub PERCSELF
+  }
+  #RELEASE_MANA_SPELLS
+  if (%firstrel = 1) then
+  {
+    if (("$guild" = "Thief") || ("$guild" = "Barbarian")) then
+    else
+    {  
+      if ("%spell" = "YES") then
+      {
+        if ((%spell1symb = "YES") || (%spell2symb = "YES") || (%spell3symb = "YES") || (%symbiosisbuff = "YES")) then
+        {
+          gosub SYMBCLEAR
+        }
+      }
+      if ("%necrosafety" = "YES") then
+      {
+        if ($SpellTimer.RiteofGrace.active = 1) then
+        {
+          gosub RELMANA
+          gosub RELSPELL
+        }
+        else gosub RELALL
+      }
+      else gosub RELALL
+    }
+    var firstrel 0
+  }
+  #AWAKE_AND_RPAS
+  if (%firstawake = 1) then
+  {
+    gosub AWAKE
+    var firstawake 0
+    action (rpa) on
+    put rpa check
+    pause 1
+    action (rpa) off
+  }
+  return
 
 
 BUFFINGONLYLOOP:
@@ -3367,6 +4981,11 @@ BUFFINGONLYLOOP:
       }
     }
   }
+  if ("%necrosafety" = "YES") then
+  {
+    gosub JUSTICECHECK
+    if (%justice = 1) then return
+  }
   #OM   
   if %osrelmeraud = "YES" then
   {
@@ -3401,6 +5020,8 @@ DONEBUFFING:
 
 
 UPKEEPLOGIC:
+  action (speech) off
+  action (emote) off
   var upkeependroom $roomid
   var goodupkeep 0
   var startedoutside 0
@@ -3423,6 +5044,34 @@ UPKEEPLOGIC:
       gosub SPELLCANCEL
     }
     if ((%researching != 1) && (%rprojectactive != 1)) then gosub APPFOCUSLOGIC
+  }
+  #STOP_DROP_AND_ROLL
+  if (%onfire = 1) then
+  {
+    gosub LIE
+    gosub ROLL
+    var onfire 0
+    gosub STAND
+  }
+  #EMPATH_REGEN
+  if ("%upkeepregen" = "YES") then
+  {
+    if ($SpellTimer.Regenerate.active = 0) then
+    {
+      if (%casting = 1) then
+      {
+        gosub RELSPELL
+        gosub RELSYMBIOSIS
+      }
+      var spellprepping regenerate
+      var prepmana %upkeepregenmana
+      var addmana 0
+      var casting 1
+      gosub PREP
+      pause 20
+      gosub CAST
+    }
+    }
   }
   #AUTOPATH
   if ("$zoneid" = "150") then
@@ -3535,6 +5184,18 @@ UPKEEPLOGIC:
   {
     if ("%appraiser" != "none") then gosub BARSELLLOGIC
   }
+  #REPAIR
+  if ("%repair" = "YES") then gosub REPAIRLOGIC
+  if (%minmoney > 0) then gosub MINMONEYLOGIC 
+  if ($zoneid = 4) then
+  {
+    gosub MOVE crossing
+  }
+  #AMMUNITION
+  if ("%ammobuy" = "YES") then
+  {
+    if (("%townname" = "%ammobuytown") && (%ammoroom != 0)) then gosub AMMOBUYLOGIC
+  }
   #LOCKPICK_BUYING
   if ("%lockpickbuy" = "YES") then
   {
@@ -3553,18 +5214,7 @@ UPKEEPLOGIC:
   {
     gosub CRITUALLOGIC
   }
-  #AMMUNITION
-  if ("%ammobuy" = "YES") then
-  {
-    if (("%townname" = "%ammobuytown") && (%ammoroom != 0)) then gosub AMMOBUYLOGIC
-  }
-  #REPAIR
-  if ("%repair" = "YES") then gosub REPAIRLOGIC
-  if (%minmoney > 0) then gosub MINMONEYLOGIC 
-  if ($zoneid = 4) then
-  {
-    gosub MOVE crossing
-  }
+  #DIRTSTACKER
   if (%upkeependroom != 0) then
   {
     if (%multizone = 1) then
@@ -3588,7 +5238,7 @@ UPKEEPLOGIC:
     }
   }
   #WAITING_FOR_APPFOCUS
-  if %appfocus = "YES" then
+  if ("%appfocus" = "YES") then
   {
     #echo appfocusing: %appfocusing
     #echo appfocusdone: %appfocusdone
@@ -3598,7 +5248,6 @@ UPKEEPLOGIC:
       waitfor Breakthrough!  
     }
   }
-  if %scriptmode != 3 then gosub BUFFINGONLYLOOP
   #REPORTING
   var outputtext Completed upkpeep
   if %didautopath = 1 then var outputtext %outputtext, healed at autopath
@@ -3719,6 +5368,9 @@ UPKEEPLOGIC:
   }
   var outputtext %outputtext.
   put #echo %alertwindow [UPKEEP]: %outputtext
+  action (speech) on
+  action (emote) on
+  var upkeepactive 0
   return
 
 UPKEEPSET:
@@ -3932,7 +5584,7 @@ UPKEEPSET:
     var pawnzone 67
     var ammoroom general
     var ammozone 67
-    var boxpoproom 131
+    var boxpoproom 382
     var boxpopzone 67
     var lockpickroom locksmith
     var lockpickzone 67
@@ -4071,7 +5723,7 @@ UPKEEPSET:
     var hasvault 1
     var hasbank 1
     var currency Dokora
-    var boxpoproom 11
+    var boxpoproom 221
     var upkeependroom 7
   }
   #JEIHREM
@@ -4089,139 +5741,6 @@ UPKEEPSET:
   return
 
 
-AUTOUPKEEPLOGIC:
-  var goupkeep 0
-  var upkeepactive 1
-  #MESSAGING
-  put #echo Yellow AUType: %autype
-  if ("%autype" = "health") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to low health.
-  if ("%autype" = "burden") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to burden of %encumbrance.
-  if ("%autype" = "bleed") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to bleeding.
-  if ("%autype" = "nerves") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to nerve damage.
-  if ("%autype" = "poison") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to poison.
-  if ("%autype" = "onfire") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to being on fire.
-  if ("%autype" = "wounds") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to significant wounds.
-  if ("%autype" = "hands") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to missing hand(s).
-  if ("%autype" = "ammo") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to running out of ammo.
-  if ("%autype" = "boxes") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to lacking space for boxes.
-  if ("%autype" = "manual") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to manual trigger.
-  if ("%autype" = "test") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep to test the route.
-
-  gosub DEEPSLEEP
-  if (%rpastatus = 1) then gosub RPATOGGLE
-  #LEAVING
-  #put #echo Yellow premiumring: %premiumring
-  #put #echo Yellow autype: %autype
-  
-  gosub LEAVEROOM
-  if ("%autype" = "ammo") then
-  {
-    var fangcovevist -1
-    gosub NEWTOWNPRESET %ammobuytown upkeep
-    gosub ROOMTRAVEL
-  }
-  else
-  {
-    if ("%upkeeptown" != "fangcove") then
-    {
-      gosub NEWTOWNPRESET %upkeeptown upkeep
-      gosub ROOMTRAVEL
-    }
-    else
-    {
-      if ($zoneid != 150) then
-      {
-        #FANGCOVE
-        var fangcovevist 0
-        if ("%premiumring" = "YES") then
-        {
-          if %t < %nextring then return
-          gosub LEAVEROOM
-          gosub PREMIUMRINGGO
-          if (%goodring = 1) then
-          {
-            var fangcovevisit 1
-            if ("$guild" = "Barbarian") then
-            {
-              gosub BERSERKSTOPALL
-              gosub FORMSTOPALL
-            }
-          }
-          else
-          {
-            #FANGCOVE_PORTAL
-            var fangcovevisit 2
-            gosub NEWTOWNPRESET %nearestportaltown upkeep
-            gosub ROOMTRAVEL
-            gosub MOVE portal
-            move go meeting portal
-          }    
-        }
-        else
-        {
-          #FANGCOVE_PORTAL
-          var fangcovevisit 2
-          gosub NEWTOWNPRESET %nearestportaltown upkeep
-          gosub ROOMTRAVEL
-          gosub MOVE portal
-          move go meeting portal
-        }
-        put #mapper reset
-        pause 1
-        move n
-        gosub STOWALL
-      }
-      else var fangcovevisit -1
-    }
-  }
-  
-	if $invisible = 1 then gosub RELINVIS
-  #UPKEEP
-  if (%upkeeptest != 1) then
-  {
-    action (speech) off
-    action (emote) off
-    gosub UPKEEPLOGIC
-    action (speech) on
-    action (emote) on
-  }
-  #RETURNING
-  var stance shield
-  gosub STANCECHANGE
-  if ("%armorcheck" = "YES") then gosub ARMORCHECK
-  var goupkeep 0
-  if ("%upkeeptown" = "fangcove") then
-  {
-    if (%fangcovevisit = 1) then
-    {
-      gosub PREMIUMRINGBACK
-      put #mapper reset
-      pause 1
-    }
-    else
-    {
-      if (%fangcovevisit = 1) then
-      {
-        put #echo Yellow premium ring going back!
-        gosub MOVE portal
-        move go exit portal
-      }
-    }
-  }
-  gosub ROOMTRAVELCOMBAT
-  put #echo %alertwindow [UPKEEP]: Returned to combat from AutoUpkeep.
-  gosub AWAKE
-  if %rpastatus = 0 then gosub RPATOGGLE
-  var upkeepactive 0
-  return
-
-AUGO:
-  gosub LEAVEROOM
-  gosub NEWTOWNPRESET %upkeeptown upkeep
-  gosub ROOMTRAVEL
-  return
-  
-  
 MINMONEYLOGIC:
   var usedbank 0
   if %hasbank = 1 then
@@ -4241,9 +5760,9 @@ MINMONEYLOGIC:
 
 EXCHANGELOGIC:
   var didexchange 0
-  if %hasbank != 1 then return
+  if (%hasbank != 1) then return
   gosub WEALTHCHECK
-  if %multizone = 1 then
+  if (%multizone = 1) then
   {
     var upkeepzone %bankzone
     gosub UPKEEPZONEMOVE
@@ -4344,7 +5863,7 @@ AUTOPATHLOGIC:
         gosub UPKEEPZONEMOVE
       }  
       #HEALER_MOVES
-      if (($zoneid = 30) || ($zoneid = 42)) then gosub MOVE healer
+      if (($zoneid = 30) || ($zoneid = 42) || ($zoneid = 67)) then gosub MOVE healer
       else gosub MOVE %healer
       put #echo Yellow Healer: %healer
       if ((matchre("$roomobjs" "%healer")) || (matchre("$roomdesc" "%healer") || (matchre("$roomname" "%healer"))) then
@@ -4372,6 +5891,7 @@ HEALERUSE:
   matchwait
 
 #####LOCKSMITHING_LOGIC#####
+
 BOXPOPPINGLOGIC:
   var poppedboxes -1
   if (%boxpoproom = 0) then return
@@ -4388,7 +5908,7 @@ BOXPOPPINGLOGIC:
   if (%foundboxes = 1) then
   {
     var poppedboxes 1
-    if (("$guild" != "Thief") && ("$guild" != "Barbarian") then
+    if (("$guild" != "Thief") && ("$guild" != "Barbarian") && ("%skeletonkey" != "YES")) then
     {
       echo boxpopbuff: %boxpopbuff
       if ("%boxpopbuff" != "none") then
@@ -4449,17 +5969,19 @@ BOXPOPPINGLOGIC:
         }
       }
     }
-    if ("$guild" = "Thief") then
+    if (("$guild" = "Thief") && ("%skeletonkey" != "YES")) then
     {
       gosub KHRISTOP
       gosub BOXPOPPINGKHRI
     }
     put #echo %alertwindow Yellow Box popping started.
-    gosub ARMORREMBOXPOP
+    if ("%skeletonkey" != "YES") then gosub ARMORREMBOXPOP
     var boxindex 0
+    var boxespoppedsession 0
     gosub BOXPOPPINGLOOP
-    put #echo %alertwindow Yellow Box popping ended.
-    if (("$guild" = "Thief") || ("$guild" = "Barbarian") then
+    math boxespoppedtotal add %boxespoppedsession
+    put #echo %alertwindow Yellow Box popping ended.  Boxes popped: %boxespoppedsession.  Total this session: %boxespoppedtotal.
+    if (("$guild" = "Thief") || ("$guild" = "Barbarian") && ("%skeletonkey" != "YES")) then
     {
       if ("$guild" = "Thief") then
       {
@@ -4471,37 +5993,65 @@ BOXPOPPINGLOGIC:
   {
     var poppedboxes 0
   }
+  if ("%skeletonkey" != "YES") then gosub ARMORCHECK
+  if ($standing != 1) then gosub STAND
   return
-      }
-    }
-    gosub ARMORCHECK
-    if ($standing != 1) then gosub STAND
-  }
-  return
- 
+  
  
 BOXPOPPINGLOOP:
   if (%baddisarm != 1) then
   {
     var boxitem %boxes(%boxindex)
     gosub GETITEM my %boxitem from %boxstorage
-    if $righthand = "Empty" then
+    if ("$righthand" = "Empty") then
     {
       math boxindex add 1
       if %boxindex > 8 then return
       goto BOXPOPPINGLOOP
     }
   }
-  var baddisarm 0
-  gosub DISARM
-  if (%baddisarm = 1) then goto BOXPOPPINGLOOP
-  gosub PICK
-  if (%baddisarm = 1) then goto BOXPOPPINGLOOP
+  if ("%skeletonkey" = "YES") then
+  {
+    gosub GETITEM my skeleton key
+    gosub TAPSHORTEN $righthand
+    gosub TURNSKELETONKEY %shorttap
+    gosub STOWITEM my skeleton key
+  }
+  else
+  {
+    var baddisarm 0
+    gosub DISARM
+    if (%baddisarm = 1) then
+    {
+      gosub DISARM2
+      goto BOXPOPPINGLOOP
+    }
+    gosub PICK
+    if (%baddisarm = 1) then
+    {
+      gosub DISARM2
+      goto BOXPOPPINGLOOP
+    }
+  }
   gosub OPENITEM my %boxitem
   gosub BOXCOINGET
   gosub BOXFILLPOUCH
   gosub BOXLOOTCHECK
-  gosub DISMANTLE
+  math boxespoppedsession add 1
+  #pit
+  if matchre ("$roomobjs", "(bucket|large stone turtle|disposal bin|waste bin|tree hollow|oak crate|firewood bin|ivory urn|trash receptacle|marble statue|pit)") then
+	{
+	  gosub PUTITEM my %boxitem in $1
+	}
+	else
+	{
+	  if ("%bucketitem" != "none") then
+	  {
+	    gosub PUTITEM my %boxitem in my %bucketitem
+	    gosub PULLBUCKET
+	  }
+	  else gosub DISMANTLE
+  }
   goto BOXPOPPINGLOOP
   
 
@@ -4776,14 +6326,14 @@ SACKDONE:
   return		
 
 COUNTCONTAINER:
-  action (bundles) var rummagestring $1 when You rummage (.+)
-  gosub RUMMAGE
+  action (bundles) var rummagetext $1 when You rummage (.+)
+  gosub RUMMAGE %storage
   pause .5
   action (bundles) off
-  eval bundropesnum count("%rummagestring","bundling rope")
-  eval incensenum count("%rummagestring","incense")
-  eval tightbundlesnum count("%rummagestring","tight bundle")
-  eval gempouchesnum count("%rummagestring","gem pouch")
+  eval bundropesnum count("%rummagetext","bundling rope")
+  eval incensenum count("%rummagetext","incense")
+  eval tightbundlesnum count("%rummagetext","tight bundle")
+  eval gempouchesnum count("%rummagetext","gem pouch")
   #echo bundropesnum: %bundropesnum
   #echo tightbundlesnum: %tightbundlesnum
   #echo gempouchesnum: %gempouchesnum
@@ -5049,7 +6599,7 @@ LOCKPICKCOUNTBAD:
 BADLOCKPICKSTACKER:
   put #echo %alertwindow [Upkeep]: Unable to find lockpick stacker.  Turning off lockpick buying!
   var lockpickbuy NO
-  put #var m%varsetlockpickbuy NO
+  put #var lockpickbuy NO
   return
 
 UPKEEPZONEMOVE:
@@ -5142,7 +6692,7 @@ GEMPOUCHSELL:
   var pouchcount 0
   gosub GEMFINDFULLPOUCH
   if %pouchcount = 12 then return
-  gosub GETITEM %pouchnum gem pouch from %storage
+  gosub GETITEM %pouchnum gem pouch from my %storage
   if $righthand != "Empty" then
   {
     var soldgem 1
@@ -5273,13 +6823,14 @@ VAULTLOGIC:
   if matchre("$roomobjs", "uniformed Dwarven attendant") then
   else
   {
-    if %multizone = 1 then
+    if (%multizone = 1) then
     {
       var upkeepzone %vaultzone
       gosub UPKEEPZONEMOVE
     }
     gosub MOVE carousel
   }
+  if (!matchre("$roomname", "Carousel")) then goto VAULTLOGIC
   var hasvaultsuccess 0
   gosub ENTERVAULT
   if %vaultsuccess = 1 then
@@ -5296,7 +6847,7 @@ GEMPOUCHSTORE:
   var pouchcount 0
   gosub GEMFINDFULLPOUCH
   if %pouchcount = 12 then return
-  gosub GETITEM %pouchnum gem pouch from %storage
+  gosub GETITEM %pouchnum gem pouch from my %storage
   if $righthand != "Empty" then
   {
     var hasvaultedgem 1
@@ -5382,8 +6933,10 @@ PERFORMLOOP:
         if %playing != 1 then
         {
           var spellprepping ecry
-	        var prepmana %eilliescryprepmana
-    	    var addmana %eilliescryaddmana
+          gosub SPELLSTATCHECK %spellprepping
+          var prepmana %spellminmana  
+          var addmana %eilliescrymanamana
+          math addmana subtract %prepmana
 	        var casting 1
 	        var scancel 0
         }
@@ -5419,14 +6972,6 @@ PERFORMLOOP:
 			gosub LOCKSMITHLOGIC
 			gosub STATUSCHECK
 		}
-    #COMPENDIUM
-    if %compendium = "YES" then
-    {
-      if %performlock = 0 then 
-      { 
-        gosub COMPLOGIC
-      }
-    }	
     gosub STATUSCHECK
     #TEXTBOOK
     if %textbook = "YES" then
@@ -5560,7 +7105,7 @@ PERFORMLOOP:
   
 
 MTPERFORMLOOP:
-  if (%movetrainperformactive = 1) then
+  if (%noncombatperformactive = 1) then
   {
     var combatperforming 1
     gosub PERFORMLOOP
@@ -5568,7 +7113,7 @@ MTPERFORMLOOP:
     if ($Performance.LearningRate > 33) then
     {
       var performlock 1
-      var movetrainperformactive 0
+      var noncombatperformactive 0
       var combatperforming 0
       if ("%instclean" = "YES") then
       {
@@ -5579,7 +7124,7 @@ MTPERFORMLOOP:
       gosub STOWALL
     }
   }
-  if (%movetrainperformactive = 0) then return
+  if (%noncombatperformactive = 0) then return
   goto MTPERFORMLOOP
 
 MTFORGING:
@@ -5609,64 +7154,10 @@ MTFORGINGLOOP:
   else
   {
     gosub CRAFTINGEND
-    var movetrainforgingactive 0
+    var noncombatforgingactive 0
     return
   }
-
-
-###LOGIC###
-ABUFFINGLOOP:
-  math abuffloop add 1
-  if %abuffloop <= %abuffnum then
-  {
-    if %abuff%abuffloop = "etf" then
-    {
-      eval fissure matchre ("$roomobjs", "fissure")
-      if %fissure = 0 then
-      {
-        gosub ABUFFINGSET
-      }
-    }
-    if %abuff%abuffloop = "nexus" then
-    {
-      if %nexus = 0 then
-      {
-        gosub ABUFFINGSET
-      }
-    }
-    if %abuff%abuffloop = "rm" then
-    {
-      if %scriptmode = 1 then
-      {
-        if %nextrmlook < %t then
-        {
-          var nextrmlook %t
-          math nextrmlook add 60
-          var mist 0
-          put look
-          pause
-	        if %mist = 0 then
-	        {        
-            gosub ABUFFINGSET
-          }
-        }
-      }
-    }     
-    if %casting = 1 then return
-  }
-  else return
-  goto ABUFFINGLOOP
-
-
-ABUFFINGSET:
-  var spellprepping %abuff%abuffloop
-	var prepmana %abuff%abuffloopprepmana
-	var addmana %abuff%abuffloopaddmana
-	var casting 1
-	var buffing 1
-	var scancel 0
-	var anybuff 1
-  return
+  
 
 ALMANACLOGIC:
 {
@@ -5724,7 +7215,7 @@ APPFOCUSBAD:
 APPLOGIC:
   if (%buffing = 1) then return
   if ((%usingtactics = 1) || (%usingexpert = 1)) then return
-  if (%noncomdelay = "YES") then
+  if (%retreatdelay = "YES") then
   {
     if %evenleastnum < 7 then return
   }
@@ -6389,7 +7880,7 @@ TRADINGSELLLOGIC:
         {
           put #echo %alertwindow No bundles or pouches could be found, so TradingSell cannot be completed!  Turning off TradingSell.
           var tradingsell NO
-          put #var m%varsettradingsell NO
+          put #var tradingsell NO
           put #var save
           gosub EXITVAULT
           return
@@ -6467,7 +7958,7 @@ TASKLOGIC:
 
 COLLECTLOGIC:
   #echo Collectlogic
-  if (%noncomdelay = "YES") then
+  if (%retreatdelay = "YES") then
   {
     if %evenleastnum < 7 then return
   }
@@ -6479,36 +7970,10 @@ COLLECTLOGIC:
     if (%t >= %nextcollect) then
     {
       math nextcollect set %t
-  	  math nextcollect add %outdoortimer
+  	  math nextcollect add %collecttimer
       gosub COLLECT
       if ($Outdoorsmanship.LearningRate > 33) then var outdoorlock 1
       #gosub KICK
-    }
-  }
-  return
-
-COMPLOGIC:
-  if %aiming = 1 then return
-  if %t > %nextstudy then
-  {
-    if $First_Aid.LearningRate > 33 then var firstaidlock 1
-    if $First_Aid.LearningRate < 21 then var firstaidlock 0
-    if $First_Aid.Ranks >= 1750 then var firstaidlock 1
-    if $Scholarship.LearningRate > 33 then var scholarlock 1
-    if $Scholarship.LearningRate < 21 then var scholarlock 0
-    if $Scholarship.Ranks >= 1750 then var scholarlock 1
-    if ((%scholarlock = 0) || (%firstaidlock = 0)) then
-    { 
-      var turncount 0
-      if ((matchre ("$righthand", "compendium")) || (matchre ("$lefthand", "compendium"))) then
-      else
-      {
-        gosub GETITEM compendium
-      }
-      math nextstudy set %t
-      math nextstudy add %compendiumtimer
-      gosub STUDY
-      gosub STOWITEM compendium
     }
   }
   return
@@ -6557,9 +8022,17 @@ DBALOGIC:
     }
   }
   var spellprepping %dbaspell%dbachoice
-  if %spellprepping = "dr" then var tmcast 1
-  var prepmana %dbaspell%dbachoiceprepmana
-  var addmana %dbaspell%dbachoiceaddmana
+  gosub SPELLSTATCHECK %spellprepping
+  if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell) then
+  {
+    var prepmana %tattooprepmana
+    var tattoocast 1
+  }
+  else var prepmana %spellminmana  
+  var addmana %dbaspell%dbachoicemana
+  math addmana subtract %prepmana
+  
+  if ("%spellprepping" = "dr") then var tmcast 1
   var spellsymb 0
   var casting 1
   var scancel 0
@@ -7366,8 +8839,15 @@ RESEARCHLOGIC:
   else
   {
     var spellprepping gaf
-	  var prepmana %gafprepmana
-	  var addmana %gafaddmana
+	  gosub SPELLSTATCHECK %spellprepping
+    if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell) then
+    {
+      var prepmana %tattooprepmana
+      var tattoocast 1
+    }
+    else var prepmana %spellminmana  
+    var addmana %gafmana
+    math addmana subtract %prepmana
 	  var casting 1
 	  var scancel 0
 	  var prepped 0
@@ -7620,15 +9100,17 @@ MAINSPELLLOGIC:
         {
           if %casting != 1 then
           {
-            var spellprepping cd
-            var prepmana %cdprepmana
-            var addmana %cdaddmana
-            var spellsymb 0
             var casting 1
             var scancel 0
+            var spellsymb 0
             var prepped 0
             var charged 0
             var harnessed 0
+            var spellprepping cd
+            gosub SPELLSTATCHECK %spellprepping
+            var prepmana %spellminmana 
+            var addmana %cursediseasemana    
+            math addmana subtract %prepmana
           }
         }
       }
@@ -7650,17 +9132,17 @@ MAINSPELLLOGIC:
                 {
                   if %t >= %nexthealcast then
                   {
-                    var spellprepping heal
-                    var prepmana %healprepmana
-                    var addmana %healaddmana
-                    var spellsymb 0
                     var casting 1
                     var scancel 0
+                    var spellsymb 0
                     var prepped 0
                     var charged 0
                     var harnessed 0
-                    var nexthealcast %t
-                    math nextheal add 60
+                    var spellprepping heal
+                    gosub SPELLSTATCHECK %spellprepping
+                    var prepmana %spellminmana 
+                    var addmana %healmana    
+                    math addmana subtract %prepmana
                   }
                 }
               }
@@ -7670,19 +9152,21 @@ MAINSPELLLOGIC:
       }
       if ("%vitheal" = "YES") then
       {
-        if $health <= %vithealnum then
+        if $health <= 80 then
         {
           if %casting != 1 then
           {
-            var spellprepping vh
-            var prepmana %vithealprepmana
-            var addmana %vithealaddmana
-            var spellsymb 0
             var casting 1
             var scancel 0
+            var spellsymb 0
             var prepped 0
             var charged 0
             var harnessed 0
+            var spellprepping vh
+            gosub SPELLSTATCHECK %spellprepping
+            var prepmana %spellminmana 
+            var addmana %vithealmana    
+            math addmana subtract %prepmana
           }
         }
       }
@@ -7785,7 +9269,7 @@ MAINSPELLLOGIC:
           gosub RELCYCLIC
           gosub PERCSELF
           var spellprepping iz
-          var prepmana %izprepmana
+          var prepmana %izmana
           var addmana 0
           var cycliccast 1
           var spellsymb 0
@@ -7828,15 +9312,6 @@ MAINSPELLLOGICNC:
     if %osrelmeraud = "YES" then
     {
       gosub OMLOGIC
-      gosub STATUSCHECK
-      if %casting = 1 then return
-    }
-    #AREA_BUFF
-    if %abuff = "YES" then
-    {
-      var buffing 0
-      var abuffloop 0 
-      gosub ABUFFINGLOOP
       gosub STATUSCHECK
       if %casting = 1 then return
     }
@@ -7954,11 +9429,11 @@ SPELLCYCLOGIC:
 SPELLCSKILLTEST:
   if (%cskillcount >= %spellcnum) then return
   math cskillcount add 1
-  eval skill tolower(%skillc%cskillcount)
-  if %skill = "warding" then var spellc%cskillcountskill Warding
-  if %skill = "utility" then var spellc%cskillcountskill Utility
-  if %skill = "augmentation" then var spellc%cskillcountskill Augmentation
-  if %skill = "sorcery" then var spellc%cskillcountskill Sorcery
+  eval skill tolower(%spell%cskillcountskill)
+  if %skill = "warding" then var spellcyc%cskillcountskill Warding
+  if %skill = "utility" then var spellcyc%cskillcountskill Utility
+  if %skill = "augmentation" then var spellcyc%cskillcountskill Augmentation
+  if %skill = "sorcery" then var spellcyc%cskillcountskill Sorcery
   #put #echo Green spellc%cskillcountskill: %spellc%cskillcountskill
   goto SPELLCSKILLTEST
   
@@ -7997,22 +9472,22 @@ CYCFINDER:
       if (%spellcnum > 0) then
       {
         var chosencyc 1
-        var cycfindleast $%spellc1skill.LearningRate
+        var cycfindleast $%spellcyc1skill.LearningRate
       }
       if (%spellcnum > 1) then
       {
-        if ($%spellc2skill.LearningRate < %cycfindleast) then
+        if ($%spellcyc2skill.LearningRate < %cycfindleast) then
         {
           var chosencyc 2
-          var cycfindleast $%spellc2skill.LearningRate
+          var cycfindleast $%spellcyc2skill.LearningRate
         }
       }
       if (%spellcnum > 2) then
       {
-        if ($%spellc3skill.LearningRate < %cycfindleast) then
+        if ($%spellcyc3skill.LearningRate < %cycfindleast) then
         {
           var chosencyc 3
-          var cycfindleast $%spellc3skill.LearningRate
+          var cycfindleast $%spellcyc3skill.LearningRate
         }
       }
     }
@@ -8020,35 +9495,36 @@ CYCFINDER:
     {
       if (%spellcnum > 0) then
       {
-        eval testlock tolower(%spellc1skill)
+        eval testlock tolower(%spellcyc1skill)
         var testlock %%testlocklock
-        put #echo Yellow Testlock: %testlock
-        if (($%spellc1skill.LearningRate < %cycfindleast) && (%testlock != 1)) then
+        
+        #put #echo Yellow Testlock: %testlock
+        if (($%spellcyc1skill.LearningRate < %cycfindleast) && (%testlock != 1)) then
         {
           var chosencyc 1
-          var cycfindleast $%spellc1skill.LearningRate
+          var cycfindleast $%spellcyc1skill.LearningRate
         }
       }
       if (%spellcnum > 1) then
       {
         eval testlock tolower(%spellc2skill)
         var testlock %%testlocklock
-        put #echo Yellow Testlock: %testlock
-        if (($%spellc2skill.LearningRate < %cycfindleast) && (%testlock != 1)) then
+        #put #echo Yellow Test$%spellcyc2skilllock: %testlock
+        if (($%spellcyc2skill.LearningRate < %cycfindleast) && (%testlock != 1)) then
         {
           var chosencyc 2
-          var cycfindleast $%spellc2skill.LearningRate
+          var cycfindleast $%spellcyc2skill.LearningRate
         }
       }
       if (%spellcnum > 2) then
       {
         eval testlock tolower(%spellc3skill)
         var testlock %%testlocklock
-        put #echo Yellow Testlock: %testlock
-        if (($%spellc3skill.LearningRate < %cycfindleast) && (%testlock != 1)) then
+        #put #echo Yellow Testlock: %testlock
+        if (($%spellcyc3skill.LearningRate < %cycfindleast) && (%testlock != 1)) then
         {
           var chosencyc 3
-          var cycfindleast $%spellc3skill.LearningRate
+          var cycfindleast $%spellcyc3skill.LearningRate
         }
       }
     }
@@ -8107,21 +9583,21 @@ CYCPERFCHECK:
     if ($pspellcnum > 0) then
     {
       var spellc1 $pspellc1
-      var skillc1 $pskillc1
+      var skillc1 $pspellc1skill
       var spellc1skill $pspellc1skill
       var spellc1prepmana $pspellc1prepmana
     }
     if ($pspellcnum > 1) then
     {
       var spellc2 $pspellc2
-      var skillc2 $pskillc2
+      var skillc2 $pspellc2skill
       var spellc2skill $pspellc2skill
       var spellc2prepmana $pspellc2prepmana
     }
     if ($pspellcnum > 1) then
     {
       var spellc3 $pspellc3
-      var skillc3 $pskillc3
+      var skillc3 $pspellc3skill
       var spellc3skill $pspellc3skill
       var spellc3prepmana $pspellc3prepmana
     }
@@ -8184,9 +9660,9 @@ CYCLICSET:
 SPELLCYCDBSET:
   gosub RELCYCLIC
   gosub PERCSELF
-  var spellprepping %spellcdb
+  var spellprepping %spellcycdebil
   var skill %skillcdb
-  var prepmana %spellcdbprepmana
+  var prepmana %spellcycdebilmana
   var addmana 0
   var cycliccast 1
   var currentcyc 5
@@ -8199,9 +9675,9 @@ SPELLCYCDBSET:
 SPELLCYCTMSET:
   gosub RELCYCLIC
   gosub PERCSELF
-  var spellprepping %spellctm
+  var spellprepping %spellcyctm
   var skill %skillctm
-  var prepmana %spellctmprepmana
+  var prepmana %spellcyctmmana
   var addmana 0
   var cycliccast 1
   var currentcyc 4
@@ -8218,7 +9694,6 @@ SPELLCHOICELOGIC:
       var usingdebiltm 0
       var tmfocusinuse 0
       gosub SPELLSWITCH
-      #echo spellleast: %spellleast
       if %spellleast = 0 then return
       else
       {
@@ -8231,10 +9706,8 @@ SPELLCHOICELOGIC:
           var charged 0
           var harnessed 0
           var usingdebiltm 1
-          var preptimewait %spelltmprepwait
-          if %spelltmtattoo = "YES" then var tattoocast 1
           if %tmfocus = "YES" then var tmfocusinuse 1
-          if %paralysisuse = 1 then
+          if (%paralysisuse = 1) then
           {
             var spellprepping paralysis
             var prepmana %paralysisprepmana
@@ -8243,8 +9716,15 @@ SPELLCHOICELOGIC:
           else
           {
             var spellprepping %spelltm
-            var prepmana %spelltmprepmana
-            var addmana %spelltmaddmana
+            gosub SPELLSTATCHECK %spellprepping
+            if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell) then
+            {
+              var prepmana %tattooprepmana
+              var tattoocast 1
+            }
+            else var prepmana %spellminmana  
+            var addmana %spelltmmana
+            math addmana subtract %prepmana
           }
         }
         if %spellleast = 2 then
@@ -8256,18 +9736,26 @@ SPELLCHOICELOGIC:
           var charged 0
           var harnessed 0
           var usingdebiltm 1
-          var spellprepping %spelldb
-          var prepmana %spelldbprepmana
-          var addmana %spelldbaddmana
-          var preptimewait %spelldbprepwait
-          if %spelldbtattoo = "YES" then var tattoocast 1
+          var spellprepping %spelldebil
+          gosub SPELLSTATCHECK %spellprepping
+          if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell) then
+          {
+            var prepmana %tattooprepmana
+            var tattoocast 1
+          }
+          else var prepmana %spellminmana 
+          var prepmana %spellminmana
+          var addmana %spelldebilmana
+          math addmana subtract %prepmana
           if %mindshout = "YES" then
           {
             if %heavytmready = 1 then
             {
               var spellprepping ms
-              var prepmana %mindshoutprepmana
-              var addmana %mindshoutaddmana
+              gosub SPELLSTATCHECK %spellprepping
+              var prepmana %spellminmana
+              var addmana %mindshoutmana
+              math addmana subtract %prepmana
             }
           }
           if %spellprepping = "dr" then
@@ -8281,13 +9769,17 @@ SPELLCHOICELOGIC:
           math spellleast subtract 2
           var spellprepping %spell%spellleast
           var skill %spell%spellleastskill
-          var prepmana %spell%spellleastprepmana
-          var addmana %spell%spellleastaddmana
+          gosub SPELLSTATCHECK %spellprepping
+          if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell") then
+          {
+            var prepmana %tattooprepmana
+            var tattoocast 1
+          }
+          else var prepmana %spellminmana 
+          var addmana %spell%spellleastmana     
+          math addmana subtract %prepmana
           if %spell%spellleastsymb = "YES" then var spellsymb 1
           else var spellsymb 0
-          var preptimewait %spell%spellleastprepwait
-          #echo preptimewait: %preptimewait
-          if %spell%spellleasttattoo = "YES" then var tattoocast 1
           var casting 1
           var scancel 0
           var prepped 0
@@ -8304,7 +9796,7 @@ SPELLSWITCH:
   var spellleastnum 0
   var paralysisuse 0
   #TARGETED_MAGIC
-  if %tm = "YES" then
+  if ("%tm" = "YES") then
   {
     if $monstercount > 0 then
     {
@@ -8346,7 +9838,7 @@ SPELLSWITCH:
   {
     if %spellnum > 0 then
     {
-      var skill %skill1
+      var skill %spell1skill
       gosub SPELLSKILLTEST
       if ((%skilltest < 34) && (%skillcap != 1)) then
       {
@@ -8359,7 +9851,7 @@ SPELLSWITCH:
     }
     if %spellnum > 1 then
     {
-      var skill %skill2
+      var skill %spell2skill
       gosub SPELLSKILLTEST
       if ((%skilltest < 34) && (%skillcap != 1)) then
       {
@@ -8372,7 +9864,7 @@ SPELLSWITCH:
     }
     if %spellnum > 2 then
     {
-      var skill %skill3
+      var skill %spell3skill
       gosub SPELLSKILLTEST
       if ((%skilltest < 34) && (%skillcap != 1)) then
       {
@@ -8385,7 +9877,7 @@ SPELLSWITCH:
     }
     if %spellnum > 3 then
     {
-      var skill %skill4
+      var skill %spell4skill
       gosub SPELLSKILLTEST
       if ((%skilltest < 34) && (%skillcap != 1)) then
       {
@@ -8652,7 +10144,7 @@ SPELLVARRESET:
   }
   if "$guild" = "Empath" then
   {
-    if %absolution = "YES" then
+    if ("%absolution" = "YES") then
     {
       put #var SpellTimer.Absolution.active 0
       put #var SpellTimer.Absolution.duration 0
@@ -8671,6 +10163,11 @@ SPELLVARRESET:
     {
       put #var SpellTimer.IcutuZaharenela.active 0
       put #var SpellTimer.IcutuZaharenela.duration 0
+    }
+    if ("%upkeepregen" = "YES") then
+    {
+      put #var SpellTimer.Regenerate.active 0
+      put #var SpellTimer.Regenerate.duration 0
     }
   }
   if "$guild" = "Moon Mage" then
@@ -8849,12 +10346,12 @@ SANOWRETLOGIC:
   }
   return
 
-NONCOMBATLOGIC:
-	var movetrainactive 0
-	var movetrainperformactive 0
-	var movetrainburgleactive 0
-	var movetrainsellactive 0
-	var movetraintasksactive 0
+NONCOMBATCHECKS:
+	var noncombatactive 0
+	var noncombatperformactive 0
+	var noncombatburgleactive 0
+	var noncombatsellactive 0
+	var noncombattasksactive 0
   #BURGLE_CHECKING
 	if ("%burgle" = "YES") then
 	{
@@ -8865,14 +10362,14 @@ NONCOMBATLOGIC:
         gosub BURGLERECALL
         if (%t >= %nextburgle) then
         {
-          var movetrainactive 1
-          var movetrainburgleactive 1
+          var noncombatactive 1
+          var noncombatburgleactive 1
         }
       }
     }
     else
     {
-	    var movetrainburgleactive 0
+	    var noncombatburgleactive 0
 	  }
 	}
 	#PERFORM_CHECKING
@@ -8883,8 +10380,8 @@ NONCOMBATLOGIC:
 		if ($Performance.Ranks >= 1750) then var performlock 1
 		if (%performlock != 1) then
 		{
-			var movetrainactive 1
-			var movetrainperformactive 1
+			var noncombatactive 1
+			var noncombatperformactive 1
 		}
 	}
   #CRAFT_CHECKING
@@ -8899,8 +10396,8 @@ NONCOMBATLOGIC:
       if (%forginglock != 1) then
       {
         #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to forge at Forging.LearningRate: $Forging.LearningRate
-        var movetrainactive 1
-        var movetrainforgingactive 1
+        var noncombatactive 1
+        var noncombatforgingactive 1
       }
     }
   }
@@ -8916,40 +10413,21 @@ NONCOMBATLOGIC:
       #put #echo >Log Yellow tradinglock: %tradinglock
       if (%tradinglock != 1) then
       {
-        var movetrainactive 1
-        if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var movetrainsellactive 1
-        if ("%tradingtasks" = "YES") then var movetraintasksactive 1
+        var noncombatactive 1
+        if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var noncombatsellactive 1
+        if ("%tradingtasks" = "YES") then var noncombattasksactive 1
       }
     }
 	}
+	return
 	
+	
+NEWNONCOMBATLOGIC:
 	#EXECUTING_NONCOMBAT_TRAIN
-	if (%movetrainactive = 1) then
+	if (%noncombatactive = 1) then
 	{
-	  #KILL_BEFORE_MOVE
-	  if ("%killbeforemove" = "YES") then
-	  {
-      #CHECKING_FOR_MONSTERS
-      if (%killbeforeleave = -1) then
-      {
-        gosub MONSTERARRAY
-        if !matchre("%monsterarray", "%critters") then var killbeforeleave 1
-        else
-        {
-          var killbeforeleave 0
-          put #echo %alertwindow Waiting for kill before leaving for NonCombat.
-        }
-      }
-      ##KILL_NEXT
-      if (%killbeforeleave != 1) then return
-		  var killbeforeleave -1
-		}
-		
-		#STARTING_NONCOMBAT_TRAIN
-		put #echo %alertwindow [NonCombat]: Leaving combat to train.
-		
 	  #TRADING_SELL
-    if (%movetrainsellactive = 1) then
+    if (%noncombatsellactive = 1) then
 		{
       gosub DEEPSLEEP
       gosub LEAVEROOM
@@ -8968,7 +10446,7 @@ NONCOMBATLOGIC:
     }
     
     #TRADING_TASKS
-    if (%movetraintasksactive = 1) then
+    if (%noncombattasksactive = 1) then
 		{
       gosub DEEPSLEEP
       gosub LEAVEROOM
@@ -8986,7 +10464,7 @@ NONCOMBATLOGIC:
     }
 		
 		#BURGLING
-		if (%movetrainburgleactive) = 1 then
+		if (%noncombatburgleactive) = 1 then
 		{
 			gosub DEEPSLEEP
 			gosub LEAVEROOM
@@ -8996,14 +10474,14 @@ NONCOMBATLOGIC:
 			gosub AWAKE
 			gosub BURGLELOGIC
 			gosub BURGLERECALL
-			var movetrainburgleactive 0
+			var noncombatburgleactive 0
 			gosub RELINVIS
 			#BURGLE_PAWN
 			if ("%burglepawn" = "YES") then gosub BURGLEPAWNLOGIC
 		}
 		
 	  #PERFORMANCE
-		if (%movetrainperformactive = 1) then
+		if (%noncombatperformactive = 1) then
 		{
 			gosub DEEPSLEEP
 		  gosub LEAVEROOM
@@ -9016,12 +10494,11 @@ NONCOMBATLOGIC:
 		}
 		
 		#FORGING
-		if (%movetrainforgingactive = 1) then
+		if (%noncombatforgingactive = 1) then
 		{
 			gosub DEEPSLEEP
 		  gosub LEAVEROOM
 		  gosub NEWTOWNPRESET %forgingtown forging
-			var firstclean 0   
 			gosub ROOMTRAVEL
 			gosub AWAKE
 			gosub STOWALL
@@ -9029,23 +10506,10 @@ NONCOMBATLOGIC:
 			gosub STOWALL
       gosub STORAGECHECKLOGIC
 		}
-    					
-		#RETURNING_TO_COMBAT
-		put #echo Yellow Returning to combat!
-		var movetrainactive 0
-		gosub DEEPSLEEP
-		#gosub BUFFINGONLYLOOP
-		gosub RELCYCLIC
-		gosub PERCSELF
-		var stance %stancemain
-		gosub STANCECHANGE
-		if ("%armorcheck" = "YES") then gosub ARMORCHECK
-		gosub ROOMTRAVELCOMBAT
-		gosub AWAKE
-		if %necrosafety = "YES" then gosub JUSTICECHECK
-		put #echo %alertwindow [NonCombat]: Returned from NonCombat training.
-	}  
-  return
+		var noncombatactive 0
+	  #gosub BUFFINGONLYLOOP
+	}
+	return
   
 STORAGECHECKLOGIC:
   gosub STOREDEFAULT %storage
@@ -9115,10 +10579,10 @@ TEACHINGLOOP:
 
 TEXTLOGIC:
   if %aiming = 1 then return
-  if (%noncomdelay = "YES") then
-  {
-    if %evenleastnum < 7 then return
-  }
+  #if (%retreatdelay = "YES") then
+  #{
+  #  if %evenleastnum < 7 then return
+  #}
   if %t > %nexttext then
   {
     if $First_Aid.LearningRate > 33 then var firstaidlock 1
@@ -9245,7 +10709,7 @@ WEAPONLOGIC:
   if (%scriptmode = 1) then
   {
     #LOWEST_FIRST_SORT
-    if %lowestfirst = "YES" then gosub LOWESTLOGIC
+    if ("%lowestfirst" = "YES") then gosub LOWESTLOGIC
     else gosub WSKILLGET
     #TMFOCUS
     if (%tmfocusinuse = 1) then return
@@ -9261,7 +10725,7 @@ WEAPONLOGIC:
     #AVOID_SHOCK
     if (%avoidshock = "YES") then
     {
-      #echo GoodTarget: %goodtarget    CurrentCritter: %currentcritter    ShockCritter: %shockcritter
+      #put #echo Yellow GoodTarget: %goodtarget    CurrentCritter: %currentcritter    ShockCritter: %shockcritter
       if (%goodtarget = 0) then gosub TARGETSELECT
       if (%shockcritter = 1) then 
       {
@@ -9302,6 +10766,7 @@ WEAPONLOGIC:
       gosub STATUSCHECK     
       gosub TACTICSEXPERTHANDCHECK    
       gosub WEAPONGET
+      gosub STATUSCHECK
       gosub MOVECHOOSE
       gosub ATTACKMELEE
     }
@@ -9553,6 +11018,7 @@ SKILLGET:
   
   
 ROOMTRAVELCOMBAT:
+  put #echo Yellow zone: %zone
   var rtzone %zone
   var rttravel %travel
   var rttraveldest %traveldest
@@ -9560,12 +11026,17 @@ ROOMTRAVELCOMBAT:
   var rtmovelist %movelist
   var rttargetroom %targetroom
   var rtfindroom %findroom
+  if ("%armorcheck" = "YES") then gosub ARMORCHECK
+  gosub LEAVEROOM
   gosub ROOMTRAVEL
+  gosub AWAKE
+  var stance %stancemain
+  gosub STANCECHANGE  
+  if ("%necrosafety" = "YES") then gosub JUSTICECHECK    
   return
     
 
 ROOMTRAVELUPKEEP:
-  gosub LEAVEROOM
   if ("%autype" = "ammo") then
   {
     gosub NEWTOWNPRESET %ammobuytown upkeep
@@ -9574,7 +11045,51 @@ ROOMTRAVELUPKEEP:
   {
     gosub NEWTOWNPRESET %upkeeptown upkeep
   }
-  gosub ROOMTRAVEL
+  if ("%upkeeptown" != "fangcove") then
+  {
+    var fangcovevisit 0
+    gosub LEAVEROOM
+    gosub ROOMTRAVEL
+    return
+  }
+  else
+  {
+    #FANGCOVE
+    var fangcovevist 0
+    if ("%premiumring" = "YES") then
+    {
+      if (%t < %nextring) then return
+      gosub LEAVEROOM
+      gosub PREMIUMRINGGO
+      if (%goodring = 1) then
+      {
+        var fangcovevisit 1
+      }
+      else
+      {
+        #FANGCOVE_PORTAL
+        var fangcovevisit 2
+        gosub NEWTOWNPRESET %nearestportaltown upkeep
+        gosub LEAVEROOM
+        gosub ROOMTRAVEL
+        gosub MOVE portal
+        move go meeting portal
+      }    
+    }
+    else
+    {
+      #FANGCOVE_PORTAL
+      var fangcovevisit 2
+      gosub NEWTOWNPRESET %nearestportaltown upkeep
+      gosub LEAVEROOM
+      gosub ROOMTRAVEL
+      gosub MOVE portal
+      move go meeting portal
+    }
+    put #mapper reset
+    pause 1
+    move n
+  }
   return
 
 ROOMTRAVEL:
@@ -9628,6 +11143,8 @@ ROOMTRAVEL:
 		  }
 		}
   }
+  #put #echo Yellow Zoneid: $zoneid
+  #put #echo Yellow RTZone: %rtzone
   if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
   if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then
   {
@@ -9648,7 +11165,7 @@ FINDROOMLOGIC:
     #echo roomplayerslength: %roomplayerslength
     if %roomplayerslength = 0 then
     {
-      if %frprefergroup != "YES" then
+      if ("%prefergroup" != "YES") then
       {
         put #echo Yellow Room you were in was fine!  Choosing that.
         return
@@ -9668,7 +11185,7 @@ FINDROOMLOGIC:
       eval roomplayerslength length("%roomplayers")
       if %roomplayerslength = 0 then
       {
-        if %frprefergroup = "YES" then
+        if ("%prefergroup" = "YES") then
         {
           put #echo Yellow Room you were in was fine!  Choosing that.
           return
@@ -9706,7 +11223,7 @@ FINDROOMLOGIC:
     }
     else
     {
-      if %frprefergroup = "YES" then put #echo Yellow Found an empty room instead!
+      if ("%prefergroup" = "YES") then put #echo Yellow Found an empty room instead!
       else put #echo Yellow Found a room with an ally instead!
     }
   }
@@ -9714,7 +11231,7 @@ FINDROOMLOGIC:
   {
     #put #echo Yellow froomempty: %froomempty
     #put #echo Yellow froomally: %froomally
-    if %frprefergroup = "YES" then put #echo Yellow Found a room with an ally!
+    if ("%prefergroup" = "YES") then put #echo Yellow Found a room with an ally!
     else put #echo Yellow Found an empty room!
   } 
   return
@@ -9735,7 +11252,7 @@ FINDROOMLOOP:
     else var froomempty %froomempty|1
     if %findroomcount = 0 then var froomblack 0
     else var froomblack %froomblack|0
-    if %frprefergroup != "YES" then
+    if ("%prefergroup" != "YES") then
     {
       var findroomselect %findroomcount
       return
@@ -9772,7 +11289,7 @@ FINDROOMLOOP:
     {
       if %findroomcount = 0 then var froomally 1
       else var froomally %froomally|1
-      if %frprefergroup = "YES" then
+      if ("%prefergroup" = "YES") then
       {
         if %froomblack(%findroomcount) != 1 then
         {
@@ -9792,7 +11309,7 @@ FINDROOMLOOP:
   
 FINDROOMLOOP2:
   if %findroomcount > %findroomnum then return
-  if %frprefergroup = "YES" then
+  if ("%prefergroup" = "YES") then
   {
     if %froomempty(%findroomcount) = 1 then
     {
@@ -10219,35 +11736,26 @@ BUFFLOGIC:
     if %necrogood != 1 then return
   }
   var anybuff 0
-  #AREA_BUFF
-  if %casting != 1 then
-  { 
-	  if ((%abuff = "YES") && (%buffingonly != 1)) then
-	  {
-	    var buffing 0
-      var abuffloop 0 
-	    gosub ABUFFINGLOOP
-	  }
-	}
 	#ABSOLUTION
   if %casting != 1 then
   {
-    if (%absolution = "YES") then
+    if ("%absolution" = "YES") then
     {
       if (($SpellTimer.Absolution.active != 1) || ($SpellTimer.Absolution.duration < %buffbuffer)) then
       {
-        #gosub MONSTERARRAY
-        #if matchre("%monsterarray", "%allundead") then
-        {
-          var anybuff 1
-          var casting 1
-          var scancel 0
-          var buffing 1
-          var spellprepping abs
-          var prepmana %absolutionprepmana
-          var addmana 0
-          return
-        }
+        var anybuff 1
+        var casting 1
+        var scancel 0
+        var buffing 1
+        var spellsymb 0
+        var prepped 0
+        var charged 0
+        var harnessed 0
+        var spellprepping absolution
+        gosub SPELLSTATCHECK %spellprepping
+        var prepmana %absolutionmana
+        var addmana 0
+        return
       }
     }  
   }
@@ -10265,12 +11773,37 @@ BUFFLOGIC:
           var scancel 0
           var buffing 1
           var spellprepping misdirection
-          var prepmana %misdirectionprepmana
-          var addmana %misdirectionaddmana
-          #echo ===Buffing===
-          #echo Prepping Misdirection
+          var spellprepping %symbiosisspell
+          gosub SPELLSTATCHECK %spellprepping
+          var prepmana %spellminmana
+          var addmana %misdirectionmana
+          math addmana subtract %prepmana
           return
         }
+      }
+    }
+  }
+  #ADAPTIVE_CURING_HEAL
+  if %adcheal = "YES" then
+  {
+    if %casting != 1 then
+    {
+      if (($SpellTimer.Heal.active != 1) || ($SpellTimer.Heal.duration < %buffbuffer)) then
+      {
+        var anybuff 1
+        var casting 1
+        var scancel 0
+        var buffing 1
+        var spellsymb 0
+        var prepped 0
+        var charged 0
+        var harnessed 0
+        var spellprepping heal
+        gosub SPELLSTATCHECK %spellprepping
+        var prepmana %spellminmana 
+        var addmana %healmana    
+        math addmana subtract %prepmana
+        return
       }
     }
   }
@@ -10285,23 +11818,6 @@ BUFFLOGIC:
     }
   }
   #ADAPTIVE_CURING
-  if %adcheal = "YES" then
-  {
-    if %casting != 1 then
-    {
-      if (($SpellTimer.Heal.active != 1) || ($SpellTimer.Heal.duration < %buffbuffer)) then
-      {
-        var anybuff 1
-        var casting 1
-        var scancel 0
-        var buffing 1
-        var spellprepping heal
-        var prepmana %healprepmana
-        var addmana %healaddmana
-        return
-      }
-    }
-  }
   if %adcdisease = "YES" then 
   {
     if %casting != 1 then
@@ -10312,9 +11828,15 @@ BUFFLOGIC:
         var casting 1
         var scancel 0
         var buffing 1
+        var spellsymb 0
+        var prepped 0
+        var charged 0
+        var harnessed 0
         var spellprepping cd
-        var prepmana %cdprepmana
-        var addmana %cdaddmana
+        gosub SPELLSTATCHECK %spellprepping
+        var prepmana %spellminmana 
+        var addmana %curediseasemana    
+        math addmana subtract %prepmana
         return
       }
     }
@@ -10329,9 +11851,15 @@ BUFFLOGIC:
         var casting 1
         var scancel 0
         var buffing 1
+        var spellsymb 0
+        var prepped 0
+        var charged 0
+        var harnessed 0
         var spellprepping fp
-        var prepmana %fpprepmana
-        var addmana %fpaddmana
+        gosub SPELLSTATCHECK %spellprepping
+        var prepmana %spellminmana 
+        var addmana %flushpoisonsmana    
+        math addmana subtract %prepmana
         return
       }
     }
@@ -10348,8 +11876,10 @@ BUFFLOGIC:
         var scancel 0
         var buffing 1
         var spellprepping pg
-        var prepmana %pgprepmana
-        var addmana %pgaddmana
+        gosub SPELLSTATCHECK %spellprepping
+        var prepmana %spellminmana
+        var addmana %piercinggazemana
+        math addmana subtract %prepmana
       }  
     }
   }
@@ -10366,9 +11896,10 @@ BUFFLOGIC:
         var buffing 1
         var spellsymb 1
         var spellprepping %symbiosisspell
-        var prepmana %symbiosisprepmana
-        var addmana %symbiosisaddmana
-        var preptimewait %symbiosisprepwait
+        gosub SPELLSTATCHECK %spellprepping
+        var prepmana %spellminmana
+        var addmana %symbiosismana
+        math addmana subtract %prepmana
         return
       }
     }
@@ -10386,8 +11917,8 @@ BUFFLOGIC:
 				var buffing 1
 				var tattoocast 1
 				var spellprepping %tattoospell
+				var prepmana %tattooprepmana
 				var addmana %tattooaddmana
-				var preptimewait %tattooprepwait
 				#echo ===Tattoo Buffing===
 				#echo Prepping %tattoospell
 				return
@@ -10411,7 +11942,6 @@ BUFFLOGIC:
   return
 
 DEVICEBUFFLOGIC:
-  #put #echo Yellow Tattoobuff: %tattoobuff  tattootype: %tattootype
   #HEROIC_TATTOO
   if ((%tattoobuff = "YES") && (%tattootype = "heroic") && (%tattooactive != 1)) then
   {
@@ -10502,38 +12032,83 @@ BUFFINGLOOP:
     var anybuff 0
     return
   }
-  #put #echo Yellow %buff%buffloopvar
-  if ((($%buff%buffloopvar.active = 1) && ($%buff%buffloopvar.duration < %buffbuffer)) || ($%buff%buffloopvar.active != 1)) then
+  #put #echo Yellow Abuffs: %abuffs
+  #put #echo Yellow Spell: |%buff%buffloop|
+  if ((contains("%abuffs", "|%buff%buffloop|")) && (%buffingonly != 1)) then
   {
-    #if %buff%buffloop = "col" then
-    #{ 
-    #  gosub MOONCHECK
-    #  if %moonsout = 1 then gosub BUFFINGFUNC
-    #  if %casting = 1 then return
-    #  else goto BUFFINGLOOP
-    #}
-    if matchre ("%buff%buffloop", "%transnecro") then
-    {  
-      #echo Testing a Transcendental spell!
-      if %necrosafety = "YES" then
-      {
-        if %justice = 1 then return
-      }
-    }
-    if %buff%buffloop = "iots" then
+    math abuffloop add 1
+    if %abuffloop <= %abuffnum then
     {
-      if %iotsscan = 0 then
+      if %abuff%abuffloop = "etf" then
       {
-        gosub FINDBODY
-        gosub TELEOBJECTS
-        var iotsscan 1
+        eval fissure matchre ("$roomobjs", "fissure")
+        if %fissure = 0 then
+        {
+          gosub ABUFFINGSET
+        }
       }
-      if ((%verena = 1) || (%szeldia = 1) || (%dawgolesh = 1) || (%merewalda = 1)) then gosub BUFFINGFUNC
+      if %abuff%abuffloop = "nexus" then
+      {
+        if %nexus = 0 then
+        {
+          gosub ABUFFINGSET
+        }
+      }
+      if %abuff%abuffloop = "rm" then
+      {
+        if %scriptmode = 1 then
+        {
+          if %nextrmlook < %t then
+          {
+            var nextrmlook %t
+            math nextrmlook add 60
+            var mist 0
+            put look
+            pause
+            if %mist = 0 then
+            {        
+              gosub ABUFFINGSET
+            }
+          }
+        }
+      }     
       if %casting = 1 then return
-      else goto BUFFINGLOOP
     }
-    gosub BUFFINGFUNC
-    if %casting = 1 then return
+  }
+  else
+  {  
+    if ((($%buff%buffloopvar.active = 1) && ($%buff%buffloopvar.duration < %buffbuffer)) || ($%buff%buffloopvar.active != 1)) then
+    {
+      #if %buff%buffloop = "col" then
+      #{ 
+      #  gosub MOONCHECK
+      #  if %moonsout = 1 then gosub BUFFINGFUNC
+      #  if %casting = 1 then return
+      #  else goto BUFFINGLOOP
+      #}
+      if matchre ("%buff%buffloop", "%transnecro") then
+      {  
+        #echo Testing a Transcendental spell!
+        if %necrosafety = "YES" then
+        {
+          if %justice = 1 then return
+        }
+      }
+      if %buff%buffloop = "iots" then
+      {
+        if %iotsscan = 0 then
+        {
+          gosub FINDBODY
+          gosub TELEOBJECTS
+          var iotsscan 1
+        }
+        if ((%verena = 1) || (%szeldia = 1) || (%dawgolesh = 1) || (%merewalda = 1)) then gosub BUFFINGFUNC
+        if %casting = 1 then return
+        else goto BUFFINGLOOP
+      }
+      gosub BUFFINGFUNC
+      if %casting = 1 then return
+    }
   }
   goto BUFFINGLOOP
   
@@ -10543,12 +12118,20 @@ BUFFINGFUNC:
   var scancel 0
   var buffing 1
   var spellprepping %buff%buffloop
-	var prepmana %buff%buffloopprepmana
-	if contains("%rituals", "|%spellprepping|") then 	var addmana 0
-  else 	var addmana %buff%buffloopaddmana
-  var preptimewait %buff%buffloopprepwait
-	#echo preptimewait: %preptimewait
-	#var %buff%buffloop %buff%buffloopduration
+  gosub SPELLSTATCHECK %spellprepping
+	var prepmana %spellminmana
+	if contains("%rituals", "|%spellprepping|") then
+	{
+	  var prepmana %buff%buffloopmana
+    var addmana 0
+  }
+  else
+  {
+    #put #echo Yellow buff%buffloopmana %buff%buffloopmana
+    #put #echo Yellow prepmana: %prepmana
+    var addmana %buff%buffloopmana
+    math addmana subtract %prepmana
+	}
 	return
 
 OMBUFFINGLOOP:
@@ -11474,6 +13057,7 @@ WEAPONGET:
 		{
 		  gosub WIELD %hand %weaponname
 			if matchre ("$%otherhandhand", "%weaponname") then gosub SWAP
+			if (%goupkeep = 1) then return
 		}
 		if !matchre ("$%handhand", "%weaponname") then
 		{
@@ -11603,7 +13187,7 @@ TACTICSEXPERTHANDCHECK:
   var usingtactics 0
   if ((%tactics = "YES") && (%tacticslock = 0)) then
   {
-		if (matchre("%weapontype", "%tacticsweapons")) then
+		if (matchre("%weapontype", "sb|lb|thb|se|le|the|brawl|pole|stave")) then
 		{
 		  var usingtactics 1
 			if (("$guild" = "Thief") && (%backstab = "YES") && (%backstablock = 0))  then
@@ -12270,20 +13854,19 @@ BUNDLELOGIC:
 LEAVEROOM:
   gosub DEFSTANCE
   gosub MONSTERARRAY
-  if !matchre("%monsterarray", "%critters") then  
+  if (matchre("%monsterarray", "%critters")) then  
   {
-    #if %aumoveshard = "YES" then
-    if %movescream = "YES" then gosub SCREAMDEFIANCE
-    if %movewhistle = "YES" then gosub WHISTLEPIERCE
-    if %movevanish = "YES" then gosub KHRI vanish
+    if ("%movescream" = "YES") then gosub SCREAMDEFIANCE
+    if ("%movewhistle" = "YES") then gosub WHISTLEPIERCE
+    if ("%movevanish" = "YES") then gosub KHRI vanish
   }
-  if $sitting = 1 then gosub STAND
-  if $kneeling = 1 then gosub STAND
-  if $prone = 1 then gosub STAND
+  if ($sitting = 1) then gosub STAND
+  if ($kneeling = 1) then gosub STAND
+  if ($prone = 1) then gosub STAND
   if %bugoutnostow != 1 then gosub STOWALL
   gosub STOWFEET
   gosub COLLECTINGAMMO
-  if %necrosafety = "YES" then
+  if ("%necrosafety" = "YES") then
   {
     if $SpellTimer.RiteofGrace.active != 1 then
     {

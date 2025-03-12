@@ -1,19 +1,28 @@
-var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rw|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
+var lastupdated 09/15/2024
+
+var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
 var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mapp|mpp|mf|pfe|pom|sl|sol|
 var abuffs |etf|nexus|rm|
 var cyctms |aban|ars|fr|gs|iz|pyre|rim|ros|sa|sls|usol|
 var cycdbs |alb|dalu|dema|ee|hyh|shw|
 var cyclics |ac|ad|af|bes|botf|cs|eye|fae|ghs|gj|hodi|how|mg|mom|regenerate|rev|roc|rog|sanctuary|sov|tr|
 var allcyclics %cyclics-%cyctms-%cycdbs
-var rituals |abs|aeg|all|ag|bc|bloodthorns|cos|dc|echo|eli|mf|mof|mon|iots|mf|mon|pom|pop|rtr|soul|vos|will|word|
-var heavytm ms
+var rituals |absolution|aeg|all|ag|bc|bloodthorns|cos|dc|echo|eli|mf|mof|mon|iots|mf|mon|pom|pop|rtr|soul|vos|will|word|
+var augmentation |ease|botf|drum|echo|ecry|fae|harm|mis|rage|soul|wotm|will|word|auspice|benediction|centering|gg|mapp|pom|rev|sap|sol|ad|ags|gol|mef|refresh|tranquility|vigor|art|aus|cv|iots|mt|sco|seer|shadows|ts|tv|bue|emc|ivm|ks|obfuscation|php|rei|rpu|clarity|crc|dig|hes|mo|rw|sr|tr|athleticism|bes|cs|cotc|em|hol|inst|oath|pls|stw|sott|sks|sk|wotp|ws|ava|blur|enrichment|fin|lgv|meg|phk|turi|aeg|mof|substratum|suf|sw|tw|ys|
+var debilitation |burden|dispel|aewo|alb|dalu|dmrs|dema|coz|halo|hulp|hyh|it|malediction|mc|ps|sb|sick|spit|compel|lethargy|nb|calm|dazzle|mb|ms|rend|set|shw|sleep|sod|tf|tv|hp|pv|rof|vs|vod|halt|shatter|sf|cotw|df|de|griz|hb|swarm|flu|anc|al|ee|frostbite|ip|moa|tc|ti|trem|vertigo|wb|
+var targetedmagic |stra|bonegrinder|sif|aban|bos|btn|pyre|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sts|
+var utility |gaf|imbue|sec|alb|aot|care|eye|hodi|nexus|resonance|sanctuary|all|bf|bless|ef|it|mre|mf|om|rejuv|rezz|rev|sol|uncurse|vigil|absolution|ad|awaken|bs|cos|cd|ev|fp|foc|gs|heal|hs|hw|hl|innocence|rp|regenerate|vh|bc|contingency|dc|dg|fm|locate|moonblade|mg|pg|rtr|rf|rend|rs|seer|shm|ss|shadowling|sm|sov|tf|teleport|th|unleash|bb|cfb|cfw|cf|devour|eotb|nr|qe|resection|roc|rof|rog|ag|as|bot|ba|crc|da|hoj|how|rue|tr|vos|af|bes|blend|compost|em|mon|sks|nou|rega|stc|ab|etf|foi|ignite|rm|zephyr|
+var warding |lw|maf|fotf|gj|name|repr|ghs|halo|mpp|pfe|sl|sos|spit|ic|pop|tranquility|col|psy|shear|tksh|wd|ch|emc|ghoulflesh|solace|worm|aa|courage|how|sp|tk|bloodthorns|etc|ey|fwb|rits|eli|ir|mom|non|trc|ac|es|gi|gf|voi|
+var targeted |stra|bonegrinder|sif|bos|btn|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sts|
+
+var heavytm bos|ms
 var transnecro |ivm|ks|bue|worm|ch|php|
 var aimweapons bow|xbow|sling
 var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|field|plane|planes|road|spell|symbiosis strengthen|symbiosis endure|symbiosis avoid|symbiosis spring|symbiosis remember|symbiosis resolve|symbiosis impress|symbiosis discern|symbiosis explore|symbiosis watch|symbiosis harvest|symbiosis heal|symbiosis learn|symbiosis examine|symbiosis perform|symbiosis cast|symbiosis harness|symbiosis activate
 
-var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-guardians|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
+var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-guardians|p1-giantbears|p1-onyxgargoyles|p1-emberbulls|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
 var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-gryphonsbaby|p2-gryphonsyoung|p2-seordmaors
-var combatpresetp3 p3-snippets|p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-sylphs|p3-quartzgargoyles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-windbags|p3-windbags2|p3-frostcrones|p3-prerenielder|p3-gryphons|p3-beltunumshi|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-adanfsorcs|p3-adanfblades
+var combatpresetp3 p3-snippets|p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-sylphs|p3-quartzgargoyles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-windbags|p3-windbags2|p3-frostcrones|p3-prerenielder|p3-gryphons|p3-beltunumshi|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-malchata|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-icearchons|p3-adanfsorcs|p3-adanfblades
 var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p4-merkreshcelpeze4|p4-armadillosjuve|p4-armadillosadult|p4-armadilloselder
 var combatpresetp5 p5-maidenstress|p5-matronstress|p5-dryads|p5-nyads1|p5-blightogres1|p5-nyads2|p5-blightogres2|p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-blackapes|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
 var combatpresetlist none|%combatpresetp1|%combatpresetp2|%combatpresetp3|%combatpresetp4|%combatpresetp5
@@ -32,7 +41,7 @@ var performtownlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|i
 var forgingtownlist none|crossing|shard|merkresh|hibarnhvidar
 
 var Ordinal none|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth
-var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.
+var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.|You're unconscious!|There is no need for violence here\.
 
 #action (combo) var elapsed $gametime; math elapsed subtract %gametimestart; put #echo Yellow Elapsed: %elapsed; 10put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
 action (combo) put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
@@ -46,8 +55,9 @@ goto LIBEND
 TITLE:
   put #echo
 	put #echo mono ------------------------------------------------
-	put #echo mono ------------------ TRAINING! -------------------
+	put #echo mono -------------- TRAIN SCRIPT SUITE --------------
 	put #echo mono ------------------------------------------------
+	put #echo mono Last Updated: %lastupdated
 	put #echo
   return
 
@@ -91,10 +101,6 @@ SETDEFAULTS:
   gosub VARCHECKS
   var checkmode 2
   gosub VARCHECKS
-  var checkmode 3
-  gosub VARCHECKS
-  var checkmode 4
-  gosub VARCHECKS
   gosub VARCHECKOTHER
   put #var save 
   return
@@ -125,2270 +131,911 @@ VARCHECKS:
   else put #var bugoutnum 1
   if !matchre("$bugoutonbleed", "\b(YES|NO)\b") then put #var bugoutonbleed NO
   if !matchre("$bugoutonsend", "\b(YES|NO)\b") then put #var bugoutonsend YES
+  if (!def(whitelist)) then put #var whitelist Saragos|Navesi
   
-  if !matchre("$m%checkmodealmanac", "\b(YES|NO)\b") then put #var m%checkmodealmanac NO
-  if !def(m%checkmodealmanacitem) then put #var m%checkmodealmanacitem almanac
-  if !matchre("$m%checkmodealmanacalerts", "\b(YES|NO)\b") then put #var m%checkmodealmanacalerts NO
-  if !matchre("$m%checkmodeejournal", "\b(YES|NO)\b") then put #var m%checkmodeejournal NO
-  if !def(m%checkmodeejournalitem) then put #var m%checkmodeejournalitem journal
-  if $m%checkmodeejournalstates > 0 then
-  else put #var m%checkmodeejournalstates 600
-  if !def(m%checkmodenextejournal) then put #var m%checkmodenextejournal 0
-  if !matchre("$m%checkmodetarantula", "\b(YES|NO)\b") then put #var m%checkmodetarantula NO  
-  if !def(m%checkmodetarantulaitem) then put #var m%checkmodetarantulaitem tarantula
-  if !def(m%checkmodetarantulaskill1) then put #var m%checkmodetarantulaskill1 evasion
-  if !def(m%checkmodetarantulaskill2) then put #var m%checkmodetarantulaskill2 shield
+  if (!def(blacklist)) then put #var blacklist Zehira|Agalea
+  
+  if !matchre("$textbook", "\b(YES|NO)\b") then put #var textbook NO
+  if $textbooktimer >= 0 then
+  else put #var textbooktimer 60
+  if !def(textbookitem) then put #var textbookitem tome
+  if !def(textbooklist) then put #var textbooklist human|elf|elothean 
+  if !matchre("$almanac", "\b(YES|NO)\b") then put #var almanac NO
+  if !def(almanacitem) then put #var almanacitem almanac
+  if !matchre("$almanacalerts", "\b(YES|NO)\b") then put #var almanacalerts NO
+  if !matchre("$ejournal", "\b(YES|NO)\b") then put #var ejournal NO
+  if !def(ejournalitem) then put #var ejournalitem journal
+  if $ejournalstates > 0 then
+  else put #var ejournalstates 600
+  if !def(nextejournal) then put #var nextejournal 0
+  if !matchre("$tarantula", "\b(YES|NO)\b") then put #var tarantula NO  
+  if !def(tarantulaitem) then put #var tarantulaitem tarantula
+  if !def(tarantulaskill1) then put #var tarantulaskill1 evasion
+  if !def(tarantulaskill2) then put #var tarantulaskill2 shield
+  if !matchre("$locksmithbox", "\b(YES|NO)\b") then put #var locksmithbox NO
+  if $locksmithboxtimer >= 0 then
+  else put #var locksmithboxtimer 120
+  if !def(locksmithboxitem) then put #var locksmithboxitem training box
+  if !matchre("$skinfatrainer", "\b(YES|NO)\b") then put #var skinfatrainer NO
+  if $skinfatrainertimer >= 0 then
+  else put #var skinfatrainertimer 120
+  if !def(skinfatraineritem) then put #var skinfatraineritem blue-belly crocodile
+  if !matchre("$windboard", "\b(YES|NO)\b") then put #var windboard NO
+  if $windboardtimer >= 0 then
+  else put #var windboardtimer 120
+  if !def(windboardtrick) then put #var windboardtrick tilt
+  if ($windboardcharge >= 0) then
+  else put #var windboardcharge 50
+  
+  
+
+  #MULTI
+  if !matchre("$huntingaream2", "%combatpresetlist") then put #var huntingaream2 none
+  if !matchre("$upkeeptownm2", "\b(%townpresetlist)\b") then put #var upkeeptownm2 crossing
+  if !matchre("$burgletownm2", "\b(%townpresetlist)\b") then put #var burgletownm2 crossing
+  if !matchre("$pawntownm2", "\b(%townpresetlist)\b") then put #var pawntownm2 crossing
+  if !matchre("$performtownm2", "\b(%townpresetlist)\b") then put #var performtownm2 crossing
+  if !matchre("$forgingtownm2", "\b(%townpresetlist)\b") then put #var forgingtownm2 crossing
   
   #MOVEMENT
-  #if !matchre("$m%checkmodeaumoveclenchshard", "\b(YES|NO)\b") then put #var m%checkmodeaumoveclenchshard NO
-  if !matchre("$m%checkmodemovewhistle", "\b(YES|NO)\b") then put #var m%checkmodemovewhistle NO
-  if !matchre("$m%checkmodemovescream", "\b(YES|NO)\b") then put #var m%checkmodemovescream NO
-  if !matchre("$m%checkmodemovevanish", "\b(YES|NO)\b") then put #var m%checkmodemovevanish NO
-  if $m%checkmodebugoutroom > 0 then
-  else put #var m%checkmodebugoutroom 1
+  if !matchre("$movevanish", "\b(YES|NO)\b") then put #var movevanish NO
+
+  if !matchre("$killbeforemove", "\b(YES|NO)\b") then put #var killbeforemove YES
+  if $movetimeout > 0 then
+  else put #var movetimeout 300
+  if !matchre("$huntingpremium", "\b(YES|NO|ONLY)\b") then put #var huntingpremium NO
+  if !matchre("$prefergroup", "\b(YES|NO)\b") then put #var prefergroup NO
+  if !matchre("$premiumring", "\b(YES|NO)\b") then put #var premiumring NO
+  if !def(premiumringitem) then put #var premiumringitem band
   
-  if !matchre("$m%checkmodecustommovement", "\b(YES|NO)\b") then put #var m%checkmodecustommovement NO
-  if !matchre("$m%checkmodekillbeforemove", "\b(YES|NO)\b") then put #var m%checkmodekillbeforemove YES
-  if $m%checkmodemovetimeout > 0 then
-  else put #var m%checkmodemovetimeout 300
-  if !matchre("$m%checkmodecombatpreset", "%combatpresetlist") then put #var m%checkmodecombatpreset none
-  if !matchre("$m%checkmodepresetpremium", "\b(YES|NO|ONLY)\b") then put #var m%checkmodepresetpremium NO
-  if ("$m%checkmodecombatpreset" != "none") then
-  {
-    if ("$m%checkmodecombatpreset" = "p1-shiprats") then
-    {
-      put #var m%checkmodezone 1
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest crossing
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 238|239|240|245|243|244|765|241|242|246|247
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 237|238|239|240|245|243|244|765|241|242|246|247|441|442|443|444|445|446|447|448|449|450|451|452|453
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 441|442|443|444|445|446|447|448|449|450|451|452|453
-      put #var m%checkmodebugoutroom 52
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-deathsquirrels") then
-    {
-      put #var m%checkmodezone 7
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest arthe
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 515|516|517|518|519|520|521|522|523|524|525|526|527|528|529|530|531|532|533|534
-      put #var m%checkmodebugoutroom 514
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-muskhogs") then
-    {
-      put #var m%checkmodezone 4
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wolf
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 18|43|44|45|46|47|73|74|75|76
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-goblins") then
-    {
-      put #var m%checkmodezone 4
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wolf
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 52|68|69|70|71|72|55|65|66|67|56|57|58|59
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-fellhogs") then
-    {
-      put #var m%checkmodezone 4
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wolf
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 60|61|62|63|64
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-badgers") then
-    {
-      put #var m%checkmodezone 6
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest crossing
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist north gate
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 297|296|26|27|28|29|30|31|32|33|34|35|269
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 297|296|26|27|28|29|30|31|32|33|34|35|269|270|272|38|40
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 270|272|38|40
-      put #var m%checkmodebugoutroom 247
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-origami") then
-    {
-      put #var m%checkmodezone 7
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest kaerna
-      put #var m%checkmodemove NO
-      put #var m%checkmodemovelist 0
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 258|257|259|260|261|262|263|264|265|266
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 258|257|259|260|261|262|263|264|265|266|788|789|790|791
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 788|789|790|791
-      put #var m%checkmodebugoutroom 480
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-pothanits") then
-    {
-      put #var m%checkmodezone 6
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest crossing
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist north gate
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 291|274|275|44|276|277|290|279
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 291|274|275|44|276|277|290|279|278|48|49
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 278|48|49
-      put #var m%checkmodebugoutroom 247
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-giantwasps") then
-    {
-      put #var m%checkmodezone 4
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wolf
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 24|25|26|27|28|29|30|31|32
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-trollkin") then
-    {
-      put #var m%checkmodezone 6
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest crossing
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist north gate
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 280|286|287|288|289|64|65|298|59|58|285|67|68|69
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 280|286|287|288|289|64|65|298|59|58|285|67|68|69|283|282|284|281
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 283|282|284|281
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-cougarsgrendels") then
-    {
-      put #var m%checkmodezone 7a
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest kaerna
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist vineyard
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 21|22|23|24|25|26|27|28|29
-      put #var m%checkmodebugoutroom 4
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-woodtrolls") then
-    {
-      put #var m%checkmodezone 7a
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest kaerna
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist vineyard
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 30|31|32|33|34
-      put #var m%checkmodebugoutroom 4
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-grasseels") then
-    {
-      put #var m%checkmodezone 4
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wolf
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 228|229|230|231|232|233
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 228|229|230|231|232|233|234|235|236|237
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 234|235|236|237
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-animateditems") then
-    {
-      put #var m%checkmodezone 7a
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest kaerna
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist baearholt
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 0
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 70|71|72|73|74|75|76|77|78|79|80|81|82
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 70|71|72|73|74|75|76|77|78|79|80|81|82
-      put #var m%checkmodebugoutroom 62
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-beisswurms") then
-    {
-      put #var m%checkmodezone 10
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest stone
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 07
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 31|32|33|34|36|36|37
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-cavebears") then
-    {
-      put #var m%checkmodezone 10
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest stone
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 50|48|49|52|53|52|51|53|55|56|54|57|59|58
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-copperheads") then
-    {
-      put #var m%checkmodezone 9b
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest sorrow
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 131|132|133|134
-      put #var m%checkmodebugoutroom 8
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-rocktrolls") then
-    {
-      put #var m%checkmodezone 7
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest kaerna
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 441|442|443|444|445|446|447|448|449|450|451|452|453|454|455|456|457|458|459|460
-      put #var m%checkmodebugoutroom 480
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-endrusserpents") then
-    {
-      put #var m%checkmodezone 60
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest leth
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist str1
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 147|148|149|150|151|152|153|154|155
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-snowbeasts") then
-    {
-      put #var m%checkmodezone 62
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest leth
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist str2
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 15|16|17|18|19|20|32|31|34|30|33|29|28|24|23|25|26|27
-      put #var m%checkmodebugoutroom 97
-      put #var m%checkmodenearestportaltown leth
-    }
-    if ("$m%checkmodecombatpreset" = "p1-crocodiles") then
-    {
-      put #var m%checkmodezone 7
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest caravansary
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 52
-      put #var m%checkmodebugoutroom 3
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-direbears") then
-    {
-      put #var m%checkmodezone 4
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wolf
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 317|316|315|324|314
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 317|316|315|324|314|321|322|323
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 321|322|323
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-vipers") then
-    {
-      put #var m%checkmodezone 11
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest vipers
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 42|43|44|45|46|47|48|49|55|56
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 42|43|44|45|46|47|48|49|55|56|149|150|151|152|153|154|155|156|157|158|159|160
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 149|150|151|152|153|154|155|156|157|158|159|160
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-leucros") then
-    {
-      put #var m%checkmodezone 11
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest vipers
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 6|7|8|9|10|11|20|19|16|11|12|15|18|21|22|17|14|13
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 6|7|8|9|10|11|20|19|16|11|12|15|18|21|22|17|14|13|50|51|52|53|54
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 50|51|52|53|54
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-guardians") then
-    {
-      put #var m%checkmodezone 11
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest vipers
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 66|67|68|69|70|78|77|76|75|74|73|72|71|65
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 66|67|68|69|70|78|77|76|75|74|73|72|71|65
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-warklins") then
-    {
-      put #var m%checkmodezone 10
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest stone
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 39|40|41|42|43|44|45|46|47
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 39|40|41|42|43|44|45|46|47|117|118|119|120|121
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 117|118|119|120|121
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p1-scuttlers") then
-    {
-      put #var m%checkmodezone 62
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest leth
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist str2
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 209|210|211|212|213
-      put #var m%checkmodebugoutroom 97
-      put #var m%checkmodenearestportaltown leth
-    }
-    if ("$m%checkmodecombatpreset" = "p1-stormbulls") then
-    {
-      put #var m%checkmodezone 112
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest ilaya
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97
-      put #var m%checkmodebugoutroom 32
-      put #var m%checkmodenearestportaltown leth
-    }
-    if ("$m%checkmodecombatpreset" = "p1-lavadrakes") then
-    {
-      put #var m%checkmodezone 13
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest dirge
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 189|190|191|192|193|194|195
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 189|190|191|192|193|194|195|300|301|302|303|304|305
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 300|301|302|303|304|305
-      put #var m%checkmodebugoutroom 49
-      put #var m%checkmodenearestportaltown crossing
-    }
-    if ("$m%checkmodecombatpreset" = "p2-brocketdeeryoung") then
-    {
-      put #var m%checkmodezone 40a
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest langenfirth
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist siksraja
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 104|105|146|147
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown langenfirth
-    }
-    if ("$m%checkmodecombatpreset" = "p2-marauders") then
-    {
-      put #var m%checkmodezone 41
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fornsted
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 16|17|18|19|25|26|27|28|29
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown theren
-    }
-    #25
-    if ("$m%checkmodecombatpreset" = "p2-swamptrolls") then
-    {
-      put #var m%checkmodezone 31
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest haven
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist egate 
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 39|108|109|110|111|80|82|83|84
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown langenfirth
-    }
-    if ("$m%checkmodecombatpreset" = "p2-piruatiserpents") then
-    {
-      put #var m%checkmodezone 31
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest haven
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist egate 
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 55|56|57|58|51|53|54|
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 55|56|57|58|51|53|54|131|132|133|134
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 131|132|133|134
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown riverhaven
-    }
-    if ("$m%checkmodecombatpreset" = "p2-brocketdeer") then
-    {
-      put #var m%checkmodezone 40a
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest langenfirth
-      put #var m%checkmodemove NO
-      put #var m%checkmodemovelist siksraja
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 148|149|150|151
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown langenfirth
-    }
-    if ("$m%checkmodecombatpreset" = "p2-brocketdeerelder") then
-    {
-      put #var m%checkmodezone 40a
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest langenfirth
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist siksraja
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 155|154|153|152
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown langenfirth
-    }
-    if ("$m%checkmodecombatpreset" = "p2-gryphonsbaby") then
-    {
-      put #var m%checkmodezone 34
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest rossman
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist gryphons|49
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 90|91|92
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown theren
-    }
-    if ("$m%checkmodecombatpreset" = "p2-gryphonsyoung") then
-    {
-      put #var m%checkmodezone 34
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest rossman
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist gryphons|49
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 93|116|117|118|119
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown theren
-    }
-    if ("$m%checkmodecombatpreset" = "p2-seordmaors") then
-    {
-      put #var m%checkmodezone 41
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fornsted
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 77|78|79|76|204
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown theren
-    }
-    if ("$m%checkmodecombatpreset" = "p3-snippets") then
-    {
-      put #var m%checkmodezone 66
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 711|712|713|714|715|716
-      put #var m%checkmodebugoutroom 128
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-rocktrolls1") then
-    {
-      put #var m%checkmodezone 68
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest ylono
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist move out|sgate
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 35|36|37|38|39|40|41|42|43|44|45|46|47
-      put #var m%checkmodebugoutroom 28
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-snowbeasts") then
-    {
-      put #var m%checkmodezone 66
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 167|168|169|170|171
-      put #var m%checkmodebugoutroom 128
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-rocktrolls2") then
-    {
-      put #var m%checkmodezone 68
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest ylono
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist move out|sgate
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 8|9|10|11|12|13|14
-      put #var m%checkmodebugoutroom 28
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-gargoyles") then
-    {
-      put #var m%checkmodezone 66
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 173|174|178|179|180|181|182|183|184|185|186|187|188|189|190
-      put #var m%checkmodebugoutroom 128
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-eidolonsteeds") then
-    {
-      put #var m%checkmodezone 68
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest ylono
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist move out|sgate
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 52|53|54|55|56|57|58|59|60|61|62|205|74|68|69|70|71|72
-      put #var m%checkmodebugoutroom 28
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-crocodiles") then
-    {
-      put #var m%checkmodezone 68
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest ylono
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist move out|sgate
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 184|183|185|186|187
-      put #var m%checkmodebugoutroom 28
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-sylphs") then
-    {
-      put #var m%checkmodezone 66
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 717|718|719|720|721
-      put #var m%checkmodebugoutroom 128
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-gryphons") then
-    {
-      put #var m%checkmodezone 69
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wyvern
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 234|235|236|237|238|239|240|241|242|243
-      put #var m%checkmodebugoutroom 382
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-quartzgargoyles") then
-    {
-      put #var m%checkmodezone 150
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fangcove
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 65|66|67|68|69|70|71|72|73|74|75
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 65|66|67|68|69|70|71|72|73|74|75
-      put #var m%checkmodebugoutroom 1
-      put #var m%checkmodenearestportaltown none
-    }
-    if ("$m%checkmodecombatpreset" = "p3-prereniyoung") then
-    {
-      put #var m%checkmodezone 66
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 656|657|658|659
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 656|657|658|659|660|662
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 660|662
-      put #var m%checkmodebugoutroom 128
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-redleucros") then
-    {
-      put #var m%checkmodezone 65
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist undergondola
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 5|6|7|8|9|10|11|12|13|14
-      put #var m%checkmodebugoutroom 2
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-goldenpards") then
-    {
-      put #var m%checkmodezone 69
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wyvern
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 87|107|108|109|110|111|112|113|114|115|129|130|131|132
-      #if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 656|657|658|659
-      #if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 656|657|658|659|660|662
-      #if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 660|662
-      put #var m%checkmodebugoutroom 382
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-prereni") then
-    {
-      put #var m%checkmodezone 66
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 664|665|666
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 664|665|666|661|663
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 661|663
-      put #var m%checkmodebugoutroom 128
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-windbags") then
-    {
-      put #var m%checkmodezone 66
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 722|723|724|725|726|727|728|729
-      put #var m%checkmodebugoutroom 128
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-windbags2") then
-    {
-      put #var m%checkmodezone 66
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 731|732|730|733|734|735|736
-      put #var m%checkmodebugoutroom 128
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-frostcrones") then
-    {
-      put #var m%checkmodezone 66
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 722|723|724|725|726|727|728|729
-      put #var m%checkmodebugoutroom 128
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-prerenielder") then
-    {
-      put #var m%checkmodezone 66
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest fayrin
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 667|668|669
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 667|668|669|679|680
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 679|680
-      put #var m%checkmodebugoutroom 128
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-cloudrats") then
-    {
-      put #var m%checkmodezone 69
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wyvern
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 607|608|609|610|611|612
-      put #var m%checkmodebugoutroom 382
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-dragonpriests") then
-    {
-      put #var m%checkmodezone 69
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wyvern
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 154|155|156|157|158|159|160|161|162|163|164|165|166|167
-      put #var m%checkmodebugoutroom 382
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-beltunumshi") then
-    {
-      put #var m%checkmodezone 69
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wyvern
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 616|617|618|619|620|621|622|623|624|625|626|627|628
-      put #var m%checkmodebugoutroom 382
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-adanfblood") then
-    {
-      put #var m%checkmodezone 68
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest ylono
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist move out|sgate
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 139|140|141|142|143|144|210|209|145|146|147|148|149|150
-      put #var m%checkmodebugoutroom 28
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-adanfspirit") then
-    {
-      put #var m%checkmodezone 68a
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest ylono
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist move out|sgate|ice caves
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 16|15|14|13|12|27|11|10|28|9|8|26|17|18|19|20|21
-      put #var m%checkmodebugoutroom 2
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-stormbulls") then
-    {
-      put #var m%checkmodezone 69
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wyvern
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 597
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 597|598|599|600|601|602
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 597|598|599|600|601|602|603|604|605
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 603|604|605
-      put #var m%checkmodebugoutroom 382
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-wyvernsjuve") then
-    {
-      put #var m%checkmodezone 69
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wyvern
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 454|455|456|457|458|459|460|461|462|463|465|467|466|453
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 454|455|456|457|458|459|460|461|462|463|465|467|466|453|575|576|577|578|579
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 575|576|577|578|579
-      put #var m%checkmodebugoutroom 382
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-wyvernsyoung") then
-    {
-      put #var m%checkmodezone 69
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wyvern
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 482|483|484|485|486|487|511|512|480|481
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 482|483|484|485|486|487|511|512|480|481|575|576|577|578|579
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 575|576|577|578|579
-      put #var m%checkmodebugoutroom 382
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-wyvernsadult") then
-    {
-      put #var m%checkmodezone 69
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wyvern
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 468|469|470|471|472|473|479|474|475|476|477|478
-      put #var m%checkmodebugoutroom 382
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-adanfsorcs") then
-    {
-      put #var m%checkmodezone 68
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest ylono
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist move out|sgate
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 151|152|153|154|155|156|157|158|159|160
-      put #var m%checkmodebugoutroom 28
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p3-adanfblades") then
-    {
-      put #var m%checkmodezone 68
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest ylono
-      put #var m%checkmodemove YES
-      put #var m%checkmodemovelist move out|sgate
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 163|164|165|166|167|168|169|170|171|172|173|174|175|176
-      put #var m%checkmodebugoutroom 28
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze1") then
-    {
-      put #var m%checkmodezone 107
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest merkresh
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152
-      put #var m%checkmodebugoutroom 16
-      put #var m%checkmodenearestportaltown merkresh
-    }
-    if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze2") then
-    {
-      put #var m%checkmodezone 107
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest merkresh
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 156|157|158|159|160|161|162|163|164|165|166|167|168
-      put #var m%checkmodebugoutroom 16
-      put #var m%checkmodenearestportaltown merkresh
-    }
-    if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze3") then
-    {
-      put #var m%checkmodezone 107
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest merkresh
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 34|35|36|37
-      put #var m%checkmodebugoutroom 16
-      put #var m%checkmodenearestportaltown merkresh
-    }
-    if ("$m%checkmodecombatpreset" = "p4-merkreshcelpeze4") then
-    {
-      put #var m%checkmodezone 107
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest merkresh
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 103|104|105|106|107
-      put #var m%checkmodebugoutroom 16
-      put #var m%checkmodenearestportaltown merkresh
-    }
-    if ("$m%checkmodecombatpreset" = "p4-armadillosjuve") then
-    {
-      put #var m%checkmodezone 108
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest mriss
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 383|384|385|386|387|388|389
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 383|384|385|386|387|388|389|403|404|405|406|407|408
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 403|404|405|406|407|408
-      put #var m%checkmodebugoutroom 150
-      put #var m%checkmodenearestportaltown merkresh
-    }
-    if ("$m%checkmodecombatpreset" = "p4-armadillosadult") then
-    {
-      put #var m%checkmodezone 108
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest mriss
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 1|2|3|4|5|6|7|8|9|10|11
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 1|2|3|4|5|6|7|8|9|10|11|415|416|417|418
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 415|416|417|418
-      put #var m%checkmodebugoutroom 150
-      put #var m%checkmodenearestportaltown merkresh
-    }
-    if ("$m%checkmodecombatpreset" = "p4-armadilloselder") then
-    {
-      put #var m%checkmodezone 108
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest mriss
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      if ("$m%checkmodepresetpremium" = "NO") then put #var m%checkmodefindroomlist 391|392|393|394|395|396|397|398|399|400|401|402
-      if ("$m%checkmodepresetpremium" = "YES") then put #var m%checkmodefindroomlist 391|392|393|394|395|396|397|398|399|400|401|402|410|411|412|413|414
-      if ("$m%checkmodepresetpremium" = "ONLY") then put #var m%checkmodefindroomlist 410|411|412|413|414
-      put #var m%checkmodebugoutroom 150
-      put #var m%checkmodenearestportaltown merkresh
-    }
-    if ("$m%checkmodecombatpreset" = "p5-fuliginmoths") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 637|638|639|640|641|642
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    #185
-    if ("$m%checkmodecombatpreset" = "p5-voidmoths") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 643|644|645|646|647|648
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    #195
-    if ("$m%checkmodecombatpreset" = "p5-shadowmoths") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 649|650|651|652|653|654
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-maidenstress") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 246|247|248|249|250|251|252|253|254
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-matronstress") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 255|256|257|258|259|260|261|262|263|264|265
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-dryads") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 283|284|285|286|287|288|289|290
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-nyads1") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 267|266|268|269|270|271|272|273
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-blightogres1") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 296|297|298|299
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-nyads2") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 274|277|281|276|275|279|280|278|282
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-blightogres2") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 312|311|308|305|309|310|307|306
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-iceadders") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 435|434|428|429|430|427|426|425|424|423|422|421|432|433|431|437|445|446|447|448|449|441|442|443|444
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-marblegargoyles") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 435|434|428|429|430|427|426|425|424|423|422|421|432|433|431|437|445|446|447|448|449|441|442|443|444
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-dpcrones") then
-    {
-      put #var m%checkmodezone 69
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wyvern
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 317|318|319|320|321|322
-      put #var m%checkmodebugoutroom 265
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p5-mountaingiants") then
-    {
-      put #var m%checkmodezone 123
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest raven
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 317|318|319|320|321|322
-      put #var m%checkmodebugoutroom 26
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p5-shalswars") then
-    {
-      put #var m%checkmodezone 69
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest wyvern
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 435|434|428|429|430|427|426|425|424|423|422|421|432|433|431|437|445|446|447|448|449|441|442|443|444
-      put #var m%checkmodebugoutroom 265
-      put #var m%checkmodenearestportaltown shard
-    }
-    if ("$m%checkmodecombatpreset" = "p5-stompers") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 560|561|562|563|564|565
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-maulers") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 566|567|568|569|570|571
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-    if ("$m%checkmodecombatpreset" = "p5-blackapes") then
-    {
-      put #var m%checkmodezone 127
-      put #var m%checkmodetravel YES
-      put #var m%checkmodetraveldest boar
-      put #var m%checkmodemove NO
-      put #var m%checkmodetargetroom 0
-      put #var m%checkmodefindroom YES
-      put #var m%checkmodefindroomlist 164|165|166|167|168|169|170|171|172|173|174|175|176|177|178|179|180|181|182|183|184|185|186|187|188|189|190|191|192|193|194|195|196|197|198|199|200|201|202|203|204|205|206|207|208|209|210
-      put #var m%checkmodebugoutroom 14
-      put #var m%checkmodenearestportaltown hibarnhvidar
-    }
-  }
-  if $m%checkmodezone > -1 then
-  else put #var m%checkmodezone 0 
-  if !matchre("$m%checkmodetravel", "\b(YES|NO)\b") then
-  {
-    if matchre("$mtreturntravel", "\b(YES|NO)\b") then put #var m%checkmodetravel $mtreturntravel
-    else put #var m%checkmodetravel NO
-  }
-  if !def(m%checkmodetraveldest) then
-  {
-    if def(mtreturntraveldest) then put #var m%checkmodetraveldest $mtreturntraveldest
-    else put #var m%checkmodetraveldest boar
-  }
-  if !matchre("$m%checkmodemove", "\b(YES|NO)\b") then
-  {
-    if matchre("$mtreturnmove", "\b(YES|NO)\b") then put #var m%checkmodemove $mtreturnmove
-    else put #var m%checkmodemove NO
-  }
-  if !def(m%checkmodemovelist) then put #var m%checkmodemovelist 14|start
-  if ($m%checkmodetargetroom > -1) then 
-  else put #var m%checkmodetargetroom 0
+  if !matchre("$huntingarea", "%combatpresetlist") then put #var huntingarea none
+  if !matchre("$upkeeptown", "\b(%townpresetlist)\b") then put #var upkeeptown crossing
+  if !matchre("$burgletown", "\b(%townpresetlist)\b") then put #var burgletown crossing
+  if !matchre("$pawntown", "\b(%townpresetlist)\b") then put #var pawntown crossing
+  if !matchre("$performtown", "\b(%townpresetlist)\b") then put #var performtown crossing
+  if !matchre("$forgingtown", "\b(%townpresetlist)\b") then put #var forgingtown crossing
   
-  if !matchre("$m%checkmodefindroom", "\b(YES|NO)\b") then put #var m%checkmodefindroom NO
-  if !def(m%checkmodefindroomlist) then put #var m%checkmodefindroomlist 300|301|302|303|304|305
-  if !def(m%checkmodefrwhitelist) then put #var m%checkmodefrwhitelist Saragos|Navesi
-  if !def(m%checkmodefrblacklist) then put #var m%checkmodefrblacklist Zehira|Agalea
-  if !matchre("$m%checkmodefrprefergroup", "\b(YES|NO)\b") then put #var m%checkmodefrprefergroup NO
-  
-  if !matchre("$m%checkmodepremiumring", "\b(YES|NO)\b") then put #var m%checkmodepremiumring NO
-  if !def(m%checkmodepremiumringitem) then put #var m%checkmodepremiumringitem band
-  if !matchre("$m%checkmodenearestportaltown", "\b(%townportalpresetlist)\b") then put #var m%checkmodenearestportaltown none
-  
-  if !def(m%checkmodeupkeeptown) then
-  {
-    if def(m%checkmodeupkeeppreset) then
-    {
-      put #var m%checkmodeupkeeptown $m%checkmodeupkeeppreset
-    }
-  }
-  if !matchre("$m%checkmodeupkeeptown", "\b(%townpresetlist)\b") then put #var m%checkmodeupkeeptown crossing
-  
-  if !matchre("$m%checkmodevaulttown", "\b(%townvaultpresetlist)\b") then put #var m%checkmodevaulttown crossing
-  if !matchre("$m%checkmodeammobuytown", "\b(%ammopresetlist)\b") then put #var m%checkmodeammobuytown crossing
-  if !matchre("$m%checkmodelockpickbuytown", "\b(%lockpickpresetlist)\b") then put #var m%checkmodelockpickbuytown crossing
-  if !matchre("$m%checkmodeburgletown", "\b(%burgletownlist)\b") then put #var m%checkmodeburgletown crossing
-  if !matchre("$m%checkmodepawntown", "\b(%pawntownlist)\b") then put #var m%checkmodepawntown crossing
-  if !matchre("$m%checkmodeperformtown", "\b(%performtownlist)\b") then put #var m%checkmodeperformtown crossing
-  if !matchre("$m%checkmodeforgingtown", "\b(%forgingtownlist)\b") then put #var m%checkmodeforgingtown crossing
+  if !matchre("$vaulttown", "\b(%townvaultpresetlist)\b") then put #var vaulttown crossing
+  if !matchre("$ammobuytown", "\b(%ammopresetlist)\b") then put #var ammobuytown crossing
+  if !matchre("$lockpickbuytown", "\b(%lockpickpresetlist)\b") then put #var lockpickbuytown crossing
   
   #UPKEEP
-  if !matchre("$m%checkmodeautoupkeep", "\b(YES|NO)\b") then put #var m%checkmodeautoupkeep NO
-  if !matchre("$m%checkmodeauonhealth", "\b(YES|NO)\b") then put #var m%checkmodeauonhealth NO
-  if $m%checkmodeauhealthnum >= 0 then
-  else put #var m%checkmodeauhealthnum 80
-  if !matchre("$m%checkmodeauonbleed", "\b(YES|NO)\b") then put #var m%checkmodeauonbleed YES
-  if !matchre("$m%checkmodeauonpoison", "\b(YES|NO)\b") then put #var m%checkmodeauonpoison YES
-  if !matchre("$m%checkmodeauonfire", "\b(YES|NO)\b") then put #var m%checkmodeauonfire YES
-  if !matchre("$m%checkmodeauonnerves", "\b(YES|NO)\b") then put #var m%checkmodeauonnerves YES
-  if !matchre("$m%checkmodeauonburden", "\b(YES|NO)\b") then put #var m%checkmodeauonburden NO
-  if $m%checkmodeauburdennum >= 0 then
-  else put #var m%checkmodeauburdennum 3
-  if !matchre("$m%checkmodeauonammo", "\b(YES|NO)\b") then put #var m%checkmodeauonammo NO
-  if !matchre("$m%checkmodeauonboxes", "\b(YES|NO)\b") then put #var m%checkmodeauonboxes NO
-  if $m%checkmodeminmoney >= 0 then
-  else put #var m%checkmodeminmoney 0
-  if !matchre("$m%checkmodeexchange", "\b(YES|NO)\b") then put #var m%checkmodeexchange NO
-  if !def(m%checkmodeautopath) then
-  {
-    if (("$m%checkmodepremiumheal" = "YES") && ("$m%checkmodenonpremheal" = "YES")) then put #var m%checkmodeautopath YES
-    if (("$m%checkmodepremiumheal" = "YES") && ("$m%checkmodenonpremheal" = "NO")) then put #var m%checkmodeautopath PREMIUM
-    if (("$m%checkmodepremiumheal" = "NO") && ("$m%checkmodenonpremheal" = "YES")) then put #var m%checkmodeautopath YES
-    if (("$m%checkmodepremiumheal" = "NO") && ("$m%checkmodenonpremheal" = "NO")) then put #var m%checkmodeautopath YES
-  }
-  if !matchre("$m%checkmodeautopath", "\b(YES|NO|PREMIUM)\b") then put #var m%checkmodeautopath YES
-  if !matchre("$m%checkmoderepair", "\b(YES|NO)\b") then put #var m%checkmoderepair NO
-  if !matchre("$m%checkmodebundlesell", "\b(YES|NO)\b") then put #var m%checkmodebundlesell NO
-  if !matchre("$m%checkmodebundlevault", "\b(YES|NO)\b") then put #var m%checkmodebundlevault NO
-  if (($m%checkmodebundlevault = "YES") && ($m%checkmodebundlesell = "YES")) then put #var m%checkmodebundlesell NO
-  if !matchre("$m%checkmodevaultmove", "\b(YES|NO)\b") then put #var m%checkmodevaultmove NO
-  if $m%checkmodebundlerope >= 0 then
-  else put #var m%checkmodebundlerope 0
-  if !matchre("$m%checkmodegemsell", "\b(YES|NO)\b") then put #var m%checkmodegemsell NO
-  if !matchre("$m%checkmodegemvault", "\b(YES|NO)\b") then put #var m%checkmodegemvault NO
-  if $m%checkmodegempouches >= 0 then
-  else put #var m%checkmodegempouches 0
-  if !matchre("$m%checkmodenuggetsell", "\b(YES|NO)\b") then put #var m%checkmodenuggetsell YES
-  if !matchre("$m%checkmodebarsell", "\b(YES|NO)\b") then put #var m%checkmodebarsell YES
-  if !matchre("$m%checkmodeammobuy", "\b(YES|NO)\b") then put #var m%checkmodeammobuy NO
-  if !def(m%checkmodeammobuylist) then put #var m%checkmodeammobuylist bow|xbow|sling
-  if !def(m%checkmodeammocontainer) then put #var m%checkmodeammocontainer backpack
-  if $m%checkmodeammomin >= 0 then
-  else put #var m%checkmodeammomin 100
-  if !matchre("$m%checkmodelockpickbuy", "\b(YES|NO)\b") then put #var m%checkmodelockpickbuy NO
-  if !def(m%checkmodelockpickstacker) then put #var m%checkmodelockpickstacker lockpick ring
-  if !def(m%checkmodelockpickitem) then put #var m%checkmodelockpickitem stout lockpick
-  if !matchre("$m%checkmodeboxpopping", "\b(YES|NO)\b") then put #var m%checkmodeboxpopping NO
-  if !matchre("$m%checkmodedismantletype", "\b(none|bash|bunny|caravan|chomp|claw|crush|fire|focus|jump|pray|press|roar|salvage|shriek|slam|slip|stomp|thump|tinker|whistle)\b") then put #var m%checkmodedismantletype none
-  if !matchre("$m%checkmodeboxpopbuff", "\b(none|drum|hol|mt)\b") then put #var m%checkmodeboxpopbuff none
-  if $m%checkmodeboxpopbuffprepmana >= 0 then
-  else put #var m%checkmodeboxpopbuffprepmana 1
-  if $m%checkmodeboxpopbuffaddmana >= 0 then
-  else put #var m%checkmodeboxpopbuffaddmana 0
-  
-  
-  if !matchre("$m%checkmodeappfocus", "\b(YES|NO)\b") then put #var m%checkmodeappfocus NO
-  if !def(m%checkmodeappfocusitem) then put #var m%checkmodeappfocusitem shark
-  if !matchre("$m%checkmodespiderfeed", "\b(YES|NO)\b") then put #var m%checkmodespiderfeed NO
-  if $m%checkmodeincense >= 0 then
-  else put #var m%checkmodeincense 0
+  if !matchre("$autoupkeep", "\b(YES|NO)\b") then put #var autoupkeep YES
+  if !matchre("$auonhealth", "\b(YES|NO)\b") then put #var auonhealth YES
+  if $auhealthnum >= 0 then
+  else put #var auhealthnum 70
+  if !matchre("$auonbleed", "\b(YES|NO)\b") then put #var auonbleed YES
+  if !matchre("$auonpoison", "\b(YES|NO)\b") then put #var auonpoison YES
+  if !matchre("$auonfire", "\b(YES|NO)\b") then put #var auonfire YES
+  if !matchre("$auonnerves", "\b(YES|NO)\b") then put #var auonnerves YES
+  if !matchre("$auonburden", "\b(YES|NO)\b") then put #var auonburden YES
+  if $auburdennum >= 0 then
+  else put #var auburdennum 3
+  if !matchre("$auonammo", "\b(YES|NO)\b") then put #var auonammo NO
+  if !matchre("$auonboxes", "\b(YES|NO)\b") then put #var auonboxes NO
+  if $minmoney >= 0 then
+  else put #var minmoney 2
+  if !matchre("$exchange", "\b(YES|NO)\b") then put #var exchange YES
+  if !matchre("$autopath", "\b(YES|NO|PREMIUM)\b") then put #var autopath YES
+  if !matchre("$repair", "\b(YES|NO)\b") then put #var repair YES
+  if !matchre("$bundlesell", "\b(YES|NO)\b") then put #var bundlesell YES
+  if !matchre("$bundlevault", "\b(YES|NO)\b") then put #var bundlevault NO
+  if (($bundlevault = "YES") && ($bundlesell = "YES")) then put #var bundlesell NO
+  if !matchre("$vaultmove", "\b(YES|NO)\b") then put #var vaultmove NO
+  if $bundlerope >= 0 then
+  else put #var bundlerope 3
+  if !matchre("$gemsell", "\b(YES|NO)\b") then put #var gemsell NO
+  if !matchre("$gemvault", "\b(YES|NO)\b") then put #var gemvault YES
+  if $gempouches >= 0 then
+  else put #var gempouches 5
+  if !matchre("$nuggetsell", "\b(YES|NO)\b") then put #var nuggetsell YES
+  if !matchre("$barsell", "\b(YES|NO)\b") then put #var barsell YES
+  if !matchre("$ammobuy", "\b(YES|NO)\b") then put #var ammobuy NO
+  if !def(ammobuylist) then put #var ammobuylist bow|xbow|sling
+  if !def(ammocontainer) then put #var ammocontainer backpack
+  if $ammomin >= 0 then
+  else put #var ammomin 100
+  if !matchre("$lockpickbuy", "\b(YES|NO)\b") then put #var lockpickbuy NO
+  if !def(lockpickstacker) then put #var lockpickstacker lockpick ring
+  if !def(lockpickitem) then put #var lockpickitem stout lockpick
+  if !matchre("$boxpopping", "\b(YES|NO)\b") then put #var boxpopping NO
+  if !matchre("$skeletonkey", "\b(YES|NO)\b") then put #var skeletonkey NO
+  if !def(bucketitem) then put #var bucketitem none
+  if !matchre("$dismantletype", "\b(none|bash|bunny|caravan|chomp|claw|crush|fire|focus|jump|pray|press|roar|salvage|shriek|slam|slip|stomp|thump|tinker|whistle)\b") then put #var dismantletype none
+  if !matchre("$boxpopbuff", "\b(none|drum|hol|mt)\b") then put #var boxpopbuff none
+  if $boxpopbuffprepmana >= 0 then
+  else put #var boxpopbuffprepmana 1
+  if $boxpopbuffaddmana >= 0 then
+  else put #var boxpopbuffaddmana 0
+  if !matchre("$appfocus", "\b(YES|NO)\b") then put #var appfocus NO
+  if !def(appfocusitem) then put #var appfocusitem shark
+  if !matchre("$spiderfeed", "\b(YES|NO)\b") then put #var spiderfeed NO
+  if $incense >= 0 then
+  else put #var incense 0
 
   #LOOT
-  if !def(m%checkmodestorage) then put #var m%checkmodestorage backpack
-  if !matchre("$m%checkmodelootalerts", "\b(YES|NO)\b") then put #var m%checkmodelootalerts YES
-  if !matchre("$m%checkmodeloottype", "\b(treasure|boxes|equipment|goods|all)\b") then put #var m%checkmodeloottype treasure
-  if !matchre("$m%checkmodelootalldead", "\b(YES|NO)\b") then put #var m%checkmodelootalldead NO
-  if !matchre("$m%checkmodecollectcoin", "\b(YES|NO)\b") then put #var m%checkmodecollectcoin YES
-  if !matchre("$m%checkmodecollectscroll", "\b(YES|NO)\b") then put #var m%checkmodecollectscroll YES
-  if !matchre("$m%checkmodecollectmaps", "\b(YES|NO)\b") then put #var m%checkmodecollectmaps YES
-  if !matchre("$m%checkmodecollectnuggets", "\b(YES|NO)\b") then put #var m%checkmodecollectnuggets YES
-  if !matchre("$m%checkmodecollectbars", "\b(YES|NO)\b") then put #var m%checkmodecollectbars YES
-  if !matchre("$m%checkmodecollectmaterials", "\b(YES|NO)\b") then put #var m%checkmodecollectmaterials YES
-  if !matchre("$m%checkmodecollectgem", "\b(YES|NO)\b") then put #var m%checkmodecollectgem YES
-  if !matchre("$m%checkmodesavegwethstones", "\b(YES|NO)\b") then put #var m%checkmodesavegwethstones NO
-  if !matchre("$m%checkmodecollectboxes", "\b(YES|NO)\b") then put #var m%checkmodecollectboxes NO
-  if !matchre("$m%checkmodeboxstorage", "\b(YES|NO)\b") then put #var m%checkmodeboxstorage portal
-  if !def(m%checkmodemisckeeplist) then put #var m%checkmodemisckeeplist none
+  if !def(storage) then put #var storage backpack
+  if !matchre("$boxstorage", "\b(YES|NO)\b") then put #var boxstorage portal
+  if !matchre("$lootalerts", "\b(YES|NO)\b") then put #var lootalerts YES
+  if !matchre("$lootalldead", "\b(YES|NO)\b") then put #var lootalldead NO
+  if !matchre("$collectcoin", "\b(YES|NO)\b") then put #var collectcoin YES
+  if !matchre("$collectscroll", "\b(YES|NO)\b") then put #var collectscroll YES
+  if !matchre("$collectmaps", "\b(YES|NO)\b") then put #var collectmaps YES
+  if !matchre("$collectnuggets", "\b(YES|NO)\b") then put #var collectnuggets YES
+  if !matchre("$collectbars", "\b(YES|NO)\b") then put #var collectbars YES
+  if !matchre("$collectmaterials", "\b(YES|NO)\b") then put #var collectmaterials YES
+  if !matchre("$collectgem", "\b(YES|NO)\b") then put #var collectgem YES
+  if !matchre("$savegwethstones", "\b(YES|NO)\b") then put #var savegwethstones NO
+  if !matchre("$collectboxes", "\b(YES|NO)\b") then put #var collectboxes YES
+  if !def(misckeeplist) then put #var misckeeplist none
+  if !matchre("$skinafterlock", "\b(YES|NO)\b") then put #var skinafterlock YES
+  if !matchre("$dropskins", "\b(YES|NO)\b") then put #var dropskins NO
 
-  if !matchre("$m%checkmodeskinning", "\b(YES|NO)\b") then put #var m%checkmodeskinning YES
-  if !matchre("$m%checkmodearrange", "\b(0|1|2|3|4|5)\b") then put #var m%checkmodearrange 0
-  if !matchre("$m%checkmodearrangeforpart", "\b(YES|NO)\b") then put #var m%checkmodearrangeforpart NO
-  if !matchre("$m%checkmodeskinafterlock", "\b(YES|NO)\b") then put #var m%checkmodeskinafterlock YES
-  if !matchre("$m%checkmodedropskins", "\b(YES|NO)\b") then put #var m%checkmodedropskins NO
-  if !matchre("$m%checkmodedissect", "\b(YES|NO)\b") then put #var m%checkmodedissect NO
+  if !matchre("$loottype", "\b(treasure|boxes|equipment|goods|all)\b") then put #var loottype treasure
+  if !matchre("$skinning", "\b(YES|NO|AUTO)\b") then put #var skinning YES
+  if !matchre("$arrange", "\b(0|1|2|3|4|5)\b") then put #var arrange 0
+  if !matchre("$arrangeforpart", "\b(YES|NO)\b") then put #var arrangeforpart NO
+  if !matchre("$dissect", "\b(YES|NO)\b") then put #var dissect YES
+
+  if !matchre("$loottypem2", "\b(treasure|boxes|equipment|goods|all)\b") then put #var loottypem2 treasure
+  if !matchre("$skinningm2", "\b(YES|NO|AUTO)\b") then put #var skinningm2 YES
+  if !matchre("$arrangem2", "\b(0|1|2|3|4|5)\b") then put #var arrangem2 0
+  if !matchre("$arrangeforpartm2", "\b(YES|NO)\b") then put #var arrangeforpartm2 NO
+  if !matchre("$dissectm2", "\b(YES|NO)\b") then put #var dissectm2 YES
+
 
   #COMBAT
-  if !matchre("$m%checkmodeweapons", "\b(YES|NO)\b") then put #var m%checkmodeweapons YES
-  #if !def(m%checkmodestanceset) then put #var m%checkmodestanceset custom
-  if !def(m%checkmodestancemain) then
+  if !matchre("$weapons", "\b(YES|NO)\b") then put #var weapons YES
+  if !matchre("$weaponsm2", "\b(YES|NO)\b") then put #var weaponsm2 YES
+  if (!def(weaponlist)) then put #var weaponlist se|le|the|sb|lb|thb|stave|pole|brawl|lt|ht|bow|xbow|sling
+  if (def(weaponlist)) then
   {
-    if !def(m%checkmodestanceset) then put #var m%checkmodestancemain custom
-    else put #var m%checkmodestancemain $m%checkmodestanceset
+    gosub WEAPONLISTCHECK $weaponlist
+    if (%weaponlistcheckresult = 0) then put #var weaponlist se|le|the|sb|lb|thb|stave|pole|brawl|lt|ht|bow|xbow|sling
   }
-  if !matchre("$m%checkmodelowestfirst", "\b(YES|NO)\b") then put #var m%checkmodelowestfirst YES
-  if (($m%checkmodeweaponnum >= 1) && ($m%checkmodeweaponnum <= 14)) then
-  else put #var m%checkmodeweaponnum 14
-  if !matchre("$m%checkmodekillafterlock", "\b(YES|NO)\b") then put #var m%checkmodekillafterlock NO
-  if !matchre("$m%checkmodeweapon1", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon1 SE
-  if !matchre("$m%checkmodeweapon2", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon2 LE
-  if !matchre("$m%checkmodeweapon3", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon3 THE
-  if !matchre("$m%checkmodeweapon4", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon4 SB
-  if !matchre("$m%checkmodeweapon5", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon5 LB
-  if !matchre("$m%checkmodeweapon6", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon6 THB
-  if !matchre("$m%checkmodeweapon7", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon7 BOW
-  if !matchre("$m%checkmodeweapon8", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon8 XBOW
-  if !matchre("$m%checkmodeweapon9", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon9 SLING
-  if !matchre("$m%checkmodeweapon10", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon10 LT
-  if !matchre("$m%checkmodeweapon11", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon11 HT
-  if !matchre("$m%checkmodeweapon12", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon12 STAVE
-  if !matchre("$m%checkmodeweapon13", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon13 POLE
-  if !matchre("$m%checkmodeweapon14", "\b(SE|LE|THE|SB|LB|THB|BOW|XBOW|SLING|LT|HT|STAVE|POLE|BRAWL)\b") then put #var m%checkmodeweapon14 BRAWL
-  if !matchre("$m%checkmodeoffhand", "\b(YES|NO)\b") then put #var m%checkmodeoffhand YES
-  if !matchre("$m%checkmodeacms", "\b(YES|NO)\b") then put #var m%checkmodeacms NO
+  if (!def(weaponlistm2)) then put #var weaponlistm2 se|le|the|sb|lb|thb|stave|pole|brawl|lt|ht|bow|xbow|sling
+  if (def(weaponlistm2)) then
+  {
+    gosub WEAPONLISTCHECK $weaponlistm2
+    if (%weaponlistcheckresult = 0) then put #var weaponlistm2 se|le|the|sb|lb|thb|stave|pole|brawl|lt|ht|bow|xbow|sling
+  }
+
   
-  if !def(m%checkmodeseweapon) then put #var m%checkmodeseweapon scimitar
-  if !matchre("$m%checkmodeseoffhand", "\b(YES|NO)\b") then put #var m%checkmodeseoffhand YES
-  if !matchre("$m%checkmodesecombo", "\b(slice|puncture)\b") then put #var m%checkmodesecombo slice
-  if !def(m%checkmodeleweapon) then put #var m%checkmodeleweapon broadsword
-  if !matchre("$m%checkmodeleoffhand", "\b(YES|NO)\b") then put #var m%checkmodeleoffhand NO
-  if !def(m%checkmodetheweapon) then put #var m%checkmodetheweapon claymore
-  if !def(m%checkmodesbweapon) then put #var m%checkmodesbweapon mace
-  if !matchre("$m%checkmodesboffhand", "\b(YES|NO)\b") then put #var m%checkmodesboffhand YES
-  if !def(m%checkmodelbweapon) then put #var m%checkmodelbweapon hammer
-  if !matchre("$m%checkmodelboffhand", "\b(YES|NO)\b") then put #var m%checkmodelboffhand NO
-  if !def(m%checkmodethbweapon) then put #var m%checkmodethbweapon maul
-  if !def(m%checkmodestaveweapon) then put #var m%checkmodestaveweapon nightstick
-  if !matchre("$m%checkmodestaveoffhand", "\b(YES|NO)\b") then put #var m%checkmodestaveoffhand NO
-  if !matchre("$m%checkmodestaveworn", "\b(YES|NO)\b") then put #var m%checkmodestaveworn NO
-  if !matchre("$m%checkmodestavetied", "\b(YES|NO)\b") then put #var m%checkmodestavetied NO
-  if !def(m%checkmodepoleweapon) then put #var m%checkmodepoleweapon spear
-  if !matchre("$m%checkmodepoleworn", "\b(YES|NO)\b") then put #var m%checkmodepoleworn NO
-  if !matchre("$m%checkmodepoletied", "\b(YES|NO)\b") then put #var m%checkmodepoletied NO
-  if !matchre("$m%checkmodepolecombo", "\b(slice|puncture)\b") then put #var m%checkmodepolecombo puncture
-  if $m%checkmodebastardsworditem = "$bastardsworditem" then put #var m%checkmodebastardsworditem bastard sword
-  if !def(m%checkmodebastardsworditem) then put #var m%checkmodebastardsworditem bastard sword
-  if $m%checkmodebarmaceitem = "$barmaceitem" then put #var m%checkmodebarmaceitem bar mace
-  if !def(m%checkmodebarmaceitem) then put #var m%checkmodebarmaceitem bar mace
-  if $m%checkmodeholyiconitem = "$holyiconitem" then put #var m%checkmodeholyiconitem icon
-  if !def(m%checkmodeholyiconitem) then put #var m%checkmodeholyiconitem icon
-  if $m%checkmoderisteitem = "$risteitem" then put #var m%checkmoderisteitem darkstone riste
-  if !def(m%checkmoderisteitem) then put #var m%checkmoderisteitem darkstone riste
-  if $m%checkmodehhristeitem = "$hhristeitem" then put #var m%checkmodehhristeitem half-handled riste
-  if !def(m%checkmodehhristeitem) then put #var m%checkmodehhristeitem half-handled riste
-  if !def(m%checkmodeltweapon) then put #var m%checkmodeltweapon bola
-  if !matchre("$m%checkmodeltoffhand", "\b(YES|NO)\b") then put #var m%checkmodeltoffhand NO
-  if !matchre("$m%checkmodeltbond", "\b(YES|NO)\b") then put #var m%checkmodeltbond NO
-  if !matchre("$m%checkmodeltverb", "\b(lob|throw|hurl)\b") then put #var m%checkmodeltverb lob
-  if !def(m%checkmodehtweapon) then put #var m%checkmodehtweapon spear
-  if !matchre("$m%checkmodehtoffhand", "\b(YES|NO)\b") then put #var m%checkmodehtoffhand NO
-  if !matchre("$m%checkmodehtbond", "\b(YES|NO|SPECIAL)\b") then put #var m%checkmodehtbond NO
-  if !matchre("$m%checkmodehtverb", "\b(lob|throw|hurl)\b") then put #var m%checkmodehtverb lob
-  if !def(m%checkmodexbowweapon) then put #var m%checkmodexbowweapon crossbow
-  if !def(m%checkmodexbowammo) then put #var m%checkmodexbowammo crossbow bolt
-  if !matchre("$m%checkmodexbowworn", "\b(YES|NO)\b") then put #var m%checkmodexbowworn NO
-  if !def(m%checkmodebowweapon) then put #var m%checkmodebowweapon bow
-  if !def(m%checkmodebowammo) then put #var m%checkmodebowammo boar-tusk arrow
-  if !matchre("$m%checkmodebowworn", "\b(YES|NO)\b") then put #var m%checkmodebowworn NO
-  if !def(m%checkmodeslingweapon) then put #var m%checkmodeslingweapon sling
-  if !def(m%checkmodeslingammo) then put #var m%checkmodeslingammo small rock
-  if !matchre("$m%checkmodecollectammo", "\b(YES|NO)\b") then put #var m%checkmodecollectammo YES
-  if !matchre("$m%checkmodeplatring", "\b(YES|NO)\b") then put #var m%checkmodeplatring NO
-  if !def(m%checkmodeplatringitem) then put #var m%checkmodeplatringitem scimitar
-  if !matchre("$m%checkmodearmorcheck", "\b(YES|NO)\b") then put #var m%checkmodearmorcheck NO
-  if !def(m%checkmodeshielditem) then put #var m%checkmodeshielditem round sipar
-  if !def(m%checkmodeparrystickitem) then put #var m%checkmodeparrystickitem parry stick
-  if !matchre("$m%checkmodearmornum", "\b(1|2|3|4|5|6)\b") then put #var m%checkmodearmornum 4
-  if !def(m%checkmodearmor1item) then put #var m%checkmodearmor1item quilted hauberk
-  if !def(m%checkmodearmor2item) then put #var m%checkmodearmor2item scale gloves
-  if !def(m%checkmodearmor3item) then put #var m%checkmodearmor3item ring helm
-  if !def(m%checkmodearmor4item) then put #var m%checkmodearmor4item plate mask
-  if !def(m%checkmodearmor5item) then put #var m%checkmodearmor5item none
-  if !def(m%checkmodearmor6item) then put #var m%checkmodearmor6item none
-  if !def(m%checkmodeknucklesitem) then put #var m%checkmodeknucklesitem knuckles
+  if (!def(stancemain)) then put #var stancemain custom
+  if !matchre("$lowestfirst", "\b(YES|NO)\b") then put #var lowestfirst YES
+  if !matchre("$killafterlock", "\b(YES|NO)\b") then put #var killafterlock YES  
+  if !matchre("$offhand", "\b(YES|NO)\b") then put #var offhand YES
+  if !matchre("$acms", "\b(YES|NO)\b") then put #var acms YES
+  if !def(seweapon) then put #var seweapon scimitar
+  if !matchre("$seoffhand", "\b(YES|NO)\b") then put #var seoffhand YES
+  if !matchre("$secombo", "\b(slice|puncture)\b") then put #var secombo slice
+  if !def(leweapon) then put #var leweapon broadsword
+  if !matchre("$leoffhand", "\b(YES|NO)\b") then put #var leoffhand NO
+  if !def(theweapon) then put #var theweapon claymore
+  if !def(sbweapon) then put #var sbweapon mace
+  if !matchre("$sboffhand", "\b(YES|NO)\b") then put #var sboffhand YES
+  if !def(lbweapon) then put #var lbweapon hammer
+  if !matchre("$lboffhand", "\b(YES|NO)\b") then put #var lboffhand NO
+  if !def(thbweapon) then put #var thbweapon maul
+  if !def(staveweapon) then put #var staveweapon nightstick
+  if !matchre("$staveoffhand", "\b(YES|NO)\b") then put #var staveoffhand NO
+  if !matchre("$staveworn", "\b(YES|NO)\b") then put #var staveworn NO
+  if !matchre("$stavetied", "\b(YES|NO)\b") then put #var stavetied NO
+  if !def(poleweapon) then put #var poleweapon spear
+  if !matchre("$poleworn", "\b(YES|NO)\b") then put #var poleworn NO
+  if !matchre("$poletied", "\b(YES|NO)\b") then put #var poletied NO
+  if !matchre("$polecombo", "\b(slice|puncture)\b") then put #var polecombo puncture
+  if !def(bastardsworditem) then put #var bastardsworditem bastard sword
+  if !def(barmaceitem) then put #var barmaceitem bar mace
+  if !def(holyiconitem) then put #var holyiconitem icon
+  if !def(risteitem) then put #var risteitem darkstone riste
+  if !def(hhristeitem) then put #var hhristeitem half-handled riste
+  if !def(ltweapon) then put #var ltweapon bola
+  if !matchre("$ltoffhand", "\b(YES|NO)\b") then put #var ltoffhand NO
+  if !matchre("$ltbond", "\b(YES|NO)\b") then put #var ltbond NO
+  if !matchre("$ltverb", "\b(lob|throw|hurl)\b") then put #var ltverb lob
+  if !def(htweapon) then put #var htweapon spear
+  if !matchre("$htoffhand", "\b(YES|NO)\b") then put #var htoffhand NO
+  if !matchre("$htbond", "\b(YES|NO|SPECIAL)\b") then put #var htbond NO
+  if !matchre("$htverb", "\b(lob|throw|hurl)\b") then put #var htverb lob
+  if !def(xbowweapon) then put #var xbowweapon crossbow
+  if !def(xbowammo) then put #var xbowammo crossbow bolt
+  if !matchre("$xbowworn", "\b(YES|NO)\b") then put #var xbowworn NO
+  if !def(bowweapon) then put #var bowweapon bow
+  if !def(bowammo) then put #var bowammo boar-tusk arrow
+  if !matchre("$bowworn", "\b(YES|NO)\b") then put #var bowworn NO
+  if !def(slingweapon) then put #var slingweapon sling
+  if !def(slingammo) then put #var slingammo small rock
+  if !matchre("$collectammo", "\b(YES|NO)\b") then put #var collectammo YES
+  if !matchre("$armorcheck", "\b(YES|NO)\b") then put #var armorcheck NO
+  if !def(shielditem) then put #var shielditem round sipar
+  if !def(parrystickitem) then put #var parrystickitem parry stick
+  if !matchre("$armornum", "\b(1|2|3|4|5|6)\b") then put #var armornum 4
+  if !def(armor1item) then put #var armor1item quilted hauberk
+  if !def(armor2item) then put #var armor2item scale gloves
+  if !def(armor3item) then put #var armor3item ring helm
+  if !def(armor4item) then put #var armor4item plate mask
+  if !def(armor5item) then put #var armor5item none
+  if !def(armor6item) then put #var armor6item none
+  if !def(knucklesitem) then put #var knucklesitem knuckles
+  if !matchre("$attune", "\b(YES|NO)\b") then put #var attune YES
+  if !matchre("$recall", "\b(YES|NO)\b") then put #var recall YES
+  if !matchre("$hunting", "\b(YES|NO)\b") then put #var hunting YES
+  if $huntingtimer >=75 then
+  else put #var huntingtimer 75
+  if !matchre("$stealth", "\b(YES|NO)\b") then put #var stealth NO
+  if !matchre("$stealthm2", "\b(YES|NO)\b") then put #var stealthm2 NO
+  if !matchre("$tactics", "\b(YES|NO)\b") then put #var tactics YES
+  if !matchre("$tacticsm2", "\b(YES|NO)\b") then put #var tacticsm2 YES
+  if !matchre("$retreatdelay", "\b(YES|NO)\b") then put #var retreatdelay NO
+  if !matchre("$appraise", "\b(YES|NO)\b") then put #var appraise YES
+  if !matchre("$appraisetarget", "\b(bundle|creature)\b") then put #var appraisetarget creature
+  if $appraisetimer >= 75 then
+  else put #var appraisetimer 75
+  if !matchre("$appsaveitem", "\b(none|tight|lumpy)\b") then put #var appsaveitem none
+  if !def(appsaveitemstorage) then put #var appsaveitemstorage haversack
+  if !matchre("$collect", "\b(YES|NO)\b") then put #var collect YES
+  if $collecttimer >= 0 then
+  else put #var collecttimer 120
+  if !matchre("$collectitem", "\b(rock|bunny)\b") then put #var collectitem rock
+  if !matchre("$teaching", "\b(YES|NO)\b") then put #var teaching NO
+  if !def(teachskill) then put #var teachskill skinning
+  if !def(teachtargets) then put #var teachtargets Saragos|Navesi
   
-  #NONCOMBAT
-  if !matchre("$m%checkmodenoncomdelay", "\b(YES|NO)\b") then put #var m%checkmodenoncomdelay NO
-  if !matchre("$m%checkmodeappraise", "\b(YES|NO)\b") then put #var m%checkmodeappraise YES
-  if !matchre("$m%checkmodeappraisetarget", "\b(bundle|creature)\b") then put #var m%checkmodeappraisetarget creature
-  if $m%checkmodeappraisetimer >= 75 then
-  else put #var m%checkmodeappraisetimer 75
-  if !matchre("$m%checkmodeappsaveitem", "\b(none|tight|lumpy)\b") then put #var m%checkmodeappsaveitem none
-  if !def(m%checkmodeappsaveitemstorage) then put #var m%checkmodeappsaveitemstorage haversack
-  if !matchre("$m%checkmodehunting", "\b(YES|NO)\b") then put #var m%checkmodehunting YES
-  if $m%checkmodehuntingtimer >=75 then
-  else put #var m%checkmodehuntingtimer 75
-  if !matchre("$m%checkmodeoutdoor", "\b(YES|NO)\b") then put #var m%checkmodeoutdoor YES
-  if $m%checkmodeoutdoortimer >= 0 then
-  else put #var m%checkmodeoutdoortimer 90
-  if !matchre("$m%checkmodecollectitem", "\b(rock|bunny)\b") then put #var m%checkmodecollectitem rock
-  if !matchre("$m%checkmodestealth", "\b(YES|NO)\b") then put #var m%checkmodestealth NO
-  if !matchre("$m%checkmodetactics", "\b(YES|NO)\b") then put #var m%checkmodetactics YES
-  if $m%checkmodetacticsweapons = "YESweapons" then put #var m%checkmodetacticsweapons sb|lb|thb|se|le|the|brawl|pole|stave
-  if !def(m%checkmodetacticsweapons) then put #var m%checkmodetacticsweapons sb|lb|thb|se|le|the|brawl|pole|stave
-  if !matchre("$m%checkmoderecall", "\b(YES|NO)\b") then put #var m%checkmoderecall YES
-  if !matchre("$m%checkmodecompendium", "\b(YES|NO)\b") then put #var m%checkmodecompendium NO
-  if $m%checkmodecompendiumtimer >= 0 then
-  else put #var m%checkmodecompendiumtimer 60
-  if !matchre("$m%checkmodetextbook", "\b(YES|NO)\b") then put #var m%checkmodetextbook NO
-  if $m%checkmodetextbooktimer >= 0 then
-  else put #var m%checkmodetextbooktimer 60
-  if !def(m%checkmodetextbookitem) then put #var m%checkmodetextbookitem tome
-  if !def(m%checkmodetextbooklist) then put #var m%checkmodetextbooklist human|elf|elothean
-  if !matchre("$m%checkmodeteaching", "\b(YES|NO)\b") then put #var m%checkmodeteaching NO
-  if !def(m%checkmodeteachskill) then put #var m%checkmodeteachskill skinning
-  if $m%checkmodeteachtargets = "$teachtargets" then put #var m%checkmodeteachtargets Saragos|Navesi
-  if !def(m%checkmodeteachtargets) then put #var m%checkmodeteachtargets Saragos|Navesi
-  if !matchre("$m%checkmodewindboard", "\b(YES|NO)\b") then put #var m%checkmodewindboard NO
-  if $m%checkmodewindboardtimer >= 0 then
-  else put #var m%checkmodewindboardtimer 120
-  if $windboardcharge >= 0 then
-  else put #var windboardcharge 50
-  if !def(m%checkmodewindboardtrick) then put #var m%checkmodewindboardtrick tilt
-  if !matchre("$m%checkmodelocksmithbox", "\b(YES|NO)\b") then put #var m%checkmodelocksmithbox NO
-  if $m%checkmodelocksmithboxtimer >= 0 then
-  else put #var m%checkmodelocksmithboxtimer 120
-  if !def(m%checkmodelocksmithboxitem) then put #var m%checkmodelocksmithboxitem training box
-  if !matchre("$m%checkmodeskinfatrainer", "\b(YES|NO)\b") then put #var m%checkmodeskinfatrainer NO
-  if $m%checkmodeskinfatrainertimer >= 0 then
-  else put #var m%checkmodeskinfatrainertimer 120
-  if !def(m%checkmodeskinfatraineritem) then put #var m%checkmodeskinfatraineritem blue-belly crocodile
-  if !matchre("$m%checkmodeclimbingrope", "\b(YES|NO)\b") then put #var m%checkmodeclimbingrope NO
-  if !def(m%checkmodeclimbingropename) then put #var m%checkmodeclimbingropename rope
-  if !matchre("$m%checkmodeclimbingropehum", "\b(YES|NO)\b") then put #var m%checkmodeclimbingropehum YES
-  if !def(m%checkmodehumsong) then put #var m%checkmodehumsong scales
+  if !matchre("$combatsanowret", "\b(YES|NO)\b") then put #var combatsanowret NO
+  if !def(sanowretitem) then put #var sanowretitem crystal
   
   #NONCOMBAT
-  if !matchre("$m%checkmodenoncombat", "\b(YES|NO)\b") then put #var m%checkmodenoncombat NO
-  if !matchre("$m%checkmodeburgle", "\b(YES|NO)\b") then put #var m%checkmodeburgle NO
-  if !def(m%checkmodeburglestorage) then put #var m%checkmodeburglestorage haversack
-  if !matchre("$m%checkmodeburgletool", "\b(pick|rope|both)\b") then put #var m%checkmodeburgletool both
-  if !def(m%checkmodeburglepickitem) then put #var m%checkmodeburglepickitem lockpick
-  if !matchre("$m%checkmodeburglepickworn", "\b(YES|NO)\b") then put #var m%checkmodeburglepickworn NO
-  if !def(m%checkmodeburgleropeitem) then put #var m%checkmodeburgleropeitem heavy rope
-  if !matchre("$m%checkmodeburglemaxgrabs", "\b(0|1|2|3|4|5|6)\b") then put #var m%checkmodeburglemaxgrabs 6
-  if !matchre("$m%checkmodeburgleloot", "\b(YES|NO)\b") then put #var m%checkmodeburgleloot NO
-  if $m%checkmodeburglekeeplist = "%burglekeeplist" then put #var m%checkmodeburglekeeplist none
-  if !def(m%checkmodeburglekeeplist) then put #var m%checkmodeburglekeeplist none
-  if !matchre("$m%checkmodeburglepawn", "\b(YES|NO)\b") then put #var m%checkmodeburglepawn NO
+  if !matchre("$noncombat", "\b(YES|NO)\b") then put #var noncombat NO
+  if !matchre("$burgle", "\b(YES|NO)\b") then put #var burgle NO
+  if !matchre("$perform", "\b(YES|NO)\b") then put #var perform NO
+  if !matchre("$crafting", "\b(YES|NO)\b") then put #var crafting NO
+  if !matchre("$forging", "\b(YES|NO)\b") then put #var forging NO
+  if !matchre("$outfitting", "\b(YES|NO)\b") then put #var outfitting NO
+  if !matchre("$noncombatm2", "\b(YES|NO)\b") then put #var noncombatm2 NO
+  if !matchre("$burglem2", "\b(YES|NO)\b") then put #var burglem2 NO
+  if !matchre("$performm2", "\b(YES|NO)\b") then put #var performm2 NO
+  if !matchre("$craftingm2", "\b(YES|NO)\b") then put #var craftingm2 NO
+  if !matchre("$forgingm2", "\b(YES|NO)\b") then put #var forgingm2 NO
+  if !matchre("$outfittingm2", "\b(YES|NO)\b") then put #var outfittingm2 NO
+
   
-  if !matchre("$m%checkmodeburglethiefbin", "\b(YES|NO)\b") then put #var m%checkmodeburglethiefbin NO
-  if !matchre("$m%checkmodeburglekhrihasten", "\b(YES|NO)\b") then put #var m%checkmodeburglekhrihasten NO
-  if !matchre("$m%checkmodeburglekhriplunder", "\b(YES|NO)\b") then put #var m%checkmodeburglekhriplunder NO
-  if !matchre("$m%checkmodeburglekhrisilence", "\b(YES|NO)\b") then put #var m%checkmodeburglekhrisilence NO
-  if !matchre("$m%checkmodeburglekhrislight", "\b(YES|NO)\b") then put #var m%checkmodeburglekhrislight NO
+  if !def(burglestorage) then put #var burglestorage haversack
+  if !matchre("$burgletool", "\b(pick|rope|both)\b") then put #var burgletool both
+  if !def(burglepickitem) then put #var burglepickitem lockpick
+  if !matchre("$burglepickworn", "\b(YES|NO)\b") then put #var burglepickworn NO
+  if !def(burgleropeitem) then put #var burgleropeitem heavy rope
+  if !matchre("$burglemaxgrabs", "\b(0|1|2|3|4|5|6)\b") then put #var burglemaxgrabs 6
+  if !matchre("$burgleloot", "\b(YES|NO)\b") then put #var burgleloot NO
+  if $burglekeeplist = "%burglekeeplist" then put #var burglekeeplist none
+  if !def(burglekeeplist) then put #var burglekeeplist none
+  if !matchre("$burglepawn", "\b(YES|NO)\b") then put #var burglepawn NO
   
-  if !matchre("$m%checkmodeboxpopkhrifocus", "\b(YES|NO)\b") then put #var m%checkmodeboxpopkhrifocus NO
-  if !matchre("$m%checkmodeboxpopkhrihasten", "\b(YES|NO)\b") then put #var m%checkmodeboxpopkhrihasten NO
-  if !matchre("$m%checkmodeboxpopkhriplunder", "\b(YES|NO)\b") then put #var m%checkmodeboxpopkhriplunder NO
-  if !matchre("$m%checkmodeboxpopkhrisafe", "\b(YES|NO)\b") then put #var m%checkmodeboxpopkhrisafe NO
-  if !matchre("$m%checkmodeboxpopkhrisight", "\b(YES|NO)\b") then put #var m%checkmodeboxpopkhrisight NO
+  if !matchre("$performcyclic", "\b(YES|NO)\b") then put #var performcyclic NO
+  if ((!def(instrument)) && (def(m1instrument))) then put #var instrument $m1instrument
+  if !def(instrument) then put #var instrument zills
+  if !matchre("$instrumentworn", "\b(YES|NO)\b") then put #var instrumentworn NO
+  if (($instrumenthands >= 1) && ($instrumenthands < 3)) then
+  else put #var instrumenthands 2
+  if !matchre("$instruments", "\b(YES|NO)\b") then put #var instrumentassess YES
+  if !matchre("$instclean", "\b(YES|NO)\b") then put #var instclean YES
+  if !def(instcleancloth) then put #var instcleancloth cloth
+  if ((!def(songtype)) && (def(m1songtype))) then put #var songtype $m1songtype
+  if !def(songtype) then put #var songtype scales
+  if !matchre("$climbingrope", "\b(YES|NO)\b") then put #var climbingrope NO
+  if !def(climbingropename) then put #var climbingropename rope
+  if !matchre("$climbingropehum", "\b(YES|NO)\b") then put #var climbingropehum YES
+  if !def(humsong) then put #var humsong scales
+  if !matchre("$noncomsanowret", "\b(YES|NO)\b") then put #var noncomsanowret YES
   
-  if !matchre("$m%checkmodeburglerf", "\b(YES|NO)\b") then put #var m%checkmodeburglerf NO
-  if $m%checkmodeburglerfdelay >= 0 then
-  else put #var m%checkmodeburglerfdelay 10 
-  if !matchre("$m%checkmodeburgleeotb", "\b(YES|NO)\b") then put #var m%checkmodeburgleeotb NO
-  if $m%checkmodeburgleeotbdelay >= 0 then
-  else put #var m%checkmodeburgleeotbdelay 10
-  
-  if !matchre("$m%checkmodeperform", "\b(YES|NO)\b") then put #var m%checkmodeperform NO
-  if !matchre("$m%checkmodeperformcyclic", "\b(YES|NO)\b") then put #var m%checkmodeperformcyclic NO
-  if !def(m%checkmodeinstrument) then put #var m%checkmodeinstrument zills
-  if !matchre("$m%checkmodeinstrumentworn", "\b(YES|NO)\b") then put #var m%checkmodeinstrumentworn NO
-  if (($m%checkmodeinstrumenthands >= 1) && ($m%checkmodeinstrumenthands < 3)) then
-  else put #var m%checkmodeinstrumenthands 2
-  if !matchre("$m%checkmodeinstruments", "\b(YES|NO)\b") then put #var m%checkmodeinstrumentassess YES
-  if !matchre("$m%checkmodeinstclean", "\b(YES|NO)\b") then put #var m%checkmodeinstclean NO
-  if !def(m%checkmodeinstcleancloth) then put #var m%checkmodeinstcleancloth cloth
-  if !def(m%checkmodesongtype) then put #var m%checkmodesongtype scales
-  
-  if !matchre("$m%checkmodecrafting", "\b(YES|NO)\b") then put #var m%checkmodecrafting NO
-  if !def(m%checkmodecraftingstorage) then put #var m%checkmodecraftingstorage crafting satchel
-  if !matchre("$m%checkmodecraftingstoragelocation", "\b(none|portal|vault)\b") then put #var m%checkmodecraftingstoragelocation none
-  if !matchre("$m%checkmodeforging", "\b(YES|NO)\b") then put #var m%checkmodeforging NO
-  if !matchre("$m%checkmodeforgingdifficulty", "\b(easy|challenging|hard)\b") then put #var m%checkmodeforgingdifficulty challenging
-  if !matchre("$m%checkmodeforgingdiscipline", "\b(weaponsmithing|armorsmithing|blacksmithing)\b") then put #var m%checkmodeforgingdiscipline weaponsmithing
-  if !def(m%checkmodeforgingmaterial) then put #var m%checkmodeforgingmaterial bronze
-  if !matchre("$m%checkmodeforgingrepair", "\b(YES|NO)\b") then put #var m%checkmodeforgingrepair YES
-  if !matchre("$m%checkmodeforgingprivateroom", "\b(YES|NO)\b") then put #var m%checkmodeforgingprivateroom NO
-  if $m%checkmodeforgingmaxvolumes >= 0 then
-  else put #var m%checkmodeforgingmaxvolumes 200
-  if $m%checkmodeforgingmaxquantity >= 0 then
-  else put #var m%checkmodeforgingmaxquantity 4
-  if !matchre("$m%checkmodeforgingsmelting", "\b(YES|NO)\b") then put #var m%checkmodeforgingsmelting YES
-  if !matchre("$m%checkmodeoutfitting", "\b(YES|NO)\b") then put #var m%checkmodeoutfitting NO
-  if !matchre("$m%checkmodeoutfittingdifficulty", "\b(easy|challenging|hard)\b") then put #var m%checkmodeoutfittingdifficulty challenging
-  if !def(m%checkmodeoutfittingcloth) then put #var m%checkmodeoutfittingcloth burlap
-  if !def(m%checkmodeoutfittingleather) then put #var m%checkmodeoutfittingleather cougar-pelt
-  if !matchre("$m%checkmodeoutfittingrepair", "\b(YES|NO)\b") then put #var m%checkmodeoutfittingrepair YES
-  if $m%checkmodeoutfittingmaxyards >= 0 then
-  else put #var m%checkmodeoutfittingmaxyards 100
-  if $m%checkmodeoutfittingmaxquantity >= 0 then
-  else put #var m%checkmodeoutfittingmaxquantity 4  
-  if !def(m%checkmodeawl) then put #var m%checkmodeawl awl
-  if !def(m%checkmodebellows) then put #var m%checkmodebellows leather bellows
-  if !def(m%checkmodehammer) then put #var m%checkmodehammer diagonal-peen hammer
-  if !def(m%checkmodeknittingneedles) then put #var m%checkmodeknittingneedles knitting needles
-  if !def(m%checkmodepliers) then put #var m%checkmodepliers pliers
-  if !def(m%checkmodescissors) then put #var m%checkmodescissors scissors
-  if !def(m%checkmodesewingneedles) then put #var m%checkmodesewingneedles sewing needles
-  if !def(m%checkmodeshovel) then put #var m%checkmodeshovel curved shovel
-  if !def(m%checkmodeslickstone) then put #var m%checkmodeslickstone slickstone
-  if !def(m%checkmoderod) then put #var m%checkmoderod stirring rod
-  if !def(m%checkmodetongs) then put #var m%checkmodetongs tongs
-  if !def(m%checkmodeyardstick) then put #var m%checkmodeyardstick yardstick
+  if !def(craftingstorage) then put #var craftingstorage crafting satchel
+  if !matchre("$craftingstoragelocation", "\b(none|portal|vault)\b") then put #var craftingstoragelocation none
+  if !matchre("$forgingdifficulty", "\b(easy|challenging|hard)\b") then put #var forgingdifficulty challenging
+  if !matchre("$forgingdiscipline", "\b(weaponsmithing|armorsmithing|blacksmithing)\b") then put #var forgingdiscipline weaponsmithing
+  if !def(forgingmaterial) then put #var forgingmaterial bronze
+  if !matchre("$forgingrepair", "\b(YES|NO)\b") then put #var forgingrepair YES
+  if !matchre("$forgingprivateroom", "\b(YES|NO)\b") then put #var forgingprivateroom NO
+  if $forgingmaxvolumes >= 0 then
+  else put #var forgingmaxvolumes 200
+  if $forgingmaxquantity >= 0 then
+  else put #var forgingmaxquantity 4
+  if !matchre("$forgingsmelting", "\b(YES|NO)\b") then put #var forgingsmelting YES
+  if !matchre("$outfittingdifficulty", "\b(easy|challenging|hard)\b") then put #var outfittingdifficulty challenging
+  if !def(outfittingcloth) then put #var outfittingcloth burlap
+  if !def(outfittingleather) then put #var outfittingleather cougar-pelt
+  if !matchre("$outfittingrepair", "\b(YES|NO)\b") then put #var outfittingrepair YES
+  if $outfittingmaxyards >= 0 then
+  else put #var outfittingmaxyards 100
+  if $outfittingmaxquantity >= 0 then
+  else put #var outfittingmaxquantity 4
+  if !def(awl) then put #var awl awl
+  if !def(bellows) then put #var bellows leather bellows
+  if !def(hammer) then put #var hammer diagonal-peen hammer
+  if !def(knittingneedles) then put #var knittingneedles knitting needles
+  if !def(pliers) then put #var pliers pliers
+  if !def(scissors) then put #var scissors scissors
+  if !def(sewingneedles) then put #var sewingneedles sewing needles
+  if !def(shovel) then put #var shovel curved shovel
+  if !def(slickstone) then put #var slickstone slickstone
+  if !def(rod) then put #var rod stirring rod
+  if !def(tongs) then put #var tongs tongs
+  if !def(yardstick) then put #var yardstick yardstick
 
   
   #MAGIC
-  if !matchre("$m%checkmodeattune", "\b(YES|NO)\b") then put #var m%checkmodeattune YES
-  if $m%checkmodeminconcentration >= 0 then
-  else put #var m%checkmodeminconcentration 80
-  if $m%checkmodeminmana >= 10 then
-  else put #var m%checkmodeminmana 30
-  if $m%checkmodecastingthrottle >= 0 then
-  else put #var m%checkmodecastingthrottle 1
-  if !matchre("$m%checkmodestraightcast", "\b(YES|NO)\b") then put #var m%checkmodestraightcast NO
-  if !matchre("$m%checkmodeharnessing", "\b(YES|NO)\b") then put #var m%checkmodeharnessing YES
-  if $m%checkmodeharnessmax >= 5 then
-  else put #var m%checkmodeharnessmax 20
-  if !matchre("$m%checkmodecambrinth", "\b(YES|NO)\b") then put #var m%checkmodecambrinth NO
-  if $m%checkmodechargemax >= 5 then
-  else put #var m%checkmodechargemax 20
-  if !matchre("$m%checkmodededicatedcambrinth", "\b(YES|NO)\b") then put #var m%checkmodededicatedcambrinth NO
-  if (($m%checkmodecambitems >= 0) && ($m%checkmodecambitems < 3)) then
-  else put #var m%checkmodecambitems 1
-  if !def(m%checkmodecambitem1) then put #var m%checkmodecambitem1 armband
-  if $m%checkmodecambitem1mana >= 1 then
-  else put #var m%checkmodecambitem1mana 1
-  if !matchre("$m%checkmodecambitem1worn", "\b(YES|NO)\b") then put #var m%checkmodecambitem1worn YES
-  if !def(m%checkmodecambitem2) then put #var m%checkmodecambitem2 armband
-  if $m%checkmodecambitem2mana >= 1 then
-  else put #var m%checkmodecambitem2mana 1
-  if !matchre("$m%checkmodecambitem2worn", "\b(YES|NO)\b") then put #var m%checkmodecambitem2worn YES
-  if !def(m%checkmoderitualfocus) then put #var m%checkmoderitualfocus rod
-  if !matchre("$m%checkmoderitualfocusworn", "\b(YES|NO)\b") then put #var m%checkmoderitualfocusworn NO
-  if !matchre("$m%checkmoderitualfocusstorage", "\b(YES|NO)\b") then put #var m%checkmoderitualfocusstorage NO
-  if !def(m%checkmoderitualfocuscontainer) then put #var m%checkmoderitualfocuscontainer backpack
-  if !matchre("$m%checkmodetmfocus", "\b(YES|NO)\b") then put #var m%checkmodetmfocus NO
-  if !def(m%checkmodetmfocusitem) then put #var m%checkmodetmfocusitem wand
-  if !matchre("$m%checkmodetmfocusstorage", "\b(YES|NO)\b") then put #var m%checkmodetmfocusstorage NO
-  if !matchre("$m%checkmodetmfocusworn", "\b(YES|NO)\b") then put #var m%checkmodetmfocusworn NO
-  if !matchre("$m%checkmodetmdbprior", "\b(YES|NO)\b") then put #var m%checkmodetmdbprior NO
-  if !matchre("$m%checkmodecombatsanowret", "\b(YES|NO)\b") then put #var m%checkmodecombatsanowret NO
-  if !matchre("$m%checkmodenoncomsanowret", "\b(YES|NO)\b") then put #var m%checkmodenoncomsanowret NO
-  if !def(m%checkmodesanowretitem) then put #var m%checkmodesanowretitem crystal
+  if $minconcentration >= 0 then
+  else put #var minconcentration 80
+  if $minmana >= 10 then
+  else put #var minmana 30
+  if !matchre("$straightcast", "\b(YES|NO)\b") then put #var straightcast NO
+  if $difficulty1percent >= 0 then
+  else put #var difficulty1percent 100
+  if $difficulty2percent >= 0 then
+  else put #var difficulty2percent 100
+  if $difficulty3percent >= 0 then
+  else put #var difficulty3percent 100
+  if $difficulty4percent >= 0 then
+  else put #var difficulty4percent 100
+  if $difficulty5percent >= 0 then
+  else put #var difficulty5percent 100
   
-  #BUFFS
-  if !matchre("$m%checkmodebuff", "\b(YES|NO)\b") then put #var m%checkmodebuff NO
-  if $m%checkmodebuffbuffer >= 1 then
-  else put #var m%checkmodebuffbuffer 2
-  if (($m%checkmodebuffnum >= 0) && ($m%checkmodebuffnum <= 16)) then
-  else put #var m%checkmodebuffnum 0
-  if !def(m%checkmodebuff1) then put #var m%checkmodebuff1 maf
-  if $m%checkmodebuff1prepmana >= 0 then
-  else put #var m%checkmodebuff1prepmana 1
-  if $m%checkmodebuff1addmana >= 0 then
-  else put #var m%checkmodebuff1addmana 0
-  if !def(m%checkmodebuff2) then put #var m%checkmodebuff2 maf
-  if $m%checkmodebuff1prepwait > 0 then
-  else put #var m%checkmodebuff1prepwait 0
-  if $m%checkmodebuff2prepmana >= 0 then
-  else put #var m%checkmodebuff2prepmana 1
-  if $m%checkmodebuff2addmana >= 0 then
-  else put #var m%checkmodebuff2addmana 0
-  if $m%checkmodebuff2prepwait > 0 then
-  else put #var m%checkmodebuff2prepwait 0
-  if !def(m%checkmodebuff3) then put #var m%checkmodebuff3 maf
-  if $m%checkmodebuff3prepmana >= 0 then
-  else put #var m%checkmodebuff3prepmana 1
-  if $m%checkmodebuff3addmana >= 0 then
-  else put #var m%checkmodebuff3addmana 0
-  if $m%checkmodebuff3prepwait > 0 then
-  else put #var m%checkmodebuff3prepwait 0
-  if !def(m%checkmodebuff4) then put #var m%checkmodebuff4 maf
-  if $m%checkmodebuff4prepmana >= 0 then
-  else put #var m%checkmodebuff4prepmana 1
-  if $m%checkmodebuff4addmana >= 0 then
-  else put #var m%checkmodebuff4addmana 0
-  if $m%checkmodebuff4prepwait > 0 then
-  else put #var m%checkmodebuff4prepwait 0
-  if !def(m%checkmodebuff5) then put #var m%checkmodebuff5 maf
-  if $m%checkmodebuff5prepmana >= 0 then
-  else put #var m%checkmodebuff5prepmana 1
-  if $m%checkmodebuff5addmana >= 0 then
-  else put #var m%checkmodebuff5addmana 0
-  if $m%checkmodebuff5prepwait > 0 then
-  else put #var m%checkmodebuff5prepwait 0
-  if !def(m%checkmodebuff6) then put #var m%checkmodebuff6 maf
-  if $m%checkmodebuff6prepmana >= 0 then
-  else put #var m%checkmodebuff6prepmana 1
-  if $m%checkmodebuff6addmana >= 0 then
-  else put #var m%checkmodebuff6addmana 0
-  if $m%checkmodebuff6prepwait > 0 then
-  else put #var m%checkmodebuff6prepwait 0
-  if !def(m%checkmodebuff7) then put #var m%checkmodebuff7 maf
-  if $m%checkmodebuff7prepmana >= 0 then
-  else put #var m%checkmodebuff7prepmana 1
-  if $m%checkmodebuff7addmana >= 0 then
-  else put #var m%checkmodebuff7addmana 0
-  if $m%checkmodebuff7prepwait > 0 then
-  else put #var m%checkmodebuff7prepwait 0
-  if !def(m%checkmodebuff8) then put #var m%checkmodebuff8 maf
-  if $m%checkmodebuff8prepmana >= 0 then
-  else put #var m%checkmodebuff8prepmana 1
-  if $m%checkmodebuff8addmana >= 0 then
-  else put #var m%checkmodebuff8addmana 0
-  if $m%checkmodebuff8prepwait > 0 then
-  else put #var m%checkmodebuff8prepwait 0
-  if !def(m%checkmodebuff9) then put #var m%checkmodebuff9 maf
-  if $m%checkmodebuff9prepmana >= 0 then
-  else put #var m%checkmodebuff9prepmana 1
-  if $m%checkmodebuff9addmana >= 0 then
-  else put #var m%checkmodebuff9addmana 0
-  if $m%checkmodebuff9prepwait > 0 then
-  else put #var m%checkmodebuff9prepwait 0
-  if !def(m%checkmodebuff10) then put #var m%checkmodebuff10 maf
-  if $m%checkmodebuff10prepmana >= 0 then
-  else put #var m%checkmodebuff10prepmana 1
-  if $m%checkmodebuff10addmana >= 0 then
-  else put #var m%checkmodebuff10addmana 0
-  if $m%checkmodebuff10prepwait > 0 then
-  else put #var m%checkmodebuff10prepwait 0
-  if !def(m%checkmodebuff11) then put #var m%checkmodebuff11 maf
-  if $m%checkmodebuff11prepmana >= 0 then
-  else put #var m%checkmodebuff11prepmana 1
-  if $m%checkmodebuff11addmana >= 0 then
-  else put #var m%checkmodebuff11addmana 0
-  if $m%checkmodebuff11prepwait > 0 then
-  else put #var m%checkmodebuff11prepwait 0
-  if !def(m%checkmodebuff12) then put #var m%checkmodebuff12 maf
-  if $m%checkmodebuff12prepmana >= 0 then
-  else put #var m%checkmodebuff12prepmana 1
-  if $m%checkmodebuff12addmana >= 0 then
-  else put #var m%checkmodebuff12addmana 0
-  if $m%checkmodebuff12prepwait > 0 then
-  else put #var m%checkmodebuff12prepwait 0
-  if !def(m%checkmodebuff13) then put #var m%checkmodebuff13 maf
-  if $m%checkmodebuff13prepmana >= 0 then
-  else put #var m%checkmodebuff13prepmana 1
-  if $m%checkmodebuff13addmana >= 0 then
-  else put #var m%checkmodebuff13addmana 0
-  if $m%checkmodebuff13prepwait > 0 then
-  else put #var m%checkmodebuff13prepwait 0
-  if !def(m%checkmodebuff14) then put #var m%checkmodebuff14 maf
-  if $m%checkmodebuff14prepmana >= 0 then
-  else put #var m%checkmodebuff14prepmana 1
-  if $m%checkmodebuff14addmana >= 0 then
-  else put #var m%checkmodebuff14addmana 0
-  if $m%checkmodebuff14prepwait > 0 then
-  else put #var m%checkmodebuff14prepwait 0
-  if !def(m%checkmodebuff15) then put #var m%checkmodebuff15 maf
-  if $m%checkmodebuff15prepmana >= 0 then
-  else put #var m%checkmodebuff15prepmana 1
-  if $m%checkmodebuff15addmana >= 0 then
-  else put #var m%checkmodebuff15addmana 0
-  if $m%checkmodebuff15prepwait > 0 then
-  else put #var m%checkmodebuff15prepwait 0
-  if !def(m%checkmodebuff16) then put #var m%checkmodebuff16 maf
-  if $m%checkmodebuff16prepmana >= 0 then
-  else put #var m%checkmodebuff16prepmana 1
-  if $m%checkmodebuff16addmana >= 0 then
-  else put #var m%checkmodebuff16addmana 0
-  if $m%checkmodebuff16prepwait > 0 then
-  else put #var m%checkmodebuff16prepwait 0
-  if !matchre("$m%checkmodesymbiosisbuff", "\b(YES|NO)\b") then put #var m%checkmodesymbiosisbuff NO
-  if !def(m%checkmodesymbiosisspell) then put #var m%checkmodesymbiosisspell ab
-  if $m%checkmodesymbiosisprepmana >= 0 then
-  else put #var m%checkmodesymbiosisprepmana 1
-  if $m%checkmodesymbiosisaddmana >= 0 then
-  else put #var m%checkmodesymbiosisaddmana 0
-  if $m%checkmodesymbiosisprepwait >= 0 then
-  else put #var m%checkmodesymbiosisprepwait 0
-  if !matchre("$m%checkmodetattoobuff", "\b(YES|NO)\b") then put #var m%checkmodetattoobuff NO
-  if !matchre("$m%checkmodetattootype", "\b(runic|heroic)\b") then
+  if !matchre("$harnessing", "\b(YES|NO)\b") then put #var harnessing YES
+  if $harnessmax >= 5 then
+  else put #var harnessmax 20
+  if !matchre("$cambrinth", "\b(YES|NO)\b") then put #var cambrinth NO
+  if !matchre("$dedicatedcambrinth", "\b(YES|NO)\b") then put #var dedicatedcambrinth NO
+  if (($cambitems >= 0) && ($cambitems < 3)) then
+  else put #var cambitems 1
+  if !def(cambitem1) then put #var cambitem1 armband
+  if $cambitem1mana >= 1 then
+  else put #var cambitem1mana 1
+  if !matchre("$cambitem1worn", "\b(YES|NO)\b") then put #var cambitem1worn YES
+  if !def(cambitem2) then put #var cambitem2 armband
+  if $cambitem2mana >= 1 then
+  else put #var cambitem2mana 1
+  if !matchre("$cambitem2worn", "\b(YES|NO)\b") then put #var cambitem2worn YES
+  if !def(ritualfocus) then put #var ritualfocus rod
+  if !matchre("$ritualfocusworn", "\b(YES|NO)\b") then put #var ritualfocusworn NO
+  if !matchre("$ritualfocusstorage", "\b(YES|NO)\b") then put #var ritualfocusstorage NO
+  if !def(ritualfocuscontainer) then put #var ritualfocuscontainer backpack
+  if !matchre("$tmfocus", "\b(YES|NO)\b") then put #var tmfocus NO
+  if !def(tmfocusitem) then put #var tmfocusitem wand
+  if !matchre("$tmfocusstorage", "\b(YES|NO)\b") then put #var tmfocusstorage NO
+  if !matchre("$tmfocusworn", "\b(YES|NO)\b") then put #var tmfocusworn NO
+  if !matchre("$tattoo", "\b(YES|NO)\b") then put #var tattoo NO
+  if !matchre("$tattootype", "\b(runic|heroic)\b") then
   {
     echo changing tattoo type
-    put #var m%checkmodetattootype runic
+    put #var tattootype runic
   }
-  if !def(m%checkmodetattoospell) then put #var m%checkmodetattoospell will
-  if $m%checkmodetattooaddmana >= 0 then
-  else put #var m%checkmodetattooaddmana 0
-  if $m%checkmodetattooprepwait >= 0 then
-  else put #var m%checkmodetattooprepwait 0
-  if !matchre("$m%checkmodewandbuff", "\b(YES|NO)\b") then put #var m%checkmodewandbuff NO
-  if !matchre("$m%checkmodewandbuffnum", "\b(1|2|3|4)\b") then put #var m%checkmodewandbuffnum 1
-  if !def(m%checkmodewandstorage) then put #var m%checkmodewandstorage backpack
+  if !def(tattoospell) then put #var tattoospell none
+  if $tattooprepmana >= 1 then
+  else put #var tattooprepmana 5
+
+#SPELL
+  if !matchre("$spell", "\b(YES|NO)\b") then put #var spell YES
+  if !matchre("$spellnum", "\b(1|2|3|4)\b") then put #var spellnum 3
+  if !matchre("$spellnumm2", "\b(1|2|3|4)\b") then put #var spellnumm2 3
+  if !def(spell1) then put #var spell1 ys
+  if $spell1mana >= 0 then
+  else put #var spell1mana 0
+  if !matchre("$spell1symb", "\b(YES|NO)\b") then put #var spell1symb NO
+  if !def(spell2) then put #var spell2 ab
+  if $spell2mana >= 0 then
+  else put #var spell2mana 0
+  if !matchre("$spell2symb", "\b(YES|NO)\b") then put #var spell2symb NO
+  if !def(spell3) then put #var spell3 maf
+  if $spell3mana >= 0 then
+  else put #var spell3mana 0
+  if !matchre("$spell3symb", "\b(YES|NO)\b") then put #var spell3symb NO
+  if !def(spell4) then put #var spell4 bless
+  if $spell4mana >= 0 then
+  else put #var spell4mana 0
+  if !matchre("$spell4symb", "\b(YES|NO)\b") then put #var spell4symb NO
+  if !matchre("$tmdbprior", "\b(YES|NO)\b") then put #var tmdbprior NO
+  if !matchre("$tm", "\b(YES|NO)\b") then put #var tm NO
+  if !matchre("$tmm2", "\b(YES|NO)\b") then put #var tmm2 NO
+  if !def(spelltm) then put #var spelltm fb
+  if $spelltmmana >= 0 then
+  else put #var spelltmmana 0
+  if !matchre("$debil", "\b(YES|NO)\b") then put #var debil NO
+  if !matchre("$debilm2", "\b(YES|NO)\b") then put #var debilm2 NO
+  if !def(spelldebil) then put #var spelldebil frb
+  if $spelldebilmana >= 0 then
+  else put #var spelldebilmana 0
+  if !matchre("$cyclic", "\b(YES|NO)\b") then put #var cyclic NO
+  if !matchre("$cyclicm2", "\b(YES|NO)\b") then put #var cyclicm2 NO
+  if !matchre("$cyclicbuff", "\b(YES|NO)\b") then put #var cyclicbuff NO
+  if !matchre("$spellcnum", "\b(1|2|3)\b") then put #var spellcnum 1
+  if !matchre("$spellcnumm2", "\b(1|2|3)\b") then put #var spellcnumm2 1
+  if !def(spellc1) then put #var spellc1 ac
+  if $spellc1prepmana >= 1 then
+  else put #var spellc1prepmana 1
+  if !def(spellc2) then put #var spellc2 sov
+  if $spellc2prepmana >= 1 then
+  else put #var spellc2prepmana 1
+  if !def(spellc3) then put #var spellc3 how
+  if $spellc3prepmana >= 1 then
+  else put #var spellc3prepmana 1
+  if !matchre("$cyctm", "\b(YES|NO)\b") then put #var cyctm NO
+  if !matchre("$cyctmm2", "\b(YES|NO)\b") then put #var cyctmm2 NO
+  if !def(spellcyctm) then put #var spellcyctm rim
+  if $spellcyctmmana >= 1 then
+  else put #var spellcyctmmana 1
+  if !matchre("$cycdebil", "\b(YES|NO)\b") then put #var cycdebil NO
+  if !matchre("$cycdebilm2", "\b(YES|NO)\b") then put #var cycdebilm2 NO
+  if !def(spellcycdebil) then put #var spellcycdebil ee
+  if $spellcycdebilmana >= 1 then
+  else put #var spellcycdebilmana 1
+  if !matchre("$buff", "\b(YES|NO)\b") then put #var buff NO
+  if (($buffnum >= 0) && ($buffnum <= 16)) then
+  else put #var buffnum 0
+  if !def(buff1) then put #var buff1 maf
+  if $buff1mana >= 0 then
+  else put #var buff1mana 100
+  if !def(buff2) then put #var buff2 maf
+  if $buff2mana >= 0 then
+  else put #var buff2mana 100
+  if !def(buff3) then put #var buff3 maf
+  if $buff3mana >= 0 then
+  else put #var buff3mana 100
+  if !def(buff4) then put #var buff4 maf
+  if $buff4mana >= 0 then
+  else put #var buff4mana 100
+  if !def(buff5) then put #var buff5 maf
+  if $buff5mana >= 0 then
+  else put #var buff5mana 100
+  if !def(buff6) then put #var buff6 maf
+  if $buff6mana >= 0 then
+  else put #var buff6mana 100
+  if !def(buff7) then put #var buff7 maf
+  if $buff7mana >= 0 then
+  else put #var buff7mana 100
+  if !def(buff8) then put #var buff8 maf
+  if $buff8mana >= 0 then
+  else put #var buff8mana 100
+  if !def(buff9) then put #var buff9 maf
+  if $buff9mana >= 0 then
+  else put #var buff9mana 100
+  if !def(buff10) then put #var buff10 maf
+  if $buff10mana >= 0 then
+  else put #var buff10mana 100
+  if !def(buff11) then put #var buff11 maf
+  if $buff11mana >= 0 then
+  else put #var buff11mana 100
+  if !def(buff12) then put #var buff12 maf
+  if $buff12mana >= 0 then
+  else put #var buff12mana 100
+  if !def(buff13) then put #var buff13 maf
+  if $buff13mana >= 0 then
+  else put #var buff13mana 100
+  if !def(buff14) then put #var buff14 maf
+  if $buff14mana >= 0 then
+  else put #var buff14mana 100
+  if !def(buff15) then put #var buff15 maf
+  if $buff15mana >= 0 then
+  else put #var buff15mana 100
+  if !def(buff16) then put #var buff16 maf
+  if $buff16mana >= 0 then
+  else put #var buff16mana 100
+  if !matchre("$symbiosisbuff", "\b(YES|NO)\b") then put #var symbiosisbuff NO
+  if !def(symbiosisspell) then put #var symbiosisspell ab
+  if $symbiosismana >= 0 then
+  else put #var symbiosismana 100
+  if !matchre("$tattoobuff", "\b(YES|NO)\b") then put #var tattoobuff NO
+  if $tattooaddmana >= 0 then
+  else put #var tattooaddmana 0
+  if !matchre("$wandbuff", "\b(YES|NO)\b") then put #var wandbuff NO
+  if !matchre("$wandbuffnum", "\b(1|2|3|4)\b") then put #var wandbuffnum 1
+  if !def(wandstorage) then put #var wandstorage backpack
+  if !def(wand1spell) then put #var wand1spell mef 
+  if !def(wand1item) then put #var wand1item bloodwood branch
+  if $wand1num > 0 then
+  else put #var wand1num 2
+  if !def(wand2spell) then put #var wand2spell rage
+  if !def(wand2item) then put #var wand2item indurium phoenix
+  if $wand2num > 0 then
+  else put #var wand2num 2
+  if !def(wand3spell) then put #var wand3spell hes
+  if !def(wand3item) then put #var wand3item ironwood wand
+  if $wand3num > 0 then
+  else put #var wand3num 2
+  if !def(wand4spell) then put #var wand4spell will
+  if !def(wand4item) then put #var wand4item crystal
+  if $wand4num > 0 then
+  else put #var wand4num 2
+  if !matchre("$wand1spell", "\b(hes|mef|rage|rw|will|wotp)\b") then put #var wand1spell mef
+  if !matchre("$wand2spell", "\b(hes|mef|rage|rw|will|wotp)\b") then put #var wand2spell rage
+  if !matchre("$wand3spell", "\b(hes|mef|rage|rw|will|wotp)\b") then put #var wand2spell hes
+  if !matchre("$wand4spell", "\b(hes|mef|rage|rw|will|wotp)\b") then put #var wand2spell will
   
-  if !def(m%checkmodewand1spell) then put #var m%checkmodewand1spell rage 
-  if !def(m%checkmodewand1item) then put #var m%checkmodewand1item indurium phoenix
-  if $m%checkmodewand1num > 0 then
-  else put #var m%checkmodewand1num 2
+  if !matchre("$gbuff", "\b(YES|NO)\b") then put #var gbuff NO
+  if (($gbuffnum >= 0) && ($gbuffnum <= 8)) then
+  else put #var gbuffnum 0
+  if !def(gbuff1) then put #var gbuff1 maf
+  if $gbuff1prepmana >= 0 then
+  else put #var gbuff1prepmana 1
+  if $gbuff1addmana >= 0 then
+  else put #var gbuff1addmana 0
+  if !def(gbuff2) then put #var gbuff2 maf
+  if $gbuff2prepmana >= 0 then
+  else put #var gbuff2prepmana 1
+  if $gbuff2addmana >= 0 then
+  else put #var gbuff2addmana 0
+  if !def(gbuff3) then put #var gbuff3 maf
+  if $gbuff3prepmana >= 0 then
+  else put #var gbuff3prepmana 1
+  if $gbuff3addmana >= 0 then
+  else put #var gbuff3addmana 0
+  if !def(gbuff4) then put #var gbuff4 maf
+  if $gbuff4prepmana >= 0 then
+  else put #var gbuff4prepmana 1
+  if $gbuff4addmana >= 0 then
+  else put #var gbuff4addmana 0
+  if !def(gbuff5) then put #var gbuff5 maf
+  if $gbuff5prepmana >= 0 then
+  else put #var gbuff5prepmana 1
+  if $gbuff5addmana >= 0 then
+  else put #var gbuff5addmana 0
+  if !def(gbuff6) then put #var gbuff6 maf
+  if $gbuff6prepmana >= 0 then
+  else put #var gbuff6prepmana 1
+  if $gbuff6addmana >= 0 then
+  else put #var gbuff6addmana 0
+  if !def(gbuff7) then put #var gbuff7 maf
+  if $gbuff7prepmana >= 0 then
+  else put #var gbuff7prepmana 1
+  if $gbuff7addmana >= 0 then
+  else put #var gbuff7addmana 0
+  if !def(gbuff8) then put #var gbuff8 maf
+  if $gbuff8prepmana >= 0 then
+  else put #var gbuff8prepmana 1
+  if $gbuff8addmana >= 0 then
+  else put #var gbuff8addmana 0
   
-  if !def(m%checkmodewand2spell) then put #var m%checkmodewand2spell mef
-  if !def(m%checkmodewand2item) then put #var m%checkmodewand2item bloodwood branch
-  if $m%checkmodewand2num > 0 then
-  else put #var m%checkmodewand2num 2
+  if !matchre("$debilassist", "\b(YES|NO)\b") then put #var debilassist NO
+  if !matchre("$dbanum", "\b(0|1|2|3)\b") then put #var dbanum 0
+  if !def(dbalist) then put #var dbalist xbow|se
+  if !def(dbaspell1) then put #var dbaspell1 anc
+  if $dbaspell1mana > -1 then
+  else put #var dbaspell1mana 0
+  if !def(dbaspell2) then put #var dbaspell2 vertigo
+  if $dbaspell2mana > -1 then
+  else put #var dbaspell2mana 0
+  if !def(dbaspell3) then put #var dbaspell3 tremor
+  if $dbaspell3mana > -1 then
+  else put #var dbaspell3mana 0
   
-  if !def(m%checkmodewand3spell) then put #var m%checkmodewand3spell hes
-  if !def(m%checkmodewand3item) then put #var m%checkmodewand3item ironwood wand
-  if $m%checkmodewand3num > 0 then
-  else put #var m%checkmodewand3num 2
   
   
-  if !def(m%checkmodewand4spell) then put #var m%checkmodewand4spell will
-  if !def(m%checkmodewand4item) then put #var m%checkmodewand4item crystal
-  if $m%checkmodewand4num > 0 then
-  else put #var m%checkmodewand4num 2
-  
-  if !def(m%checkmodewand1next) then put #var m%checkmodewand1next 0
-  if !def(m%checkmodewand2next) then put #var m%checkmodewand2next 0
-  if !matchre("$m%checkmodewand1spell", "\b(hes|mef|rage|rw|will|wotp)\b") then put #var m%checkmodewand1spell mef
-  if !matchre("$m%checkmodewand2spell", "\b(hes|mef|rage|rw|will|wotp)\b") then put #var m%checkmodewand2spell rage
-  if !matchre("$m%checkmodeabuff", "\b(YES|NO)\b") then put #var m%checkmodeabuff NO
-  if (($m%checkmodeabuffnum >= 0) && ($m%checkmodeabuffnum <= 8)) then
-  else put #var m%checkmodeabuffnum 0
-  if !def(m%checkmodeabuff1) then put #var m%checkmodeabuff1 maf
-  if $m%checkmodeabuff1prepmana >= 0 then
-  else put #var m%checkmodeabuff1prepmana 1
-  if $m%checkmodeabuff1addmana >= 0 then
-  else put #var m%checkmodeabuff1addmana 0
-  if !def(m%checkmodeabuff2) then put #var m%checkmodeabuff2 maf
-  if $m%checkmodeabuff2prepmana >= 0 then
-  else put #var m%checkmodeabuff2prepmana 1
-  if $m%checkmodeabuff2addmana >= 0 then
-  else put #var m%checkmodeabuff2addmana 0
-  if !def(m%checkmodeabuff3) then put #var m%checkmodeabuff3 maf
-  if $m%checkmodeabuff3prepmana >= 0 then
-  else put #var m%checkmodeabuff3prepmana 1
-  if $m%checkmodeabuff3addmana >= 0 then
-  else put #var m%checkmodeabuff3addmana 0
-  if !def(m%checkmodeabuff4) then put #var m%checkmodeabuff4 maf
-  if $m%checkmodeabuff4prepmana >= 0 then
-  else put #var m%checkmodeabuff4prepmana 1
-  if $m%checkmodeabuff4addmana >= 0 then
-  else put #var m%checkmodeabuff4addmana 0
-  if !def(m%checkmodeabuff5) then put #var m%checkmodeabuff5 maf
-  if $m%checkmodeabuff5prepmana >= 0 then
-  else put #var m%checkmodeabuff5prepmana 1
-  if $m%checkmodeabuff5addmana >= 0 then
-  else put #var m%checkmodeabuff5addmana 0
-  if !def(m%checkmodeabuff6) then put #var m%checkmodeabuff6 maf
-  if $m%checkmodeabuff6prepmana >= 0 then
-  else put #var m%checkmodeabuff6prepmana 1
-  if $m%checkmodeabuff6addmana >= 0 then
-  else put #var m%checkmodeabuff6addmana 0
-  if !def(m%checkmodeabuff7) then put #var m%checkmodeabuff7 maf
-  if $m%checkmodeabuff7prepmana >= 0 then
-  else put #var m%checkmodeabuff7prepmana 1
-  if $m%checkmodeabuff7addmana >= 0 then
-  else put #var m%checkmodeabuff7addmana 0
-  if !def(m%checkmodeabuff8) then put #var m%checkmodeabuff8 maf
-  if $m%checkmodeabuff8prepmana >= 0 then
-  else put #var m%checkmodeabuff8prepmana 1
-  if $m%checkmodeabuff8addmana >= 0 then
-  else put #var m%checkmodeabuff8addmana 0
-  if !matchre("$m%checkmodegbuff", "\b(YES|NO)\b") then put #var m%checkmodegbuff NO
-  if (($m%checkmodegbuffnum >= 0) && ($m%checkmodegbuffnum <= 8)) then
-  else put #var m%checkmodegbuffnum 0
-  if !def(m%checkmodegbuff1) then put #var m%checkmodegbuff1 maf
-  if $m%checkmodegbuff1prepmana >= 0 then
-  else put #var m%checkmodegbuff1prepmana 1
-  if $m%checkmodegbuff1addmana >= 0 then
-  else put #var m%checkmodegbuff1addmana 0
-  if !def(m%checkmodegbuff2) then put #var m%checkmodegbuff2 maf
-  if $m%checkmodegbuff2prepmana >= 0 then
-  else put #var m%checkmodegbuff2prepmana 1
-  if $m%checkmodegbuff2addmana >= 0 then
-  else put #var m%checkmodegbuff2addmana 0
-  if !def(m%checkmodegbuff3) then put #var m%checkmodegbuff3 maf
-  if $m%checkmodegbuff3prepmana >= 0 then
-  else put #var m%checkmodegbuff3prepmana 1
-  if $m%checkmodegbuff3addmana >= 0 then
-  else put #var m%checkmodegbuff3addmana 0
-  if !def(m%checkmodegbuff4) then put #var m%checkmodegbuff4 maf
-  if $m%checkmodegbuff4prepmana >= 0 then
-  else put #var m%checkmodegbuff4prepmana 1
-  if $m%checkmodegbuff4addmana >= 0 then
-  else put #var m%checkmodegbuff4addmana 0
-  if !def(m%checkmodegbuff5) then put #var m%checkmodegbuff5 maf
-  if $m%checkmodegbuff5prepmana >= 0 then
-  else put #var m%checkmodegbuff5prepmana 1
-  if $m%checkmodegbuff5addmana >= 0 then
-  else put #var m%checkmodegbuff5addmana 0
-  if !def(m%checkmodegbuff6) then put #var m%checkmodegbuff6 maf
-  if $m%checkmodegbuff6prepmana >= 0 then
-  else put #var m%checkmodegbuff6prepmana 1
-  if $m%checkmodegbuff6addmana >= 0 then
-  else put #var m%checkmodegbuff6addmana 0
-  if !def(m%checkmodegbuff7) then put #var m%checkmodegbuff7 maf
-  if $m%checkmodegbuff7prepmana >= 0 then
-  else put #var m%checkmodegbuff7prepmana 1
-  if $m%checkmodegbuff7addmana >= 0 then
-  else put #var m%checkmodegbuff7addmana 0
-  if !def(m%checkmodegbuff8) then put #var m%checkmodegbuff8 maf
-  if $m%checkmodegbuff8prepmana >= 0 then
-  else put #var m%checkmodegbuff8prepmana 1
-  if $m%checkmodegbuff8addmana >= 0 then
-  else put #var m%checkmodegbuff8addmana 0
-  
-  #SPELL
-  if !matchre("$m%checkmodespell", "\b(YES|NO)\b") then put #var m%checkmodespell YES
-  if !matchre("$m%checkmodespellnum", "\b(1|2|3|4)\b") then put #var m%checkmodespellnum 1
-  if !def(m%checkmodespell1) then put #var m%checkmodespell1 ys
-  if !def(m%checkmodeskill1) then put #var m%checkmodeskill1 augmentation
-  if $m%checkmodespell1prepmana >= 0 then
-  else put #var m%checkmodespell1prepmana 1
-  if $m%checkmodespell1addmana >= 0 then
-  else put #var m%checkmodespell1addmana 0
-  if $m%checkmodespell1prepwait > 0 then
-  else put #var m%checkmodespell1prepwait 0
-  if !matchre("$m%checkmodespell1symb", "\b(YES|NO)\b") then put #var m%checkmodespell1symb NO
-  if !matchre("$m%checkmodespell1tattoo", "\b(YES|NO)\b") then put #var m%checkmodespell1tattoo NO
-  if !def(m%checkmodespell2) then put #var m%checkmodespell2 ab
-  if !def(m%checkmodeskill2) then put #var m%checkmodeskill2 utility
-  if $m%checkmodespell2prepmana >= 0 then
-  else put #var m%checkmodespell2prepmana 2
-  if $m%checkmodespell2addmana >= 0 then
-  else put #var m%checkmodespell2addmana 0
-  if $m%checkmodespell2prepwait > 0 then
-  else put #var m%checkmodespell2prepwait 0
-  if !matchre("$m%checkmodespell2symb", "\b(YES|NO)\b") then put #var m%checkmodespell2symb NO
-  if !matchre("$m%checkmodespell2tattoo", "\b(YES|NO)\b") then put #var m%checkmodespell2tattoo NO
-  if !def(m%checkmodespell3) then put #var m%checkmodespell3 maf
-  if !def(m%checkmodeskill3) then put #var m%checkmodeskill3 warding
-  if $m%checkmodespell3prepmana >= 0 then
-  else put #var m%checkmodespell3prepmana 3
-  if $m%checkmodespell3addmana >= 0 then
-  else put #var m%checkmodespell3addmana 0
-  if $m%checkmodespell3prepwait > 0 then
-  else put #var m%checkmodespell3prepwait 0
-  if !matchre("$m%checkmodespell3symb", "\b(YES|NO)\b") then put #var m%checkmodespell3symb NO
-  if !matchre("$m%checkmodespell3tattoo", "\b(YES|NO)\b") then put #var m%checkmodespell3tattoo NO
-  if !def(m%checkmodespell4) then put #var m%checkmodespell4 bless
-  if !def(m%checkmodeskill4) then put #var m%checkmodeskill4 sorcery
-  if $m%checkmodespell4prepmana >= 0 then
-  else put #var m%checkmodespell4prepmana 4
-  if $m%checkmodespell4addmana >= 0 then
-  else put #var m%checkmodespell4addmana 0
-  if $m%checkmodespell4prepwait > 0 then
-  else put #var m%checkmodespell4prepwait 0
-  if !matchre("$m%checkmodespell4symb", "\b(YES|NO)\b") then put #var m%checkmodespell4symb NO
-  if !matchre("$m%checkmodespell4tattoo", "\b(YES|NO)\b") then put #var m%checkmodespell4tattoo NO
-  if !matchre("$m%checkmodetm", "\b(YES|NO)\b") then put #var m%checkmodetm NO
-  if !matchre("$m%checkmodetmskill", "\b(tm|sorcery)\b") then put #var m%checkmodetmskill tm
-  if !def(m%checkmodespelltm) then put #var m%checkmodespelltm fb
-  if $m%checkmodespelltmprepmana >= 1 then
-  else put #var m%checkmodespelltmprepmana 1
-  if $m%checkmodespelltmaddmana >= 0 then
-  else put #var m%checkmodespelltmaddmana 0
-  if $m%checkmodespelltmprepwait > 0 then
-  else put #var m%checkmodespelltmprepwait 0
-  if !matchre("$m%checkmodespelltmtattoo", "\b(YES|NO)\b") then put #var m%checkmodespelltmtattoo NO
-  if !matchre("$m%checkmodedebil", "\b(YES|NO)\b") then put #var m%checkmodedebil NO
-  if !matchre("$m%checkmodedebilskill", "\b(debil|sorcery)\b") then put #var m%checkmodedebilskill debil
-  if !def(m%checkmodespelldb) then put #var m%checkmodespelldb frb
-  if $m%checkmodespelldbprepmana >= 1 then
-  else put #var m%checkmodespelldbprepmana 1
-  if $m%checkmodespelldbaddmana >= 0 then
-  else put #var m%checkmodespelldbaddmana 0
-  if $m%checkmodespelldbprepwait > 0 then
-  else put #var m%checkmodespelldbprepwait 0
-  if !matchre("$m%checkmodespelldbtattoo", "\b(YES|NO)\b") then put #var m%checkmodespelldbtattoo NO
-  if !matchre("$m%checkmodecyclic", "\b(YES|NO)\b") then put #var m%checkmodecyclic NO
-  if !matchre("$m%checkmodecyclicbuff", "\b(YES|NO)\b") then put #var m%checkmodecyclicbuff NO
-  if !matchre("$m%checkmodespellcnum", "\b(1|2|3)\b") then put #var m%checkmodespellcnum 1
-  if !def(m%checkmodespellc1) then put #var m%checkmodespellc1 ac
-  if !def(m%checkmodeskillc1) then put #var m%checkmodeskillc1 warding
-  if $m%checkmodespellc1prepmana >= 1 then
-  else put #var m%checkmodespellc1prepmana 1
-  if !def(m%checkmodespellc2) then put #var m%checkmodespellc2 sov
-  if !def(m%checkmodeskillc2) then put #var m%checkmodeskillc2 utility
-  if $m%checkmodespellc2prepmana >= 1 then
-  else put #var m%checkmodespellc2prepmana 1
-  if !def(m%checkmodespellc3) then put #var m%checkmodespellc3 how
-  if !def(m%checkmodeskillc3) then put #var m%checkmodeskillc3 augmentation
-  if $m%checkmodespellc3prepmana >= 1 then
-  else put #var m%checkmodespellc3prepmana 1
-  if !matchre("$m%checkmodecyctm", "\b(YES|NO)\b") then put #var m%checkmodecyctm NO
-  if !def(m%checkmodespellctm) then put #var m%checkmodespellctm rim
-  if $m%checkmodespellctmprepmana >= 1 then
-  else put #var m%checkmodespellctmprepmana 1
-  if !matchre("$m%checkmodecycdebil", "\b(YES|NO)\b") then put #var m%checkmodecycdebil NO
-  if !def(m%checkmodespellcdb) then put #var m%checkmodespellcdb ee
-  if $m%checkmodespellcdbprepmana >= 1 then
-  else put #var m%checkmodespellcdbprepmana 1
-  if !matchre("$m%checkmodedebilassist", "\b(YES|NO)\b") then put #var m%checkmodedebilassist NO
-  if !matchre("$m%checkmodedbanum", "\b(0|1|2|3)\b") then put #var m%checkmodedbanum 0
-  if !def(m%checkmodedbalist) then put #var m%checkmodedbalist xbow|se
-  if !def(m%checkmodedbaspell1) then put #var m%checkmodedbaspell1 anc
-  if $m%checkmodedbaspell1prepmana > -1 then
-  else put #var m%checkmodedbaspell1prepmana 0
-  if $m%checkmodedbaspell1addmana > -1 then
-  else put #var m%checkmodedbaspell1addmana 0
-  if !def(m%checkmodedbaspell2) then put #var m%checkmodedbaspell2 vertigo
-  if $m%checkmodedbaspell2prepmana > -1 then
-  else put #var m%checkmodedbaspell2prepmana 0
-  if $m%checkmodedbaspell2addmana > -1 then
-  else put #var m%checkmodedbaspell2addmana 0
-  if !def(m%checkmodedbaspell3) then put #var m%checkmodedbaspell3 tremor
-  if $m%checkmodedbaspell3prepmana > -1 then
-  else put #var m%checkmodedbaspell3prepmana 0
-  if $m%checkmodedbaspell3addmana > -1 then
-  else put #var m%checkmodedbaspell3addmana 0
-  
-  if !matchre("$m%checkmoderesearch", "\b(YES|NO)\b") then put #var m%checkmoderesearch NO
-  if $m%checkmodegafprepmana >= 5 then
-  else put #var m%checkmodegafprepmana 5
-  if $m%checkmodegafaddmana >= 0 then
-  else put #var m%checkmodegafaddmana 0
-  if !matchre("$m%checkmoderesearchnum", "\b(1|2|3|4|5)\b") then put #var m%checkmoderesearchnum 1
-  #if !matchre("$m%checkmoderesearchtype1", "\b(fundamental|augmentation|stream|sorcery|utility|warding|energy|field|plane|spell)\b") then put #var m%checkmoderesearchtype1 fundamental
-  #if !matchre("$m%checkmoderesearchtype2", "\b(fundamental|augmentation|stream|sorcery|utility|warding|energy|field|plane|spell)\b") then put #var m%checkmoderesearchtype2 fundamental
-  #if !matchre("$m%checkmoderesearchtype3", "\b(fundamental|augmentation|stream|sorcery|utility|warding|energy|field|plane|spell)\b") then put #var m%checkmoderesearchtype3 fundamental
-  #if !matchre("$m%checkmoderesearchtype4", "\b(fundamental|augmentation|stream|sorcery|utility|warding|energy|field|plane|spell)\b") then put #var m%checkmoderesearchtype4 fundamental
-  #if !matchre("$m%checkmoderesearchtype5", "\b(fundamental|augmentation|stream|sorcery|utility|warding|energy|field|plane|spell)\b") then put #var m%checkmoderesearchtype5 fundamental
+  if !matchre("$research", "\b(YES|NO)\b") then put #var research NO
+  if $gafmana >= 5 then
+  else put #var gafmana 100
+  if $gafaddmana >= 0 then
+  else put #var gafaddmana 0
+  if !matchre("$researchnum", "\b(1|2|3|4|5)\b") then put #var researchnum 1
+  #if !matchre("$researchtype1", "\b(fundamental|augmentation|stream|sorcery|utility|warding|energy|field|plane|spell)\b") then put #var researchtype1 fundamental
+  #if !matchre("$researchtype2", "\b(fundamental|augmentation|stream|sorcery|utility|warding|energy|field|plane|spell)\b") then put #var researchtype2 fundamental
+  #if !matchre("$researchtype3", "\b(fundamental|augmentation|stream|sorcery|utility|warding|energy|field|plane|spell)\b") then put #var researchtype3 fundamental
+  #if !matchre("$researchtype4", "\b(fundamental|augmentation|stream|sorcery|utility|warding|energy|field|plane|spell)\b") then put #var researchtype4 fundamental
+  #if !matchre("$researchtype5", "\b(fundamental|augmentation|stream|sorcery|utility|warding|energy|field|plane|spell)\b") then put #var researchtype5 fundamental
   
   
   #GUILD-BARBARIAN
-  if !matchre("$m%checkmodewarhorn", "\b(YES|NO)\b") then put #var m%checkmodewarhorn NO
-  if !def(m%checkmodewarhornitem) then put #var m%checkmodewarhornitem warhorn
-  if !matchre("$m%checkmodeexpertise", "\b(YES|NO)\b") then put #var m%checkmodeexpertise NO
-  if !matchre("$m%checkmodewhirlwind", "\b(YES|NO)\b") then put #var m%checkmodewhirlwind NO
-  if !matchre("$m%checkmodedualload", "\b(YES|NO)\b") then put #var m%checkmodedualload NO
-  if $m%checkmodemininnerfire >= 0 then
-  else put #var m%checkmodemininnerfire 20
-  if !matchre("$m%checkmodeberserkava", "\b(YES|NO)\b") then put #var m%checkmodeberserkava NO
-  if $m%checkmodeavafatigue >= 0 then
-  else put #var m%checkmodeavafatigue 90
-  if !matchre("$m%checkmodeberserkdrought", "\b(YES|NO)\b") then put #var m%checkmodeberserkdrought NO
-  if !matchre("$m%checkmodeberserkfamine", "\b(YES|NO)\b") then put #var m%checkmodeberserkfamine NO
-  if $m%checkmodefaminevit >= 0 then
-  else put #var m%checkmodefaminevit 90
-  if !matchre("$m%checkmodemeditatestaunch", "\b(YES|NO)\b") then put #var m%checkmodemeditatestaunch NO
-  if !matchre("$m%checkmodeexpaccuracy", "\b(YES|NO)\b") then put #var m%checkmodeexpaccuracy NO
-  if !matchre("$m%checkmodeexpdamage", "\b(YES|NO)\b") then put #var m%checkmodeexpdamage NO
-  if !matchre("$m%checkmodeberserkblizzard", "\b(YES|NO)\b") then put #var m%checkmodeberserkblizzard NO
-  if !matchre("$m%checkmodeberserkcyclone", "\b(YES|NO)\b") then put #var m%checkmodeberserkcyclone NO
-  if !matchre("$m%checkmodeberserkearthquake", "\b(YES|NO)\b") then put #var m%checkmodeberserkearthquake NO
-  if !matchre("$m%checkmodeberserkflashflood", "\b(YES|NO)\b") then put #var m%checkmodeberserkflashflood NO
-  if !matchre("$m%checkmodeberserkhurricane", "\b(YES|NO)\b") then put #var m%checkmodeberserkhurricane NO
-  if !matchre("$m%checkmodeberserklandslide", "\b(YES|NO)\b") then put #var m%checkmodeberserklandslide NO
-  if !matchre("$m%checkmodelandslidetraining", "\b(YES|NO)\b") then put #var m%checkmodelandslidetraining NO
-  if !matchre("$m%checkmodeberserktornado", "\b(YES|NO)\b") then put #var m%checkmodeberserktornado NO
-  if !matchre("$m%checkmodetornadotraining", "\b(YES|NO)\b") then put #var m%checkmodetornadotraining NO
-  if !matchre("$m%checkmodeberserktsunami", "\b(YES|NO)\b") then put #var m%checkmodeberserktsunami NO
-  if !matchre("$m%checkmodeberserkvolcano", "\b(YES|NO)\b") then put #var m%checkmodeberserkvolcano NO
-  if !matchre("$m%checkmodeberserkwildfire", "\b(YES|NO)\b") then put #var m%checkmodeberserkwildfire NO
-  if !matchre("$m%checkmodebearform", "\b(YES|NO)\b") then put #var m%checkmodebearform NO
-  if !matchre("$m%checkmodebuffaloform", "\b(YES|NO)\b") then put #var m%checkmodebuffaloform NO
-  if !matchre("$m%checkmodedragonform", "\b(YES|NO)\b") then put #var m%checkmodedragonform NO
-  if !matchre("$m%checkmodeeagleform", "\b(YES|NO)\b") then put #var m%checkmodeeagleform NO
-  if !matchre("$m%checkmodemonkeyform", "\b(YES|NO)\b") then put #var m%checkmodemonkeyform NO
-  if !matchre("$m%checkmodeowlform", "\b(YES|NO)\b") then put #var m%checkmodeowlform NO
-  if !matchre("$m%checkmodepantherform", "\b(YES|NO)\b") then put #var m%checkmodepantherform NO
-  if !matchre("$m%checkmodepiranhaform", "\b(YES|NO)\b") then put #var m%checkmodepiranhaform NO
-  if !matchre("$m%checkmodepythonform", "\b(YES|NO)\b") then put #var m%checkmodepythonform NO
-  if !matchre("$m%checkmodewolverineform", "\b(YES|NO)\b") then put #var m%checkmodewolverineform NO
-  if !matchre("$m%checkmodemeditatebastion", "\b(YES|NO)\b") then put #var m%checkmodemeditatebastion NO
-  if !matchre("$m%checkmodemeditatecontemplation", "\b(YES|NO)\b") then put #var m%checkmodemeditatecontemplation NO
-  if !matchre("$m%checkmodemeditateserenity", "\b(YES|NO)\b") then put #var m%checkmodemeditateserenity NO
-  if !matchre("$m%checkmodemeditatetenacity", "\b(YES|NO)\b") then put #var m%checkmodemeditatetenacity NO
-  if !matchre("$m%checkmoderoaranger", "\b(YES|NO)\b") then put #var m%checkmoderoaranger NO
-  if !matchre("$m%checkmoderoarembrace", "\b(YES|NO)\b") then put #var m%checkmoderoarembrace NO
-  if !matchre("$m%checkmoderoarkuniyo", "\b(YES|NO)\b") then put #var m%checkmoderoarkuniyo NO
-  if !matchre("$m%checkmoderoarrage", "\b(YES|NO)\b") then put #var m%checkmoderoarrage NO
-  if !matchre("$m%checkmoderoarscreech", "\b(YES|NO)\b") then put #var m%checkmoderoarscreech NO
-  if !matchre("$m%checkmoderoarshriek", "\b(YES|NO)\b") then put #var m%checkmoderoarshriek NO
-  if !matchre("$m%checkmoderoarwail", "\b(YES|NO)\b") then put #var m%checkmoderoarwail NO
+  if !matchre("$expertise", "\b(YES|NO)\b") then put #var expertise NO
+  if !matchre("$expaccuracy", "\b(YES|NO)\b") then put #var expaccuracy NO
+  if !matchre("$expdamage", "\b(YES|NO)\b") then put #var expdamage NO
+  if !matchre("$whirlwind", "\b(YES|NO)\b") then put #var whirlwind NO
+  if !matchre("$dualload", "\b(YES|NO)\b") then put #var dualload NO
+  if !matchre("$warhorn", "\b(YES|NO)\b") then put #var warhorn NO
+  if !def(warhornitem) then put #var warhornitem warhorn
+  
+  if $mininnerfire >= 0 then
+  else put #var mininnerfire 20
+  if !matchre("$berserkava", "\b(YES|NO)\b") then put #var berserkava NO
+  if $avafatigue >= 0 then
+  else put #var avafatigue 90
+  if !matchre("$berserkfamine", "\b(YES|NO)\b") then put #var berserkfamine NO
+  if $faminevit >= 0 then
+  else put #var faminevit 90
+  if !matchre("$meditatestaunch", "\b(YES|NO)\b") then put #var meditatestaunch NO
+  
+  if !matchre("$berserkblizzard", "\b(YES|NO)\b") then put #var berserkblizzard NO
+  if !matchre("$berserkcyclone", "\b(YES|NO)\b") then put #var berserkcyclone NO
+  if !matchre("$berserkdrought", "\b(YES|NO)\b") then put #var berserkdrought NO
+  if !matchre("$berserkearthquake", "\b(YES|NO)\b") then put #var berserkearthquake NO
+  if !matchre("$berserkflashflood", "\b(YES|NO)\b") then put #var berserkflashflood NO
+  if !matchre("$berserkhurricane", "\b(YES|NO)\b") then put #var berserkhurricane NO
+  if !matchre("$berserklandslide", "\b(YES|NO)\b") then put #var berserklandslide NO
+  if !matchre("$landslidetraining", "\b(YES|NO)\b") then put #var landslidetraining NO
+  if !matchre("$berserktornado", "\b(YES|NO)\b") then put #var berserktornado NO
+  if !matchre("$tornadotraining", "\b(YES|NO)\b") then put #var tornadotraining NO
+  if !matchre("$berserktsunami", "\b(YES|NO)\b") then put #var berserktsunami NO
+  if !matchre("$berserkvolcano", "\b(YES|NO)\b") then put #var berserkvolcano NO
+  if !matchre("$berserkwildfire", "\b(YES|NO)\b") then put #var berserkwildfire NO
+  if !matchre("$bearform", "\b(YES|NO)\b") then put #var bearform NO
+  if !matchre("$buffaloform", "\b(YES|NO)\b") then put #var buffaloform NO
+  if !matchre("$dragonform", "\b(YES|NO)\b") then put #var dragonform NO
+  if !matchre("$eagleform", "\b(YES|NO)\b") then put #var eagleform NO
+  if !matchre("$monkeyform", "\b(YES|NO)\b") then put #var monkeyform NO
+  if !matchre("$owlform", "\b(YES|NO)\b") then put #var owlform NO
+  if !matchre("$pantherform", "\b(YES|NO)\b") then put #var pantherform NO
+  if !matchre("$piranhaform", "\b(YES|NO)\b") then put #var piranhaform NO
+  if !matchre("$pythonform", "\b(YES|NO)\b") then put #var pythonform NO
+  if !matchre("$wolverineform", "\b(YES|NO)\b") then put #var wolverineform NO
+  if !matchre("$meditatebastion", "\b(YES|NO)\b") then put #var meditatebastion NO
+  if !matchre("$meditatecontemplation", "\b(YES|NO)\b") then put #var meditatecontemplation NO
+  if !matchre("$meditateserenity", "\b(YES|NO)\b") then put #var meditateserenity NO
+  if !matchre("$meditatetenacity", "\b(YES|NO)\b") then put #var meditatetenacity NO
+  if !matchre("$roaranger", "\b(YES|NO)\b") then put #var roaranger NO
+  if !matchre("$roarembrace", "\b(YES|NO)\b") then put #var roarembrace NO
+  if !matchre("$roarkuniyo", "\b(YES|NO)\b") then put #var roarkuniyo NO
+  if !matchre("$roarrage", "\b(YES|NO)\b") then put #var roarrage NO
+  if !matchre("$roarscreech", "\b(YES|NO)\b") then put #var roarscreech NO
+  if !matchre("$roarshriek", "\b(YES|NO)\b") then put #var roarshriek NO
+  if !matchre("$roarwail", "\b(YES|NO)\b") then put #var roarwail NO
+  
   
   #GUILD-BARD
-  if !matchre("$m%checkmodewhistlepiercing", "\b(YES|NO)\b") then put #var m%checkmodewhistlepiercing NO
-  if !matchre("$m%checkmodeeilliescry", "\b(YES|NO)\b") then put #var m%checkmodeeilliescry NO
-  if $m%checkmodeeilliescryprepmana >= 1 then
-  else put #var m%checkmodeeilliescryprepmana 1
-  if $m%checkmodeeilliescryaddmana >= 0 then
-  else put #var m%checkmodeeilliescryaddmana 0
-  if !matchre("$m%checkmodemisdirection", "\b(YES|NO)\b") then put #var m%checkmodemisdirection NO
-  if $m%checkmodemisdirectionprepmana >= 10 then
-  else put #var m%checkmodemisdirectionprepmana 10
-  if $m%checkmodemisdirectionaddmana >= 0 then
-  else put #var m%checkmodemisdirectionaddmana 0
+  if !matchre("$whistlepiercing", "\b(YES|NO)\b") then put #var whistlepiercing NO
+  if !matchre("$movewhistle", "\b(YES|NO)\b") then put #var movewhistle NO
+  if !matchre("$movescream", "\b(YES|NO)\b") then put #var movescream NO
+  if !matchre("$eilliescry", "\b(YES|NO)\b") then put #var eilliescry NO
+  if $eilliescrymana >= 1 then
+  else put #var eilliescrymana 1
+  if !matchre("$misdirection", "\b(YES|NO)\b") then put #var misdirection NO
+  if $misdirectionmana >= 0 then
+  else put #var misdirectionmana 100
   #GUILD-CLERIC
-  if !matchre("$m%checkmodetheurgy", "\b(YES|NO)\b") then put #var m%checkmodetheurgy NO
-  if !matchre("$m%checkmodepray", "\b(YES|NO)\b") then put #var m%checkmodepray NO
-  if !def(m%checkmodepraydeity) then put #var m%checkmodepraydeity meraud
-  if !matchre("$m%checkmodeanloralpin", "\b(YES|NO)\b") then put #var m%checkmodeanloralpin NO
-  if !def(m%checkmodeanloralpinitem) then put #var m%checkmodeanloralpinitem pin
-  if !matchre("$m%checkmodepilgrimbadge", "\b(YES|NO)\b") then put #var m%checkmodepilgrimbadge NO
-  if !def(m%checkmodepilgrimbadgeitem) then put #var m%checkmodepilgrimbadgeitem badge
-  if !matchre("$m%checkmodemeraudcommune", "\b(YES|NO)\b") then put #var m%checkmodemeraudcommune NO
-  if !matchre("$m%checkmodeelunedcommune", "\b(YES|NO)\b") then put #var m%checkmodeelunedcommune NO
-  if !matchre("$m%checkmodetamsinecommune", "\b(YES|NO)\b") then put #var m%checkmodetamsinecommune NO
-  if $m%checkmodeblessdelay >= 0 then
-  else put #var m%checkmodeblessdelay 2
-  if !matchre("$m%checkmodedirtstacker", "\b(YES|NO)\b") then put #var m%checkmodedirtstacker NO
-  if !def(m%checkmodedirtstackeritem) then put #var m%checkmodedirtstackeritem pouch
-  if !matchre("$m%checkmodelighter", "\b(YES|NO)\b") then put #var m%checkmodelighter NO
-  if !def(m%checkmodelighteritem) then put #var m%checkmodelighteritem dragon
-  if !def(m%checkmodewatercontainer) then put #var m%checkmodewatercontainer chalice
-  if !matchre("$m%checkmoderecite", "\b(YES|NO)\b") then put #var m%checkmoderecite NO
-  if !matchre("$m%checkmodedance", "\b(YES|NO)\b") then put #var m%checkmodedance NO
-  if !matchre("$m%checkmodeprayermat", "\b(YES|NO)\b") then put #var m%checkmodeprayermat NO
-  if !def(m%checkmodeprayermatitem) then put #var m%checkmodeprayermatitem mat
-  if !matchre("$m%checkmodehyhcast", "\b(coz|male|male offense|male defense)\b") then put #var m%checkmodehyhcast male
-  if !matchre("$m%checkmodeosrelmeraud", "\b(YES|NO)\b") then put #var m%checkmodeosrelmeraud NO
-  if $m%checkmodeomprepmana >= 30 then
-  else put #var m%checkmodeomprepmana 30
-  if $m%checkmodeomaddmana >= 0 then
-  else put #var m%checkmodeomaddmana 0
-  if $m%checkmodeombuffnum >= 0 then
-  else put #var m%checkmodeombuffnum 0
+  if !matchre("$theurgy", "\b(YES|NO)\b") then put #var theurgy NO
+  if !matchre("$pray", "\b(YES|NO)\b") then put #var pray NO
+  if !def(praydeity) then put #var praydeity meraud
+  if !matchre("$anloralpin", "\b(YES|NO)\b") then put #var anloralpin NO
+  if !def(anloralpinitem) then put #var anloralpinitem pin
+  if !matchre("$pilgrimbadge", "\b(YES|NO)\b") then put #var pilgrimbadge NO
+  if !def(pilgrimbadgeitem) then put #var pilgrimbadgeitem badge
+  if !matchre("$meraudcommune", "\b(YES|NO)\b") then put #var meraudcommune NO
+  if !matchre("$elunedcommune", "\b(YES|NO)\b") then put #var elunedcommune NO
+  if !matchre("$tamsinecommune", "\b(YES|NO)\b") then put #var tamsinecommune NO
+  if $blessdelay >= 0 then
+  else put #var blessdelay 2
+  if !matchre("$dirtstacker", "\b(YES|NO)\b") then put #var dirtstacker NO
+  if !def(dirtstackeritem) then put #var dirtstackeritem pouch
+  if !matchre("$lighter", "\b(YES|NO)\b") then put #var lighter NO
+  if !def(lighteritem) then put #var lighteritem dragon
+  if !def(watercontainer) then put #var watercontainer chalice
+  if !matchre("$recite", "\b(YES|NO)\b") then put #var recite NO
+  if !matchre("$dance", "\b(YES|NO)\b") then put #var dance NO
+  if !matchre("$prayermat", "\b(YES|NO)\b") then put #var prayermat NO
+  if !def(prayermatitem) then put #var prayermatitem mat
+  if !matchre("$hyhcast", "\b(coz|male|male offense|male defense)\b") then put #var hyhcast male
+  if !matchre("$osrelmeraud", "\b(YES|NO)\b") then put #var osrelmeraud NO
+  if $ommana >= 30 then
+  else put #var ommana 30
+  if $ombuffnum >= 0 then
+  else put #var ombuffnum 0
+  
   #GUILD-EMPATH
-  if !matchre("$m%checkmodeavoidshock", "\b(YES|NO)\b") then put #var m%checkmodeavoidshock NO
-  if !matchre("$m%checkmodeperchealth", "\b(YES|NO)\b") then put #var m%checkmodeperchealth NO
-  if !matchre("$m%checkmodemanipulate", "\b(YES|NO)\b") then put #var m%checkmodemanipulate NO
-  if !matchre("$m%checkmodemanipnum", "\b(1|2)\b") then put #var m%checkmodemanipnum 2
-  if !matchre("$m%checkmodeparalysis", "\b(YES|NO)\b") then put #var m%checkmodeparalysis NO
-  if $m%checkmodeparalysisprepmana >= 10 then
-  else put #var m%checkmodeparalysisprepmana 2
-  if $m%checkmodeparalysisaddmana >= 0 then
-  else put #var m%checkmodeparalysisaddmana 0
-  if !matchre("$m%checkmodevitheal", "\b(YES|NO)\b") then put #var m%checkmodevitheal NO
-  if $m%checkmodevithealprepmana >= 5 then
-  else put #var m%checkmodevithealprepmana 5
-  if $m%checkmodevithealaddmana >= 0 then
-  else put #var m%checkmodevithealaddmana 0
-  if $m%checkmodevithealnum >= 0 then
-  else put #var m%checkmodevithealnum 80
-  if !matchre("$m%checkmodeheal", "\b(YES|NO)\b") then put #var m%checkmodeheal NO
-  if $m%checkmodehealprepmana >= 15 then
-  else put #var m%checkmodehealprepmana 15
-  if $m%checkmodehealaddmana >= 0 then
-  else put #var m%checkmodehealaddmana 0
-  if !matchre("$m%checkmodecuredisease", "\b(YES|NO)\b") then put #var m%checkmodecuredisease NO
-  if $m%checkmodecdprepmana >= 15 then
-  else put #var m%checkmodecdprepmana 15
-  if $m%checkmodecdaddmana >= 0 then
-  else put #var m%checkmodecdaddmana 0
-  if !matchre("$m%checkmodeadcheal", "\b(YES|NO)\b") then put #var m%checkmodeadcheal NO
-  if !matchre("$m%checkmodeadcdisease", "\b(YES|NO)\b") then put #var m%checkmodeadcdisease NO
-  if !matchre("$m%checkmodeadcpoison", "\b(YES|NO)\b") then put #var m%checkmodeadcpoison NO
-  if !matchre("$m%checkmodeabsolution", "\b(YES|NO)\b") then put #var m%checkmodeabsolution NO
-  if $m%checkmodeabsolutionprepmana >= 150 then
-  else put #var m%checkmodeabsolutionprepmana 150
-  if !matchre("$m%checkmodeiztouch", "\b(YES|NO)\b") then put #var m%checkmodeiztouch NO
-  if $m%checkmodeizprepmana >= 0 then
-  else put #var m%checkmodeizprepmana 15
-  if $m%checkmodeiztimer >= 0 then
-  else put #var m%checkmodeiztimer 30
+  if !matchre("$avoidshock", "\b(YES|NO)\b") then put #var avoidshock YES
+  if !matchre("$perchealth", "\b(YES|NO)\b") then put #var perchealth NO
+  if !matchre("$manipulate", "\b(YES|NO)\b") then put #var manipulate NO
+  if !matchre("$manipnum", "\b(1|2)\b") then put #var manipnum 2
+  if !matchre("$paralysis", "\b(YES|NO)\b") then put #var paralysis NO
+  if $paralysismana >= 10 then
+  else put #var paralysismana 2
+  if !matchre("$vitheal", "\b(YES|NO)\b") then put #var vitheal NO
+  if $vithealmana >= 5 then
+  else put #var vithealmana 5
+  if !matchre("$heal", "\b(YES|NO)\b") then put #var heal NO
+  if $healmana >= 15 then
+  else put #var healmana 15
+  if !matchre("$curedisease", "\b(YES|NO)\b") then put #var curedisease NO
+  if $curediseasemana >= 15 then
+  else put #var curediseasemana 15
+  if !matchre("$flushpoisons", "\b(YES|NO)\b") then put #var flushpoisons NO
+  if $flushpoisonsmana >= 15 then
+  else put #var flushpoisonsmana 15
+  if !matchre("$adcheal", "\b(YES|NO)\b") then put #var adcheal NO
+  if !matchre("$adcdisease", "\b(YES|NO)\b") then put #var adcdisease NO
+  if !matchre("$adcpoison", "\b(YES|NO)\b") then put #var adcpoison NO
+  if !matchre("$upkeepregen", "\b(YES|NO)\b") then put #var upkeepregen NO
+  if $upkeepregenmana >= 0 then
+  else put #var upkeepregenmana 5
+  if !matchre("$absolution", "\b(YES|NO)\b") then put #var absolution NO
+  if $absolutionmana >= 150 then
+  else put #var absolutionmana 150
+  if !matchre("$iztouch", "\b(YES|NO)\b") then put #var iztouch NO
+  if $izmana >= 0 then
+  else put #var izmana 15
+  if $iztimer >= 0 then
+  else put #var iztimer 30
   #GUILD-MM
-  if !matchre("$m%checkmodeastro", "\b(YES|NO)\b") then put #var m%checkmodeastro NO
-  if $m%checkmodeastrotimer >= 0 then
-  else put #var m%checkmodeastrotimer 0
-  if !def(m%checkmodetktitem) then put #var m%checkmodetktitem dagger
-  if !def(m%checkmodeshadowlingnoun) then put #var m%checkmodeshadowlingnoun shadowling
-  if !matchre("$m%checkmodepredictiontool", "\b(none|bones|mirror)\b") then put #var m%checkmodepredictiontool none
-  if !def(m%checkmodepredictiontoolitem) then put #var m%checkmodepredictiontoolitem bones
-  if !matchre("$m%checkmodepiercinggaze", "\b(YES|NO)\b") then put #var m%checkmodepiercinggaze YES
-  if $m%checkmodepgprepmana >= 5 then
-  else put #var m%checkmodepgprepmana 5
-  if $m%checkmodepgaddmana >= 0 then
-  else put #var m%checkmodepgaddmana 0
-  if !matchre("$m%checkmodemindshout", "\b(YES|NO)\b") then put #var m%checkmodemindshout NO
-  if $m%checkmodemindshoutprepmana >= 5 then
-  else put #var m%checkmodemindshoutprepmana 20
-  if $m%checkmodemindshoutaddmana >= 0 then
-  else put #var m%checkmodemindshoutaddmana 0
+  if !matchre("$astro", "\b(YES|NO)\b") then put #var astro NO
+  if $astrotimer >= 0 then
+  else put #var astrotimer 0
+  if !def(tktitem) then put #var tktitem dagger
+  if !def(shadowlingnoun) then put #var shadowlingnoun shadowling
+  if !matchre("$predictiontool", "\b(none|bones|mirror)\b") then put #var predictiontool none
+  if !def(predictiontoolitem) then put #var predictiontoolitem bones
+  if !matchre("$piercinggaze", "\b(YES|NO)\b") then put #var piercinggaze YES
+  if $piercinggazemana >= 5 then
+  else put #var piercinggazemana 5
+  if !matchre("$mindshout", "\b(YES|NO)\b") then put #var mindshout NO
+  if $mindshoutmana >= 5 then
+  else put #var mindshoutmana 20
+  if !matchre("$burglerf", "\b(YES|NO)\b") then put #var burglerf NO
+  if $burglerfdelay >= 0 then
+  else put #var burglerfdelay 10 
+  
   #GUILD-NECRO
-  if !matchre("$m%checkmodenecrostate", "\b(unsullied|forsaken|redeemed)\b") then put #var m%checkmodenecrostate unsullied
-  if !matchre("$m%checkmodenecrosafety", "\b(YES|NO)\b") then put #var m%checkmodenecrosafety NO
-  if !def(m%checkmodenecrowhitelist) then put #var m%checkmodenecrowhitelist person1|person2
-  if !matchre("$m%checkmoderiteofgrace", "\b(YES|NO)\b") then put #var m%checkmoderiteofgrace NO
-  if $m%checkmoderogprepmana > 4 then
-  else put #var m%checkmoderogprepmana 5
-  if !matchre("$m%checkmoderogcycle", "\b(YES|NO)\b") then put #var m%checkmoderogcycle NO
-  if !matchre("$m%checkmodedevour", "\b(YES|NO)\b") then put #var m%checkmodedevour NO
-  if $m%checkmodedevourprepmana >= 30 then
-  else put #var m%checkmodedevourprepmana 30
-  if $m%checkmodedevouraddmana >= 0 then
-  else put #var m%checkmodedevouraddmana 0
-  if !matchre("$m%checkmodesiphonvit", "\b(YES|NO)\b") then put #var m%checkmodesiphonvit NO
-  if $m%checkmodesiphonvitprepmana >= 30 then
-  else put #var m%checkmodesiphonvitprepmana 10
-  if $m%checkmodesiphonvitaddmana >= 0 then
-  else put #var m%checkmodesiphonvitaddmana 0
-  if $m%checkmodesiphonvitnum >= 0 then
-  else put #var m%checkmodesiphonvitnum 80
+  if !matchre("$necrostate", "\b(unsullied|forsaken|redeemed)\b") then put #var necrostate unsullied
+  if !matchre("$necrosafety", "\b(YES|NO)\b") then put #var necrosafety NO
+  if !def(necrowhitelist) then put #var necrowhitelist person1|person2
+  if !matchre("$riteofgrace", "\b(YES|NO)\b") then put #var riteofgrace NO
+  if $rogmana > 4 then
+  else put #var rogmana 5
+  if !matchre("$rogcycle", "\b(YES|NO)\b") then put #var rogcycle NO
+  if !matchre("$devour", "\b(YES|NO)\b") then put #var devour NO
+  if $devourmana >= 30 then
+  else put #var devourmana 30
+  if !matchre("$siphonvit", "\b(YES|NO)\b") then put #var siphonvit NO
+  if $siphonvitmana >= 30 then
+  else put #var siphonvitmana 10
+  if $siphonvitnum >= 0 then
+  else put #var siphonvitnum 80
   
-  if !matchre("$m%checkmodepreserve", "\b(YES|NO)\b") then put #var m%checkmodepreserve NO
-  if !matchre("$m%checkmodeharvest", "\b(YES|NO)\b") then put #var m%checkmodeharvest NO
-  if !matchre("$m%checkmodeharveststore", "\b(YES|NO)\b") then put #var m%checkmodeharveststore NO
-  if $m%checkmodeharveststorenum >= 0 then
-  else put #var m%checkmodeharveststorenum 5
-  if !matchre("$m%checkmodeeotbrel", "\b(YES|NO)\b") then put #var m%checkmodeeotbrel NO
-  #GUILD-PALADIN
-  if !matchre("$m%checkmodesmite", "\b(YES|NO)\b") then put #var m%checkmodesmite NO
-  if !matchre("$m%checkmodetithe", "\b(YES|NO)\b") then put #var m%checkmodetithe NO
+  if !matchre("$preserve", "\b(YES|NO)\b") then put #var preserve NO
+  if !matchre("$harvest", "\b(YES|NO)\b") then put #var harvest NO
+  if !matchre("$harveststore", "\b(YES|NO)\b") then put #var harveststore NO
+  if $harveststorenum >= 0 then
+  else put #var harveststorenum 5
+  if !matchre("$eotbrel", "\b(YES|NO)\b") then put #var eotbrel NO
+  if !matchre("$burgleeotb", "\b(YES|NO)\b") then put #var burgleeotb NO
+  if $burgleeotbdelay >= 0 then
+  else put #var burgleeotbdelay 10
+  
+  #GUILD-PALADIN  
+  if !matchre("$smite", "\b(YES|NO)\b") then put #var smite YES
+  if !matchre("$tithe", "\b(YES|NO)\b") then put #var tithe NO
   #GUILD-RANGER
-  if !matchre("$m%checkmodepounce", "\b(YES|NO)\b") then put #var m%checkmodepounce NO
-  if !matchre("$m%checkmoderitstype", "\b(any|low|mid|high)\b") then put #var m%checkmoderitstype mid
+  if !matchre("$pounce", "\b(YES|NO)\b") then put #var pounce YES
+  if !matchre("$ritstype", "\b(any|low|mid|high)\b") then put #var ritstype mid
   #GUILD-THIEF
-  if !matchre("$m%checkmodebackstab", "\b(YES|NO)\b") then put #var m%checkmodebackstab NO
-  if !matchre("$m%checkmodesnipe", "\b(YES|NO)\b") then put #var m%checkmodesnipe NO
-  if (($m%checkmodekhrimax >= 1) && ($m%checkmodekhrimax <= 8)) then
-  else put #var m%checkmodekhrimax 1
-  if !matchre("$m%checkmodekhriadaptation", "\b(YES|NO)\b") then put #var m%checkmodekhriadaptation NO
-  if !matchre("$m%checkmodekhriavoidance", "\b(YES|NO)\b") then put #var m%checkmodekhriavoidance NO
-  if !matchre("$m%checkmodekhricunning", "\b(YES|NO)\b") then put #var m%checkmodekhricunning NO
-  if !matchre("$m%checkmodekhridampen", "\b(YES|NO)\b") then put #var m%checkmodekhridampen NO
-  if !matchre("$m%checkmodekhridarken", "\b(YES|NO)\b") then put #var m%checkmodekhridarken NO
-  if !matchre("$m%checkmodekhrielusion", "\b(YES|NO)\b") then put #var m%checkmodekhrielusion NO
-  if !matchre("$m%checkmodekhriendure", "\b(YES|NO)\b") then put #var m%checkmodekhriendure NO
-  if !matchre("$m%checkmodekhrievanescence", "\b(YES|NO)\b") then put #var m%checkmodekhrievanescence NO
-  if !matchre("$m%checkmodekhriflight", "\b(YES|NO)\b") then put #var m%checkmodekhriflight NO
-  if !matchre("$m%checkmodekhrifright", "\b(YES|NO)\b") then put #var m%checkmodekhrifright NO
-  if !matchre("$m%checkmodekhrifocus", "\b(YES|NO)\b") then put #var m%checkmodekhrifocus NO
-  if !matchre("$m%checkmodekhriharrier", "\b(YES|NO)\b") then put #var m%checkmodekhriharrier NO
-  if !matchre("$m%checkmodekhrihasten", "\b(YES|NO)\b") then put #var m%checkmodekhrihasten NO
-  if !matchre("$m%checkmodekhriinsight", "\b(YES|NO)\b") then put #var m%checkmodekhriinsight NO
-  if !matchre("$m%checkmodekhriplunder", "\b(YES|NO)\b") then put #var m%checkmodekhriplunder NO
-  if !matchre("$m%checkmodekhrisagacity", "\b(YES|NO)\b") then put #var m%checkmodekhrisagacity NO
-  if !matchre("$m%checkmodekhrisensing", "\b(YES|NO)\b") then put #var m%checkmodekhrisensing NO
-  if !matchre("$m%checkmodekhriserenity", "\b(YES|NO)\b") then put #var m%checkmodekhriserenity NO
-  if !matchre("$m%checkmodekhrishadowstep", "\b(YES|NO)\b") then put #var m%checkmodekhrishadowstep NO
-  if !matchre("$m%checkmodekhrisight", "\b(YES|NO)\b") then put #var m%checkmodekhrisight NO
-  if !matchre("$m%checkmodekhristeady", "\b(YES|NO)\b") then put #var m%checkmodekhristeady NO
-  if !matchre("$m%checkmodekhristrike", "\b(YES|NO)\b") then put #var m%checkmodekhristrike NO
-  if !matchre("$m%checkmodekhriguile", "\b(YES|NO)\b") then put #var m%checkmodekhriguile NO
-  if !matchre("$m%checkmodekhriprowess", "\b(YES|NO)\b") then put #var m%checkmodekhriprowess NO
-  if !matchre("$m%checkmodekhriterrify", "\b(YES|NO)\b") then put #var m%checkmodekhriterrify NO
-  if !matchre("$m%checkmodekhridebil", "\b(YES|NO)\b") then put #var m%checkmodekhridebil NO
-  if !matchre("$m%checkmodekhridebiltype", "\b(prowess|guile|credence|terrify|intimidate|eliminate)\b") then put #var m%checkmodekhridebiltype prowess
-  if !matchre("$m%checkmodemovevanish", "\b(YES|NO)\b") then put #var m%checkmodemovevanish NO
+  if !matchre("$backstab", "\b(YES|NO)\b") then put #var backstab NO
+  if !matchre("$snipe", "\b(YES|NO)\b") then put #var snipe NO
+  if (($khrimax >= 1) && ($khrimax <= 8)) then
+  else put #var khrimax 1
+  if !matchre("$khriadaptation", "\b(YES|NO)\b") then put #var khriadaptation NO
+  if !matchre("$khriavoidance", "\b(YES|NO)\b") then put #var khriavoidance NO
+  if !matchre("$khricunning", "\b(YES|NO)\b") then put #var khricunning NO
+  if !matchre("$khridampen", "\b(YES|NO)\b") then put #var khridampen NO
+  if !matchre("$khridarken", "\b(YES|NO)\b") then put #var khridarken NO
+  if !matchre("$khrielusion", "\b(YES|NO)\b") then put #var khrielusion NO
+  if !matchre("$khriendure", "\b(YES|NO)\b") then put #var khriendure NO
+  if !matchre("$khrievanescence", "\b(YES|NO)\b") then put #var khrievanescence NO
+  if !matchre("$khriflight", "\b(YES|NO)\b") then put #var khriflight NO
+  if !matchre("$khrifright", "\b(YES|NO)\b") then put #var khrifright NO
+  if !matchre("$khrifocus", "\b(YES|NO)\b") then put #var khrifocus NO
+  if !matchre("$khriharrier", "\b(YES|NO)\b") then put #var khriharrier NO
+  if !matchre("$khrihasten", "\b(YES|NO)\b") then put #var khrihasten NO
+  if !matchre("$khriinsight", "\b(YES|NO)\b") then put #var khriinsight NO
+  if !matchre("$khriplunder", "\b(YES|NO)\b") then put #var khriplunder NO
+  if !matchre("$khrisagacity", "\b(YES|NO)\b") then put #var khrisagacity NO
+  if !matchre("$khrisensing", "\b(YES|NO)\b") then put #var khrisensing NO
+  if !matchre("$khriserenity", "\b(YES|NO)\b") then put #var khriserenity NO
+  if !matchre("$khrishadowstep", "\b(YES|NO)\b") then put #var khrishadowstep NO
+  if !matchre("$khrisight", "\b(YES|NO)\b") then put #var khrisight NO
+  if !matchre("$khristeady", "\b(YES|NO)\b") then put #var khristeady NO
+  if !matchre("$khristrike", "\b(YES|NO)\b") then put #var khristrike NO
+  if !matchre("$khriguile", "\b(YES|NO)\b") then put #var khriguile NO
+  if !matchre("$khriprowess", "\b(YES|NO)\b") then put #var khriprowess NO
+  if !matchre("$khriterrify", "\b(YES|NO)\b") then put #var khriterrify NO
+  if !matchre("$khridebil", "\b(YES|NO)\b") then put #var khridebil NO
+  if !matchre("$khridebiltype", "\b(prowess|guile|credence|terrify|intimidate|eliminate)\b") then put #var khridebiltype prowess
+  if !matchre("$movevanish", "\b(YES|NO)\b") then put #var movevanish NO
+  if !matchre("$burglethiefbin", "\b(YES|NO)\b") then put #var burglethiefbin NO
+  if !matchre("$burglekhrihasten", "\b(YES|NO)\b") then put #var burglekhrihasten NO
+  if !matchre("$burglekhriplunder", "\b(YES|NO)\b") then put #var burglekhriplunder NO
+  if !matchre("$burglekhrisilence", "\b(YES|NO)\b") then put #var burglekhrisilence NO
+  if !matchre("$burglekhrislight", "\b(YES|NO)\b") then put #var burglekhrislight NO
+  if !matchre("$boxpopkhrifocus", "\b(YES|NO)\b") then put #var boxpopkhrifocus NO
+  if !matchre("$boxpopkhrihasten", "\b(YES|NO)\b") then put #var boxpopkhrihasten NO
+  if !matchre("$boxpopkhriplunder", "\b(YES|NO)\b") then put #var boxpopkhriplunder NO
+  if !matchre("$boxpopkhrisafe", "\b(YES|NO)\b") then put #var boxpopkhrisafe NO
+  if !matchre("$boxpopkhrisight", "\b(YES|NO)\b") then put #var boxpopkhrisight NO
   #GUILD-TRADER
-  if !matchre("$m%checkmodeinvest", "\b(YES|NO)\b") then put #var m%checkmodeinvest NO
-  if !matchre("$m%checkmodetradingsell", "\b(YES|NO)\b") then put #var m%checkmodetradingsell NO
-  if !matchre("$m%checkmodetradingselltown", "\b(%townvaultpresetlist)\b") then put #var m%checkmodetradingselltown none
-  if !matchre("$m%checkmodetradingsellsource", "\b(vault|portal)\b") then put #var m%checkmodetradingsellsource vault
-  if !matchre("$m%checkmodetradingtasks", "\b(YES|NO)\b") then put #var m%checkmodetradingtasks NO
+  if !matchre("$invest", "\b(YES|NO)\b") then put #var invest NO
+  if !matchre("$tradingsell", "\b(YES|NO)\b") then put #var tradingsell NO
+  if !matchre("$tradingselltown", "\b(%townvaultpresetlist)\b") then put #var tradingselltown none
+  if !matchre("$tradingsellsource", "\b(vault|portal)\b") then put #var tradingsellsource vault
+  if !matchre("$tradingtasks", "\b(YES|NO)\b") then put #var tradingtasks NO
   #GUILD-WM
-  if !matchre("$m%checkmodesummoning", "\b(YES|NO)\b") then put #var m%checkmodesummoning NO
-  if !matchre("$m%checkmodesummonweapon", "\b(YES|NO)\b") then put #var m%checkmodesummonweapon NO
-  if $m%checkmodesummonweapontimer >= 0 then
-  else put #var m%checkmodesummonweapontimer 120
-  if !matchre("$m%checkmodepathway", "\b(YES|NO)\b") then put #var m%checkmodepathway NO
-  if !def(m%checkmodepathwaytype) then put #var m%checkmodepathwaytype precise
-  if !matchre("$m%checkmodedomain", "\b(YES|NO)\b") then put #var m%checkmodedomain NO
-  if !matchre("$m%checkmodedomaintype", "\b(fire|air|earth|water|electricity|aether|metal)\b") then put #var m%checkmodedomaintype fire
-  if !matchre("$m%checkmodechargeafterlock", "\b(YES|NO)\b") then put #var m%checkmodechargeafterlock NO
-  if !def(m%checkmodecalspell) then put #var m%checkmodecalspell ab
-  if $m%checkmodecalprepmana >= 1 then
-  else put #var m%checkmodecalprepmana 100
-  if $m%checkmodecaladdmana >= 1 then
-  else put #var m%checkmodecaladdmana 0
-  if !def(m%checkmodeignitebackup) then put #var m%checkmodeignitebackup scimitar
-  
+  if !matchre("$summoning", "\b(YES|NO)\b") then put #var summoning YES
+  if !matchre("$summonweapon", "\b(YES|NO)\b") then put #var summonweapon NO
+  if $summonweapontimer >= 0 then
+  else put #var summonweapontimer 120
+  if !matchre("$pathway", "\b(YES|NO)\b") then put #var pathway NO
+  if !def(pathwaytype) then put #var pathwaytype precise
+  if !matchre("$domain", "\b(YES|NO)\b") then put #var domain NO
+  if !matchre("$domaintype", "\b(fire|air|earth|water|electricity|aether|metal)\b") then put #var domaintype fire
+  if !matchre("$chargeafterlock", "\b(YES|NO)\b") then put #var chargeafterlock NO
+  if !def(calspell) then put #var calspell ab
+  if $calprepmana >= 1 then
+  else put #var calprepmana 100
+  if $caladdmana >= 1 then
+  else put #var caladdmana 0
+  if !def(ignitebackup) then put #var ignitebackup scimitar
+  if !matchre("$platring", "\b(YES|NO)\b") then put #var platring NO
+  if !def(platringitem) then put #var platringitem scimitar
   
   #CONDITIONAL_VARIABLE_SWITCHES
-  if $m%checkmodepremiumring = "YES" then put #var m%checkmodeupkeeptown fangcove
-  if (($m%checkmodebugoutonbleed = "YES") && ($m%checkmodeauonbleed = "YES") && ($m%checkmodeautoupkeep = "YES")) then put #var m%checkmodebugoutonbleed NO
-  if $m%checkmodeharvest = "YES" then put #var m%checkmodepreserve YES
-  if $m%checkmodetmfocus = "YES" then put #var m%checkmodetmdbprior YES
+  if $premiumring = "YES" then put #var upkeeptown fangcove
+  if (($bugoutonbleed = "YES") && ($auonbleed = "YES") && ($autoupkeep = "YES")) then put #var bugoutonbleed NO
+  if $harvest = "YES" then put #var preserve YES
+  if $tmfocus = "YES" then put #var tmdbprior YES
   if %necrostate = "forsaken" then
   {
-    put #var m%checkmodeautopath NO
+    put #var autopath NO
   }
-  if (($m%checkmodenecrosafety = "YES") && ($m%checkmoderiteofgrace = "YES")) then
+  if (($necrosafety = "YES") && ($riteofgrace = "YES")) then
   {
-    put #var m%checkmodecyctm NO
-    put #var m%checkmodecycdebil NO
-    put #var m%checkmodecyclic NO
+    put #var cyctm NO
+    put #var cycdebil NO
+    put #var cyclic NO
   }
   if %iztouch = "YES" then
   {
-    put #var m%checkmodecyclic NO
-    put #var m%checkmodecyctm NO
-    put #var m%checkmodecycdebil NO
+    put #var cyclic NO
+    put #var cyctm NO
+    put #var cycdebil NO
   }
-  if (($m%checkmodetmfocusworn = "YES") && ($m%checkmodetmfocusstorage = "YES")) then put #var m%checkmodetmfocusstorage NO
-  if (($m%checkmoderitualfocusworn = "YES") && ($m%checkmoderitualfocusstorage = "YES")) then put #var m%checkmoderitualfocusstorage NO
-  if (($m%checkmodeexpertise = "YES") && ($m%checkmodeacms = "YES")) then 
+  if (($tmfocusworn = "YES") && ($tmfocusstorage = "YES")) then put #var tmfocusstorage NO
+  if (($ritualfocusworn = "YES") && ($ritualfocusstorage = "YES")) then put #var ritualfocusstorage NO
+  if (($expertise = "YES") && ($acms = "YES")) then 
   {
-    put #var m%checkmodeexpertise NO
-    put #var m%checkmodeexpaccuracy NO
-    put #var m%checkmodeexpdamage NO
+    put #var expertise NO
+    put #var expaccuracy NO
+    put #var expdamage NO
   }
   if (($guild = "Barbarian") || ($guild = "Thief")) then
   {
-    put #var m%checkmodeattune NO
-    put #var m%checkmodespellprepping NO
-    put #var m%checkmodecyclic NO
-    put #var m%checkmodecycdebil NO
-    put #var m%checkmodecyctm NO
-    put #var m%checkmodebuff NO
-    put #var m%checkmodeabuff NO
-    put #var m%checkmodegbuff NO
-    if !def(m%checkmodegbufftarget) then put #var m%checkmodegbufftarget Saragos
+    put #var attune NO
+    put #var spellprepping NO
+    put #var cyclic NO
+    put #var cycdebil NO
+    put #var cyctm NO
+    put #var buff NO
+    #put #var gbuff NO
+    #if !def(gbufftarget) then put #var gbufftarget Saragos
   }
   return
-  
-  
-  
+
+
+WEAPONLISTCHECK:
+  var weaponlistcheckresult 1
+  eval weaponliststring replace("$0", "weaponlist ", "")
+  eval weaponlistcount count("%weaponliststring", "|")
+  eval weaponlistlength length("%weaponlist")
+  #echo weaponliststring %weaponliststring
+  #echo weaponlistcount: %weaponlistcount
+  if (%weaponlistlength < 1) then
+  {
+    var weaponlistcheckresult 0
+    return
+  }
+  var weaponlistcheckcounter 0
+  goto WEAPONLISTCHECKMAIN
+WEAPONLISTCHECKMAIN:
+  if (%weaponlistcheckcounter > %weaponlistcount) then return
+  #echo weaponliststring(%weaponlistcheckcounter): %weaponliststring(%weaponlistcheckcounter)
+  if (!matchre("%weaponliststring(%weaponlistcheckcounter)", "se|le|the|sb|lb|thb|stave|pole|brawl|lt|ht|bow|xbow|sling")) then
+  {
+    var weaponlistcheckresult 0
+    return
+  }
+  math weaponlistcheckcounter add 1
+  goto WEAPONLISTCHECKMAIN
+
   
 VARCHECKOTHER:
   #KILL_SCRIPT_CONDITIONALS
@@ -2400,17 +1047,6 @@ VARCHECKOTHER:
     if $m%checkmodekilltmprepmana < 30 then put #var m%checkmodekilltmprepmana 30
     if $m%checkmodekilltmaddmana > 70 then put #var m%checkmodekilltmaddmana 70 
   }
-  
-  
-  
-  #OTHER-PREPTIMER
-  if !matchre("$fastertargeting", "\b(YES|NO)\b") then put #var fastertargeting NO
-  if !matchre("$fasterbattleprep", "\b(YES|NO)\b") then put #var fasterbattleprep NO
-  if !matchre("$fastermatrices", "\b(YES|NO)\b") then put #var fastermatrices NO
-  if !matchre("$silentprep", "\b(YES|NO)\b") then put #var silentprep NO
-  if !matchre("$hideprep", "\b(YES|NO)\b") then put #var hideprep NO
-  #OTHER-P
-  if !matchre("$pscriptmode", "\b(1|2|3|4)\b") then put #var pscriptmode 1
   
   #OTHER-ASTRAL
   if !matchre("$astralsafe", "\b(YES|NO)\b") then put #var astralsafe YES
@@ -2462,29 +1098,21 @@ VARCHECKOTHER:
   else put #var btnprepmana 30
   if $btnaddmana >= 0 then
   else put #var btnaddmana 0
-  if $btnprepwait >= 0 then
-  else put #var btnprepwait 0
   if !matchre("$dragonsbreath", "\b(YES|NO)\b") then put #var dragonsbreath NO
   if $dbprepmana >= 30 then
   else put #var dbprepmana 15
   if $dbaddmana >= 0 then
   else put #var dbaddmana 0
-  if $dbprepwait >= 0 then
-  else put #var dbprepwait 0
   if !matchre("$blufmorgaraen", "\b(YES|NO)\b") then put #var blufmorgaraen NO
   if $bgprepmana >= 30 then
   else put #var bgprepmana 15
   if $bgaddmana >= 0 then
   else put #var bgaddmana 0
-  if $bgprepwait >= 0 then
-  else put #var bgprepwait 0
   if !matchre("$magneticballista", "\b(YES|NO)\b") then put #var magneticballista NO
   if $mabprepmana >= 30 then
   else put #var mabprepmana 15
   if $mabaddmana >= 0 then
   else put #var mabaddmana 0
-  if $mabprepwait >= 0 then
-  else put #var mabprepwait 0
   
   if !matchre("$killweapon", "\b(YES|NO)\b") then put #var killweapon NO
   if !matchre("$killweapontype", "\b(melee|brawl|thrown|aimed)\b") then put #var killweapontype brawl
@@ -2696,7 +1324,2353 @@ NEWTOWNPRESET:
   return
 
 
+SPELLSTATCHECK:
+  var spelldiffname $0
+  var spellmana -1
+  var spelldifficulty 0
+  var spellminmana 0
+  var spellcapmana 0
+  
+  #AP
+  if ("%spelldiffname" = "burden") then
+  {
+    var spellmana 0
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "dispel") then
+  {
+    var spellmana 0
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ease") then
+  {
+    var spellmana 0
+    var spelldifficulty 1
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "gaf") then
+  {
+    var spellmana 0
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "imbue") then
+  {
+    var spellmana 0
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "lw") then
+  {
+    var spellmana 0
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "maf") then
+  {
+    var spellmana 0
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sec") then
+  {
+    var spellmana 0
+    var spelldifficulty 2
+    var spellminmana 50
+    var spellcapmana 600
+  }
+  if ("%spelldiffname" = "stra") then
+  {
+    var spellmana 0
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 50
+  }
 
+  #MISC
+  if ("%spelldiffname" = "bonegrinder") then
+  {
+    var spellmana 6
+    var spelldifficulty 4
+    var spellminmana 20
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "sif") then
+  {
+    var spellmana 6
+    var spelldifficulty 3
+    var spellminmana 7
+    var spellcapmana 50
+    var spellskill targeted
+  }
+
+  #BARD
+  if ("%spelldiffname" = "aban") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 7
+    var spellcapmana 37
+  }
+  if ("%spelldiffname" = "aewo") then
+  {
+    var spellmana 1
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "alb") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "aot") then
+  {
+    var spellmana 1
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "btn") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "botf") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "bos") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "care") then
+  {
+    var spellmana 1
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "dalu") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 6
+    var spellcapmana 31
+  }
+  if ("%spelldiffname" = "dmrs") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 3
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "dema") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 20
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "drum") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "echo") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ecry") then
+  {
+    var spellmana 1
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "eye") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "fae") then
+  {
+    var spellmana 1
+    var spelldifficulty 1
+    var spellminmana 2
+    var spellcapmana 15
+  }
+  if ("%spelldiffname" = "fotf") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "gj") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "harm") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "hodi") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "mis") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "name") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "nexus") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "pyre") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 7
+    var spellcapmana 37
+  }
+  if ("%spelldiffname" = "rage") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "repr") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "resonance") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sanctuary") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "soul") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "wotm") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "will") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 150
+    var spellcapmana 700
+  }
+  if ("%spelldiffname" = "word") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 50
+    var spellcapmana 600
+  }
+
+  #CLERIC
+  if ("%spelldiffname" = "ae") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "all") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 50
+    var spellcapmana 600
+  }
+  if ("%spelldiffname" = "auspice") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "benediction") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "bless") then
+  {
+    var spellmana 2
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "centering") then
+  {
+    var spellmana 2
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "chs") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 7
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "coz") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "dr") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "ef") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "fou") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ff") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "ghs") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "gg") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "halo") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "hot") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 7
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "he") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "hh") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "horn") then
+  {
+    var spellmana 2
+    var spelldifficulty 6
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "hulp") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "hyh") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 6
+    var spellcapmana 31
+  }
+  if ("%spelldiffname" = "it") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 20
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "mapp") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "malediction") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "mre") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "mc") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "mpp") then
+  {
+    var spellmana 2
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "mf") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "om") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 200
+  }
+  if ("%spelldiffname" = "pom") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 150
+    var spellcapmana 700
+  }
+  if ("%spelldiffname" = "ps") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "pfe") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "rejuv") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "rezz") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "rev") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "sap") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sl") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sol") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sa") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 6
+    var spellcapmana 31
+  }
+  if ("%spelldiffname" = "sb") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "sos") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sick") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "spit") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 20
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "uncurse") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "vigil") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+
+  #EMPATH
+  if ("%spelldiffname" = "absolution") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 150
+    var spellcapmana 700
+  }
+  if ("%spelldiffname" = "ad") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "ags") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "awaken") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "bs") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "cr") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "cos") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 150
+    var spellcapmana 700
+  }
+  if ("%spelldiffname" = "compel") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "cd") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ev") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "fp") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "foc") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "gol") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "gs") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "heal") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "hs") then
+  {
+    var spellmana 3
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "hw") then
+  {
+    var spellmana 3
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "hl") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "iz") then
+  {
+    var spellmana 3
+    var spelldifficulty 5
+    var spellminmana 15
+    var spellcapmana 45
+  }
+  if ("%spelldiffname" = "innocence") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ic") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "lethargy") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "mef") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "nb") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "paralysis") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "pop") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "rp") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "refresh") then
+  {
+    var spellmana 3
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "regenerate") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "tranquility") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "vigor") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "vh") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  
+  #MOON_MAGE
+  if ("%spelldiffname" = "art") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "aus") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "bc") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 150
+    var spellcapmana 700
+  }
+  if ("%spelldiffname" = "burn") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 7
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "col") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "calm") then
+  {
+    var spellmana 4
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "cv") then
+  {
+    var spellmana 4
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "contingency") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "dazzle") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "dc") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 50
+    var spellcapmana 600
+  }
+  if ("%spelldiffname" = "do") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "dg") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "fm") then
+  {
+    var spellmana 4
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "iots") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "locate") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "mt") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "mb") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 20
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "ms") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 20
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "moonblade") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "mg") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "pd") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "pg") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "psy") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "rtr") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "rf") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "rend") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "rs") then
+  {
+    var spellmana 4
+    var spelldifficulty 5
+    var spellminmana 40
+    var spellcapmana 120
+  }
+  if ("%spelldiffname" = "sco") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "seer") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "set") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 3
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "shm") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ss") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "shw") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 6
+    var spellcapmana 31
+  }
+  if ("%spelldiffname" = "shadowling") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "shadows") then
+  {
+    var spellmana 4
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "shear") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sm") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sleep") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "sod") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "sls") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 6
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "sov") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "tf") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "tksh") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "tks") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "tkt") then
+  {
+    var spellmana 4
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "teleport") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ts") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "tv") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "th") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "unleash") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "wd") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 6
+    var spellcapmana 100
+  }
+  
+  #NECROMANCER
+  if ("%spelldiffname" = "acs") then
+  {
+    var spellmana 5
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "blb") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "bb") then
+  {
+    var spellmana 5
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "bue") then
+  {
+    var spellmana 5
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ch") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "cfb") then
+  {
+    var spellmana 5
+    var spelldifficulty 2
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "cfw") then
+  {
+    var spellmana 5
+    var spelldifficulty 4
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "cf") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "devour") then
+  {
+    var spellmana 5
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "emc") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "eotb") then
+  {
+    var spellmana 5
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ghoulflesh") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "hp") then
+  {
+    var spellmana 5
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "ivm") then
+  {
+    var spellmana 5
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ks") then
+  {
+    var spellmana 5
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "nr") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "obfuscation") then
+  {
+    var spellmana 5
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "pv") then
+  {
+    var spellmana 5
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "php") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "qe") then
+  {
+    var spellmana 5
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "rei") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "resection") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "rpu") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "roc") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "rof") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 5
+  }
+  if ("%spelldiffname" = "rog") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "sv") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "solace") then
+  {
+    var spellmana 5
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "usol") then
+  {
+    var spellmana 5
+    var spelldifficulty 4
+    var spellminmana 7
+    var spellcapmana 37
+  }
+  if ("%spelldiffname" = "vs") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "vod") then
+  {
+    var spellmana 5
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "vivisection") then
+  {
+    var spellmana 5
+    var spelldifficulty 4
+    var spellminmana 20
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "worm") then
+  {
+    var spellmana 5
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  
+  #PALADIN
+  if ("%spelldiffname" = "ag") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "as") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "aa") then
+  {
+    var spellmana 2
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "bot") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ba") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "clarity") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "courage") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "crc") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "da") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "dig") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "fst") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "halt") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "hoj") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "hes") then
+  {
+    var spellmana 2
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "how") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "mo") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "reb") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "rw") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "rue") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sr") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "shatter") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "smh") then
+  {
+    var spellmana 2
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sp") then
+  {
+    var spellmana 2
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sf") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "tk") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "vos") then
+  {
+    var spellmana 2
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  
+  #RANGER
+  if ("%spelldiffname" = "athleticism") then
+  {
+    var spellmana 3
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "af") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "bes") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "blend") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "bloodthorns") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "cac") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "cs") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "cotc") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "compost") then
+  {
+    var spellmana 3
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "cotw") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 10
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "devi") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "df") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "devi") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "de") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "ec") then
+  {
+    var spellmana 3
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "em") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "etc") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ey") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "fwb") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "griz") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "hol") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "hb") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 3
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "inst") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "mon") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "oath") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "rits") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "stw") then
+  {
+    var spellmana 3
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sott") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sks") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "stampede") then
+  {
+    var spellmana 3
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "swarm") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "sk") then
+  {
+    var spellmana 3
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "wotp") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ws") then
+  {
+    var spellmana 3
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 100
+  }
+
+  #TRADER
+  if ("%spelldiffname" = "ars") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 6
+    var spellcapmana 31
+  }
+  if ("%spelldiffname" = "ava") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "blur") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "crd") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "eli") then
+  {
+    var spellmana 4
+    var spelldifficulty 5
+    var spellminmana 400
+    var spellcapmana 900
+  }
+  if ("%spelldiffname" = "enrichment") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "fin") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "flu") then
+  {
+    var spellmana 4
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "ir") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "lgv") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "mom") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 5
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "meg") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "non") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "nou") then
+  {
+    var spellmana 4
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "phk") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "rega") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "star") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "stc") then
+  {
+    var spellmana 4
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "trc") then
+  {
+    var spellmana 4
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "turi") then
+  {
+    var spellmana 4
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+
+  #WM
+  if ("%spelldiffname" = "aeg") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "ac") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 4
+    var spellcapmana 25
+  }
+  if ("%spelldiffname" = "aethrolysis") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 2
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "ab") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ala") then
+  {
+    var spellmana 1
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "anc") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "al") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "bg") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "cl") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "db") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ee") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 6
+    var spellcapmana 31
+  } 
+  if ("%spelldiffname" = "etf") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "es") then
+  {
+    var spellmana 1
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "fb") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "fr") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 7
+    var spellcapmana 37
+  }
+  if ("%spelldiffname" = "fs") then
+  {
+    var spellmana 1
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "foi") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "frs") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 7
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "frb") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "gi") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "gz") then
+  {
+    var spellmana 1
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "geyser") then
+  {
+    var spellmana 1
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "gf") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "ip") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "ignite") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "lb") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 7
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "mab") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "mof") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 300
+    var spellcapmana 800
+  }
+  if ("%spelldiffname" = "moa") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "pw") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 7
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "rim") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 6
+    var spellcapmana 31
+  }
+  if ("%spelldiffname" = "ros") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 7
+    var spellcapmana 37
+  }
+  if ("%spelldiffname" = "rm") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "shockwave") then
+  {
+    var spellmana 1
+    var spelldifficulty 4
+    var spellminmana 30
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sts") then
+  {
+    var spellmana 1
+    var spelldifficulty 1
+    var spellminmana 1
+    var spellcapmana 50
+  }
+  if ("%spelldiffname" = "substratum") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "suf") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "sw") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "tw") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "tc") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "ti") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "trem") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 10
+    var spellcapmana 66
+  }
+  if ("%spelldiffname" = "voi") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "vertigo") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 5
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "wb") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 1
+    var spellcapmana 33
+  }
+  if ("%spelldiffname" = "ys") then
+  {
+    var spellmana 1
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
+  if ("%spelldiffname" = "zephyr") then
+  {
+    var spellmana 1
+    var spelldifficulty 2
+    var spellminmana 5
+    var spellcapmana 100
+  }
+  return
 
 
 
@@ -2721,7 +3695,7 @@ STATUSCHECK:
     put #flash
   }
   #ROOMID_CHECKING
-  if %scriptmode = 1 then
+  if (%scriptmode = 1) then
   {
     if ((%autoupkeep = "YES") || (%bugout = "YES")) then
     {
@@ -2745,15 +3719,11 @@ STATUSCHECK:
     if ($kneeling = 1) then gosub STAND
     if ($prone = 1) then gosub STAND
   }
-  #AUTOUPKEEP
-  if ((%autoupkeep = "YES") && (%buffingonly != 1) && (%scriptmode = 1)) then
+  #SCRIPT_AREA_CHECKING_AUTOUPKEEP
+  if (%scriptmode = 1) then 
   {
-    gosub AUTOUPKEEPCHECKS
-    #echo goupkeep: %goupkeep
-    if (%goupkeep = 1) then
-    {
-      if ((%upkeepactive != 1) && (%movetrainactive != 1)) then gosub AUTOUPKEEPLOGIC
-    }
+    gosub NEWAREADECISION
+    gosub NEWAREAMOVEMENT
   }
   #COLLECTAMMO
   if ((%scriptmode = 1) && (%buffingonly != 1) then
@@ -2792,7 +3762,7 @@ STATUSCHECK:
     if %aimready = 1 then gosub FIRE
   }
   #TARGET_SELECTION
-  if ((%scriptmode = 1) && (%buffingonly != 1) && (%upkeepactive != 1) && (%movetrainactive != 1)) then
+  if ((%scriptmode = 1) && (%buffingonly != 1) && (%upkeepactive != 1) && (%noncombatactive != 1)) then
   {
     if (%goodtarget = 0) then
     {
@@ -2838,26 +3808,6 @@ STATUSCHECK:
         gosub STOW right
         gosub GETITEM %tmfocusitem
         gosub TMFOCUSINVOKE
-      }
-    }
-  }
-  #SPELL_WAIT_CHECK
-  if (%preptimewait > 0) then
-  {
-    if (%preptime > 0) then
-    {
-      #echo preptime: %preptime
-      #echo preptimewait: %preptimewait
-      #echo t: %t
-      #echo
-      var preptimewaittest %preptime
-      math preptimewaittest add %preptimewait
-      #echo preptimewaittest: %preptimewaittest
-      #echo t: %t
-      if (%t >= %preptimewaittest) then
-      {
-        #put #echo Yellow Past!
-        var ready 1
       }
     }
   }
@@ -2923,12 +3873,10 @@ AUTOUPKEEPCHECKS:
       var onfire 0
       action (nerves) on
       action (poison) on
-      action (onfire) on
       gosub HEALTHCHECK
       pause 1
       action (nerves) off
       action (poison) off
-      action (onfire) off
       var nexthealthcheck %t
       math nexthealthcheck add 120
     }
@@ -2995,11 +3943,11 @@ RPLAYERSCRUB:
   eval roomplayers replace("%roomplayers", " who is shrouded in ghostly flames", "")
   eval roomplayers replace("%roomplayers", " who is shrouded by swirling grey fog", "")
   eval roomplayers replace("%roomplayers", " the body of", "")
-  
   #echo roomplayers: %roomplayers
 
   #POSTFIX_REMOVAL
   eval roomplayers replacere("%roomplayers", " who (is|has) [A-Za-z\s-]+", "")
+  eval roomplayers replacere("%roomplayers", " whose [A-Za-z\s-]+", "")
   #PRETITLE_REMOVAL
   eval roomplayers replace("%roomplayers", "'", ""
   eval roomplayers replacere("%roomplayers", "([A-Za-z]+) ([A-Za-z]+) ([A-Za-z]+) ([A-Z][a-z]+)", "\$4")
@@ -3220,6 +4168,8 @@ AMMOGETMAIN:
 	  matchre AMMOGETMAINP %waitstring
 	  matchre AMMOGETMAIN You pick up|You pull a|out of the pile of rubble.|You pull a small rock out|You fade in|You put your
 	  matchre RETURN You must unload|You stop as you realize the|Stow what?|You stop as|What were you referring to?
+	  match AMMOGETINJURED You can't pick that up with your hands that damaged.
+	  match AMMOGETINJURED You can't pick that up with your hand that damaged.
 	  matchre AMMOGETBAD You need a free hand to pick that up.
 	  put stow %ammogetstring
 	  matchwait 5
@@ -3228,6 +4178,29 @@ AMMOGETMAIN:
 	  goto TIMEOUT
 	}
 	else return
+
+AMMOGETINJURED:
+  if ("%autoupkeep" = "YES") then
+  {
+    var goupkeep 1
+    var autype wounds
+  }
+  else
+  {
+    put #echo >$alertwindow Yellow Tried to stow %ammogetstring hand, but you're too injured!  Please address!
+    put #flash
+    put #play Advance
+    if ("%bugout" = "YES") then goto BUGOUT
+    else goto AMMOGETINJURED2
+  }
+  return
+
+AMMOGETINJURED2:
+  put #echo Yellow ===FAILED TO STOW %ammogetstring DUE TO WOUNDS!===
+  put #flash
+  put #play Advance
+  pause 5
+  goto AMMOGETINJURED2
 
 AMMOGETBAD:
   gosub STOW left
@@ -3273,6 +4246,7 @@ BUYMAIN:
   matchre BUYOFFER Kilam says, "I'll give that to you for (\d+) dokoras\."
   matchre BUYOFFER Ss'Thran smiles, baring his fangs. "Ahh, the lockpick\.  That'll cost you (\d+) lirums\."
   match RETURN You realize you don't have that much.
+  matchre BUYOTHER That .* is not for sale\.
   put order %buytarget
   matchwait 5
 	var timeoutsub BUY
@@ -3282,7 +4256,10 @@ BUYMAIN:
 BUYOFFER:
   var offeramount $1
   goto BUYOFFERMAIN
-  
+
+BUYOTHER:
+  var buytarget other %buytarget
+  goto BUYMAIN
   
 BUYOFFERMAINP:
   pause
@@ -3309,7 +4286,7 @@ BUNDLEPULL:
 
 
 CLOSEITEM:
-  var openitemstring $0
+  var closeitemstring $0
   goto CLOSEITEMMAIN
 CLOSEITEMP:
   pause
@@ -3469,7 +4446,7 @@ GETITEMMAIN:
   matchre GETUNTIE You pull at it, but the ties prevent you.  Maybe if you untie it, first?|You should untie the
   matchre RETURN You get|You're already holding|You are already holding that.|You pick up|What were you referring to?|You stop as you realize|You must unload|You fade in for a moment|You remove|You pull|What were you referring to?|You try to grab your|Please rephrase that command\.|You are already holding that\.
   match RETURN Get what?
-  matchre GETINJURED ^You can't pick that up with your hand that damaged\.
+  matchre GETINJURED ^You can't pick that up with your (hand|hands) that damaged\.
   matchre GETITEMBAD You need a free hand to pick that up.
   matchre GETCLIMBPRACBAD You should stop practicing 
   matchre GETITEMADV Sheesh, it's still alive! 
@@ -3482,9 +4459,6 @@ GETITEMMAIN:
 	goto TIMEOUT
 
 GETINJURED:
-  put #echo >$alertwindow Yellow Tried to stow %stowhandstring hand, but it's too heavy or unable to fit!  Please address!
-  put #flash
-  put #play Advance
   if ("%autoupkeep" = "YES") then
   {
     var goupkeep 1
@@ -3492,6 +4466,9 @@ GETINJURED:
   }
   else
   {
+    put #echo >$alertwindow Yellow Tried to get %getitemstring hand, but it's too heavy or you're too injured!  Please address!
+    put #flash
+    put #play Advance
     if ("%bugout" = "YES") then goto BUGOUT
     else goto GETINJURED2
   }
@@ -3620,15 +4597,18 @@ REMOVESTOW:
   gosub STOWALL
   goto REMITEMMAIN
 
+RUMMAGE:
+  var rummagestring $0
+  goto RUMMAGEMAIN
 RUMMAGEP:
   pause
-RUMMAGE:
+RUMMAGEMAIN:
   matchre RUMMAGEP %waitstring
   matchre RETURN I don't know what you are referring to.|You rummage|While it's closed?
-  put rummage %storage
+  put rummage %rummagestring
 	matchwait 5
-	var timeoutsub RUMMAGE
-  var timeoutcommand rummage %storage
+	var timeoutsub RUMMAGEMAIN
+  var timeoutcommand rummage %rummagestring
 	goto TIMEOUT
 
 SHEATHEHAND:
@@ -3640,6 +4620,7 @@ SHEATHEHANDMAIN:
   matchre SHEATHEHANDP %waitstring
   matchre SHEATHEBAD ^Sheathe your .* where\?$|There's no room in the
   matchre RETURN Sheathe what?|You sheathe|You hang|You secure|You easily strap|Sheathing a
+  matchre SHEATHEUNLOAD You should unload the .* first\.
   if ("%sheathehandstring" = "right") then var sheatheitemstring $righthandnoun
   else var sheatheitemstring $lefthandnoun
   put sheathe %sheatheitemstring
@@ -3653,6 +4634,27 @@ SHEATHEBAD:
   if ("%stowhand" = "right") then gosub STOWITEM $righthandnoun
   else gosub STOWITEM $lefthandnoun
   gosub STOWITEM
+  return
+
+SHEATHEUNLOAD:
+  if (matchre("%sheatheitemstring", "$lefthand")) then
+  {
+    if ("$righthand" != "Empty") then
+    {
+      gosub TAPSHORTEN $righthand
+      gosub STOWITEM my %shorttap
+    }
+  }
+  else
+  {
+    if ("$lefthand" != "Empty") then
+    {
+      gosub TAPSHORTEN $lefthand
+      gosub STOWITEM my %shorttap
+    }
+  }
+  gosub UNLOAD
+  gosub STOWALL
   return
 
 SLIPITEMP:
@@ -3732,11 +4734,35 @@ STOWMAIN:
   match STOWSTOPPLAY You should stop playing before you do that.
   matchre STOWCOIL The \S+ rope is too long, even after stuffing it, to fit in the
   matchre RETURN You put your|Stow what\?|You open your pouch|You stop as|What were you referring to?|You think the gem pouch|You stop as you realize|You easily strap your
+  match STOWINJURED You can't pick that up with your hands that damaged.
   put stow %stowhandstring
   matchwait 5
   var timeoutsub STOWMAIN
   var timeoutcommand stow %stowhandstring
 	goto TIMEOUT
+
+STOWINJURED:
+  if ("%autoupkeep" = "YES") then
+  {
+    var goupkeep 1
+    var autype wounds
+  }
+  else
+  {
+    put #echo >$alertwindow Yellow Tried to stow %stowhandstring hand, but you're too injured!  Please address!
+    put #flash
+    put #play Advance
+    if ("%bugout" = "YES") then goto BUGOUT
+    else goto STOWINJURED2
+  }
+  return
+
+STOWINJURED2:
+  put #echo Yellow ===FAILED TO STOW %stowhandstring DUE TO WOUNDS!===
+  put #flash
+  put #play Advance
+  pause 5
+  goto STOWINJURED2
 
 STOWFAIL:
   gosub DEEPSLEEP
@@ -3763,11 +4789,19 @@ STOWUNLOADP:
 STOWUNLOAD:
   if ("%stowhandstring" = "left") then
   {
-    gosub SWAP
+    if ("$righthand" != "Empty") then
+    {
+      gosub TAPSHORTEN $righthand
+      gosub STOWITEM my %shorttap
+    }
   }
-  if ("$lefthand" != "Empty") then
+  else
   {
-		gosub STOW left
+    if ("$lefthand" != "Empty") then
+    {
+      gosub TAPSHORTEN $lefthand
+      gosub STOWITEM my %shorttap
+    }
   }
   gosub UNLOAD
   gosub STOWALL
@@ -3810,6 +4844,11 @@ STOWFEETFULL:
   
 STOWCUSTOM:
   var stowcustomstring $0
+  if matchre ("%stowcustomstring", "%monsterskins") then
+  {
+    gosub BUNDLE
+    return
+  }
   if %platring = "YES" then
   {
     if matchre ("%stowcustomstring", "%platringitem") then
@@ -3976,6 +5015,7 @@ STOWITEMMAIN:
   match STOWITEMSTOPPLAY You should stop playing before you do that.
   matchre STOWITEMFAIL ^That's too heavy to go in there\!|^There isn't any more room in the \w+ for that\.|^There's no room in the \w+\.
   matchre STOWRETURN You put your|You sling|You attach|You open your pouch|You stop as
+  matchre STOWITEMINJURED You can't pick that up with your (hand|hands) that damaged.
   match RETURN Stow what?  Type 'STOW HELP' for details.
   matchre STOWITEMUNLOAD ^You should unload the .* first\.$
   match STOWITEMMAINFULL You need a free hand to pick that up.
@@ -3993,7 +5033,40 @@ STOWITEMSTOPPLAY:
   gosub PLAYSTOP
   goto STOWITEMMAIN
 
+STOWITEMINJURED:
+  if ("%autoupkeep" = "YES") then
+  {
+    var goupkeep 1
+    var autype wounds
+  }
+  else
+  {
+    put #echo >$alertwindow Yellow Tried to stow %stowitemstring hand, but you're too injured!  Please address!
+    put #flash
+    put #play Advance
+    if ("%bugout" = "YES") then goto BUGOUT
+    else goto STOWITEMINJURED2
+  }
+  return
+
+STOWITEMINJURED2:
+  put #echo Yellow ===FAILED TO STOW %stowitemstring DUE TO WOUNDS!===
+  put #flash
+  put #play Advance
+  pause 5
+  goto STOWITEMINJURED2
+
 STOWITEMFAIL:
+  if (($righthand = "tight bundle") || ($lefthand = "tight bundle")) then
+  {
+    if ("%autoupkeep" = "YES") then
+    { 
+      gosub WEARITEM my tight bundle
+      var goupkeep 1
+      var autype bundle
+      return
+    }
+  }
   gosub DEEPSLEEP
   put #echo >$alertwindow Yellow Tried to stow %stowitemstring, but failed because it's too heavy or won't fit!  Please address!
   put #flash
@@ -4014,9 +5087,21 @@ STOWITEMFAIL2:
   goto STOWITEMFAIL2
 
 STOWITEMUNLOAD:
-  if ("$lefthand" != "Empty") then
+  if (matchre("%stowitemstring", "$lefthand")) then
   {
-		gosub STOW left
+    if ("$righthand" != "Empty") then
+    {
+      gosub TAPSHORTEN $righthand
+      gosub STOWITEM my %shorttap
+    }
+  }
+  else
+  {
+    if ("$lefthand" != "Empty") then
+    {
+      gosub TAPSHORTEN $lefthand
+      gosub STOWITEM my %shorttap
+    }
   }
   gosub UNLOAD
   gosub STOWALL
@@ -4032,8 +5117,9 @@ SWAPP:
 SWAP:
   matchre SWAPP %waitstring
   match RETURN You move
-  match You have nothing to swap!
+  match RETURN You have nothing to swap!
   matchre SWAPINJURED Your (right|left) hand is too injured to do that\.
+  matchre SWAPINJURED Excruciating pain swells up inside you as your maimed limbs fail you.
   matchre SWAPNERVES Will alone cannot conquer the paralysis that has wracked your body\.
   put swap
   matchwait 5
@@ -4450,16 +5536,27 @@ UNCOILROPE:
   var timeoutcommand uncoil heavy rope
 	goto TIMEOUT
 
+UNLOAD:
+  var unloadstring
 UNLOADP:
   pause
-UNLOAD:
+UNLOADMAIN:
   matchre UNLOADP %waitstring
-  matchre RETURN You unload|isn't loaded!|You remain concealed by your surroundings|You don't have a ranged weapon to unload\.
-  put unload
+  matchre RETURN You unload|isn't loaded!|You remain concealed by your surroundings
+  match UNLOADLEFT You don't have a ranged weapon to unload.
+  put unload %unloadstring
   matchwait 5
   var timeoutsub UNLOAD
-  var timeoutcommand unload
+  var timeoutcommand unload %unloadstring
 	goto TIMEOUT
+
+UNLOADLEFT:
+  if ("$lefthand" != "Empty") then
+  {
+    var unloadstring $lefthandnoun
+    goto UNLOADMAIN
+  }
+  return
 
 UNTIEITEM:
   var untieitemstring $0
@@ -4614,7 +5711,16 @@ BOWLOADLOGIC:
       if %usingacm = 1 then goto ATTACKACM
       else goto BOWAIM
     }
-    else goto BOWNOAMMO
+    else
+    {  
+      gosub FINDITEM %ubowammo
+      if ((%finditemfound = 1) && ("%autoupkeep" = "YES")) then
+      {
+        var goupkeep 1
+        var autype wounds
+      }
+      else goto BOWNOAMMO
+    }
   }
   else
   {
@@ -4673,7 +5779,8 @@ ANALYZE:
 	goto TIMEOUT
 
 ANALYZEAGAIN:
-  gosub AUTOUPKEEPCHECKS
+  gosub STATUSCHECK
+  #gosub AUTOUPKEEPCHECKS
   if (%goupkeep = 1) then return
   goto ANALYZE
 
@@ -5021,6 +6128,7 @@ BOWLOADMAIN:
 	matchre BOWLOADGETITEM You don't have the proper ammunition
 	match BOWDLBAD You are not skilled enough to dual-load
 	match BOWNOEAGLE You focus on the image of an eagle but are unable to draw upon its majesty.
+	match BOWNOWINDS Such a feat would be impossible without the winds to guide you.
 	match BOWNOSTW Such a feat would be impossible without the winds to guide you\.
 	match BOWNOSTEADY Such a feat would be impossible without steadier hands.
 	match BOWNOAMMO What weapon are you trying to load?
@@ -5049,6 +6157,10 @@ BOWDLBAD:
   put #echo Yellow Not skilled enough to dual-load!  Turning variable off.
   return
 
+BOWNOWINDS:
+  var usingdualload 0
+  goto BOWLOADMAIN
+
 BOWNOEAGLE:
   var usingdualload 0
   goto BOWLOADMAIN
@@ -5062,11 +6174,7 @@ BOWNOSTEADY:
   goto BOWLOADMAIN
 
 BOWNOAMMO:
-  gosub DEEPSLEEP
-  put #echo >$alertwindow Yellow Out of ammo for %weapontype!  Please address!
-  put #flash
-  put #play Advance
-  if ("%auonammo" = "YES") then
+  if (("%autoupkeep" = "YES") && ("%auonammo" = "YES")) then
   {
     var goupkeep 1
     var autype ammo
@@ -5074,6 +6182,10 @@ BOWNOAMMO:
   }
   else
   {
+    gosub DEEPSLEEP
+    put #echo >$alertwindow Yellow Out of ammo for %weapontype!  Please address!
+    put #flash
+    put #play Advance
     if ("%bugout" = "YES") then goto BUGOUT
     else goto BOWNOAMMO2
   }
@@ -5287,7 +6399,7 @@ FIREAMMOGET:
 
 
 HIDELOGIC:
-  if matchre ("%abufflist", "rm") then
+  if matchre ("%bufflist", "rm") then
   {
     if %mist != 1 then return
   }
@@ -5527,6 +6639,19 @@ LOOKROOM:
   var timeoutcommand look
 	goto TIMEOUT
 
+
+LIEP:
+  pause
+LIE:
+  matchre LIEP %waitstring
+  matchre RETURN You lie down\.|You are already lying down\.
+  put lie
+  matchwait 5
+	var timeoutsub LIE
+  var timeoutcommand lie
+	goto TIMEOUT
+
+
 MOVE:
   var roomtarget $0
 MOVEMAIN:
@@ -5753,6 +6878,25 @@ MOVEROOMSRET:
   goto MOVEROOMSMAIN
   
 
+ROLLP:
+  pause
+ROLL:
+  matchre ROLLP %waitstring
+  matchre ROLL You roll around on the ground in an attempt to extinguish the fire\.|You continue to roll around frantically.  It seems to be doing some good\.
+  match RETURN You roll around on the ground, completely extinguishing the flames.
+  match RETURN You roll around on the ground.
+  match ROLLLIE You're not lying down.  What do you want to roll?
+  put roll
+  matchwait 5
+	var timeoutsub ROLL
+  var timeoutcommand roll
+	goto TIMEOUT
+
+ROLLLIE:
+  gosub LIE
+  goto ROLL
+
+
 SITP:
   pause
 SIT:
@@ -5861,20 +7005,6 @@ BERSERKP:
   pause
 BERSERKMAIN:
   if (%t < %nextberserk) then return
-  var tsunamistow 0
-  if %berserktype = "Tsunami" then
-  {
-    if ("$righthand" != "Empty") then var irighthandnoun $righthandnoun
-    else var irighthandnoun ----
-    if ("$lefthand" != "Empty") then var ilefthandnoun $lefthandnoun
-    else var ilefthandnoun ----
-    if ((matchre ("%tsunamiweapon", "%irighthandnoun")) || (matchre ("%tsunamiweapon", "%ilefthandnoun"))) then
-    else 
-    {
-      var tsunamistow 1
-      gosub GETITEM %tsunamibackup
-    }
-  }
   matchre BERSERKP %waitstring
   match BERSERKWRONG You have no idea how to do that.
   match BERSERKTRAIN You have not been trained in that manner of berserking.
@@ -5898,7 +7028,6 @@ BERSERKPAUSE:
   return
 
 BERSERKRETURN:
-  if (%tsunamistow = 1) then gosub STOWITEM %tsunamibackup
   gosub MEDITATEPOWER
   return
 
@@ -6101,6 +7230,8 @@ CASTRESET:
   var charged 0
   var invoked 0
   var harnessed 0
+  var spelldifficulty -1
+  var spellpercent 100
   var spellprepping
   var prepmana 0
   var cambmana 0
@@ -6123,59 +7254,103 @@ CASTRESET:
   var ctoverride 0
   var omcast 0
   var preptime 0
-  var preptimewait 0
   return
 
 CASTINGLOGIC:
+  #NECRO
   if ("%necrosafety" = "YES") then
   {
     gosub NSAFETYCHECK
-    if %necrogood != 1 then return
+    if (%necrogood != 1) then return
   }
+  #DIFFICULTY_SETTING
+  if (%spelldifficulty = -1) then gosub SPELLSTATCHECK %spellprepping
+  if (%spellsymb != 1) then
+  {
+    if (%spelldifficulty > 0) then
+    {
+      if ((%spellmana != %nativemana) && (%spellmana != 0) then
+      {
+        var spellpercent 100
+        #var spellpercent %sorcdifficulty%spelldifficultypercent
+      }
+      else
+      {
+        if (%tmcast = 1) then var spellpercent 100
+        else var spellpercent %difficulty%spelldifficultypercent
+      }
+    }
+    else
+    {
+      put #echo Yellow Unknown spell!
+      var spellpercent 100
+    }
+  }
+  else var spellpercent 100
+  #EARLY_READINESS
+  if ((%spelldifficulty > 0) && (%spellpercent < 100) then
+  {
+     var spellpreptest $spelltime
+     math spellpreptest divide $spellpreptime
+     math spellpreptest * 100
+    if (%spellpreptest >= %spellpercent) then
+    {
+      var ready 1
+      put #echo Yellow Ready due to being %spellpreptest% done vs %spellpercent% for the difficulty!
+    }
+  }
+  #EARLY_HARNESSING
+  if ((%harnmana > 0) && (%harnessed = 0)) then
+  {
+    #echo spellpreptime: $spellpreptime
+    var harnesstest %spellpercent
+    math harnesstest divide 100
+    math harnesstest * $spellpreptime
+    #echo total prep time: %harnesstest
+    math harnesstest subtract %harnesstime
+    #echo harness prep time: %harnesstest
+    if ($spelltime >= %harnesstest) then
+    {
+      #echo harnesstest: %harnesstest
+      #echo spelltime: $spelltime
+      gosub HARNESS
+    }
+  }
+  #NEEDS_PREP
   if (%prepped != 1) then
   {
     gosub ARRANGEMANA
     if ($concentration >= %minconcentration) then gosub PREP
   }
+  #PREPPED
   if (%prepped = 1) then
   {
-    if contains("%rituals", "|%spellprepping|") then
-    {
-      if %invoked != 1 then
-      {
-        gosub RITUAL
-      }
-    }
+    if ((contains("%rituals", "|%spellprepping|")) && (%invoked != 1)) then gosub RITUAL
     if (%charged != 1) then
     {
-      if %cambtapped > 0 then
+      if (%cambtapped > 0) then
       {
-        if %t > %cambtapped then gosub CHARGE
+        if (%t > %cambtapped) then gosub CHARGE
       }
-      else
-      {
-        #gosub ARRANGEMANA
-        gosub CHARGE
-      }
+      else gosub CHARGE
     }
   }
-  if (%ready = 1) then 
+  #READY_TO_CAST
+  if ((%ready = 1) && (%cambtapped != 1)) then 
   {
-    if (%cambtapped != 1) then
+    #SYMBIOSIS
+    if (%spellsymb = 1) then
     {
-      #echo spellsymb: %spellsymb
-      if %spellsymb = 1 then
-      {
-        #echo symbiosis: %symbiosis
-        if %symbiosis = 0 then gosub PREPSYMBIOSIS
-        gosub PREPSYMBIOSIS
-      }
-      else
-      {
-        if %symbiosis = 1 then gosub RELSYMBIOSIS
-      }
-      gosub CAST
+      #if (%symbiosis = 0) then gosub PREPSYMBIOSIS
+      gosub PREPSYMBIOSIS
     }
+    else
+    {
+      if (%symbiosis = 1) then gosub RELSYMBIOSIS
+    }
+    #HARNESSING
+    if ((%harnmana > 0) && (%harnessed = 0)) then gosub HARNESS
+    gosub CAST
   }
   else
   {
@@ -6189,8 +7364,7 @@ ARRANGEMANA:
   var harnmana 0
   var cambmana 0
   #Lock_checking
-  if %buffingonly != 1 then
-  #if %buffingonly = poopooi then
+  if (%buffingonly != 1) then
   {
     if $Arcana.LearningRate < 20 then var arcanalock 0
     if $Arcana.LearningRate > 31 then var arcanalock 1
@@ -6204,7 +7378,7 @@ ARRANGEMANA:
     var attunelock 0
     var arcanalock 0
   }
-  if %straightcast = "YES" then
+  if (("%straightcast" = "YES") && (%tattoocast != 1)) then
   {
     if ((%attunelock = 1) && (%arcanalock = 1)) then
     {
@@ -6213,26 +7387,39 @@ ARRANGEMANA:
       return
     }
   }
+  #if ((contains("%rituals", "|%spellprepping|")) && (%invoked != 1)) then gosub RITUAL
   #Arrange_logic
-  if %harnessing = "YES" then
+  if ("%harnessing" = "YES") then
   {
-    if %cambrinth = "NO" then var harnmana %addmana
+    if ("%cambrinth" = "NO") then var harnmana %addmana
     else
     {  
-      if %arcanalock = 1 then var harnmana %addmana
+      if (%arcanalock = 1) then var harnmana %addmana
       else
       {
-        if %addmana > %totalcamb then
+        if (%addmana > %totalcamb) then
         {
           var cambmana %totalcamb
           var harnmana %addmana
           math harnmana subtract %totalcamb
-          #echo harnmana: %harnmana
-          #echo cambmana: %cambmana
         }  
         else var cambmana %addmana 
       }
     }
+    if ((%harnmana > 0) && (%harnmana > %harnessmax)) then
+    {
+      var hsplitcounter 1
+      gosub HARNSPLITLOOP
+    }
+    else
+    {
+      var harnnumber 1
+      var harnmana1 %harnmana
+    }
+    #HARNESS_TIME
+    var harnesstime %harnnumber
+    math harnesstime * 2
+    math harnesstime add 1.5
   }
   else
   {
@@ -6245,10 +7432,9 @@ ARRANGEMANA:
     {
       math prepmana add %addmana
       var addmana 0
-      #echo prepmana: %prepmana
-      #echo addmana: %addmana
     }
   }
+  
   return
 
 
@@ -6516,23 +7702,23 @@ CYCSPELLVARSLOOP:
   goto CYCSPELLVARSLOOP
 
 CYCTMDBVARS:
-  if %spellctm = "aban" then var spellc4var SpellTimer.AbandonedHeart
-  if %spellctm = "ars" then var spellc4var SpellTimer.ArbitersStylus
-  if %spellctm = "fr" then var spellc4var SpellTimer.FireRain
-  if %spellctm = "gs" then var spellc4var SpellTimer.GuardianSpirit
-  if %spellctm = "iz" then var spellc4var SpellTimer.IcutuZaharenela
-  if %spellctm = "pyre" then var spellc4var SpellTimer.Pyre
-  if %spellctm = "rim" then var spellc4var SpellTimer.Rimefang
-  if %spellctm = "ros" then var spellc4var SpellTimer.RingofSpears
-  if %spellctm = "sa" then var spellc4var SpellTimer.SoulAttrition
-  if %spellctm = "sls" then var spellc4var SpellTimer.StarlightSphere
-  if %spellctm = "usol" then var spellc4var SpellTimer.UniversalSolvent
-  if %spellcdb = "alb" then var spellc5var SpellTimer.AlbredasBalm
-  if %spellcdb = "dalu" then var spellc5var SpellTimer.DamarisLullaby
-  if %spellcdb = "dema" then var spellc5var SpellTimer.DesertsMaelstrom
-  if %spellcdb = "ee" then var spellc5var SpellTimer.ElectrostaticEddy
-  if %spellcdb = "hyh" then var spellc5var SpellTimer.HydraHex
-  if %spellcdb = "shw" then var spellc5var SpellTimer.ShadowWeb
+  if %spellcyctm = "aban" then var spellc4var SpellTimer.AbandonedHeart
+  if %spellcyctm = "ars" then var spellc4var SpellTimer.ArbitersStylus
+  if %spellcyctm = "fr" then var spellc4var SpellTimer.FireRain
+  if %spellcyctm = "gs" then var spellc4var SpellTimer.GuardianSpirit
+  if %spellcyctm = "iz" then var spellc4var SpellTimer.IcutuZaharenela
+  if %spellcyctm = "pyre" then var spellc4var SpellTimer.Pyre
+  if %spellcyctm = "rim" then var spellc4var SpellTimer.Rimefang
+  if %spellcyctm = "ros" then var spellc4var SpellTimer.RingofSpears
+  if %spellcyctm = "sa" then var spellc4var SpellTimer.SoulAttrition
+  if %spellcyctm = "sls" then var spellc4var SpellTimer.StarlightSphere
+  if %spellcyctm = "usol" then var spellc4var SpellTimer.UniversalSolvent
+  if %spellcycdebil = "alb" then var spellc5var SpellTimer.AlbredasBalm
+  if %spellcycdebil = "dalu" then var spellc5var SpellTimer.DamarisLullaby
+  if %spellcycdebil = "dema" then var spellc5var SpellTimer.DesertsMaelstrom
+  if %spellcycdebil = "ee" then var spellc5var SpellTimer.ElectrostaticEddy
+  if %spellcycdebil = "hyh" then var spellc5var SpellTimer.HydraHex
+  if %spellcycdebil = "shw" then var spellc5var SpellTimer.ShadowWeb
   return
 
 
@@ -6542,14 +7728,6 @@ CYCTMDBVARS:
 CASTP:
 	pause
 CAST:
-  if %harnmana > 0 then
-  {
-    if %harnessed = 0 then
-    {
-      gosub HARNESS
-      pause
-    }
-  }
   var casttarget
   if %spellprepping = "aeg" then
   {
@@ -6564,11 +7742,11 @@ CAST:
   {
     if ("$righthandnoun" = "wine") then var casttarget wine
   }
-  if %spellprepping = "devour" then
+  if (%spellprepping = "devour") then
   {
     if matchre ("$roomobjs", "(\w+) ((which|that) appears dead|\(dead\))") then
 	  {
-	    var monster $1
+	    var ritualmonster $1
 	    gosub CONSUME
 	  }
 	  else
@@ -6632,6 +7810,7 @@ CAST:
   }
   if %spellprepping = "hyh" then var casttarget male offense
   if %spellprepping = "om" then var casttarget orb
+  if %spellprepping = "resection" then gosub PERFORMCUT
   if %spellprepping = "rits" then var casttarget %ritstype
   #if %spellprepping = "shadowling" then put release shadowling
   if %spellprepping = "tks" then
@@ -6742,6 +7921,41 @@ CAST:
 	goto TIMEOUT
 
 
+
+PVPPREP:
+  var pvpprepstring $0
+  goto PVPPREPMAIN
+PVPPREPP:
+  pause
+PVPPREPMAIN:
+  matchre PVPPREPP %waitstring
+	matchre RETURN You trace a|You raise your|You raise an|You begin chanting|With rigid|With meditative|With calm|With tense|You mutter|You briskly utter a few sharp words|Darkly gleaming motes of
+	match RETURN As you attempt to prepare the spell, a sense of overwhelming peace washes over you.
+	matchre RETURN You begin to hum|You begin your enchante|The first gentle notes|With a sharp cut to your voice|Low, hummed tones form|You begin to chant a mesmerizing|With a resounding "POP"|You begin to sing, a gentle|Wrapped in winter|You weave a soft|Slow, rich tones|Though softly humming|In a low tone you|The wailing of lost souls|Turning your focus solemnly inward|You hear the slow, rich tones of|as you trace your finger along mana|Images of streaking stars falling from the heavens flash across your vision|With great force, you slap your hands together|You direct your attention toward the heavens|You whistle an intricate sequence|A radiant glow wreathes your hands|A strong wind swirls around you|Glowing geometric patterns arc between|Light withdraws from around you|Calmly reaching out with one hand,|In one fluid motion, you bring your palms|You start frantically flailing your hands|Shadow and light collide wildly around|You gaze skyward and trace the planetary|You spin about wildly, whirling around with a feral|Throwing your head back, you release a savage roar|You gaze at your hands, touching your thumb to each|Accompanied with a flash of light, you clap your hands|Droplets of water coalesce around your fingertips|Turning your head slightly and gazing directly|Inhaling deeply, you adopt a cyclical rhythm in your breaths|You clasp your silvery-white flame shrouded hands together|Focusing intently, you slice seven straight lines through|You exhale softly, your breath flowing into a shimmering cloud|You inhale sharply, invoking the
+	matchre PVPPREPREL you're already preparing|You have already fully prepared|You are already preparing
+	match RETURN Something in the area interferes with your spell preparations.
+	put prep %pvpprepstring
+	matchwait
+
+PVPPREPREL:
+  gosub RELSPELL
+  goto PVPPREP
+
+PVPCAST:
+  var pvpcaststring $0
+  goto PVPCASTMAIN
+PVPCASTP:
+  pause
+PVPCASTMAIN:
+  matchre PVPCASTP %waitstring
+	matchre RETURN You gesture.|You gesture at|You wave your hand|With a wave of your hand|You roll your hands in an elliptical|You clasp your hands together|You cup your hand before|You clap your hands once|Your spell|You press your fist|You reach with your fist toward the ground.|You speak a few words of righteousness|You whisper|Tendrils of flame|You make a holy gesture|You close your eyes and take several slow|You clench your hands into fists and grit your teeth|You don't think you can manage to ignite another weapon at the moment.|The flames dancing along your fingertips|Mentally steeling yourself in preparation for|You shudder involuntarily|You release an accompaniment of elemental|You thrust your (right|left) arm before you, fingers splayed\.|With a wave of your hand, your vitality is fully restored\.|You strike your heel against the ground|A sense of calm focus|Roundtime|Your heart skips a beat as your spell|You clench your fists, pressing your fingernails painfully into your flesh\.|You place your hands on your temples\.|You raise your fist toward the sun\.|You raise your hand in an imaginary toast to Glythtide\.|You drop briefly to one knee as you firmly press your palms into the ground\.|You steeple your fingers together to channel the spell's energies\.|You close your eyes and focus on the old hero, Lirisa\.|You swear|With a chirurgeon's care, you press your fingertips against the side of your neck\.
+	matchre RETURN Currently lacking the skill|You don't have a spell prepared!|Your target pattern dissipates because|You can't cast that on anyone else!|You strain, but are too|The spell pattern resists the influx|I could not find what you were referring to.|You must specify one of the thirteen planets\.|The spell pattern resists the influx of .* mana and fails completely\.|You attempt to quiet your mind, focusing on your planar link\.|Steadying your breath, you briefly point one arm up and the other towards the ground, forming a conduit through your body\.
+	match RETURN You can't cast that at yourself!
+	matchre RETURN is already dead, so that's a bit pointless.
+	put cast %pvpcaststring
+	matchwait
+
+
 CASTLOOT:
   gosub LOOT
   goto CAST
@@ -6822,7 +8036,7 @@ CHARGE:
 CHARGESPLITLOOP:
   var cambsplitting %cambmana%cambnumbercount
   math cambsplitting divide %splitcounter
-  if %cambsplitting <= %chargemax then
+  if (%cambsplitting <= %harnessmax) then
   {
     var cambitem%cambnumbercountsplit %splitcounter
     var cambitem%cambnumbercountmod %cambmana%cambnumbercount
@@ -6860,7 +8074,7 @@ CHARGESPLITLOOP2:
 CHARGESPLIT:
   if %cambnumbercount > %cambnumber then return
   var cambitems %cambnumbercount
-  if %cambmana%cambnumbercount > %chargemax then
+  if (%cambmana%cambnumbercount > %harnessmax) then
   {
     var splitcounter 2
     gosub CHARGESPLITLOOP
@@ -6901,6 +8115,7 @@ CHARGELOOP:
   matchre CHARGEFAIL You fail to channel
   matchre CHARGEREM Try though you may|You'll have to hold it, set it
   matchre CHARGETAP You strain
+  match CHARGEINJURED You are in no condition to do that.
   match CHARGEGET You'll have to hold it, set it on the ground, or put it on something first.
   #echo cambcount: %cambcount
   #echo splitcount: %splitcount
@@ -6915,6 +8130,30 @@ CHARGELOOP:
 CHARGEGET:
   gosub GETITEM %cambitem%cambcount
   goto CHARGELOOP
+
+CHARGEINJURED:
+  if ("%autoupkeep" = "YES") then
+  {
+    var goupkeep 1
+    var autype wounds
+    return
+  }
+  else
+  {
+    if ("%bugout" = "YES") then
+    {
+      put #echo >$alertwindow Yellow Tried to use cambrinth, but you're too injured!  Please address!
+      goto BUGOUT
+    }
+    else goto CHARGEINJURED2
+  }
+
+CHARGEINJURED2:
+  put #echo Yellow Alarm: Attention Needed - Too injured for cambrinth!
+  put #flash
+  put #play Advance
+  pause 5
+  goto CHARGEINJURED
 
 CHARGEFAIL:
   put #echo Yellow Alarm: Attention Needed - Cambrinth amount is more than your skill can support!
@@ -6989,8 +8228,8 @@ INVOKECAMB:
 	matchre INVOKESUCC You reach for its center|Your link to|dim, almost magically null.
 	matchre INVOKEREM Try though you may
 	#echo ctotal%invokecount: %ctotal%invokecount
-	if %dedicatedcambrinth != "YES" then put invoke %cambitem%invokecount %ctotal%invokecount
-	else put invoke %cambitem%invokecount %ctotal%invokecount spell
+	if %dedicatedcambrinth != "YES" then put invoke my %cambitem%invokecount %ctotal%invokecount
+	else put invoke my %cambitem%invokecount %ctotal%invokecount spell
 	matchwait 5
 	var timeoutsub INVOKECAMB
   if %dedicatedcambrinth != "YES" then var timeoutcommand invoke %cambitem%invokecount %ctotal%invokecount
@@ -7024,23 +8263,13 @@ HARNESS:
     var harnessed 1
     return
   }
-  if %harntapped > 0 then
+  if (%harntapped > 0) then
   {
-    if %t > %harntapped then
+    if (%t > %harntapped) then
     {
       goto HARNLOOP
     }
     else return
-  }
-  if %harnmana > %harnessmax then
-  {
-    var hsplitcounter 1
-    gosub HARNSPLITLOOP
-  }
-  else
-  {
-    var harnnumber 1
-    var harnmana1 %harnmana
   }
   var harncount 1
   goto HARNLOOP
@@ -7131,6 +8360,7 @@ PERC:
 	if (($guild = "Barbarian") || ($guild = "Thief")) then return
   matchre PERCP %waitstring
   matchre RETURN Roundtime:|You are a bit too busy performing to do that.|You aren't trained in the ways of magic.|Something in the area is interfering with your ability to perceive power\.
+  match RETURN Strangely, you can sense absolutely nothing.
   put perceive
   matchwait 5
 	var timeoutsub PERC
@@ -7140,6 +8370,7 @@ PERC:
 PERCMM:
 	if (($guild = "Barbarian") || ($guild = "Thief")) then return
   matchre RETURN Roundtime:|You are a bit too busy performing to do that.
+  match RETURN Something in the area is interfering with your ability to perceive power.
   matchre PERCP %waitstring
   put perceive mana 
 	matchwait 5
@@ -7168,7 +8399,7 @@ PREP:
 	var preptime %t
   var prepped 1
 	var casting 1
-	if %tattoocast = 1 then 
+	if (%tattoocast = 1) then 
 	{
 	  gosub PREPTATTOO
 	  if %tmcast = 1 then gosub RETARGET
@@ -7190,8 +8421,9 @@ PREPSPELL:
 	matchre RETURN You trace a|You raise your|You raise an|You begin chanting|With rigid|With meditative|With calm|With tense|You mutter|You briskly utter a few sharp words|Darkly gleaming motes of
 	match RETURN As you attempt to prepare the spell, a sense of overwhelming peace washes over you.
 	matchre RETURN You begin to hum|You begin your enchante|The first gentle notes|With a sharp cut to your voice|Low, hummed tones form|You begin to chant a mesmerizing|With a resounding "POP"|You begin to sing, a gentle|Wrapped in winter|You weave a soft|Slow, rich tones|Though softly humming|In a low tone you|The wailing of lost souls|Turning your focus solemnly inward|You hear the slow, rich tones of|as you trace your finger along mana|Images of streaking stars falling from the heavens flash across your vision|With great force, you slap your hands together|You direct your attention toward the heavens|You whistle an intricate sequence|A radiant glow wreathes your hands|A strong wind swirls around you|Glowing geometric patterns arc between|Light withdraws from around you|Calmly reaching out with one hand,|In one fluid motion, you bring your palms|You start frantically flailing your hands|Shadow and light collide wildly around|You gaze skyward and trace the planetary|You spin about wildly, whirling around with a feral|Throwing your head back, you release a savage roar|You gaze at your hands, touching your thumb to each|Accompanied with a flash of light, you clap your hands|Droplets of water coalesce around your fingertips|Turning your head slightly and gazing directly|Inhaling deeply, you adopt a cyclical rhythm in your breaths|You clasp your silvery-white flame shrouded hands together|Focusing intently, you slice seven straight lines through|You exhale softly, your breath flowing into a shimmering cloud|You inhale sharply, invoking the
-	matchre SPELLCANCEL you're already preparing|You have already fully prepared|You are already preparing
+	matchre PREPREL you're already preparing|You have already fully prepared|You are already preparing
 	match SPELLCANCEL Something in the area interferes with your spell preparations.
+	match SPELLCANCEL As quickly as you form the spell pattern in your mind it slips away from you again.
 	match PREPPLAYING You should stop playing before you do that.
 	match PREPBADUNKNOWN You have no idea how to cast that spell.
 	if %prepmana != 0 then var prepstring %spellprepping %prepmana
@@ -7245,7 +8477,9 @@ INVOKETATTOO:
   matchre INVOKETATTOOP %waitstring
   match RETURN You brace yourself as you activate your tattoo and feel empowered, as its magic washes over you.
   match RETURN You brace yourself as you activate your tattoo, but nothing happens.  Its magic appears depleted.
-  match return You brace yourself as you activate your tattoo, but nothing happens as you're already under a heroic effect.
+  match RETURN You brace yourself as you activate your tattoo, but nothing happens as you're already under a heroic effect.
+  match RETURN Something in the area is interfering with the magical device.
+  match INVOKETATTOOP Something in the area is interfering with the magical device.
   put invoke tattoo
   matchwait 5
 	var timeoutsub INVOKETATTOO
@@ -7260,6 +8494,8 @@ PREPTATTOO:
   matchre RETURN Closing your eyes, you carefully bend some mana streams
   matchre PREPTATTOOBAD Invoke what?
   matchre PREPTATTOOUNHIDE You cannot use the tattoo while maintaining the effort to stay hidden.
+  match RETURN Something in the area is interfering with the magical device.
+  match RETURN You are in no condition to do that.
   put invoke tattoo
 	matchwait 5
 	var timeoutsub PREPTATTOO
@@ -7323,7 +8559,7 @@ RESEARCHMAIN:
   matchre RESEARCHP ...wait|type ahead|stunned|while entangled in a web.
 	matchre RESEARCHMAIN there is still more to learn
 	match RESEARCHREL You realize that your prepared spell would interfere with your magical research.
-	matchre RETURN You tentatively reach out and begin|You are already busy at research!|You confidently begin|You require some special means of|You begin to bend the mana streams|With some trepidation, you begin to push the mana streams
+	matchre RETURN You tentatively reach out and begin|You are already busy at research!|You confidently begin|You require some special means of|You begin to bend the mana streams|With some trepidation, you begin to push the mana streams|Abandoning the normal discipline required to manipulate the mana streams
 	put research %researchstring 300
 	matchwait 5
   var timeoutsub RESEARCHMAIN
@@ -7353,11 +8589,12 @@ PREPSYMBIOSISP:
   pause
 PREPSYMBIOSIS:
   matchre PREPSYMBIOSISP %waitstring
-  matchre RETURN But you've already prepared the|You recall the exact details of the 
+  matchre RETURN But you've already prepared the|You recall the exact details of the
+  match RETURN As quickly as you form the spell pattern in your mind it slips away from you again.
   put prepare symbiosis
   matchwait 5
 	var timeoutsub PREPSYMBIOSIS
-  var timeoutcommand preparesymbiosis
+  var timeoutcommand prepare symbiosis
 	goto TIMEOUT
 
 
@@ -7370,6 +8607,7 @@ RELALL:
 	gosub CASTRESET
 	matchre RELALLP %waitstring
 	matchre RETURN You let your concentration|You aren't preparing a spell.|You aren't harnessing any mana.|You have no cyclic spell active to release.
+	match RETURN Release?  You can't even sense mana right now.
 	put release all
 	matchwait 5
 	var timeoutsub RELALL
@@ -7418,6 +8656,7 @@ RELSPELLP:
 RELSPELL:
 	matchre RELSPELLP %waitstring
 	matchre RETURN You let your concentration|You aren't preparing a spell.
+	match RETURN Release?  You can't even sense mana right now.
 	put release spell
 	matchwait 5
 	var timeoutsub RELSPELL
@@ -7445,6 +8684,7 @@ RELCYCLIC:
 	var currentcyc 0
 	matchre RELCYCLICP %waitstring
 	match RETURN You have no cyclic spell active to release.
+	match RETURN Release?  You can't even sense mana right now.
   put release cyclic
 	matchwait .5
 	goto RELCYCLIC2
@@ -7454,6 +8694,7 @@ RELCYCLIC2P:
 RELCYCLIC2:
 	matchre RELCYCLIC2P %waitstring
 	match RETURN You have no cyclic spell active to release.
+	match RETURN Release?  You can't even sense mana right now.
 	put release cyclic
 	matchwait 2
 	return
@@ -7464,6 +8705,7 @@ RELSYMBIOSISP:
 RELSYMBIOSIS:
   matchre RELSYMBIOSISP %waitstring
   matchre RETURN But you haven't prepared a symbiosis!|You pause for a moment|Are you sure you'd lke to remove the
+  match RETURN Release?  You can't even sense mana right now.
   put release symbiosis
   matchwait 5
 	var timeoutsub RELSYMBIOSIS
@@ -7486,11 +8728,37 @@ RITUALINVOKE:
   matchre RETURN You must begin preparing a ritual spell|You make sweeping gestures|Invoke what?|toward the sky and will the mana streams|toward the ceiling and will the mana streams|Kneeling down, you draw|reverently above your head and steadily harness mana streams through it.
   matchre RITUALINVOKESTOW You must be able to handle your .* with both hands to use it for a ritual\.
   matchre RITUALINVIS Magical rituals are exceedingly obvious.  You cannot do it while remaining hidden.
+  match RITUALINJURED You are in no condition to do that.
+  match RITUALMISSING You'll have to hold it, set it on the ground, or put it on something first.
   put invoke %ritualfocus
   matchwait 5
 	var timeoutsub RITUALINVOKE
   var timeoutcommand invoke %ritualfocus
 	goto TIMEOUT
+
+RITUALINJURED:
+  if ("%autoupkeep" = "YES") then
+  {
+    var goupkeep 1
+    var autype wounds
+    return
+  }
+  else
+  {
+    if ("%bugout" = "YES") then
+    {
+      put #echo >$alertwindow Yellow Tried to invoke ritual focus, but you're too injured!  Please address!
+      goto BUGOUT
+    }
+    else goto CHARGEINJURED2
+  }
+  
+RITUALINJURED2:
+  put #echo Yellow Alarm: Attention Needed - Too injured for ritual focus!
+  put #flash
+  put #play Advance
+  pause 5
+  goto RITUALINJURED
 
 RITUALINVOKESTOW:
   gosub STOW left
@@ -7500,6 +8768,9 @@ RITUALINVIS:
   gosub RELINVIS
   goto RITUALINVOKE
 
+RITUALMISSING:
+  gosub GETITEM %ritualfocus
+  goto RITUALINVOKE
 
 TMFOCUSINVOKEP:
   pause
@@ -7646,12 +8917,16 @@ EXCHANGEP:
 EXCHANGE:
   matchre EXCHANGEP %waitstring
   matchre RETURN You hand your|You don't have that many|You count|One of the guards mutters|The money-changer says crossly
+  match EXCHANGENOTHERE There is no money-changer here.
   put exchange %examount to %excurrency
   matchwait 5
 	var timeoutsub EXCHANGE
   var timeoutcommand exchange %examount to %excurrency
 	goto TIMEOUT
   
+EXCHANGENOTHERE:
+  gosub MOVE exchange
+  goto EXCHANGE
   
 EXITVAULT:
   put close vault
@@ -7811,6 +9086,9 @@ WEALTHCHECK:
   var silverdok 0
   var golddok 0
   var platinumdok 0
+  var totalkro 0
+  var totallir 0
+  var totaldok 0
 
   action (wealth) var copperkro $1; var totalkro $2 when .+ (\d+) copper Kronars \((\d+) copper Kronars\).
   action (wealth) var bronzekro $1; var totalkro $2 when .+ (\d+) bronze.+Kronars \((\d+) copper Kronars\).
@@ -7866,6 +9144,27 @@ ARRANGEBADSKIN:
   return
 
 
+BUNDLEP:
+	pause
+BUNDLE:
+  matchre BUNDLEP %waitstring 
+  match RETURN You bundle up
+  match RETURN You carefully fit 
+  matchre BUNDLEBAD That's not going to work.|What were you referring to?
+  match BUNDLEMAKENEW Where did you intend to put that?
+  put bundle
+  matchwait 5
+  var timeoutsub BUNDLE
+  var timeoutcommand bundle
+  goto TIMEOUT
+
+BUNDLEMAKENEW:
+  gosub BUNDLEMAKE
+  gosub BUNDLETIE
+  gosub BUNDLEADJUST
+  gosub WEARITEM my bundle
+  RETURN
+
 BUNDLEADJUSTP:
   pause
 BUNDLEADJUST:
@@ -7888,6 +9187,7 @@ BUNDLEMAKE:
   {
 	  matchre BUNDLEMAKEP %waitstring 
 	  match RETURN You bundle up
+	  match RETURN You carefully fit 
 	  matchre BUNDLEBAD That's not going to work.|What were you referring to?
 	  put bundle
 	  matchwait 5
@@ -7902,13 +9202,22 @@ BUNDLEBAD:
   return
 
 BUNDLEMAKENOROPE:
-  gosub DEEPSLEEP
-  put #echo >$alertwindow Yellow Out of bundling ropes!  Please address!
-  put #flash
-  put #play Advance
-  if (%bugout = "YES") then goto BUGOUT
-  else goto BUNDLEMAKENOROPE2
-
+  if (("%autoupkeep" = "YES") && (%bundlerope > 0)) then
+  {
+    var goupkeep 1
+    var autype gem
+    return
+  }
+  else
+  {  
+    gosub DEEPSLEEP
+    put #echo >$alertwindow Yellow Out of bundling ropes!  Please address!
+    put #flash
+    put #play Advance
+    if (%bugout = "YES") then goto BUGOUT
+    else goto BUNDLEMAKENOROPE2
+  }
+  
 BUNDLEMAKENOROPE2:
   echo ===OUT OF BUNDLING ROPES===
   put #flash
@@ -7918,7 +9227,7 @@ BUNDLEMAKENOROPE2:
   
 
 BUNDLESWAP:
-  if %dropskins = "YES" then
+  if ("%dropskins" = "YES") then
   {
     if %hand = "left" then gosub DUMPITEM $righthandnoun
     else gosub DUMPITEM $lefthandnoun
@@ -8186,7 +9495,7 @@ GEMPOUCHLOOK:
   match GEMPOUCHLOOKFULL You sort through the contents of the gem pouch and find 500 gems in it.  It is tied.
   matchre GEMPOUCHLOOKEMPTY You sort through the contents of the gem pouch and find (([1-9]|[1-9][0-9]|[1-4][0-9][0-9])) (gems|gem) in it\.
   match GEMPOUCHLOOKEMPTY The gem pouch is empty.
-  put count %pouchnum gem pouch in %storage
+  put count %pouchnum gem pouch in my %storage
   matchwait 5
 	var timeoutsub GEMPOUCHLOOK
   var timeoutcommand count %pouchnum gem pouch in %storage
@@ -8207,12 +9516,21 @@ GEMPOUCHLOOKEMPTY:
   return
 
 GEMPOUCHNONE:
-  gosub DEEPSLEEP
-  put #echo >$alertwindow Yellow Out of gem pouches!  Please address!
-  put #flash
-  put #play Advance
-  if (%bugout = "YES") then goto BUGOUT
-  else goto GEMPOUCHNONE2
+  if (("%autoupkeep" = "YES") && (%gempouches > 0)) then
+  {
+    var goupkeep 1
+    var autype gem
+    return
+  }
+  else
+  {
+    gosub DEEPSLEEP
+    put #echo >$alertwindow Yellow Out of gem pouches!  Please address!
+    put #flash
+    put #play Advance
+    if (%bugout = "YES") then goto BUGOUT
+    else goto GEMPOUCHNONE2
+  }
 
 GEMPOUCHNONE2:
   echo ===OUT OF GEM POUCHES===
@@ -8231,7 +9549,8 @@ GEMGET:
   matchre GEMGET ^You open your
   matchre GEMGETBAD You need a free hand to pick that up\.
   matchre GEMPOUCHFULL ^You think the .*gem pouch is too full|^You put your
-  matchre TIEPOUCH You've already got a wealth of gems in there! 
+  matchre TIEPOUCH You've already got a wealth of gems in there!
+  match RETURN You can't pick that up with your hand that damaged.
   put stow gem
   matchwait 5
 	var timeoutsub GEMGET
@@ -8424,6 +9743,7 @@ SKINNINGP:
 SKINNING:
   matchre RETURN You can't skin something that's not dead\!|but end up destroying the skin\.|You carefully fit|renders your skinning attempt|You hideously bungle|You make a series of cuts|cannot be skinned|I don't know|twists and slips in your grip|You claw wildly|Skin what\?|You manage to slice it to dripping tatters\.
 	match SKINSTOW You must have one hand free to skin.
+	match SKININJURED You're too wounded to be skinning anything!
 	matchre SKINNINGP %waitstring
 	matchre RETURN Roundtime: \d+
 	put skin
@@ -8435,6 +9755,31 @@ SKINNING:
 SKINSTOW:
   gosub STOWALL
   goto SKINNING
+
+SKININJURED:
+  if ("%autoupkeep" = "YES") then
+  {
+    var goupkeep 1
+    var autype wounds
+  }
+  else
+  {
+    put #echo >$alertwindow Yellow Tried to skin, but you're too injured!  Please address!
+    put #flash
+    put #play Advance
+    if ("%bugout" = "YES") then goto BUGOUT
+    else goto SKININJURED2
+  }
+  return
+
+SKININJURED2:
+  put #echo Yellow ===FAILED TO SKIN DUE TO WOUNDS!===
+  put #flash
+  put #play Advance
+  pause 5
+  goto SKININJURED2
+  
+  return
 
 
 TIEPOUCHP:
@@ -8568,7 +9913,7 @@ ARMORPROBLEM:
   put #flash
   put #play Advance
   pause 5
-  goto BOWNOAMMO2
+  goto ARMORPROBLEM
     
 ARMORCHECKLOOP:
   math armorloop add 1
@@ -8667,7 +10012,7 @@ BOXLOOTCHECK:
 	matchre BOXLOOTCHECKP \.\.\.wait|type ahead|stunned|while entangled in a web\.
 	#matchre stow_Gear (gear|\bbolt\b|\bnut\b|glarmencoupler|spangleflange|rackensprocket|flarmencrank)
 	matchre BOXLOOTGETMISC (map|treasure map|Treasure map)
-  matchre BOXLOOTGETMISC (nugget|ingot|(?!bar of)\bbar\b|jadeite|kyanite|bark|parchment|\bdira\b|papyrus|tablet|vellum|\bscroll\b|\broll\b|ostracon|leaf|\brune\b)
+  matchre BOXLOOTGETMISC (nugget|ingot|(?!bar of)\bbar\b|jadeite|kyanite|bark|parchment|\bdira\b|papyrus|papyrus roll|tablet|vellum|\bscroll\b|\broll\b|ostracon|leaf|\brune\b)
   matchre RETURN In the|nothing|What
 	put look in my %boxitem
 	matchwait
@@ -8722,11 +10067,11 @@ DISARM:
   match DISARM fails to reveal to you what type of trap protects it.
   match RETURN You guess it is already disarmed.
   match RETURN Roundtime:
-  put disarm %boxitem identify
+  put disarm my %boxitem identify
   matchwait
 
 DISARM2Q:
-  var disarmtype careful
+  var disarmtype
   goto DISARM2
   
 DISARM2C:
@@ -8760,9 +10105,7 @@ PICKP:
 PICK:
   if (%baddisarm = 1) then
   {
-    #var baddisarm 0
-    #goto DISARM
-    return
+    gosub DISARM2put st
   }
   matchre PICKP \.\.\.wait|type ahead|stunned|while entangled in a web\.
   match PICK fails to teach you anything about the lock guarding it.
@@ -8789,7 +10132,7 @@ PICK:
   matchwait
     
 PICK2Q:
-  var picktype careful
+  var picktype
   goto PICK2
   
 PICK2C:
@@ -8801,9 +10144,8 @@ PICK2P:
 PICK2:
   if (%baddisarm = 1) then
   {
-    #var baddisarm 0
-    #goto DISARM
-    return
+    gosub DISARM
+    goto BOXPOPPINGLOOP   
   }
   matchre PICK2P \.\.\.wait|type ahead|stunned|while entangled in a web\.
   match PICK You discover another lock protecting the
@@ -8814,6 +10156,28 @@ PICK2:
   matchwait
 
 
+TURNSKELETONKEY:
+  var skelkeystring $0
+  goto TURNSKELETONKEYMAIN
+TURNSKELETONKEYP:
+  pause
+TURNSKELETONKEYMAIN:
+  matchre TURNSKELETONKEYP %waitstring
+  matchre RETURN You turn a vardite skeleton key at .* and a soft glow surrounds it\.
+  matchre RETURN You attempt to turn .*, but that doesn't seem to do much\.
+  put turn my skeleton key at my %skelkeystring
+  matchwait
+
+PULLBUCKETP:
+  pause
+PULLBUCKET:
+  matchre PULLBUCKETP %waitstring
+  match PULLBUCKET [OOC: PULL the bucket again within the next 30 seconds to flush it.].
+  match RETURN After a moment, a dull *THUD* echoes from within the bucket.
+  put pull my %bucketitem
+  matchwait
+  
+
 BOXPOPPINGKHRI:
   var firstbpkhristring 1
   var bpkhristring 
@@ -8821,7 +10185,6 @@ BOXPOPPINGKHRI:
   {
     if ($SpellTimer.KhriFocus.active != 1) then
     {
-      echo firstbpkhristring: %firstbpkhristring
       if (%firstbpkhristring = 1) then
       {
         var firstbpkhristring 0
@@ -9047,6 +10410,18 @@ NRITUAL:
       }
     }
   }
+  if ("%harvest" = "YES") then
+  {
+    if matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
+    {
+      gosub COUNTMATERIAL
+      if (%materialnum < %harveststorenum) then
+      {
+        gosub HARVEST
+        var necroskin 1
+      }
+    }
+  }
   if ("%dissect" = "YES") then
   {
     if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
@@ -9054,29 +10429,6 @@ NRITUAL:
       if ($Skinning.LearningRate > $Thanatology.LearningRate) then
       {
         gosub NECRODISSECT
-        var necroskin 1
-      }
-    }
-  }
-  else
-  {
-    if ("%harvest" = "YES") then
-    {
-      if (%materialnum = -1) then
-      {
-      
-      }
-      if matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
-      {
-        if $Skinning.LearningRate > $Thanatology.LearningRate then
-        {
-          gosub HARVEST
-          var necroskin 1
-        }
-      }
-      else
-      {
-        gosub HARVEST
         var necroskin 1
       }
     }
@@ -9089,12 +10441,23 @@ NRITUAL:
 
 #####NECRO_SUBS#####
 
+PERFORMCUTP:
+  pause
+PERFORMCUT:
+	matchre PERFORMCUTP %waitstring
+  matchre RETURN You draw a slight cut across your palm
+  put perform cut
+  matchwait 5
+	var timeoutsub PERFORMCUT
+  var timeoutcommand perform cut
+	goto TIMEOUT
+
 
 CONSUMEP:
   pause
 CONSUME:
 	matchre CONSUMEP %waitstring
-  matchre RETURN This ritual may only be performed on a creature's corpse.|Roundtime:|A skinned creature is worthless for your purposes.|Rituals do not work upon constructs.
+  matchre RETURN This ritual may only be performed on a creature's corpse.|Roundtime:|A skinned creature is worthless for your purposes.|Rituals do not work upon constructs\.|This corpse has already been prepared for consumption\.
   put perform consume on %ritualmonster
   matchwait 5
 	var timeoutsub CONSUME
@@ -9108,6 +10471,7 @@ NECRODISSECT:
   matchre DISSECTP %waitstring
   matchre RETURN Roundtime:|A skinned creature is worthless for your purposes.
   matchre NECRODISSECTBAD This ritual may only be performed on a creature's corpse.|This ritual may only be performed on a corpse.|A failed or completed ritual has rendered this corpse unusable for your purposes.
+  matchre NECRODISSECTBAD The preservation ritual that has been performed on this corpse prevents a meaningful dissection.|The harvesting ritual performed on this corpse prevents a meaningful dissection.
   put perform dissect on %ritualmonster
   matchwait 5
 	var timeoutsub NECRODISSECT
@@ -9189,11 +10553,17 @@ POUNCE:
   matchre POUNCEP %waitstring
   match RETURN Roundtime
   match RETURN You're too tired from the last time you pounced on some prey.
+  match POUNCESTAND You'd have better luck if you stood up first.
+  match RETURN What are you trying to attack?
   put pounce
   matchwait 5
   var timeoutsub POUNCE
   var timeoutcommand pounce
 	goto TIMEOUT
+
+POUNCESTAND:
+  gosub STAND
+  goto POUNCE
 
 #####TRADER_SUBS#####
 
@@ -9661,6 +11031,8 @@ PERCHEALTHP:
 PERCHEALTH:
   matchre PERCHEALTHP %waitstring
   matchre RETURN Roundtime|You fail to sense anything, however.|You close your eyes, drawing all your thoughts inward
+  match RETURN Strangely, you can sense absolutely nothing.
+  match RETURN You're in no shape to perceive anyone else's health right now!
   put perceive health
   matchwait 5
 	var timeoutsub PERCHEALTH
@@ -9883,6 +11255,7 @@ BURDENCHECK:
 HEALTHCHECKP:
   pause
 HEALTHCHECK:
+  #echo healthcheck
   var healthcheckgood 0
   matchre HEALTHCHECKP %waitstring
   matchre HEALTHCHECKCLEAN You have no significant injuries.
@@ -9901,6 +11274,7 @@ HEALTHCHECKCLEAN:
 BLEEDCHECKP:
   pause
 BLEEDCHECK:
+  #echo bleedcheck
   var nextbleed %t
   math nextbleed add 90
   gosub BLEEDCLEAN
@@ -10254,12 +11628,17 @@ ASSESSINSTRUMENTP:
 ASSESSINSTRUMENT:
   matchre ASSESSINSTRUMENTP %waitstring
   match RETURN Roundtime:
+  match ASSESSINSTWOUNDED You are in no condition to properly assess your ability to work on your
   matchre RETURN You cannot assess the .* properly while in combat\!
   put assess my %instrument
   matchwait 5
   var timeoutsub ASSESSINSTRUMENT
   var timeoutcommand assess my %instrument
   goto TIMEOUT
+
+ASSESSINSTRWOUNDED:
+  var goupkeep 1
+  return
 
 PLAYP:
   pause
@@ -10354,6 +11733,7 @@ INSTDRY:
   matchre RETURN is not in need of drying.
   match INSTDRYNONE You must be holding
   matchre INSTWRING Your cloth absorbs the water without too much trouble, but remains very wet afterwards.|Using your cloth, you expertly drain|You stare at your
+  match RETURN You're a bit too injured to be attempting something like that.
   put wipe my %instrument with %instcleancloth
   matchwait 5
   var timeoutsub INSTDRY
@@ -10435,6 +11815,7 @@ STUDYALMANAC:
   matchre ALMANACRETURN Roundtime:
   matchre BADALMANAC You've gleaned all the insight you can from
   match RETURN Study what?
+  matchre RETURN But you aren't holding .*
   put study my %almanacitem
   matchwait 5
   var timeoutsub STUDYALMANAC
@@ -10555,6 +11936,7 @@ TURNTEXT:
   matchre TURNTEXTP %waitstring
   matchre RETURN You turn to the section on
   matchre BADTEXT That section does not exist within your
+  match TURNTEXTGET You need to be holding your
   put turn my %textbookitem to %textmonster
   matchwait 5
   var timeoutsub TURNTEXT
@@ -10564,6 +11946,10 @@ TURNTEXT:
 BADTEXT:
   var badtextturn 1
   return
+
+TURNTEXTGET:
+  gosub GETITEM %textbookitem
+  goto TURNTEXT
 
 TEACHP:
   pause
@@ -10633,7 +12019,7 @@ PICKBOXP:
 PICKBOX:
   matchre PICKBOXP %waitstring
   matchre LOCKBOX You set about picking your training box.  With a faint \*CLICK\* it opens.|But the training box isn't locked!|It's not even locked, why bother?
-  matchre RETURN You set about picking the training box, but it quickly becomes apparent you are not making any progress.|Pick what?
+  matchre RETURN You set about picking the training box, but it quickly becomes apparent you are not making any progress.|Pick what?|But you aren't holding
   matchre BADLOCK The lock feels warm, as if worked too often recently, so you stop your attempt to pick it.
   put pick my %locksmithboxitem
   matchwait 5
@@ -10662,6 +12048,7 @@ SKINTRAINER:
   matchre SKINTRAINERP %waitstring
   matchre REPAIRSKINTRAINER You skillfully peel back the leather from the frame underneath\.|A .* has already been sliced open\.  Maybe you should REPAIR it\.
   matchre BADSKINTRAIN The leather looks frayed, as if worked too often recently, so you stop your attempt to skin it\.
+  matchre RETURN You must be holding .* to skin it\.
   put skin %skinfatraineritem
   matchwait 5
   var timeoutsub SKINTRAINER
@@ -11340,9 +12727,26 @@ TAPNOUN:
 TAPSHORTEN:
   var tap $0
   eval tap replace("%tap", " ", "|"
+  eval tap replacere("%tap", "\ba\b\|", ""
+  eval tap replacere("%tap", "\ban\b\|", ""
+  eval tap replacere("%tap", "\bsome\b\|", ""
   eval taplength count("%tap","|")
   #echo taplength: %taplength
   if %taplength > 0 then var shorttap %tap(0) %tap(%taplength)
+  else var shorttap %tap(0)
+  return
+  
+TAPSHORTENMAT:
+  var tap $0
+  eval tap replace("%tap", " ", "|"
+  eval tap replacere("%tap", "\ba\b\|", ""
+  eval tap replacere("%tap", "\ban\b\|", ""
+  eval tap replacere("%tap", "\bsome\b\|", ""
+  eval taplength count("%tap","|")
+  #echo taplength: %taplength
+  var matadj %taplength
+  math matadj subtract 1
+  if %taplength > 0 then var shorttap %tap(%matadj) %tap(%taplength)
   else var shorttap %tap(0)
   return
 

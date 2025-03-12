@@ -142,38 +142,41 @@ AREAVARINIT:
 
 CRAFTVARLOAD:
   var crafting $m%varsetcrafting
-  var craftingstorage $m%varsetcraftingstorage
-  var craftingstoragelocation $m%varsetcraftingstoragelocation
   var forging $m%varsetforging
-  var forgingdifficulty $m%varsetforgingdifficulty
-  var forgingmaterial $m%varsetforgingmaterial
-  var forgingdiscipline $m%varsetforgingdiscipline
-  var forgingrepair $m%varsetforgingrepair
-  var forgingprivateroom $m%varsetforgingprivateroom
-  var forgingmaxvolumes $m%varsetforgingmaxvolumes  
-  var forgingmaxquantity $m%varsetforgingmaxquantity
-  var forgingsmelting $m%varsetforgingsmelting
-  
   var outfitting $m%varsetoutfitting
-  var outfittingdifficulty $m%varsetoutfittingdifficulty
-  var outfittingcloth $m%varsetoutfittingcloth
-  var outfittingleather $m%varsetoutfittingleather
-  var outfittingrepair $m%varsetoutfittingrepair
-  var outfittingmaxquantity $m%varsetoutfittingmaxquantity
-  var outfittingmaxyards $m%varsetoutfittingmaxyards
   
-  var awl $m%varsetawl
-  var bellows $m%varsetbellows
-  var hammer $m%varsethammer
-  var knittingneedles $m%varsetknittingneedles
-  var pliers $m%varsetpliers
-  var scissors $m%varsetscissors
-  var sewingneedles $m%varsetsewingneedles
-  var shovel $m%varsetshovel
-  var slickstone $m%varsetslickstone
-  var rod $m%varsetrod
-  var tongs $m%varsettongs
-  var yardstick $m%varsetyardstick
+  var craftingstorage $craftingstorage
+  var craftingstoragelocation $craftingstoragelocation
+
+  var forgingdifficulty $forgingdifficulty
+  var forgingmaterial $forgingmaterial
+  var forgingdiscipline $forgingdiscipline
+  var forgingrepair $forgingrepair
+  var forgingprivateroom $forgingprivateroom
+  var forgingmaxvolumes $forgingmaxvolumes  
+  var forgingmaxquantity $forgingmaxquantity
+  var forgingsmelting $forgingsmelting
+  
+
+  var outfittingdifficulty $outfittingdifficulty
+  var outfittingcloth $outfittingcloth
+  var outfittingleather $outfittingleather
+  var outfittingrepair $outfittingrepair
+  var outfittingmaxquantity $outfittingmaxquantity
+  var outfittingmaxyards $outfittingmaxyards
+  
+  var awl $awl
+  var bellows $bellows
+  var hammer $hammer
+  var knittingneedles $knittingneedles
+  var pliers $pliers
+  var scissors $scissors
+  var sewingneedles $sewingneedles
+  var shovel $shovel
+  var slickstone $slickstone
+  var rod $rod
+  var tongs $tongs
+  var yardstick $yardstick
   
   var restartorder 0
   var workorderbail 0
@@ -197,7 +200,7 @@ CRAFTINGABORT:
    return
 
 CRAFTINGEND:
-  put store default %storage
+  gosub STOREDEFAULT %storage
   if ("$righthand" != "Empty") then gosub PUTITEM my $righthandnoun in my %craftingstorage
   if ("$lefthand" != "Empty") then gosub PUTITEM my $lefthandnoun in my %craftingstorage
   gosub CLOSEITEM my %craftingstorage
@@ -1323,7 +1326,7 @@ COMBINEALLMAIN:
   gosub GETITEM %combineadj %combinenoun in my %craftingstorage
   echo righthand: $righthand   lefthand: $lefthand
   if (("$righthand" = "Empty") || ("$lefthand" = "Empty")) then gosub GETITEM %combineadj %combinenoun in my %craftingstorage
-  if (("$righthand" != "Empty") && ("$lefthand" != "Empty")) then gosub COMBINE
+  if (("$righthand" != "Empty") && ("$lefthand" != "Empty")) then gosub COMBINE %combineadj %combinenoun
   else
   {
     gosub PUTITEM %combineadj %combinenoun in my %craftingstorage
@@ -1331,12 +1334,15 @@ COMBINEALLMAIN:
   }
   goto COMBINEALLMAIN
   
-  
 COMBINE:
+  var combineadjstring %1
+  var combinenounstring %2
+  goto COMBINEMAIN
+COMBINEMAIN:
 	matchre RETURN too large
 	matchre RETURN You must be holding|You combine
 	match RETURN The spool is not large enough to combine both threads.
-	put combine my %combineadj %combinenoun with my other %combineadj %combinenoun
+	put combine my %combineadjstring %combinenounstring with my other %combineadjstring %combinenounstring
 	matchwait
 
 
@@ -2036,7 +2042,7 @@ GIVEMASTERLOGMAIN:
 
 GIVEMASTERLOGBAD:
   gosub FINDMASTER
-  GOTO givemasterlog
+  goto GIVEMASTERLOGMAIN
 
 #####REPAIR#####
 
