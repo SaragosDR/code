@@ -980,9 +980,8 @@ SET:
     if tolower("%1") = "windboardcharge" then goto REGTEXTSET
     if tolower("%1") = "windboardtrick" then goto TEXTSET
     
-    
-    
     if tolower("%1") = "killbeforemove" then goto YESNOSET
+    if tolower("%1") = "sleepontravel" then goto YESNOSET
     if tolower("%1") = "movetimeout" then goto TEXTSET
     if tolower("%1") = "prefergroup" then goto YESNOSET
     if tolower("%1") = "huntingpremium" then
@@ -1603,9 +1602,6 @@ MAINHELP:
   put #echo mono .SET <variable> <value> - changes variables
 	put #echo mono  .SET DISPLAY ALL  - Displays all variables
 	put #echo
-  put #echo mono  .SET MODE <value> - Changes variable mode to view, 1 or 2.
-  put #echo mono  .SET COPY <variable section> <source> <destination> - Copies variables from the variable section in the value1 mode to the value2 mode.
-	put #echo
   put #echo mono  .SET DISPLAY GENERAL - General variables.
   put #echo mono  .SET DISPLAY UPKEEP - In-town upkeep variables.
   put #echo mono  .SET DISPLAY HUNTING - Variables for where you train and how you loot.
@@ -1613,6 +1609,7 @@ MAINHELP:
   put #echo mono  .SET DISPLAY NONCOMBAT - Variables for skills trained out of combat.
   put #echo mono  .SET DISPLAY MAGIC - Magic and spell variables.
   put #echo mono  .SET DISPLAY GUILD - Guild-specific variables.
+  put #echo mono  .SET DISPLAY MULTI - Multi-Area variables.
 	put #echo
 	put #echo mono  .SET DISPLAY KILL - Variables for Kill.cmd script.
 	put #echo mono  .SET DISPLAY OTHER - Variables for scripts other than Train.cmd.
@@ -2672,6 +2669,7 @@ DISPLAYOTHER:
   }
   if $guild = "Moon Mage" then
   {
+    echo
     put #echo mono =================== Astral Script Variables===================
     put #echo mono AstralSafe: $astralsafe
     put #echo mono Hundredth: $hundredth
@@ -2737,6 +2735,7 @@ DISPLAYHUNTING:
   put #echo mono ========== Movement Variables ==========
   put #echo
   gosub OUTPUT KillBeforeMove     (Finish your kill before leaving combat for other training.)
+  gosub OUTPUT SleepOnTravel
   gosub OUTPUT MoveTimeout     (Timeout, in seconds, before the Travel or AutoMapper script will be restarted.)
   gosub OUTPUT PreferGroup     (Prefer hunting with people on your WhiteList to an empty room)
   gosub OUTPUT HuntingPremium (YES, NO, or ONLY if you wish to select only from Premium rooms.)

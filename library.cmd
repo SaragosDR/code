@@ -1,4 +1,4 @@
-var lastupdated 09/15/2024
+var lastupdated 03/11/2025
 
 var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
 var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mapp|mpp|mf|pfe|pom|sl|sol|
@@ -181,6 +181,7 @@ VARCHECKS:
   if !matchre("$movevanish", "\b(YES|NO)\b") then put #var movevanish NO
 
   if !matchre("$killbeforemove", "\b(YES|NO)\b") then put #var killbeforemove YES
+  if !matchre("$sleepontravel", "\b(YES|NO)\b") then put #var sleepontravel YES
   if $movetimeout > 0 then
   else put #var movetimeout 300
   if !matchre("$huntingpremium", "\b(YES|NO|ONLY)\b") then put #var huntingpremium NO
@@ -852,7 +853,7 @@ VARCHECKS:
   #GUILD-MM
   if !matchre("$astro", "\b(YES|NO)\b") then put #var astro NO
   if $astrotimer >= 0 then
-  else put #var astrotimer 0
+  else put #var astrotimer 60
   if !def(tktitem) then put #var tktitem dagger
   if !def(shadowlingnoun) then put #var shadowlingnoun shadowling
   if !matchre("$predictiontool", "\b(none|bones|mirror)\b") then put #var predictiontool none
@@ -3720,7 +3721,7 @@ STATUSCHECK:
     if ($prone = 1) then gosub STAND
   }
   #SCRIPT_AREA_CHECKING_AUTOUPKEEP
-  if (%scriptmode = 1) then 
+  if ((%scriptmode = 1) && (%buffingonly != 1)) then 
   {
     gosub NEWAREADECISION
     gosub NEWAREAMOVEMENT

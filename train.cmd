@@ -3408,6 +3408,7 @@ MAINVARLOAD:
   var bugoutonbleed $bugoutonbleed
   var bugoutonsend $bugoutonsend
   var killbeforemove $killbeforemove
+  var sleepontravel $sleepontravel
   var movetimeout $movetimeout
   var prefergroup $prefergroup
   var huntingpremium $huntingpremium
@@ -4252,7 +4253,7 @@ NEWAREAMOVEMENT:
       put #echo Yellow Noncombat ended!
       put #echo %alertwindow [Train]: Ended NonCombat training.
       var noncombatactive 0
-      gosub DEEPSLEEP    
+      if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
     } 
     
     #GOING_TO_COMBAT
@@ -4322,7 +4323,7 @@ NEWAREAMOVEMENT:
       if ("%autype" = "boxes") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to lacking space for boxes.
       if ("%autype" = "manual") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to manual trigger.
       if ("%autype" = "test") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep to test the route.
-      gosub DEEPSLEEP
+      if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
       if (%rpastatus = 1) then gosub RPATOGGLE
     	if $invisible = 1 then gosub RELINVIS
     	gosub LEAVEROOM
@@ -7416,7 +7417,7 @@ BURGLEPAWNLOGIC:
   if (%pawnshop = "none") then var burglepawnsold -2
   else
   {
-    gosub DEEPSLEEP
+    if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
     var burglepawnsold 0
     eval burglelootlistnum count("%burglelootlist", "|")
     echo burglelootlist: %burglelootlist
@@ -10429,7 +10430,7 @@ NEWNONCOMBATLOGIC:
 	  #TRADING_SELL
     if (%noncombatsellactive = 1) then
 		{
-      gosub DEEPSLEEP
+      if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
       gosub LEAVEROOM
       var rtzone 1
       var rttravel YES
@@ -10448,7 +10449,7 @@ NEWNONCOMBATLOGIC:
     #TRADING_TASKS
     if (%noncombattasksactive = 1) then
 		{
-      gosub DEEPSLEEP
+      if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
       gosub LEAVEROOM
       var rtzone 1
       var rttravel YES
@@ -10466,7 +10467,7 @@ NEWNONCOMBATLOGIC:
 		#BURGLING
 		if (%noncombatburgleactive) = 1 then
 		{
-			gosub DEEPSLEEP
+			if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
 			gosub LEAVEROOM
 			gosub NEWTOWNPRESET %burgletown burgle
 			gosub ROOMTRAVEL
@@ -10483,7 +10484,7 @@ NEWNONCOMBATLOGIC:
 	  #PERFORMANCE
 		if (%noncombatperformactive = 1) then
 		{
-			gosub DEEPSLEEP
+			if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
 		  gosub LEAVEROOM
 		  gosub NEWTOWNPRESET %performtown perform
 			var firstclean 0   
@@ -10496,7 +10497,7 @@ NEWNONCOMBATLOGIC:
 		#FORGING
 		if (%noncombatforgingactive = 1) then
 		{
-			gosub DEEPSLEEP
+			if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
 		  gosub LEAVEROOM
 		  gosub NEWTOWNPRESET %forgingtown forging
 			gosub ROOMTRAVEL
@@ -11044,26 +11045,36 @@ ROOMTRAVELUPKEEP:
   else
   {
     gosub NEWTOWNPRESET %upkeeptown upkeep
-  }
-  if ("%upkeeptown" != "fangcove") then
-  {
-    var fangcovevisit 0
-    gosub LEAVEROOM
-    gosub ROOMTRAVEL
-    return
-  }
-  else
-  {
-    #FANGCOVE
-    var fangcovevist 0
-    if ("%premiumring" = "YES") then
+    if ("%upkeeptown" != "fangcove") then
     {
-      if (%t < %nextring) then return
+      var fangcovevisit 0
       gosub LEAVEROOM
-      gosub PREMIUMRINGGO
-      if (%goodring = 1) then
+      gosub ROOMTRAVEL
+      return
+    }
+    else
+    {
+      #FANGCOVE
+      var fangcovevist 0
+      if ("%premiumring" = "YES") then
       {
-        var fangcovevisit 1
+        if (%t < %nextring) then return
+        gosub LEAVEROOM
+        gosub PREMIUMRINGGO
+        if (%goodring = 1) then
+        {
+          var fangcovevisit 1
+        }
+        else
+        {
+          #FANGCOVE_PORTAL
+          var fangcovevisit 2
+          gosub NEWTOWNPRESET %nearestportaltown upkeep
+          gosub LEAVEROOM
+          gosub ROOMTRAVEL
+          gosub MOVE portal
+          move go meeting portal
+        }    
       }
       else
       {
@@ -11074,21 +11085,11 @@ ROOMTRAVELUPKEEP:
         gosub ROOMTRAVEL
         gosub MOVE portal
         move go meeting portal
-      }    
+      }
+      put #mapper reset
+      pause 1
+      move n
     }
-    else
-    {
-      #FANGCOVE_PORTAL
-      var fangcovevisit 2
-      gosub NEWTOWNPRESET %nearestportaltown upkeep
-      gosub LEAVEROOM
-      gosub ROOMTRAVEL
-      gosub MOVE portal
-      move go meeting portal
-    }
-    put #mapper reset
-    pause 1
-    move n
   }
   return
 
@@ -13913,7 +13914,7 @@ BUGOUT:
   }
   gosub RELALL
   gosub CASTRESET
-  gosub DEEPSLEEP
+  if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
   if %rpastatus = 1 then gosub RPATOGGLE
   goto BUGOUTLOOP
 
