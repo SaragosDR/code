@@ -8812,8 +8812,26 @@ WANDINVOKESTOW:
   gosub GETITEM %wandinvokestring
   goto WANDINVOKE
 
-
-
+WEATHER:
+  var inside 0
+  goto WEATHERMAIN
+WEATHERP:
+  pause
+WEATHERMAIN:
+  matchre WEATHERP %waitstring
+  match RETURN You glance up at the sky.
+  match RETURN You glance outside.
+  match WEATHERINSIDE That's a bit hard to do while inside.
+  put weather
+  matchwait 5
+	var timeoutsub WEATHERMAIN
+  var timeoutcommand weather
+	goto TIMEOUT
+	
+WEATHERINSIDE:
+  var inside 1
+  return
+	
 #####UPKEEP_SUBS#####
 
 
@@ -11568,7 +11586,7 @@ FULLHANDS:
   goto COLLECT
 
 BADCOLLECT:
-  var outdoor NO
+  var collect NO
   return
 
 COLLECTR:

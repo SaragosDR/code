@@ -4210,11 +4210,11 @@ NEWAREAMOVEMENT:
           ##KILL_NEXT
           if (%killbeforeleave != 1) then return
           var killbeforeleave -1
-          put #echo %alertwindow [Train]: Ended Combat training.
+          #put #echo %alertwindow [Train]: Ended Combat training.
         }
         else
         {
-          put #echo %alertwindow [Train]: Ended Combat training.
+          #put #echo %alertwindow [Train]: Ended Combat training.
         }
       }
     }
@@ -4251,7 +4251,7 @@ NEWAREAMOVEMENT:
     if ("%scriptarea" = "noncombat") then
     {
       put #echo Yellow Noncombat ended!
-      put #echo %alertwindow [Train]: Ended NonCombat training.
+      #put #echo %alertwindow [Train]: Ended NonCombat training.
       var noncombatactive 0
       if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
     } 
@@ -4849,7 +4849,7 @@ NONCOMBATLOOP:
 	  gosub STATUSCHECK
 	}
   #COLLECTING
-  if %collect = "YES" then
+  if (%collect = "YES") then
   {
     gosub COLLECTLOGIC
     gosub STATUSCHECK
@@ -11041,6 +11041,10 @@ ROOMTRAVELUPKEEP:
   if ("%autype" = "ammo") then
   {
     gosub NEWTOWNPRESET %ammobuytown upkeep
+    var fangcovevisit 0
+    gosub LEAVEROOM
+    gosub ROOMTRAVEL
+    return
   }
   else
   {
@@ -12080,13 +12084,6 @@ BUFFINGLOOP:
   {  
     if ((($%buff%buffloopvar.active = 1) && ($%buff%buffloopvar.duration < %buffbuffer)) || ($%buff%buffloopvar.active != 1)) then
     {
-      #if %buff%buffloop = "col" then
-      #{ 
-      #  gosub MOONCHECK
-      #  if %moonsout = 1 then gosub BUFFINGFUNC
-      #  if %casting = 1 then return
-      #  else goto BUFFINGLOOP
-      #}
       if matchre ("%buff%buffloop", "%transnecro") then
       {  
         #echo Testing a Transcendental spell!
@@ -12097,6 +12094,11 @@ BUFFINGLOOP:
       }
       if %buff%buffloop = "iots" then
       {
+        gosub WEATHER
+        if (%inside = 1) then
+        {
+          goto BUFFINGLOOP
+        }
         if %iotsscan = 0 then
         {
           gosub FINDBODY
