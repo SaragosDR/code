@@ -8726,7 +8726,7 @@ RITUALINVOKEP:
 RITUALINVOKE:
   var invoked 1
   matchre RITUALINVOKEP %waitstring
-  matchre RETURN You must begin preparing a ritual spell|You make sweeping gestures|Invoke what?|toward the sky and will the mana streams|toward the ceiling and will the mana streams|Kneeling down, you draw|reverently above your head and steadily harness mana streams through it.
+  matchre RETURN You must begin preparing a ritual spell|You make sweeping gestures|Invoke what?|toward the sky and will the mana streams|toward the ceiling and will the mana streams|Kneeling down, you draw|reverently above your head and steadily harness mana streams through it.|Roundtime\:
   matchre RITUALINVOKESTOW You must be able to handle your .* with both hands to use it for a ritual\.
   matchre RITUALINVIS Magical rituals are exceedingly obvious.  You cannot do it while remaining hidden.
   match RITUALINJURED You are in no condition to do that.

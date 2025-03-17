@@ -1,6 +1,74 @@
+03/16/25
+Updated Scripts: train, library, set, p
+Added new variable: SleepOnTravel.  This decides whether the script stops experience drain during movement.  Default is YES.
+Pushed an update for the p script that incorporates the variable changes.
+Put in missing text for new ritual foci.
+
+
+
+03/15/25
+Updated Scripts: train, library, set, craft, craftlibrary
+I've pushed out an update to the script that's big enough to be considered a 2.0 update.  It's been a long time since the last update, because there's a lot I've been working on and I wanted to make sure that it was all working properly.
+
+I've substantially changed the architecture of how it runs and dramatically reduced the number of variables.  Basically, I applied what I've learned over the years to make it so that instead of having a lot of settings, the script makes the decision if there's a "right answer".  I've also dramatically improved the reliability of it, both in making sure that it's int he right place, as well as dealing with injuries and interruptions.  There's about half as many variables, the display has been simplified, and multi-zone variables are just a few extra variables rather than a complete duplication of everything.  There's also significantly more visible documentation about what variables do, and defaults have been improved.
+
+I highly recommend copying your variables to a text file via .set display all, deleting all your existing variables, and then setting your variables fresh.  Please feel free to reach out to me if you need any help doing that.
+
+
+06/05/24
+Updated Scripts: train, library, craftlibrary, set
+Fixed a bug that could cause a miscount on oil uses and volumes in an ingot.
+Fixed a bug that would cause a script halt when a long cord was needed for forging.
+Fixed a bug for some niche cases with with certain items and applying oil.
+Added logic to re-find the forging master if the master leaves immediately after being found.
+Fixed a bug in new skinning logic that could cause skinnable constructs not to be skinned.
+Fixed a bug in travel logic that could cause it to get stuck in Fang Cove if you entered through a portal and restarted the script.
+Added missing messaging to text whitelist for Crossing Forging Society.
+
+
+03/31/24
+Updated Scripts: train, maze
+A couple of minor bugfixes.
+
+
+03/30/24
+Updated Scripts: train, library, set, craftlibrary, craft, maze
+Added maze.cmd script for the Duskruin labyrinth.
+
+New variable: BugoutOnSend - to automatically bugout when you recieve a GM SEND.  Defaults to YES.
+Whitelisted mail speech to prevent it from making noise.
+Added a fallback to avoid an endless loop if a bug happens with travel.
+The script should now be able to navigate away from Fang Cove if it is started up there but wants to travel elsewhere.
+
+Added variables for pliers and Outfitting.
+Scripts can now gracefully handle when the anvil they wants to use has a partially finished project on it.
+Craft script now works for Tailoring.
+Craft script now properly recognizes when Tailoring materials are yarn instead of cloth.
+Craft script no longer requires the noun of the item to be entered - it instead pulls it from the book.
+Added checks to successfully recover from being unable to locate the appropriate crafting book.
+Fixed a bug that could cause oil not to be purchased if you had oil elsewhere not in your crafting storage.
+Added a missing room to check for where the Forging Master in Crossing.
+
+
+03/11/2024
+Updated Scripts: train, library, workorder, craftlibrary
+Fixed several bugs related to Crossing forging society mistress and navigation.
+Fixed a bug related to the blacksmithing crafting products that have no article in their name.
+Improved script recovery and user messaging for several failure states in the forging process.
+Added graceful recovery to attempting to fill a crucible that already has molten metal.
+Added tool repair cost to expenses tracking.
+Fixed an issue where Crossing private forge rental wasn't being recorded in expenses.
+Tweaked Work order report so that it doesn't give so many decimal places on the total minutes.
+Cleaned up crafting end processes.
+Fixed BUNDLEADJUST so that it wouldn't fail if a bundle was on the ground.
+Fixed a bug in CLOSEITEM sub that caused it to open items instead.
+Added additional checks to travel sub to make sure that it got where it was intending to go when moving rooms for training/upkeep.
+
+
 03/08/2024
 Updated Scripts: train, library, set, craft, craftlibrary, workorder
 Forging is implemented!  Check the NonCombat section for related variables and the Movement section to choose where to forge at.  Currently, only Crossing, Shard, Hibarnhvidar, and Mer'kresh forges are implemented.
+Craft script is a standalone script for crafting items, workorder script is a standalone script for workorders.
 
 Additional checks put in to help the script properly recognize when you've died.
 Changed collecting to use new COLLECT PRACTICE.
