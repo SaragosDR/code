@@ -122,6 +122,7 @@ action var researching 0; var rprojectactive 1; var researchtype $2 when ^You ha
 #SANOWRET_TRIGGERS
 action var sanowretready 1 when ^However, nothing much else happens, as you lack the concentration to focus.
 action var sanowretready 1 when ^The light and crystal sound of your
+action var tomeofloreready 1 when ^Having finished your studies, you close the cover of your
 #sanowret crystal fades slightly
 
 #APPFOCUS_TRIGGERS
@@ -364,7 +365,7 @@ timer start
 var multimode 0
 var mstarget 0
 var modestart 0
-var multitrain NO
+var multiarea NO
 
 var scriptmodename %1
 var scriptmode -1
@@ -632,6 +633,8 @@ GUILDVARLOAD:
 
 
 COMMANDVARLOAD:
+  if tolower("%scriptmodename") = "1" then var multiarea NO
+  if tolower("%scriptmodename") = "2" then var multiarea NO
   if (tolower("%scriptmodename") = "noncombat") then
   {
     var scriptmode 0
@@ -1035,11 +1038,11 @@ COMMANDVARLOAD:
   if tolower("%scriptmodename") = "multi" then
   {
     echo
-    echo ================MultiTrain===============
+    echo ================Multi-Area Training===============
     echo
     var scriptmode 1
-    var multitrain YES
-    put #echo >$alertwindow Began combat training in MultiTrain Mode.
+    var multiarea YES
+    put #echo >$alertwindow Began combat training in Multi-Area Mode.
   }
   if tolower("%scriptmodename") = "alerts" then
   {
@@ -1099,6 +1102,7 @@ COMMANDPARSE:
     {
       var scriptmode 1
       gosub TITLE
+      var multiarea NO
       if ("%1" = "2") then
       {
         var varset 2
@@ -3027,7 +3031,7 @@ VALIDROOMCHECK:
         {
           put #flash
           put #play JustArrived
-          put #echo %alertwindow Yellow [UPKEEP]: Multitrain, AutoUpkeep or Bugout is turned on, but the script is starting up in an unrecognized room!  Restart script when $roomid is something other than 0!
+          put #echo %alertwindow Yellow [UPKEEP]: Multi-Area Training, AutoUpkeep or Bugout is turned on, but the script is starting up in an unrecognized room!  Restart script when $roomid is something other than 0!
           put #echo Yellow [UPKEEP]: AutoUpkeep or Bugout is turned on, but the script is starting up in an unrecognized room!  Restart script when $roomid is something other than 0!
           exit
         }
@@ -3379,6 +3383,7 @@ STATUSVARLOAD:
   var tmove3 none
   var tmove4 none
   var tmove5 none
+  var tomeofloreready 1
   var usingacm 0
   var usingbow 0
   var usingdebiltm 0
@@ -3415,17 +3420,17 @@ MAINVARLOAD:
   var premiumring $premiumring
   var premiumringitem $premiumringitem
   
-  if ($varset = 1) then var huntingarea $huntingarea
+  if (%varset = 1) then var huntingarea $huntingarea
   else var huntingarea $huntingaream2
-  if ($varset = 1) then var upkeeptown $upkeeptown
+  if (%varset = 1) then var upkeeptown $upkeeptown
   else var upkeeptown $upkeeptownm2
-  if ($varset = 1) then var burgletown $burgletown
+  if (%varset = 1) then var burgletown $burgletown
   else var burgletown $burgletownm2
-  if ($varset = 1) then var pawntown $pawntown
+  if (%varset = 1) then var pawntown $pawntown
   else var pawntown $pawntownm2
-  if ($varset = 1) then var performtown $performtown
+  if (%varset = 1) then var performtown $performtown
   else var performtown $performtownm2
-  if ($varset = 1) then var forgingtown $forgingtown
+  if (%varset = 1) then var forgingtown $forgingtown
   else var forgingtown $forgingtownm2
   
   var movevanish $movevanish
@@ -3570,6 +3575,8 @@ MAINVARLOAD:
   var textbooktimer $textbooktimer
   var textbookitem $textbookitem
   var textbooklist $textbooklist
+  var tomeoflore $tomeoflore
+  var tomeofloreitem $tomeofloreitem
   var teaching $teaching
   var teachtargets $teachtargets
   var teachskill $teachskill
@@ -3690,9 +3697,9 @@ MAINVARLOAD:
   var tattoospell $tattoospell
   var tattooprepmana $tattooprepmana
  
-  if ($varset = 1) then var spell $spell
+  if (%varset = 1) then var spell $spell
   else var spell $spellm2
-  if ($varset = 1) then var spellnum $spellnum
+  if (%varset = 1) then var spellnum $spellnum
   else var spellnum $spellnumm2
   var spell1 $spell1
   var spell1mana $spell1mana
@@ -3707,19 +3714,19 @@ MAINVARLOAD:
   var spell4mana $spell4mana
   var spell4symb $spell4symb
   var tmdbprior $tmdbprior
-  if ($varset = 1) then var tm $tm
+  if (%varset = 1) then var tm $tm
   else var tm $tmm2
   var spelltm $spelltm
   var spelltmmana $spelltmmana
-  if ($varset = 1) then var debil $debil
+  if (%varset = 1) then var debil $debil
   else var debil $debilm2
   var spelldebil $spelldebil
   var spelldebilmana $spelldebilmana
-  if ($varset = 1) then var cyclic $cyclic
+  if (%varset = 1) then var cyclic $cyclic
   else var var cyclic $cyclicm2
   var cyclicbuff $cyclicbuff
   var spellcnum $spellcnum
-  if ($varset = 1) then var spellcnum $spellcnum
+  if (%varset = 1) then var spellcnum $spellcnum
   else var var spellcnum $spellcnumm2
   var spellc1 $spellc1
   var spellc1prepmana $spellc1prepmana
@@ -3727,11 +3734,11 @@ MAINVARLOAD:
   var spellc2prepmana $spellc2prepmana
   var spellc3 $spellc3
   var spellc3prepmana $spellc3prepmana
-  if ($varset = 1) then var cyctm $cyctm
+  if (%varset = 1) then var cyctm $cyctm
   else var cyctm $cyctmm2
   var spellcyctm $spellcyctm
   var spellcyctmmana $spellcyctmmana
-  if ($varset = 1) then var cycdebil $cycdebil
+  if (%varset = 1) then var cycdebil $cycdebil
   else var cycdebil $cycdebilm2
   var spellcycdebil $spellcycdebil
   var spellcycdebilmana $spellcycdebilmana
@@ -3860,19 +3867,19 @@ MAINVARLOAD:
   }
 
   #NONCOMBAT
-  if ($varset = 1) then var noncombat $noncombat
+  if (%varset = 1) then var noncombat $noncombat
   else var noncombat $noncombatm2
-  if ($varset = 1) then var burgle $burgle
+  if (%varset = 1) then var burgle $burgle
   else var burgle $burglem2
-  if ($varset = 1) then var perform $perform
+  if (%varset = 1) then var perform $perform
   else var perform $performm2
-  if ($varset = 1) then var crafting $crafting
+  if (%varset = 1) then var crafting $crafting
   else var crafting $craftingm2
-  if ($varset = 1) then var forging $forging
+  if (%varset = 1) then var forging $forging
   else var forging $forgingm2
-  if ($varset = 1) then var outfitting $outfitting
+  if (%varset = 1) then var outfitting $outfitting
   else var outfitting $outfittingm2
-  if ($varset = 1) then var research $research
+  if (%varset = 1) then var research $research
   else var research $researchm2
   
   var burglestorage $burglestorage
@@ -3930,31 +3937,28 @@ WEAPONLOADLOOPMAIN:
 
 MULTIVARLOAD:
   #MULTITRAIN
-  var mode1name $mode1name
+  var multiarea $multiarea
+  var multiareapriority $multiareapriority
+  var multimindstep $multimindstep
   var mode1list $mode1list
-  var mode1step $mode1step
-  var mode1priority $mode1priority
-  var mode2name $mode2name
   var mode2list $mode2list
-  var mode2step $mode2step
-  var mode2priority $mode2priority
   return
 
 
 
 ###MAIN LOOP###
 MAINLOOP:
-  if %scriptmode = 0 then goto NONCOMBATLOOP
-  if %scriptmode = 1 then goto COMBATLOOP
-  if %scriptmode = 2 then goto BUFFINGONLYLOOP
-  if %scriptmode = 3 then
+  if (%scriptmode = 0) then goto NONCOMBATLOOP
+  if (%scriptmode = 1) then goto COMBATLOOP
+  if (%scriptmode = 2) then goto BUFFINGONLYLOOP
+  if (%scriptmode = 3) then
   {
     gosub UPKEEPLOGIC
     put #flash
     put #play NewRank
     exit
   }
-  if %scriptmode = 4 then
+  if (%scriptmode = 4) then
   {
     gosub AWAKE
     gosub BURGLELOGIC
@@ -4045,7 +4049,7 @@ NEWNONCOMBATCHECKS:
 
 NEWAREADECISION:
   #MULTITRAIN
-  if ("%multitrain" = "YES") then
+  if ("%multiarea" = "YES") then
   {
     gosub MULTITRAINLOGIC
   }
@@ -4831,6 +4835,12 @@ NONCOMBATLOOP:
     }
   }
 	#SANOWRET
+  if %noncomsanowret = "YES" then
+  {
+    gosub SANOWRETLOGIC
+    gosub STATUSCHECK
+  }
+  #SANOWRET
   if %noncomsanowret = "YES" then
   {
     gosub SANOWRETLOGIC
@@ -6952,6 +6962,12 @@ PERFORMLOOP:
     {
       gosub ALMANACLOGIC
     }
+  }
+  #TOME_OF_LORE
+  if ("%tomeoflore" = "YES") then
+  {
+    gosub TOMEOFLORELOGIC
+    gosub STATUSCHECK
   }
   #SANOWRET
   if %noncomsanowret = "YES" then
@@ -10347,6 +10363,33 @@ SANOWRETLOGIC:
   }
   return
 
+TOMEOFLORELOGIC:
+  if ((!matchre ("$righthand", "%tomeofloreitem")) && (!matchre ("$lefthand", "%tomeofloreitem"))) then
+  {
+    if (%tomeofloreready = 0) then var tomeofloreready 1
+  }
+  if (%tomeofloreready = 1) then
+  {
+    if $Scholarship.LearningRate > 33 then var scholarlock 1
+    if $Scholarship.LearningRate < 21 then var scholarlock 0
+    if $Scholarship.Ranks >= 1750 then var scholarlock 1      
+    if (($concentration > 99) && (%scholarlock != 1)) then
+    {
+      if (%playing = 1) then
+      {
+        if ("$righthand" = "Empty") then
+        {
+          gosub GETITEM %tomeofloreitem
+          gosub SWAP
+        }
+        else gosub GETITEM %tomeofloreitem        
+        gosub STUDYTOME
+      }
+    }
+  }
+  return
+
+
 NONCOMBATCHECKS:
 	var noncombatactive 0
 	var noncombatperformactive 0
@@ -10868,7 +10911,7 @@ MULTITRAINLOGIC:
   {
     #echo lowestskill1: %lowestskill1 - mstarget: %mstarget
     if %lowestskill1 >= %mstarget then var mstarget 0
-    if %mode2priority = "YES" then
+    if (%multiareapriority = 2) then
     {
       if %lowestskill2 = 0 then var mstarget 0
     }
@@ -10877,7 +10920,7 @@ MULTITRAINLOGIC:
   {
     #echo lowestskill2: %lowestskill2 - mstarget: %mstarget
     if %lowestskill2 >= %mstarget then var mstarget 0
-    if %mode1priority = "YES" then
+    if (%multiareapriority = 1) then
     {
       if %lowestskill1 = 0 then var mstarget 0
     }
@@ -10885,13 +10928,13 @@ MULTITRAINLOGIC:
   #CHOOSING_NEW_MODE
   if %mstarget = 0 then
   {
-    if %mode2priority = "YES" then
+    if (%multiareapriority = 2) then
     {
       if %lowestskill1 < %lowestskill2 then
       {
         #put #echo Yellow Skill1 <= Skill2
         var mstargetwork %lowestskill1
-        math mstargetwork add %mode1step
+        math mstargetwork add %multimindstep
         if %mstargetwork > 34 then var mstargetwork 34
         var mstarget %mstargetwork
         #put #echo Yellow Current MS is %mode1list(%lowestpos1) - %lowestskill1.  New target is %mstarget.
@@ -10902,7 +10945,7 @@ MULTITRAINLOGIC:
       {
         #put #echo Yellow Skill2 < Skill1
         var mstargetwork %lowestskill2
-        math mstargetwork add %mode2step
+        math mstargetwork add %multimindstep
         if %mstargetwork > 34 then var mstargetwork 34
         var mstarget %mstargetwork
         #put #echo Yellow Current MS is %mode2list(%lowestpos2) - %lowestskill2.  New target is %mstarget.
@@ -10916,7 +10959,7 @@ MULTITRAINLOGIC:
       {
         #put #echo Yellow Skill1 <= Skill2
         var mstargetwork %lowestskill1
-        math mstargetwork add %mode1step
+        math mstargetwork add %multimindstep
         if %mstargetwork > 34 then var mstargetwork 34
         var mstarget %mstargetwork
         #put #echo Yellow Current MS is %mode1list(%lowestpos1) - %lowestskill1.  New target is %mstarget.
@@ -10927,7 +10970,7 @@ MULTITRAINLOGIC:
       {
         #put #echo Yellow Skill2 < Skill1
         var mstargetwork %lowestskill2
-        math mstargetwork add %mode2step
+        math mstargetwork add %multimindstep
         if %mstargetwork > 34 then var mstargetwork 34
         var mstarget %mstargetwork
         #put #echo Yellow Current MS is %mode2list(%lowestpos2) - %lowestskill2.  New target is %mstarget.
@@ -10940,7 +10983,7 @@ MULTITRAINLOGIC:
 
 
 MODETRANSITION:
-  if %modestart = 0 then put #echo Yellow >$alertwindow [MultiTrain] Mode %multimode Transition!  New target is %mstarget.
+  if %modestart = 0 then put #echo Yellow >$alertwindow [MultiArea] Mode %multimode Transition!  New target is %mstarget.
   else
   {
     var modeminutes %t
@@ -10949,7 +10992,7 @@ MODETRANSITION:
     math minutesmod modulus 60
     math modeminutes subtract %minutesmod
     math modeminutes divide 60
-    put #echo Yellow >$alertwindow [MultiTrain] Mode %multimode Transition after %modeminutes minutes!  New target is %mstarget.
+    put #echo Yellow >$alertwindow [MultiArea] Mode %multimode Transition after %modeminutes minutes!  New target is %mstarget.
   }
   gosub LEAVEROOM
   var varset %multimode

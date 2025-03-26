@@ -12,6 +12,9 @@ SET:
     }
     if tolower("%1") = "display" then goto DISPLAY
     if tolower("%1") = "help" then goto MAINHELP
+    if tolower("%1") = "multiarea" then goto YESNOSET
+    if tolower("%1") = "multiareapriority" then goto TEXTSET
+    if tolower("%1") = "multimindstep" then goto TEXTSET
     if tolower("%1") = "mode1list" then goto LISTSET
     if tolower("%1") = "mode1step" then goto TEXTSET
     if tolower("%1") = "mode2list" then goto LISTSET
@@ -555,6 +558,8 @@ SET:
     if tolower("%1") = "textbooktimer" then goto TEXTSET
     if tolower("%1") = "textbookitem" then goto TEXTSET
     if tolower("%1") = "textbooklist" then goto LISTSET
+    if tolower("%1") = "tomeoflore" then goto YESNOSET
+    if tolower("%1") = "tomeofloreitem" then goto TEXTSET
     
     if tolower("%1") = "noncombat" then goto YESNOSET
     if tolower("%1") = "burgle" then goto YESNOSET
@@ -2029,6 +2034,7 @@ DISPLAYGENERAL:
 	gosub OUTPUT Tarantula TarantulaItem
 	gosub OUTPUT TarantulaSkill1 TarantulaSkill2
 	gosub OUTPUT Textbook TextbookTimer
+	gosub OUTPUT TomeOfLore TomeOfLoreItem
   gosub OUTPUT TextbookItem 
   gosub OUTPUT TextbookList
   gosub OUTPUT Windboard WindboardTimer
@@ -2787,20 +2793,22 @@ DISPLAYMULTI:
   put #echo mono ========== Multi-Area Hunting Variables ==========
   put #echo mono ===============================================
   put #echo
+  gosub OUTPUT MultiArea (Multi-area training is turned on or off.)
+  gosub OUTPUT MultiAreaPriority (Which hunting area's skills take priority if both need training.)
+  gosub OUTPUT MultiMindStep (The number of mindstates to step up by before moving to the other area.)
+  put #echo
+  put #echo mono Mode1List: $mode1list     (the list of skills checked, separated by |)
+  #put #echo mono Mode1Step: $mode1step     (the number of mindstates to increase before moving to the other mode)
+  #put #echo mono Mode1Priority: $mode1priority     (if YES, script will switch back to mode 1 if any skills hit 0)
+  put #echo mono Mode2List: $mode2list     (the list of skills checked, separated by |)
+  #put #echo mono Mode2Step: $mode2step     (the number of mindstates to increase before moving to the other mode)
+  #put #echo mono Mode2Priority: $mode2priority     (if YES, script will switch back to mode 1 if any skills hit 0)
   put #echo Gray mono -----MultiTrain - Training different variable set sin multiple combat areas-----
   put #echo Gray mono Valid weapon skills to trigger off of: brawl, se, le, the, sb, lb, thb, stave, pole, lt, ht, bow, xbow, sling, parry
   put #echo Gray mono Valid magic skills to trigger off of: debil, tm, sorcery
   put #echo Gray mono Valid lore skills to trigger off of:  empathy, tactics
   put #echo Gray mono Valid survival skills to trigger off of: backstab, evasion, stealth, thanatology, skinning, firstaid
   put #echo Gray mono Valid armor skills to trigger off of: brigandine, chain, defending, light, plate, shield
-  put #echo
-  put #echo mono Mode1List: $mode1list     (the list of skills checked, separated by |)
-  put #echo mono Mode1Step: $mode1step     (the number of mindstates to increase before moving to the other mode)
-  put #echo mono Mode1Priority: $mode1priority     (if YES, script will switch back to mode 1 if any skills hit 0)
-  put #echo
-  put #echo mono Mode2List: $mode2list     (the list of skills checked, separated by |)
-  put #echo mono Mode2Step: $mode2step     (the number of mindstates to increase before moving to the other mode)
-  put #echo mono Mode2Priority: $mode2priority     (if YES, script will switch back to mode 1 if any skills hit 0)
   put #echo
   put #echo mono =================== Movement ===================
   gosub OUTPUT HuntingAreaM2

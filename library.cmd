@@ -1,6 +1,6 @@
 var lastupdated 03/15/2025
 
-var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
+var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
 var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mapp|mpp|mf|pfe|pom|sl|sol|
 var abuffs |etf|nexus|rm|
 var cyctms |aban|ars|fr|gs|iz|pyre|rim|ros|sa|sls|usol|
@@ -69,6 +69,10 @@ SETDEFAULTS:
   }
   if !matchre("$varset", "\b(1|2|3|4)\b") then put #var varset 1
   #MULTITRAIN
+  if !matchre("$multiarea", "\b(YES|NO)\b") then put #var multiarea NO
+  if !matchre("$multiareapriority", "\b(1|2)\b") then put #var multiareapriority 2
+  if (($multimindstep > 0) && ($multimindstep < 35)) then
+  else put #var multimindstep 10
   if !def(mode1list) then put #var mode1list thb|bow|sling|sb|lb
   if $mode1step > 0 then
   else put #var mode1step 10 
@@ -140,6 +144,9 @@ VARCHECKS:
   else put #var textbooktimer 60
   if !def(textbookitem) then put #var textbookitem tome
   if !def(textbooklist) then put #var textbooklist human|elf|elothean 
+  if !matchre("$tomeoflore", "\b(YES|NO)\b") then put #var tomeoflore NO
+  if !def(tomeofloreitem) then put #var tomeofloreitem spiritwood tome
+  
   if !matchre("$almanac", "\b(YES|NO)\b") then put #var almanac NO
   if !def(almanacitem) then put #var almanacitem almanac
   if !matchre("$almanacalerts", "\b(YES|NO)\b") then put #var almanacalerts NO
@@ -4445,7 +4452,7 @@ GETITEMP:
 GETITEMMAIN:
   matchre GETITEMP %waitstring|You don't seem to be able to moveYou grab hold|You try to grab your
   matchre GETUNTIE You pull at it, but the ties prevent you.  Maybe if you untie it, first?|You should untie the
-  matchre RETURN You get|You're already holding|You are already holding that.|You pick up|What were you referring to?|You stop as you realize|You must unload|You fade in for a moment|You remove|You pull|What were you referring to?|You try to grab your|Please rephrase that command\.|You are already holding that\.
+  matchre RETURN You get|You're already holding|You are already holding that.|You pick up|What were you referring to?|You stop as you realize|You must unload|You fade in for a moment|You remove|You pull|What were you referring to?|You try to grab your|Please rephrase that command\.|You are already holding that\.|You deftly remove the
   match RETURN Get what?
   matchre GETINJURED ^You can't pick that up with your (hand|hands) that damaged\.
   matchre GETITEMBAD You need a free hand to pick that up.
@@ -4845,6 +4852,10 @@ STOWFEETFULL:
   
 STOWCUSTOM:
   var stowcustomstring $0
+  if matchre ("%stowcustomstring", "%tomeofloreitem") then 
+  {
+    var tomeofloreready 1
+  }
   if matchre ("%stowcustomstring", "%monsterskins") then
   {
     gosub BUNDLE
@@ -6078,7 +6089,7 @@ ATTACKWHIRLBAD:
   return
 
 ATTACKWHIRLWINDSTOW:
-  gosub STOWHAND left
+  gosub STOWleft
   goto ATTACKWHIRLWIND
 
 
@@ -6099,9 +6110,11 @@ BOWAIM:
 	matchre BOWAIMP %waitstring
 	matchre BOWLOADLOGIC isn't loaded!
 	match BOWAIMSTOW You need both hands in order to aim.
+	matchre BOWAIMSTOW But the .* in your right hand isn't a ranged weapon!
 	matchre FACE at what are you|I could not find what you were referring to.
 	matchre BOWAIMSUCCESS You begin to target|You are already targetting|You shift your target to 
 	matchre RETURN Face what?|There is nothing else to face!|You don't have a ranged weapon to aim with!
+	
 	put aim
 	matchwait 5
 	var timeoutsub BOWAIM
@@ -8820,7 +8833,7 @@ WEATHERP:
 WEATHERMAIN:
   matchre WEATHERP %waitstring
   match RETURN You glance up at the sky.
-  match RETURN You glance outside.
+  match WEATHERINSIDE You glance outside.
   match WEATHERINSIDE That's a bit hard to do while inside.
   put weather
   matchwait 5
@@ -11850,6 +11863,24 @@ BADALMANAC:
   var nextalmanac %t
   math nextalmanac add 120
   return   
+
+STUDYTOMEP:
+  pause
+STUDYTOME:
+  var tomeofloreready 0
+  matchre STUDYTOMEP %waitstring
+  match RETURN You immerse yourself in the wisdom of your
+  match RETURN However, you find that you lack the concentration to focus on your studies.
+  match STUDYTOMEGET You need to be holding that first.
+  put study my %tomeofloreitem
+  matchwait 5
+  var timeoutsub STUDYTOME
+  var timeoutcommand study my %tomeofloreitem
+  goto TIMEOUT
+
+STUDYTOMEGET:
+  gosub GETITEM %tomeofloreitem
+  goto STUDYTOME
 
 WRITEJOURNALP:
   pause
