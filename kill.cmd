@@ -5,11 +5,18 @@ include library.cmd
 action var var goodtarget 0 when (balance|balanced|imbalanced|unbalanced)\]
 action var goodtarget 0 when You turn to face
 
+var storage haversack
+var multiplier 1
+
+
+
 if ("$roomname" = "Duskruin, Antechamber") then
 {
-  gosub GETITEM multiplier
-  put redeem multiplier
-  waitfor You redeem the ten times multiplier, multiplying the amount of bloodscrip you will gain in the near future.
+  if (%multiplier = 1) then
+  {
+    gosub GETITEM multiplier
+    gosub REDEEM
+  }
   gosub GETITEM dueling slip
   move go portcullis
   gosub STOWITEM dueling slip
@@ -20,8 +27,9 @@ if (contains("$roomname", "Duskruin")) then
   var duskruin 1
 }
 
+
+
 #VARLOAD
-var killvarmode %killvarmode
 var killadvance $killadvance
 var killretreat $killretreat
 var killbuffing $killbuffing
@@ -43,93 +51,89 @@ var killthrownverb $killthrownverb
 var weaponname $killweaponitem
 var ubowammo $killammo
 var killloot $killloot
-var harnessmax $m1harnessmax
+var harnessmax harnessmax
 var cambrinth NO
 var harnessing YES
 var killtmfocus $killtmfocus
-var tmfocusitem $m1tmfocusitem
-var tmfocusworn $m1tmfocusworn
-var tmfocusstorage $m1tmfocusstorage
-var tmfocuscontainer $m1tmfocuscontainer
-var ritualfocus $m1ritualfocus
-var ritualfocusworn $m1ritualfocusworn
-var ritualfocusstorage $m1ritualfocusstorage
-var ritualfocuscontainer $m1ritualfocuscontainer
-var minconcentration $m1minconcentration
-var loottype $m1loottype
-var minmana $m1minmana
-var buffnum $m1buffnum
-var collectcoin $m1collectcoin
-var collectgem $m1collectgem
-var collectscroll $m1collectscroll
-var collectmaps $m1collectmaps
+var tmfocusitem $tmfocusitem
+var tmfocusworn $tmfocusworn
+var tmfocusstorage $tmfocusstorage
+var tmfocuscontainer $tmfocuscontainer
+var ritualfocus $ritualfocus
+var ritualfocusworn $ritualfocusworn
+var ritualfocusstorage $ritualfocusstorage
+var ritualfocuscontainer $ritualfocuscontainer
+var minconcentration $minconcentration
+var loottype $loottype
+var minmana $minmana
+var buffnum $buffnum
+var collectcoin $collectcoin
+var collectgem $collectgem
+var collectscroll $collectscroll
+var collectmaps $collectmaps
 
-if %buffnum > 0 then var buff1 $m1buff1
-if %buffnum > 0 then var buff1prepmana $m1buff1prepmana
-if %buffnum > 0 then var buff1addmana $m1buff1addmana
-if %buffnum > 0 then var buff1prepwait $m1buff1prepwait
-if %buffnum > 1 then var buff2 $m1buff2
-if %buffnum > 1 then var buff2prepmana $m1buff2prepmana
-if %buffnum > 1 then var buff2addmana $m1buff2addmana
-if %buffnum > 1 then var buff2prepwait $m1buff2prepwait
-if %buffnum > 2 then var buff3 $m1buff3
-if %buffnum > 2 then var buff3prepmana $m1buff3prepmana
-if %buffnum > 2 then var buff3addmana $m1buff3addmana
-if %buffnum > 2 then var buff3prepwait $m1buff3prepwait
-if %buffnum > 3 then var buff4 $m1buff4
-if %buffnum > 3 then var buff4prepmana $m1buff4prepmana
-if %buffnum > 3 then var buff4addmana $m1buff4addmana
-if %buffnum > 3 then var buff4prepwait $m1buff4prepwait
-if %buffnum > 4 then var buff5 $m1buff5
-if %buffnum > 4 then var buff5prepmana $m1buff5prepmana
-if %buffnum > 4 then var buff5addmana $m1buff5addmana
-if %buffnum > 4 then var buff5prepwait $m1buff5prepwait
-if %buffnum > 5 then var buff6 $m1buff6
-if %buffnum > 5 then var buff6prepmana $m1buff6prepmana
-if %buffnum > 5 then var buff6addmana $m1buff6addmana
-if %buffnum > 5 then var buff6prepwait $m1buff6prepwait
-if %buffnum > 6 then var buff7 $m1buff7
-if %buffnum > 6 then var buff7prepmana $m1buff7prepmana
-if %buffnum > 6 then var buff7addmana $m1buff7addmana
-if %buffnum > 6 then var buff7prepwait $m1buff7prepwait
-if %buffnum > 7 then var buff8 $m1buff8
-if %buffnum > 7 then var buff8prepmana $m1buff8prepmana
-if %buffnum > 7 then var buff8addmana $m1buff8addmana
-if %buffnum > 7 then var buff8prepwait $m1buff8prepwait
-if %buffnum > 8 then var buff9 $m1buff9
-if %buffnum > 8 then var buff9prepmana $m1buff9prepmana
-if %buffnum > 8 then var buff9addmana $m1buff9addmana
-if %buffnum > 8 then var buff9prepwait $m1buff9prepwait
-if %buffnum > 9 then var buff10 $m1buff10
-if %buffnum > 9 then var buff10prepmana $m1buff10prepmana
-if %buffnum > 9 then var buff10addmana $m1buff10addmana
-if %buffnum > 9 then var buff10prepwait $m1buff10prepwait
-if %buffnum > 10 then var buff11 $m1buff11
-if %buffnum > 10 then var buff11prepmana $m1buff11prepmana
-if %buffnum > 10 then var buff11addmana $m1buff11addmana
-if %buffnum > 10 then var buff11prepwait $m1buff11prepwait
-if %buffnum > 11 then var buff12 $m1buff12
-if %buffnum > 11 then var buff12prepmana $m1buff12prepmana
-if %buffnum > 11 then var buff12addmana $m1buff12addmana
-if %buffnum > 11 then var buff12prepwait $m1buff12prepwait
-if %buffnum > 12 then var buff13 $m1buff13
-if %buffnum > 12 then var buff13prepmana $m1buff13prepmana
-if %buffnum > 12 then var buff13addmana $m1buff13addmana
-if %buffnum > 12 then var buff13prepwait $m1buff13prepwait
-if %buffnum > 13 then var buff14 $m1buff14
-if %buffnum > 13 then var buff14prepmana $m1buff14prepmana
-if %buffnum > 13 then var buff14addmana $m1buff14addmana
-if %buffnum > 13 then var buff14prepwait $m1buff14prepwait
-if %buffnum > 14 then var buff15 $m1buff15
-if %buffnum > 14 then var buff15prepmana $m1buff15prepmana
-if %buffnum > 14 then var buff15addmana $m1buff15addmana
-if %buffnum > 14 then var buff15prepwait $m1buff15prepwait
-if %buffnum > 15 then var buff16 $m1buff16
-if %buffnum > 15 then var buff16prepmana $m1buff16prepmana
-if %buffnum > 15 then var buff16addmana $m1buff16addmana
-if %buffnum > 15 then var buff16prepwait $m1buff16prepwait
+  var buff $buff
+  var buffnum $buffnum
+  var buff1 $buff1
+  var buff1mana $buff1mana
+  var buff2 $buff2
+  var buff2mana $buff2mana
+  var buff3 $buff3
+  var buff3mana $buff3mana
+  var buff4 $buff4
+  var buff4mana $buff4mana
+  var buff5 $buff5
+  var buff5mana $buff5mana
+  var buff6 $buff6
+  var buff6mana $buff6mana
+  var buff7 $buff7
+  var buff7mana $buff7mana
+  var buff8 $buff8
+  var buff8mana $buff8mana
+  var buff9 $buff9
+  var buff9mana $buff9mana
+  var buff10 $buff10
+  var buff10mana $buff10mana
+  var buff11 $buff11
+  var buff11mana $buff11mana
+  var buff12 $buff12
+  var buff12mana $buff12mana
+  var buff13 $buff13
+  var buff13mana $buff13mana
+  var buff14 $buff14
+  var buff14mana $buff14mana
+  var buff15 $buff15
+  var buff15mana $buff15mana
+  var buff16 $buff16
+  var buff16mana $buff16mana
+  var difficulty1percent $difficulty1percent
+  var difficulty2percent $difficulty2percent
+  var difficulty3percent $difficulty3percent
+  var difficulty4percent $difficulty4percent
+  var difficulty5percent $difficulty5percent
+  
+  if (("$guild" = "Warrior Mage") || ("$guild" = "Bard")) then
+  {
+    var nativemana 1
+  }
+  if (("$guild" = "Cleric") || ("$guild" = "Paladin")) then
+  {
+    var nativemana 2
+  }
+  if (("$guild" = "Empath") || ("$guild" = "Ranger")) then
+  {
+    var nativemana 3
+  }
+  if (("$guild" = "Moon Mage") || ("$guild" = "Trader")) then
+  {
+    var nativemana 4
+  }
+  if ("$guild" = "Necromancer") then
+  {
+    var nativemana 5
+  }
 #MM_VARS
-var tktitem $m1tktitem
+var tktitem $tktitem
 
 #WM_VARS
 var dragonsbreath $dragonsbreath
@@ -266,6 +270,8 @@ else
   }
 }
 
+gosub RELSPELL
+
 if %killadvance = "YES" then gosub ADV
 MAINLOOP:
   gosub KILLSTATUSCHECK
@@ -294,6 +300,7 @@ MAINLOOP:
       {
         gosub RELCYCLIC
         var spellprepping %killcycspell
+        gosub SPELLSTATCHECK %spellprepping
         var prepmana %killcycprepmana
         var addmana 0
         var casting 1
@@ -589,7 +596,7 @@ BUFFINGLOOP:
   else return
   goto BUFFINGLOOP
   
-BUFFINGFUNC:
+BUFFINGFUNCOLD:
   var anybuff 1
   var casting 1
   var scancel 0
@@ -603,6 +610,27 @@ BUFFINGFUNC:
 	#var %buff%buffloop %buff%buffloopduration
 	return
 
+BUFFINGFUNC:
+  var anybuff 1
+  var casting 1
+  var scancel 0
+  var buffing 1
+  var spellprepping %buff%buffloop
+  gosub SPELLSTATCHECK %spellprepping
+	var prepmana %spellminmana
+	if contains("%rituals", "|%spellprepping|") then
+	{
+	  var prepmana %buff%buffloopmana
+    var addmana 0
+  }
+  else
+  {
+    #put #echo Yellow buff%buffloopmana %buff%buffloopmana
+    #put #echo Yellow prepmana: %prepmana
+    var addmana %buff%buffloopmana
+    math addmana subtract %prepmana
+	}
+	return
 
 BTNLOGIC:
   if (%t > %nextbtnlook) then
@@ -639,7 +667,8 @@ BGLOGIC:
       var casting 1
       var bgdone 0
       var preptimewait %bgprepwait
-      gosub CLEANCASTINGLOGIC
+      #gosub CLEANCASTINGLOGIC
+      gosub CASTINGLOGIC
     }
   }
   else
@@ -784,7 +813,8 @@ KILLSTATUSCHECK:
         if ($SpellTimer.DragonsBreath.active != 1) then gosub SPELLCANCEL
       }
     }
-    gosub CLEANCASTINGLOGIC
+    #gosub CLEANCASTINGLOGIC
+    gosub CASTINGLOGIC
   }
   if %aimready = 1 then gosub FIRE
   if %preptimewait > 0 then
@@ -904,7 +934,7 @@ DUSKRUINEND:
   gosub OPENITEM my package
   gosub GETITEM bloodscrip from my package
   gosub STOWITEM package
-  gosub GETITEM bloodscrip from haversack
+  gosub GETITEM bloodscrip from %storage
   gosub COMBINE
   gosub STOWALL
   move se
@@ -915,6 +945,15 @@ COMBINE:
   matchre COMBINEP %waitstring
   match RETURN You combine
   put combine bloodscrip
+  matchwait
+ 
+ REDEEMP:
+   pause
+ REDEEM:
+  matchre REDEEMP %waitstring
+  match RETURN You redeem the times multiplier, multiplying the amount of bloodscrip you will gain in the near future.
+  match RETURN You redeem the ten times multiplier, multiplying the amount of bloodscrip you will gain in the near future.
+  put redeem multiplier
   matchwait
   
 END:
