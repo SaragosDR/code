@@ -1,3 +1,20 @@
+04/10/25
+Updated Scripts: train, library
+Changed Crossing autopath to be Martyr.
+Added gem appraiser to Leth.
+Added logic to recover from attempting to pay vault bill, but not having enough money.  This is hard to test, so let me know if it has any issues.
+Fixed a bug with Whirlwind that could cause a script halt.
+Fixed a rare bug with non-shock Empath target choosing that could cause it to stop training weapons if it tried to target something that died.
+A few small adjustment to tomes of lore usage.
+
+03/25/25
+Updated Scripts: train, library, set
+Added new variable for multi-area training, and condensed others.  When MultiArea is set to YES, script will automatically engage in multi-area training.  Fixed bugs in variable assignment.
+Added DIG, SP to buff spells.
+Added Variables for tomes of lore (scholarship trainer) under General.  They will be used during performance training, but require a 1-handed weapon.  I'm still tweaking this to make sure it's working as well as it can.
+Fixed a bug in Whirlwind function when it wanted to stow a weapon.
+
+
 03/16/25
 Updated Scripts: train, library, set, p
 Added new variable: SleepOnTravel.  This decides whether the script stops experience drain during movement.  Default is YES.
@@ -32,6 +49,7 @@ A couple of minor bugfixes.
 
 
 03/30/24
+
 Updated Scripts: train, library, set, craftlibrary, craft, maze
 Added maze.cmd script for the Duskruin labyrinth.
 
