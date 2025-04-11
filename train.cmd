@@ -1,7 +1,7 @@
 ########################################
 ###Training scripts by player of Saragos.
 ###Version 2.0
-###Last Updated: 03/15/2025
+###Last Updated: 04/10/2025
 ########################################
 
 include library.cmd
@@ -519,7 +519,7 @@ ALERTINIT:
       action put #echo %alertwindow Yellow [GM]: PAGE; put #echo %alertwindow Yellow [Bugout]: Bugging out due to GM PAGE!;goto BUGOUT when ^\[PAGE!\] \w+, a member of staff is trying to get your attention.  Please respond!
     }
   }
-  if (%autoupkeep = "YES") then
+  if ("%autoupkeep" = "YES") then
   { 
     if %auonhealth = "YES" then action var goupkeep 1;var autype health when eval $health <= $auhealthnum
     if %auonhealth = "YES" then action var goupkeep 1;var autype wounds when You try to creep out of hiding but your injuries cause you to stumble and crash to the ground!
@@ -531,11 +531,14 @@ ALERTINIT:
     action var goupkeep 1; var autype manual when ^UPKEEP!!!
   }
   action put #flash; put #play JustArrived;put #echo %alertwindow Yellow [Health]: when The silt and sand starts to shift and slide
-  if %nervealerts = "YES" then
+  if ("%nervealerts" = "YES") then
   {
-    action put #flash; put #play Echo;put #echo %alertwindow [Nerves]: Backfire - %spellprepping when ^Your spell (.*)backfires
     action put #flash; put #play Echo;put #echo %alertwindow [Nerves]: Nerve Damage when ^You sense (.*) amount of mana slip away from you\.
     action put #flash; put #play Echo;put #echo %alertwindow [Nerves]: Nerve Damage when The mana you were holding dissipates.
+  }
+  if ("%backfirealerts" = "YES") then
+  {
+    action put #flash; put #play Echo;put #echo %alertwindow [Nerves]: Backfire - %spellprepping when ^Your spell (.*)backfires
   }
   #SORCERY_ALARMS
   if ("%sorceryalerts" = "YES") then
@@ -3912,6 +3915,7 @@ MAINVARLOAD:
   var healthalerts $healthalerts
   var healthalertnum $healthalertnum
   var nervealerts $nervealerts
+  var backfirealerts $backfirealerts
   var sorceryalerts $sorceryalerts
   var speechalerts $speechalerts
   var arrivalalerts $arrivalalerts
@@ -4152,6 +4156,7 @@ NEWAREADECISION:
     }
   }
   return
+
 
 NEWAREAMOVEMENT:
   #put #echo Yellow NEWAREAMOVEMENT
@@ -5417,8 +5422,8 @@ UPKEEPSET:
     var furrierzone 1
     var appraiser Dwarven appraiser
     var appraiserzone 1
-    var healer Dokt
-    var healerzone 4
+    var healer Martyr
+    var healerzone 1
     var critual Durantine
     var critualzone 1
     var hasvault 1
@@ -5545,6 +5550,7 @@ UPKEEPSET:
     var townname leth
     var goodupkeep 1
     var furrier Morikai
+    var appraiser Ghendil
     var healer Arthianna
     var hasbank 1
     var currency Kronar
@@ -5885,7 +5891,14 @@ AUTOPATHLOGIC:
         return
       }
     }
-    gosub HEALERUSE
+    if ($zoneid = 1) then
+    {
+      var didautopath 1
+      gosub MOVE healer
+      put join list
+      waitfor Kaiva crosses your name off the waiting list.
+    }
+    else gosub HEALERUSE
     #echo Exited HEALERUSE
   }
   return
@@ -10773,8 +10786,9 @@ WEAPONLOGIC:
       if (%goodtarget = 0) then gosub TARGETSELECT
       if (%shockcritter = 1) then 
       {
-        #echo ShockCritter = 1! Returning.
-        return
+        gosub TARGETSELECT
+        #put #echo Yellow ShockCritter = 1! Returning.
+        #return
       }
     }
     #WEAPON CHOOSING
@@ -11148,6 +11162,7 @@ ROOMTRAVEL:
   #put #echo Yellow rtmovelist: %rtmovelist
   #put #echo Yellow rttargetroom: %rttargetroom
   #put #echo Yellow rtfindroom: %rtfindroom
+  #put #echo Yellow Here
   if ("$zoneid" != "%rtzone") then
   {
     if (%rtzone != 0) then

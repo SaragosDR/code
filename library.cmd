@@ -121,6 +121,7 @@ VARCHECKS:
   if !matchre("$healthalerts", "\b(YES|NO)\b") then put #var healthalerts YES
   if !matchre("$healthalertnum", "\b(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99)\b") then put #var healthalertnum 85
   if !matchre("$nervealerts", "\b(YES|NO)\b") then put #var nervealerts YES
+  if !matchre("$backfirealerts", "\b(YES|NO)\b") then put #var nervealerts YES
   if !matchre("$sorceryalerts", "\b(YES|NO)\b") then put #var sorceryalerts YES
   if !matchre("$speechalerts", "\b(YES|NO)\b") then put #var speechalerts YES
   if !matchre("$arrivalalerts", "\b(YES|NO)\b") then put #var arrivalalerts NO
@@ -6089,7 +6090,7 @@ ATTACKWHIRLBAD:
   return
 
 ATTACKWHIRLWINDSTOW:
-  gosub STOWleft
+  gosub STOW left
   goto ATTACKWHIRLWIND
 
 
@@ -7301,12 +7302,13 @@ CASTINGLOGIC:
     }
   }
   else var spellpercent 100
+  #put #echo Yellow spellpercent: %spellpercent
   #EARLY_READINESS
   if ((%spelldifficulty > 0) && (%spellpercent < 100) then
   {
-     var spellpreptest $spelltime
-     math spellpreptest divide $spellpreptime
-     math spellpreptest * 100
+    var spellpreptest $spelltime
+    math spellpreptest divide $spellpreptime
+    math spellpreptest * 100
     if (%spellpreptest >= %spellpercent) then
     {
       var ready 1
@@ -8930,10 +8932,36 @@ ENTERVAULTNONE:
   
 ENTERVAULTPAY:
   move go desk
-  put pay 5000
-  pause .5
+  gosub VAULTPAY
   move out
   goto ENTERVAULT
+ 
+VAULTPAYP:
+  pause 
+VAULTPAY:
+  matchre VAULTPAYP %waitstring
+  match VAULYPAYNOMONEY You don't have that much money!
+  match RETURN You hand the Dwarven clerk your payment.
+  put pay 5000
+  matchwait
+  var timeoutsub VAULTPAY
+  var timeoutcommand pay 5000
+	goto TIMEOUT
+ 
+VAULTPAYNOMONEY:
+  gosub MOVE teller
+  gosub COINWITHDRAW 5 gold %currency
+  if ("%currency" != "Kronar") then
+  {
+    gosub MOVE exchange
+    var excurrency Kronar
+    var examount 5 gold %currency
+    gosub EXCHANGE
+  }
+  gosub MOvE vault
+  move go desk
+  goto VAULTPAY
+  
  
 ENTERVAULTOPEN:
   var vaultsuccess 1
@@ -12665,7 +12693,8 @@ TARGETSELECT:
     var faceadj first
     var goodtarget 0 
     gosub TARGETSELECTLOOP
-    if %goodtarget = 1 then
+    put #echo Yellow goodtarget: %goodtarget
+    if (%goodtarget = 1) then
     {
       #echo MonsterArray: %monsterarray 
       #echo Element: %tsloop
