@@ -1,7 +1,7 @@
 ########################################
 ###Training scripts by player of Saragos.
 ###Version 2.0
-###Last Updated: 04/10/2025
+###Last Updated: 04/18/2025
 ########################################
 
 include library.cmd
@@ -99,10 +99,15 @@ var nuggetmaterials brass|bronze|coal|copper|covellite|iron|lead|nickel|oravir|p
 
 
 #JUSTICE_TRIGGERS
-action put #echo %alertwindow Yellow Charged with forbidden practices in $1!  Please investigate! when "Burn him!  Burn him!"  You hear the cries echo around you as everyone in the vicinity suddenly moves away, giving you a wide berth!  It goes without saying you'll be wanted for forbidden practices in City of (\w+) now\.
-action put #echo %alertwindow Yellow Arrested in Hibarnhvidar! when "Stop right there!"  The shout reverberates through the area as the Gwaerd charges towards you\.  "You're under arrest!"
-action put #echo %alertwindow Yellow Arrested in Shard! when Sentinel Neharon glances at you, and a look of recognition crosses his face\.  He calmly prepares a spell, then gestures at you!  A sparkling cloud of silver motes envelops your body like a mist of stars\.  You are stunned by the haze of Holy energy whorling around you!  As you pass out, you see Neharon standing over you\.
-#The judge gazes down at you with stern eyes, "Saragos, you stand before this court accused of endangering the public.  Though the evidence against you is considerable, final judgement has not yet been reached.  How do you plead?"
+action put #echo %alertwindow Yellow [Justice]: Charged with forbidden practices in $1!  Please investigate! when "Burn him!  Burn him!"  You hear the cries echo around you as everyone in the vicinity suddenly moves away, giving you a wide berth!  It goes without saying you'll be wanted for forbidden practices in City of (\w+) now\.
+action put #echo %alertwindow Yellow [Justice]: Charged with endangering the public in $1!  Please investigate! when A sudden shout of "The man's dangerous!" heralds a nearby citizen to run for the guards.  It won't be long before the (\w+) authorities will try to bring you in for endangering the public\.
+
+action (arrest) var arrested 1; goto ARRESTED when ^Before you really realize .* you are marched off.|wrestle you to the ground, bind you in chains, and drag you off to jail|ushered to a cell, the door opened just long enough for you to be shoved inside|\[Guard House, Jail Cell\]|^The guard looks you over.* and leads you firmly off to jail|A sparkling cloud of silver motes envelops your body like a mist of stars|Although your head is still ringing from the assault|The sentinel brings you to the jail|^You slowly wake up again to find that all your belongings have been stripped
+
+action var justice 1 when After assessing the area, you think local law enforcement keeps an eye on what's going on here.
+action var justice 1 when After assessing the area, you believe there is some kind of unusual law enforcement in this area.
+action var justice 0 when You're fairly certain this area is lawless and unsafe.
+action instant var fine 0;var platfine 0;var goldfine 0;var silverfine 0;var bronzefine 0;var copperfine 0;if ($1) then evalmath platfine $1*10000;if ($2) then evalmath goldfine $2*1000;if ($3) then evalmath silverfine $3*100;if ($4) then evalmath bronzefine $4*10;if ($5) then var copperfine $5;evalmath fine %platfine+%goldfine+%silverfine+%bronzefine+%copperfine when I pronounce a fine upon you of (?:(\d+) platinum[,.]?)?(?:(?: and)? ?(\d+) gold[,.]?)?(?:(?: and)? ?(\d+) silver[,.]?)?(?:(?: and)? ?(\d+) bronze[,.]?)?(?:(?: and)? ?(\d+) copper\.)?
 
 #RESEARCH_TRIGGERS
 action var appfocusdone 1; var appfocusing 0; var rprojectactive 0; var researching 0 when ^Breakthrough!
@@ -301,14 +306,8 @@ action var surface rack when ^\[Someone Else\'s Home\, Armory\]$
 action var room armory when Armory\]$
 action var surface bookshelf when ^\[Someone Else\'s Home\, Library\]$
 action var room library when Library\]$
-action var arrested 1 when ^Before you really realize what\'s going on\, your hands are firmly bound behind you and you are marched off\.$
-action var arrested 2 when ^Clan guards arrive, an angry glint in their eyes\!
-action instant var fine 0;var platfine 0;var goldfine 0;var silverfine 0;var bronzefine 0;var copperfine 0;if ($1) then evalmath platfine $1*10000;if ($2) then evalmath goldfine $2*1000;if ($3) then evalmath silverfine $3*100;if ($4) then evalmath bronzefine $4*10;if ($5) then var copperfine $5;evalmath fine %platfine+%goldfine+%silverfine+%bronzefine+%copperfine when I pronounce a fine upon you of (?:(\d+) platinum[,.]?)?(?:(?: and)? ?(\d+) gold[,.]?)?(?:(?: and)? ?(\d+) silver[,.]?)?(?:(?: and)? ?(\d+) bronze[,.]?)?(?:(?: and)? ?(\d+) copper\.)?
 action math grabs add 1 when ^You rummage around (.*)\, until you find
 action math grabs add 1 when You rummage around (.*)\, but find nothing that looks valuable\.
-action var justice 1 when After assessing the area, you think local law enforcement keeps an eye on what's going on here.
-action var justice 1 when After assessing the area, you believe there is some kind of unusual law enforcement in this area.
-action var justice 0 when You're fairly certain this area is lawless and unsafe.
 action math pawntotal add $3 when ^(.+) takes your (.*) and gives it a quick but thorough examination\.  After pausing for a moment, he hands you (\d+) (\S+) for it\.
 
 #MISC_TRIGGERS
@@ -3911,6 +3910,7 @@ MAINVARLOAD:
   
   var deathaction $deathaction
   var disconnectaction $disconnectaction
+  var arrestaction $arrestaction
   var alertwindow $alertwindow
   var healthalerts $healthalerts
   var healthalertnum $healthalertnum
@@ -7423,7 +7423,7 @@ BURGLELOGIC:
   if %scriptmode = 4 then gosub UPKEEPSET
   gosub BURGLE
   if %justice != 1 then goto BURGLEEND
-  if %arrested != 0 then goto BURGLEARRESTED
+  if %arrested != 0 then goto ARRESTED
   gosub STOWALL
   gosub BURGLELOOP
   gosub BURGLELEAVE
@@ -7440,7 +7440,7 @@ BURGLELOGIC:
     }
     goto BURGLEEND
   }
-  else goto BURGLEARRESTED
+  else goto ARRESTED
 
 BURGLEPAWNLOGIC:
   if (%pawnshop = "none") then var burglepawnsold -2
@@ -7511,15 +7511,15 @@ BURGLEEND:
   }
   else var burgletext %burgletext  No loot was kept.
   put #echo %alertwindow [Burgle]: %burgletext
-  if %arrested = 1 then
-  {
-    pause 2
-    put #echo %alertwindow Yellow [Burgle]: Arrested!  You plead guilty and your fine was %fine.
-  }
-  if %arrested = 2 then
-  {
-    put #echo %alertwindow Yellow [Burgle]: Arrested by clan justice and had your hand chopped off!
-  }
+  #if %arrested = 1 then
+  #{
+  #  pause 2
+  #  put #echo %alertwindow Yellow [Burgle]: Arrested!  You plead guilty and your fine was %fine.
+  #}
+  #if %arrested = 2 then
+  #{
+  #  put #echo %alertwindow Yellow [Burgle]: Arrested by clan justice and had your hand chopped off!
+  #}
   return
 
 
@@ -7730,24 +7730,117 @@ BURGLEKEEPLISTCHECK:
   goto BURGLEKEEPLISTCHECK
 
 
-BURGLEARRESTED:
-  if %arrested = 1 then
+ARRESTED:
+  action (arrest) off
+  if ($zoneid = 1) then var arresttown Crossing
+  put #echo %alertwindow Yellow [Justice]: Arrested in %arresttown!
+  if ("%arrestaction" = "logout") then
   {
-    matchre BURGLEPLEA ^The eyes of the court|\[PLEAD INNOCENT or PLEAD GUILTY\]|Your silence shall be taken|How do you plead
+    put #echo %alertwindow Yellow You arrested!  Logging out!
+    put quit
+    exit
+  }
+  if (%arrested = 1) then
+  {
+    matchre ARRESTEDPLEA ^The eyes of the court|\[PLEAD INNOCENT or PLEAD GUILTY\]|Your silence shall be taken|How do you plead
     matchwait
   }
-  if %arrested = 2 then
+  if (%arrested = 2) then
   {
-    goto BURGLEEND  
+    #clan_justice
+    put #echo %alertwindow Yellow [Justice]: Arrested by clan justice and had your hand chopped off!
   }
-
-BURGLEPLEAP:
+  exit
+  
+ARRESTEDPLEAP:
   pause
-BURGLEPLEA:
-    matchre BURGLEPLEAP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
-    matchre BURGLEEND ^After a weighty pause\,
+ARRESTEDPLEA:
+    matchre ARRESTEDPLEAP \.\.\.wait|type ahead|stunned|while entangled in a web\.|You don't seem to be able to move
+    #matchre ARRESTEDEND ^After a weighty pause\,
+    match ARRESTEDPAID The bailiff rifles through your coin purse, taking out what you owe before handing it over to you with the rest of your things.
+    match ARRESTEDNOTPAID The bailiff rifles through your coin purse briefly, until it is obvious you do not have the necessary cash.  He tosses it back to you.
     put plead guilty
     matchwait
+
+ARRESTEDNOTPAID:
+  #put #echo Yellow fine: %fine
+  gosub MOVE teller
+  gosub COINWITHDRAW %fine copper
+  gosub MOVE debt
+  gosub DEBTPAY %fine
+  gosub MOVE guard
+  gosub GETITEM $charactername sack
+  put #echo %alertwindow Yellow [Justice]: Pled guilty.  Withdrew money to pay your fine of %fine.
+  if ("$righthand" = "small sack") then goto ARRESTEDRECOVER
+  else goto ARRESTEDFAIL
+
+ARRESTEDFAIL:
+  put #echo %alertwindow Yellow Failure to recover after being arrested!  Emergency!
+ARRESTEDFAIL2:
+  put #echo Yellow ===FAILED TO RECOVER FROM ARREST!===
+  put #flash
+  put #play Advance
+  pause 5
+  goto ARRESTEDFAIL2
+
+ARRESTEDPAID:
+  put #echo %alertwindow Yellow [Justice]: Pled guilty.  Paid your fine of %fine automatically.
+  goto ARRESTEDRECOVER
+  
+ARRESTEDRECOVER:
+  gosub OPENITEM my sack
+  action (sack) on
+  var sacklist -1
+  gosub LOOKSACK
+  pause 1
+  #put #echo sacklist: %sacklist
+  gosub Base.ListExtract sacklist NounList maxitemcount
+  action (sack) off
+  #put #echo sacklist: %sacklist
+  #put #echo maxitemcount: %maxitemcount
+  if (%sacklist != -1) then
+  {
+    var itemcount 1
+    gosub ARRESTSACKGETLOOP
+    var jailsackclean 0
+  }
+  gosub ARRESTSACKCHECK
+  if (%jailsackclean = 0) then goto ARRESTEDPAID
+  gosub DUMPITEM small sack
+  put #echo %alertwindow Yellow [Justice]: Gear reacquired.  Restarting training.
+  goto ARRESTEDRESTART
+  
+ARRESTEDRESTART:
+  put .train %1 %2
+  exit
+
+LOOKSACK:
+  match RETURN There is nothing in there.
+  match RETURN In the
+  put look in my small sack
+  matchwait
+  
+    
+ARRESTSACKGETLOOP:
+  if (%itemcount > %maxitemcount) then return
+  #echo NounList: %NounList
+  gosub GETITEM %NounList(%itemcount) from my small sack
+  gosub STOWITEM my %NounList(%itemcount)
+  #put wear my %NounList(%itemcount)
+  pause .5
+  math itemcount add 1
+  goto ARRESTSACKGETLOOP
+
+ARRESTSACKCHECK:
+  match ARRESTSACKCHECKRETURN There is nothing in there.
+  match RETURN You glance 
+  put look in my small sack
+  put glance
+  matchwait
+
+ARRESTSACKCHECKRETURN:
+  var jailsackclean 1
+  return
 
 BURGLEKHRI:
   if %burglekhrihasten = "YES" then
@@ -10529,8 +10622,11 @@ NEWNONCOMBATLOGIC:
 			gosub ROOMTRAVEL
 			gosub STOWALL
 			gosub AWAKE
-			gosub BURGLELOGIC
-			gosub BURGLERECALL
+			if (%onfire != 1) then
+			{
+			  gosub BURGLELOGIC
+		  	gosub BURGLERECALL
+			}
 			var noncombatburgleactive 0
 			gosub RELINVIS
 			#BURGLE_PAWN

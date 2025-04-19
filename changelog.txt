@@ -1,3 +1,11 @@
+Updated Scripts: train, library, set
+Added completely new arrest logic that's vastly more effective than what was previously in place.
+Added a new check to really make sure to not burgle when you're on fire (which instantly gets you caught).
+Split the alerts covered by NerveAlerts into NerveAlerts and BackfireAlerts.
+Bugfixes to getting more money to pay your vault rent.
+Fixed a bug with Berserk Avalanche.
+
+
 04/10/25
 Updated Scripts: train, library
 Changed Crossing autopath to be Martyr.

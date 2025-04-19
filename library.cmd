@@ -1,4 +1,4 @@
-var lastupdated 03/15/2025
+var lastupdated 04/18/2025
 
 var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
 var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mapp|mpp|mf|pfe|pom|sl|sol|
@@ -115,13 +115,14 @@ VARCHECKS:
   #DEATH_DISCO
   if !matchre("$deathaction", "\b(logout|alert)\b") then put #var deathaction logout
   if !matchre("$disconnectaction", "\b(reconnect|quit)\b") then put #var disconnectaction reconnect
+  if !matchre("$arrestaction", "\b(logout|quit)\b") then put #var arrestaction logout
   
   #ALERTS
   if !matchre("$alertwindow", "\b(Main|Log|Conversation)\b") then put #var alertwindow Log
   if !matchre("$healthalerts", "\b(YES|NO)\b") then put #var healthalerts YES
   if !matchre("$healthalertnum", "\b(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99)\b") then put #var healthalertnum 85
   if !matchre("$nervealerts", "\b(YES|NO)\b") then put #var nervealerts YES
-  if !matchre("$backfirealerts", "\b(YES|NO)\b") then put #var nervealerts YES
+  if !matchre("$backfirealerts", "\b(YES|NO)\b") then put #var backfirealerts YES
   if !matchre("$sorceryalerts", "\b(YES|NO)\b") then put #var sorceryalerts YES
   if !matchre("$speechalerts", "\b(YES|NO)\b") then put #var speechalerts YES
   if !matchre("$arrivalalerts", "\b(YES|NO)\b") then put #var arrivalalerts NO
@@ -4304,7 +4305,7 @@ CLOSEITEMMAIN:
   matchre RETURN What were you referring to?|You close your|That is already closed\.
   put close %closeitemstring
   matchwait 5
-	var timeoutsub OPENITEMMAIN
+	var timeoutsub CLOSEITEMMAIN
 	var timeoutcommand close %closeitemstring
 	goto TIMEOUT
 
@@ -4455,6 +4456,7 @@ GETITEMMAIN:
   matchre GETUNTIE You pull at it, but the ties prevent you.  Maybe if you untie it, first?|You should untie the
   matchre RETURN You get|You're already holding|You are already holding that.|You pick up|What were you referring to?|You stop as you realize|You must unload|You fade in for a moment|You remove|You pull|What were you referring to?|You try to grab your|Please rephrase that command\.|You are already holding that\.|You deftly remove the
   match RETURN Get what?
+  match RETURN You reach for your sack and retrieve the equipment stored inside.
   matchre GETINJURED ^You can't pick that up with your (hand|hands) that damaged\.
   matchre GETITEMBAD You need a free hand to pick that up.
   matchre GETCLIMBPRACBAD You should stop practicing 
@@ -7023,7 +7025,7 @@ BERSERKMAIN:
   matchre BERSERKP %waitstring
   match BERSERKWRONG You have no idea how to do that.
   match BERSERKTRAIN You have not been trained in that manner of berserking.
-  matchre BERSERKRETURN Roundtime|The momentus rage of the avalanche replenishes your energy\!|A ravenous energy fills your limbs and you feel yourself growing healthier\!|You struggle\, but find yourself lacking the inner fire to enact such a rage\!|A vortex of malice springs into being\, expanding your focus and steadying your shield arm\!|Fury storming forth\, your pulse whips itself up to a furious tempo\!|You sense the rage within you well up and explode in a wild rage of dangerous power\.|You form the epicenter of a violent rage bent on crumbling your enemies\!|The momentus eruption of the volcano hardens you against damage\!|Careful control and timing of rage can provide reflexes capable of weathering even a landslide\.|In a flash your body fills with a flood of resilient rage\!|A supernatural strength and need to lash out at your foes inhabits you\.|A supernatural timing pulses through your veins, steadying your reaction against reflex based contests\!|The .* in your hands suddenly feels easier to wield, and more capable of powerful attacks\.|Unleashing a blizzard of hate, its raging violence amplifies the damage of your attacks\!|Fury wells up from within and swirls into a raging hurricane that leaves you in the calm eye of its center, supremely focused\.
+  matchre BERSERKRETURN Roundtime|The momentous rage of the avalanche replenishes your energy\!|A ravenous energy fills your limbs and you feel yourself growing healthier\!|You struggle\, but find yourself lacking the inner fire to enact such a rage\!|A vortex of malice springs into being\, expanding your focus and steadying your shield arm\!|Fury storming forth\, your pulse whips itself up to a furious tempo\!|You sense the rage within you well up and explode in a wild rage of dangerous power\.|You form the epicenter of a violent rage bent on crumbling your enemies\!|The momentus eruption of the volcano hardens you against damage\!|Careful control and timing of rage can provide reflexes capable of weathering even a landslide\.|In a flash your body fills with a flood of resilient rage\!|A supernatural strength and need to lash out at your foes inhabits you\.|A supernatural timing pulses through your veins, steadying your reaction against reflex based contests\!|The .* in your hands suddenly feels easier to wield, and more capable of powerful attacks\.|Unleashing a blizzard of hate, its raging violence amplifies the damage of your attacks\!|Fury wells up from within and swirls into a raging hurricane that leaves you in the calm eye of its center, supremely focused\.
   match BERSERKRETURN Your hands shake in anticipation of releasing the fury of the tsunami down upon your foes!
   matchre BERSERKRETURN But you are already enraged with that berserk\.
   match BERSERKPAUSE Your inner fire lacks the strength to fuel such a rage at this time.
@@ -8940,7 +8942,7 @@ VAULTPAYP:
   pause 
 VAULTPAY:
   matchre VAULTPAYP %waitstring
-  match VAULYPAYNOMONEY You don't have that much money!
+  match VAULTPAYNOMONEY You don't have that much money!
   match RETURN You hand the Dwarven clerk your payment.
   put pay 5000
   matchwait
@@ -8971,6 +8973,19 @@ ENTERVAULTOPEN:
   put open vault
   return
   
+DEBTPAY:
+  var debtpaystring $0
+  goto DEBTPAYMAIN
+DEBTPAYP:
+  pause
+DEBTPAYMAIN:
+  matchre DEBTPAYP %waitstring
+  match RETURN The clerk nods and takes your money, noting that your debt is now settled.
+  put pay %debtpaystring
+  matchwait 5
+	var timeoutsub DEBTPAY
+  var timeoutcommand pay %debtpaystring
+	goto TIMEOUT
   
 EXCHANGEP:
   pause
@@ -12693,7 +12708,7 @@ TARGETSELECT:
     var faceadj first
     var goodtarget 0 
     gosub TARGETSELECTLOOP
-    put #echo Yellow goodtarget: %goodtarget
+    #put #echo Yellow goodtarget: %goodtarget
     if (%goodtarget = 1) then
     {
       #echo MonsterArray: %monsterarray 

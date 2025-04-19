@@ -55,6 +55,22 @@ SET:
         goto END
       }
     }
+    if (tolower("%1") = "arrestaction") then
+    {
+      if matchre("%2", "\b(logout|alert)\b") then
+      {  
+        var setvar arrestaction
+        var input %2  
+        put #var %setvar %input
+        put #var save
+        goto VARDISPLAY
+      }
+      else
+      {
+        put #echo mono You can only set logout or alert!
+        goto END
+      }
+    }
     if tolower("%1") = "alertwindow" then
     {
       if matchre("%2", "\b(Main|Conversation|Log)\b") then
@@ -75,6 +91,7 @@ SET:
     if tolower("%1") = "healthalertnum" then goto TEXTSET
     if tolower("%1") = "speechalerts" then goto YESNOSET
     if tolower("%1") = "nervealerts" then goto YESNOSET
+    if tolower("%1") = "backfirealerts" then goto YESNOSET
     if tolower("%1") = "sorceryalerts" then goto YESNOSET
     if tolower("%1") = "emotealerts" then goto YESNOSET
     if tolower("%1") = "arrivalalerts" then goto YESNOSET
@@ -2005,10 +2022,12 @@ DISPLAYGENERAL:
 	put #echo
 	put #echo mono DeathAction: $deathaction     (logout or alert)
 	put #echo mono DisconnectAction: $disconnectaction     (reconnect or quit)
+	put #echo mono ArrestAction: $arrestaction     (logout or alert)
 	put #echo
 	gosub OUTPUT AlertWindow
   gosub OUTPUT HealthAlerts HealthAlertNum
 	gosub OUTPUT NerveAlerts
+	gosub OUTPUT BackfireAlerts
 	gosub OUTPUT SorceryAlerts
 	gosub OUTPUT InventoryAlerts
 	put #echo
