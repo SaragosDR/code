@@ -626,6 +626,7 @@ SET:
     if tolower("%1") = "climbingrope" then goto YESNOSET
     if tolower("%1") = "climbingropename" then goto TEXTSET
     if tolower("%1") = "climbingropehum" then goto YESNOSET
+    if tolower("%1") = "studyart" then goto YESNOSET
     if tolower("%1") = "humsong" then goto TEXTSET
     if tolower("%1") = "noncomsanowret" then goto YESNOSET
     
@@ -2335,20 +2336,20 @@ DISPLAYNONCOMBAT:
     gosub OUTPUT PSpellC3 PSpellC3PrepMana
     put #echo
   }
-  gosub OUTPUT Instrument
-  gosub OUTPUT InstrumentWorn
-  gosub OUTPUT InstrumentHands
+  gosub OUTPUT Instrument SongType
+  gosub OUTPUT InstrumentWorn InstrumentHands
   gosub OUTPUT InstrumentAssess
   gosub OUTPUT InstClean InstCleanCloth
-  gosub OUTPUT SongType
   gosub OUTPUT ClimbingRope ClimbingRopeName
   gosub OUTPUT ClimbingRopeHum HumSong
+  put #echo
+  gosub OUTPUT StudyArt (If enabled, will travel to Crossing)
+  put #echo
   gosub OUTPUT NonComSanowret
   put #echo
   gosub OUTPUT Crafting
   gosub OUTPUT Forging
   gosub OUTPUT Outfitting
-  
   gosub OUTPUT CraftingStorage (should have length at least 15 spans to accomodate all supplies)
   gosub OUTPUT CraftingStorageLocation (CraftingStorage container stored in portal|vault|none when not direclty in use)
   

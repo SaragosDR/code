@@ -1,3 +1,21 @@
+06/28/25
+Updated Scripts: train, library, set
+Added StudyArt to NonCombat for Scholarship training.  Enabling it will cause your character to travel to Crossing to study art at Raven's Court.
+Adjusted code for skin handling and bundle swapping to use at-feet slot.
+Added EV to the list of ritual spells.
+Changed default state of NonComSanowret to NO to make new characters require less configuration.
+
+Fixed a bug with Paralysis use for Empaths.
+Fixed a bug related to Empaths not using weapons but having skins to bundle due to alfar use.
+Added extra information on the target the script thought it was going for to Empathic Shock alerts to try to track down some rare issues with attacking when it shouldn't.
+Added some missing text for instrument training.
+Fixed a bug with some guild-related variables not being loaded properly for Warrior Mages and Traders, which could cause some things not to properly train.
+Fixed a bug with the Collect variable not being loaded properly, which would cause Outdoorsmanship not to be trained.
+Fixed a bug that could cause the script to stall if buffs were enabled, but BuffNum was set to 0.
+Fixed a bug with getting to the Crossing North Gate area caused by map changes.
+
+
+04/18/25
 Updated Scripts: train, library, set
 Added completely new arrest logic that's vastly more effective than what was previously in place.
 Added a new check to really make sure to not burgle when you're on fire (which instantly gets you caught).

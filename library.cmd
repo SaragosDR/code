@@ -7,7 +7,7 @@ var cyctms |aban|ars|fr|gs|iz|pyre|rim|ros|sa|sls|usol|
 var cycdbs |alb|dalu|dema|ee|hyh|shw|
 var cyclics |ac|ad|af|bes|botf|cs|eye|fae|ghs|gj|hodi|how|mg|mom|regenerate|rev|roc|rog|sanctuary|sov|tr|
 var allcyclics %cyclics-%cyctms-%cycdbs
-var rituals |absolution|aeg|all|ag|bc|bloodthorns|cos|dc|echo|eli|mf|mof|mon|iots|mf|mon|pom|pop|rtr|soul|vos|will|word|
+var rituals |absolution|aeg|all|ag|bc|bloodthorns|cos|dc|echo|eli|ev|mf|mof|mon|iots|mf|mon|pom|pop|rtr|soul|vos|will|word|
 var augmentation |ease|botf|drum|echo|ecry|fae|harm|mis|rage|soul|wotm|will|word|auspice|benediction|centering|gg|mapp|pom|rev|sap|sol|ad|ags|gol|mef|refresh|tranquility|vigor|art|aus|cv|iots|mt|sco|seer|shadows|ts|tv|bue|emc|ivm|ks|obfuscation|php|rei|rpu|clarity|crc|dig|hes|mo|rw|sr|tr|athleticism|bes|cs|cotc|em|hol|inst|oath|pls|stw|sott|sks|sk|wotp|ws|ava|blur|enrichment|fin|lgv|meg|phk|turi|aeg|mof|substratum|suf|sw|tw|ys|
 var debilitation |burden|dispel|aewo|alb|dalu|dmrs|dema|coz|halo|hulp|hyh|it|malediction|mc|ps|sb|sick|spit|compel|lethargy|nb|calm|dazzle|mb|ms|rend|set|shw|sleep|sod|tf|tv|hp|pv|rof|vs|vod|halt|shatter|sf|cotw|df|de|griz|hb|swarm|flu|anc|al|ee|frostbite|ip|moa|tc|ti|trem|vertigo|wb|
 var targetedmagic |stra|bonegrinder|sif|aban|bos|btn|pyre|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sts|
@@ -24,7 +24,7 @@ var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-
 var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-gryphonsbaby|p2-gryphonsyoung|p2-seordmaors
 var combatpresetp3 p3-snippets|p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-sylphs|p3-quartzgargoyles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-windbags|p3-windbags2|p3-frostcrones|p3-prerenielder|p3-gryphons|p3-beltunumshi|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-malchata|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-icearchons|p3-adanfsorcs|p3-adanfblades
 var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p4-merkreshcelpeze4|p4-armadillosjuve|p4-armadillosadult|p4-armadilloselder
-var combatpresetp5 p5-maidenstress|p5-matronstress|p5-dryads|p5-nyads1|p5-blightogres1|p5-nyads2|p5-blightogres2|p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-blackapes|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
+var combatpresetp5 p5-maidenstress|p5-matronstress|p5-dryads|p5-nyads1|p5-blightogres1|p5-nyads2|p5-blightogres2|p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-headsplitters|p5-blackapes|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
 var combatpresetlist none|%combatpresetp1|%combatpresetp2|%combatpresetp3|%combatpresetp4|%combatpresetp5
 
 
@@ -41,7 +41,7 @@ var performtownlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|i
 var forgingtownlist none|crossing|shard|merkresh|hibarnhvidar
 
 var Ordinal none|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth
-var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.|You're unconscious!|There is no need for violence here\.
+var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.|You're unconscious!|There is no need for violence here\.|Sorry, system is slow\.  No type ahead allowed\.
 
 #action (combo) var elapsed $gametime; math elapsed subtract %gametimestart; put #echo Yellow Elapsed: %elapsed; 10put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
 action (combo) put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
@@ -436,7 +436,8 @@ VARCHECKS:
   if !def(climbingropename) then put #var climbingropename rope
   if !matchre("$climbingropehum", "\b(YES|NO)\b") then put #var climbingropehum YES
   if !def(humsong) then put #var humsong scales
-  if !matchre("$noncomsanowret", "\b(YES|NO)\b") then put #var noncomsanowret YES
+  if !matchre("$studyart", "\b(YES|NO)\b") then put #var studyart NO
+  if !matchre("$noncomsanowret", "\b(YES|NO)\b") then put #var noncomsanowret NO
   
   if !def(craftingstorage) then put #var craftingstorage crafting satchel
   if !matchre("$craftingstoragelocation", "\b(none|portal|vault)\b") then put #var craftingstoragelocation none
@@ -1133,6 +1134,18 @@ VARCHECKOTHER:
   if !matchre("$killthrownbond", "\b(YES|NO)\b") then put #var killthrownbond NO
   return
 
+BOOSTCRAFTINGP:
+  pause
+BOOSTCRAFTING:
+  match BOOSTCRAFTINGP %waitstring
+  match BOOSTCRAFTINGSTOW A lumpy canvas sack appears in your right hand!
+  match RETURN You don't have enough credits for the Crafting Material Sack boost.
+  put boost crafting
+  matchwait
+  
+BOOSTCRAFTINGSTOW:
+  gosub STOWITEM canvas sack
+  goto BOOSTCRAFTING  
 
 NEWTOWNPRESET:
   var towncheck $1
@@ -1212,6 +1225,7 @@ NEWTOWNPRESET:
 		if (%towntype = "upkeep") then var upkeepzone 1
 		if (%towntype = "burgle") then var rttargetroom 388
 		if (%towntype = "perform") then var rttargetroom 227
+		if (%towntype = "studyart") then var rttargetroom 534
 		if (%towntype = "pawn") then var rttargetroom Cormyn
 	}
 	if ("%towncheck" = "leth") then
@@ -1360,7 +1374,7 @@ SPELLSTATCHECK:
   {
     var spellmana 0
     var spelldifficulty 1
-    var spellminmana 5
+    var spellminmana 1
     var spellcapmana 100
   }
   if ("%spelldiffname" = "gaf") then
@@ -4427,7 +4441,7 @@ DUMPITEM:
   var dumpitemstring $0
   goto DUMPITEMMAIN
 DUMPITEMMAIN:
-	if matchre ("$roomobjs", "(bucket|large stone turtle|disposal bin|waste bin|tree hollow|oak crate|firewood bin|ivory urn|pit|trash receptacle|marble statue)") then
+	if matchre ("$roomobjs", "(bucket|large stone turtle|disposal bin|waste bin|tree hollow|oak crate|firewood bin|ivory urn|pit|trash receptacle|marble statue|waste basket)") then
 	{
 	  gosub PUTITEM %dumpitemstring in $1
 	}
@@ -4518,17 +4532,27 @@ GETITEMBAD:
 
 LOWERITEM:
   var loweritemstring $0
+  var lowereditem -1
   goto LOWERITEMMAIN
 LOWERITEMP:
   pause
 LOWERITEMMAIN:
   matchre LOWERITEMP %waitstring
-  matchre RETURN What did you want to lower\?|You lower the .* and place it on the ground at your feet\.
-  put lower %loweritemstring ground
+  matchre LOWERRETURN What did you want to lower\?
+  matchre LOWERSUCCESS You lower the (.*) and place it on the ground at your feet\.
+  put lower my %loweritemstring ground
   matchwait 5
 	var timeoutsub LOWERITEMMAIN
 	var timeoutcommand lower %loweritemstring ground
 	goto TIMEOUT
+
+LOWERRETURN:
+  var lowereditem 0
+  return
+
+LOWERSUCCESS:
+  var lowereditem %loweritemstring
+  return
 
 OPENITEM:
   var openitemstring $0
@@ -4568,7 +4592,7 @@ PUTITEMP:
 	pause
 PUTITEMMAIN:
 	matchre PUTITEMP %waitstring
-	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.|That is far too hot to touch\!
+	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.|That is far too hot to touch\!|As you attempt to place your
 	matchre PUTRETURN You put|You drop|You briefly twist the top off of|Raffle Attendant Tizzeg examines your ticket and exclaims|A bored-looking Human boy says
 	match PUTITEMSTOW There's no room in the
 	match RETURN That's too heavy to go in there!
@@ -8385,14 +8409,14 @@ PERC:
   var timeoutcommand perceive
 	goto TIMEOUT
 
-PERCMM:
+PERCLUNAR:
 	if (($guild = "Barbarian") || ($guild = "Thief")) then return
   matchre RETURN Roundtime:|You are a bit too busy performing to do that.
   match RETURN Something in the area is interfering with your ability to perceive power.
   matchre PERCP %waitstring
   put perceive mana 
 	matchwait 5
-	var timeoutsub PERCMM
+	var timeoutsub PERCLUNAR
   var timeoutcommand perceive mana
 	goto TIMEOUT
 
@@ -9060,6 +9084,7 @@ GEMPOUCHASK:
   }
   else var actualappraiser %appraiser
   matchre GEMPOUCHASKP %waitstring
+  matchre GEMPOUCHASKSTOW Free one of your hands first.
   matchre GEMPOUCHASKGOOD hands you (a|an) (\S+) gem pouch\.
   matchre RETURN Usage: ASK|"All I know about are skins 
   put ask %actualappraiser for gem pouch
@@ -9067,6 +9092,10 @@ GEMPOUCHASK:
   var timeoutsub GEMPOUCHASK
   var timeoutcommand var actualappraiser %appraiser
 	goto TIMEOUT
+  
+GEMPOUCHASKSTOW:
+  gosub STOWALL
+  goto GEMPOUCHASK
   
 GEMPOUCHASKGOOD:
   var didgetpouch 1
@@ -9304,25 +9333,46 @@ BUNDLEMAKENOROPE2:
 BUNDLESWAP:
   if ("%dropskins" = "YES") then
   {
-    if %hand = "left" then gosub DUMPITEM $righthandnoun
+    if ("%hand" = "left") then gosub DUMPITEM $righthandnoun
     else gosub DUMPITEM $lefthandnoun
     return
   }
-  if tolower("%weapon%currentweapon") != "brawl" then 
+  if (%currentweapon = -1) then
   {
-    if %hand = "left" then 
+    if ("$lefthand" != "Empty") then gosub LOWERITEM $lefthandnoun
+    if ("$righthand" != "Empty") then gosub LOWERITEM $righthandnoun
+  }
+  else
+  {
+    if tolower("%weapon%currentweapon") != "brawl" then 
     {
-      if ("$lefthand" != "Empty") then
+      if ("%hand" = "left") then 
       {
-        gosub STOW left
+        if ("$lefthand" != "Empty") then
+        {
+          gosub STOW left
+        }
+        if ("$righthand" != "Empty") then
+        {
+          gosub LOWERITEM $righthandnoun
+        }
+      }
+      else 
+      {
+        if ("$righthand" != "Empty") then
+        {
+          gosub STOW right
+        }
+        if ("$lefthand" != "Empty") then
+        {
+          gosub LOWERITEM $lefthandnoun
+        }
       }
     }
-    else 
+    else
     {
-      if ("$righthand" != "Empty") then
-      {
-        gosub STOW right
-      }
+      if ("$lefthand" != "Empty") then gosub LOWERITEM $lefthandnoun
+      if ("$righthand" != "Empty") then gosub LOWERITEM $righthandnoun
     }
   }
   return  
@@ -10726,7 +10776,7 @@ TASKGIVEMAGSP:
   pause
 TASKGIVEMAGS:
   matchre TASKGIVEMAGSP %waitstring
-  matchre RETURN The firewood peddler Mags takes the stems and says, "Thanks, .*\!  I need .* more\."
+  matchre RETURN The firewood peddler Mags takes the .* and says, "Thanks, .*\!  I need .* more\."
   matchre TASKGIVEGOOD The firewood peddler Mags says, "Thank you very much, .*\.  I have a few things here for you, thank you so much for your help\."
   put give mags
   matchwait 5
@@ -11719,7 +11769,7 @@ PLAYP:
   pause
 PLAY:
   matchre PLAYP %waitstring
-  matchre PLAYSUCCESS You're already playing a song!|You begin a|You effortlessly begin|You fumble slightly|You struggle to begin
+  matchre PLAYSUCCESS You're already playing a song!|You begin a|You effortlessly begin|You fumble slightly|You struggle to begin|You begin some
   match PLAYUNHIDE That would give away your hiding place!
   put play %songtype on %instrument
   matchwait 5
@@ -11830,6 +11880,56 @@ INSTWRING:
   var timeoutsub INSTWRING
   var timeoutcommand wring my %instcleancloth
   goto TIMEOUT 
+
+
+STUDYART:
+  var artstring $0
+  goto STUDYARTMAIN
+STUDYARTP:
+  pause
+STUDYARTMAIN:
+  matchre STUDYARTP %waitstring
+  match RETURN Roundtime:
+  put study %artstring
+  matchwait 5
+  var timeoutsub STUDYARTMAIN
+  var timeoutcommand wipe my %instrument with %instcleancloth
+  goto TIMEOUT
+
+GETARTLIST:
+  if ($roomid = 534) then var artlist sculpture|painting|carving|statue|second painting
+  if ($roomid = 535) then var artlist painting|triptych|statue|figurine|second painting
+  if ($roomid = 536) then var artlist cylinder|sculpture|statue|painting|second painting
+  if ($roomid = 537) then var artlist sphere|panel|painting|canvas|statue
+  if ($roomid = 538) then var artlist painting|second painting|diorama|figure|statue
+  return
+
+ARTMOVELOOP:
+  if (%artroomscounter > %artroomslen) then return
+  gosub MOVE %artrooms(%artroomscounter)
+  gosub STUDYLOOP
+  if $Scholarship.LearningRate > 33 then var scholarlock 1
+  if $Scholarship.LearningRate < 21 then var scholarlock 0
+  if $Scholarship.Ranks >= 1750 then var scholarlock 1
+  if %scholarlock = 1 then return
+  math artroomscounter add 1
+  goto ARTMOVELOOP
+
+STUDYLOOP:
+  gosub GETARTLIST
+  eval artlistlen count("%artlist", "|")
+  var studyloopcounter 0
+STUDYLOOPMAIN:
+  if (%studyloopcounter > %artlistlen) then return
+  gosub STUDYART %artlist(%studyloopcounter)
+  if $Scholarship.LearningRate > 33 then var scholarlock 1
+  if $Scholarship.LearningRate < 21 then var scholarlock 0
+  if $Scholarship.Ranks >= 1750 then var scholarlock 1
+  if %scholarlock = 1 then return
+  math studyloopcounter add 1
+  goto STUDYLOOPMAIN
+
+
 
 AWAKEP:
   pause

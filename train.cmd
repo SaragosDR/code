@@ -1336,9 +1336,9 @@ EMPATHONLY:
   var nexthealcast 0
   if %healthalerts = "YES" then
   {
-    action put #flash; put #play JustArrived;var goodtarget 0;var shockcritter 1;put #echo %alertwindow Yellow [Health]: Empathic Shock when Pain blossoms within you, your delicate empathic senses
-    action put #flash; put #play JustArrived;var goodtarget 0;var shockcritter 1;put #echo %alertwindow Yellow [Health]: Empathic Shock when Pain blossoms within you, your empathic shock deepening, but you compose yourself\.
-    action put #flash; put #play JustArrived;var goodtarget 0;var shockcritter 1;put #echo %alertwindow Yellow [Health]: Total Empathic Shock! when You realize that you can no longer sense the life essences around you, a numb coldness gripping you\.
+    action put #flash; put #play JustArrived; put #echo %alertwindow Yellow [Health]: Empathic Shock.  Target: %faceadj %facemon; var goodtarget 0;var shockcritter 1 when Pain blossoms within you, your delicate empathic senses
+    action put #flash; put #play JustArrived;put #echo %alertwindow Yellow [Health]: Empathic Shock.  Target: %faceadj %facemon;var goodtarget 0;var shockcritter 1 when Pain blossoms within you, your empathic shock deepening, but you compose yourself\.
+    action put #flash; put #play JustArrived;put #echo %alertwindow Yellow [Health]: Total Empathic Shock!  Target: %faceadj %facemon;var goodtarget 0;var shockcritter 1 when You realize that you can no longer sense the life essences around you, a numb coldness gripping you\.
   }
   action var alfarcommand 1 when A (\S+) alfar warrior calmly strides in and surveys the area\.
   return
@@ -1542,7 +1542,11 @@ THIEFONLY:
   var boxpopkhriplunder $boxpopkhriplunder
   var boxpopkhrisafe $boxpopkhrisafe
   var boxpopkhrisight $boxpopkhrisight
-  
+  return
+
+TRADERONLY:
+  action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) (.*)s\.
+  action var quantity $1 when You need to turn in (\d*) more\.
   var invest $invest
   var tradingsell $tradingsell
   var tradingselltown $tradingselltown
@@ -1550,9 +1554,7 @@ THIEFONLY:
   var tradingtasks $tradingtasks
   return
 
-TRADERONLY:
-  action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) (.*)s\.
-  action var quantity $1 when You need to turn in (\d*) more\.
+WARMAGEONLY:
   var ignitebackup $ignitebackup
   var summoning $summoning
   var summonweapon $summonweapon
@@ -1565,12 +1567,6 @@ TRADERONLY:
   var calspell $calspell
   var calprepmana $calprepmana
   var caladdmana $caladdmana
-
-  return
-
-WARMAGEONLY:
-
-  
   var igniteweapon %seweapon|%leweapon|%theweapon|%sbweapon|%lbweapon|%thbweapon|%staveweapon|%poleweapon|%ltweapon|%htweapon
   action var elecharge 1 when You sense nothing out of the ordinary\.
   action var elecharge 2 when A small charge lingers within your body\, just above the threshold of perception\. 
@@ -1660,7 +1656,7 @@ HUNTINGVARLOAD:
       var travel YES
       var traveldest crossing
       var move YES
-      var movelist north gate
+      var movelist n gate
       var targetroom 0
       var findroom YES
       if ("%huntingpremium" = "NO") then var findroomlist 297|296|26|27|28|29|30|31|32|33|34|35|269
@@ -1690,7 +1686,7 @@ HUNTINGVARLOAD:
       var travel YES
       var traveldest crossing
       var move YES
-      var movelist north gate
+      var movelist n gate
       var targetroom 0
       var findroom YES
       if ("%huntingpremium" = "NO") then var findroomlist 291|274|275|44|276|277|290|279
@@ -1717,7 +1713,7 @@ HUNTINGVARLOAD:
       var travel YES
       var traveldest crossing
       var move YES
-      var movelist north gate
+      var movelist n gate
       var targetroom 0
       var findroom YES
       if ("%huntingpremium" = "NO") then var findroomlist 280|286|287|288|289|64|65|298|59|58|285|67|68|69
@@ -2838,6 +2834,18 @@ HUNTINGVARLOAD:
       var bugoutroom 14
       var nearestportaltown hibarnhvidar
     }
+    if ("%huntingarea" = "p5-headsplitters") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 572|573|574|575|576|577|578|579|580
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
     if ("%huntingarea" = "p5-blackapes") then
     {
       var zone 127
@@ -3149,6 +3157,7 @@ STATUSVARLOAD:
   var nextacmtwirl 0
   var nextalmanac 0
   var nextapp 0
+  var nextartstudy 0
   var nextassess 0
   var nextberserk 0
   var nextburgle 0
@@ -3570,8 +3579,8 @@ MAINVARLOAD:
   var appraisetimer $appraisetimer
   var appsaveitem $appsaveitem
   var appsaveitemstorage $appsaveitemstorage
-  var outdoor $outdoor
-  var outdoortimer $outdoortimer
+  var collect $collect
+  var collecttimer $collecttimer
   var collectitem $collectitem
   var textbook $textbook
   var textbooktimer $textbooktimer
@@ -3905,6 +3914,7 @@ MAINVARLOAD:
   var climbingropename $climbingropename
   var climbingropehum $climbingropehum
   var humsong $humsong
+  var studyart $studyart
   var noncomsanowret $noncomsanowret
 
   
@@ -4012,21 +4022,21 @@ NEWNONCOMBATCHECKS:
       var noncombatperformactive 1
     }
   }
-  #CRAFT_CHECKING
-  if ("%crafting" = "YES") then
+  #STUDY_ART
+  if ("%studyart" = "YES") then
   {
-    #FORGING_CHECKING
-    if ("%forging" = "YES") then
-    {
-      if ($Forging.LearningRate > 20) then var forginglock 1
-      if ($Forging.LearningRate < 4) then var forginglock 0
-      if ($Forging.Ranks >= 1750) then var forginglock 1
-      if (%forginglock != 1) then
+    if $Scholarship.LearningRate > 33 then var scholarlock 1
+    if $Scholarship.LearningRate < 21 then var scholarlock 0
+    if $Scholarship.Ranks >= 1750 then var scholarlock 1
+	  if %scholarlock != 1 then
+	  {
+	    var gametimetimest $lastartstudy
+	    math gametimetest add 108000
+      if ((%t >= %nextartstudy) && ($gametime > %gametimetest)) then
       {
-        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to forge at Forging.LearningRate: $Forging.LearningRate
         var scriptareachange noncombat
         var noncombatactive 1
-        var noncombatforgingactive 1
+        var noncombatstudyartactive 1
       }
     }
   }
@@ -4046,6 +4056,24 @@ NEWNONCOMBATCHECKS:
         var noncombatactive 1
         if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var noncombatsellactive 1
         if ("%tradingtasks" = "YES") then var noncombattasksactive 1
+      }
+    }
+  }
+  #CRAFT_CHECKING
+  if ("%crafting" = "YES") then
+  {
+    #FORGING_CHECKING
+    if ("%forging" = "YES") then
+    {
+      if ($Forging.LearningRate > 20) then var forginglock 1
+      if ($Forging.LearningRate < 4) then var forginglock 0
+      if ($Forging.Ranks >= 1750) then var forginglock 1
+      if (%forginglock != 1) then
+      {
+        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to forge at Forging.LearningRate: $Forging.LearningRate
+        var scriptareachange noncombat
+        var noncombatactive 1
+        var noncombatforgingactive 1
       }
     }
   }
@@ -4277,8 +4305,11 @@ NEWAREAMOVEMENT:
         if (("$zoneid" = "%zone") && (contains("|%findroomlist|", "|$roomid|"))) then
         else
         {
-          put #echo %alertwindow [Combat]: Buffing before combat.
-          gosub BUFFINGONLYLOOP
+          if (("%buff" = "YES") && (%buffnum > 0)) then
+          {
+            put #echo %alertwindow [Combat]: Buffing before combat.
+            gosub BUFFINGONLYLOOP
+          }
         }
       }
       if %rpastatus = 0 then gosub RPATOGGLE
@@ -4626,12 +4657,14 @@ COMBATLOOP:
     }
   }
   #COLLECTING
-  if %collect = "YES" then
+  #put #echo Yellow Collect: %collect
+  if ("%collect" = "YES") then
   {
-    #echo Collecting.
-    if %buffing = 0 then
+    #put #echo buffing: %buffing
+    if (%buffing = 0) then
     {
       #echo Not buffing.
+      #put #echo usingtactics: %usingtactics
       if ((%usingtactics != 1) && (%usingexpert != 1)) then
       {
         #echo Not using tactics or expertise.
@@ -6492,6 +6525,8 @@ AMMOBUYLOGIC:
 	}
 	gosub MOVE %ammoroom
 	pause .5
+	gosub MOVE %ammoroom
+	pause .5
   
   action var xbowtriggerlist %xbowtriggerlist|$1 when ^There are (.*) (%xbowammos) inside your.*\.
   action var bowtriggerlist %bowtriggerlist|$1 when ^There are (.*) (%bowammos) inside your.*\.
@@ -7349,7 +7384,7 @@ ATTUNELOGIC:
   #echo t: %t
   if %t >= %nextperc then
   {
-    if "$guild" = "Moon Mage" then 
+    if (("$guild" = "Moon Mage") || ("$guild" = "Trader")) then 
     {
       #if %t > %mmnextperc then
       #{
@@ -7357,8 +7392,8 @@ ATTUNELOGIC:
       #  math mmnextperc add 300
       #  gosub PERC
       #}
-      #else gosub PERCMM
-      gosub PERCMM
+      #else gosub PERCLUNAR
+      gosub PERCLUNAR
     }
     else gosub PERC
     math nextperc set %t
@@ -7733,10 +7768,16 @@ BURGLEKEEPLISTCHECK:
 ARRESTED:
   action (arrest) off
   if ($zoneid = 1) then var arresttown Crossing
+  #if ($zoneid = 67) then var arresttown Leth
+  #if ($zoneid = 67) then var arresttown Riverhaven
+  #if ($zoneid = 67) then var arresttown Therenborough
+  #if ($zoneid = 67) then var arresttown Fornsted
+  #if ($zoneid = 67) then var arresttown Throne City
+  if ($zoneid = 67) then var arresttown Shard
   put #echo %alertwindow Yellow [Justice]: Arrested in %arresttown!
   if ("%arrestaction" = "logout") then
   {
-    put #echo %alertwindow Yellow You arrested!  Logging out!
+    put #echo %alertwindow Yellow You were arrested!  Logging out!
     put quit
     exit
   }
@@ -8058,6 +8099,17 @@ TRADINGSELLLOGIC:
   goto TRADINGSELLLOGIC
   
 
+STUDYARTLOGIC:
+  var artrooms 534|535|536|537|538
+  eval artroomslen count("%artrooms", "|")
+  var artroomscounter 0
+  put #echo %alertwindow [Noncombat]: Studying art in Raven's Court.
+  gosub ARTMOVELOOP
+  var nextartstudy %t
+  math nextartstudy add 108000
+  put #var lastartstudy $gametime
+  return
+  
 
 TASKLOGIC:
   if $Trading.LearningRate > 33 then var tradinglock 1
@@ -8069,6 +8121,8 @@ TASKLOGIC:
   pause 1
   put #echo Yellow Quantity: %quantity
   put #echo Yellow Forageitem: %forageitem
+  if ("%forageitem" = "branche") then var forageitem branch
+  if ("%forageitem" = "berrie") then var forageitem berries
   gosub MOVE ntr
   var heldquantity 0
   gosub TASKFORAGELOOP
@@ -8080,7 +8134,7 @@ TASKLOGIC:
 
 
 COLLECTLOGIC:
-  #echo Collectlogic
+  #put #echo Yellow Collectlogic
   if (%retreatdelay = "YES") then
   {
     if %evenleastnum < 7 then return
@@ -9833,8 +9887,10 @@ SPELLCHOICELOGIC:
           if (%paralysisuse = 1) then
           {
             var spellprepping paralysis
-            var prepmana %paralysisprepmana
-            var addmana %paralysisaddmana
+            gosub SPELLSTATCHECK %spellprepping
+            var prepmana %spellminmana
+            var addmana %paralysismana
+            math addmana subtract %prepmana
           }
           else
           {
@@ -10646,6 +10702,18 @@ NEWNONCOMBATLOGIC:
 			gosub MTPERFORMLOOP
 		}
 		
+		#STUDY_ART
+		if (%noncombatstudyartactive = 1) then
+		{
+		  if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
+		  gosub LEAVEROOM
+		  gosub NEWTOWNPRESET crossing studyart
+		  gosub ROOMTRAVEL
+			gosub AWAKE
+			gosub STOWALL
+      gosub STUDYARTLOGIC
+		}
+		
 		#FORGING
 		if (%noncombatforgingactive = 1) then
 		{
@@ -10878,6 +10946,7 @@ WEAPONLOGIC:
     #AVOID_SHOCK
     if (%avoidshock = "YES") then
     {
+      if ($SpellTimer.Absolution.active != 1) then return
       #put #echo Yellow GoodTarget: %goodtarget    CurrentCritter: %currentcritter    ShockCritter: %shockcritter
       if (%goodtarget = 0) then gosub TARGETSELECT
       if (%shockcritter = 1) then 
@@ -13930,25 +13999,41 @@ SKINNINGLOGIC:
   if %badskin = 0 then
   {
     gosub SKINNING
-    if (matchre("$lefthandnoun", "%weaponname") then
+    if (%currentweapon = -1) then
     {
-      if ("$righthand" != "Empty") then gosub BUNDLELOGIC      
+      if (("$lefthand" != "Empty") || ("$righthand" != "Empty")) then gosub BUNDLELOGIC
     }
-    else 
+    else
     {
-      if (matchre("$righthandnoun", "%weaponname") then
+      if tolower("%weapon%currentweapon") != "brawl" then
       {
-        if ("$lefthand" != "Empty") then gosub BUNDLELOGIC
+        if (matchre("$lefthandnoun", "%weaponname") then
+        {
+          if ("$righthand" != "Empty") then gosub BUNDLELOGIC      
+        }
+        else 
+        {
+          if (matchre("$righthandnoun", "%weaponname") then
+          {
+            if ("$lefthand" != "Empty") then gosub BUNDLELOGIC
+          }
+          else if (("$righthand" != "Empty") && ("$lefthand" != "Empty")) then gosub BUNDLELOGIC
+        }
       }
-      else if (("$righthand" != "Empty") && ("$lefthand" != "Empty")) then gosub BUNDLELOGIC
+      else
+      {
+        if (("$lefthand" != "Empty") || ("$righthand" != "Empty")) then gosub BUNDLELOGIC
+      }
     }
   }
   return
   
 
 BUNDLELOGIC:
+  #SWAPPING_SKINS_OUT
+  var lowereditem -1
   gosub BUNDLESWAP
-  if %appsaveitem != "none" then
+  if ("%appsaveitem" != "none") then
   {
     var lbundlecount 0
     var tbundlecount 0
@@ -13992,6 +14077,7 @@ BUNDLELOGIC:
     }
   }
   #MAKING_NEW_BUNDLE
+  if ((%lowereditem != -1) && (%lowereditem != 0)) then gosub GETITEM %lowereditem
   gosub BUNDLEMAKE
   if ((matchre("$righthandnoun", "bundle")) || (matchre("$lefthandnoun", "bundle"))) then
   {
@@ -14006,6 +14092,7 @@ BUNDLELOGIC:
       gosub WEARITEM bundle
     }
   }
+  gosub STOWFEET
   return
   
 LEAVEROOM:
