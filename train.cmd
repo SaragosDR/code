@@ -241,21 +241,39 @@ action var tacticsdone 1 when You can no longer see openings
 
 
 ##BLEEDING
-ACTION setvar head 1 WHEN ^\s+head       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar neck 1 WHEN ^\s+neck       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar chest 1 WHEN ^\s+chest       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar abdomen 1 WHEN ^\s+abdomen       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar back 1 WHEN ^\s+back       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar tail 1 WHEN ^\s+tail       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar rightarm 1 WHEN ^\s+right arm       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar leftarm 1 WHEN ^\s+left arm       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar righthand 1 WHEN ^\s+right hand       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar lefthand 1 WHEN ^\s+left hand       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar rightleg 1 WHEN ^\s+right leg       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar leftleg 1 WHEN ^\s+left leg       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar righteye 1 WHEN ^\s+right eye       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
-ACTION setvar lefteye 1 WHEN ^\s+left eye       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var head 1 when ^\s+head       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var neck 1 when ^\s+neck       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var chest 1 when ^\s+chest       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var abdomen 1 when ^\s+abdomen       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var back 1 when ^\s+back       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var tail 1 when ^\s+tail       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var rightarm 1 when ^\s+right arm       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var leftarm 1 when ^\s+left arm       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var righthand 1 when ^\s+right hand       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var lefthand 1 when ^\s+left hand       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var rightleg 1 when ^\s+right leg       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var leftleg 1 when ^\s+left leg       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var righteye 1 when ^\s+right eye       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var lefteye 1 when ^\s+left eye       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+
+action var inthead 1 when ^\s+inside head       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var intneck 1 when ^\s+inside neck       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var intchest 1 when ^\s+inside chest       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action echo intabdomen;var intabdomen 1 when ^\s+inside abdomen       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var intback 1 when ^\s+inside back       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var inttail 1 when ^\s+inside tail       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var intrightarm 1 when ^\s+inside r\. arm       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var intleftarm 1 when ^\s+inside l\. arm       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var intrighthand 1 when ^\s+inside r\. hand       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var intlefthand 1 when ^\s+inside l\. hand       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var intrightleg 1 when ^\s+inside r\. leg       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var intleftleg 1 when ^\s+inside l\. leg       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var intrighteye 1 when ^\s+inside r\. eye       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
+action var intlefteye 1 when ^\s+inside l\. eye       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
 #action setvar You feel like now might be a good time to change the bandages on your head.
+
+
+
 
 #NERVES
 action (nerves) var badnerves 1 when some minor twitching
@@ -391,7 +409,8 @@ ALERTINIT:
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "|The shadowling exclaims,
     var hespeech A voice on the wind whispers|A pair of Merelew guards assist you into the water|The libik (?:shouts|yells),|The seedy monger looks up to you and|The Monger's voice booms out,|The Monger's booming voice comes from the booth,|One of the attendants glances at you and says,|One of the monger's assistants addresses you, saying,|^An attendant in an otter costume exclaims|\w+ chants, "C'mon! I feel the luck of Eluned smiling on you all!
-    var speechwhitelist %generalspeech|%craftingspeech|%ferryspeech|%monsterspeech|%spellspeech|%hespeech
+    var artspeech Painted with lush color and housed in a polished rectangle of walnut|A single crystal rose sits perfectly balanced upon the point|Fiendish lacerations exposing bare bone and dripping blood|Standing resolute in the face of an advancing horde of undead|The bright frame illuminates the rich color of the dark scene|Gracefully composed, the artwork features bold black strokes and pale watercolors|The sculpture itself is made from a single piece of gnarled copperwood|The kneeling figure of the chained man sits the height|Careful use of shading diverts your eyes away from the|At first glance, the piece appears dark and featureless|Rendered in dark bronze and rising three feet tall|Rich, polished mahogany frames this exquisite work of art|About the size of a Gor'Tog's skull, this smooth orb rests on an ornate|The panel is a worked slab of fine-grained pink sandstone standing four hands tall|Framed in a magnificent rectangle of rich mahogany, the bright bedroom|Framed in a square of goldenoak, the picture is presented against a backdrop of black velvet|As you take a look at this unique display, the first thing you notice|This display features a drape of black velvet overhead to protect
+    var speechwhitelist %generalspeech|%craftingspeech|%ferryspeech|%monsterspeech|%spellspeech|%hespeech|%artspeech
     var namementionwhitelist Welcome back, (Sir|Madam)|Farewell, (Sir|Madam)|Take care, (Sir|Madam)|Thanks,|Thank you very much,|Searching methodically through the shelves, you finally manage to locate the jar labeled
     action (speech) var speechspeaker $1; var speechtext $2; var speechdiff2 %t; math speechdiff2 subtract %lastspeech; var speechdiff %speechdiff2 when ^(?!%speechwhitelist)(.{0,40}).*\, "(?!Say Ahh!)(.+)"
     action (speech) put #echo %alertwindow Yellow [Speech] %speechspeaker...; put #play Speech; put #flash; var lastspeech %t when eval %speechdiff >= 1
@@ -1545,6 +1564,13 @@ THIEFONLY:
   return
 
 TRADERONLY:
+  action var badxibar 1 when Xibar is below the horizon.
+  action var badxibar 1 when Clouds obscure the sky where Xibar should appear.
+  action var badyavash 1 when Yavash is below the horizon.
+  action var badyavash 1 when Clouds obscure the sky where Yavash should appear.
+  action var badstars 2 when Dense clouds completely obscure your search.
+  action var badstars 1; var badyavash 1; var badxibar 1 when That's a bit hard to do while inside.
+  
   action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) (.*)s\.
   action var quantity $1 when You need to turn in (\d*) more\.
   var invest $invest
@@ -3201,6 +3227,7 @@ STATUSVARLOAD:
   var nextskinfa 0
   var nextsmite 0
   var nextspider 0
+  var nextstarcheck 0
   var nextstudy 0
   var nextsumm 0
   var nexttarantula 0
@@ -3579,7 +3606,8 @@ MAINVARLOAD:
   var appraisetimer $appraisetimer
   var appsaveitem $appsaveitem
   var appsaveitemstorage $appsaveitemstorage
-  var collect $collect
+  if (%varset = 1) then var collect $collect
+  else var collect $collectm2
   var collecttimer $collecttimer
   var collectitem $collectitem
   var textbook $textbook
@@ -3935,6 +3963,9 @@ MAINVARLOAD:
   var pvpstealthalerts $pvpstealthalerts
   var inventoryalerts $inventoryalerts
   var paranoiaalerts $paranoiaalerts
+  
+  var tendarea $tendarea
+  var tendobject $tendobject
   return
 
 WEAPONLOADLOOP:
@@ -4026,13 +4057,17 @@ NEWNONCOMBATCHECKS:
   if ("%studyart" = "YES") then
   {
     if $Scholarship.LearningRate > 33 then var scholarlock 1
-    if $Scholarship.LearningRate < 21 then var scholarlock 0
+    if $Scholarship.LearningRate < 11 then var scholarlock 0
     if $Scholarship.Ranks >= 1750 then var scholarlock 1
 	  if %scholarlock != 1 then
 	  {
-	    var gametimetimest $lastartstudy
-	    math gametimetest add 108000
-      if ((%t >= %nextartstudy) && ($gametime > %gametimetest)) then
+	    var gametimetest $unixtime
+	    math gametimetest subtract $lastartstudy
+	    #put #echo t: %t
+	    #put #echo nextartstudy: %nextartstudy
+	    #put #echo unixtime: $unixtime
+	    #put #echo gametimetest: %gametimetest
+      if ((%t >= %nextartstudy) && (%gametimetest >= 1800)) then
       {
         var scriptareachange noncombat
         var noncombatactive 1
@@ -4122,7 +4157,8 @@ NEWAREADECISION:
         return
       }
     }
-    var scriptareachange combat
+    if (%noncombatactive != 1) then var scriptareachange combat
+    else var scriptareachange noncombat
   }
   if ("%scriptarea" = "upkeep") then
   {
@@ -4157,7 +4193,6 @@ NEWAREADECISION:
     }
     else
     {
-      ###this is where upkeep from noncombat goes
       if (%goupkeep = 1) then
       {
         var noncombatactive 0
@@ -4210,10 +4245,8 @@ NEWAREAMOVEMENT:
       }
     }
     #NONCOMBAT_MOVEMENT
-    if ("%scriptarea" = "noncombat") then
-    {
-      #gosub NEWNONCOMBATLOGIC
-    }
+      #MOVEMENT_CONTAINED_IN_NEWNONCOMBAT
+     
     #UPKEEP_MOVEMENT
     if ("%scriptarea" = "upkeep") then
     {
@@ -4298,6 +4331,7 @@ NEWAREAMOVEMENT:
     {
       if ("%scriptarea" = "0") then put #echo %alertwindow [Train]: Starting training in %scriptareachange.
       else put #echo %alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
+      var noncombatactive 0
       var scriptareachange 0
       var scriptarea combat
       if ((%scriptmode != 3) && ("$guild" != "Barbarian") && ("$guild" != "Thief")) then
@@ -4322,6 +4356,7 @@ NEWAREAMOVEMENT:
         }
       }
       gosub AWAKE
+      return
     }
     #GOING_TO_NONCOMBAT
     if ("%scriptareachange" = "noncombat") then
@@ -4336,6 +4371,7 @@ NEWAREAMOVEMENT:
       put #echo >$alertwindow Ending noncombat.
       gosub NEWAREADECISION
       goto NEWAREAMOVEMENT
+      return
     }
     #GOING_TO_UPKEEP
     if ("%scriptareachange" = "upkeep") then
@@ -4378,6 +4414,7 @@ NEWAREAMOVEMENT:
       gosub UPKEEPLOGIC
       gosub NEWAREADECISION
       goto NEWAREAMOVEMENT
+      return
     }
   }
   return
@@ -5929,23 +5966,37 @@ AUTOPATHLOGIC:
       var didautopath 1
       gosub MOVE healer
       put join list
+      if ("$guild" != "Necromancer") then
+      {
+        if (matchre("$roomobjs", "vela'tohr plant")) then gosub TOUCHVELA plant
+        if (matchre("$roomobjs", "vela'tohr thicket")) then gosub TOUCHVELA thicket
+      }
       waitfor Kaiva crosses your name off the waiting list.
     }
-    else gosub HEALERUSE
-    #echo Exited HEALERUSE
+    else
+    {
+      if ("$guild" != "Necromancer") then
+      {
+        if (matchre("$roomobjs", "vela'tohr plant")) then gosub TOUCHVELA plant
+        if (matchre("$roomobjs", "vela'tohr thicket")) then gosub TOUCHVELA thicket
+      }
+      gosub HEALERUSE
+    }
   }
   return
 
 HEALERUSEP:
   pause
 HEALERUSE:
-  matchre HEALERUSEP ...wait|type ahead|stunned|while entangled in a web
+  matchre HEALERUSEP %waitstring
   match RETURN Dokt gives you a quick glance, "Look fine to me, out with you now."
   match RETURN Quentin snickers at you.  "Get up, get up, go have yourself a birthday party 'cause you don't need healing!"
   match RETURN Quentin whispers, "Just between you and me and the Queen, I think you don't really need healing.  Are you just my friend or something?"
   match RETURN You sit up.
   put lie
   matchwait
+
+
 
 #####LOCKSMITHING_LOGIC#####
 
@@ -8107,7 +8158,7 @@ STUDYARTLOGIC:
   gosub ARTMOVELOOP
   var nextartstudy %t
   math nextartstudy add 108000
-  put #var lastartstudy $gametime
+  put #var lastartstudy $unixtime
   return
   
 
@@ -11328,6 +11379,11 @@ ROOMTRAVEL:
   #put #echo Yellow rttargetroom: %rttargetroom
   #put #echo Yellow rtfindroom: %rtfindroom
   #put #echo Yellow Here
+  if (("$zoneid" = "1") && ("$roomid" = "388")) then
+  {
+    gosub MOVE 386
+    gosub MOVE 145
+  }
   if ("$zoneid" != "%rtzone") then
   {
     if (%rtzone != 0) then
@@ -11376,6 +11432,11 @@ ROOMTRAVEL:
   if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
   if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then
   {
+    if (("$zoneid" = "1") && ("%rttargetroom" = "388")) then
+    {
+      gosub MOVE 145
+      gosub MOVE 386
+    }
     gosub MOVE %rttargetroom
     #if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then goto ROOMTRAVEL
   }
@@ -12315,7 +12376,7 @@ BUFFINGLOOP:
           if %justice = 1 then return
         }
       }
-      if %buff%buffloop = "iots" then
+      if ("%buff%buffloop" = "iots") then
       {
         gosub WEATHER
         if (%inside = 1) then
@@ -12332,6 +12393,13 @@ BUFFINGLOOP:
         if %casting = 1 then return
         else goto BUFFINGLOOP
       }
+      if (matchre("%buff%buffloop", "%staraura") then
+      {
+        if (%t > %nextstarcheck) then gosub STARLIGHTCHECK
+        if (%starlight = 1) then gosub BUFFINGFUNC
+        if (%casting = 1) then return
+        else goto BUFFINGLOOP
+      } 
       gosub BUFFINGFUNC
       if %casting = 1 then return
     }

@@ -1,3 +1,17 @@
+07/15/25
+Updated Scripts: train, library, set
+Added TendArea variable for tending internal and external wounds at once.  Defaults to NO, so set to YES for skilled characters.  TendObject coming later.
+Added code to make the script take advantage of vela'tohr plants/thickets if they are available in the autopath rooms.
+Added new code for ava|blur|ir|rega|stc|trc so that they can be put in your buff list, but will not cast if there is no available starlight.  Will add a variable to allow it to use starlight aura if chosen later.
+Added CollectM2 variable for the ability to turn off collecting during Mode 2 training if it's turned on in Mode 1.
+Added special logic for Crossing to avoid lower level characters getting stuck on the embrasure going to burgle.
+Fixed a bug that could cause art studying to run when it was on cooldown if the script was restarted.
+Fixed a bug in setting the skinning variables that could cause you not to be able to turn it off.
+Added new code to fix an issue with burgling new paper items that you have to throw away instead of drop.
+Minor fixes to Trader tasks.
+Added missing text to Flee sub.
+
+
 06/28/25
 Updated Scripts: train, library, set
 Added StudyArt to NonCombat for Scholarship training.  Enabling it will cause your character to travel to Crossing to study art at Raven's Court.

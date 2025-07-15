@@ -14,6 +14,7 @@ var targetedmagic |stra|bonegrinder|sif|aban|bos|btn|pyre|ae|chs|fou|ff|hot|he|h
 var utility |gaf|imbue|sec|alb|aot|care|eye|hodi|nexus|resonance|sanctuary|all|bf|bless|ef|it|mre|mf|om|rejuv|rezz|rev|sol|uncurse|vigil|absolution|ad|awaken|bs|cos|cd|ev|fp|foc|gs|heal|hs|hw|hl|innocence|rp|regenerate|vh|bc|contingency|dc|dg|fm|locate|moonblade|mg|pg|rtr|rf|rend|rs|seer|shm|ss|shadowling|sm|sov|tf|teleport|th|unleash|bb|cfb|cfw|cf|devour|eotb|nr|qe|resection|roc|rof|rog|ag|as|bot|ba|crc|da|hoj|how|rue|tr|vos|af|bes|blend|compost|em|mon|sks|nou|rega|stc|ab|etf|foi|ignite|rm|zephyr|
 var warding |lw|maf|fotf|gj|name|repr|ghs|halo|mpp|pfe|sl|sos|spit|ic|pop|tranquility|col|psy|shear|tksh|wd|ch|emc|ghoulflesh|solace|worm|aa|courage|how|sp|tk|bloodthorns|etc|ey|fwb|rits|eli|ir|mom|non|trc|ac|es|gi|gf|voi|
 var targeted |stra|bonegrinder|sif|bos|btn|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sts|
+var staraura ava|blur|ir|rega|stc|trc
 
 var heavytm bos|ms
 var transnecro |ivm|ks|bue|worm|ch|php|
@@ -132,6 +133,8 @@ VARCHECKS:
   if !matchre("$pvpstealthalerts", "\b(YES|NO)\b") then put #var pvpstealthalerts NO
   if !matchre("$inventoryalerts", "\b(YES|NO)\b") then put #var inventoryalerts YES
   if !matchre("$paranoiaalerts", "\b(YES|NO)\b") then put #var paranoiaalerts NO
+  if !matchre("$tendarea", "\b(YES|NO)\b") then put #var tendarea NO
+  if !matchre("$tendobject", "\b(YES|NO)\b") then put #var tendobject NO
   if !matchre("$bugout", "\b(YES|NO)\b") then put #var bugout NO
   if $bugoutnum > 0 then
   else put #var bugoutnum 1
@@ -377,6 +380,7 @@ VARCHECKS:
   if !matchre("$stealthm2", "\b(YES|NO)\b") then put #var stealthm2 NO
   if !matchre("$tactics", "\b(YES|NO)\b") then put #var tactics YES
   if !matchre("$tacticsm2", "\b(YES|NO)\b") then put #var tacticsm2 YES
+  if !matchre("$collectm2", "\b(YES|NO)\b") then put #var collectm2 YES
   if !matchre("$retreatdelay", "\b(YES|NO)\b") then put #var retreatdelay NO
   if !matchre("$appraise", "\b(YES|NO)\b") then put #var appraise YES
   if !matchre("$appraisetarget", "\b(bundle|creature)\b") then put #var appraisetarget creature
@@ -525,6 +529,7 @@ VARCHECKS:
 
 #SPELL
   if !matchre("$spell", "\b(YES|NO)\b") then put #var spell YES
+  if !matchre("$spellm2", "\b(YES|NO)\b") then put #var spellm2 YES
   if !matchre("$spellnum", "\b(1|2|3|4)\b") then put #var spellnum 3
   if !matchre("$spellnumm2", "\b(1|2|3|4)\b") then put #var spellnumm2 3
   if !def(spell1) then put #var spell1 ys
@@ -4156,6 +4161,21 @@ STEAL:
 	goto TIMEOUT
 
 
+TOUCHVELA:
+  var touchvelastring $0
+  goto TOUCHVELAMAIN
+TOUCHVELAP:
+  pause
+TOUCHVELAMAIN:
+  match TOUCHVELAP %waitstring
+  match RETURN You reach out to touch a
+  match RETURN You feel a brief flare of warmth where your skin previously made contact with a healing plant.
+  put touch %touchvelastring
+  matchwait 5
+	var timeoutsub TOUCHVELAMAIN
+  var timeoutcommand mark %stealitem
+	goto TIMEOUT
+
 
 #####ITEM_HANDLING_SUBS#####
 ACTIVEWEAPONS:
@@ -4421,6 +4441,7 @@ DROPITEMMAIN:
 	match DROPLOWER Trying to go unnoticed, are you?
 	match DROPLOWER Doing that would give away your hiding place!
   match DROPITEMMAIN Whoah!
+  match DROPITEMTHROW You really shouldn't litter.  If you wish to discard the
 	matchre RETURN What were you referring to?|You drop|You wince as the|You spread|You drop your
 	put drop my %dropitemstring
 	matchwait 5
@@ -4436,6 +4457,27 @@ DROPLOWER:
 	gosub LOWERITEM %dropitemstring
 	gosub EMPTYFEET
 	return
+
+DROPITEMTHROW:
+  gosub THROWITEM %dropitemstring
+  return
+
+
+THROWITEM:
+  var throwitemstring $0
+  goto THROWITEMMAIN
+THROWITEMP:
+  pause
+THROWITEMMAIN:
+  match THROWITEMP %waitstring
+  match RETURN You throw away your
+  match RETURN I could not find what you were referring to.
+  put throw %throwitemstring
+  matchwait 5
+	var timeoutsub THROWITEMMAIN
+	var timeoutcommand drop my %throwitemstring
+	goto TIMEOUT
+
 
 DUMPITEM:
   var dumpitemstring $0
@@ -6501,6 +6543,8 @@ FLEE:
   matchre FLEEP %waitstring
   matchre FLEECONT You foresee the situation deteriorating rapidly.|You realize you're out of your element!|Either you're looking really tasty|You feel the wrenching pain of dejection as you|Hoping the gods will come to your rescue, you mutter|You suddenly realize that you may be completely outclassed in this match.|You suddenly realize that the hunter may be the hunted\.|For some inexplicable reason, you can't flee from this area\.  You frantically attempt to disengage from combat\.|Scanning the area for an escape route, you turn
   match RETURN You assess your combat situation and realize you don't see anything engaged with you.
+  match RETURN How do you expect to flee with your right leg in that condition?
+  match RETURN How do you expect to flee with your left leg in that condition?
   put flee
   matchwait 5
 	var timeoutsub FLEE
@@ -6695,6 +6739,7 @@ LIE:
 
 MOVE:
   var roomtarget $0
+  var nextstarcheck 0
 MOVEMAIN:
   put #echo Yellow AutoMove Target: %roomtarget
   pause 0.1
@@ -6708,6 +6753,7 @@ MOVEMAIN:
 
 TRAVEL:
   var traveltarget $0
+  var nextstarcheck 0
 TRAVELMAIN:
   put #echo Yellow Travel Target: %traveltarget
   pause 0.1
@@ -10709,6 +10755,55 @@ INVESTRETREAT:
   goto INVEST
 
 
+STARLIGHTCHECK:
+  var badxibar 0
+  var badyavash 0
+  var badstars 0
+  var starlight -1
+  gosub TRADEROBSERVE
+  var nextstarcheck %t
+  math nextstarcheck add 900
+  echo badxibar: %badxibar
+  echo badyavash: %badyavash
+  echo badstars: %badstars
+  if ($SpellTimer.Noumena.active = 1) then
+  {
+    if ((($Time.isDay = 0) && (%badstars = 0)) || (($Time.isDay = 0) && (%badstars = 2)) || (%badxibar = 0) || (%badyavash = 0)) then
+    {
+      var starlight 1
+    }
+    else
+    {
+      var starlight 0
+    }
+  }
+  else
+  {
+    if ((($Time.isDay = 0) && (%badstars = 0)) || (%badxibar = 0) || (%badyavash = 0)) then 
+    {
+      var starlight 1
+    }
+    else var starlight 0
+  }
+  return
+
+TRADEROBSERVEP:
+  pause
+TRADEROBSERVE:
+  match TRADEROBSERVEP %waitlist
+  match TOBSERVERET You are a bit too distracted to be observing something.
+  match RETURN That's a bit hard to do while inside.
+  match RETURN Roundtime:
+  put observe heavens
+  matchwait 5
+  var timeoutsub TRADEROBSERVE
+  var timeoutcommand observe heavens
+	goto TIMEOUT
+	
+TOBSERVERET:
+  gosub RETREAT
+  goto TRADEROBSERVE
+
 TASKASKP:
   pause
 TASKASK:
@@ -11414,20 +11509,28 @@ BLEEDCHECK:
 	goto TIMEOUT
   
 BLEEDING:
-  if %head = 1 then gosub tend head
-  if %neck = 1 then gosub tend neck
-  if %chest = 1 then gosub tend chest
-  if %abdomen = 1 then gosub tend abdomen
-  if %back = 1 then gosub tend back
-  if %tail = 1 then gosub tend tail
-  if %rightarm = 1 then gosub tend right arm
-  if %leftarm = 1 then gosub tend left arm
-  if %righthand = 1 then gosub tend right hand
-  if %lefthand = 1 then gosub tend left hand
-  if %rightleg = 1 then gosub tend right leg
-  if %leftleg = 1 then gosub tend left leg
-  if %righteye = 1 then gosub tend right eye
-  if %lefteye = 1 then gosub tend left eye
+  if ("%tendarea" != "YES") then
+  {
+    if (%head = 1)) then gosub tend head
+    if (%neck = 1)) then gosub tend neck
+    if (%chest = 1) then gosub tend chest
+    if (%abdomen = 1) then gosub tend abdomen
+    if (%back = 1) then gosub tend back
+    if (%tail = 1) then gosub tend tail
+    if (%rightarm = 1) then gosub tend right arm
+    if (%leftarm = 1) then gosub tend left arm
+    if (%righthand = 1) then gosub tend right hand
+    if (%lefthand = 1) then gosub tend left hand
+    if (%rightleg = 1) then gosub tend right leg
+    if (%leftleg = 1) then gosub tend left leg
+    if (%righteye = 1) then gosub tend right eye
+    if (%lefteye = 1) then gosub tend left eye
+  }
+  else
+  {
+    if ((%head = 1) || (%neck = 1) || (%chest = 1) || (%abdomen = 1) || (%back = 1) || (%tail = 1) || (%rightarm = 1) || (%leftarm = 1) || (%righthand = 1) || (%lefthand = 1) || (%rightleg = 1) || (%leftleg = 1) || (%righteye = 1) || (%lefteye = 1)) then gosub TEND external
+    if ((%inthead = 1) || (%intneck = 1) || (%intchest = 1) || (%intabdomen = 1) || (%intback = 1) || (%inttail = 1) || (%intrightarm = 1) || (%intleftarm = 1) || (%intrighthand = 1) || (%intlefthand = 1) || (%intrightleg = 1) || (%intleftleg = 1) || (%intrighteye = 1) || (%intlefteye = 1)) then gosub TEND internal
+  }
   return
 
 TEND:

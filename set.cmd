@@ -97,6 +97,8 @@ SET:
     if tolower("%1") = "arrivalalerts" then goto YESNOSET
     if tolower("%1") = "gmalerts" then goto YESNOSET
     if tolower("%1") = "paranoiaalerts" then goto YESNOSET
+    if tolower("%1") = "tendarea" then goto YESNOSET
+    if tolower("%1") = "tendobject" then goto YESNOSET
     if tolower("%1") = "bugout" then goto YESNOSET
     if tolower("%1") = "bugoutnum" then goto TEXTSET
     if tolower("%1") = "bugoutonbleed" then goto YESNOSET
@@ -732,7 +734,8 @@ SET:
     if tolower("%1") = "stealth" then goto YESNOSET
     if tolower("%1") = "stealthm2" then goto YESNOSET
     if tolower("%1") = "tactics" then goto YESNOSET
-    if tolower("%1") = "tacticsm2" then goto YESNOSET    
+    if tolower("%1") = "tacticsm2" then goto YESNOSET
+    if tolower("%1") = "collectm2" then goto YESNOSET
 
     if tolower("%1") = "theurgy" then goto YESNOSET
     if tolower("%1") = "pray" then goto YESNOSET
@@ -1243,10 +1246,10 @@ SET:
     }
     if tolower("%1") = "skinning" then
     {
-      if matchre("%2", "\b(yes|no|auto)\b") then
+      eval input toupper(%2)
+      if matchre("%input", "\b(YES|NO|AUTO)\b") then
       {  
         var setvar skinning
-        eval input tolower(%2)  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1293,10 +1296,10 @@ SET:
     }
     if tolower("%1") = "skinningm2" then
     {
-      if matchre("%2", "\b(yes|no|auto)\b") then
+      eval input toupper(%2)
+      if matchre("%input", "\b(YES|NO|AUTO)\b") then
       {  
-        var setvar skinning
-        eval input tolower(%2)  
+        var setvar skinningm2
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -2039,6 +2042,9 @@ DISPLAYGENERAL:
 	gosub OUTPUT PvPStealthAlerts
 	gosub OUTPUT ArrivalAlerts
   gosub OUTPUT ParanoiaAlerts
+  put #echo
+  gosub OUTPUT TendArea
+  #gosub OUTPUT TendObject
   put #echo
   gosub OUTPUT Whitelist
   gosub OUTPUT BlackList
@@ -2850,6 +2856,7 @@ DISPLAYMULTI:
   gosub OUTPUT WeaponListM2
   gosub OUTPUT StealthM2
   gosub OUTPUT TacticsM2
+  gosub OUTPUT CollectM2
   put #echo
   put #echo mono =================== NonCombat ===================
   gosub OUTPUT NonCombatM2
