@@ -4168,8 +4168,9 @@ TOUCHVELAP:
   pause
 TOUCHVELAMAIN:
   match TOUCHVELAP %waitstring
-  match RETURN You reach out to touch a
+  match RETURN You reach out to touch
   match RETURN You feel a brief flare of warmth where your skin previously made contact with a healing plant.
+  match RETURN As you reach for the thicket you feel a brief flare of warmth where your skin previously made contact with a healing plant.
   put touch %touchvelastring
   matchwait 5
 	var timeoutsub TOUCHVELAMAIN
@@ -6524,6 +6525,7 @@ FLEERETREATMAIN:
   }
   matchre FLEERETREATCONT You retreat back to pole range.|You try to back away from|You stop advancing on|You sneak back out|You try to back out of combat but are unable to get away!|You try to sneak out of combat,
   matchre RETURN You retreat from combat.|You are already as far away as you can get!
+  match RETURN As you start to move, a shooting pain ripples up your leg, which stops you short.
   match STAND You must stand first.
   matchre FLEERETREATMAINP %waitstring
   put retreat
