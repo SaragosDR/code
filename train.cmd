@@ -5182,9 +5182,9 @@ UPKEEPLOGIC:
     }
   }
   #BUNDLES
-  if %bundlesell = "YES" then
+  if ("%bundlesell" = "YES") then
   {
-    if %furrier != "none" then
+    if ("%furrier" != "none") then
     {
       var soldbundle 0
       gosub BUNDLESELL
@@ -5969,12 +5969,13 @@ AUTOPATHLOGIC:
       {
         put join list
         gosub TOUCHVELA $0
-        matchwait 300 The last of your wounds knit shut, a cool wave of relief washing over you.
+        match RETURN The last of your wounds knit shut, a cool wave of relief washing over you.
+        matchwait 180
       }
       else
       {
         put join list
-        matchwait 300 Kaiva crosses your name off the waiting list.
+        waitfor Kaiva crosses your name off the waiting list.
       }
     }
     else
@@ -5983,7 +5984,8 @@ AUTOPATHLOGIC:
       {
         gosub LIE
         gosub TOUCHVELA $0
-        matchwait 300 The last of your wounds knit shut, a cool wave of relief washing over you.
+        match RETURN The last of your wounds knit shut, a cool wave of relief washing over you.
+        matchwait 180
       }
       else gosub HEALERUSE
     }
