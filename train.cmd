@@ -5964,26 +5964,32 @@ AUTOPATHLOGIC:
     if ($zoneid = 1) then
     {
       var didautopath 1
-      gosub MOVE healer
-      put join list
-      if ("$guild" != "Necromancer") then
+      gosub MOVE healer   
+      if (matchre("$roomobjs", "vela'tohr (\w+)")) then
       {
-        if (matchre("$roomobjs", "vela'tohr plant")) then gosub TOUCHVELA plant
-        if (matchre("$roomobjs", "vela'tohr thicket")) then gosub TOUCHVELA thicket
+        put join list
+        gosub TOUCHVELA $0
+        matchwait 300 The last of your wounds knit shut, a cool wave of relief washing over you.
       }
-      waitfor Kaiva crosses your name off the waiting list.
+      else
+      {
+        put join list
+        matchwait 300 Kaiva crosses your name off the waiting list.
+      }
     }
     else
     {
-      if ("$guild" != "Necromancer") then
+      if (matchre("$roomobjs", "vela'tohr (\w+)")) then
       {
-        if (matchre("$roomobjs", "vela'tohr plant")) then gosub TOUCHVELA plant
-        if (matchre("$roomobjs", "vela'tohr thicket")) then gosub TOUCHVELA thicket
+        gosub LIE
+        gosub TOUCHVELA $0
+        matchwait 300 The last of your wounds knit shut, a cool wave of relief washing over you.
       }
-      gosub HEALERUSE
+      else gosub HEALERUSE
     }
   }
   return
+
 
 HEALERUSEP:
   pause

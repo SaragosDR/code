@@ -4473,11 +4473,16 @@ THROWITEMMAIN:
   match THROWITEMP %waitstring
   match RETURN You throw away your
   match RETURN I could not find what you were referring to.
+  match THROWITEMOPEN It's not even open!  Are you really sure nothing is still inside?
   put throw %throwitemstring
   matchwait 5
 	var timeoutsub THROWITEMMAIN
 	var timeoutcommand drop my %throwitemstring
 	goto TIMEOUT
+
+THROWITEMOPEN:
+  gosub OPENITEM my %throwitemstring
+  goto THROWITEMMAIN
 
 
 DUMPITEM:

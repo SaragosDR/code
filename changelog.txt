@@ -1,3 +1,9 @@
+07/16/25
+Updated Scripts: train, library
+Additional fixes for burgling envelopes, which need to be OPENed before being THROWn away.
+Vela'tohr plant usage now works with altered plants.
+Script will now wait until the vela'tohr plant completion message comes through, because the autopaths will sometimes tell you they're done when you're full of scars.
+
 07/15/25
 Updated Scripts: train, library, set
 Added TendArea variable for tending internal and external wounds at once.  Defaults to NO, so set to YES for skilled characters.  TendObject coming later.
