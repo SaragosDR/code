@@ -9,14 +9,19 @@ setvariable murderRoom NotFound
 
 setvariable passName pass
 
-START:
-if ("$roomname" != "The Morada, Morgue") then
-{
-  gosub GETITEM multiplier
-  put redeem multiplier
-	gosub STOWITEM multiplier
-	pause .5
+var multiplier 1
+var repeat 0
 
+START:
+if (("$roomname" != "The Morada, Morgue") || ("$roomname" != "[The Morada, Gangway")) then
+{
+  if (%multiplier = 1) then
+  {
+    gosub GETITEM multiplier
+    put redeem multiplier
+    gosub STOWITEM multiplier
+    pause .5
+  }
 	gosub GETITEM %passName
 	put redeem %passName
 	put redeem %passName
@@ -26,6 +31,7 @@ if ("$roomname" != "The Morada, Morgue") then
 }
 
 Morgue:
+  matchre Morgue %waitstring
   match Corkscrew oddly curved puncture
   match Comb odd perforations of the skin
   match Baton soft tissue damage and internal bleeding
@@ -73,6 +79,7 @@ Bar:
 goto investigate
 
 Investigate:
+  matchre Investigate %waitstring
   match FoundRoom damp stickiness
   match IdentifyPerson fails to turn up
   put search
@@ -83,6 +90,7 @@ FoundRoom:
   setvariable 1 Found
 
 IdentifyPerson:
+  matchre IdentifyPerson %waitstring
   echo Identify Person
   match Director director.
   match Artist artist.
@@ -97,6 +105,7 @@ IdentifyPerson:
 matchwait
 
 Interrogate:
+  matchre Interrogate %waitstring
   echo Interrogate
   match Guilty shifty
   match Guilty blinking
@@ -199,4 +208,5 @@ End:
   put stow coupon
   put stow %passName
   pause .5
-  goto START
+  if (%repeat = 1) then goto START
+  else exit
