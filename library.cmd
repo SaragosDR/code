@@ -21,11 +21,11 @@ var transnecro |ivm|ks|bue|worm|ch|php|
 var aimweapons bow|xbow|sling
 var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|field|plane|planes|road|spell|symbiosis strengthen|symbiosis endure|symbiosis avoid|symbiosis spring|symbiosis remember|symbiosis resolve|symbiosis impress|symbiosis discern|symbiosis explore|symbiosis watch|symbiosis harvest|symbiosis heal|symbiosis learn|symbiosis examine|symbiosis perform|symbiosis cast|symbiosis harness|symbiosis activate
 
-var combatpresetp1 p1-shiprats|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-guardians|p1-giantbears|p1-onyxgargoyles|p1-emberbulls|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
-var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-gryphonsbaby|p2-gryphonsyoung|p2-seordmaors
+var combatpresetp1 p1-shiprats|p1-louts|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-guardians|p1-giantbears|p1-onyxgargoyles|p1-emberbulls|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
+var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-gryphonsbaby|p2-gryphonsyoung|p2-seordmaors|p2-fibrousslayers|p2-clayslayers|p2-glazedslayers
 var combatpresetp3 p3-snippets|p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-sylphs|p3-quartzgargoyles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-windbags|p3-windbags2|p3-frostcrones|p3-prerenielder|p3-gryphons|p3-beltunumshi|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-malchata|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-icearchons|p3-adanfsorcs|p3-adanfblades
 var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p4-merkreshcelpeze4|p4-armadillosjuve|p4-armadillosadult|p4-armadilloselder
-var combatpresetp5 p5-maidenstress|p5-matronstress|p5-dryads|p5-nyads1|p5-blightogres1|p5-nyads2|p5-blightogres2|p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-headsplitters|p5-blackapes|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
+var combatpresetp5 p5-maidenstress|p5-matronstress|p5-dryads|p5-nyads1|p5-blightogres1|p5-nyads2|p5-blightogres2|p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-headsplitters|p5-blackapes|p5-tuskies|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
 var combatpresetlist none|%combatpresetp1|%combatpresetp2|%combatpresetp3|%combatpresetp4|%combatpresetp5
 
 
@@ -1199,7 +1199,7 @@ NEWTOWNPRESET:
 		if (%towntype = "upkeep") then var upkeepzone 47
 		if (%towntype = "burgle") then var rttargetroom 250
 		if (%towntype = "perform") then var rttargetroom 219
-		if (%towntype = "pawn") then var rttargetroom Ioun
+		if (%towntype = "pawn") then var rttargetroom 297
 	}
 	if ("%towncheck" = "dirge") then
 	{
@@ -1231,7 +1231,9 @@ NEWTOWNPRESET:
 		if (%towntype = "burgle") then var rttargetroom 388
 		if (%towntype = "perform") then var rttargetroom 227
 		if (%towntype = "studyart") then var rttargetroom 534
-		if (%towntype = "pawn") then var rttargetroom Cormyn
+		if (%towntype = "pawn") then var rttargetroom 433
+		if (%towntype = "tradingsell") then var rttargetroom 1
+		if (%towntype = "tradingtask") then var rttargetroom 379
 	}
 	if ("%towncheck" = "leth") then
 	{
@@ -1262,7 +1264,6 @@ NEWTOWNPRESET:
 		if (%towntype = "upkeep") then var upkeepzone 150
 		if (%towntype = "burgle") then var rttargetroom 0
 		if (%towntype = "perform") then var rttargetroom 189
-		if (%towntype = "pawn") then var rttargetroom Ioun
 	}
 	if ("%towncheck" = "shard") then
 	{
@@ -1272,9 +1273,9 @@ NEWTOWNPRESET:
 		var rtmove NO
 		if (%towntype = "upkeep") then var upkeepzone 67
 		if (%towntype = "burgle") then var rttargetroom 194
-		if (%towntype = "pawn") then var rttargetroom Aelik
+		if (%towntype = "pawn") then var rttargetroom 158
 		if (%towntype = "perform") then var rttargetroom 180
-		if (%towntype = "forging") then var rttargetroom forging
+		if (%towntype = "forging") then var rttargetroom 658
 	}
 	if ("%towncheck" = "hibarnhvidar") then
 	{
@@ -1285,8 +1286,8 @@ NEWTOWNPRESET:
 		if (%towntype = "upkeep") then var upkeepzone 116
 		if (%towntype = "burgle") then var rttargetroom 439
 		if (%towntype = "perform") then var rttargetroom 442
-		if (%towntype = "pawn") then var rttargetroom Relf
-		if (%towntype = "forging") then var rttargetroom forging
+		if (%towntype = "pawn") then var rttargetroom 229
+		if (%towntype = "forging") then var rttargetroom 408
 	}
 	if ("%towncheck" = "boarclan") then
 	{
@@ -3752,8 +3753,10 @@ STATUSCHECK:
   if ((%scriptmode = 1) && (%buffingonly != 1)) then 
   {
     gosub NEWAREADECISION
-    gosub NEWAREAMOVEMENT
+    #gosub NEWAREAMOVEMENT
   }
+  #TENDING_BLEEDING_LODGED
+  if (%t > %nextbleed) then gosub TENDCHECK
   #COLLECTAMMO
   if ((%scriptmode = 1) && (%buffingonly != 1) then
   {
@@ -3870,7 +3873,6 @@ AUTOUPKEEPCHECKS:
       var autype bleed
       var goupkeep 1
     }
-    if (%t > %nextbleed) then gosub BLEEDCHECK
   }
   #BURDEN
   if (%auonburden = "YES") then
@@ -4174,7 +4176,7 @@ TOUCHVELAMAIN:
   put touch %touchvelastring
   matchwait 5
 	var timeoutsub TOUCHVELAMAIN
-  var timeoutcommand mark %stealitem
+  var timeoutcommand touch %touchvelastring
 	goto TIMEOUT
 
 
@@ -4489,7 +4491,7 @@ DUMPITEM:
   var dumpitemstring $0
   goto DUMPITEMMAIN
 DUMPITEMMAIN:
-	if matchre ("$roomobjs", "(bucket|large stone turtle|disposal bin|waste bin|tree hollow|oak crate|firewood bin|ivory urn|pit|trash receptacle|marble statue|waste basket)") then
+	if matchre ("$roomobjs", "(waste receptacle|bucket|large stone turtle|disposal bin|waste bin|tree hollow|oak crate|firewood bin|ivory urn|trash receptacle|marble statue|waste basket)") then
 	{
 	  gosub PUTITEM %dumpitemstring in $1
 	}
@@ -4519,6 +4521,7 @@ GETITEMMAIN:
   matchre RETURN You get|You're already holding|You are already holding that.|You pick up|What were you referring to?|You stop as you realize|You must unload|You fade in for a moment|You remove|You pull|What were you referring to?|You try to grab your|Please rephrase that command\.|You are already holding that\.|You deftly remove the
   match RETURN Get what?
   match RETURN You reach for your sack and retrieve the equipment stored inside.
+  match RETURN That can't be picked up.
   matchre GETINJURED ^You can't pick that up with your (hand|hands) that damaged\.
   matchre GETITEMBAD You need a free hand to pick that up.
   matchre GETCLIMBPRACBAD You should stop practicing 
@@ -4818,11 +4821,16 @@ STOWMAIN:
   matchre STOWCOIL The \S+ rope is too long, even after stuffing it, to fit in the
   matchre RETURN You put your|Stow what\?|You open your pouch|You stop as|What were you referring to?|You think the gem pouch|You stop as you realize|You easily strap your
   match STOWINJURED You can't pick that up with your hands that damaged.
+  match STOWNOSTORAGE I can't find your container for stowing things in!  Type STORE HELP for information on how to set up your containers.
   put stow %stowhandstring
   matchwait 5
   var timeoutsub STOWMAIN
   var timeoutcommand stow %stowhandstring
 	goto TIMEOUT
+
+STOWNOSTORAGE:
+  gosub STOWDEFAULT %storage
+  goto STOWMAIN
 
 STOWINJURED:
   if ("%autoupkeep" = "YES") then
@@ -5106,11 +5114,16 @@ STOWITEMMAIN:
   match RETURN Stow what?  Type 'STOW HELP' for details.
   matchre STOWITEMUNLOAD ^You should unload the .* first\.$
   match STOWITEMMAINFULL You need a free hand to pick that up.
+  match STOWITEMNOSTORAGE I can't find your container for stowing things in!  Type STORE HELP for information on how to set up your containers.
   put stow %stowitemstring
   matchwait 5
   var timeoutsub STOWITEMMAIN
   var timeoutcommand stow %stowitemstring
 	goto TIMEOUT
+
+STOWITEMNOSTORAGE:
+  gosub STOREDEFAULT %storage
+  goto STOWITEMMAIN
 
 STOWRETURN:
   var stowsucceed 1
@@ -5867,7 +5880,6 @@ ANALYZE:
 
 ANALYZEAGAIN:
   gosub STATUSCHECK
-  #gosub AUTOUPKEEPCHECKS
   if (%goupkeep = 1) then return
   goto ANALYZE
 
@@ -5885,7 +5897,7 @@ ANAFLYING:
   goto ANALYZE
 
 ANAFACE:
-  if $monstercount < 1 then RETURN
+  if ($monstercount < 1) then RETURN
   gosub FACE
   if %badface = 1 then
   {
@@ -5895,9 +5907,9 @@ ANAFACE:
   goto ANALYZE
  
 ANAFACENEXT:
-  if $monstercount < 1 then RETURN
+  if ($monstercount < 1) then RETURN
   gosub FACENEXT
-  if %badface = 1 then
+  if (%badface) = 1 then
   {
     var badface 0
     return
@@ -6189,14 +6201,11 @@ BOWAIM:
 	matchre FACE at what are you|I could not find what you were referring to.
 	matchre BOWAIMSUCCESS You begin to target|You are already targetting|You shift your target to 
 	matchre RETURN Face what?|There is nothing else to face!|You don't have a ranged weapon to aim with!
-	
 	put aim
 	matchwait 5
 	var timeoutsub BOWAIM
 	var timeoutcommand aim
 	goto TIMEOUT
-	gosub STATUSCHECK
-	return
 
 BOWAIMSUCCESS:
   var aiming 1
@@ -6762,6 +6771,7 @@ TRAVEL:
   var traveltarget $0
   var nextstarcheck 0
 TRAVELMAIN:
+  if ($zoneid = 998) then put #mapper reset
   put #echo Yellow Travel Target: %traveltarget
   pause 0.1
   match RETURN REACHED YOUR DESTINATION
@@ -10775,7 +10785,7 @@ STARLIGHTCHECK:
   echo badstars: %badstars
   if ($SpellTimer.Noumena.active = 1) then
   {
-    if ((($Time.isDay = 0) && (%badstars = 0)) || (($Time.isDay = 0) && (%badstars = 2)) || (%badxibar = 0) || (%badyavash = 0)) then
+    if ((($Time.isDay = 0) && (%badstars = 0)) || (($Time.isDay = 0) && (%badstars = 0)) || (%badxibar = 0) || (%badyavash = 0)) then
     {
       var starlight 1
     }
@@ -10836,6 +10846,18 @@ TASKACCEPT:
   var timeoutcommand accept task
 	goto TIMEOUT
 
+TASKCANCELP:
+  pause
+TASKCANCEL:
+  matchre TASKCANCELP %waitlist
+  match TASKCANCEL The firewood peddler Mags looks at you and says, "You wish to end your current task?  If so, ask me again within fifteen seconds."
+  match RETURN The firewood peddler Mags says, "Very well, I see that you no longer wish to assist me."
+  put ask mags about task cancel
+  matchwait 5
+  var timeoutsub TASKCANCEL
+  var timeoutcommand ask mags about task cancel
+	goto TIMEOUT
+
 TASKFINDP:
   pause
 TASKFIND:
@@ -10869,7 +10891,7 @@ TASKFORAGELOOP:
   goto TASKFORAGELOOP
   
 TASKGIVELOOP:
-  gosub GETITEM %forageitem
+  gosub GETITEM %forageitem from %storage
   gosub TASKGIVEMAGS 
   if (%givingdone = 1) then return
   else goto TASKGIVELOOP
@@ -10880,6 +10902,7 @@ TASKGIVEMAGS:
   matchre TASKGIVEMAGSP %waitstring
   matchre RETURN The firewood peddler Mags takes the .* and says, "Thanks, .*\!  I need .* more\."
   matchre TASKGIVEGOOD The firewood peddler Mags says, "Thank you very much, .*\.  I have a few things here for you, thank you so much for your help\."
+  match RETURN Mags clucks her tongue, takes your stick, and hands you
   put give mags
   matchwait 5
   var timeoutsub TASKGIVEMAGS
@@ -11498,23 +11521,53 @@ HEALTHCHECKCLEAN:
   var healthcheckgood 1
   return
   
-BLEEDCHECKP:
+TENDCHECKP:
   pause
-BLEEDCHECK:
+TENDCHECK:
   #echo bleedcheck
   var nextbleed %t
   math nextbleed add 90
-  gosub BLEEDCLEAN
-  matchre BLEEDCHECKP %waitstring
-  matchre BLEEDING ^Bleeding$
-  matchre RETURN A good positive attitude never hurts.
+  gosub TENDCLEAN
+  matchre TENDCHECKP %waitstring
+  matchre TENDCHECKRETURN ^Bleeding$
+  matchre TENDCHECKRETURN A good positive attitude never hurts.
   put health
   put yes
   matchwait 5
-	var timeoutsub BLEEDCHECK
+	var timeoutsub TENDCHECK
   var timeoutcommand yes
 	goto TIMEOUT
+	
+TENDCHECKRETURN:
+  if ((%head = 1) || (%neck = 1) || (%chest = 1) || (%abdomen = 1) || (%back = 1) || (%tail = 1) || (%rightarm = 1) || (%leftarm = 1) || (%righthand = 1) || (%lefthand = 1) || (%rightleg = 1) || (%leftleg = 1) || (%righteye = 1) || (%lefteye = 1)) then gosub BLEEDING
+  if ((%inthead = 1) || (%intneck = 1) || (%intchest = 1) || (%intabdomen = 1) || (%intback = 1) || (%inttail = 1) || (%intrightarm = 1) || (%intleftarm = 1) || (%intrighthand = 1) || (%intlefthand = 1) || (%intrightleg = 1) || (%intleftleg = 1) || (%intrighteye = 1) || (%intlefteye = 1)) then gosub BLEEDING
+  if ((%lodgehead = 1) || (%lodgeneck = 1) || (%lodgechest = 1) || (%lodgeabdomen = 1) || (%lodgeback = 1) || (%lodgetail = 1) || (%lodgerightarm = 1) || (%lodgeleftarm = 1) || (%lodgerighthand = 1) || (%lodgelefthand = 1) || (%lodgerightleg = 1) || (%lodgeleftleg = 1) || (%lodgerighteye = 1) || (%lodgelefteye = 1)) then gosub LODGED
+  gosub TENDCLEAN
+  return
   
+LODGED:
+  
+  if ("%tendobject" != "YES") then
+  {
+    gosub STOWALL
+    if (%lodgehead = 1)) then gosub tend head
+    if (%lodgeneck = 1)) then gosub tend neck
+    if (%lodgechest = 1) then gosub tend chest
+    if (%lodgeabdomen = 1) then gosub tend abdomen
+    if (%lodgeback = 1) then gosub tend back
+    if (%lodgetail = 1) then gosub tend tail
+    if (%lodgerightarm = 1) then gosub tend right arm
+    if (%lodgeleftarm = 1) then gosub tend left arm
+    if (%lodgerighthand = 1) then gosub tend right hand
+    if (%lodgelefthand = 1) then gosub tend left hand
+    if (%lodgerightleg = 1) then gosub tend right leg
+    if (%lodgeleftleg = 1) then gosub tend left leg
+    if (%lodgerighteye = 1) then gosub tend right eye
+    if (%lodgelefteye = 1) then gosub tend left eye
+  }
+  else gosub TEND objects
+  return
+
 BLEEDING:
   if ("%tendarea" != "YES") then
   {
@@ -11551,14 +11604,14 @@ TENDMAIN:
     return
   }
   matchre TENDP %waitstring
-  matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove
+  matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove|As you reach for the
   put tend my %tendlocation
   matchwait 5
 	var timeoutsub TENDMAIN
   var timeoutcommand tend my %tendlocation
 	goto TIMEOUT
   
-BLEEDCLEAN:
+TENDCLEAN:
   var head 0
   var neck 0
   var chest 0
@@ -11573,6 +11626,36 @@ BLEEDCLEAN:
   var leftleg 0
   var righteye 0
   var lefteye 0
+  
+  var inthead 0
+  var intrighteye
+  var intlefteye
+  var intneck 0
+  var intchest 0
+  var intback 0
+  var intabdomen 0
+  var intrightarm 0
+  var intrighthand 0
+  var intrightleg 0
+  var intleftarm 0
+  var intlefthand 0
+  var intleftleg 0
+  var inttail 0
+  
+  var lodgehead 0
+  var lodgerighteye 0
+  var lodgelefteye 0
+  var lodgeneck 0
+  var lodgechest 0
+  var lodgeback 0
+  var lodgeabdomen 0
+  var lodgerightarm 0
+  var lodgerighthand 0
+  var lodgerightleg 0
+  var lodgeleftarm 0
+  var lodgelefthand 0
+  var lodgeleftleg 0
+  var lodgetail 0
   return
   
 HEALTHCHECK2:
@@ -12125,11 +12208,16 @@ STUDYTOME:
   match RETURN You immerse yourself in the wisdom of your
   match RETURN However, you find that you lack the concentration to focus on your studies.
   match STUDYTOMEGET You need to be holding that first.
+  matchre STUDYTOMEBAD You are unable to focus on studying your .* while gazing at your .*\.
   put study my %tomeofloreitem
   matchwait 5
   var timeoutsub STUDYTOME
   var timeoutcommand study my %tomeofloreitem
   goto TIMEOUT
+
+STUDYTOMEBAD:
+  var tomeofloreready 1
+  return
 
 STUDYTOMEGET:
   gosub GETITEM %tomeofloreitem
@@ -12503,6 +12591,7 @@ APPRAISECREATURE:
   matchre RETURN Roundtime:|You cannot appraise that when you are in combat!|You don't see anything of interest in that direction\.
   match RETURN Appraise what?  Type APPRAISE HELP for more information.
   matchre RETURN The /* appears to be in good condition\.
+  match RETURN The newsman is too busy trying to sell newssheets to pay attention to your antics.
   match RETURN Perhaps that's not such a wise thing to do.
   match RETURN I could not find what you were referring to.
   match RETURN It's hard to appraise the
@@ -12840,7 +12929,7 @@ PRAYGODP:
   pause
 PRAYGOD:
   matchre PRAYGODP %waitstring
-  matchre RETURN You glance heavenward|You throw your head back and howl|Praying for|You raise your hands lightly|Bristling up against a sudden sense of evil|You slowly square your shoulders|You tap the center of your forehead|You whisper your prayer into the wind|With a pat you double-check|Quietly touching your lip|You mutter a prayer to|You grumble ominously|Aligning your thoughts with the song of the inner earth
+  matchre RETURN You glance heavenward|You throw your head back and howl|Praying for|You raise your hands lightly|Bristling up against a sudden sense of evil|You slowly square your shoulders|You tap the center of your forehead|You whisper your prayer into the wind|With a pat you double-check|Quietly touching your lip|You mutter a prayer to|You grumble ominously|Aligning your thoughts with the song of the inner earth|You offer a prayer to
   put pray %praydeity
   matchwait
 

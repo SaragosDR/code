@@ -49,7 +49,7 @@ var skinnableundead1 ice adder|adder skeleton|enraged tusky|fell hog|ghoul|ghoul
 var skinnableundead2 mutant togball|reaver|shadow hound|squirrel|steed|zombie kobold headhunter|zombie kobold savage
 
 var construct ashu hhinvi|beltunumshi|boggle|bone amalgam|clay archer|clay mage|clay soldier|clockwork assistant|gam chaga|glass construct|(granite|marble|onyx|quartz) gargoyle|ice archon|lachmate|miniscule (fork|griddle|knife|lid|pan|plate|pot|spoon|teapot)|origami \S+|(alabaster|andesite|breccia|dolomite|marble|obsidian|quartzite|rock) guardian|rough-hewn doll
-var skinnableconstruct Endrus serpent|(granite|marble|onyx|quartz) gargoyle|lava drake|marble gargoyle|snippet|sylph|windbag
+var skinnableconstruct Endrus serpent|(granite|marble|onyx|quartz) gargoyle|lava drake|marble gargoyle|snippet|sylph|windbag|clay slayer
 
 var invasioncritters bone amalgam|bone warrior|brine shark|cloud eel|Drogorian stormrider|Elpalzi (bowyer|deadeye|dissident|fomenter|hunter|incendiary|instigator|malcontent|malcontent|partisan|rebel|sharpshooter|toxophilite)|flea-ridden beast|putrefying shambler|revivified mutt|shambling horror|skeletal peon|thunder eel|transmogrified oaf|Asketian harbinger|giant adder|wind wretch|wind hag|North Wind banshee|blight locust|murder crow|mantrap|clockwork monstrosity|rafflesia|Black Fang watcher
 
@@ -272,6 +272,21 @@ action var intrighteye 1 when ^\s+inside r\. eye       (clotted|slight|light|mod
 action var intlefteye 1 when ^\s+inside l\. eye       (clotted|slight|light|moderate|bad|very bad|heavy|very heavy|severe|very severe|profuse|very profuse|gushing|massive stream|uncontrollable|unbelievable|beyond measure|death awaits)$
 #action setvar You feel like now might be a good time to change the bandages on your head.
 
+action var lodgehead 1 when (?:a|an) .* lodged \w+ into your head
+action var lodgerighteye 1 when (?:a|an) .* lodged \w+ into your right eye
+action var lodgelefteye 1 when (?:a|an) .* lodged \w+ into your left eye
+action var lodgeneck 1 when (?:a|an) .* lodged \w+ into your neck
+action var lodgechest 1 when (?:a|an) .* lodged \w+ into your chest
+action var lodgeback 1 when (?:a|an) .* lodged \w+ into your back
+action var lodgeabdomen 1 when (?:a|an) .* lodged \w+ into your abdomen
+action var lodgerightarm 1 when (?:a|an) .* lodged \w+ into your right arm
+action var lodgerighthand 1 when (?:a|an) .* lodged \w+ into your right hand
+action var lodgeleftarm 1 when (?:a|an) .* lodged \w+ into your left arm
+action var lodgelefthand 1 when (?:a|an) .* lodged \w+ into your left hand
+action var lodgerightleg 1 when (?:a|an) .* lodged \w+ into your right leg
+action var lodgeleftleg 1 when (?:a|an) .* lodged \w+ into your left leg
+action var lodgechest 1 when (?:a|an) .* lodged \w+ into your tail
+
 
 
 
@@ -392,7 +407,7 @@ gosub COMMANDPARSE
 gosub SETUP
 gosub COMMANDVARLOAD
 
-goto MAINLOOP
+goto SWITCHBOARD
 #######
 
 
@@ -564,7 +579,7 @@ ALERTINIT:
     #The spell pattern resists the influx of Elemental mana as a strange itching sensation builds under your skin.  Geysers of uncontrolled mana suddenly erupt from your flesh, illuminating the surroundings in an excruciating display of blue-black fire!
     
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Nerve damage due to backlash. when The spell pattern resists the influx of (.+) mana though you are able to channel the worst of the backlash into your nervous system.
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Burned skin due to backlash. when Geysers of uncontrolled mana suddenly erupt from your flesh, illuminating the surroundings in an excruciating display of blue-black fire!
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Burned skin due to backlash. when The spell pattern resists the influx of (.+) mana as a strange itching sensation builds under your skin.  Geysers of uncontrolled mana suddenly erupt from your flesh, illuminating the surroundings in an excruciating display of blue-black fire!
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Lost scrolls due to backlash. when The spell pattern resists the influx of unfocused mana, overloading your arcane senses and rendering you magically inert\.
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Stunned due to backlash. when The spell pattern resists the influx of .* mana though the backlash leaves you stunned\!
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Attunement dulled due to backlash. when The spell pattern resists the influx of .* mana.  You are able to contain the backlash but doing so leaves your attunement to the mana streams dulled\.
@@ -656,10 +671,28 @@ GUILDVARLOAD:
 COMMANDVARLOAD:
   if tolower("%scriptmodename") = "1" then var multiarea NO
   if tolower("%scriptmodename") = "2" then var multiarea NO
+  if (tolower("%scriptmodename") = "combat") then
+  {
+    echo
+    echo ================Combat Training Only===============
+    echo
+    var scriptmode 1
+    var combat YES
+    var huntingarea none
+    var autoupkeep NO
+    var noncombat NO
+    var bugout NO
+    var multiarea NO
+    if ("%2" = "2") then var varset 2
+    else var varset 1
+    put #echo Yellow huntingarea: %huntingarea
+    put #echo >$alertwindow Began combat only training in Mode %varset.
+  }
   if (tolower("%scriptmodename") = "noncombat") then
   {
-    var scriptmode 0
+    var scriptmode 1
     echo Out of Combat Training!
+    var combat NO
     var outdoortimer 0
     var textbooktimer 0
     if ((%research = "YES") && (%spell = YES)) then var research NO
@@ -1139,7 +1172,7 @@ COMMANDPARSE:
     }
     else
     {
-      if ((tolower("%scriptmodename") = "1") || (tolower("%scriptmodename") = "2") || (tolower("%scriptmodename") = "research") || (tolower("%scriptmodename") = "teach") || (tolower("%scriptmodename") = "focus") || (tolower("%scriptmodename") = "buff")) || (tolower("%scriptmodename") = "gbuff") || (tolower("%scriptmodename") = "upkeep") || (tolower("%scriptmodename") = "burgle") || (tolower("%scriptmodename") = "multi") || (tolower("%scriptmodename") = "alerts") || (tolower("%scriptmodename") = "noncombat") || (tolower("%scriptmodename") = "climb") || (tolower("%scriptmodename") = "devotion") || (tolower("%scriptmodename") = "quiet") || (tolower("%scriptmodename") = "silent") || (tolower("%scriptmodename") = "nort") || (tolower("%scriptmodename") = "magic") || (tolower("%scriptmodename") = "music")) then
+      if ((tolower("%scriptmodename") = "1") || (tolower("%scriptmodename") = "2") || (tolower("%scriptmodename") = "combat") || (tolower("%scriptmodename") = "research") || (tolower("%scriptmodename") = "teach") || (tolower("%scriptmodename") = "focus") || (tolower("%scriptmodename") = "buff")) || (tolower("%scriptmodename") = "gbuff") || (tolower("%scriptmodename") = "upkeep") || (tolower("%scriptmodename") = "burgle") || (tolower("%scriptmodename") = "multi") || (tolower("%scriptmodename") = "alerts") || (tolower("%scriptmodename") = "noncombat") || (tolower("%scriptmodename") = "climb") || (tolower("%scriptmodename") = "devotion") || (tolower("%scriptmodename") = "quiet") || (tolower("%scriptmodename") = "silent") || (tolower("%scriptmodename") = "nort") || (tolower("%scriptmodename") = "magic") || (tolower("%scriptmodename") = "music")) then
       {
         var varset 1
         put #echo mono Train script beginning.
@@ -1614,6 +1647,7 @@ WARMAGEONLY:
 HUNTINGVARLOAD:
   if ("%huntingarea" != "none") then
   {
+    var huntingareamaze 0
     if ("%huntingarea" = "p1-shiprats") then
     {
       var zone 1
@@ -1626,6 +1660,17 @@ HUNTINGVARLOAD:
       if ("%huntingpremium" = "YES") then var findroomlist 237|238|239|240|245|243|244|765|241|242|246|247|441|442|443|444|445|446|447|448|449|450|451|452|453
       if ("%huntingpremium" = "ONLY") then var findroomlist 441|442|443|444|445|446|447|448|449|450|451|452|453
       var bugoutroom 52
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-louts") then
+    {
+      var zone 1
+      var travel YES
+      var traveldest crossing
+      var move YES
+      var targetroom e gate
+      var findroomlist 1|3|4|5|6|7|8|10|11|12|36|13|14
+      var bugoutroom 2
       var nearestportaltown crossing
     }
     if ("%huntingarea" = "p1-deathsquirrels") then
@@ -1879,6 +1924,7 @@ HUNTINGVARLOAD:
     }
     if ("%huntingarea" = "p1-crocodiles") then
     {
+      var huntingareamaze 1
       var zone 7
       var travel YES
       var traveldest caravansary
@@ -2156,6 +2202,69 @@ HUNTINGVARLOAD:
       var targetroom 0
       var findroom YES
       var findroomlist 77|78|79|76|204
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
+    if ("%huntingarea" = "p2-fibrousslayers") then
+    {
+      var zone 40a
+      var travel YES
+      var traveldest langenfirth
+      var move YES
+      var movelist 263
+      var targetroom 0
+      var findroom YES
+      var findroomlist 213|214|215|216
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
+    if ("%huntingarea" = "p2-clayslayers") then
+    {
+      var zone 40a
+      var travel YES
+      var traveldest langenfirth
+      var move YES
+      var movelist 263
+      var targetroom 0
+      var findroom YES
+      var findroomlist 208|209|210|211
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
+    if ("%huntingarea" = "p2-foragerghouls") then
+    {
+      var zone 41
+      var travel YES
+      var traveldest fornsted
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 77|78|79|76|204
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
+    if ("%huntingarea" = "p2-foragerwights") then
+    {
+      var zone 41
+      var travel YES
+      var traveldest fornsted
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 77|78|79|76|204
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
+    if ("%huntingarea" = "p2-glazedslayers") then
+    {
+      var zone 40a
+      var travel YES
+      var traveldest langenfirth
+      var move YES
+      var movelist 263
+      var targetroom 0
+      var findroom YES
+      var findroomlist 219|220|221|222
       var bugoutroom 1
       var nearestportaltown theren
     }
@@ -2884,6 +2993,18 @@ HUNTINGVARLOAD:
       var bugoutroom 14
       var nearestportaltown hibarnhvidar
     }
+    if ("%huntingarea" = "p5-tuskies") then
+    {
+      var zone 127
+      var travel YES
+      var traveldest boar
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 660|661|662|663|664|665
+      var bugoutroom 14
+      var nearestportaltown hibarnhvidar
+    }
   }
   return
 
@@ -3099,8 +3220,8 @@ MAINHELP:
 	put #echo mono ================================================
 	put #echo
 	echo Options are:
-	echo TRAIN COMBAT - Combat training.
-  echo TRAIN COMBAT 2 - Combat training using Mode 2 variables.
+	echo TRAIN COMBAT - Combat training with no movement in the room that you're in.
+  echo TRAIN COMBAT 2 - The above, with Mode 2 variables.
 	echo TRAIN MULTI - Multi-Variable Set training.
   echo TRAIN NONCOMBAT - Out-of-combat training.
 	echo TRAIN UPKEEP - Performs upkeep while inside a town.
@@ -3422,6 +3543,7 @@ STATUSVARLOAD:
   var tmove4 none
   var tmove5 none
   var tomeofloreready 1
+  var upkeepactive 0
   var usingacm 0
   var usingbow 0
   var usingdebiltm 0
@@ -3450,7 +3572,8 @@ MAINVARLOAD:
   var bugoutnum $bugoutnum
   var bugoutonbleed $bugoutonbleed
   var bugoutonsend $bugoutonsend
-  var killbeforemove $killbeforemove
+  #var killbeforemove $killbeforemove
+  var killbeforemove NO
   var sleepontravel $sleepontravel
   var movetimeout $movetimeout
   var prefergroup $prefergroup
@@ -3992,9 +4115,13 @@ MULTIVARLOAD:
 
 
 ###MAIN LOOP###
-MAINLOOP:
-  if (%scriptmode = 0) then goto NONCOMBATLOOP
-  if (%scriptmode = 1) then goto COMBATLOOP
+SWITCHBOARD:
+  if (%scriptmode = 0) then goto OLDNONCOMBATLOOP
+  if (%scriptmode = 1) then
+  {
+    gosub SCRIPTBEGINCHECKS
+    goto MAINLOOP
+  }
   if (%scriptmode = 2) then goto BUFFINGONLYLOOP
   if (%scriptmode = 3) then
   {
@@ -4012,107 +4139,683 @@ MAINLOOP:
     exit
   }
   exit
-
-NEWNONCOMBATCHECKS:
-  var noncombatactive 0
-  var noncombatperformactive 0
-  var noncombatburgleactive 0
-  var noncombatsellactive 0
-  var noncombattasksactive 0
-  #BURGLE_CHECKING
-  if ("%burgle" = "YES") then
+  
+  
+MAINLOOP:
+  pause .5
+  #AREADECISION_MOVEMENT
+  gosub NEWAREADECISION
+  gosub NEWAREAMOVEMENT
+  #put #echo Yellow ScriptArea: %scriptarea  ScriptAreaChange: %scriptareachange
+  #put #echo upkeepactive: %upkeepactive  noncombatactive: %noncombatactive
+  if (%upkeepactive = 1) then
   {
-    if (($Athletics.Ranks < 1750) || ($Locksmithing.Ranks < 1750) || ($Thievery.Ranks < 1750) || ($Stealth.Ranks < 1750)) then
+    gosub UPKEEPLOGIC
+  }
+  else
+  {
+    if ("%scriptareachange" = "0") then
     {
-      if ((%t >= %nextburgle) && (%killbeforeleave != 0) then
-      {
-        gosub BURGLERECALL
-        if (%t >= %nextburgle) then
-        {
-          var scriptareachange noncombat
-          var noncombatactive 1
-          var noncombatburgleactive 1
-        }
-      }
+      if (%noncombatactive = 1) then goto NONCOMBATLOOP
+      else goto COMBATLOOP
     }
     else
     {
-      var noncombatburgleactive 0
-    }
-  }
-  #PERFORM_CHECKING
-  if ("%perform" = "YES") then
-  {
-    if ($Performance.LearningRate > 20) then var performlock 1
-    if ($Performance.LearningRate < 4) then var performlock 0
-    if ($Performance.Ranks >= 1750) then var performlock 1
-    if (%performlock != 1) then
-    {
-      var scriptareachange noncombat
-      var noncombatactive 1
-      var noncombatperformactive 1
-    }
-  }
-  #STUDY_ART
-  if ("%studyart" = "YES") then
-  {
-    if $Scholarship.LearningRate > 33 then var scholarlock 1
-    if $Scholarship.LearningRate < 11 then var scholarlock 0
-    if $Scholarship.Ranks >= 1750 then var scholarlock 1
-	  if %scholarlock != 1 then
-	  {
-	    var gametimetest $unixtime
-	    math gametimetest subtract $lastartstudy
-	    #put #echo t: %t
-	    #put #echo nextartstudy: %nextartstudy
-	    #put #echo unixtime: $unixtime
-	    #put #echo gametimetest: %gametimetest
-      if ((%t >= %nextartstudy) && (%gametimetest >= 1800)) then
+      if ((%killbeforeleave = 0) && ("%scriptarea" = "combat") && ("%scriptareachange" = "noncombat")) then
       {
-        var scriptareachange noncombat
-        var noncombatactive 1
-        var noncombatstudyartactive 1
+        goto COMBATLOOP
       }
     }
   }
-  #TRADING_SELL_TASKS
-  if ("$guild" = "Trader") then
+  else
+  {
+    pause .5
+  }
+  goto MAINLOOP
+
+  
+COMBATLOOP:
+  #SANCTUARY_CHECK
+  if ($SpellTimer.Sanctuary.active = 1) then
+  {
+    gosub RELCYCLIC
+    gosub PERCSELF
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #SPIDER
+  if %spiderfeed = "YES" then
+  {
+    if %t > %nextspider then
+    {
+      var nextspider %t
+      math nextspider add 3600
+      put look my clockwork spider
+    }
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #ATTUNEMENT
+  if %attune = "YES" then
+  {
+    gosub ATTUNELOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #STANCE_CHECKING
+  gosub BOWSTANCECHECK
+  if ((%stance != "%stancemain") && (%usingbow = 0)) then
+  {
+    var stance %stancemain
+    gosub STANCECHANGE
+  }
+  if ((%stance != "shield") && (%usingbow = 1)) then
+  {
+    var stance shield
+    gosub STANCECHANGE
+  }
+  #ALMANAC
+  if %almanac = "YES" then
+  {
+    if %t >= %nextalmanac then
+    {
+      gosub ALMANACLOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+  }
+  #EJOURNAL
+  if %ejournal = "YES" then
+  {
+    gosub EJOURNALLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #TARANTULA
+  if %tarantula = "YES" then
+  {
+    gosub TARANTULALOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #DOMAIN
+  if (("$guild" = "Warrior Mage") && (%domain = "YES")) then
+  {
+    echo DomainActive: %domainactive
+    if %domainactive = 1 then echo DomainActiveType: %domainactivetype
+    if %domainactive = -1 then
+    {
+      gosub RETREAT
+      gosub DOMAINSTART 
+    }
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #MANIPULATE
+  if %manipulate = "YES" then
+  {
+    if "$guild" = "Empath" then
+    {
+      gosub MANIPLOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+  }
+  #TEACHING
+  if %teaching = "YES" then gosub TEACHINGLOGIC
+  
+  #NONVIOLENT_TACTICS
+  if ((%avoidshock = "YES") && (%tactics = "YES")) then
+  {
+    if %shockcritter = 1 then
+    {
+      gosub NVTACTICSLOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+  }
+  #WEAPONS
+  if ("%weapons" = "YES") then
+  {
+    if ($monstercount > 0) then
+    {
+      gosub WEAPONLOGIC
+    }
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #NVSTEALTH
+  if ((%avoidshock = "YES") && (%stealth = "YES")) then
+  {
+    if %shockcritter = 1 then
+    {
+      gosub NVSTEALTHLOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+  }
+  if (("$guild" = "Paladin") && (%stealth = "YES")) then
+  {
+    gosub NVSTEALTHLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  ######
+  ##GUILD_SKILLS
+  ######
+  #PERCEIVE_HEALTH
+  if (("$guild" = "Empath") && ("%perchealth" = "YES")) then
+  {
+    gosub PERCHEALTHLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #ASTROLOGY
+  if (("$guild" = "Moon Mage") && ("%astro" = "YES")) then
+  {
+    gosub ASTROLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+	}
+	#WARHORN
+	if %warhorn = "YES" then
+  {
+    if %t >= %nextwarhorn then
+    {
+      gosub GETITEM %warhornitem
+      gosub WARHORN
+      gosub STOWITEM %warhornitem
+      var nextwarhorn %t
+      math nextwarhorn add 605
+    }
+  }
+ 	if ("$guild" = "Paladin") then
+  {
+ 	  #PILGRIMBADGE
+    if %pilgrimbadge = YES then
+    {
+      gosub BADGELOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+    #ANLORALPIN
+    if %anloralpin = "YES" then
+    {
+      gosub PINLOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+ 	}
+ 	if (("$guild" = "Cleric") && ("%theurgy" = "YES")) then
+ 	{
+ 	  #COMMUNE_DETECTION
+ 	  if ((%meraudcommune = "YES") || (%elunedcommune = "YES") || (%tamsinecommune = "YES")) then
+    {
+      if %firstcommsense = 1 then
+      {
+        gosub COMMSENSE
+        var firstcommsense 0
+        var nextcommsense %t
+        math nextcommsense add 1200
+        echo commgood: %commgood
+        echo mercomup: %mercomup
+        echo meraudgood: %meraudgood
+      }
+    }
+    #PRAYER
+    if %pray = YES then
+    {
+      gosub PRAYLOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+    #PILGRIMBADGE
+    if %pilgrimbadge = YES then
+    {
+      gosub BADGELOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+    #ANLORALPIN
+    if %anloralpin = "YES" then
+    {
+      gosub PINLOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+    #MERAUDCOMMUNE
+    if ((%meraudcommune = "YES") || (%elunedcommune = "YES") || (%tamsinecommune = "YES")) then
+    {
+      gosub COMMUNELOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+    #RECITE
+    if %recite = "YES" then
+    {
+      gosub RECITELOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+    #DANCE
+    if %dance = "YES" then
+    {
+      gosub DANCELOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+  }
+  #SUMMONING
+  if (($guild = "Warrior Mage") && (%summoning = "YES")) then
+  {
+    if %summonweapon = "YES" then
+    {
+      gosub SUMMWEAPONLOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+    if %pathway = "YES" then
+    {
+      gosub PATHWAYLOGIC
+      gosub STATUSCHECK
+      if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+    }
+  }
+  #TRADING
+  if (($guild = "Ranger") && ("%pounce" = "YES")) then
+  {
+    gosub POUNCELOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #TRADING
+  if (($guild = "Trader") && ("%invest" = "YES")) then
+  {
+    gosub INVESTLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #BARDIC_LORE
+  if (($guild = "Bard") && ("%whistlepiercing" = "YES")) then
+  {
+    gosub WHISTLELOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #HUNTING
+	if %hunting = "YES" then
+	{
+	  gosub HUNTLOGIC
+	  gosub STATUSCHECK
+	  if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #RECALL
+  if %recall = "YES" then
+  {
+    gosub RECALLLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #APPRAISAL
+	if %appraise = "YES" then
+	{
+    gosub APPLOGIC
+	  gosub STATUSCHECK
+	  if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #WINDBOARD
+  if %windboard = "YES" then
+  {
+    if %buffing = 0 then
+    {
+      if ((%usingtactics != 1) && (%usingexpert != 1)) then
+      {
+        gosub WINDBOARDLOGIC
+        gosub STATUSCHECK
+        if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+      }
+    }
+  }
+  #COLLECTING
+  #put #echo Yellow Collect: %collect
+  if ("%collect" = "YES") then
+  {
+    #put #echo buffing: %buffing
+    if (%buffing = 0) then
+    {
+      #echo Not buffing.
+      #put #echo usingtactics: %usingtactics
+      if ((%usingtactics != 1) && (%usingexpert != 1)) then
+      {
+        #echo Not using tactics or expertise.
+        gosub COLLECTLOGIC
+      }
+    }
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #TEXTBOOK
+  if %textbook = "YES" then
+  {
+    if %buffing = 0 then
+    {
+      if ((%usingtactics != 1) && (%usingexpert != 1)) then
+      {
+        gosub TEXTLOGIC
+      }
+    }
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #SANOWRET
+  if %combatsanowret = "YES" then
+  {
+    gosub SANOWRETLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #LOCKSMITHBOX
+  if %locksmithbox = "YES" then
+  {
+    gosub LOCKSMITHLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #SKINFATRAINER
+  if %skinfatrainer = "YES" then
+  {
+    gosub SKINFATRAINERLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  gosub STATUSCHECK
+  if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  goto MAINLOOP
+
+
+OLDNONCOMBATLOOP:
+  #PRERUN_ACTIONS
+  if %firststowall = 1 then
+  {
+    if tolower("%1") != "alerts" then gosub STOWALL
+    var firststowall 0
+  }
+  if %firstrel = 1 then
+  {
+    if (($guild = "Thief") || ($guild = "Barbarian")) then
+    else
+    {  
+      if %spell = "YES" then
+      {
+        if ((%spell1symb = "YES") || (%spell2symb = "YES") || (%spell3symb = "YES") || (%symbiosisbuff = "YES")) then
+        {
+          gosub SYMBCLEAR
+        }
+      }
+      if ("%necrosafety" = "YES") then
+      {
+        gosub RELMANA
+        gosub RELSPELL
+      }
+      else gosub RELALL
+    }
+    var firstrel 0
+  }
+  if ((%appfocusonly = 0) && (%alertsonly = 0)) then
+  {
+    if %firstawake = 1 then
+    {
+      gosub AWAKE
+      var firstawake 0
+    }
+  }
+  #TRADING_SELL
+  if (("%tradingsell" = "YES") && ("$guild" = "Trader")) then
+  {
+    #put #echo >Log Yellow tradingsell: %tradingsell Logic started.
+    if $Trading.LearningRate > 28 then var tradinglock 1
+    if $Trading.LearningRate < 4 then var tradinglock 0
+    if $Trading.Ranks >= 1750 then var tradinglock 1
+    if (%tradinglock = 0) then
+    {
+      #put #echo >Log [Train] Attempting to sell bundle.
+      gosub TRADINGSELLLOGIC
+    }
+  }
+  #TRADING_TASKS
+  if (("%tradingtasks" = "YES") && ("$guild" = "Trader")) then
+  {
+    if $Trading.LearningRate > 33 then var tradinglock 1
+    if $Trading.LearningRate < 4 then var tradinglock 0
+    if $Trading.Ranks >= 1750 then var tradinglock 1
+    if (%tradinglock = 0) then
+    {
+      gosub TASKLOGIC
+    }
+  }
+  #HEALING
+  if %selfheal = 1 then gosub HEALTHCHECK
+  #APPFOCUS
+  if %appfocusonly = 1 then
   { 
-    #put #echo >Log Yellow tradingsell: %tradingsell
-    if (("%tradingsell" = "YES") || ("%tradingtasks" = "YES")) then
+    if %appfocus = "YES" then
     {
-      if $Trading.LearningRate > 28 then var tradinglock 1
-      if $Trading.LearningRate < 4 then var tradinglock 0
-      if $Trading.Ranks >= 1750 then var tradinglock 1
-      #put #echo >Log Yellow tradinglock: %tradinglock
-      if (%tradinglock != 1) then
-      {
-        var scriptareachange noncombat
-        var noncombatactive 1
-        if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var noncombatsellactive 1
-        if ("%tradingtasks" = "YES") then var noncombattasksactive 1
+      gosub APPFOCUSLOGIC
+    }
+  }
+  #DEVOTION
+  if %devotiononly = 1 then
+  {
+    gosub DEVOTIONLOGIC
+    exit
+  }
+  #ALMANAC
+  if %almanac = "YES" then
+  {
+    if %t >= %nextalmanac then
+    {
+      gosub ALMANACLOGIC
+    }
+  }
+  #TEACHING
+  if %teaching = "YES" then gosub TEACHINGLOGIC
+  #PERFORMING_CLIMBING
+  if ((%perform = "YES") || (%climbing = "YES") | (%climbingrope = "YES")) then
+  {
+    if ((%climbing = "YES") || (%climbingrope = "YES")) then
+    {
+      if ($Athletics.LearningRate < 20) then var athleticslock 0
+      if ($Athletics.LearningRate = 34) then var athleticslock 1
+      if ($Athletics.LearningRate >= 1750) then var athleticslock 1
+      if (%athleticslock = 1) then gosub STOWITEM %climbingropename
+    }
+    else var athleticslock 1
+    if $Performance.LearningRate < 20 then var performlock 0
+    if $Performance.LearningRate = 34 then var performlock 1
+    if $Performance.Ranks >= 1750 then var performlock 1
+    if %perform = "NO" then var performlock 1
+    if ((%performlock = 0) || (%athleticslock = 0)) then
+    {
+      gosub PERFORMLOOP
+      goto OLDNONCOMBATLOOP
+    }
+    else
+    {
+      if %playing = 1 then
+      { 
+        gosub PLAYSTOP
+        if ((matchre ("$righthand", "%instrument") || (matchre ("$lefthand", "%instrument"))) then
+        {
+          gosub STOWITEM %instrument
+        }
       }
     }
   }
-  #CRAFT_CHECKING
-  if ("%crafting" = "YES") then
+  #LOCKSMITHBOX
+  if %locksmithbox = "YES" then
   {
-    #FORGING_CHECKING
-    if ("%forging" = "YES") then
+    gosub LOCKSMITHLOGIC
+    gosub STATUSCHECK
+  }
+  #SKINFATRAINER
+  if %skinfatrainer = "YES" then
+  {
+    gosub SKINFATRAINERLOGIC
+    gosub STATUSCHECK
+  }
+  #WINDBOARD
+  if %windboard = "YES" then
+  {
+    if %buffing = 0 then
     {
-      if ($Forging.LearningRate > 20) then var forginglock 1
-      if ($Forging.LearningRate < 4) then var forginglock 0
-      if ($Forging.Ranks >= 1750) then var forginglock 1
-      if (%forginglock != 1) then
+      if ((%usingtactics != 1) && (%usingexpert != 1)) then
       {
-        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to forge at Forging.LearningRate: $Forging.LearningRate
-        var scriptareachange noncombat
-        var noncombatactive 1
-        var noncombatforgingactive 1
+        gosub WINDBOARDLOGIC
+        gosub STATUSCHECK
       }
     }
+  }
+  #PERCEIVE_HEALTH
+  if %perchealth = "YES" then
+  {
+    gosub PERCHEALTHLOGIC
+    gosub STATUSCHECK
+  }
+  #ATTUNEMENT
+  if %attune = "YES" then
+  {
+    gosub ATTUNELOGIC
+	  gosub STATUSCHECK
+  }
+  #SPELLCASTING
+	gosub MAINSPELLLOGICNC
+	gosub STATUSCHECK
+  #RESEARCH
+	if ("%research" = "YES") then
+  {
+    if %casting != 1 then
+    { 
+      gosub RESEARCHLOGIC
+    }
+  }
+	#SANOWRET
+  if %noncomsanowret = "YES" then
+  {
+    gosub SANOWRETLOGIC
+    gosub STATUSCHECK
+  }
+  #SANOWRET
+  if %noncomsanowret = "YES" then
+  {
+    gosub SANOWRETLOGIC
+    gosub STATUSCHECK
+  }
+  #TEXTBOOK
+	if %textbook = "YES" then
+	{
+	  gosub TEXTLOGIC
+    gosub STATUSCHECK
+  }
+  #HUNTING
+	if %hunting = "YES" then
+	{
+	  gosub HUNTLOGIC
+	  gosub STATUSCHECK
+	}
+  #COLLECTING
+  if (%collect = "YES") then
+  {
+    gosub COLLECTLOGIC
+    gosub STATUSCHECK
+  }
+  #ASTROLOGY
+  if %astro = YES then
+  {
+    gosub ASTROLOGIC
+    gosub STATUSCHECK
+  }
+  #SUMMONING
+  if (($guild = "Warrior Mage") && (%summoning = "YES")) then
+  {
+    if %pathway = "YES" then
+    {
+      gosub PATHWAYLOGIC
+      gosub STATUSCHECK
+    }
+  }
+  pause 1
+  gosub STATUSCHECK
+  goto OLDNONCOMBATLOOP
+
+
+#################################################
+
+
+SCRIPTBEGINCHECKS:
+  #STORAGE_CHECK
+  if (%firststowall = 1) then
+  {
+    gosub STOWALL
+    var firststowall 0
+  }
+  if (%firststoragecheck = 1) then
+  {
+    var firststoragecheck 0
+    gosub STORAGECHECKLOGIC
+  }
+  if (("%armorcheck" = "YES") && (%firstarmorcheck = 0)) then
+  {
+    gosub ARMORCHECK
+  }
+  #FIRSTPERC
+  if (%firstperc = 1) then
+  {
+    if ("$guild" = "Moon Mage") then
+    {
+      var mmnextperc %t
+      math mmnextperc add 300
+    }
+    var firstperc 0
+    gosub PERCSELF
+  }
+  #RELEASE_MANA_SPELLS
+  if (%firstrel = 1) then
+  {
+    if (("$guild" = "Thief") || ("$guild" = "Barbarian")) then
+    else
+    {  
+      if ("%spell" = "YES") then
+      {
+        if ((%spell1symb = "YES") || (%spell2symb = "YES") || (%spell3symb = "YES") || (%symbiosisbuff = "YES")) then
+        {
+          gosub SYMBCLEAR
+        }
+      }
+      if ("%necrosafety" = "YES") then
+      {
+        if ($SpellTimer.RiteofGrace.active = 1) then
+        {
+          gosub RELMANA
+          gosub RELSPELL
+        }
+        else gosub RELALL
+      }
+      else gosub RELALL
+    }
+    var firstrel 0
+  }
+  #AWAKE_AND_RPAS
+  if (%firstawake = 1) then
+  {
+    gosub AWAKE
+    var firstawake 0
+    action (rpa) on
+    put rpa check
+    pause 1
+    action (rpa) off
   }
   return
+
 
 NEWAREADECISION:
   #MULTITRAIN
@@ -4221,6 +4924,110 @@ NEWAREADECISION:
   return
 
 
+NEWNONCOMBATCHECKS:
+  var noncombatactive 0
+  var noncombatperformactive 0
+  var noncombatburgleactive 0
+  var noncombatsellactive 0
+  var noncombattasksactive 0
+  var noncombatstudyartactive 0
+  var noncombatforgingactive 0
+  #BURGLE_CHECKING
+  if ("%burgle" = "YES") then
+  {
+    if (($Athletics.Ranks < 1750) || ($Locksmithing.Ranks < 1750) || ($Thievery.Ranks < 1750) || ($Stealth.Ranks < 1750)) then
+    {
+      if ((%t >= %nextburgle) && (%killbeforeleave != 0) then
+      {
+        gosub BURGLERECALL
+        if (%t >= %nextburgle) then
+        {
+          var scriptareachange noncombat
+          var noncombatactive 1
+          var noncombatburgleactive 1
+        }
+      }
+    }
+    else
+    {
+      var noncombatburgleactive 0
+    }
+  }
+  #PERFORM_CHECKING
+  if ("%perform" = "YES") then
+  {
+    if ($Performance.LearningRate > 20) then var performlock 1
+    if ($Performance.LearningRate < 4) then var performlock 0
+    if ($Performance.Ranks >= 1750) then var performlock 1
+    if (%performlock != 1) then
+    {
+      var scriptareachange noncombat
+      var noncombatactive 1
+      var noncombatperformactive 1
+    }
+  }
+  #STUDY_ART
+  if ("%studyart" = "YES") then
+  {
+    if $Scholarship.LearningRate > 33 then var scholarlock 1
+    if $Scholarship.LearningRate < 11 then var scholarlock 0
+    if $Scholarship.Ranks >= 1750 then var scholarlock 1
+	  if %scholarlock != 1 then
+	  {
+	    var gametimetest $unixtime
+	    math gametimetest subtract $lastartstudy
+	    #put #echo t: %t
+	    #put #echo nextartstudy: %nextartstudy
+	    #put #echo unixtime: $unixtime
+	    #put #echo gametimetest: %gametimetest
+      if ((%t >= %nextartstudy) && (%gametimetest >= 1800)) then
+      {
+        var scriptareachange noncombat
+        var noncombatactive 1
+        var noncombatstudyartactive 1
+      }
+    }
+  }
+  #TRADING_SELL_TASKS
+  if ("$guild" = "Trader") then
+  { 
+    #put #echo >Log Yellow tradingsell: %tradingsell
+    if (("%tradingsell" = "YES") || ("%tradingtasks" = "YES")) then
+    {
+      if $Trading.LearningRate > 28 then var tradinglock 1
+      if $Trading.LearningRate < 4 then var tradinglock 0
+      if $Trading.Ranks >= 1750 then var tradinglock 1
+      #put #echo >Log Yellow tradinglock: %tradinglock
+      if (%tradinglock != 1) then
+      {
+        var scriptareachange noncombat
+        var noncombatactive 1
+        if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var noncombatsellactive 1
+        if ("%tradingtasks" = "YES") then var noncombattasksactive 1
+      }
+    }
+  }
+  #CRAFT_CHECKING
+  if ("%crafting" = "YES") then
+  {
+    #FORGING_CHECKING
+    if ("%forging" = "YES") then
+    {
+      if ($Forging.LearningRate > 20) then var forginglock 1
+      if ($Forging.LearningRate < 4) then var forginglock 0
+      if ($Forging.Ranks >= 1750) then var forginglock 1
+      if (%forginglock != 1) then
+      {
+        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to forge at Forging.LearningRate: $Forging.LearningRate
+        var scriptareachange noncombat
+        var noncombatactive 1
+        var noncombatforgingactive 1
+      }
+    }
+  }
+  return
+
+
 NEWAREAMOVEMENT:
   #put #echo Yellow NEWAREAMOVEMENT
   #put #echo scriptarea: %scriptarea
@@ -4236,16 +5043,33 @@ NEWAREAMOVEMENT:
     {
       if ("%huntingarea" != "none") then
       {
-        #put #echo Yellow zoneid: $zoneid  zone: %zone
-        if (("$zoneid" != "%zone") || (!contains("|%findroomlist|", "|$roomid|"))) then
+        if (%huntingareamaze = 1) then
         {
-          gosub ROOMTRAVELCOMBAT
-          gosub STATUSCHECK
+          #put #echo Yellow zoneid: $zoneid  zone: %zone
+          if ("$zoneid" = "%zone") then
+          else
+          {
+            put #echo %alertwindow Script was in combat mode in a maze, but found itself in the wrong zone.  Moving back to hunting area.
+            gosub ROOMTRAVELCOMBAT
+            gosub STATUSCHECK
+          }
+        }
+        else
+        {
+          #put #echo Yellow zoneid: $zoneid  zone: %zone
+          #put #echo Yellow roomid: $roomid  findroomlist: %findroomlist
+          if (("$zoneid" = "%zone") && (contains("|%findroomlist|", "|$roomid|"))) then
+          else
+          {
+            put #echo %alertwindow Script was in combat mode, but found itself in the wrong zone or area.  Moving back to hunting area.
+            gosub ROOMTRAVELCOMBAT
+            gosub STATUSCHECK
+          }
         }
       }
     }
     #NONCOMBAT_MOVEMENT
-      #MOVEMENT_CONTAINED_IN_NEWNONCOMBAT
+      #NEED_TO_ADD_ONGOING_MOVEMENT_CHECKS_FOR_NONCOMBAT
      
     #UPKEEP_MOVEMENT
     if ("%scriptarea" = "upkeep") then
@@ -4321,8 +5145,7 @@ NEWAREAMOVEMENT:
     if ("%scriptarea" = "noncombat") then
     {
       put #echo Yellow Noncombat ended!
-      #put #echo %alertwindow [Train]: Ended NonCombat training.
-      var noncombatactive 0
+      put #echo %alertwindow [Train]: Ended NonCombat training.
       if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
     } 
     
@@ -4332,7 +5155,7 @@ NEWAREAMOVEMENT:
       if ("%scriptarea" = "0") then put #echo %alertwindow [Train]: Starting training in %scriptareachange.
       else put #echo %alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
       var noncombatactive 0
-      var scriptareachange 0
+      var scriptareachange 0 
       var scriptarea combat
       if ((%scriptmode != 3) && ("$guild" != "Barbarian") && ("$guild" != "Thief")) then
       {
@@ -4363,14 +5186,13 @@ NEWAREAMOVEMENT:
     {
       if ("%scriptarea" = "0") then put #echo %alertwindow [Train]: Starting training in %scriptareachange.
       else put #echo %alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
+      
       var scriptareachange 0
       var scriptarea noncombat
       var noncombatactive 1
-      if (%rpastatus = 1) then gosub RPATOGGLE
-      gosub NEWNONCOMBATLOGIC
-      put #echo >$alertwindow Ending noncombat.
-      gosub NEWAREADECISION
-      goto NEWAREAMOVEMENT
+      #if (%rpastatus = 1) then gosub RPATOGGLE
+      gosub NONCOMBATCHOOSE
+      gosub NONCOMBATMOVEMENT
       return
     }
     #GOING_TO_UPKEEP
@@ -4401,7 +5223,7 @@ NEWAREAMOVEMENT:
       if ("%autype" = "test") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep to test the route.
       if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
       if (%rpastatus = 1) then gosub RPATOGGLE
-    	if $invisible = 1 then gosub RELINVIS
+    	if ($invisible = 1) then gosub RELINVIS
     	gosub LEAVEROOM
     	put #echo Yellow starting travel
     	gosub ROOMTRAVELUPKEEP
@@ -4410,617 +5232,8 @@ NEWAREAMOVEMENT:
         gosub BERSERKSTOPALL
         gosub FORMSTOPALL
       }
-      #UPKEEP
-      gosub UPKEEPLOGIC
-      gosub NEWAREADECISION
-      goto NEWAREAMOVEMENT
       return
     }
-  }
-  return
-  
-  
-COMBATLOOP:
-  #AREADECISION_MOVEMENT
-  gosub NEWAREADECISION
-  gosub NEWAREAMOVEMENT
-  
-  #SANCTUARY_CHECK
-  if $SpellTimer.Sanctuary.active = 1 then
-  {
-    gosub RELCYCLIC
-    gosub PERCSELF
-    gosub STATUSCHECK
-  }
-  #SPIDER
-  if %spiderfeed = "YES" then
-  {
-    if %t > %nextspider then
-    {
-      var nextspider %t
-      math nextspider add 3600
-      put look my clockwork spider
-    }
-    gosub STATUSCHECK
-  }
-  #ATTUNEMENT
-  if %attune = "YES" then
-  {
-    gosub ATTUNELOGIC
-    gosub STATUSCHECK
-  }
-  #STANCE_CHECKING
-  gosub BOWSTANCECHECK
-  if ((%stance != "%stancemain") && (%usingbow = 0)) then
-  {
-    var stance %stancemain
-    gosub STANCECHANGE
-  }
-  if ((%stance != "shield") && (%usingbow = 1)) then
-  {
-    var stance shield
-    gosub STANCECHANGE
-  }
-  #ALMANAC
-  if %almanac = "YES" then
-  {
-    if %t >= %nextalmanac then
-    {
-      gosub ALMANACLOGIC
-      gosub STATUSCHECK
-    }
-  }
-  #EJOURNAL
-  if %ejournal = "YES" then
-  {
-    gosub EJOURNALLOGIC
-    gosub STATUSCHECK
-  }
-  #TARANTULA
-  if %tarantula = "YES" then
-  {
-    gosub TARANTULALOGIC
-    gosub STATUSCHECK
-  }
-  #DOMAIN
-  if (("$guild" = "Warrior Mage") && (%domain = "YES")) then
-  {
-    echo DomainActive: %domainactive
-    if %domainactive = 1 then echo DomainActiveType: %domainactivetype
-    if %domainactive = -1 then
-    {
-      gosub RETREAT
-      gosub DOMAINSTART 
-    }
-    gosub STATUSCHECK
-  }
-  #MANIPULATE
-  if %manipulate = "YES" then
-  {
-    if "$guild" = "Empath" then
-    {
-      gosub MANIPLOGIC
-      gosub STATUSCHECK
-    }
-  }
-  #TEACHING
-  if %teaching = "YES" then gosub TEACHINGLOGIC
-  
-  #NONVIOLENT_TACTICS
-  if ((%avoidshock = "YES") && (%tactics = "YES")) then
-  {
-    if %shockcritter = 1 then
-    {
-      gosub NVTACTICSLOGIC
-      gosub STATUSCHECK
-    }
-  }
-  #WEAPONS
-  if ("%weapons" = "YES") then
-  {
-    if ($monstercount > 0) then
-    {
-      gosub WEAPONLOGIC
-    }
-    gosub STATUSCHECK
-  }
-  #NVSTEALTH
-  if ((%avoidshock = "YES") && (%stealth = "YES")) then
-  {
-    if %shockcritter = 1 then
-    {
-      gosub NVSTEALTHLOGIC
-      gosub STATUSCHECK
-    }
-  }
-  if (("$guild" = "Paladin") && (%stealth = "YES")) then
-  {
-    gosub NVSTEALTHLOGIC
-    gosub STATUSCHECK
-  }
-  ######
-  ##GUILD_SKILLS
-  ######
-  #PERCEIVE_HEALTH
-  if (("$guild" = "Empath") && ("%perchealth" = "YES")) then
-  {
-    gosub PERCHEALTHLOGIC
-    gosub STATUSCHECK
-  }
-  #ASTROLOGY
-  if (("$guild" = "Moon Mage") && ("%astro" = "YES")) then
-  {
-    gosub ASTROLOGIC
-    gosub STATUSCHECK
-	}
-	#WARHORN
-	if %warhorn = "YES" then
-  {
-    if %t >= %nextwarhorn then
-    {
-      gosub GETITEM %warhornitem
-      gosub WARHORN
-      gosub STOWITEM %warhornitem
-      var nextwarhorn %t
-      math nextwarhorn add 605
-    }
-  }
- 	if ("$guild" = "Paladin") then
-  {
- 	  #PILGRIMBADGE
-    if %pilgrimbadge = YES then
-    {
-      gosub BADGELOGIC
-      gosub STATUSCHECK
-    }
-    #ANLORALPIN
-    if %anloralpin = "YES" then
-    {
-      gosub PINLOGIC
-      gosub STATUSCHECK
-    }
- 	}
- 	if (("$guild" = "Cleric") && ("%theurgy" = "YES")) then
- 	{
- 	  #COMMUNE_DETECTION
- 	  if ((%meraudcommune = "YES") || (%elunedcommune = "YES") || (%tamsinecommune = "YES")) then
-    {
-      if %firstcommsense = 1 then
-      {
-        gosub COMMSENSE
-        var firstcommsense 0
-        var nextcommsense %t
-        math nextcommsense add 1200
-        echo commgood: %commgood
-        echo mercomup: %mercomup
-        echo meraudgood: %meraudgood
-      }
-    }
-    #PRAYER
-    if %pray = YES then
-    {
-      gosub PRAYLOGIC
-      gosub STATUSCHECK
-    }
-    #PILGRIMBADGE
-    if %pilgrimbadge = YES then
-    {
-      gosub BADGELOGIC
-      gosub STATUSCHECK
-    }
-    #ANLORALPIN
-    if %anloralpin = "YES" then
-    {
-      gosub PINLOGIC
-      gosub STATUSCHECK
-    }
-    #MERAUDCOMMUNE
-    if ((%meraudcommune = "YES") || (%elunedcommune = "YES") || (%tamsinecommune = "YES")) then
-    {
-      gosub COMMUNELOGIC
-      gosub STATUSCHECK
-    }
-    #RECITE
-    if %recite = "YES" then
-    {
-      gosub RECITELOGIC
-      gosub STATUSCHECK
-    }
-    #DANCE
-    if %dance = "YES" then
-    {
-      gosub DANCELOGIC
-      gosub STATUSCHECK
-    }
-  }
-  #SUMMONING
-  if (($guild = "Warrior Mage") && (%summoning = "YES")) then
-  {
-    if %summonweapon = "YES" then
-    {
-      gosub SUMMWEAPONLOGIC
-      gosub STATUSCHECK
-    }
-    if %pathway = "YES" then
-    {
-      gosub PATHWAYLOGIC
-      gosub STATUSCHECK
-    }
-  }
-  #TRADING
-  if (($guild = "Ranger") && ("%pounce" = "YES")) then
-  {
-    gosub POUNCELOGIC
-  }
-  #TRADING
-  if (($guild = "Trader") && ("%invest" = "YES")) then
-  {
-    gosub INVESTLOGIC
-  }
-  #BARDIC_LORE
-  if (($guild = "Bard") && ("%whistlepiercing" = "YES")) then
-  {
-    gosub WHISTLELOGIC
-    gosub STATUSCHECK
-  }
-  #HUNTING
-	if %hunting = "YES" then
-	{
-	  gosub HUNTLOGIC
-	  gosub STATUSCHECK
-  }
-  #RECALL
-  if %recall = "YES" then
-  {
-    gosub RECALLLOGIC
-    gosub STATUSCHECK
-  }
-  #APPRAISAL
-	if %appraise = "YES" then
-	{
-    gosub APPLOGIC
-	  gosub STATUSCHECK
-  }
-  #WINDBOARD
-  if %windboard = "YES" then
-  {
-    if %buffing = 0 then
-    {
-      if ((%usingtactics != 1) && (%usingexpert != 1)) then
-      {
-        gosub WINDBOARDLOGIC
-        gosub STATUSCHECK
-      }
-    }
-  }
-  #COLLECTING
-  #put #echo Yellow Collect: %collect
-  if ("%collect" = "YES") then
-  {
-    #put #echo buffing: %buffing
-    if (%buffing = 0) then
-    {
-      #echo Not buffing.
-      #put #echo usingtactics: %usingtactics
-      if ((%usingtactics != 1) && (%usingexpert != 1)) then
-      {
-        #echo Not using tactics or expertise.
-        gosub COLLECTLOGIC
-      }
-    }
-    gosub STATUSCHECK
-  }
-  #TEXTBOOK
-  if %textbook = "YES" then
-  {
-    if %buffing = 0 then
-    {
-      if ((%usingtactics != 1) && (%usingexpert != 1)) then
-      {
-        gosub TEXTLOGIC
-      }
-    }
-    gosub STATUSCHECK
-  }
-  #SANOWRET
-  if %combatsanowret = "YES" then
-  {
-    gosub SANOWRETLOGIC
-    gosub STATUSCHECK
-  }
-  #LOCKSMITHBOX
-  if %locksmithbox = "YES" then
-  {
-    gosub LOCKSMITHLOGIC
-    gosub STATUSCHECK
-  }
-  #SKINFATRAINER
-  if %skinfatrainer = "YES" then
-  {
-    gosub SKINFATRAINERLOGIC
-    gosub STATUSCHECK
-  }
-  gosub STATUSCHECK
-  pause .5
-  goto COMBATLOOP
-
-NONCOMBATLOOP:
-  #PRERUN_ACTIONS
-  if %firststowall = 1 then
-  {
-    if tolower("%1") != "alerts" then gosub STOWALL
-    var firststowall 0
-  }
-  if %firstrel = 1 then
-  {
-    if (($guild = "Thief") || ($guild = "Barbarian")) then
-    else
-    {  
-      if %spell = "YES" then
-      {
-        if ((%spell1symb = "YES") || (%spell2symb = "YES") || (%spell3symb = "YES") || (%symbiosisbuff = "YES")) then
-        {
-          gosub SYMBCLEAR
-        }
-      }
-      if ("%necrosafety" = "YES") then
-      {
-        gosub RELMANA
-        gosub RELSPELL
-      }
-      else gosub RELALL
-    }
-    var firstrel 0
-  }
-  if ((%appfocusonly = 0) && (%alertsonly = 0)) then
-  {
-    if %firstawake = 1 then
-    {
-      gosub AWAKE
-      var firstawake 0
-    }
-  }
-  #TRADING_SELL
-  if (("%tradingsell" = "YES") && ("$guild" = "Trader")) then
-  {
-    #put #echo >Log Yellow tradingsell: %tradingsell Logic started.
-    if $Trading.LearningRate > 28 then var tradinglock 1
-    if $Trading.LearningRate < 4 then var tradinglock 0
-    if $Trading.Ranks >= 1750 then var tradinglock 1
-    if (%tradinglock = 0) then
-    {
-      #put #echo >Log [Train] Attempting to sell bundle.
-      gosub TRADINGSELLLOGIC
-    }
-  }
-  #TRADING_TASKS
-  if (("%tradingtasks" = "YES") && ("$guild" = "Trader")) then
-  {
-    if $Trading.LearningRate > 33 then var tradinglock 1
-    if $Trading.LearningRate < 4 then var tradinglock 0
-    if $Trading.Ranks >= 1750 then var tradinglock 1
-    if (%tradinglock = 0) then
-    {
-      gosub TASKLOGIC
-    }
-  }
-  #HEALING
-  if %selfheal = 1 then gosub HEALTHCHECK
-  #APPFOCUS
-  if %appfocusonly = 1 then
-  { 
-    if %appfocus = "YES" then
-    {
-      gosub APPFOCUSLOGIC
-    }
-  }
-  #DEVOTION
-  if %devotiononly = 1 then
-  {
-    gosub DEVOTIONLOGIC
-    exit
-  }
-  #ALMANAC
-  if %almanac = "YES" then
-  {
-    if %t >= %nextalmanac then
-    {
-      gosub ALMANACLOGIC
-    }
-  }
-  #TEACHING
-  if %teaching = "YES" then gosub TEACHINGLOGIC
-  #PERFORMING_CLIMBING
-  if ((%perform = "YES") || (%climbing = "YES") | (%climbingrope = "YES")) then
-  {
-    if ((%climbing = "YES") || (%climbingrope = "YES")) then
-    {
-      if ($Athletics.LearningRate < 20) then var athleticslock 0
-      if ($Athletics.LearningRate = 34) then var athleticslock 1
-      if ($Athletics.LearningRate >= 1750) then var athleticslock 1
-      if (%athleticslock = 1) then gosub STOWITEM %climbingropename
-    }
-    else var athleticslock 1
-    if $Performance.LearningRate < 20 then var performlock 0
-    if $Performance.LearningRate = 34 then var performlock 1
-    if $Performance.Ranks >= 1750 then var performlock 1
-    if %perform = "NO" then var performlock 1
-    if ((%performlock = 0) || (%athleticslock = 0)) then
-    {
-      gosub PERFORMLOOP
-      goto NONCOMBATLOOP
-    }
-    else
-    {
-      if %playing = 1 then
-      { 
-        gosub PLAYSTOP
-        if ((matchre ("$righthand", "%instrument") || (matchre ("$lefthand", "%instrument"))) then
-        {
-          gosub STOWITEM %instrument
-        }
-      }
-    }
-  }
-  #LOCKSMITHBOX
-  if %locksmithbox = "YES" then
-  {
-    gosub LOCKSMITHLOGIC
-    gosub STATUSCHECK
-  }
-  #SKINFATRAINER
-  if %skinfatrainer = "YES" then
-  {
-    gosub SKINFATRAINERLOGIC
-    gosub STATUSCHECK
-  }
-  #WINDBOARD
-  if %windboard = "YES" then
-  {
-    if %buffing = 0 then
-    {
-      if ((%usingtactics != 1) && (%usingexpert != 1)) then
-      {
-        gosub WINDBOARDLOGIC
-        gosub STATUSCHECK
-      }
-    }
-  }
-  #PERCEIVE_HEALTH
-  if %perchealth = "YES" then
-  {
-    gosub PERCHEALTHLOGIC
-    gosub STATUSCHECK
-  }
-  #ATTUNEMENT
-  if %attune = "YES" then
-  {
-    gosub ATTUNELOGIC
-	  gosub STATUSCHECK
-  }
-  #SPELLCASTING
-	gosub MAINSPELLLOGICNC
-	gosub STATUSCHECK
-  #RESEARCH
-	if ("%research" = "YES") then
-  {
-    if %casting != 1 then
-    { 
-      gosub RESEARCHLOGIC
-    }
-  }
-	#SANOWRET
-  if %noncomsanowret = "YES" then
-  {
-    gosub SANOWRETLOGIC
-    gosub STATUSCHECK
-  }
-  #SANOWRET
-  if %noncomsanowret = "YES" then
-  {
-    gosub SANOWRETLOGIC
-    gosub STATUSCHECK
-  }
-  #TEXTBOOK
-	if %textbook = "YES" then
-	{
-	  gosub TEXTLOGIC
-    gosub STATUSCHECK
-  }
-  #HUNTING
-	if %hunting = "YES" then
-	{
-	  gosub HUNTLOGIC
-	  gosub STATUSCHECK
-	}
-  #COLLECTING
-  if (%collect = "YES") then
-  {
-    gosub COLLECTLOGIC
-    gosub STATUSCHECK
-  }
-  #ASTROLOGY
-  if %astro = YES then
-  {
-    gosub ASTROLOGIC
-    gosub STATUSCHECK
-  }
-  #SUMMONING
-  if (($guild = "Warrior Mage") && (%summoning = "YES")) then
-  {
-    if %pathway = "YES" then
-    {
-      gosub PATHWAYLOGIC
-      gosub STATUSCHECK
-    }
-  }
-  pause 1
-  gosub STATUSCHECK
-  goto NONCOMBATLOOP
-
-
-SCRIPTBEGINCHECKS:
-  #STORAGE_CHECK
-  if (%firststowall = 1) then
-  {
-    gosub STOWALL
-    var firststowall 0
-  }
-  if (%firststoragecheck = 1) then
-  {
-    var firststoragecheck 0
-    gosub STORAGECHECKLOGIC
-  }
-  if (("%armorcheck" = "YES") && (%firstarmorcheck = 0)) then
-  {
-    gosub ARMORCHECK
-  }
-  #FIRSTPERC
-  if (%firstperc = 1) then
-  {
-    if ("$guild" = "Moon Mage") then
-    {
-      var mmnextperc %t
-      math mmnextperc add 300
-    }
-    var firstperc 0
-    gosub PERCSELF
-  }
-  #RELEASE_MANA_SPELLS
-  if (%firstrel = 1) then
-  {
-    if (("$guild" = "Thief") || ("$guild" = "Barbarian")) then
-    else
-    {  
-      if ("%spell" = "YES") then
-      {
-        if ((%spell1symb = "YES") || (%spell2symb = "YES") || (%spell3symb = "YES") || (%symbiosisbuff = "YES")) then
-        {
-          gosub SYMBCLEAR
-        }
-      }
-      if ("%necrosafety" = "YES") then
-      {
-        if ($SpellTimer.RiteofGrace.active = 1) then
-        {
-          gosub RELMANA
-          gosub RELSPELL
-        }
-        else gosub RELALL
-      }
-      else gosub RELALL
-    }
-    var firstrel 0
-  }
-  #AWAKE_AND_RPAS
-  if (%firstawake = 1) then
-  {
-    gosub AWAKE
-    var firstawake 0
-    action (rpa) on
-    put rpa check
-    pause 1
-    action (rpa) off
   }
   return
 
@@ -7380,11 +7593,11 @@ APPLOGIC:
   return
 
 ASSESSLOGIC:
-  if %t > %nextassess then 
+  if (%t > %nextassess) then 
   {
     math nextassess set %t
     math nextassess add 12
-    if $Appraisal.LearningRate < 34 then gosub ASSESSINSTRUMENT
+    if ($Appraisal.LearningRate < 34) then gosub ASSESSINSTRUMENT
   }
   return
 
@@ -7537,16 +7750,18 @@ BURGLELOGIC:
   else goto ARRESTED
 
 BURGLEPAWNLOGIC:
-  if (%pawnshop = "none") then var burglepawnsold -2
-  else
+  #need to make it travel if there's no pawnshop in the town it's in.
+  put #echo Yellow burglelootlist: %burglelootlist
+  var burglepawnsold 0
+  eval burglelootlistnum count("%burglelootlist", "|")
+  echo burglelootlist: %burglelootlist
+  echo burglelootlistnum: %burglelootlistnum
+  if ((%burglelootlist(0) != "") || (%burglelootlistnum > 0)) then
   {
-    if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
-    var burglepawnsold 0
-    eval burglelootlistnum count("%burglelootlist", "|")
-    echo burglelootlist: %burglelootlist
-    echo burglelootlistnum: %burglelootlistnum
-    if ((%burglelootlist(0) != "") || (%burglelootlistnum > 0)) then
+    if (%pawnshop = "none") then var burglepawnsold -2
+    else
     {
+      if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
       gosub NEWTOWNPRESET %pawntown pawn
       gosub ROOMTRAVEL
       var pawncounter 0
@@ -7555,8 +7770,8 @@ BURGLEPAWNLOGIC:
       gosub STOWALL
       gosub BURGLEPAWN
     }
-    else var burglepawnsold -1
   }
+  else var burglepawnsold -1
   return
 
 BURGLEPAWN:
@@ -7590,9 +7805,9 @@ BURGLEEND:
   if %burgleloot = "YES" then
   {
     var burgletext %burgletext  Found %burglelootlist.
-    if %burglepawn = "YES" then
+    if (%burglepawn = "YES") then
     {
-      if %burglepawnsold = 1 then
+      if (%burglepawnsold = 1) then
       {
         math totalburgle add %pawntotal
         var burgletext %burgletext  Pawned for %pawntotal, with a total of %totalburgle this session. 
@@ -7665,7 +7880,7 @@ BURGLETOOLGET:
 
 BURGLELOOP:
   if %grabs >= %burglemaxgrabs then var footsteps 1
-  if (($invisible = 0) && ($hidden = 0)) then gosub HIDE
+  #if (($invisible = 0) && ($hidden = 0)) then gosub HIDE
   if %footsteps = 1 then return
   if %arrested = 1 then return
   gosub BURGLESEARCH
@@ -8592,7 +8807,7 @@ PERCHEALTHLOGIC:
 
 PERFORMLOGIC:
   #dirtiness may affect your performance.
-  if %instrumentworn != "YES" then
+  if (%instrumentworn != "YES") then
   {
     if matchre ("$righthand", "%instrument") then
     else
@@ -8607,7 +8822,7 @@ PERFORMLOGIC:
         gosub GETITEM %instrument
       }
     }
-    if %instrumentassess = "YES" then gosub ASSESSLOGIC
+    if (%instrumentassess = "YES") then gosub ASSESSLOGIC
   }
   else
   {
@@ -8618,7 +8833,6 @@ PERFORMLOGIC:
         gosub WEARITEM %instrument 
       }
     }
-    
   }
   if %playing = 0 then
   {
@@ -9256,9 +9470,12 @@ RESEARCHCHOOSELOOP:
 	
 MAINSPELLLOGIC:
   if (("$guild" = "Barbarian") || ("$guild" = "Thief")) then return
-  if %playing = 1 then return
+  if (%playing = 1) then return
+  if ((("%scriptarea" = "combat") && (%scriptareachange = 0)) then
+  else return
+  if ((%noncombatactive = 1) || (%upkeepactive = 1)) then return
   if %t < %nextcast then return
-  if %combatperforming = 1 then return
+  if (%combatperforming = 1) then return
   if ((%necrosafety = "YES") && ("$guild" = "Necromancer")) then
   {
     gosub NSAFETYCHECK
@@ -10686,110 +10903,168 @@ NONCOMBATCHECKS:
 	}
 	return
 	
-	
-NEWNONCOMBATLOGIC:
+NONCOMBATLOOP:
 	#EXECUTING_NONCOMBAT_TRAIN
-	if (%noncombatactive = 1) then
-	{
-	  #TRADING_SELL
-    if (%noncombatsellactive = 1) then
-		{
-      if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
-      gosub LEAVEROOM
-      var rtzone 1
-      var rttravel YES
-      var rttraveldest %tradingselltown
-      var rtmove NO
-      var rtmovelist none
-      var rttargetroom 0
-      var rtfindroom NO
-      gosub ROOMTRAVEL
-      gosub STOWALL
-      gosub AWAKE
+	gosub NONCOMBATCHOOSE
+  if (%noncombatactive = 1) then
+  {
+    if ("%currentnoncombat" = "tradingsell") then
+    {
+      gosub NONCOMBATMOVEMENT
       var foundsellitem 0
       gosub TRADINGSELLLOGIC
+      gosub NONCOMBATCHOOSE
     }
-    
-    #TRADING_TASKS
-    if (%noncombattasksactive = 1) then
-		{
-      if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
-      gosub LEAVEROOM
-      var rtzone 1
-      var rttravel YES
-      var rttraveldest crossing
-      var rtmove NO
-      var rtmovelist none
-      var rttargetroom mags
-      var rtfindroom NO
-      gosub ROOMTRAVEL
-      gosub STOWALL
-      gosub AWAKE
+    if ("%currentnoncombat" = "tradingtasks") then
+    {
+      gosub NONCOMBATMOVEMENT
       gosub TASKLOGIC
+      gosub NONCOMBATCHOOSE
     }
-		
-		#BURGLING
-		if (%noncombatburgleactive) = 1 then
-		{
-			if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
-			gosub LEAVEROOM
-			gosub NEWTOWNPRESET %burgletown burgle
-			gosub ROOMTRAVEL
-			gosub STOWALL
-			gosub AWAKE
-			if (%onfire != 1) then
-			{
-			  gosub BURGLELOGIC
-		  	gosub BURGLERECALL
-			}
-			var noncombatburgleactive 0
-			gosub RELINVIS
-			#BURGLE_PAWN
-			if ("%burglepawn" = "YES") then gosub BURGLEPAWNLOGIC
-		}
-		
-	  #PERFORMANCE
-		if (%noncombatperformactive = 1) then
-		{
-			if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
-		  gosub LEAVEROOM
-		  gosub NEWTOWNPRESET %performtown perform
-			var firstclean 0   
-			gosub ROOMTRAVEL
-			gosub AWAKE
-			gosub STOWALL
-			gosub MTPERFORMLOOP
-		}
-		
-		#STUDY_ART
-		if (%noncombatstudyartactive = 1) then
-		{
-		  if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
-		  gosub LEAVEROOM
-		  gosub NEWTOWNPRESET crossing studyart
-		  gosub ROOMTRAVEL
-			gosub AWAKE
-			gosub STOWALL
+    if ("%currentnoncombat" = "burgle") then
+    {
+      gosub NONCOMBATMOVEMENT
+      if (%onfire != 1) then
+      {
+        gosub BURGLELOGIC
+        gosub BURGLERECALL
+      }
+      var noncombatburgleactive 0
+      gosub RELINVIS
+      #BURGLE_PAWN
+      if ("%burglepawn" = "YES") then gosub BURGLEPAWNLOGIC
+      gosub NONCOMBATCHOOSE
+    }
+    if ("%currentnoncombat" = "perform") then
+    {
+      gosub NONCOMBATMOVEMENT
+      gosub MTPERFORMLOOP
+      gosub NONCOMBATCHOOSE
+    }
+    if ("%currentnoncombat" = "studyart") then
+    {
+      gosub NONCOMBATMOVEMENT
       gosub STUDYARTLOGIC
-		}
-		
-		#FORGING
-		if (%noncombatforgingactive = 1) then
-		{
-			if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
-		  gosub LEAVEROOM
-		  gosub NEWTOWNPRESET %forgingtown forging
-			gosub ROOMTRAVEL
-			gosub AWAKE
-			gosub STOWALL
-			gosub MTFORGING
-			gosub STOWALL
+      gosub NONCOMBATCHOOSE
+    }
+    if ("%currentnoncombat" = "forging") then
+    {
+      put #echo Here!
+      gosub NONCOMBATMOVEMENT
+      gosub STOWALL
+      gosub MTFORGING
+      gosub STOWALL
       gosub STORAGECHECKLOGIC
-		}
-		var noncombatactive 0
-	  #gosub BUFFINGONLYLOOP
-	}
-	return
+      gosub NONCOMBATCHOOSE
+    }
+  }
+	goto MAINLOOP	
+	
+
+NONCOMBATCHOOSE:
+  #put #echo Yellow noncombatactive: %noncombatactive
+  #put #echo Yellow noncombatsellactive: %noncombatsellactive
+  #put #echo Yellow noncombattasksactive: %noncombattasksactive
+  #put #echo Yellow noncombatburgleactive: %noncombatburgleactive
+  #put #echo Yellow noncombatperformactive: %noncombatperformactive
+  #put #echo Yellow noncombatstudyartactive: %noncombatstudyartactive
+  #put #echo Yellow noncombatforgingactive: %noncombatforgingactive
+  var currentnoncombat 0
+  if (%noncombatactive = 0) then return
+  if (%noncombatsellactive = 1) then
+  {
+    var currentnoncombat tradingsell
+    return
+  }
+  if (%noncombattasksactive = 1) then
+  {
+    var currentnoncombat tradingtasks
+    return
+  }
+  if (%noncombatburgleactive) = 1 then
+  {
+    var currentnoncombat burgle
+    return
+  }
+  if (%noncombatperformactive = 1) then
+  {
+    var currentnoncombat perform
+    return
+  }
+  if (%noncombatstudyartactive = 1) then
+  {
+    var currentnoncombat studyart
+    return
+  }
+  if (%noncombatforgingactive = 1) then
+  {
+    var currentnoncombat forging
+    return
+  }
+  var noncombatactive 0
+  gosub NEWAREADECISION
+  return
+  
+NONCOMBATMOVEMENT:
+  put #echo Yellow currentnoncombat: %currentnoncombat
+  if (%noncombatactive = 1) then
+  {
+    #TRADING_SELL
+    if ("%currentnoncombat" = "tradingsell") then
+    {
+      gosub NEWTOWNPRESET crossing tradingsell
+    } 
+    #TRADING_TASKS
+    if ("%currentnoncombat" = "tradingtask") then
+    {
+			gosub NEWTOWNPRESET crossing tradingtask
+    }
+    #BURGLING
+    if ("%currentnoncombat" = "burgle") then
+    {
+			gosub NEWTOWNPRESET %burgletown burgle
+    }
+    #PERFORMANCE
+    if ("%currentnoncombat" = "perform") then
+    {
+      gosub NEWTOWNPRESET %performtown perform
+    }
+    #STUDY_ART
+    if ("%currentnoncombat" = "studyart") then
+    {
+      gosub NEWTOWNPRESET crossing studyart
+    }
+    #FORGING
+    if ("%currentnoncombat" = "forging") then
+    {
+      gosub NEWTOWNPRESET %forgingtown forging
+    }
+    if (("%currentnoncombat" != "studyart") && ("%currentnoncombat" != "forging")) then
+    {
+      if (("$zoneid" != "%rtzone") || ("$roomid" != "%rttargetroom")) then
+      {
+        if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
+        gosub LEAVEROOM
+        gosub ROOMTRAVEL
+        gosub STOWALL
+        gosub AWAKE
+      }
+    }
+    else
+    {
+      put #echo Yellow zoneid: $zoneid  rtzone: %rtzone
+      if ("$zoneid" != "%rtzone") then
+      {
+        if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
+        gosub LEAVEROOM
+        gosub ROOMTRAVEL
+        gosub STOWALL
+        gosub AWAKE
+      }
+    }
+  }
+  return
+  
   
 STORAGECHECKLOGIC:
   gosub STOREDEFAULT %storage
@@ -13978,7 +14253,7 @@ MONTEST:
           if ($First_Aid.LearningRate > 33) then var firstaidlock 1
           if ($First_Aid.LearningRate < 21) then var firstaidlock 0
           if ($First_Aid.Ranks >= 1750) then var firstaidlock 1   
-          if ("%dissect" = "YES") then
+          if (("%dissect" = "YES") && ($circle >= 10)) then
           {
             if ("%skinning" = "YES") then
             {
@@ -14043,11 +14318,6 @@ SKINNINGLOGIC:
     var necroskin 0
     return
   }
-  #if (%dissected = 1) then
-  #{
-  #  var dissected 0
-  #  return
-  #}
   if ("%skinning" = "NO") then return
   
   var badskin 0
@@ -14072,7 +14342,7 @@ SKINNINGLOGIC:
       gosub ARRANGE
     }
   }
-  if %badskin = 0 then
+  if (%badskin = 0) then
   {
     gosub SKINNING
     if (%currentweapon = -1) then
@@ -14130,6 +14400,14 @@ BUNDLELOGIC:
     else
     {
       gosub STOWITEM tight bundle
+      if (($righthand = "tight bundle") || ($lefthand = "tight bundle")) then
+      {
+        put #echo >$alertwindow Yellow Tried to stow full bundle but failed!  Please address!
+        put #flash
+        put #play Advance
+        if ("%bugout" = "YES") then goto BUGOUT
+        else goto BUNDLESTOWFAILED
+      }
     }
   }
   if (($righthand = "lumpy bundle") || ($lefthand = "lumpy bundle")) then
@@ -14153,7 +14431,7 @@ BUNDLELOGIC:
     }
   }
   #MAKING_NEW_BUNDLE
-  if ((%lowereditem != -1) && (%lowereditem != 0)) then gosub GETITEM %lowereditem
+  if ((%lowereditem != -1) && (%lowereditem != 0)) then gosub GETITEM my %lowereditem
   gosub BUNDLEMAKE
   if ((matchre("$righthandnoun", "bundle")) || (matchre("$lefthandnoun", "bundle"))) then
   {
@@ -14170,6 +14448,13 @@ BUNDLELOGIC:
   }
   gosub STOWFEET
   return
+  
+BUNDLESTOWFAILED:
+  put #echo Yellow ===FAILED TO STOW TIGHT BUNDLE!===
+  put #flash
+  put #play Advance
+  pause 5
+  goto BUNDLESTOWFAILED
   
 LEAVEROOM:
   gosub DEFSTANCE
@@ -14241,7 +14526,7 @@ BUGOUTLOOP:
   #gosub BUGOUTCUSTOM
   if ($bleeding = 1) then
   {
-    if (%t > %nextbleed) then gosub BLEEDCHECK
+    if (%t > %nextbleed) then gosub TENDCHECK
   }
   pause 1
   goto BUGOUTLOOP

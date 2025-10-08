@@ -2044,7 +2044,7 @@ DISPLAYGENERAL:
   gosub OUTPUT ParanoiaAlerts
   put #echo
   gosub OUTPUT TendArea
-  #gosub OUTPUT TendObject
+  gosub OUTPUT TendObject
   put #echo
   gosub OUTPUT Whitelist
   gosub OUTPUT BlackList
@@ -2060,9 +2060,8 @@ DISPLAYGENERAL:
 	gosub OUTPUT Tarantula TarantulaItem
 	gosub OUTPUT TarantulaSkill1 TarantulaSkill2
 	gosub OUTPUT Textbook TextbookTimer
+	gosub OUTPUT TextbookItem TextbookList
 	gosub OUTPUT TomeOfLore TomeOfLoreItem
-  gosub OUTPUT TextbookItem 
-  gosub OUTPUT TextbookList
   gosub OUTPUT Windboard WindboardTimer
   gosub OUTPUT WindboardTrick WindboardCharge
 	put #echo
@@ -2322,14 +2321,14 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT NonCombat
 	put #echo
   gosub OUTPUT Burgle
-	gosub OUTPUT BurgleStorage
 	gosub OUTPUT BurgleTool (pick, rope, or both, which chooses tool based on learningrates)  
   gosub OUTPUT BurglePickItem BurglePickWorn
   gosub OUTPUT BurgleRopeItem
   gosub OUTPUT BurgleMaxGrabs
   gosub OUTPUT BurgleLoot
-  #gosub OUTPUT BurgleKeepList
+  gosub OUTPUT BurgleStorage (Should be a large container that ideally contains no other items)
   gosub OUTPUT BurglePawn
+  #gosub OUTPUT BurgleKeepList
   #if $guild = "Thief" then gosub OUTPUT BurgleThiefBin
   put #echo
   gosub OUTPUT Perform
