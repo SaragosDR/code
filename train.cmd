@@ -8479,7 +8479,8 @@ TASKLOGIC:
   if ("%forageitem" = "branche") then var forageitem branch
   if ("%forageitem" = "berrie") then var forageitem berries
   if (matchre("%forageitem", "(\w+) branches")) then var forageitem $1 branch
-  #if (matchre("%forageitem", "(\w+) leave")) then var forageitem $1 leaf
+  if (matchre("%forageitem", "(\w+) leave")) then var forageitem $1 leaf
+  if (matchre("%forageitem", "riolur leaf")) then var forageitem riolur leaves
   if (matchre("%forageitem", "%badforagelist")) then
   {
     #put #echo >Log [Mags]: Bad ForageItem: %forageitem
@@ -8526,7 +8527,7 @@ CUSTOMFORAGEROOMS:
     var foragezone 7
     var forageroom 268
   }
-  if ("%forageitem" = "tea leave") then
+  if ("%forageitem" = "tea leaf") then
   {
     var foragezone 7
     var forageroom 313
