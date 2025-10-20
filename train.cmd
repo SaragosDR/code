@@ -8463,7 +8463,11 @@ TASKLOGIC:
   if $Trading.LearningRate > 33 then var tradinglock 1
 	if $Trading.LearningRate < 4 then var tradinglock 0
   if $Trading.Ranks >= 1750 then var tradinglock 1
-  if (%tradinglock = 1) then return
+  if (%tradinglock = 1) then
+  {
+    var noncombattasksactive 0
+    return
+  }
   var forageitem 0
   var foragezone 7
   var forageroom 556
