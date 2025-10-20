@@ -27,7 +27,7 @@ var monsters6 sentinel|shadow master|shadoweaver|sky giant|sleazy lout|sprite|sw
 var monsters7 umbramagii|velver|\bvine\b|vykathi builder|vykathi excavator|wind hound|wood troll|Xala'shar (archer|archmage|conjurer|lookout|magus|overseer|shredder|slayer|thrall|vanquisher|vindicator)|young ogre|zealot
 
 var undead1 boggle|emaciated umbramagus|deadwood dryad|fiend|gargantuan bone golem|blue ghast|olensari mihmanan|plague wraith
-var undead2 revivified mutt|blightwater nyad|shylvic|sinister maelshyvean heirophant|skeletal peon|skeletal sailor|skeleton
+var undead2 revivified mutt|blightwater nyad|shylvic|sinister maelshyvean heirophant|revenant conscript|skeletal peon|skeletal sailor|skeleton
 var undead3 shambling frostcrone|skeletal kobold headhunter|skeletal kobold savage|snaer hafwa|soul|spectral pirate|spectral sailor
 var undead4 tress|spirit|ur hhrki'izh|telga orek|wir dinego|zombie(?!\s)|zombie (head-splitter|mauler|nomad|stomper)
 
@@ -72,6 +72,7 @@ var gems2 chrysoberyl|chrysoprase|citrine|coral|crystal|diamond|diopside|emerald
 var gems3 (chunk of|some|piece of).*granite|hematite|iolite|ivory|jade|jasper|kunzite|lapis lazuli|malachite stone|minerals|moonstone|morganite|onyx
 var gems4 opal|pearl|pebble|peridot|quartz|ruby|sapphire|spinel|star-stone|(waermodi|lasmodi|sjatmal|lantholite) stones|sunstone|talon|tanzanite|tooth|topaz|tourmaline|tsavorite|turquoise|zircon
 var gweths (jadeite|kyanite|lantholite|sjatmal|waermodi|lasmodi) stones
+var goodgweths (jadeite|kyanite|waermodi) stones
 var boxtype brass|copper|deobar|driftwood|iron|ironwood|mahogany|oaken|pine|steel|wooden
 var boxes coffer|crate|strongbox|caddy|casket|skippet|trunk|chest|box
 var junkloot runestone|scroll|tablet|vellum|sheiska leaf|ostracon|hhr'lav'geluhh bark|papyrus roll|smudged parchment|lockpick|fragment|package
@@ -416,9 +417,9 @@ ALERTINIT:
   if %alertwindow = "Main" then var alertwindow
   else var alertwindow >%alertwindow
   ##AWARENESS_TRIGGERS##
-  if (%speechalerts = "YES") then
+  if ((%speechalerts = "YES") && (tolower("%scriptmodename") != "combat")) then
   { 
-    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,|The apprentice repairman looks over|A youthful attendant hands you some bundling rope and says,|You hand the apprentice repairman|The apprentice repairman smiles and says
+    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,|The apprentice repairman looks over|A youthful attendant hands you some bundling rope and says,|You hand the apprentice repairman|The apprentice repairman smiles and says|You throw your head back and howl,
     var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
@@ -444,7 +445,7 @@ ALERTINIT:
   {
     action put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes-Arrival when ^\S+ just arrived.
   }
-  if %emotealerts = "YES" then
+  if (("%emotealerts" = "YES") && (tolower("%scriptmodename") != "combat")) then then
   { 
     action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 bows. when ^(\S+) bows to you.
     action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 curtsies. when ^(\S+) curtsies to you.
@@ -677,6 +678,8 @@ COMMANDVARLOAD:
     echo ================Combat Training Only===============
     echo
     var scriptmode 1
+    var speechalerts NO
+    var emotealerts NO
     var combat YES
     var huntingarea none
     var autoupkeep NO
@@ -685,7 +688,6 @@ COMMANDVARLOAD:
     var multiarea NO
     if ("%2" = "2") then var varset 2
     else var varset 1
-    put #echo Yellow huntingarea: %huntingarea
     put #echo >$alertwindow Began combat only training in Mode %varset.
   }
   if (tolower("%scriptmodename") = "noncombat") then
@@ -1089,6 +1091,21 @@ COMMANDVARLOAD:
     var healthalertnum 0
     var autoupkeep NO
   }
+  if tolower("%scriptmodename") = "burglepawn" then
+  {
+    echo
+    echo ================Burgle & Pawn===============
+    echo
+    var scriptmode 4
+    var perchealth NO
+    var bugout NO
+    var healthalerts NO
+    var speechalerts NO
+    var emotealerts NO
+    var healthalertnum 0
+    var autoupkeep NO
+    var burglepawn YES
+  }
   if tolower("%scriptmodename") = "multi" then
   {
     echo
@@ -1172,8 +1189,8 @@ COMMANDPARSE:
     }
     else
     {
-      if ((tolower("%scriptmodename") = "1") || (tolower("%scriptmodename") = "2") || (tolower("%scriptmodename") = "combat") || (tolower("%scriptmodename") = "research") || (tolower("%scriptmodename") = "teach") || (tolower("%scriptmodename") = "focus") || (tolower("%scriptmodename") = "buff")) || (tolower("%scriptmodename") = "gbuff") || (tolower("%scriptmodename") = "upkeep") || (tolower("%scriptmodename") = "burgle") || (tolower("%scriptmodename") = "multi") || (tolower("%scriptmodename") = "alerts") || (tolower("%scriptmodename") = "noncombat") || (tolower("%scriptmodename") = "climb") || (tolower("%scriptmodename") = "devotion") || (tolower("%scriptmodename") = "quiet") || (tolower("%scriptmodename") = "silent") || (tolower("%scriptmodename") = "nort") || (tolower("%scriptmodename") = "magic") || (tolower("%scriptmodename") = "music")) then
-      {
+      if ((tolower("%scriptmodename") = "1") || (tolower("%scriptmodename") = "2") || (tolower("%scriptmodename") = "combat") || (tolower("%scriptmodename") = "research") || (tolower("%scriptmodename") = "teach") || (tolower("%scriptmodename") = "focus") || (tolower("%scriptmodename") = "buff")) || (tolower("%scriptmodename") = "gbuff") || (tolower("%scriptmodename") = "upkeep") || (tolower("%scriptmodename") = "burgle") || (tolower("%scriptmodename") = "burglepawn") || (tolower("%scriptmodename") = "multi") || (tolower("%scriptmodename") = "alerts") || (tolower("%scriptmodename") = "noncombat") || (tolower("%scriptmodename") = "climb") || (tolower("%scriptmodename") = "devotion") || (tolower("%scriptmodename") = "quiet") || (tolower("%scriptmodename") = "silent") || (tolower("%scriptmodename") = "nort") || (tolower("%scriptmodename") = "magic") || (tolower("%scriptmodename") = "music")) then
+      { 
         var varset 1
         put #echo mono Train script beginning.
         put #echo >$alertwindow [Train]: Train script beginning.
@@ -1309,6 +1326,7 @@ CLERICONLY:
   var watercontainer $watercontainer
   var blessdelay $blessdelay
   var hyhcast $hyhcast
+  var sapcast $sapcast
   var osrelmeraud $osrelmeraud
   var omprepmana $omprepmana
   var omaddmana $omaddmana
@@ -1605,6 +1623,11 @@ TRADERONLY:
   action var badstars 1; var badyavash 1; var badxibar 1 when That's a bit hard to do while inside.
   
   action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) (.*)s\.
+  action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) sprigs of (.*)\.
+  action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) some (.*)\.
+  action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) bits of (.*)\.
+  action var forageitem stick when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) sticks, branches or limbs.
+  action var forageitem leaf when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) leaves.
   action var quantity $1 when You need to turn in (\d*) more\.
   var invest $invest
   var tradingsell $tradingsell
@@ -1664,11 +1687,13 @@ HUNTINGVARLOAD:
     }
     if ("%huntingarea" = "p1-louts") then
     {
-      var zone 1
+      var zone 8
       var travel YES
       var traveldest crossing
       var move YES
-      var targetroom e gate
+      var movelist 170
+      var targetroom 0
+      var findroom YES
       var findroomlist 1|3|4|5|6|7|8|10|11|12|36|13|14
       var bugoutroom 2
       var nearestportaltown crossing
@@ -1806,19 +1831,6 @@ HUNTINGVARLOAD:
       var bugoutroom 4
       var nearestportaltown crossing
     }
-    if ("%huntingarea" = "p1-woodtrolls") then
-    {
-      var zone 7a
-      var travel YES
-      var traveldest kaerna
-      var move YES
-      var movelist vineyard
-      var targetroom 0
-      var findroom YES
-      var findroomlist 30|31|32|33|34
-      var bugoutroom 4
-      var nearestportaltown crossing
-    }
     if ("%huntingarea" = "p1-grasseels") then
     {
       var zone 4
@@ -1831,6 +1843,44 @@ HUNTINGVARLOAD:
       if ("%huntingpremium" = "YES") then var findroomlist 228|229|230|231|232|233|234|235|236|237
       if ("%huntingpremium" = "ONLY") then var findroomlist 234|235|236|237
       var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-revenantconscripts") then
+    {
+      var zone 8
+      var travel YES
+      var traveldest crossing
+      var move YES
+      var movelist 170
+      var targetroom 0
+      var findroom YES
+      var findroomlist 106|107|104|105|128
+      var bugoutroom 2
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-lipopods") then
+    {
+      var zone 2
+      var travel YES
+      var traveldest wolf
+      var move YES
+      var targetroom 15
+      var findroom YES
+      var findroomlist 7|8|9|10|11|12|13|14|15|19|20|21|22|28|29|30|31|32|33
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-woodtrolls") then
+    {
+      var zone 7a
+      var travel YES
+      var traveldest kaerna
+      var move YES
+      var movelist vineyard
+      var targetroom 0
+      var findroom YES
+      var findroomlist 30|31|32|33|34
+      var bugoutroom 4
       var nearestportaltown crossing
     }
     if ("%huntingarea" = "p1-animateditems") then
@@ -1882,6 +1932,18 @@ HUNTINGVARLOAD:
       var findroom YES
       var findroomlist 131|132|133|134
       var bugoutroom 8
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-bloodwolves") then
+    {
+      var zone 4
+      var travel YES
+      var traveldest wolf
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 301|303|304|305|306|326|307
+      var bugoutroom 1
       var nearestportaltown crossing
     }
     if ("%huntingarea" = "p1-rocktrolls") then
@@ -3609,6 +3671,7 @@ MAINVARLOAD:
   var auonammo $auonammo
   var auonboxes $auonboxes
   var minmoney $minmoney
+  var minmoneytype $minmoneytype
   var exchange $exchange
   var autopath $autopath
   var repair $repair
@@ -4332,7 +4395,7 @@ COMBATLOOP:
  	if ("$guild" = "Paladin") then
   {
  	  #PILGRIMBADGE
-    if %pilgrimbadge = YES then
+    if ("%pilgrimbadge" = "YES") then
     {
       gosub BADGELOGIC
       gosub STATUSCHECK
@@ -4760,8 +4823,11 @@ SCRIPTBEGINCHECKS:
   }
   if (%firststoragecheck = 1) then
   {
-    var firststoragecheck 0
-    gosub STORAGECHECKLOGIC
+    if ("%crafting" = "YES") then
+    {
+      var firststoragecheck 0
+      gosub STORAGECHECKLOGIC
+    }
   }
   if (("%armorcheck" = "YES") && (%firstarmorcheck = 0)) then
   {
@@ -5415,7 +5481,7 @@ UPKEEPLOGIC:
   }
   if (($zoneid = 150) && ($roomid = 0)) then move out
   if %exchange = "YES" then gosub EXCHANGELOGIC
-  if %minmoney > 0 then gosub MINMONEYLOGIC
+  if (%minmoney > 0) then gosub MINMONEYLOGIC
   #BUNDLEVAULT
   if ((%bundlevault = "YES") || (%gemvault = "YES")) then
   {
@@ -6043,7 +6109,7 @@ UPKEEPSET:
 
 MINMONEYLOGIC:
   var usedbank 0
-  if %hasbank = 1 then
+  if (%hasbank = 1) then
   {
     if %multizone = 1 then
     {
@@ -6053,7 +6119,7 @@ MINMONEYLOGIC:
     gosub MOVE teller
     put deposit all %currency
     pause .5
-    put withdraw %minmoney platinum %currency
+    put withdraw %minmoney %minmoneytype %currency
     var usedbank 1
   }
   return
@@ -7681,7 +7747,7 @@ BURGLELOGIC:
   var moves 0
   var arrested 0
   var footsteps 0
-  var burglelootlist
+  var burglelootlist 0
   unvar direction(0)
   unvar direction(1)
   unvar direction(2)
@@ -7717,6 +7783,7 @@ BURGLELOGIC:
   unvar priorexit(library)
         
   gosub BURGLERECALL
+  put #echo burgleready: %burgleready
   if (%burgleready = 0) then goto BURGLEEND
   gosub JUSTICECHECK
   if %justice != 1 then goto BURGLEEND
@@ -7727,7 +7794,7 @@ BURGLELOGIC:
   if ("$guild" = "Necromancer") then gosub BURGLEEOTBCAST
   gosub BURGLETOOLGET
   gosub BURGLEGUARDCHECK
-  if %scriptmode = 4 then gosub UPKEEPSET
+  if (%scriptmode = 4) then gosub UPKEEPSET
   gosub BURGLE
   if %justice != 1 then goto BURGLEEND
   if %arrested != 0 then goto ARRESTED
@@ -7737,44 +7804,36 @@ BURGLELOGIC:
   if %arrested = 0 then gosub BURGLEEXIT
   if %arrested = 0 then
   {
-    eval result element("%burglelootlist", 0)
-    var result A%result
-    if %result = "A" then
-    {
-      var burglelootlist A%burglelootlist
-      eval burglelootlist replace("%burglelootlist", "A|", "")
-      eval burglelootlist replace("%burglelootlist", "A", "")
-    }
     goto BURGLEEND
   }
   else goto ARRESTED
 
 BURGLEPAWNLOGIC:
-  #need to make it travel if there's no pawnshop in the town it's in.
-  put #echo Yellow burglelootlist: %burglelootlist
+  if ("%burglelootlist" = "0") then
+  {
+    var burglepawnsold -1
+    return
+  }
   var burglepawnsold 0
   eval burglelootlistnum count("%burglelootlist", "|")
-  echo burglelootlist: %burglelootlist
+  put #echo Yellow burglelootlist: %burglelootlist
   echo burglelootlistnum: %burglelootlistnum
-  if ((%burglelootlist(0) != "") || (%burglelootlistnum > 0)) then
+  if (%pawnshop = "none") then var burglepawnsold -2
+  else
   {
-    if (%pawnshop = "none") then var burglepawnsold -2
-    else
-    {
-      if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
-      gosub NEWTOWNPRESET %pawntown pawn
-      gosub ROOMTRAVEL
-      var pawncounter 0
-      var burglepawnsold 0
-      var pawntotal 0
-      gosub STOWALL
-      gosub BURGLEPAWN
-    }
+    if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
+    gosub NEWTOWNPRESET %pawntown pawn
+    gosub ROOMTRAVEL
+    var pawncounter 0
+    var burglepawnsold 0
+    var pawntotal 0
+    gosub STOWALL
+    gosub BURGLEPAWN
   }
-  else var burglepawnsold -1
   return
 
 BURGLEPAWN:
+  if (%pawncounter > %burglelootlistnum) then return
   gosub GETITEM %burglelootlist(%pawncounter) from %burglestorage
   if ("$righthand" != "Empty") then
   {
@@ -7786,12 +7845,11 @@ BURGLEPAWN:
     else var burglepawnsold 1
   }
   math pawncounter add 1
-  if %pawncounter < %grabs then goto BURGLEPAWN
-  else return
+  goto BURGLEPAWN
   
 BURGLEEND:
-	if "$guild" = "Thief" then gosub BURGLEKHRISTOP
-  if %justice != 1 then
+	if ("$guild" = "Thief") then gosub BURGLEKHRISTOP
+  if (%justice != 1) then
   {
     put #echo %alertwindow [Burgle]: Unable to burgle, not in a justice zone.
     return
@@ -7801,24 +7859,37 @@ BURGLEEND:
     put #echo %alertwindow [Burgle]: Unable to burgle, still on cooldown.
     return
   }
-  var burgletext Burgled using a %burgletoolchosen for %grabs grabs.
-  if %burgleloot = "YES" then
+  var burgletext Burgled using a %burgletoolchosen for %grabs grabs
+  if ("%burgleloot" = "YES") then
   {
-    var burgletext %burgletext  Found %burglelootlist.
-    if (%burglepawn = "YES") then
+    if ("%burglelootlist" != "0") then
     {
-      if (%burglepawnsold = 1) then
+      if ("%burglepawn" = "YES") then gosub BURGLEPAWNLOGIC
+      eval finds count("%burglelootlist", "|")
+      math finds add 1
+      var burgletext %burgletext and %finds finds.
+      var burgletext %burgletext  Found %burglelootlist.
+      echo burglepawn: %burglepawn
+      if ("%burglepawn" = "YES") then
       {
-        math totalburgle add %pawntotal
-        var burgletext %burgletext  Pawned for %pawntotal, with a total of %totalburgle this session. 
-      }
-      if %burglepawnsold = 0 then var burgletext %burgletext  Failed to pawn for an unknown reason.
-      if %burglepawnsold = -1 then var burgletext %burgletext  No loot to pawn.
-      if %burglepawnsold = -2 then var burgletext %burgletext  No pawn shop present in this zone to sell at.
-      
+        echo burglepawnsold: %burglepawnsold
+        if (%burglepawnsold = 1) then
+        {
+          math totalburgle add %pawntotal
+          var burgletext %burgletext  Pawned for %pawntotal, with a total of %totalburgle this session. 
+        }
+        if %burglepawnsold = 0 then var burgletext %burgletext  Failed to pawn for an unknown reason.
+        if %burglepawnsold = -1 then var burgletext %burgletext  No loot to pawn.
+        if %burglepawnsold = -2 then var burgletext %burgletext  No pawn shop present in this zone to sell at.
+      }        
+    }
+    else
+    {
+      else var finds 0
+      var burgletext %burgletext and nothing found.
     }
   }
-  else var burgletext %burgletext  No loot was kept.
+  else var burgletext %burgletext.  No loot was kept.
   put #echo %alertwindow [Burgle]: %burgletext
   #if %arrested = 1 then
   #{
@@ -7879,17 +7950,16 @@ BURGLETOOLGET:
   
 
 BURGLELOOP:
-  if %grabs >= %burglemaxgrabs then var footsteps 1
-  #if (($invisible = 0) && ($hidden = 0)) then gosub HIDE
-  if %footsteps = 1 then return
-  if %arrested = 1 then return
+  if (%grabs >= %burglemaxgrabs) then var footsteps 1
+  if (%footsteps = 1) then return
+  if (%arrested = 1) then return
   gosub BURGLESEARCH
-  if %grabs >= %burglemaxgrabs then var footsteps 1
-  if %footsteps = 1 then return
-  if %arrested = 1 then return
+  if (%grabs >= %burglemaxgrabs) then var footsteps 1
+  if (%footsteps = 1) then return
+  if (%arrested = 1) then return
   gosub BURGLEMOVE
-  if %footsteps = 1 then return
-  if %arrested = 1 then return
+  if (%footsteps = 1) then return
+  if (%arrested = 1) then return
   goto BURGLELOOP
   
 BURGLEMOVE:
@@ -8003,13 +8073,17 @@ BURGLELEAVE:
 
 BURGLESEARCH:
   gosub BURGLESTEAL
-  if %burgleloot = "YES" then
+  if ("%burgleloot" = "YES") then
   {
     if ("$righthand" != "Empty") then
     {
       gosub TAPSHORTEN $righthand
       gosub PUTITEM my %shorttap in my %burglestorage
-      if ("$righthand" = "Empty") then var burglelootlist %burglelootlist|%shorttap
+      if ("$righthand" = "Empty") then var
+      {
+        if ("%burglelootlist" = "0") then var burglelootlist %shorttap
+        else var burglelootlist %burglelootlist|%shorttap
+      }
       else
       {
         gosub DROPITEM $righthandnoun
@@ -8390,22 +8464,74 @@ TASKLOGIC:
 	if $Trading.LearningRate < 4 then var tradinglock 0
   if $Trading.Ranks >= 1750 then var tradinglock 1
   if (%tradinglock = 1) then return
-  gosub TASKMOVE
-  gosub TASKASK
-  pause 1
-  put #echo Yellow Quantity: %quantity
-  put #echo Yellow Forageitem: %forageitem
+  var forageitem 0
+  var foragezone 7
+  var forageroom 556
+  gosub STOWALL
+  gosub TASKFIND
+  if (%forageitem = 0) then
+  {
+    gosub DEEPSLEEP
+    gosub TASKMOVE
+    gosub TASKASK
+    pause 1
+  }
   if ("%forageitem" = "branche") then var forageitem branch
   if ("%forageitem" = "berrie") then var forageitem berries
-  gosub MOVE ntr
+  if (matchre("%forageitem", "(\w+) branches")) then var forageitem $1 branch
+  #if (matchre("%forageitem", "(\w+) leave")) then var forageitem $1 leaf
+  if (matchre("%forageitem", "%badforagelist")) then
+  {
+    #put #echo >Log [Mags]: Bad ForageItem: %forageitem
+    gosub TASKMOVE
+    gosub TASKCANCEL
+    goto TASKLOGIC
+  }
+  put #echo Yellow Quantity: %quantity
+  put #echo Yellow Forageitem: %forageitem
+  put #echo >Log [Mags]: ForageItem: %forageitem
+  gosub CUSTOMFORAGEROOMS
+  if ("$zoneid" != "%foragezone") then
+  {
+    if ("%foragezone" = "1") then gosub TRAVEL crossing
+    if ("%foragezone" = "7") then gosub TRAVEL arthe
+  }
+  if ($roomid != %forageroom) then gosub MOVE %forageroom
+  gosub AWAKE
   var heldquantity 0
+  var foragesuccess 0
   gosub TASKFORAGELOOP
+  if (%foragesuccess != 1) then
+  {
+    put #echo Yellow >Log [Mags]: Failed to forage %forageitem!
+    gosub TASKMOVE
+    gosub TASKCANCEL
+    goto MAINLOOP
+  }
   gosub TASKMOVE
   var givingdone 0
   gosub AWAKE
   gosub TASKGIVELOOP
   goto TASKLOGIC
+  
 
+CUSTOMFORAGEROOMS:
+  if ("%forageitem" = "briarberry root") then
+  {
+    var foragezone 7
+    var forageroom 116
+  }
+  if ("%forageitem" = "honey comb") then
+  {
+    var foragezone 7
+    var forageroom 268
+  }
+  if ("%forageitem" = "tea leave") then
+  {
+    var foragezone 7
+    var forageroom 313
+  }
+  return
 
 COLLECTLOGIC:
   #put #echo Yellow Collectlogic
@@ -8914,7 +9040,7 @@ PRAYLOGIC:
 BADGELOGIC:
   if (("$guild" = "Cleric") || ("$guild" = "Paladin")) then
   {
-    if %t >= %nextbadge then
+    if (%t >= %nextbadge) then
     {
       gosub GETITEM %pilgrimbadgeitem
       if ((matchre ("$righthand", "%pilgrimbadgeitem")) || (matchre ("$lefthand", "%pilgrimbadgeitem"))) then
@@ -10931,8 +11057,6 @@ NONCOMBATLOOP:
       }
       var noncombatburgleactive 0
       gosub RELINVIS
-      #BURGLE_PAWN
-      if ("%burglepawn" = "YES") then gosub BURGLEPAWNLOGIC
       gosub NONCOMBATCHOOSE
     }
     if ("%currentnoncombat" = "perform") then
@@ -11015,7 +11139,7 @@ NONCOMBATMOVEMENT:
       gosub NEWTOWNPRESET crossing tradingsell
     } 
     #TRADING_TASKS
-    if ("%currentnoncombat" = "tradingtask") then
+    if ("%currentnoncombat" = "tradingtasks") then
     {
 			gosub NEWTOWNPRESET crossing tradingtask
     }
@@ -11654,14 +11778,14 @@ ROOMTRAVELUPKEEP:
   return
 
 ROOMTRAVEL:
-  #put #echo Yellow rtzone: %rtzone
-  #put #echo Yellow rttravel: %rttravel
-  #put #echo Yellow rttraveldest: %rttraveldest
-  #put #echo Yellow rtmove: %rtmove
-  #put #echo Yellow rtmovelist: %rtmovelist
-  #put #echo Yellow rttargetroom: %rttargetroom
-  #put #echo Yellow rtfindroom: %rtfindroom
-  #put #echo Yellow Here
+  put #echo Yellow rtzone: %rtzone
+  put #echo Yellow rttravel: %rttravel
+  put #echo Yellow rttraveldest: %rttraveldest
+  put #echo Yellow rtmove: %rtmove
+  put #echo Yellow rtmovelist: %rtmovelist
+  put #echo Yellow rttargetroom: %rttargetroom
+  put #echo Yellow rtfindroom: %rtfindroom
+  put #echo Yellow Here
   if (("$zoneid" = "1") && ("$roomid" = "388")) then
   {
     gosub MOVE 386

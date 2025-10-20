@@ -1,3 +1,18 @@
+10/19/25
+Updated Scripts: train, library, set
+Enormous changes to how the script chooses to move between areas.  End result - script is vastly more reliable in not getting stuck or lost.
+Added revenant conscripts, lipopods, and blood wolves to P1 hunting areas.
+Added fibrous clay slayers, clay slayers, and glazed clay slayers to P2 hunting areas.
+Added enraged tuskies to P5 hunting areas.
+Script can now recognize lodged shards from clay slayers and tend them out.
+New variable - TendObject.  This allows the script to tend lodged items out in one go.
+Added a fix in STOW functions to set a new default storage based on your Storage variable if one is not set.
+Improvements to Mags tasks.
+Improvements to burglepawn reporting and reliability.
+Added SAP to bufflist and added SAPSkill variable to choose what it buffs.
+
+
+
 07/16/25
 Updated Scripts: train, library
 Additional fixes for burgling envelopes, which need to be OPENed before being THROWn away.

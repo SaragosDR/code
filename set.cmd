@@ -145,6 +145,7 @@ SET:
       }
     }
     if tolower("%1") = "minmoney" then goto TEXTSET
+    if tolower("%1") = "minmoneytype" then goto TEXTSET
     if tolower("%1") = "exchange" then goto YESNOSET
     if tolower("%1") = "autopath" then
     {
@@ -775,6 +776,7 @@ SET:
         goto REGEND
       }
     }
+    if tolower("%1") = "sapcast" then goto TEXTSET
     if tolower("%1") = "osrelmeraud" then goto YESNOSET
     if tolower("%1") = "ommana" then goto TEXTSET
     if tolower("%1") = "ombuffnum" then goto 0THRU8SET
@@ -2201,6 +2203,7 @@ DISPLAYUPKEEP:
   gosub OUTPUT AUOnBoxes
   put #echo
 	gosub OUTPUT MinMoney
+	gosub OUTPUT MinMoneyType
 	gosub OUTPUT Exchange
 	gosub OUTPUT AutoPath (yes|no|premium)
 	gosub OUTPUT Repair
@@ -2495,10 +2498,14 @@ DISPLAYGUILD:
     }
     if $guild = "Cleric" then
     {
+      gosub OUTPUT DirtStacker DirtStackerItem
+      gosub OUTPUT Lighter LighterItem
+      gosub OUTPUT WaterContainer
+      echo
       gosub OUTPUT Theurgy
-      gosub OUTPUT Pray PrayDeity
       gosub OUTPUT AnloralPin AnloralPinItem
       gosub OUTPUT PilgrimBadge PilgrimBadgeitem
+      gosub OUTPUT Pray PrayDeity
       gosub OUTPUT MeraudCommune
       gosub OUTPUT ElunedCommune
       gosub OUTPUT TamsineCommune
@@ -2507,11 +2514,8 @@ DISPLAYGUILD:
       gosub OUTPUT PrayerMat PrayerMatItem
       gosub OUTPUT BlessDelay
       echo
-      gosub OUTPUT DirtStacker DirtStackerItem
-      gosub OUTPUT Lighter LighterItem
-      gosub OUTPUT WaterContainer
-      echo
       gosub OUTPUT HYHCast
+      gosub OUTPUT SAPCast
       echo
       gosub OUTPUT OsrelMeraud OMMana
       gosub OUTPUT OMBuffNum

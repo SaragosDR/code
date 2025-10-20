@@ -9,37 +9,61 @@ action var forageitem leaf when The firewood peddler Mags in The Crossing wants 
 
 action var quantity $1 when You need to turn in (\d*) more\.
 
+var badforagelist glaysker flower|briarberry root|coffee bean|almond|moss
+
 var storage $storage
 
-var badforagelist log|almond|moss|tea leaf|plovik leaf|green moss|lavender|sage
-var foragelist berries|branch|chamomile|hulnik grass|rose|seolarn weed|turnip
+var forageitem 0
+var foragezone 7
+var forageroom 556
+
 
 MAINLOOP:
-  gosub DEEPSLEEP
   gosub STOWALL
-  gosub TASKMOVE
-  gosub TASKASK
-  pause 1
+  var forageitem 0
+  gosub TASKFIND
+  if (%forageitem = 0) then
+  {
+    gosub DEEPSLEEP
+    gosub TASKMOVE
+    gosub TASKASK
+    pause 1
+  }
   if ("%forageitem" = "branche") then var forageitem branch
   if ("%forageitem" = "berrie") then var forageitem berries
-  if ("%forageitem" = "plovik leave") then var forageitem plovik leaf
-  if ("%forageitem" = "tea leave") then var forageitem tea leaf
-  put #echo Yellow Quantity: %quantity
-  put #echo Yellow Forageitem: %forageitem
+  if (matchre("%forageitem", "(\w+) branches")) then var forageitem $1 branch
+  if (matchre("%forageitem", "(\w+) leave")) then var forageitem $1 leaf
+
   if (matchre("%forageitem", "%badforagelist")) then
   {
+    #put #echo >Log [Mags]: Bad ForageItem: %forageitem
+    gosub TASKMOVE
     gosub TASKCANCEL
     goto MAINLOOP
   }
-  gosub MOVE ntr
-  gosub MOVE 314
+  put #echo Yellow Quantity: %quantity
+  put #echo Yellow Forageitem: %forageitem
+  put #echo >Log [Mags]: ForageItem: %forageitem
+  gosub CUSTOMFORAGEROOMS
+  if ("$zoneid" != "%foragezone") then
+  {
+    if ("%foragezone" = "1") then gosub TRAVEL crossing
+    if ("%foragezone" = "7") then gosub TRAVEL arthe
+  }
+  if ($roomid != %forageroom) then gosub MOVE %forageroom
   gosub AWAKE
   var heldquantity 0
+  var foragesuccess 0
   gosub TASKFORAGELOOP
+  if (%foragesuccess != 1) then
+  {
+    put #echo Yellow >Log [Mags]: Failed to forage %forageitem!
+    gosub TASKMOVE
+    gosub TASKCANCEL
+    goto MAINLOOP
+  }
   gosub TASKMOVE
   var givingdone 0
   gosub AWAKE
   gosub TASKGIVELOOP
   goto MAINLOOP
-
-

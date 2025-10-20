@@ -1,6 +1,6 @@
 var lastupdated 04/18/2025
 
-var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
+var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
 var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mapp|mpp|mf|pfe|pom|sl|sol|
 var abuffs |etf|nexus|rm|
 var cyctms |aban|ars|fr|gs|iz|pyre|rim|ros|sa|sls|usol|
@@ -8,7 +8,7 @@ var cycdbs |alb|dalu|dema|ee|hyh|shw|
 var cyclics |ac|ad|af|bes|botf|cs|eye|fae|ghs|gj|hodi|how|mg|mom|regenerate|rev|roc|rog|sanctuary|sov|tr|
 var allcyclics %cyclics-%cyctms-%cycdbs
 var rituals |absolution|aeg|all|ag|bc|bloodthorns|cos|dc|echo|eli|ev|mf|mof|mon|iots|mf|mon|pom|pop|rtr|soul|vos|will|word|
-var augmentation |ease|botf|drum|echo|ecry|fae|harm|mis|rage|soul|wotm|will|word|auspice|benediction|centering|gg|mapp|pom|rev|sap|sol|ad|ags|gol|mef|refresh|tranquility|vigor|art|aus|cv|iots|mt|sco|seer|shadows|ts|tv|bue|emc|ivm|ks|obfuscation|php|rei|rpu|clarity|crc|dig|hes|mo|rw|sr|tr|athleticism|bes|cs|cotc|em|hol|inst|oath|pls|stw|sott|sks|sk|wotp|ws|ava|blur|enrichment|fin|lgv|meg|phk|turi|aeg|mof|substratum|suf|sw|tw|ys|
+var augmentation |ease|botf|drum|echo|ecry|fae|harm|mis|rage|soul|wotm|will|word|auspice|benediction|centering|gg|mapp|pom|rev|sap|sol|ad|ags|gol|mef|refresh|tranquility|vigor|art|aus|cv|iots|mt|sap|sco|seer|shadows|ts|tv|bue|emc|ivm|ks|obfuscation|php|rei|rpu|clarity|crc|dig|hes|mo|rw|sr|tr|athleticism|bes|cs|cotc|em|hol|inst|oath|pls|stw|sott|sks|sk|wotp|ws|ava|blur|enrichment|fin|lgv|meg|phk|turi|aeg|mof|substratum|suf|sw|tw|ys|
 var debilitation |burden|dispel|aewo|alb|dalu|dmrs|dema|coz|halo|hulp|hyh|it|malediction|mc|ps|sb|sick|spit|compel|lethargy|nb|calm|dazzle|mb|ms|rend|set|shw|sleep|sod|tf|tv|hp|pv|rof|vs|vod|halt|shatter|sf|cotw|df|de|griz|hb|swarm|flu|anc|al|ee|frostbite|ip|moa|tc|ti|trem|vertigo|wb|
 var targetedmagic |stra|bonegrinder|sif|aban|bos|btn|pyre|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sts|
 var utility |gaf|imbue|sec|alb|aot|care|eye|hodi|nexus|resonance|sanctuary|all|bf|bless|ef|it|mre|mf|om|rejuv|rezz|rev|sol|uncurse|vigil|absolution|ad|awaken|bs|cos|cd|ev|fp|foc|gs|heal|hs|hw|hl|innocence|rp|regenerate|vh|bc|contingency|dc|dg|fm|locate|moonblade|mg|pg|rtr|rf|rend|rs|seer|shm|ss|shadowling|sm|sov|tf|teleport|th|unleash|bb|cfb|cfw|cf|devour|eotb|nr|qe|resection|roc|rof|rog|ag|as|bot|ba|crc|da|hoj|how|rue|tr|vos|af|bes|blend|compost|em|mon|sks|nou|rega|stc|ab|etf|foi|ignite|rm|zephyr|
@@ -21,7 +21,7 @@ var transnecro |ivm|ks|bue|worm|ch|php|
 var aimweapons bow|xbow|sling
 var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|field|plane|planes|road|spell|symbiosis strengthen|symbiosis endure|symbiosis avoid|symbiosis spring|symbiosis remember|symbiosis resolve|symbiosis impress|symbiosis discern|symbiosis explore|symbiosis watch|symbiosis harvest|symbiosis heal|symbiosis learn|symbiosis examine|symbiosis perform|symbiosis cast|symbiosis harness|symbiosis activate
 
-var combatpresetp1 p1-shiprats|p1-louts|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-guardians|p1-giantbears|p1-onyxgargoyles|p1-emberbulls|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
+var combatpresetp1 p1-shiprats|p1-louts|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-revenantconscripts|p1-lipopods|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-bloodwolves|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-guardians|p1-giantbears|p1-onyxgargoyles|p1-emberbulls|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
 var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-gryphonsbaby|p2-gryphonsyoung|p2-seordmaors|p2-fibrousslayers|p2-clayslayers|p2-glazedslayers
 var combatpresetp3 p3-snippets|p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-sylphs|p3-quartzgargoyles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-windbags|p3-windbags2|p3-frostcrones|p3-prerenielder|p3-gryphons|p3-beltunumshi|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-malchata|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-icearchons|p3-adanfsorcs|p3-adanfblades
 var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p4-merkreshcelpeze4|p4-armadillosjuve|p4-armadillosadult|p4-armadilloselder
@@ -50,6 +50,8 @@ action (combo) var barbmane $unixtime; math barbmane subtract 30; put #var %mane
 action (combo) var failtest $unixtime; math failtest subtract 80; put #var %manenamelast %failtest; send #echo Yellow ACM is still on cooldown! when You must rest a bit longer before attempting that maneuver again\.
 action (combo) off
 
+var badforagelist glaysker flower|briarberry root|coffee bean|almond|green moss|rosewood limb
+#var badforagelist almond|glaysker flower|coffee bean|green moss|jasmine blossom|eghmok moss|plovik leaf|briarberry root|rosewood limb
 goto LIBEND
 
 
@@ -228,6 +230,7 @@ VARCHECKS:
   if !matchre("$auonboxes", "\b(YES|NO)\b") then put #var auonboxes NO
   if $minmoney >= 0 then
   else put #var minmoney 2
+  if !matchre("$minmoney", "\b(platinum|gold|silver)\b") then put #var minmoneytype platinum
   if !matchre("$exchange", "\b(YES|NO)\b") then put #var exchange YES
   if !matchre("$autopath", "\b(YES|NO|PREMIUM)\b") then put #var autopath YES
   if !matchre("$repair", "\b(YES|NO)\b") then put #var repair YES
@@ -825,6 +828,7 @@ VARCHECKS:
   if !matchre("$prayermat", "\b(YES|NO)\b") then put #var prayermat NO
   if !def(prayermatitem) then put #var prayermatitem mat
   if !matchre("$hyhcast", "\b(coz|male|male offense|male defense)\b") then put #var hyhcast male
+  if !matchre("$sapcast", "\b(augmentation|utility|warding|debilitation)\b") then put #var sapcast augmentation
   if !matchre("$osrelmeraud", "\b(YES|NO)\b") then put #var osrelmeraud NO
   if $ommana >= 30 then
   else put #var ommana 30
@@ -4124,7 +4128,11 @@ BURGLERECALL:
   matchwait
 
 BURGLERECALLGOOD:
-  if (($Athletics.Ranks >= 1750) && ($Locksmithing.Ranks >= 1750) && ($Thievery.Ranks >= 1750) && ($Stealth.Ranks >= 1750)) then var burgleready 0
+  if ("%scriptmode" != "4") then
+  {
+    if (($Athletics.Ranks >= 1750) && ($Locksmithing.Ranks >= 1750) && ($Thievery.Ranks >= 1750) && ($Stealth.Ranks >= 1750)) then var burgleready 0
+    else var burgleready 1
+  }
   else var burgleready 1
   return
 
@@ -4644,7 +4652,7 @@ PUTITEMP:
 PUTITEMMAIN:
 	matchre PUTITEMP %waitstring
 	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.|That is far too hot to touch\!|As you attempt to place your
-	matchre PUTRETURN You put|You drop|You briefly twist the top off of|Raffle Attendant Tizzeg examines your ticket and exclaims|A bored-looking Human boy says
+	matchre PUTRETURN You put|You drop|You briefly twist the top off of|Raffle Attendant Tizzeg examines your ticket and exclaims|A bored-looking Human boy says|You briefly twist the top off of your
 	match PUTITEMSTOW There's no room in the
 	match RETURN That's too heavy to go in there!
 	matchre RETURN You just can't get the .* to fit in the .*\, no matter how you arrange it\.
@@ -7842,7 +7850,7 @@ CAST:
   {
     if $SpellTimer.AegisofGranite.active = 1 then gosub RELNSPELL aeg
   }
-  if %spellprepping = "sap" then var casttarget augmentation
+  if %spellprepping = "sap" then var casttarget %sapcast
   if %spellprepping = "bless" then
   {
     if ("$righthandnoun" = "wine") then var casttarget wine
@@ -9764,15 +9772,18 @@ GEMPOUCHFULL:
 
 
 GWETHGET:
-  if matchre ("$roomobjs", "\b(%gweths)\b(,|\.| and)") then
+  if matchre ("$roomobjs", "\b(%goodgweths)\b(,|\.| and)") then
   {
-    if %savegwethstones = "YES" then
+    if ("%savegwethstones" = "YES") then
     {
-      gosub GETITEM stones
+      if matchre ("$roomobjs", "\bwaermodi stones\b") then var stoneget waermodi stones
+      if matchre ("$roomobjs", "\bjadeite stones\b") then var stoneget jadeite stones
+      if matchre ("$roomobjs", "\bkyanite stones\b") then var stoneget kyanite stones
+      gosub GETITEM %stoneget
       if %lootalerts = "YES" then put #echo %alertwindow Yellow [Treasure]: Found a gweth stone!
       gosub PUTITEM my stones in my %storage
     }
-    if (matchre ("$roomobjs", "\b(%gweths)\b(,|\.| and)")) then goto GWETHGET
+    if (matchre ("$roomobjs", "\b(%goodgweths)\b")) then goto GWETHGET
   }
   return
 
@@ -10863,7 +10874,9 @@ TASKFINDP:
 TASKFIND:
   matchre TASKFINDP %waitstring
   match RETURN You look in your task journal and see the following entry:
+  match RETURN A good positive attitude never hurts.
   put task
+  put yes
   matchwait 5
   var timeoutsub TASKFIND
   var timeoutcommand task
@@ -10871,7 +10884,7 @@ TASKFIND:
 	
 	
 TASKMOVE:
-  if ($zoneid != 1) then gosub TRAVEL crossing
+  if ("$zoneid" != "1") then gosub TRAVEL crossing
   if (!matchre("$roomobjs" "Mags")) then gosub MOVE mags
   return
   
@@ -10882,9 +10895,11 @@ TASKBAD:
   
 TASKFORAGELOOP:
   if (%heldquantity >= %quantity) then return
-  gosub FORAGE %forageitem
+  gosub TASKFORAGE %forageitem
+  if (%foragesuccess < -5) then return
   if (matchre ("$righthand", "%forageitem")) then
   {
+    var foragesuccess 1
     gosub STOW right
     math heldquantity add 1
   }
@@ -10912,6 +10927,42 @@ TASKGIVEMAGS:
 TASKGIVEGOOD:
   var givingdone 1
   return
+
+
+TASKFORAGEP:
+	pause
+TASKFORAGE:
+	matchre TASKFORAGEP %waitstring
+	match RETURN You manage to find
+	match TASKFORAGEFULL You really need to have at least one hand free to forage properly.
+	match TASKFORAGEDUMP The room is too cluttered to find anything here!
+	match TASKFORAGEBAD Roundtime:
+	put forage %forageitem
+	matchwait
+
+TASKFORAGEBAD:
+  if (%foragesuccess <= 0) then math foragesuccess subtract 1
+  put #echo Yellow foragesuccess: %foragesuccess
+  if (%foragesuccess < -5) then return
+  goto TASKFORAGE
+
+TASKFORAGEFULL:
+  if matchre ("$righthand", "%braidtarget") then
+  else
+  {
+    gosub STOW right
+  }
+  if matchre ("$lefthand", "%braidtarget") then
+  else
+  {
+    gosub STOW left
+  }
+  goto TASKFORAGE
+  
+TASKFORAGEDUMP:
+  gosub DUMPJUNK
+  pause 20
+  goto TASKFORAGE
 
 
 #####WM_SUBS#####
