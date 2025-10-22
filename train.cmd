@@ -419,11 +419,11 @@ ALERTINIT:
   ##AWARENESS_TRIGGERS##
   if ((%speechalerts = "YES") && (tolower("%scriptmodename") != "combat")) then
   { 
-    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,|The apprentice repairman looks over|A youthful attendant hands you some bundling rope and says,|You hand the apprentice repairman|The apprentice repairman smiles and says|You throw your head back and howl,
+    var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,|The apprentice repairman looks over|A youthful attendant hands you some bundling rope and says,|You hand the apprentice repairman|The apprentice repairman smiles and says|The horse-drawn carriage's driver shouts|Mags calls out,|Aelik scowls and says,|Cormyn scowls and says,
     var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
-    var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "|The shadowling exclaims,
+    var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "|The shadowling exclaims,|You throw your head back and howl,
     var hespeech A voice on the wind whispers|A pair of Merelew guards assist you into the water|The libik (?:shouts|yells),|The seedy monger looks up to you and|The Monger's voice booms out,|The Monger's booming voice comes from the booth,|One of the attendants glances at you and says,|One of the monger's assistants addresses you, saying,|^An attendant in an otter costume exclaims|\w+ chants, "C'mon! I feel the luck of Eluned smiling on you all!
     var artspeech Painted with lush color and housed in a polished rectangle of walnut|A single crystal rose sits perfectly balanced upon the point|Fiendish lacerations exposing bare bone and dripping blood|Standing resolute in the face of an advancing horde of undead|The bright frame illuminates the rich color of the dark scene|Gracefully composed, the artwork features bold black strokes and pale watercolors|The sculpture itself is made from a single piece of gnarled copperwood|The kneeling figure of the chained man sits the height|Careful use of shading diverts your eyes away from the|At first glance, the piece appears dark and featureless|Rendered in dark bronze and rising three feet tall|Rich, polished mahogany frames this exquisite work of art|About the size of a Gor'Tog's skull, this smooth orb rests on an ornate|The panel is a worked slab of fine-grained pink sandstone standing four hands tall|Framed in a magnificent rectangle of rich mahogany, the bright bedroom|Framed in a square of goldenoak, the picture is presented against a backdrop of black velvet|As you take a look at this unique display, the first thing you notice|This display features a drape of black velvet overhead to protect
     var speechwhitelist %generalspeech|%craftingspeech|%ferryspeech|%monsterspeech|%spellspeech|%hespeech|%artspeech
@@ -1316,7 +1316,7 @@ CLERICONLY:
   var anloralpin $anloralpin
   var anloralpinitem $anloralpinitem    
   var pilgrimbadge $pilgrimbadge
-  var pilgrimbadgeitem $pilgrimbadgeitem
+  var pilgrimbadgeworn $pilgrimbadgeworn
   var prayermat $prayermat
   var prayermatitem $prayermatitem
   var dirtstacker $dirtstacker
@@ -1343,6 +1343,7 @@ CLERICONLY:
   gosub OMSPELLVARSLOOP
   
   #CLERIC_TRIGGERS
+  action (cleric) var mercomup 0; var tamcomup 0 when You are not a vessel for the gods at present.
   action (cleric) var mercomup 1 when The power of Meraud is channeling through the area.
   action (cleric) var mercomup 1 when The area is being favored by Meraud.
   action (cleric) var mercomup 1 when Meraud's benevolent eyes are upon the area.
@@ -1366,7 +1367,7 @@ CLERICONLY:
   action (cleric) var tamcomup 1 when The miracle of Tamsine has manifested about you.
   action (cleric) var tamcomup 1 when You feel warmth spread throughout your body
 
-  action (cleric) var mercomup 0; var tamcomup 0 when You are not a vessel for the gods at present.
+  
   action (cleric) var commgood 1 when You feel fully prepared to seek assistance from the Immortals once again.
   action (cleric) var commgood 1 when You are eager to better understand your relationship with the Immortals.
   action (cleric) var meraudgood 0 when Meraud's power still holds your attention.
@@ -1551,7 +1552,7 @@ PALADINONLY:
   var anloralpin $anloralpin
   var anloralpinitem $anloralpinitem    
   var pilgrimbadge $pilgrimbadge
-  var pilgrimbadgeitem $pilgrimbadgeitem
+  var pilgrimbadgeworn $pilgrimbadgeworn
   var watercontainer $watercontainer
   return
 
@@ -4433,7 +4434,7 @@ COMBATLOOP:
       if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
     }
     #PILGRIMBADGE
-    if %pilgrimbadge = YES then
+    if ("%pilgrimbadge" = "YES") then
     {
       gosub BADGELOGIC
       gosub STATUSCHECK
@@ -7849,6 +7850,7 @@ BURGLEPAWN:
   
 BURGLEEND:
 	if ("$guild" = "Thief") then gosub BURGLEKHRISTOP
+	if ($invisible = 1) then gosub RELINVIS
   if (%justice != 1) then
   {
     put #echo %alertwindow [Burgle]: Unable to burgle, not in a justice zone.
@@ -8526,11 +8528,6 @@ CUSTOMFORAGEROOMS:
     var foragezone 7
     var forageroom 116
   }
-  if ("%forageitem" = "honey comb") then
-  {
-    var foragezone 7
-    var forageroom 268
-  }
   if ("%forageitem" = "tea leaf") then
   {
     var foragezone 7
@@ -8995,7 +8992,7 @@ DEVOTIONLOGIC:
       gosub STATUSCHECK
     }
     #PILGRIMBADGE
-    if %pilgrimbadge = YES then
+    if ("%pilgrimbadge" = "YES") then
     {
       gosub BADGELOGIC
       gosub STATUSCHECK
@@ -9047,14 +9044,16 @@ BADGELOGIC:
   {
     if (%t >= %nextbadge) then
     {
-      gosub GETITEM %pilgrimbadgeitem
-      if ((matchre ("$righthand", "%pilgrimbadgeitem")) || (matchre ("$lefthand", "%pilgrimbadgeitem"))) then
+      if ("%pilgrimbadgeworn" != "YES") then gosub GETITEM pilgrim's badge
+      else gosub REMITEM pilgrim's badge
+      if ((matchre ("$righthand", "pilgrim's badge")) || (matchre ("$lefthand", "pilgrim's badge"))) then
       {
         gosub PRAYBADGE
-        gosub STOWITEM %pilgrimbadgeitem
+        if ("%pilgrimbadgeworn" != "YES") then gosub STOWITEM pilgrim's badge
+        else gosub WEARITEM pilgrim's badge
         var nextbadge %t
-        if "$guild" = "Paladin" then math nextbadge add 1900
-        if "$guild" = "Cleric" then math nextbadge add 3660
+        if ("$guild" = "Paladin") then math nextbadge add 1900
+        if ("$guild" = "Cleric") then math nextbadge add 3660
         put #echo %alertwindow Used pilgrim badge.
       }
     }
@@ -11877,11 +11876,11 @@ FINDROOMLOGIC:
       var roomplayers $roomplayers
       gosub RPLAYERSCRUB
       var findcounter 0
-      eval findwhitenum count("%frwhitelist", "|")
+      eval findwhitenum count("%whitelist", "|")
       eval rplayernum count("%roomplayers", "|")
       #TURNING_TO_LOWERCASE
       eval roomplayers tolower("%roomplayers")
-      eval findwhitelist tolower("%frwhitelist")
+      eval findwhitelist tolower("%whitelist")
       gosub FINDPLAYERSORT
       eval roomplayerslength length("%roomplayers")
       if %roomplayerslength = 0 then
@@ -11968,15 +11967,15 @@ FINDROOMLOOP:
     gosub RPLAYERSCRUB
     #echo post-scrub roomplayers: %roomplayers
     var findcounter 0
-    eval findwhitenum count("%frwhitelist", "|")
+    eval findwhitenum count("%whitelist", "|")
     eval rplayernum count("%roomplayers", "|")
     #TURNING_TO_LOWERCASE
     eval roomplayers tolower("%roomplayers")
-    eval findwhitelist tolower("%frwhitelist")
+    eval findwhitelist tolower("%whitelist")
     gosub FINDPLAYERSORT
     eval roomplayerslength length("%roomplayers")
-    eval frblacklist tolower("%frblacklist")
-    if matchre("%roomplayers", "%frblacklist") then
+    eval blacklist tolower("%blacklist")
+    if matchre("%roomplayers", "%blacklist") then
     {
       if %findroomcount = 0 then var froomblack 1
       else var froomblack %froomblack|1
