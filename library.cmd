@@ -2,7 +2,7 @@ var lastupdated 04/18/2025
 
 var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
 var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mapp|mpp|mf|pfe|pom|sl|sol|
-var abuffs |etf|nexus|rm|
+var abuffs |etf|nexus|rm|zephyr
 var cyctms |aban|ars|fr|gs|iz|pyre|rim|ros|sa|sls|usol|
 var cycdbs |alb|dalu|dema|ee|hyh|shw|
 var cyclics |ac|ad|af|bes|botf|cs|eye|fae|ghs|gj|hodi|how|mg|mom|regenerate|rev|roc|rog|sanctuary|sov|tr|
@@ -812,7 +812,7 @@ VARCHECKS:
   if !matchre("$anloralpin", "\b(YES|NO)\b") then put #var anloralpin NO
   if !def(anloralpinitem) then put #var anloralpinitem pin
   if !matchre("$pilgrimbadge", "\b(YES|NO)\b") then put #var pilgrimbadge NO
-  if !def(pilgrimbadgeitem) then put #var pilgrimbadgeitem badge
+  if !matchre("$pilgrimbadgeworn", "\b(YES|NO)\b") then put #var pilgrimbadgeworn NO
   if !matchre("$meraudcommune", "\b(YES|NO)\b") then put #var meraudcommune NO
   if !matchre("$elunedcommune", "\b(YES|NO)\b") then put #var elunedcommune NO
   if !matchre("$tamsinecommune", "\b(YES|NO)\b") then put #var tamsinecommune NO
@@ -822,8 +822,11 @@ VARCHECKS:
   if !def(dirtstackeritem) then put #var dirtstackeritem pouch
   if !matchre("$lighter", "\b(YES|NO)\b") then put #var lighter NO
   if !def(lighteritem) then put #var lighteritem dragon
+  if !matchre("$flint", "\b(YES|NO)\b") then put #var flint NO
+  if !def(steelitem) then put #var steelitem carving knife
   if !def(watercontainer) then put #var watercontainer chalice
   if !matchre("$recite", "\b(YES|NO)\b") then put #var recite NO
+  if !def(recitation) then put #var recitation Meraud, I give you your due with my passion and magic,\;Everild, I pay you tribute with the swing of my blade,\;As I brave the trials of Eluned's seas.\;Faenella, I shall ever be tempered in your flames,\;Forged and reforged and reforged again,\;Until, one day, I am given Urrem'tier's mercy.\;Lend me your strength, and I shall show you mine.
   if !matchre("$dance", "\b(YES|NO)\b") then put #var dance NO
   if !matchre("$prayermat", "\b(YES|NO)\b") then put #var prayermat NO
   if !def(prayermatitem) then put #var prayermatitem mat
@@ -9477,6 +9480,7 @@ DISSECT:
   match DISSECTSTOW You need at least one free hand for that!
   match DISSECTBADU That'd be a waste of time.  The rotted remains of the unliving are a poor study of how a body functions when alive.
   match DISSECTBAD You do not yet possess the knowledge required to perform this task.
+  match RETURN While likely a fascinating study, the pile of rubble would not be useful to your understanding of First Aid.
   put dissect
   matchwait 5
 	var timeoutsub DISSECT
@@ -12831,7 +12835,7 @@ COMMSENSEP:
   pause
 COMMSENSE:
   var mercomup 0
-  var tamcomup
+  var tamcomup 0
   var tamsinegood 1
   var meraudgood 1
   var elunedgood 1
@@ -12840,11 +12844,38 @@ COMMSENSE:
   put commune sense
   matchwait
 
+COMMUNEBASICP:
+  pause
+COMMUNEBASIC:
+  matchre COMMUNEBASICP %waitstring
+  match RETURN You feel unclean and unworthy.
+  match RETURN You close your eyes and start to concentrate. In a moment a vision appears of a barren garden, parched and thirsting for nourishment. You have an intense desire to tend it.
+  match RETURN You call out to your god, but there is no answer.
+  match RETURN After a moment, you sense that your god is barely aware of you.
+  match RETURN After a moment, you sense that your efforts have not gone unnoticed.
+  match RETURN After a moment, you sense a distinct link between you and your god.
+  match RETURN After a moment, you sense that your god is aware of your devotion.
+  match RETURN After a moment, you sense that your god knows your name.
+  match RETURN After a moment, you sense that your god is pleased with your devotion
+  match RETURN After a moment, you see a vision of your god, though the visage is cloudy and impossible to make out clearly.
+  match RETURN After a moment, you sense a slight pressure on your shoulder, leaving the feeling that your efforts have been acknowledged.
+  match RETURN After a moment, you see a silent vision of your god, radiating forth with a powerful divine brilliance.
+  match RETURN After a moment, you see a vision of your god who calls to you by name, "Come here, my child, and I will show you things of wonder."
+  match RETURN After a moment, you see a vision of your god who calls to you by name, "My child, though you may not always see my face, I am pleased with thee and thy efforts."
+  match RETURN After a moment, you see a crystal-clear vision of your god who speaks slowly and deliberately,
+  match RETURN After a moment, you feel a clear presence like a warm blanket covering you beneath the shade of a giant Sana'ati tree.
+  match COMMUNEBASIC You feel warmth spread throughout your body, making the very ends of your hair tingle. A vibrant blue nimbus encloses you before fading away.
+  put commune
+  matchwait 5
+  var timeoutsub COMMUNEBASIC
+  var timeoutcommand commune
+  goto TIMEOUT
+
 COMMUNEP:
   pause
 COMMUNE:
   matchre COMMUNEP %waitstring
-  match COMMUNEBAD You stop as you realize that you have attempted a commune too recently in the past.
+  matchre COMMUNEBAD You stop as you realize that you have attempted a commune too recently in the past.|You struggle to commune, but feel somehow too hollow to channel Eluned's waters.
   matchre RETURN Roundtime|You grind some dirt in your fist|You feel warmth spread throughout your body|As you commune you sense that the ground is already consecrated\.
   put commune %commune
   matchwait
@@ -12922,29 +12953,41 @@ DRAGONLIGHT:
   matchre RETURN You quickly flick
   put point %lighteritem at incense
   matchwait
-
-WAVEINCP:
+  
+  
+FLINTLIGHT:
+  var lighttarget $0
+  goto FLINTLIGHTMAIN
+FLINTLIGHTP:
   pause
-WAVEINC:
-  matchre WAVEINCP %waitstring
+FLINTLIGHTMAIN:
+  matchre FLINTLIGHTP %waitstring
+  matchre FLINTLIGHTRETURN Roundtime
+  matchre RETURN But the .* is already lit.
+  put light %lighttarget with my flint
+  matchwait 5
+  var timeoutsub FLINTLIGHT
+  var timeoutcommand light %lighttarget with my flint
+  goto TIMEOUT
+
+FLINTLIGHTRETURN:
+  gosub STOWITEM %steelitem
+  return
+
+
+WAVEINCENSE:
+  var wavetarget $0
+  goto WAVEINCENSEMAIN
+WAVEINCENSEP:
+  pause
+WAVEINCENSEMAIN:
+  matchre WAVEINCENSEP %waitstring
   matchre RETURN I do not understand what you mean.|You wave your|You wave some
   put wave incense at %wavetarget
-  matchwait
-  
-SPRINKLEP:
-  pause
-SPRINKLE:
-  var goodsprinkle 1
-  matchre SPRINKLEP %waitstring
-  matchre RETURN I do not understand what you mean.|You sprinkle
-  match SPRINKLEBAD Sprinkle that?  I don't think so.
-  match RETURN USAGE: SPRINKLE (item) on (person|creature|item|ROOM)
-  put sprinkle %sprinkleitem on %sprinkletarget
-  matchwait
-
-SPRINKLEBAD:
-  var goodsprinkle 0
-  return
+  matchwait 5
+  var timeoutsub WAVEINCENSE
+  var timeoutcommand wave incense at %wavetarget
+  goto TIMEOUT
 
 SNUFFINCP:
   pause
@@ -12954,6 +12997,40 @@ SNUFFINC:
   put snuff incense
   matchwait
 
+ 
+SPRINKLEP:
+  pause
+SPRINKLE:
+  var goodsprinkle 1
+  matchre SPRINKLEP %waitstring
+  matchre RETURN I do not understand what you mean.|You sprinkle
+  match SPRINKLEBAD Sprinkle that?  I don't think so.
+  match RETURN USAGE: SPRINKLE (item) on (person|creature|item|ROOM)
+  put sprinkle %sprinkleitem on %sprinkletarget
+  matchwait 5
+  var timeoutsub SPRINKLE
+  var timeoutcommand sprinkle %sprinkleitem on %sprinkletarget
+  goto TIMEOUT
+
+SPRINKLEBAD:
+  var goodsprinkle 0
+  return
+  
+
+DANCELOGIC:
+  var dancetest $lastdance
+  math dancetest add 610
+  if ($unixtime >= %dancetest) then
+  {
+    if %mercomup = 1 then
+    {
+      var dancetarget
+      gosub DANCE
+      put #var lastdance $unixtime
+    }
+  }
+  return
+
 DANCEP:
   pause
 DANCE:
@@ -12962,10 +13039,51 @@ DANCE:
   matchre RETURN Your dance reaches its conclusion|In your condition?|USAGE: DANCE
   #|You feel that your gods have smiled
   put dance %dancetarget
-  matchwait
+  matchwait 5
+  var timeoutsub DANCE
+  var timeoutcommand dance %dancetarget
+  goto TIMEOUT
+
+
+RECITELOGIC:
+  var recitetest $lastrecite
+  math recitetest add 610
+  if ($unixtime >= %recitetest) then
+  {
+    #echo mercomup: %mercomup
+    if (%mercomup = 1) then
+    {
+      gosub RECITE
+      put #var lastrecite $unixtime
+    }
+  }
+  return
 
 RECITE:
   put recite %recitation
+  return
+
+
+BADGELOGIC:
+  if (("$guild" = "Cleric") || ("$guild" = "Paladin")) then
+  {
+    var badgetest $lastpilgrimbadge
+    if ("$guild" = "Paladin") then math badgetest add 1900
+    if ("$guild" = "Cleric") then math badgetest add 3660
+    if ($unixtime >= %badgetest) then
+    {
+      if ("%pilgrimbadgeworn" != "YES") then gosub GETITEM pilgrim's badge
+      else gosub REMITEM pilgrim's badge
+      if ((matchre ("$righthand", "pilgrim's badge")) || (matchre ("$lefthand", "pilgrim's badge"))) then
+      {
+        gosub PRAYBADGE
+        if ("%pilgrimbadgeworn" != "YES") then gosub STOWITEM pilgrim's badge
+        else gosub WEARITEM pilgrim's badge
+        put #var lastpilgrimbadge $unixtime
+        put #echo %alertwindow Used pilgrim badge.
+      }
+    }
+  }
   return
 
 PRAYBADGEP:
@@ -12973,8 +13091,19 @@ PRAYBADGEP:
 PRAYBADGE:
   matchre PRAYBADGEP %waitstring
   match RETURN Roundtime:
-  put pray %pilgrimbadgeitem
+  put pray pilgrim's badge
   matchwait
+
+
+PRAYLOGIC:
+  var praytest $lastpray
+  math praytest add 610
+  if ($unixtime >= %praytest) then
+  {
+    gosub PRAYGOD
+    put #var lastpray $unixtime
+  }
+  return
 
 PRAYGODP:
   pause
@@ -12983,6 +13112,7 @@ PRAYGOD:
   matchre RETURN You glance heavenward|You throw your head back and howl|Praying for|You raise your hands lightly|Bristling up against a sudden sense of evil|You slowly square your shoulders|You tap the center of your forehead|You whisper your prayer into the wind|With a pat you double-check|Quietly touching your lip|You mutter a prayer to|You grumble ominously|Aligning your thoughts with the song of the inner earth|You offer a prayer to
   put pray %praydeity
   matchwait
+
 
 LOOKPINP:
   pause

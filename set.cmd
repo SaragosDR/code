@@ -747,15 +747,27 @@ SET:
     if tolower("%1") = "anloralpin" then goto YESNOSET
     if tolower("%1") = "anloralpinitem" then goto TEXTSET
     if tolower("%1") = "pilgrimbadge" then goto YESNOSET
-    if tolower("%1") = "pilgrimbadgeitem" then goto TEXTSET
+    if tolower("%1") = "pilgrimbadgeworn" then goto YESNOSET
     if tolower("%1") = "prayermat" then goto YESNOSET
     if tolower("%1") = "prayermatitem" then goto TEXTSET
     if tolower("%1") = "dirtstacker" then goto YESNOSET
     if tolower("%1") = "dirtstackeritem" then goto TEXTSET
     if tolower("%1") = "lighter" then goto YESNOSET
     if tolower("%1") = "lighteritem" then goto TEXTSET
+    if tolower("%1") = "flint" then goto YESNOSET
+    if tolower("%1") = "steelitem" then goto TEXTSET
     if tolower("%1") = "watercontainer" then goto TEXTSET
     if tolower("%1") = "recite" then goto YESNOSET
+    if tolower("%1") = "recitation" then gosub TEXTSET
+    #{
+    #  eval setvar tolower(%1)
+    #  gosub TEXTSETTRIM
+    #  if ((%"input" = "2he") || ("%input" = "2HE")) then var input "2he"
+    #  else eval input1 tolower(%input)
+    #  put #var %setvar %input
+    #  put #var save
+    #  goto VARDISPLAY
+    #}
     if tolower("%1") = "dance" then goto YESNOSET
     if tolower("%1") = "blessdelay" then goto TEXTSET
     if tolower("%1") = "hyhcast" then
@@ -2500,19 +2512,22 @@ DISPLAYGUILD:
     {
       gosub OUTPUT DirtStacker DirtStackerItem
       gosub OUTPUT Lighter LighterItem
+      gosub OUTPUT Flint SteelItem
       gosub OUTPUT WaterContainer
       echo
       gosub OUTPUT Theurgy
-      gosub OUTPUT AnloralPin AnloralPinItem
-      gosub OUTPUT PilgrimBadge PilgrimBadgeitem
       gosub OUTPUT Pray PrayDeity
-      gosub OUTPUT MeraudCommune
-      gosub OUTPUT ElunedCommune
-      gosub OUTPUT TamsineCommune
-      gosub OUTPUT Recite
+      gosub OUTPUT Recite Recitation
       gosub OUTPUT Dance
       gosub OUTPUT PrayerMat PrayerMatItem
       gosub OUTPUT BlessDelay
+      
+      gosub OUTPUT AnloralPin AnloralPinItem
+      gosub OUTPUT PilgrimBadge PilgrimBadgeWorn
+      
+      gosub OUTPUT MeraudCommune
+      gosub OUTPUT ElunedCommune
+      gosub OUTPUT TamsineCommune
       echo
       gosub OUTPUT HYHCast
       gosub OUTPUT SAPCast
@@ -2576,7 +2591,7 @@ DISPLAYGUILD:
       gosub OUTPUT Smite
       gosub OUTPUT Tithe
       gosub OUTPUT PilgrimBadge
-      gosub OUTPUT PilgrimBadgeitem
+      gosub OUTPUT PilgrimBadgeWorn
       gosub OUTPUT AnloralPin
       gosub OUTPUT AnloralPinItem
       gosub OUTPUT WaterContainer

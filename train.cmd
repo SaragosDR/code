@@ -6,7 +6,7 @@
 
 include library.cmd
 include craftlibrary.cmd
-include custom.cmd
+#include custom.cmd
 
 #ScriptMode -1 = Help
 #ScriptMode 0 = NonCombat
@@ -1158,7 +1158,7 @@ COMMANDVARLOAD:
     var auonburden NO
     var alertsonly 1
   }
-  gosub CUSTOMSETS
+  #gosub CUSTOMSETS
   return
 
 
@@ -1313,6 +1313,7 @@ CLERICONLY:
   var tamsinecommune $tamsinecommune
   var dance $dance
   var recite $recite
+  var recitation $recitation
   var anloralpin $anloralpin
   var anloralpinitem $anloralpinitem    
   var pilgrimbadge $pilgrimbadge
@@ -1323,6 +1324,8 @@ CLERICONLY:
   var dirtstackeritem $dirtstackeritem
   var lighter $lighter
   var lighteritem $lighteritem
+  var flint $flint
+  var steelitem $steelitem
   var watercontainer $watercontainer
   var blessdelay $blessdelay
   var hyhcast $hyhcast
@@ -1340,6 +1343,7 @@ CLERICONLY:
   var ombuff7 $ombuff7
   var ombuff8 $ombuff8
   var spellvarscount 0
+  var devotion -1
   gosub OMSPELLVARSLOOP
   
   #CLERIC_TRIGGERS
@@ -1376,6 +1380,24 @@ CLERICONLY:
 
   action (cleric) var nextcommsense 0 when You sense your connection to the area you consecrated earlier fade away.
   action (cleric) var nextcommsense 0 when The holy presence in the area fades quietly away.
+
+  action (cleric) var devotion 0 when You feel unclean and unworthy.
+  action (cleric) var devotion 1 when You close your eyes and start to concentrate. In a moment a vision appears of a barren garden, parched and thirsting for nourishment. You have an intense desire to tend it.
+  action (cleric) var devotion 2 when You call out to your god, but there is no answer.
+  action (cleric) var devotion 3 when After a moment, you sense that your god is barely aware of you.
+  action (cleric) var devotion 4 when After a moment, you sense that your efforts have not gone unnoticed.
+  action (cleric) var devotion 5 when After a moment, you sense a distinct link between you and your god.
+  action (cleric) var devotion 6 when After a moment, you sense that your god is aware of your devotion.
+  action (cleric) var devotion 7 when After a moment, you sense that your god knows your name.
+  action (cleric) var devotion 8 when After a moment, you sense that your god is pleased with your devotion
+  action (cleric) var devotion 9 when After a moment, you see a vision of your god, though the visage is cloudy and impossible to make out clearly.
+  action (cleric) var devotion 10 when After a moment, you sense a slight pressure on your shoulder, leaving the feeling that your efforts have been acknowledged.
+  action (cleric) var devotion 11 when After a moment, you see a silent vision of your god, radiating forth with a powerful divine brilliance.
+  action (cleric) var devotion 12 when After a moment, you see a vision of your god who calls to you by name, "Come here, my child, and I will show you things of wonder."
+  action (cleric) var devotion 13 when After a moment, you see a vision of your god who calls to you by name, "My child, though you may not always see my face, I am pleased with thee and thy efforts."
+  action (cleric) var devotion 14 when After a moment, you see a crystal-clear vision of your god who speaks slowly and deliberately,
+  action (cleric) var devotion 15 when  After a moment, you feel a clear presence like a warm blanket covering you beneath the shade of a giant Sana'ati tree.
+  
   return
 
 EMPATHONLY:
@@ -1651,6 +1673,10 @@ WARMAGEONLY:
   var calprepmana $calprepmana
   var caladdmana $caladdmana
   var igniteweapon %seweapon|%leweapon|%theweapon|%sbweapon|%lbweapon|%thbweapon|%staveweapon|%poleweapon|%ltweapon|%htweapon
+  var zephyractive 0
+  action zephyractive 1 when A faint pleasant breeze begins to stir.
+  action zephyractive 1 when A faint warm breeze continues to swirl around you.
+  action zephyractive 0 when With a final, swirling whisper, the breeze fades from the area.
   action var elecharge 1 when You sense nothing out of the ordinary\.
   action var elecharge 2 when A small charge lingers within your body\, just above the threshold of perception\. 
   action var elecharge 3 when A small charge lingers within your body\. 
@@ -1981,7 +2007,7 @@ HUNTINGVARLOAD:
       var movelist str2
       var targetroom 0
       var findroom YES
-      var findroomlist 15|16|17|18|19|20|32|31|34|30|33|29|28|24|23|25|26|27
+      var findroomlist 16|17|18|19|20|32|31|34|30|33|29|28|24|23|25|26|27|15
       var bugoutroom 97
       var nearestportaltown leth
     }
@@ -4415,7 +4441,7 @@ COMBATLOOP:
  	  #COMMUNE_DETECTION
  	  if ((%meraudcommune = "YES") || (%elunedcommune = "YES") || (%tamsinecommune = "YES")) then
     {
-      if %firstcommsense = 1 then
+      if (%firstcommsense = 1) then
       {
         gosub COMMSENSE
         var firstcommsense 0
@@ -4472,7 +4498,7 @@ COMBATLOOP:
   #SUMMONING
   if (($guild = "Warrior Mage") && (%summoning = "YES")) then
   {
-    if %summonweapon = "YES" then
+    if ("%summonweapon" = "YES") then
     {
       gosub SUMMWEAPONLOGIC
       gosub STATUSCHECK
@@ -8986,7 +9012,7 @@ DEVOTIONLOGIC:
       }
     }
     #PRAYER
-    if %pray = YES then
+    if ("%pray" = "YES") then
     {
       gosub PRAYLOGIC
       gosub STATUSCHECK
@@ -9030,35 +9056,6 @@ DEVOTIONLOGIC:
   }
   RETURN
 
-PRAYLOGIC:
-  if %t >= %nextpray then
-  {
-    gosub PRAYGOD
-    var nextpray %t
-    math nextpray add 610
-  }
-  return
-  
-BADGELOGIC:
-  if (("$guild" = "Cleric") || ("$guild" = "Paladin")) then
-  {
-    if (%t >= %nextbadge) then
-    {
-      if ("%pilgrimbadgeworn" != "YES") then gosub GETITEM pilgrim's badge
-      else gosub REMITEM pilgrim's badge
-      if ((matchre ("$righthand", "pilgrim's badge")) || (matchre ("$lefthand", "pilgrim's badge"))) then
-      {
-        gosub PRAYBADGE
-        if ("%pilgrimbadgeworn" != "YES") then gosub STOWITEM pilgrim's badge
-        else gosub WEARITEM pilgrim's badge
-        var nextbadge %t
-        if ("$guild" = "Paladin") then math nextbadge add 1900
-        if ("$guild" = "Cleric") then math nextbadge add 3660
-        put #echo %alertwindow Used pilgrim badge.
-      }
-    }
-  }
-  return
 
 PINLOGIC:
   if (("$guild" = "Cleric") || ("$guild" = "Paladin")) then
@@ -9085,7 +9082,7 @@ PINLOGIC:
 
 
 COMMUNELOGIC:
-  if %t >= %nextcommsense then
+  if (%t >= %nextcommsense) then
   {
     gosub COMMSENSE
     echo commgood: %commgood
@@ -9095,24 +9092,78 @@ COMMUNELOGIC:
     var nextcommsense %t
     math nextcommsense add 600
   }
-  if $Theurgy.Ranks >= 1750 then return
-  if $Theurgy.LearningRate > 9 then return
-  if %commgood = 1 then
+  if ($Theurgy.Ranks >= 1750) then return
+  if ($Theurgy.LearningRate > 9) then return
+  if (%commgood = 1) then
   {
-    if ((%meraudcommune = "YES") && (%mercomup = 0) && (%meraudgood = 1) && ($Theurgy.LearningRate < 11)) then
+    gosub COMMUNEBASIC
+    #MERAUD
+    if ((%meraudcommune = "YES") && (%mercomup = 0) && (%meraudgood = 1) && ($Theurgy.LearningRate < 11) && (%devotion >= 4)) then
     {
       gosub GETITEM %watercontainer
       var sprinkleitem %watercontainer
       var sprinkletarget $charactername
       gosub SPRINKLE
-      if %goodsprinkle != 1 then
+      if (%goodsprinkle = 1) then
       {
-        if %elunedcommune = "YES" then
+        gosub STOWALL
+        gosub GETITEM incense
+        gosub SWAP
+        if ("$lefthandnoun" != "incense") then
         {
-          if %elunedgood = 1 then
+          put #echo %alertwindow Yellow Out of incense!  Turning off Meraud commune.
+          put #flash
+          put #play JustArrived
+          var meraudcommune NO
+          return
+        }
+        if ("%lighter" = "YES") then
+        {
+          gosub GETITEM %lighteritem
+          gosub DRAGONLIGHT
+        }
+        else
+        {
+          if ("%flint" = "YES") then
+          {
+            gosub GETITEM %steelitem
+            gosub FLINTLIGHT incense
+          }
+          else
+          {
+            put #echo %alertwindow Yellow No lighter or flint!  Turning off Meraud commune.
+            put #flash
+            put #play JustArrived
+            var meraudcommune NO
+            return
+          }
+        }
+        gosub WAVEINCENSE $charactername
+        gosub SNUFFINC
+        gosub STOWALL
+        gosub RETREAT
+        var commune meraud
+        gosub COMMUNE
+        gosub STAND
+        var meraudgood 0
+        var commgood 0
+        var commsense %t
+        math commsense add 600
+        put #echo %alertwindow Meraud's commune used.
+        return
+      }
+      else
+      {
+        #NO_HOLY_WATER_ELUNED?
+        if ("%elunedcommune" = "YES") then
+        {
+          if (%elunedgood = 1) then
           {
             gosub STOWALL
-            if %dirtstacker = "YES" then gosub DIRTPUSH
+            if ("%dirtstacker" = "YES") then
+            {
+              gosub DIRTPUSH
+            }
             else
             {
               gosub GETITEM dirt
@@ -9154,39 +9205,11 @@ COMMUNELOGIC:
         }
         return
       }
-      gosub STOWALL
-      gosub GETITEM incense
-      if $righthandnoun = "incense" then
-      {      
-        gosub GETITEM %lighteritem
-        gosub DRAGONLIGHT
-        var wavetarget $charactername
-        gosub WAVEINC
-        gosub SNUFFINC
-        gosub STOWALL
-        gosub RETREAT
-        var commune meraud
-        gosub COMMUNE
-        gosub STAND
-        var meraudgood 0
-        var commgood 0
-        var commsense %t
-        math commsense add 600
-        put #echo %alertwindow Meraud's commune used.
-        return
-      }
-      else
-      {
-        put #echo %alertwindow Yellow Water container is out of holy water!  Turning off Meraud commune.
-        put #flash
-        put #play JustArrived
-        var meraudcommune NO
-        return
-      }
+
     }
     #ELUNED
     #put #echo %alertwindow Elunedgood: %elunedgood   Theurgy.LearningRate: $Theurgy.LearningRate
-    if ((%elunedcommune = "YES") && (%elunedgood = 1) && ($Theurgy.LearningRate < 11)) then
+    if ((%elunedcommune = "YES") && (%elunedgood = 1) && ($Theurgy.LearningRate < 11) && (%devotion > 4)) then
     {
       #put #echo %alertwindow Eluned checking
       gosub COMMUNEELUNED
@@ -9317,31 +9340,6 @@ BLESSCAST:
   gosub CAST
   return
 
-RECITELOGIC:
-  if %t >= %nextrecite then
-  {
-    #echo mercomup: %mercomup
-    if %mercomup = 1 then
-    {
-      gosub RECITE
-      var nextrecite %t
-      math nextrecite add 660
-    }
-  }
-  return
-
-DANCELOGIC:
-  if %t >= %nextdance then
-  {
-    if %mercomup = 1 then
-    {
-      var dancetarget
-      gosub DANCE
-      var nextdance %t
-      math nextdance add 660
-    }
-  }
-  return
 
 RECALLLOGIC:
   if ((%usingtactics = 1) || (%usingexpert = 1)) then return
@@ -10842,20 +10840,21 @@ STANCELOGIC:
   return
 
 SUMMWEAPONLOGIC:
-  if $Summoning.LearningRate > 33 then var summlock 1
-  if $Summoning.LearningRate < 20 then var summlock 0
-  if $Summoning.Ranks >= 1750 then var summlock 1
-  if %summlock != 1 then
+  if ($Summoning.LearningRate > 33) then var summlock 1
+  if ($Summoning.LearningRate < 20) then var summlock 0
+  if ($Summoning.Ranks >= 1750) then var summlock 1
+  if (%summlock != 1) then
   {
-    if %t >= %nextsumm then
+    if (%t >= %nextsumm) then
     {
       gosub PATHSENSE
-      if %elecharge >= 2 then
+      if (%elecharge >= 2) then
       {
         var nextsumm %t
         math nextsumm add %summonweapontimer 
+        var summweaponname 0
         gosub SUMMONWEAPONTRAIN
-        if %summweaponname != 0 then gosub BREAKWEAPON %summweaponname
+        if (%summweaponname != 0) then gosub BREAKWEAPON %summweaponname
         if %summfull = 1 then var summfull 0         
       }
       else
@@ -11716,7 +11715,8 @@ ROOMTRAVELCOMBAT:
   gosub ROOMTRAVEL
   gosub AWAKE
   var stance %stancemain
-  gosub STANCECHANGE  
+  gosub STANCECHANGE
+  var zephyractive 0
   if ("%necrosafety" = "YES") then gosub JUSTICECHECK    
   return
     
@@ -12734,46 +12734,54 @@ BUFFINGLOOP:
   }
   #put #echo Yellow Abuffs: %abuffs
   #put #echo Yellow Spell: |%buff%buffloop|
-  if ((contains("%abuffs", "|%buff%buffloop|")) && (%buffingonly != 1)) then
-  {
-    math abuffloop add 1
-    if %abuffloop <= %abuffnum then
+  if (contains("%abuffs", "|%buff%buffloop|")) then
+  { 
+    if (%buffingonly = 1) then
     {
-      if %abuff%abuffloop = "etf" then
+      goto BUFFINGLOOP
+    }
+    if ("%buff%buffloop" = "etf") then
+    {
+      put look
+      eval fissure matchre ("$roomobjs", "fissure")
+      if %fissure = 0 then
       {
-        eval fissure matchre ("$roomobjs", "fissure")
-        if %fissure = 0 then
-        {
-          gosub ABUFFINGSET
-        }
+        gosub BUFFINGFUNC
       }
-      if %abuff%abuffloop = "nexus" then
+    }
+    if %buff%buffloop = "nexus" then
+    {
+      if %nexus = 0 then
       {
-        if %nexus = 0 then
-        {
-          gosub ABUFFINGSET
-        }
+        gosub BUFFINGFUNC
       }
-      if %abuff%abuffloop = "rm" then
+    }
+    if %buff%buffloop = "rm" then
+    {
+      if %scriptmode = 1 then
       {
-        if %scriptmode = 1 then
+        if %nextrmlook < %t then
         {
-          if %nextrmlook < %t then
-          {
-            var nextrmlook %t
-            math nextrmlook add 60
-            var mist 0
-            put look
-            pause
-            if %mist = 0 then
-            {        
-              gosub ABUFFINGSET
-            }
+          var nextrmlook %t
+          math nextrmlook add 60
+          var mist 0
+          put look
+          pause
+          if %mist = 0 then
+          {        
+            gosub BUFFINGFUNC
           }
         }
-      }     
-      if %casting = 1 then return
+      }
     }
+    if ("%buff%buffloop" = "zephyr") then
+    {
+      if (%zephyractive != 1) then
+      {
+        gosub BUFFINGFUNC
+      }
+    }     
+    if %casting = 1 then return
   }
   else
   {  
