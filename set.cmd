@@ -600,6 +600,7 @@ SET:
     if tolower("%1") = "burglepickitem" then goto TEXTSET
     if tolower("%1") = "burglepickworn" then goto YESNOSET
     if tolower("%1") = "burgleropeitem" then goto TEXTSET
+    if tolower("%1") = "burglehide" then goto YESNOSET
     if tolower("%1") = "burglemaxgrabs" then
     {
       if matchre("%2", "\b(0|1|2|3|4|5|6)\b") then
@@ -1017,7 +1018,7 @@ SET:
     if tolower("%1") = "skinfatraineritem" then goto TEXTSET
     if tolower("%1") = "windboard" then goto YESNOSET
     if tolower("%1") = "windboardtimer" then goto TEXTSET
-    if tolower("%1") = "windboardcharge" then goto REGTEXTSET
+    if tolower("%1") = "windboardcharge" then goto TEXTSET
     if tolower("%1") = "windboardtrick" then goto TEXTSET
     
     if tolower("%1") = "killbeforemove" then goto YESNOSET
@@ -2110,23 +2111,6 @@ DISPLAYMAGIC:
     gosub OUTPUT TattooPrepMana TattooAddMana
     gosub OUTPUT TattooBuff (Tattoo is cast and maintained as a buff)
     put #echo
-    gosub OUTPUT Spell
-    gosub OUTPUT SpellNum
-    gosub OUTPUT Spell1 Spell1Mana
-    gosub OUTPUT Spell1Symb
-    gosub OUTPUT Spell2 Spell2Mana
-    gosub OUTPUT Spell2Symb
-    gosub OUTPUT Spell3 Spell3Mana
-    gosub OUTPUT Spell3Symb
-    gosub OUTPUT Spell4 Spell4Mana
-    gosub OUTPUT Spell4Symb
-    put #echo
-    gosub OUTPUT TMDBPrior (Gives priority to TM and Debil over other spell training.)
-    gosub OUTPUT TM
-    gosub OUTPUT SpellTM SpellTMMana
-    gosub OUTPUT Debil
-    gosub OUTPUT SpellDebil SpellDebilMana
-    put #echo
     gosub OUTPUT Cyclic
     gosub OUTPUT CyclicBuff
     gosub OUTPUT SpellCNum
@@ -2162,6 +2146,23 @@ DISPLAYMAGIC:
     #gosub OUTPUT DBASpell1 DBASpell1Mana
     #gosub OUTPUT DBASpell2 DBASpell2Mana
     #gosub OUTPUT DBASpell3 DBASpell3Mana
+    put #echo
+    gosub OUTPUT Spell
+    gosub OUTPUT SpellNum
+    gosub OUTPUT Spell1 Spell1Mana
+    gosub OUTPUT Spell1Symb
+    gosub OUTPUT Spell2 Spell2Mana
+    gosub OUTPUT Spell2Symb
+    gosub OUTPUT Spell3 Spell3Mana
+    gosub OUTPUT Spell3Symb
+    gosub OUTPUT Spell4 Spell4Mana
+    gosub OUTPUT Spell4Symb
+    put #echo
+    gosub OUTPUT TMDBPrior (Gives priority to TM and Debil over other spell training.)
+    gosub OUTPUT TM
+    gosub OUTPUT SpellTM SpellTMMana
+    gosub OUTPUT Debil
+    gosub OUTPUT SpellDebil SpellDebilMana
   }
   else
   {
@@ -2335,14 +2336,12 @@ DISPLAYNONCOMBAT:
   put #echo
   gosub OUTPUT NonCombat
 	put #echo
-  gosub OUTPUT Burgle
+  gosub OUTPUT Burgle BurgleStorage (Should be a large container that ideally contains no other items)
 	gosub OUTPUT BurgleTool (pick, rope, or both, which chooses tool based on learningrates)  
   gosub OUTPUT BurglePickItem BurglePickWorn
   gosub OUTPUT BurgleRopeItem
-  gosub OUTPUT BurgleMaxGrabs
-  gosub OUTPUT BurgleLoot
-  gosub OUTPUT BurgleStorage (Should be a large container that ideally contains no other items)
-  gosub OUTPUT BurglePawn
+  gosub OUTPUT BurgleHide BurgleMaxGrabs
+  gosub OUTPUT BurgleLoot BurglePawn
   #gosub OUTPUT BurgleKeepList
   #if $guild = "Thief" then gosub OUTPUT BurgleThiefBin
   put #echo

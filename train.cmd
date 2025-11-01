@@ -20,7 +20,7 @@ START:
 ##Monster Variables
 var monsters1 ashu hhinvi|atik'et|bloodvine|bucca|cabalist|\bcrag\b|creeper|cutthroat|charred husk
 var monsters2 Dragon Priest (assassin|crone|fanatic|imperial warden|intercessor|juggernaut|purifier|sentinel|zealot)|Dragon priest|Dragon priestess|blood dryad|dummy|dusk ogre|dyrachis|eviscerator|faenrae assassin|fendryad|fire maiden|folsi immola
-var monsters3 footpad|frostweaver|gam chaga|\bgeni\b|gidii|goblin shaman|graverobber|guardian|gypsy marauder|\bimp\b|juggernaut
+var monsters3 footpad|forest bandit|frostweaver|gam chaga|\bgeni\b|gidii|goblin shaman|graverobber|guardian|gypsy marauder|\bimp\b|juggernaut
 var monsters4 kelpie|kra'hei|kra'hei hatchling|intercessor|lipopod|lun'shele hunter|madman|malchata|mountain giant|nipoh oshu|\bnyad\b|orc bandit
 var monsters5 orc clan chief|orc raider|orc reiver|orc scout|pile of rubble|pirate|river sprite|ruffian|scavenger troll|scout ogre|screamer
 var monsters6 sentinel|shadow master|shadoweaver|sky giant|sleazy lout|sprite|swain|swamp troll|telga moradu|\bthug\b|trekhalo
@@ -288,6 +288,20 @@ action var lodgerightleg 1 when (?:a|an) .* lodged \w+ into your right leg
 action var lodgeleftleg 1 when (?:a|an) .* lodged \w+ into your left leg
 action var lodgechest 1 when (?:a|an) .* lodged \w+ into your tail
 
+action var lodgehead 1 when a small red blood mite on your head
+action var lodgerighteye 1 when a small red blood mite on your right eye
+action var lodgelefteye 1 when a small red blood mite on your left eye
+action var lodgeneck 1 when a small red blood mite on your neck
+action var lodgechest 1 when a small red blood mite on your chest
+action var lodgeback 1 when a small red blood mite on your back
+action var lodgeabdomen 1 when a small red blood mite on your abdomen
+action var lodgerightarm 1 when a small red blood mite on your right arm
+action var lodgerighthand 1 when a small red blood mite on your right hand
+action var lodgeleftarm 1 when a small red blood mite on your left arm
+action var lodgelefthand 1 when a small red blood mite on your left hand
+action var lodgerightleg 1 when a small red blood mite on your right leg
+action var lodgeleftleg 1 when a small red blood mite on your left leg
+action var lodgechest 1 when a small red blood mite on your tail
 
 
 
@@ -305,7 +319,8 @@ action (poison) var poisoned 1 when You have a (critically|dangerously|seriously
 action (poison) off
 
 #FIRE
-action var onfire 1 when ^A \w+ \w+ breathes a stream of fire directly at you!  The flames *WHOOSH* around your (.*), setting it on fire!  You can smell the strong scent of naphtha in the wyvern's breath fueling the flames further\.
+action var onfire 1 when ^(?:A|An) \w+ \w+ breathes a stream of fire directly at you!  The flames *WHOOSH* around your (.*), setting it on fire!  You can smell the strong scent of naphtha in the \w+'s breath fueling the flames further\.
+#action var onfire 1 when An adult wyvern breathes a stream of fire directly at you!  The flames *WHOOSH* around your left leg, setting it on fire!  You can smell the strong scent of naphtha in the wyvern's breath fueling the flames further.
 action var onfire 1 when ^You pretend not to notice as the flames consume your (.*)!
 action var onfire 1 when ^Your (.*) is on fire\.
 
@@ -423,7 +438,7 @@ ALERTINIT:
     var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
-    var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "|The shadowling exclaims,|You throw your head back and howl,
+    var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "|The shadowling exclaims,|You throw your head back and howl,|After a moment, you see a crystal-clear vision of your|After a moment, you see a vision of your god who calls to you by name,
     var hespeech A voice on the wind whispers|A pair of Merelew guards assist you into the water|The libik (?:shouts|yells),|The seedy monger looks up to you and|The Monger's voice booms out,|The Monger's booming voice comes from the booth,|One of the attendants glances at you and says,|One of the monger's assistants addresses you, saying,|^An attendant in an otter costume exclaims|\w+ chants, "C'mon! I feel the luck of Eluned smiling on you all!
     var artspeech Painted with lush color and housed in a polished rectangle of walnut|A single crystal rose sits perfectly balanced upon the point|Fiendish lacerations exposing bare bone and dripping blood|Standing resolute in the face of an advancing horde of undead|The bright frame illuminates the rich color of the dark scene|Gracefully composed, the artwork features bold black strokes and pale watercolors|The sculpture itself is made from a single piece of gnarled copperwood|The kneeling figure of the chained man sits the height|Careful use of shading diverts your eyes away from the|At first glance, the piece appears dark and featureless|Rendered in dark bronze and rising three feet tall|Rich, polished mahogany frames this exquisite work of art|About the size of a Gor'Tog's skull, this smooth orb rests on an ornate|The panel is a worked slab of fine-grained pink sandstone standing four hands tall|Framed in a magnificent rectangle of rich mahogany, the bright bedroom|Framed in a square of goldenoak, the picture is presented against a backdrop of black velvet|As you take a look at this unique display, the first thing you notice|This display features a drape of black velvet overhead to protect
     var speechwhitelist %generalspeech|%craftingspeech|%ferryspeech|%monsterspeech|%spellspeech|%hespeech|%artspeech
@@ -692,15 +707,19 @@ COMMANDVARLOAD:
   }
   if (tolower("%scriptmodename") = "noncombat") then
   {
-    var scriptmode 1
+    var scriptmode 0
     echo Out of Combat Training!
     var combat NO
     var outdoortimer 0
     var textbooktimer 0
+    var appraisetarget bundle
     if ((%research = "YES") && (%spell = YES)) then var research NO
+    var buff NO
+    var tm NO
+    var debil NO
     var autoupkeep NO
     var bugout NO
-    put #echo >$alertwindow Began noncombat training in Mode %varset.
+    put #echo >$alertwindow Began noncombat training.
   }
   if tolower("%scriptmodename") = "climb" then
   {
@@ -880,6 +899,7 @@ COMMANDVARLOAD:
     var locksmithbox NO
     var skinfatrainer NO
     var autoupkeep NO
+    put #echo >$alertwindow Began noncombat training.
   }
   if tolower("%scriptmodename") = "music" then
   {
@@ -2065,6 +2085,18 @@ HUNTINGVARLOAD:
       if ("%huntingpremium" = "ONLY") then var findroomlist 50|51|52|53|54
       var bugoutroom 1
       var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-forestbandits") then
+    {
+      var zone 112
+      var travel YES
+      var traveldest ilaya
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 172|173|174|175|176|177|178|179|180|181|182|183|170|171
+      var bugoutroom 32
+      var nearestportaltown leth
     }
     if ("%huntingarea" = "p1-guardians") then
     {
@@ -4139,6 +4171,7 @@ MAINVARLOAD:
   var burglepickitem $burglepickitem
   var burglepickworn $burglepickworn
   var burgleropeitem $burgleropeitem
+  var burglehide $burglehide
   var burglemaxgrabs $burglemaxgrabs
   var burgleloot $burgleloot
   var burglekeeplist $burglekeeplist
@@ -4206,7 +4239,7 @@ MULTIVARLOAD:
 
 ###MAIN LOOP###
 SWITCHBOARD:
-  if (%scriptmode = 0) then goto OLDNONCOMBATLOOP
+  if (%scriptmode = 0) then goto NONCOMBATONLYLOOP
   if (%scriptmode = 1) then
   {
     gosub SCRIPTBEGINCHECKS
@@ -4390,6 +4423,94 @@ COMBATLOOP:
     gosub STATUSCHECK
     if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
   }
+  #HUNTING
+	if %hunting = "YES" then
+	{
+	  gosub HUNTLOGIC
+	  gosub STATUSCHECK
+	  if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #RECALL
+  if %recall = "YES" then
+  {
+    gosub RECALLLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #APPRAISAL
+	if %appraise = "YES" then
+	{
+    gosub APPLOGIC
+	  gosub STATUSCHECK
+	  if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #WINDBOARD
+  if %windboard = "YES" then
+  {
+    if %buffing = 0 then
+    {
+      if ((%usingtactics != 1) && (%usingexpert != 1)) then
+      {
+        gosub WINDBOARDLOGIC
+        gosub STATUSCHECK
+        if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+      }
+    }
+  }
+  #COLLECTING
+  #put #echo Yellow Collect: %collect
+  if ("%collect" = "YES") then
+  {
+    #put #echo buffing: %buffing
+    if (%buffing = 0) then
+    {
+      #echo Not buffing.
+      #put #echo usingtactics: %usingtactics
+      if ((%usingtactics != 1) && (%usingexpert != 1)) then
+      {
+        #echo Not using tactics or expertise.
+        gosub COLLECTLOGIC
+      }
+    }
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #TEXTBOOK
+  if %textbook = "YES" then
+  {
+    if %buffing = 0 then
+    {
+      if ((%usingtactics != 1) && (%usingexpert != 1)) then
+      {
+        gosub TEXTLOGIC
+      }
+    }
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #SANOWRET
+  if %combatsanowret = "YES" then
+  {
+    gosub SANOWRETLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #LOCKSMITHBOX
+  if %locksmithbox = "YES" then
+  {
+    gosub LOCKSMITHLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #SKINFATRAINER
+  if %skinfatrainer = "YES" then
+  {
+    gosub SKINFATRAINERLOGIC
+    gosub STATUSCHECK
+    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  
+  
   ######
   ##GUILD_SKILLS
   ######
@@ -4532,57 +4653,53 @@ COMBATLOOP:
     gosub STATUSCHECK
     if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
   }
-  #HUNTING
-	if %hunting = "YES" then
-	{
-	  gosub HUNTLOGIC
-	  gosub STATUSCHECK
-	  if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
-  }
-  #RECALL
-  if %recall = "YES" then
+  gosub STATUSCHECK
+  if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  goto MAINLOOP
+
+NONCOMBATONLYLOOP:
+  var noncombatperformactive 0
+  #PERFORM
+  if ("%perform" = "YES") then
   {
-    gosub RECALLLOGIC
-    gosub STATUSCHECK
-    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
-  }
-  #APPRAISAL
-	if %appraise = "YES" then
-	{
-    gosub APPLOGIC
-	  gosub STATUSCHECK
-	  if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
-  }
-  #WINDBOARD
-  if %windboard = "YES" then
-  {
-    if %buffing = 0 then
+    if ($Performance.LearningRate > 20) then var performlock 1
+    if ($Performance.LearningRate < 4) then var performlock 0
+    if ($Performance.Ranks >= 1750) then var performlock 1
+    if (%performlock != 1) then 
     {
-      if ((%usingtactics != 1) && (%usingexpert != 1)) then
-      {
-        gosub WINDBOARDLOGIC
-        gosub STATUSCHECK
-        if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
-      }
+      var noncombatperformactive = 1
+      gosub MTPERFORMLOOP
+    }
+    else var noncombatperformactive = 1
+    put #echo Yellow loop passed.
+  }
+  #MAGIC_AND_MISC
+  #ATTUNEMENT
+  if %attune = "YES" then
+  {
+    gosub ATTUNELOGIC
+    gosub STATUSCHECK
+  }
+  #ALMANAC
+  if %almanac = "YES" then
+  {
+    if %t >= %nextalmanac then
+    {
+      gosub ALMANACLOGIC
+      gosub STATUSCHECK
     }
   }
-  #COLLECTING
-  #put #echo Yellow Collect: %collect
-  if ("%collect" = "YES") then
+  #EJOURNAL
+  if %ejournal = "YES" then
   {
-    #put #echo buffing: %buffing
-    if (%buffing = 0) then
-    {
-      #echo Not buffing.
-      #put #echo usingtactics: %usingtactics
-      if ((%usingtactics != 1) && (%usingexpert != 1)) then
-      {
-        #echo Not using tactics or expertise.
-        gosub COLLECTLOGIC
-      }
-    }
+    gosub EJOURNALLOGIC
     gosub STATUSCHECK
-    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #TARANTULA
+  if %tarantula = "YES" then
+  {
+    gosub TARANTULALOGIC
+    gosub STATUSCHECK
   }
   #TEXTBOOK
   if %textbook = "YES" then
@@ -4595,32 +4712,53 @@ COMBATLOOP:
       }
     }
     gosub STATUSCHECK
-    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #TEACHING
+  if %teaching = "YES" then gosub TEACHINGLOGIC
+  #HUNTING
+	if %hunting = "YES" then
+	{
+	  gosub HUNTLOGIC
+	  gosub STATUSCHECK
+  }
+  #APPRAISAL
+	if %appraise = "YES" then
+	{
+    gosub APPLOGIC
+	  gosub STATUSCHECK
+  }
+  #COLLECTING
+  if ("%collect" = "YES") then
+  {
+    gosub COLLECTLOGIC
+    gosub STATUSCHECK
   }
   #SANOWRET
   if %combatsanowret = "YES" then
   {
     gosub SANOWRETLOGIC
     gosub STATUSCHECK
-    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
+  }
+  #WINDBOARD
+  if %windboard = "YES" then
+  {
+    gosub WINDBOARDLOGIC
+    gosub STATUSCHECK
   }
   #LOCKSMITHBOX
   if %locksmithbox = "YES" then
   {
     gosub LOCKSMITHLOGIC
     gosub STATUSCHECK
-    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
   }
   #SKINFATRAINER
   if %skinfatrainer = "YES" then
   {
     gosub SKINFATRAINERLOGIC
     gosub STATUSCHECK
-    if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
   }
-  gosub STATUSCHECK
-  if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
-  goto MAINLOOP
+  pause 1
+  goto NONCOMBATONLYLOOP
 
 
 OLDNONCOMBATLOOP:
@@ -7979,8 +8117,13 @@ BURGLETOOLGET:
 
 BURGLELOOP:
   if (%grabs >= %burglemaxgrabs) then var footsteps 1
+  if ("%burglehide" = "YES") then
+  {
+    if (($invisible = 0) && ($hidden = 0)) then gosub HIDE
+  }
   if (%footsteps = 1) then return
   if (%arrested = 1) then return
+  if ("%burglehide" = "YES") then gosub HIDE
   gosub BURGLESEARCH
   if (%grabs >= %burglemaxgrabs) then var footsteps 1
   if (%footsteps = 1) then return

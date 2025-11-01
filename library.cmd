@@ -1,6 +1,6 @@
 var lastupdated 04/18/2025
 
-var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|
+var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|zephyr|
 var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mapp|mpp|mf|pfe|pom|sl|sol|
 var abuffs |etf|nexus|rm|zephyr
 var cyctms |aban|ars|fr|gs|iz|pyre|rim|ros|sa|sls|usol|
@@ -21,7 +21,7 @@ var transnecro |ivm|ks|bue|worm|ch|php|
 var aimweapons bow|xbow|sling
 var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|field|plane|planes|road|spell|symbiosis strengthen|symbiosis endure|symbiosis avoid|symbiosis spring|symbiosis remember|symbiosis resolve|symbiosis impress|symbiosis discern|symbiosis explore|symbiosis watch|symbiosis harvest|symbiosis heal|symbiosis learn|symbiosis examine|symbiosis perform|symbiosis cast|symbiosis harness|symbiosis activate
 
-var combatpresetp1 p1-shiprats|p1-louts|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-revenantconscripts|p1-lipopods|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-bloodwolves|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-guardians|p1-giantbears|p1-onyxgargoyles|p1-emberbulls|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
+var combatpresetp1 p1-shiprats|p1-louts|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-revenantconscripts|p1-lipopods|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-bloodwolves|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-forestbandits|p1-guardians|p1-giantbears|p1-onyxgargoyles|p1-emberbulls|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
 var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-gryphonsbaby|p2-gryphonsyoung|p2-seordmaors|p2-fibrousslayers|p2-clayslayers|p2-glazedslayers
 var combatpresetp3 p3-snippets|p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-sylphs|p3-quartzgargoyles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-windbags|p3-windbags2|p3-frostcrones|p3-prerenielder|p3-gryphons|p3-beltunumshi|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-malchata|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-icearchons|p3-adanfsorcs|p3-adanfblades
 var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p4-merkreshcelpeze4|p4-armadillosjuve|p4-armadillosadult|p4-armadilloselder
@@ -41,7 +41,7 @@ var pawntownlist none|crossing|riverhaven|shard|hibarnhvidar
 var performtownlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|fangcove|shard|hibarnhvidar|boarclan|ratha|merkresh|mriss
 var forgingtownlist none|crossing|shard|merkresh|hibarnhvidar
 
-var Ordinal none|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth
+var ordinal none|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth
 var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.|You're unconscious!|There is no need for violence here\.|Sorry, system is slow\.  No type ahead allowed\.
 
 #action (combo) var elapsed $gametime; math elapsed subtract %gametimestart; put #echo Yellow Elapsed: %elapsed; 10put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
@@ -50,7 +50,7 @@ action (combo) var barbmane $unixtime; math barbmane subtract 30; put #var %mane
 action (combo) var failtest $unixtime; math failtest subtract 80; put #var %manenamelast %failtest; send #echo Yellow ACM is still on cooldown! when You must rest a bit longer before attempting that maneuver again\.
 action (combo) off
 
-var badforagelist glaysker flower|briarberry root|coffee bean|almond|green moss|rosewood limb
+var badforagelist glaysker flower|briarberry root|coffee bean|almond|green moss|rosewood limb|eghmok moss|nuloe stem
 #var badforagelist almond|glaysker flower|coffee bean|green moss|jasmine blossom|eghmok moss|plovik leaf|briarberry root|rosewood limb
 goto LIBEND
 
@@ -422,6 +422,7 @@ VARCHECKS:
   if !def(burglepickitem) then put #var burglepickitem lockpick
   if !matchre("$burglepickworn", "\b(YES|NO)\b") then put #var burglepickworn NO
   if !def(burgleropeitem) then put #var burgleropeitem heavy rope
+  if !matchre("$burglehide", "\b(YES|NO)\b") then put #var burglehide NO
   if !matchre("$burglemaxgrabs", "\b(0|1|2|3|4|5|6)\b") then put #var burglemaxgrabs 6
   if !matchre("$burgleloot", "\b(YES|NO)\b") then put #var burgleloot NO
   if $burglekeeplist = "%burglekeeplist" then put #var burglekeeplist none
@@ -3857,6 +3858,7 @@ STATUSCHECK:
   }
   #SPELL_PREPPING
   if (%scriptmode = 1) then gosub MAINSPELLLOGIC
+  if (%scriptmode = 0) then gosub MAINSPELLLOGICNC
   #CASTING
   if (%casting = 1) then gosub CASTINGLOGIC
   return
@@ -4654,7 +4656,7 @@ PUTITEMP:
 	pause
 PUTITEMMAIN:
 	matchre PUTITEMP %waitstring
-	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.|That is far too hot to touch\!|As you attempt to place your
+	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.|That is far too hot to touch\!|As you attempt to place your|You can't put that there!
 	matchre PUTRETURN You put|You drop|You briefly twist the top off of|Raffle Attendant Tizzeg examines your ticket and exclaims|A bored-looking Human boy says|You briefly twist the top off of your
 	match PUTITEMSTOW There's no room in the
 	match RETURN That's too heavy to go in there!
@@ -4819,6 +4821,7 @@ STOWMAIN:
   if (%cleanstow != 1) then
   {
     var stowcustomsuccess 0
+    var stowsource STOW
     gosub STOWCUSTOM $%stowhandstringhand
     if %stowcustomsuccess = 1 then return
   }
@@ -4965,22 +4968,47 @@ STOWCUSTOM:
       return
     }
   }
-  if matchre ("%stowcustomstring", "%cambitem1") then
+  if matchre ("%stowcustomstring", "%shielditem") then
   {
-    if %cambitem1worn = "YES" then
-    {
-      gosub WEARITEM %cambitem1
-      var stowcustomsuccess 1
-      return
-    }
+    gosub WEARITEM %shielditem
   }
-  if matchre ("%stowcustomstring", "%cambitem2") then
+  if ("%cambitem1" = "%cambitem2") then
   {
-    if %cambitem2worn = "YES" then
+    if ((matchre("$righthand", "%cambitem1")) || (matchre("$lefthand", "%cambitem1"))) then
     {
-      gosub WEARITEM %cambitem2
+      if ("%stowsource" = "STOWITEM") then
+      {
+        if ("%stowitemstring" = "second %cambitem2") then gosub WEARITEM second %cambitem2
+        else gosub WEARITEM first %cambitem1
+      }
+      else
+      {
+        gosub WEARITEM first %cambitem1
+        gosub WEARITEM second %cambitem2
+      }
       var stowcustomsuccess 1
       return
+    }  
+  }
+  else
+  {
+    if matchre ("%stowcustomstring", "%cambitem1") then
+    {
+      if %cambitem1worn = "YES" then
+      {
+        gosub WEARITEM %cambitem1
+        var stowcustomsuccess 1
+        return
+      }
+    }
+    if matchre ("%stowcustomstring", "%cambitem2") then
+    {
+      if %cambitem2worn = "YES" then
+      {
+        gosub WEARITEM %cambitem2
+        var stowcustomsuccess 1
+        return
+      }
     }
   }
   if matchre ("%stowcustomstring", "%bowweapon") then 
@@ -5113,6 +5141,7 @@ STOWITEMMAIN:
   if (%cleanstow != 1) then
   {
     var stowcustomsuccess 0
+    var stowsource STOWITEM
     gosub STOWCUSTOM %stowitemstring
     if (%stowcustomsuccess = 1) then return
   }
@@ -6385,13 +6414,13 @@ FACE:
 	  if ("%mobpos" = "Facing") then return
     if contains("flanking|behind|advancing","%mobpos") then
     {
-      gosub FACETARGET %Ordinal(%mobnum) %mob
+      gosub FACETARGET %ordinal(%mobnum) %mob
       var goodtarget 1 
     }
 	  if contains("%mobpos","moving") then
     {
       #gosub block stop
-      gosub FACETARGET %Ordinal(%mobnum) %mob
+      gosub FACETARGET %ordinal(%mobnum) %mob
       var goodtarget 1
     }
     if contains("%mobpos","facing") then var goodtarget 1
@@ -8021,7 +8050,7 @@ CAST:
 	  }
 	}
   matchre CASTP %waitstring
-	matchre CASTCLEANUP You gesture.|You gesture at|You wave your hand|With a wave of your hand|You roll your hands in an elliptical|You clasp your hands together|You cup your hand before|You clap your hands once|Your spell|You press your fist|You reach with your fist toward the ground.|You speak a few words of righteousness|You whisper|Tendrils of flame|You make a holy gesture|You close your eyes and take several slow|You clench your hands into fists and grit your teeth|You don't think you can manage to ignite another weapon at the moment.|The flames dancing along your fingertips|Mentally steeling yourself in preparation for|You shudder involuntarily|You release an accompaniment of elemental|You thrust your (right|left) arm before you, fingers splayed\.|With a wave of your hand, your vitality is fully restored\.|You strike your heel against the ground|A sense of calm focus|Roundtime|Your heart skips a beat as your spell|You clench your fists, pressing your fingernails painfully into your flesh\.|You place your hands on your temples\.|You raise your fist toward the sun\.|You raise your hand in an imaginary toast to Glythtide\.|You drop briefly to one knee as you firmly press your palms into the ground\.|You steeple your fingers together to channel the spell's energies\.|You close your eyes and focus on the old hero, Lirisa\.|You swear|With a chirurgeon's care, you press your fingertips against the side of your neck\.
+	matchre CASTCLEANUP You gesture.|You gesture at|You wave your hand|With a wave of your hand|You roll your hands in an elliptical|You clasp your hands together|You cup your hand before|You clap your hands once|Your spell|You press your fist|You reach with your fist toward the ground.|You speak a few words of righteousness|You whisper|Tendrils of flame|You make a holy gesture|You close your eyes and take several slow|You clench your hands into fists and grit your teeth|You don't think you can manage to ignite another weapon at the moment.|The flames dancing along your fingertips|Mentally steeling yourself in preparation for|You shudder involuntarily|You release an accompaniment of elemental|You thrust your (right|left) arm before you, fingers splayed\.|With a wave of your hand, your vitality is fully restored\.|You strike your heel against the ground|A sense of calm focus|Roundtime|Your heart skips a beat as your spell|You clench your fists, pressing your fingernails painfully into your flesh\.|You place your hands on your temples\.|You raise your fist toward the sun\.|You raise your hand in an imaginary toast to Glythtide\.|You drop briefly to one knee as you firmly press your palms into the ground\.|You steeple your fingers together to channel the spell's energies\.|You close your eyes and focus on the old hero, Lirisa\.|You swear|With a chirurgeon's care, you press your fingertips against the side of your neck\.|As you gesture an ethereal vela'tohr
 	matchre CASTBAD Currently lacking the skill|You don't have a spell prepared!|Your target pattern dissipates because|You can't cast that on anyone else!|You strain, but are too|The spell pattern resists the influx|I could not find what you were referring to.|You must specify one of the thirteen planets\.|The spell pattern resists the influx of .* mana and fails completely\.|You attempt to quiet your mind, focusing on your planar link\.|Steadying your breath, you briefly point one arm up and the other towards the ground, forming a conduit through your body\.
 	#match CASTFACE You can't cast that at yourself!
 	#matchre CASTLOOT is already dead, so that's a bit pointless.
@@ -8055,7 +8084,25 @@ PVPPREPMAIN:
 
 PVPPREPREL:
   gosub RELSPELL
-  goto PVPPREP
+  goto PVPPREPMAIN
+
+PVPTARGET:
+  var targetstring $0
+  goto PVPPREPMAIN
+PVPTARGETP:
+  pause
+PVPTARGETMAIN:
+  matchre PVPTARGETP %waitstring
+  matchre SPELLCANCEL You are not engaged to anything, so you must specify a target to focus on!|You cannot target
+	matchre RETURN You begin to weave mana lines into
+	matchre PREPTARREL you're already preparing|You have already fully prepared|You are already preparing
+	matchre SPELLCANCEL Something in the area interferes with your spell preparations.
+	put target %targetstring
+	matchwait 5
+	var timeoutsub PREPTAR
+  var timeoutcommand target
+	goto TIMEOUT
+
 
 PVPCAST:
   var pvpcaststring $0
@@ -8217,12 +8264,19 @@ CHARGELOOP:
       goto CHARGELOOP
     }
   }
+  if (("%cambitem1" = "%cambitem2") then
+  {
+    if (%cambcount = 1) then var workingcambitem first %cambitem%cambcount
+    if (%cambcount = 2) then var workingcambitem second %cambitem%cambcount
+  }
+  else var workingcambitem %cambitem%cambcount
+  
   if %cambitem%cambcountworn = "NO" then
   {
     if ((matchre ("$righthandnoun", "%cambitem%cambcount")) || (matchre ("$lefthandnoun", "%cambitem%cambcount"))) then
     else
     {
-      gosub GETITEM %cambitem%cambcount
+      gosub GETITEM %workingcambitem
     }
   }
   var cambtapped 0
@@ -8233,18 +8287,19 @@ CHARGELOOP:
   matchre CHARGETAP You strain
   match CHARGEINJURED You are in no condition to do that.
   match CHARGEGET You'll have to hold it, set it on the ground, or put it on something first.
+  match CHARGEGET I could not find what you were referring to.
   #echo cambcount: %cambcount
   #echo splitcount: %splitcount
-  if %cambitem%cambcountsplit > 1 then put charge my %cambitem%cambcount %camb%cambcountsplit%splitcount
-  else put charge my %cambitem%cambcount %cambmana%cambcount
+  if %cambitem%cambcountsplit > 1 then put charge my %workingcambitem %camb%cambcountsplit%splitcount
+  else put charge my %workingcambitem %cambmana%cambcount
   matchwait 5
 	var timeoutsub CHARGELOOP
-	if %cambitem%cambcountsplit > 1 then var timeoutcommand charge my %cambitem%cambcount %camb%cambcountsplit%splitcount
-  else var timeoutcommand charge my %cambitem%cambcount %cambmana%cambcount
+	if %cambitem%cambcountsplit > 1 then var timeoutcommand charge my %workingcambitem %camb%cambcountsplit%splitcount
+  else var timeoutcommand charge my %workingcambitem %cambmana%cambcount
 	goto TIMEOUT
 
 CHARGEGET:
-  gosub GETITEM %cambitem%cambcount
+  gosub GETITEM %workingcambitem
   goto CHARGELOOP
 
 CHARGEINJURED:
@@ -8289,7 +8344,7 @@ CHARGESUCC:
       var splitcount 1
       if ((matchre ("$righthand", "%cambitem%cambcount")) || (matchre ("$lefthand", "%cambitem%cambcount"))) then
 	    {
-		    gosub STOWITEM %cambitem%cambcount
+		    gosub STOWITEM %workingcambitem
 	    }
       #if %cambitem%cambcountworn = "NO" then
       #{
@@ -8306,7 +8361,7 @@ CHARGESUCC:
   {
     if ((matchre ("$righthand", "%cambitem%cambcount")) || (matchre ("$lefthand", "%cambitem%cambcount"))) then
 		{
-			gosub STOWITEM %cambitem%cambcount
+			gosub STOWITEM %workingcambitem
 		}
     math cambcharge add %cambmana%cambcount
     math cambcharge%cambcount add %cambmana%cambcount
@@ -8316,7 +8371,7 @@ CHARGESUCC:
   goto CHARGELOOP
 
 CHARGEREM:
-  gosub REMITEM %cambitem%cambcount
+  gosub REMITEM %workingcambitem
   goto CHARGELOOP
 
 CHARGESTOW:
@@ -8332,30 +8387,36 @@ CHARGETAP:
 INVOKECAMBP:
   pause
 INVOKECAMB:
+  if ("%cambitem1" = "%cambitem2") then
+  {
+    if (%invokecount = 1) then var workingcambitem first %cambitem%invokecount
+    if (%invokecount = 2) then var workingcambitem second %cambitem%invokecount
+  }
+  else var workingcambitem %cambitem%invokecount
 	if %cambitem%invokecountworn = "NO" then
   {
     if ((matchre ("$righthandnoun", "%cambitem%invokecount")) || (matchre ("$lefthandnoun", "%cambitem%invokecount"))) then
     else
     {
-      gosub GETITEM %cambitem%invokecount
+      gosub GETITEM %workingcambitem
     }
   }
 	matchre INVOKECAMBP %waitstring
 	matchre INVOKESUCC You reach for its center|Your link to|dim, almost magically null.
 	matchre INVOKEREM Try though you may
 	#echo ctotal%invokecount: %ctotal%invokecount
-	if %dedicatedcambrinth != "YES" then put invoke my %cambitem%invokecount %ctotal%invokecount
-	else put invoke my %cambitem%invokecount %ctotal%invokecount spell
+	if %dedicatedcambrinth != "YES" then put invoke my %workingcambitem %ctotal%invokecount
+	else put invoke my %workingcambitem %ctotal%invokecount spell
 	matchwait 5
 	var timeoutsub INVOKECAMB
-  if %dedicatedcambrinth != "YES" then var timeoutcommand invoke %cambitem%invokecount %ctotal%invokecount
-	else var timeoutcommand invoke %cambitem%invokecount %ctotal%invokecount spell
+  if %dedicatedcambrinth != "YES" then var timeoutcommand invoke %workingcambitem %ctotal%invokecount
+	else var timeoutcommand invoke %workingcambitem %ctotal%invokecount spell
 	goto TIMEOUT
 
 INVOKESUCC:
 	if ((matchre ("$righthand", "%cambitem%invokecount")) || (matchre ("$lefthand", "%cambitem%invokecount"))) then
 	{
-		gosub STOWITEM %cambitem%invokecount
+		gosub STOWITEM %workingcambitem
 	}
   if %cambnumber > %invokecount then
   {
@@ -8369,7 +8430,7 @@ INVOKESUCC:
   }
 
 INVOKEREM:
-  gosub REMITEM %cambitem%invokecount
+  gosub REMITEM %workingcambitem
   goto INVOKECAMB
 
 
@@ -8632,8 +8693,7 @@ PREPTATTOOBAD:
 PREPTARP:
 	pause
 PREPTAR:
-	#var cambcharge 0
-  matchre SPELLCANCEL You are not engaged to anything, so you must specify a target to focus on!|You cannot target
+	matchre SPELLCANCEL You are not engaged to anything, so you must specify a target to focus on!|You cannot target
 	matchre RETURN You begin to weave mana lines into
 	matchre PREPTARREL you're already preparing|You have already fully prepared|You are already preparing
 	matchre SPELLCANCEL Something in the area interferes with your spell preparations.
@@ -8926,6 +8986,20 @@ WANDINVOKESTOW:
   gosub STOWALL
   gosub GETITEM %wandinvokestring
   goto WANDINVOKE
+
+
+WANDPOINT:
+  var pointerstring $0
+  goto WANDPOINTMAIN
+WANDPOINTP:
+  pause
+WANDPOINTMAIN:
+  matchre WANDPOINTP %waitstring
+  match RETURN You point your
+  match RETURN I could not find what you were referring to.
+  put point %pointerstring
+  matchwait
+
 
 WEATHER:
   var inside 0
@@ -10900,7 +10974,7 @@ TASKBAD:
 TASKFORAGELOOP:
   if (%heldquantity >= %quantity) then return
   gosub TASKFORAGE %forageitem
-  if (%foragesuccess < -5) then return
+  if (%foragesuccess < -6) then return
   if (matchre ("$righthand", "%forageitem")) then
   {
     var foragesuccess 1
@@ -11291,7 +11365,7 @@ SUMMONWEAPONTRAINP:
 SUMMONWEAPONTRAIN:
   matchre SUMMONWEAPONTRAINP %waitstring
   matchre RETURN You lack the elemental charge to summon a weapon\.
-  matchre SUMMONWEAPONSET Closing your eyes, you grunt briefly in effort as you sense a small earthen ethereal fissure open in front of you\.  Thrusting your hand through, you draw out a.*stone (\w+)\.
+  matchre SUMMONWEAPONSET Closing your eyes, you grunt briefly in effort as you sense a small earthen ethereal fissure open in front of you\.  Thrusting your hand through, you draw out a.*stone (.*)\. 
   match SUMMONWEAPONSTOW How can you summon a weapon, when your hands are full?
   put summon weapon
   matchwait 5
@@ -12107,6 +12181,7 @@ INSTDRY:
   match INSTDRYNONE You must be holding
   matchre INSTWRING Your cloth absorbs the water without too much trouble, but remains very wet afterwards.|Using your cloth, you expertly drain|You stare at your
   match RETURN You're a bit too injured to be attempting something like that.
+  match INSTDRYPLAYING You are a bit too busy performing to do that.
   put wipe my %instrument with %instcleancloth
   matchwait 5
   var timeoutsub INSTDRY
@@ -12128,6 +12203,10 @@ INSTWRING:
   var timeoutsub INSTWRING
   var timeoutcommand wring my %instcleancloth
   goto TIMEOUT 
+
+INSTDRYPLAYING:
+  gosub PLAYSTOP
+  goto INSTDRY
 
 
 STUDYART:
@@ -12864,6 +12943,7 @@ COMMUNEBASIC:
   match RETURN After a moment, you see a vision of your god who calls to you by name, "My child, though you may not always see my face, I am pleased with thee and thy efforts."
   match RETURN After a moment, you see a crystal-clear vision of your god who speaks slowly and deliberately,
   match RETURN After a moment, you feel a clear presence like a warm blanket covering you beneath the shade of a giant Sana'ati tree.
+  match RETURN After a moment
   match COMMUNEBASIC You feel warmth spread throughout your body, making the very ends of your hair tingle. A vibrant blue nimbus encloses you before fading away.
   put commune
   matchwait 5

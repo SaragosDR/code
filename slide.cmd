@@ -23,6 +23,8 @@ var poleweapon lance
 var staveweapon quarterstaff
 var brawlweapon fist
 
+var shielditem $shielditem
+
 #scimitar|sword|broadsword|nimsha|blade|sword|mallet|cudgel|hara|mace|maul|kodur|lance|bardiche|quarterstaff|nightstick
 
 if !def(cleavelast) then put #var cleavelast 0
@@ -111,6 +113,7 @@ if ("%manename" = "doublestrike") then
 else put #echo Yellow Manuever %maneuver: %manename (%maneweapon)
 
 #IS_WEAPON_PRESENT
+if (matchre("$lefthand", "%shielditem")) then gosub STOW left
 if ("%manename" = "palmstrike") then
 {
   gosub SUMMONWEAPONBREAK $righthandnoun
@@ -151,7 +154,13 @@ else
   #BREAK_OFFHAND_NOT_NEEDED
   if ("%manename" != "doublestrike") then
 	{
-	  if ("$lefthand" != "Empty") then gosub SUMMONWEAPONBREAK $lefthandnoun
+	  if ("$lefthand" != "Empty") then 
+	  {
+	    if (!matchre("$lefthand", "%shielditem")) then
+	    {
+	      gosub SUMMONWEAPONBREAK $lefthandnoun
+	    }
+	  }
 	  var offhandexists 1
 	  var offhandcorrect 1
 	}
