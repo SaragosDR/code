@@ -16,12 +16,13 @@ var doublestrikeweapon2 $doublestrikeweapon2
 var powershotweapon $powershotweapon
 var powershotammo $powershotammo
 
+var shielditem $shielditem
 
 MAIN:  
   #TESTING_NEXT_MANEUVER_OFF_COOLDOWN
   gosub MANEUVERTEST
 
-  ###GETTING_WEAPON
+  ###CHECKING_WEAPON
   var manename %maneuverlist(%maneuver)
   var maneweapon %%manenameweapon  
   if ("%manename" = "doublestrike") then
@@ -62,7 +63,8 @@ MAIN:
     }
   }
 
-if (matchre("$lefthand", "%shielditem")) then gosub WEARITEM %shielditem
+  #WEARING_SHIELD
+  if (matchre("$lefthand", "%shielditem")) then gosub WEARITEM %shielditem
 
   #GETTINGWEAPONS
   #MAIN_WEAPON
