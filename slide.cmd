@@ -33,6 +33,7 @@ if !def(impalelast) then put #var impalelast 0
 if !def(twirllast) then put #var twirllast 0
 if !def(doublestrikelast) then put #var doublestrikelast 0
 if !def(palmstrikelast) then put #var palmstrikelast 0
+if !def(rushlast) then put #var rushlast 0
 
 var executemaneuver 1
 
@@ -99,6 +100,7 @@ if_1 then
 #TESTING_NEXT_MANEUVER_OFF_COOLDOWN
 gosub MANEUVERTEST
 
+if (matchre("$lefthand", "%shielditem")) then gosub WEARITEM %shielditem
 
 ###GETTING_WEAPON
 var manename %maneuverlist(%maneuver)

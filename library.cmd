@@ -1,7 +1,7 @@
 var lastupdated 04/18/2025
 
 var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|zephyr|
-var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mapp|mpp|mf|pfe|pom|sl|sol|
+var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mapp|mpp|mf|pfe|pom|sl|sol|word|
 var abuffs |etf|nexus|rm|zephyr
 var cyctms |aban|ars|fr|gs|iz|pyre|rim|ros|sa|sls|usol|
 var cycdbs |alb|dalu|dema|ee|hyh|shw|
@@ -46,6 +46,7 @@ var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stun
 
 #action (combo) var elapsed $gametime; math elapsed subtract %gametimestart; put #echo Yellow Elapsed: %elapsed; 10put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
 action (combo) put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
+action (combo) put #var rushlast $unixtime when ^You angle your .* towards .* and charge forwards!
 action (combo) var barbmane $unixtime; math barbmane subtract 30; put #var %manenamelast %barbmane; put #var save;put #echo Yellow Barbarian Maneuver %manename cooldown reduction! when With expert skill you end the attack and maneuver into a better position\.
 action (combo) var failtest $unixtime; math failtest subtract 80; put #var %manenamelast %failtest; send #echo Yellow ACM is still on cooldown! when You must rest a bit longer before attempting that maneuver again\.
 action (combo) off
@@ -4656,7 +4657,7 @@ PUTITEMP:
 	pause
 PUTITEMMAIN:
 	matchre PUTITEMP %waitstring
-	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.|That is far too hot to touch\!|As you attempt to place your|You can't put that there!
+	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.|That is far too hot to touch\!|As you attempt to place your|You can't put that there!|You can't do that!
 	matchre PUTRETURN You put|You drop|You briefly twist the top off of|Raffle Attendant Tizzeg examines your ticket and exclaims|A bored-looking Human boy says|You briefly twist the top off of your
 	match PUTITEMSTOW There's no room in the
 	match RETURN That's too heavy to go in there!
@@ -10234,6 +10235,7 @@ ARMORREMBOXPOP:
   var armorremcount 0
   gosub ARMORREMBOXPOPLOOP
   gosub REMITEM %shielditem
+  var cleanstow 1
   gosub STOWITEM %shielditem
   gosub REMITEM %knucklesitem
   gosub STOWITEM %knucklesitem
@@ -11500,7 +11502,7 @@ ATTACKACMCOMBOMAIN:
   matchre ATTACKACMCBADNEWS %waitstringbad
   #match ATTACKACMCRETURN Roundtime:
   matchre ATTACKACMCRETURN ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
-  matchre ATTACKACMCRETURN  ^\* .* is slain before your eyes!|^You take a step back and set your staff into a twirling motion\.
+  matchre ATTACKACMCRETURN  ^\* .* is slain before your eyes!|^You take a step back and set your staff into a twirling motion\.|^You angle your .* towards .* and charge forwards!
   #match RETURN With a loud twang, you let fly your
   #match ATTACKACMCSTOW You must free up your left hand first.
   matchre ATTACKACMCSTAND You'll need to stand up first\.|You must be standing to perform that maneuver\.
@@ -11733,7 +11735,7 @@ TENDMAIN:
     return
   }
   matchre TENDP %waitstring
-  matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove|As you reach for the
+  matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove|As you reach for the|You foolishly attempt to remove
   put tend my %tendlocation
   matchwait 5
 	var timeoutsub TENDMAIN

@@ -8,6 +8,7 @@ var healbotroom 204
 var healbotname Maorn
 
 var savedyes NO
+var deedmaterials NO
 
 var craftingstorage $craftingstorage
 var awl $awl
@@ -23,8 +24,9 @@ if {"$charactername" = "Saragos") then
   var healbotroom 204
   var healbotname Maorn
   
-  var storage haversack  
+  var storage haversack
   var workroom 264
+  var deedmaterials YES
 }
 if {"$charactername" = "Sorhhn") then
 {
@@ -34,11 +36,13 @@ if {"$charactername" = "Sorhhn") then
   
   var storage haversack  
   var workroom 264
+  var deedmaterials YES
 }
 if {"$charactername" = "Isrenar") then
 {
   var workroom 292
   var storage haversack
+  var deedmaterials YES
 }
 if {"$charactername" = "Navesi") then
 {
@@ -51,6 +55,7 @@ if {"$charactername" = "Navesi") then
   var sewingneedles sewing needles
   var slickstone slickstone
   var yardstick yardstick
+  var deedmaterials YES
 }
 if {"$charactername" = "Itusumera") then
 {
@@ -63,6 +68,7 @@ if {"$charactername" = "Itusumera") then
   var sewingneedles sewing needles
   var slickstone slickstone
   var yardstick yardstick
+  var deedmaterials YES
 }
 if {"$charactername" = "Eyuve") then
 {
@@ -75,6 +81,7 @@ if {"$charactername" = "Eyuve") then
   var sewingneedles sewing needles
   var slickstone slickstone
   var yardstick yardstick
+  var deedmaterials YES
 }
 if {"$charactername" = "Ysei") then
 {
@@ -87,6 +94,7 @@ if {"$charactername" = "Ysei") then
   var sewingneedles sewing needles
   var slickstone slickstone
   var yardstick yardstick
+  var deedmaterials YES
 }
 if {"$charactername" = "Chyral") then
 {
@@ -109,14 +117,14 @@ if ("%scripttag" != "DARK") then
 else
 {
   var badlootlist \S+ kelp|\S+ rockweed|\S+ \S+ rockweed|piece of \S+ sharkskin|\S+ root|\S+ flowers|shark's tooth|burlap cloth|felt cloth|bear-pelt moccasins threaded with white leather laces|cobalt-blue leather belt studded with iron|doeskin moccasins threaded with brown leather laces|embossed leather belt with a gold-washed buckle|fawn-brown leather belt decorated with steel studs|green leather eye patch|light grey leather belt studded with circles of polished amber|pleated deep green wool breeches cross-gartered from ankle to knee with brown leather|purple leather eye patch|seal-pelt moccasins threaded with black leather laces|bear tooth necklace strung on a leather thong|gryphon feather necklace strung on a leather thong|leatherfoot steak|yelith root|ocarina|cambrinth .*|black linen shirt with carved amethyst buttons|black silk surcoat with the crest of the Bards' Guild|pair of .* leather ankle boots decorated with .* chains|skullcap crafted of .* with colorful beadwork|black linen shirt with carved lapis lazuli buttons|jadice flowers|low-slung pair of billowy sapphire-blue gauze pants gathered close at the ankles|some heavy pearl-grey wool pants with rolled-up cuffs|black silk surcoat with the crest of the Rangers' Guild on the front|some soft .* linen trousers edged with black piping|a clay whistle in the shape of a bird|some pleated turquoise wool breeches cross-gartered from ankle to knee with pink silk cords|a pale blue leather belt decorated with copper studs
-
   var lootkeeplist infuser stone|potency crystal|\S+ powder|.* cloth|.* stack|.* leather|.* bar|.* nugget|.* fragment|.* lump|.* tear|.* shard|.* ingot|.* pebble|.* rock|.* stone|.* boulder|.* deed|bulging pouch|small pouch
+  var lootdeedlist .* cloth|.* stack|.* leather|.* bar|.* nugget|.* fragment|.* lump|.* tear|.* shard|.* ingot|.* pebble|.* rock|.* stone|.* boulder
 }
 
-var sacknouns lump|shard|nugget|bar|leather|cloth|dye|deed|stack|fragment
+var sacknouns lump|shard|tear|nugget|bar|leather|cloth|dye|deed|stack|fragment
 var commonbones badger-bone|barghest-bone|bear-bone|bison-bone|bobcat-bone|cougar-bone|crocodile-bone|deer-bone|frog-bone|ghoul-bone|goblin-bone|jackal-bone|kobold-bone|lava drake-bone|leucro-bone|prereni-bone|rat-bone|reaver-bone|rotting-bone|serpent-bone|sluagh-bone|snow goblin-bone|stalker-bone|troll-bone|wolf-bone|zombie-bone
 var commoncloths burlap|cotton|felt|linen|silk|wool
-var commonleathers amber-scale|antelope-skin|azure-scale|badger-pelt|bison-hide|ape-pelt|black goblin-skin|black leucro pelt|black-hide|blood wolf-pelt|boar hide|bobcat-pelt|bronze leucro-hide|brown poloh'izh-hide|caracal-pelt|cave-troll|clouded arzumos pelt|cougar-pelt|crimson-scale|crocodile-skin|damaska boar hide|dark-scale|deer-skin|eel-skin|frog-skin|ghoul-skin|goblin-hide|goblin-skin|gargoyle-hide|hound-pelt|green-scale|grey-scale|gryphon-pelt|horse-hide|jackal-pelt|kobold-skin|la'tami-hide|lava drake-hide|hound-pelt|blue-scale|marble-hide|ogre-skin|pivuh-skin|prereni-skin|quartz-hide|rat-pelt|reaver-pelt|red-leucro|red-scale|salt-encrusted|serpent-skin|salswar-hide|sharkskin|sheepskin|silver-leucro|sluagh-hide|snow goblin-hide|stalker-pelt|storm-bull|troll-skin|trollkin-hide|viper-skin|warcat-pelt|white-pelt|wolf-pelt|zombie-skin
+var commonleathers amber-scale|antelope-skin|azure-scale|badger-pelt|bison-hide|ape-pelt|black goblin-skin|black leucro pelt|black-hide|blood wolf-pelt|boar hide|bobcat-pelt|bronze leucro-hide|brown poloh'izh-hide|caracal-pelt|cave-troll|clouded arzumos pelt|cougar-pelt|crimson-scale|crocodile-skin|damaska boar hide|dark-scale|deer-skin|eel-skin|frog-skin|ghoul-skin|goblin-hide|goblin-skin|gargoyle-hide|hound-pelt|green-scale|grey-scale|gryphon-pelt|horse-hide|jackal-pelt|kobold-skin|la'tami-hide|lava drake-hide|hound-pelt|blue-scale|marble-hide|ogre-skin|pivuh-skin|prereni-skin|quartz-hide|rat-pelt|rat-skin|reaver-pelt|red-leucro|red-scale|salt-encrusted|serpent-skin|salswar-hide|sharkskin|sheepskin|silver-leucro|sluagh-hide|snow goblin-hide|stalker-pelt|storm-bull|troll-skin|trollkin-hide|viper-skin|warcat-pelt|white-pelt|wolf-pelt|zombie-skin
 var commonmetals brass|bronze|coal|copper|covellite|highsteel|iron|lead|nickel|oravir|pewter|platinum|silver|steel|tin|gold|zinc
 var commonstones alabaster|andesite|basalt|breccia|dolomite|gabbro|granite|jade|limestone|marble|obsidian|onyx|pumice|quartzite|sandstone|schist|serpentine|soapstone|travertine
 var commonwoods alder|apple|ash|aspen|balsa|bamboo|birch|cedar|cypress|elm|fir|hemlock|larch|mahogany|mangrove|maple|moabi|oak|pine|spruce|teak|walnut|willow
@@ -135,7 +143,7 @@ eval savedyes toupper(%savedyes)
 goto HELIBEND
 
 LOCATIONCHECK:
-	if ($zoneid != 62022) then
+	if (($zoneid != 610) && ($zoneid != 612) && ($zoneid != 62022)) then
 	{
 	  if ($zoneid = 1) then
 	  {
@@ -386,9 +394,8 @@ PROCESSSACK:
   if ("$lefthandnoun" = "sack") then gosub SWAP
   if ("$lefthand" != "Empty") then
   {
-    gosub TAPSHORTEN $lefthand
-    if (%storage != 0) then gosub PUTITEM %shorttap in my %storage
-    else gosub STOWITEM my %shorttap
+    if (%storage != 0) then gosub PUTITEM $lefthand in my %storage
+    else gosub STOWITEM my $lefthand
   }
   if ("$lefthand" != "Empty") then
   {
@@ -453,6 +460,12 @@ SACKLOOTMATS:
   else
   {
     put #echo >Log Yellow [%scripttag] Found $lefthand!
+    if (("deedmaterials" = "YES") && (matchre("%lootreceived", "%lootdeedlist"))) then
+    {
+      gosub PUTITEM my %sackname in my %storage
+      gosub GETITEM my packet
+      
+    }
     gosub PUTITEM my %shorttap in my %storage
   }
   goto SACKLOOT

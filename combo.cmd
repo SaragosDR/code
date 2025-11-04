@@ -62,6 +62,8 @@ MAIN:
     }
   }
 
+if (matchre("$lefthand", "%shielditem")) then gosub WEARITEM %shielditem
+
   #GETTINGWEAPONS
   #MAIN_WEAPON
   if ("%manename" = "palmstrike") then

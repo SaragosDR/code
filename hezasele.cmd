@@ -19,7 +19,7 @@ timer start
 gosub STOWALL
 
 MAIN:  
-  if (($zoneid != 1) && ($zoneid != 62022)) then
+  if (($zoneid != 1) && ($zoneid != 612) && ($zoneid != 610) && ($zoneid != 62022)) then
   {
     put #echo Yellow Not in Crossing or Andreshlew!  Exiting!
     exit
@@ -39,6 +39,16 @@ MAIN:
 
     if (%taskremaining > 0) then
     {
+      if ($zoneid = 612) then
+      {
+        gosub MOVE dolphin
+        gosub GOCORRAL
+      }
+      if ($zoneid = 610) then
+      {
+        gosub MOVE dolphin
+        gosub GOCORRAL
+      }
       if ($zoneid = 62022) then
       {
         gosub MOVE dolphin
