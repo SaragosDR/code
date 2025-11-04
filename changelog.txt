@@ -1,8 +1,26 @@
+11/3/25
+Updated Scripts: train, set, library, bombo, slide, helibrary, hezasele, hebob, hecatch, hecna, hedark, hegortik, hesack, hesmash, hestt
+Bugfixes to combo and slide scripts.
+Other misc bugfixes.
+
+Updated HELibrary and HEZasele to use any of the three ZoneID's that have been used for HE.
+Updated all HE scripts to make sure the repo is synced with any last minute updates I might have made last year and forgot to document.
+
+
+Added BurgleHide variable to control whether you hide or not while inside the house - affects Stealth learning.
+Added missing text for burgling if you try to stow a cylinder into a cylinder container.
+Fixed cambrinth logic to support using two identical cambrinth items.
+Bugfixes to MAGIC, PERFORM, and NONCOMBAT script options to ensure that they work with the new architecture.
+Bugfixes to worn cambrinth to make sure it's stowed.
+Script will not try to wear items that match your ShieldItem variable instead of stowing them.
+Bugfix to summoned weapon training for weapons with two words in the tap.
+
 10/23/25
 Updated Scripts: train, set, library
 Lots of work on Cleric devotion rituals.
 Bugfixes to area buffing logic.
 Fixes to Zephyr use.
+Bugfixes to summoned weapons to ensure it is properly detected when summoning one fails.
 Custom.cmd is deprecated and no longer used.
 
 
