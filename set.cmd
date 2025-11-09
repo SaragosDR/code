@@ -868,6 +868,7 @@ SET:
       }
     }
     if tolower("%1") = "tradingtasks" then goto YESNOSET
+    if tolower("%1") = "ttbadforagelist" then goto TEXTSET
     if tolower("%1") = "summoning" then goto YESNOSET
     if tolower("%1") = "summonweapon" then goto YESNOSET
     if tolower("%1") = "summonweapontimer" then goto TEXTSET
@@ -1546,6 +1547,10 @@ SET:
     if tolower("%1") = "adcpoison" then goto YESNOSET
     if tolower("%1") = "upkeepregen" then goto YESNOSET
     if tolower("%1") = "upkeepregenmana" then goto TEXTSET
+    if tolower("%1") = "embracevela" then goto YESNOSET
+    if tolower("%1") = "embracevelamana" then goto TEXTSET
+    if tolower("%1") = "embracevelatown" then goto TEXTSET
+    if tolower("%1") = "embracevelaroom" then goto TEXTSET
     if tolower("%1") = "absolution" then goto YESNOSET
     if tolower("%1") = "absolutionmana" then goto TEXTSET
     if tolower("%1") = "iztouch" then goto YESNOSET
@@ -2547,8 +2552,12 @@ DISPLAYGUILD:
       gosub OUTPUT ADCHeal
       gosub OUTPUT ADCDisease
       gosub OUTPUT ADCPoison
-      gosub OUTPUT UpkeepRegen UpkeepRegenMana
       gosub OUTPUT Absolution AbsolutionMana
+      gosub OUTPUT UpkeepRegen UpkeepRegenMana
+      echo
+      gosub OUTPUT EmbraceVela EmbraceVelaMana
+      gosub OUTPUT EmbraceVelaTown EmbraceVelaRoom
+      echo
       gosub OUTPUT IZTouch IZMana
       gosub OUTPUT IZTimer (in seconds, minimum is 0)
     }
@@ -2657,7 +2666,7 @@ DISPLAYGUILD:
       gosub OUTPUT TradingSell
       #gosub OUTPUT TradingSellSource (vault or portal)
       gosub OUTPUT TradingSellTown
-      gosub OUTPUT TradingTasks
+      gosub OUTPUT TradingTasks TTBadForageList
     }
     if $guild = "Warrior Mage" then
     {

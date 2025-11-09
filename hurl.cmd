@@ -3,7 +3,7 @@ include library.cmd
 if ("$charactername" = "Saragos") then
 {
   var weapontype elemental
-  var weaponname electric javelin
+  var weaponname electric ht
 }
 if ("$charactername" = "Sorhhn") then
 {
@@ -15,6 +15,9 @@ if ("$charactername" = "Navesi") then
   var weapontype weapon
   var weaponname tyrium axe
 }
+
+if_1 then var pvptarget %1
+else var pvptarget $pvptarget
 
 if_1 then
 {
@@ -48,5 +51,21 @@ MAINLOOP:
   {
     if !matchre("$righthand", "%weaponname") then gosub GETITEM %weaponname
   }
-  gosub ATTACKTHROWNKNIVES
+  gosub ATTACKHURLPVP
   goto MAINLOOP
+  
+  
+  
+ATTACKHURLPVPP:
+	pause
+ATTACKHURLPVP:
+	matchre FACE at what are you
+	matchre RETURN There is nothing else to face!
+	matchre ATTACKHURLPVPP %waitstring
+	matchre RETURN Roundtime|What are you trying to|You must hold the|I could not find what you were referring to\.
+	matchre THROWSTOW You need a free hand to
+  put hurl %pvptarget
+  matchwait 5
+	var timeoutsub ATTACKHURLPVP
+  var timeoutcommand hurl
+	goto TIMEOUT

@@ -10,7 +10,7 @@ var allcyclics %cyclics-%cyctms-%cycdbs
 var rituals |absolution|aeg|all|ag|bc|bloodthorns|cos|dc|echo|eli|ev|mf|mof|mon|iots|mf|mon|pom|pop|rtr|soul|vos|will|word|
 var augmentation |ease|botf|drum|echo|ecry|fae|harm|mis|rage|soul|wotm|will|word|auspice|benediction|centering|gg|mapp|pom|rev|sap|sol|ad|ags|gol|mef|refresh|tranquility|vigor|art|aus|cv|iots|mt|sap|sco|seer|shadows|ts|tv|bue|emc|ivm|ks|obfuscation|php|rei|rpu|clarity|crc|dig|hes|mo|rw|sr|tr|athleticism|bes|cs|cotc|em|hol|inst|oath|pls|stw|sott|sks|sk|wotp|ws|ava|blur|enrichment|fin|lgv|meg|phk|turi|aeg|mof|substratum|suf|sw|tw|ys|
 var debilitation |burden|dispel|aewo|alb|dalu|dmrs|dema|coz|halo|hulp|hyh|it|malediction|mc|ps|sb|sick|spit|compel|lethargy|nb|calm|dazzle|mb|ms|rend|set|shw|sleep|sod|tf|tv|hp|pv|rof|vs|vod|halt|shatter|sf|cotw|df|de|griz|hb|swarm|flu|anc|al|ee|frostbite|ip|moa|tc|ti|trem|vertigo|wb|
-var targetedmagic |stra|bonegrinder|sif|aban|bos|btn|pyre|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sts|
+var targetedmagic |stra|bonegrinder|sif|aban|bos|btn|pyre|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sorrow|sts|
 var utility |gaf|imbue|sec|alb|aot|care|eye|hodi|nexus|resonance|sanctuary|all|bf|bless|ef|it|mre|mf|om|rejuv|rezz|rev|sol|uncurse|vigil|absolution|ad|awaken|bs|cos|cd|ev|fp|foc|gs|heal|hs|hw|hl|innocence|rp|regenerate|vh|bc|contingency|dc|dg|fm|locate|moonblade|mg|pg|rtr|rf|rend|rs|seer|shm|ss|shadowling|sm|sov|tf|teleport|th|unleash|bb|cfb|cfw|cf|devour|eotb|nr|qe|resection|roc|rof|rog|ag|as|bot|ba|crc|da|hoj|how|rue|tr|vos|af|bes|blend|compost|em|mon|sks|nou|rega|stc|ab|etf|foi|ignite|rm|zephyr|
 var warding |lw|maf|fotf|gj|name|repr|ghs|halo|mpp|pfe|sl|sos|spit|ic|pop|tranquility|col|psy|shear|tksh|wd|ch|emc|ghoulflesh|solace|worm|aa|courage|how|sp|tk|bloodthorns|etc|ey|fwb|rits|eli|ir|mom|non|trc|ac|es|gi|gf|voi|
 var targeted |stra|bonegrinder|sif|bos|btn|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sts|
@@ -51,7 +51,7 @@ action (combo) var barbmane $unixtime; math barbmane subtract 30; put #var %mane
 action (combo) var failtest $unixtime; math failtest subtract 80; put #var %manenamelast %failtest; send #echo Yellow ACM is still on cooldown! when You must rest a bit longer before attempting that maneuver again\.
 action (combo) off
 
-var badforagelist glaysker flower|briarberry root|coffee bean|almond|green moss|rosewood limb|eghmok moss|nuloe stem
+var badforagelist glaysker flower|briarberry root|coffee bean|almond|green moss|rosewood limb|eghmok moss
 #var badforagelist almond|glaysker flower|coffee bean|green moss|jasmine blossom|eghmok moss|plovik leaf|briarberry root|rosewood limb
 goto LIBEND
 
@@ -866,6 +866,10 @@ VARCHECKS:
   if !matchre("$upkeepregen", "\b(YES|NO)\b") then put #var upkeepregen NO
   if $upkeepregenmana >= 0 then
   else put #var upkeepregenmana 5
+  if !matchre("$embracevela", "\b(YES|NO)\b") then put #var embracevela NO
+  if $embracevelamana >= 300 then
+  else put #var embracevelamana 300
+  
   if !matchre("$absolution", "\b(YES|NO)\b") then put #var absolution NO
   if $absolutionmana >= 150 then
   else put #var absolutionmana 150
@@ -974,6 +978,7 @@ VARCHECKS:
   if !matchre("$tradingselltown", "\b(%townvaultpresetlist)\b") then put #var tradingselltown none
   if !matchre("$tradingsellsource", "\b(vault|portal)\b") then put #var tradingsellsource vault
   if !matchre("$tradingtasks", "\b(YES|NO)\b") then put #var tradingtasks NO
+  if !def(ttbadforagelist) then put #var ttbadforagelist none
   #GUILD-WM
   if !matchre("$summoning", "\b(YES|NO)\b") then put #var summoning YES
   if !matchre("$summonweapon", "\b(YES|NO)\b") then put #var summonweapon NO
@@ -2495,6 +2500,13 @@ SPELLSTATCHECK:
     var spellminmana 5
     var spellcapmana 33
   }
+  if ("%spelldiffname" = "sorrow") then
+  {
+    var spellmana 4
+    var spelldifficulty 3
+    var spellminmana 15
+    var spellcapmana 100
+  }
   if ("%spelldiffname" = "sls") then
   {
     var spellmana 4
@@ -3858,7 +3870,10 @@ STATUSCHECK:
     gosub SPELLCANCEL
   }
   #SPELL_PREPPING
-  if (%scriptmode = 1) then gosub MAINSPELLLOGIC
+  if (%scriptmode = 1) then
+  {
+    if (%buffingonly != 1) then gosub MAINSPELLLOGIC
+  }
   if (%scriptmode = 0) then gosub MAINSPELLLOGICNC
   #CASTING
   if (%casting = 1) then gosub CASTINGLOGIC
@@ -5820,6 +5835,28 @@ PIERCECOMBO:
   var highattack lunge
   return
 
+BOWLOADCHECK:
+  var bowcheckstring $0
+  goto BOWLOADCHECKMAIN
+BOWLOADCHECKP:
+  pause
+BOWLOADCHECKMAIN:
+  matchre BOWLOADCHECKP %waitstring
+  matchre BOWLOADCHECKGOOD On the .* you see .*\.
+  matchre BOWLOADCHECKBAD There is nothing on there\.|I could not find what you were referring to\.
+  put look on %bowcheckstring
+  matchwait 5
+	var timeoutsub ADV
+  var timeoutcommand advance
+	goto TIMEOUT
+
+BOWLOADCHECKGOOD:
+  var bowloadgood 1
+  return
+  
+BOWLOADCHECKBAD:
+  var bowloadgood 0
+  return
 
 BOWLOADLOGIC:
   var usingdualload 0
@@ -8089,7 +8126,7 @@ PVPPREPREL:
 
 PVPTARGET:
   var targetstring $0
-  goto PVPPREPMAIN
+  goto PVPTARGETMAIN
 PVPTARGETP:
   pause
 PVPTARGETMAIN:
@@ -11735,7 +11772,7 @@ TENDMAIN:
     return
   }
   matchre TENDP %waitstring
-  matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove|As you reach for the|You foolishly attempt to remove
+  matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove|As you reach for the|You foolishly attempt to remove|You deftly remove
   put tend my %tendlocation
   matchwait 5
 	var timeoutsub TENDMAIN
@@ -12085,7 +12122,7 @@ ASSESSINSTRUMENT:
   var timeoutcommand assess my %instrument
   goto TIMEOUT
 
-ASSESSINSTRWOUNDED:
+ASSESSINSTWOUNDED:
   var goupkeep 1
   return
 

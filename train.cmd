@@ -1677,6 +1677,8 @@ TRADERONLY:
   var tradingselltown $tradingselltown
   var tradingsellsource $tradingsellsource
   var tradingtasks $tradingtasks
+  var ttbadforagelist $ttbadforagelist
+  if ("%ttbadforagelist" != "none") then var badforagelist %badforagelist|%ttbadforagelist
   return
 
 WARMAGEONLY:
@@ -2083,6 +2085,7 @@ HUNTINGVARLOAD:
       if ("%huntingpremium" = "NO") then var findroomlist 6|7|8|9|10|11|20|19|16|11|12|15|18|21|22|17|14|13
       if ("%huntingpremium" = "YES") then var findroomlist 6|7|8|9|10|11|20|19|16|11|12|15|18|21|22|17|14|13|50|51|52|53|54
       if ("%huntingpremium" = "ONLY") then var findroomlist 50|51|52|53|54
+      #if ("$charactername" = "Selmoren") then var findroomlist 6|7|8
       var bugoutroom 1
       var nearestportaltown crossing
     }
@@ -7499,6 +7502,7 @@ PERFORMLOOP:
           var prepmana %spellminmana  
           var addmana %eilliescrymanamana
           math addmana subtract %prepmana
+          if (%addmana < 0) then var addmana 0
 	        var casting 1
 	        var scancel 0
         }
@@ -7678,6 +7682,12 @@ MTPERFORMLOOP:
     var combatperforming 1
     gosub PERFORMLOOP
     var combatperforming 0
+    if (%goupkeep = 1) then
+    {
+      var noncombatperformactive 0
+      var combatperforming 0
+      gosub STOWALL
+    }
     if ($Performance.LearningRate > 33) then
     {
       var performlock 1
@@ -8779,6 +8789,7 @@ DBALOGIC:
   else var prepmana %spellminmana  
   var addmana %dbaspell%dbachoicemana
   math addmana subtract %prepmana
+  if (%addmana < 0) then var addmana 0
   
   if ("%spellprepping" = "dr") then var tmcast 1
   var spellsymb 0
@@ -9131,7 +9142,7 @@ PERFORMLOGIC:
       }
     }
   }
-  if %playing = 0 then
+  if (%playing = 0) then
   {
     gosub PLAY
   }
@@ -9569,6 +9580,7 @@ RESEARCHLOGIC:
     else var prepmana %spellminmana  
     var addmana %gafmana
     math addmana subtract %prepmana
+    if (%addmana < 0) then var addmana 0
 	  var casting 1
 	  var scancel 0
 	  var prepped 0
@@ -9832,9 +9844,10 @@ MAINSPELLLOGIC:
             var harnessed 0
             var spellprepping cd
             gosub SPELLSTATCHECK %spellprepping
-            var prepmana %spellminmana 
-            var addmana %cursediseasemana    
+            var prepmana %spellminmana
+            var addmana %cursediseasemana
             math addmana subtract %prepmana
+            if (%addmana < 0) then var addmana 0
           }
         }
       }
@@ -9864,9 +9877,10 @@ MAINSPELLLOGIC:
                     var harnessed 0
                     var spellprepping heal
                     gosub SPELLSTATCHECK %spellprepping
-                    var prepmana %spellminmana 
+                    var prepmana %spellminmana
                     var addmana %healmana    
                     math addmana subtract %prepmana
+                    if (%addmana < 0) then var addmana 0
                   }
                 }
               }
@@ -9888,9 +9902,10 @@ MAINSPELLLOGIC:
             var harnessed 0
             var spellprepping vh
             gosub SPELLSTATCHECK %spellprepping
-            var prepmana %spellminmana 
+            var prepmana %spellminmana
             var addmana %vithealmana    
             math addmana subtract %prepmana
+            if (%addmana < 0) then var addmana 0
           }
         }
       }
@@ -10438,6 +10453,7 @@ SPELLCHOICELOGIC:
             var prepmana %spellminmana
             var addmana %paralysismana
             math addmana subtract %prepmana
+            if (%addmana < 0) then var addmana 0
           }
           else
           {
@@ -10451,6 +10467,7 @@ SPELLCHOICELOGIC:
             else var prepmana %spellminmana  
             var addmana %spelltmmana
             math addmana subtract %prepmana
+            if (%addmana < 0) then var addmana 0
           }
         }
         if %spellleast = 2 then
@@ -10473,6 +10490,7 @@ SPELLCHOICELOGIC:
           var prepmana %spellminmana
           var addmana %spelldebilmana
           math addmana subtract %prepmana
+          if (%addmana < 0) then var addmana 0
           if %mindshout = "YES" then
           {
             if %heavytmready = 1 then
@@ -10482,6 +10500,7 @@ SPELLCHOICELOGIC:
               var prepmana %spellminmana
               var addmana %mindshoutmana
               math addmana subtract %prepmana
+              if (%addmana < 0) then var addmana 0
             }
           }
           if %spellprepping = "dr" then
@@ -10504,6 +10523,7 @@ SPELLCHOICELOGIC:
           else var prepmana %spellminmana 
           var addmana %spell%spellleastmana     
           math addmana subtract %prepmana
+          if (%addmana < 0) then var addmana 0
           if %spell%spellleastsymb = "YES" then var spellsymb 1
           else var spellsymb 0
           var casting 1
@@ -12621,6 +12641,7 @@ BUFFLOGIC:
           var prepmana %spellminmana
           var addmana %misdirectionmana
           math addmana subtract %prepmana
+          if (%addmana < 0) then var addmana 0
           return
         }
       }
@@ -12646,6 +12667,7 @@ BUFFLOGIC:
         var prepmana %spellminmana 
         var addmana %healmana    
         math addmana subtract %prepmana
+        if (%addmana < 0) then var addmana 0
         return
       }
     }
@@ -12680,6 +12702,7 @@ BUFFLOGIC:
         var prepmana %spellminmana 
         var addmana %curediseasemana    
         math addmana subtract %prepmana
+        if (%addmana < 0) then var addmana 0
         return
       }
     }
@@ -12703,6 +12726,7 @@ BUFFLOGIC:
         var prepmana %spellminmana 
         var addmana %flushpoisonsmana    
         math addmana subtract %prepmana
+        if (%addmana < 0) then var addmana 0
         return
       }
     }
@@ -12723,6 +12747,7 @@ BUFFLOGIC:
         var prepmana %spellminmana
         var addmana %piercinggazemana
         math addmana subtract %prepmana
+        if (%addmana < 0) then var addmana 0
       }  
     }
   }
@@ -12743,6 +12768,7 @@ BUFFLOGIC:
         var prepmana %spellminmana
         var addmana %symbiosismana
         math addmana subtract %prepmana
+        if (%addmana < 0) then var addmana 0
         return
       }
     }
@@ -12987,6 +13013,7 @@ BUFFINGFUNC:
     #put #echo Yellow prepmana: %prepmana
     var addmana %buff%buffloopmana
     math addmana subtract %prepmana
+    if (%addmana < 0) then var addmana 0
 	}
 	return
 
