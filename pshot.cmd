@@ -10,7 +10,8 @@ if !def(powershotlast) then put #var powershotlast 0
   action (combo) on
   
 
-
+if_1 then var pvptarget %1
+else var pvptarget $pvptarget
 
 var manetest $unixtime
 math manetest subtract $powershotlast
@@ -25,6 +26,7 @@ if (%manetest > 90) then
     gosub BOWLOAD %powershotammo
     gosub STOWITEM %powershotammo
   }
+  gosub FACETARGET %pvptarget
   gosub ATTACKACMCOMBO powershot
   gosub STOWFEET
 }
