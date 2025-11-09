@@ -17,7 +17,15 @@ var manetest $unixtime
 math manetest subtract $powershotlast
 if (%manetest > 90) then
 {
-  if (!matchre("$righthand", "%powershotweapon")) then gosub GETITEM %powershotweapon
+  if ("$righthand" != "Empty") then 
+  {
+    if (!matchre("$righthand", "%powershotweapon")) then
+    {
+      gosub STOW right
+      gosub GETITEM %powershotweapon  
+    }
+  }
+  else gosub GETITEM %powershotweapon  
   gosub BOWLOADCHECK %powershotweapon
   if (%bowloadgood = 0) then
   {
