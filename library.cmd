@@ -1298,7 +1298,7 @@ NEWTOWNPRESET:
 		var rttraveldest hib
 		var rtmove NO
 		if (%towntype = "upkeep") then var upkeepzone 116
-		if (%towntype = "burgle") then var rttargetroom 439
+		if (%towntype = "burgle") then var rttargetroom 64
 		if (%towntype = "perform") then var rttargetroom 442
 		if (%towntype = "pawn") then var rttargetroom 229
 		if (%towntype = "forging") then var rttargetroom 408
@@ -8635,7 +8635,7 @@ PREPSPELL:
 	matchre PREPBADHEAVYTM You are still too fatigued from your previous efforts to manifest another major feat of offensive magic.
 	matchre RETURN You trace a|You raise your|You raise an|You begin chanting|With rigid|With meditative|With calm|With tense|You mutter|You briskly utter a few sharp words|Darkly gleaming motes of
 	match RETURN As you attempt to prepare the spell, a sense of overwhelming peace washes over you.
-	matchre RETURN You begin to hum|You begin your enchante|The first gentle notes|With a sharp cut to your voice|Low, hummed tones form|You begin to chant a mesmerizing|With a resounding "POP"|You begin to sing, a gentle|Wrapped in winter|You weave a soft|Slow, rich tones|Though softly humming|In a low tone you|The wailing of lost souls|Turning your focus solemnly inward|You hear the slow, rich tones of|as you trace your finger along mana|Images of streaking stars falling from the heavens flash across your vision|With great force, you slap your hands together|You direct your attention toward the heavens|You whistle an intricate sequence|A radiant glow wreathes your hands|A strong wind swirls around you|Glowing geometric patterns arc between|Light withdraws from around you|Calmly reaching out with one hand,|In one fluid motion, you bring your palms|You start frantically flailing your hands|Shadow and light collide wildly around|You gaze skyward and trace the planetary|You spin about wildly, whirling around with a feral|Throwing your head back, you release a savage roar|You gaze at your hands, touching your thumb to each|Accompanied with a flash of light, you clap your hands|Droplets of water coalesce around your fingertips|Turning your head slightly and gazing directly|Inhaling deeply, you adopt a cyclical rhythm in your breaths|You clasp your silvery-white flame shrouded hands together|Focusing intently, you slice seven straight lines through|You exhale softly, your breath flowing into a shimmering cloud|You inhale sharply, invoking the
+	matchre RETURN You begin to hum|You begin your enchante|The first gentle notes|With a sharp cut to your voice|Low, hummed tones form|You begin to chant a mesmerizing|With a resounding "POP"|You begin to sing, a gentle|Wrapped in winter|You weave a soft|Slow, rich tones|Though softly humming|In a low tone you|The wailing of lost souls|Turning your focus solemnly inward|You hear the slow, rich tones of|as you trace your finger along mana|Images of streaking stars falling from the heavens flash across your vision|With great force, you slap your hands together|You direct your attention toward the heavens|You whistle an intricate sequence|A radiant glow wreathes your hands|A strong wind swirls around you|Glowing geometric patterns arc between|Light withdraws from around you|Calmly reaching out with one hand,|In one fluid motion, you bring your palms|You start frantically flailing your hands|Shadow and light collide wildly around|You gaze skyward and trace the planetary|You spin about wildly, whirling around with a feral|Throwing your head back, you release a savage roar|You gaze at your hands, touching your thumb to each|Accompanied with a flash of light, you clap your hands|Droplets of water coalesce around your fingertips|Turning your head slightly and gazing directly|Inhaling deeply, you adopt a cyclical rhythm in your breaths|You clasp your silvery-white flame shrouded hands together|Focusing intently, you slice seven straight lines through|You exhale softly, your breath flowing into a shimmering cloud|You inhale sharply, invoking the|Meditating on the stillness of the deep ocean,|Steeling your resolve, you draw one hand before you, 
 	matchre PREPREL you're already preparing|You have already fully prepared|You are already preparing
 	match SPELLCANCEL Something in the area interferes with your spell preparations.
 	match SPELLCANCEL As quickly as you form the spell pattern in your mind it slips away from you again.
@@ -11772,7 +11772,7 @@ TENDMAIN:
     return
   }
   matchre TENDP %waitstring
-  matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove|As you reach for the|You foolishly attempt to remove|You deftly remove
+  matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove|As you reach for the|You foolishly attempt to remove|You deftly remove|You were not able to find anything to remove\.|There are no areas that are bleeding\.|You carefully attempt|You callously remove
   put tend my %tendlocation
   matchwait 5
 	var timeoutsub TENDMAIN
@@ -12983,6 +12983,7 @@ COMMUNEBASIC:
   match RETURN After a moment, you see a crystal-clear vision of your god who speaks slowly and deliberately,
   match RETURN After a moment, you feel a clear presence like a warm blanket covering you beneath the shade of a giant Sana'ati tree.
   match RETURN After a moment
+  match RETURN You sense nothing special from your communing.  Maybe something isn't right with your ritual.
   match COMMUNEBASIC You feel warmth spread throughout your body, making the very ends of your hair tingle. A vibrant blue nimbus encloses you before fading away.
   put commune
   matchwait 5
@@ -12994,7 +12995,7 @@ COMMUNEP:
   pause
 COMMUNE:
   matchre COMMUNEP %waitstring
-  matchre COMMUNEBAD You stop as you realize that you have attempted a commune too recently in the past.|You struggle to commune, but feel somehow too hollow to channel Eluned's waters.
+  matchre COMMUNEBAD You stop as you realize that you have attempted a commune too recently in the past.|You struggle to commune, but feel somehow too hollow to channel Eluned's waters\.|Nothing happens\.
   matchre RETURN Roundtime|You grind some dirt in your fist|You feel warmth spread throughout your body|As you commune you sense that the ground is already consecrated\.
   put commune %commune
   matchwait

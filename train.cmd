@@ -5085,6 +5085,7 @@ NEWAREADECISION:
       var scriptareachange upkeep
       return
     }
+    put #echo noncombat: %noncombat
     if ("%noncombat" = "YES") then
     {
       gosub NEWNONCOMBATCHECKS
@@ -6412,18 +6413,7 @@ AUTOPATHLOGIC:
     {
       var didautopath 1
       gosub MOVE healer   
-      if (matchre("$roomobjs", "vela'tohr (\w+)")) then
-      {
-        put join list
-        gosub TOUCHVELA $0
-        match RETURN The last of your wounds knit shut, a cool wave of relief washing over you.
-        matchwait 180
-      }
-      else
-      {
-        put join list
-        waitfor Kaiva crosses your name off the waiting list.
-      }
+      gosub CROSSINGHEALER
     }
     else
     {
@@ -6439,6 +6429,12 @@ AUTOPATHLOGIC:
   }
   return
 
+CROSSINGHEALER:
+  if (matchre("$roomobjs", "vela'tohr (\w+)")) then gosub TOUCHVELA $0
+  match RETURN The last of your wounds knit shut, a cool wave of relief washing over you.
+  match Kaiva crosses your name off the waiting list.
+  put join list
+  matchwait 240
 
 HEALERUSEP:
   pause
@@ -8692,7 +8688,7 @@ TASKLOGIC:
     put #echo Yellow >Log [Mags]: Failed to forage %forageitem!
     gosub TASKMOVE
     gosub TASKCANCEL
-    goto MAINLOOP
+    goto TASKLOGIC
   }
   gosub TASKMOVE
   var givingdone 0
@@ -11710,78 +11706,63 @@ MULTITRAINLOGIC:
   var lowestskill2 %lowestskill
   var lowestpos2 %lowestlocation
   #TESTING_IF_DONE
-  if %multimode = 1 then
+  if (%multimode = 1) then
   {
-    #echo lowestskill1: %lowestskill1 - mstarget: %mstarget
-    if %lowestskill1 >= %mstarget then var mstarget 0
+    #put #echo Yellow lowestskill1: %lowestskill1 - mstarget: %mstarget
+    if (%lowestskill1 >= %mstarget) then var mstarget 0
     if (%multiareapriority = 2) then
     {
-      if %lowestskill2 = 0 then var mstarget 0
+      if (%lowestskill2 = 0) then var mstarget 0
     }
   }
-  if %multimode = 2 then
+  if (%multimode = 2) then
   {
-    #echo lowestskill2: %lowestskill2 - mstarget: %mstarget
-    if %lowestskill2 >= %mstarget then var mstarget 0
+    #put #echo Yellow lowestskill2: %lowestskill2 - mstarget: %mstarget
+    if (%lowestskill2 >= %mstarget) then var mstarget 0
     if (%multiareapriority = 1) then
     {
-      if %lowestskill1 = 0 then var mstarget 0
+      if (%lowestskill1 = 0) then var mstarget 0
     }
   }
   #CHOOSING_NEW_MODE
-  if %mstarget = 0 then
+  if (%mstarget = 0) then
   {
     if (%multiareapriority = 2) then
     {
-      if %lowestskill1 < %lowestskill2 then
-      {
-        #put #echo Yellow Skill1 <= Skill2
-        var mstargetwork %lowestskill1
-        math mstargetwork add %multimindstep
-        if %mstargetwork > 34 then var mstargetwork 34
-        var mstarget %mstargetwork
-        #put #echo Yellow Current MS is %mode1list(%lowestpos1) - %lowestskill1.  New target is %mstarget.
-        var multimode 1
-        gosub MODETRANSITION
-      }
+      if (%lowestskill2 < %multimindstep) then gosub MULTISETSKILL 2 1
       else
       {
-        #put #echo Yellow Skill2 < Skill1
-        var mstargetwork %lowestskill2
-        math mstargetwork add %multimindstep
-        if %mstargetwork > 34 then var mstargetwork 34
-        var mstarget %mstargetwork
-        #put #echo Yellow Current MS is %mode2list(%lowestpos2) - %lowestskill2.  New target is %mstarget.
-        var multimode 2
-        gosub MODETRANSITION
+        if (%lowestskill1 < %lowestskill2) then gosub MULTISETSKILL 1 2
+        else gosub MULTISETSKILL 2 1
       }
     }
     else
     {
-      if %lowestskill1 <= %lowestskill2 then
-      {
-        #put #echo Yellow Skill1 <= Skill2
-        var mstargetwork %lowestskill1
-        math mstargetwork add %multimindstep
-        if %mstargetwork > 34 then var mstargetwork 34
-        var mstarget %mstargetwork
-        #put #echo Yellow Current MS is %mode1list(%lowestpos1) - %lowestskill1.  New target is %mstarget.
-        var multimode 1
-        gosub MODETRANSITION
-      }
+      if (%lowestskill1 < %multimindstep) then gosub MULTISETSKILL 1 2
       else
       {
-        #put #echo Yellow Skill2 < Skill1
-        var mstargetwork %lowestskill2
-        math mstargetwork add %multimindstep
-        if %mstargetwork > 34 then var mstargetwork 34
-        var mstarget %mstargetwork
-        #put #echo Yellow Current MS is %mode2list(%lowestpos2) - %lowestskill2.  New target is %mstarget.
-        var multimode 2
-        gosub MODETRANSITION
+        if (%lowestskill1 <= %lowestskill2) then gosub MULTISETSKILL 1 2
+        else gosub MULTISETSKILL 2 1
       }
     }
   }
+  return
+
+MULTISETSKILL:
+  if (%multimode = 0) then var mstarget %multimindstep
+  else
+  {
+    if (%lowestskill$2 < %multimindstep) then var mstarget %multimindstep
+    else
+    {
+      var mstarget %lowestskill$1
+      math mstarget add %multimindstep
+      if %mstarget > 34 then var mstarget 34
+    }
+  }
+  #put #echo Yellow Current MS is %mode$1list(%lowestpos$1) - %lowestskill$1.  New target is %mstarget.
+  var multimode $1
+  gosub MODETRANSITION
   return
 
 

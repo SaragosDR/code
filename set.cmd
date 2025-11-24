@@ -868,7 +868,7 @@ SET:
       }
     }
     if tolower("%1") = "tradingtasks" then goto YESNOSET
-    if tolower("%1") = "ttbadforagelist" then goto TEXTSET
+    if tolower("%1") = "ttbadforagelist" then goto LISTSET
     if tolower("%1") = "summoning" then goto YESNOSET
     if tolower("%1") = "summonweapon" then goto YESNOSET
     if tolower("%1") = "summonweapontimer" then goto TEXTSET
