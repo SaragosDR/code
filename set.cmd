@@ -887,6 +887,7 @@ SET:
     
     if tolower("%1") = "minconcentration" then goto TEXTSET
     if tolower("%1") = "minmana" then goto TEXTSET
+    if tolower("%1") = "fastmagic" then goto YESNOSET
     if tolower("%1") = "straightcast" then goto YESNOSET
     if tolower("%1") = "difficulty1percent" then goto TEXTSET
     if tolower("%1") = "difficulty2percent" then goto TEXTSET
@@ -2191,6 +2192,7 @@ DISPLAYMAGIC:
   {
     put #echo
     put #echo Gray mono -----Advanced Options-----
+    gosub OUTPUT FastMagic (more rapid casting for experienced casters with shorter roundtimes.)
     gosub OUTPUT StraightCast (Prep spells at your cap when Arcana and Attunement are locked.  For advanced casters.)
     gosub OUTPUT Difficulty1Percent (Percentage of full prep to wait for on intro spells.)
     gosub OUTPUT Difficulty2Percent (Percentage of full prep to wait for on basic spells.)

@@ -487,6 +487,7 @@ VARCHECKS:
   else put #var minconcentration 80
   if $minmana >= 10 then
   else put #var minmana 30
+  if !matchre("$fastmagic", "\b(YES|NO)\b") then put #var fastmagic NO
   if !matchre("$straightcast", "\b(YES|NO)\b") then put #var straightcast NO
   if $difficulty1percent >= 0 then
   else put #var difficulty1percent 100
@@ -4859,7 +4860,7 @@ STOWMAIN:
 	goto TIMEOUT
 
 STOWNOSTORAGE:
-  gosub STOWDEFAULT %storage
+  gosub STOREDEFAULT %storage
   goto STOWMAIN
 
 STOWINJURED:
@@ -4952,12 +4953,17 @@ STOWFEET:
   matchre STOWFEETP %waitstring
   match STOWFEET You pick up
   match RETURN Stow what?
+  match STOWFEETDEFAULT I can't find your container for stowing things in!  Type STORE HELP for information on how to set up your containers.
   match STOWFEETFULL You need a free hand to pick that up.
   put stow feet  
   matchwait 5
   var timeoutsub STOWFEET
   var timeoutcommand stow feet
 	goto TIMEOUT
+  
+STOWFEETDEFAULT:
+  gosub STOREDEFAULT %storage
+  goto STOWFEET
   
 STOWFEETFULL:
   gosub STOWALL
@@ -5433,7 +5439,7 @@ SWAPSWORDMAIN:
   matchre SSWAPTHE as a two-handed edged weapon|to a two-handed edged grip
   matchre SWAPSWORDP %waitstring
   match SWAPSWORDNOTHELD You must hold the
-  match RETURN Will alone cannot conquer the paralysis that has wracked your body.
+  match SWAPPABLEINJURED Will alone cannot conquer the paralysis that has wracked your body.
   put swap %swapstring
   matchwait 5
   var timeoutsub SWAPSWORDMAIN
@@ -5483,7 +5489,7 @@ SWAPBARMACEMAIN:
   matchre SWAPBMLB to a heavy blunt grip|as a heavy blunt weapon
   matchre SWAPBMTHB to a two-handed blunt grip|as a two-handed blunt weapon
   match SWAPBARMACENOTHELD You must hold the
-  match RETURN Will alone cannot conquer the paralysis that has wracked your body.
+  match SWAPPABLEINJURED Will alone cannot conquer the paralysis that has wracked your body.
   put swap %swapbarstring
   matchwait 5
   var timeoutsub SWAPBARMACEMAIN
@@ -5541,12 +5547,26 @@ SWAPRISTEMAIN:
   matchre SWAPRTHB as a two-handed blunt weapon|to a two-handed blunt grip
   matchre SWAPRLE as a heavy edged weapon|to a heavy edged grip
   match SWAPRISTENOTHELD You must hold the
+  match SWAPPABLEINJURED Will alone cannot conquer the paralysis that has wracked your body.
   matchre SWAPRISTEP %waitstring
   put swap %swapristestring
   matchwait 5
   var timeoutsub SWAPRISTEMAIN
   var timeoutcommand swap %swapristestring
 	goto TIMEOUT
+
+SWAPPABLEINJURED:
+  if ("%autoupkeep" = "YES") then
+  {
+    var goupkeep 1
+    var autype wounds
+  }
+  else
+  {
+    if ("%bugout" = "YES") then goto BUGOUT
+    else goto SWAPTOOINJURED
+  }
+  return
 	
 SWAPRSTOW:
   if %getitemhand = "right" then

@@ -1,12 +1,11 @@
 ########################################
 ###Training scripts by player of Saragos.
 ###Version 2.0
-###Last Updated: 11/03/2025
+###Last Updated: 12/21/2025
 ########################################
 
 include library.cmd
 include craftlibrary.cmd
-#include custom.cmd
 
 #ScriptMode -1 = Help
 #ScriptMode 0 = NonCombat
@@ -435,7 +434,7 @@ ALERTINIT:
   if ((%speechalerts = "YES") && (tolower("%scriptmodename") != "combat")) then
   { 
     var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,|The apprentice repairman looks over|A youthful attendant hands you some bundling rope and says,|You hand the apprentice repairman|The apprentice repairman smiles and says|The horse-drawn carriage's driver shouts|Mags calls out,|Aelik scowls and says,|Cormyn scowls and says,
-    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.
+    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.|An Elothean clerk says|You hand an Elothean clerk
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "|The shadowling exclaims,|You throw your head back and howl,|After a moment, you see a crystal-clear vision of your|After a moment, you see a vision of your god who calls to you by name,
@@ -1065,7 +1064,7 @@ COMMANDVARLOAD:
     var appraise NO
     var astro NO
     var textbook NO
-    #var harnessing YES
+    #var harnessing YES    
     var straightcast NO
     var perchealth NO
     var bugout NO
@@ -3645,7 +3644,6 @@ STATUSVARLOAD:
   var stance 0
   var stealthcount 0
   var stealthmax 0
-  var summfull 0
   var tacticsdone 1
   var tacticsmove 0
   var tacticsmax 0
@@ -3953,6 +3951,7 @@ MAINVARLOAD:
   #MAGIC
   var minconcentration $minconcentration
   var minmana $minmana
+  var fastmagic $fastmagic
   var straightcast $straightcast
   var difficulty1percent $difficulty1percent
   var difficulty2percent $difficulty2percent
@@ -4410,6 +4409,13 @@ COMBATLOOP:
     gosub STATUSCHECK
     if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
   }
+  #MAGIC
+  if ("%fastmagic" != "YES") then
+  {
+    var slowmagic 1
+    gosub MAINSPELLLOGIC
+    var slowmagic 0
+  }
   #NVSTEALTH
   if ((%avoidshock = "YES") && (%stealth = "YES")) then
   {
@@ -4628,7 +4634,7 @@ COMBATLOOP:
       gosub STATUSCHECK
       if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
     }
-    if %pathway = "YES" then
+    if ("%pathway" = "YES") then
     {
       gosub PATHWAYLOGIC
       gosub STATUSCHECK
@@ -6414,6 +6420,7 @@ AUTOPATHLOGIC:
       var didautopath 1
       gosub MOVE healer   
       gosub CROSSINGHEALER
+      echo back from it!
     }
     else
     {
@@ -6432,9 +6439,9 @@ AUTOPATHLOGIC:
 CROSSINGHEALER:
   if (matchre("$roomobjs", "vela'tohr (\w+)")) then gosub TOUCHVELA $0
   match RETURN The last of your wounds knit shut, a cool wave of relief washing over you.
-  match Kaiva crosses your name off the waiting list.
+  match RETURN Kaiva crosses your name off the waiting list.
   put join list
-  matchwait 240
+  matchwait 180
 
 HEALERUSEP:
   pause
@@ -6900,7 +6907,7 @@ COUNTCONTAINER:
 
 BUNDLESELL:
   #if (($Time.isDay != 1) && ($zoneid = 150)) then return
-  var bundlefindname bundle
+  var bundlefindname tight bundle
   gosub BUNDLEFIND
   if %foundbundle = 0 then return
   if ((matchre("$roomobjs" "%furrier")) || (matchre("$roomdesc" "%furrier"))) then
@@ -6954,7 +6961,7 @@ BUNDLEFINDP:
 BUNDLEFIND:
   matchre BUNDLEFINDP ...wait|type ahead|stunned|while entangled in a web
   matchre BUNDLEFINDYES You see
-  matchre BUNDLEFINDNO I could not find what you were referring to.
+  matchre BUNDLEFINDNO I could not find what you were referring to.|A pale blue faesilk incense bundle clasped 
   put look %bundlefindname
   matchwait
 
@@ -9977,64 +9984,68 @@ MAINSPELLLOGIC:
       gosub OMLOGIC
       if %casting = 1 then return
     }
-    #CYCLICS
-    if ((%cyclic = "YES") || (%cyctm = "YES") || (%cycdebil = "YES")) then
+    #TRAINING_SPELLS
+    if (("%fastmagic" = "YES") || (%slowmagic = 1)) then
     {
-      if ("%cyclicpriorty" != "YES") then
+      #CYCLICS
+      if ((%cyclic = "YES") || (%cyctm = "YES") || (%cycdebil = "YES")) then
       {
-        gosub SPELLCYCLOGIC
-        if %casting = 1 then return
-      }
-    }
-    #DEBILASSIST
-    if ((%debilassist = "YES") && (%buffingonly != 1) && ($monstercount > 0)) then
-    {
-      if matchre("%dbalist", "%weapontype") then
-      {
-        gosub DBALOGIC
-      }
-    }
-    #ICUTU_ZAHARENLA
-    if ((%iztouch = "YES") && ("$guild" = "Empath") && (%buffingonly != 1) && ($monstercount > 0)) then
-    {
-      if $SpellTimer.IcutuZaharenela.active != 1 then
-      {
-        if %casting != 1 then  
+        if ("%cyclicpriorty" != "YES") then
         {
-          gosub RELCYCLIC
-          gosub PERCSELF
-          var spellprepping iz
-          var prepmana %izmana
-          var addmana 0
-          var cycliccast 1
-          var spellsymb 0
-          var casting 1
-          var scancel 0
-          var prepped 0
-          var charged 0
-          var harnessed 0
+          gosub SPELLCYCLOGIC
+          if %casting = 1 then return
         }
       }
-      else gosub ICUTULOGIC
-    }
-    #STRAIGHT_SPELLCASTING
-    if (("%spell" = "YES") || ("%tm" = "YES") || ("%debil" = "YES")) then
-    {
-      gosub SPELLCHOICELOGIC
-      if %casting = 1 then return
-    }
-    #CHARGE_AFTER_LOCK
-    if %chargeafterlock = "YES" then
-    {
-      var spellprepping %calspell
-      var prepmana %calprepmana
-      var addmana %caladdmana
-      var spellsymb 0
-      var casting 1
-      var scancel 0
-      var prepped 0
-      var charged 0
-      var harnessed 0
+      #DEBILASSIST
+      if ((%debilassist = "YES") && (%buffingonly != 1) && ($monstercount > 0)) then
+      {
+        if matchre("%dbalist", "%weapontype") then
+        {
+          gosub DBALOGIC
+        }
+      }
+      #ICUTU_ZAHARENLA
+      if ((%iztouch = "YES") && ("$guild" = "Empath") && (%buffingonly != 1) && ($monstercount > 0)) then
+      {
+        if $SpellTimer.IcutuZaharenela.active != 1 then
+        {
+          if %casting != 1 then  
+          {
+            gosub RELCYCLIC
+            gosub PERCSELF
+            var spellprepping iz
+            var prepmana %izmana
+            var addmana 0
+            var cycliccast 1
+            var spellsymb 0
+            var casting 1
+            var scancel 0
+            var prepped 0
+            var charged 0
+            var harnessed 0
+          }
+        }
+        else gosub ICUTULOGIC
+      }
+      #STRAIGHT_SPELLCASTING
+      if (("%spell" = "YES") || ("%tm" = "YES") || ("%debil" = "YES")) then
+      {
+        gosub SPELLCHOICELOGIC
+        if %casting = 1 then return
+      }
+      #CHARGE_AFTER_LOCK
+      if %chargeafterlock = "YES" then
+      {
+        var spellprepping %calspell
+        var prepmana %calprepmana
+        var addmana %caladdmana
+        var spellsymb 0
+        var casting 1
+        var scancel 0
+        var prepped 0
+        var charged 0
+        var harnessed 0
+      }
     }
   }
   return
@@ -11013,8 +11024,7 @@ SUMMWEAPONLOGIC:
         math nextsumm add %summonweapontimer 
         var summweaponname 0
         gosub SUMMONWEAPONTRAIN
-        if (%summweaponname != 0) then gosub BREAKWEAPON %summweaponname
-        if %summfull = 1 then var summfull 0         
+        if (%summweaponname != 0) then gosub BREAKWEAPON %summweaponname      
       }
       else
       {
@@ -11027,35 +11037,29 @@ SUMMWEAPONLOGIC:
 
 
 PATHWAYLOGIC:  
-  if "$guild" != "Warrior Mage" then return
-  if %elecharge = -1 then
+  if ("$guild" != "Warrior Mage") then return
+  
+  if ($Summoning.LearningRate < 34) then var summlock 1
+  if ($Summoning.LearningRate < 20) then var summlock 0
+  if ($Summoning.Ranks >= 1750) then var summlock 1
+  
+  if (%summlock != 1) then
   {
-    gosub PATHSENSE
-    pause 1
-  }
-  if %pathwayactive = -1 then gosub PATHCHECK
-  if $Summoning.LearningRate < 34 then var summlock 1
-  if $Summoning.LearningRate < 20 then var summlock 0
-  if $Summoning.Ranks >= 1750 then var summlock 1
-  if %summlock != 1 then
-  {
-    if %pathwayactive = 0 then 
+    if (%t < %nextpathway) then
     {
-      if %t <= %nextpathway then return
+      var nextpathway %t
+      math nextpathway add 120
+      gosub PATHCHECK
+      gosub PATHSENSE
+      if ((%pathwayactive = 0) && (%elecharge > 2)) then 
       {
-        var nextpathway %t
-        math nextpathway add 30
-        math nextpathway add 30
         gosub PATHSTART %pathwaytype
-        if %summfull = 1 then var summfull 0         
       }
     }
-    if %scriptmode != 1 then gosub SUMMON
   }
   else
   {
-    if %pathwayactive = 1 then GOSUB PATHSTOP    
-    if %scriptmode != 1 then gosub SUMMON
+    if (%pathwayactive = 1) then GOSUB PATHSTOP    
   }
   return
 
@@ -13898,8 +13902,8 @@ WEAPONGET:
 	  gosub STOWALL
     return
 	}
-	if %hand = "left" then var otherhand right
-	if %hand = "right" then var otherhand left
+	if ("%hand" = "left") then var otherhand right
+	if ("%hand" = "right") then var otherhand left
 	if matchre ("$%otherhandhand", "%weaponname") then gosub SWAP
 	if !matchre ("$%handhand", "%weaponname") then
 	{

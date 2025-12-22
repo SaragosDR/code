@@ -1,3 +1,19 @@
+12/21/25
+Updated Scripts: train, set, library
+Magic training was taking too much of a timeslice for lower level characters.  Added new variable, FastMagic, for more advanced characters with shorter roundtimes.  For everyone else, casting for training is throttled to one cast per weapon swing.  Other types of casting, such as buffs, remain unthrottled.
+Rewrote Pathways sub to hopefully make it work a little better.
+Minor bugfixes.
+
+
+11/10/25
+Updated Scripts: train, set, library, combo, slide, pshot, helibrary, craftlibrary
+Various pvp-related fixes and updates.
+Significant improvements to the logic for how the script decides to move between multiple areas for training.
+Added many needed "my"s to craftlibrary to fix an issue with moving an item if a similar one is on the ground.
+Fixed the text for identifying black leucro leather.
+
+
+
 11/3/25
 Updated Scripts: train, set, library, bombo, slide, helibrary, hezasele, hebob, hecatch, hecna, hedark, hegortik, hesack, hesmash, hestt
 Bugfixes to combo and slide scripts.
