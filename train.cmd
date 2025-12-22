@@ -11045,7 +11045,7 @@ PATHWAYLOGIC:
   
   if (%summlock != 1) then
   {
-    if (%t < %nextpathway) then
+    if (%t > %nextpathway) then
     {
       var nextpathway %t
       math nextpathway add 120
