@@ -11264,6 +11264,7 @@ PATHCHECKYES:
 PATHSENSEP:
   pause
 PATHSENSE:
+  var elecharge -1
   matchre PATHSENSEP %waitstring
   match RETURN You turn your perceptions inward
   put pathway sense
@@ -11279,7 +11280,7 @@ PATHSTART:
 PATHSTARTP:
   pause
 PATHSTARTMAIN:
-  var pathway 1
+  var pathwayactive 1
   matchre RETURN You focus on|You are already manipulating the aether to your benefit.
   matchre PATHSTARTBAD You lack the necessary charge
   matchre PATHSTARTP %waitstring
@@ -11290,14 +11291,14 @@ PATHSTARTMAIN:
 	goto TIMEOUT
 
 PATHSTARTBAD:
-  var pathway 0
+  var pathwayactive 0
   return
 
 
 PATHSTOPP:
   pause
 PATHSTOP:
-  var pathway 0
+  var pathwayactive 0
   matchre RETURN You aren't focusing on any of the aethereal pathways.
   matchre RETURN You gently relax your mind and release your hold on the aethereal pathways.
   matchre PATHSTOPP %waitstring

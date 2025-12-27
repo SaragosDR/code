@@ -1706,10 +1706,10 @@ WARMAGEONLY:
   action var elecharge 6 when A charge circulates through your body\, causing a low hum to vibrate through your bones\. 
   action var elecharge 7 when Elemental essence floats freely within your body\, leaving little untouched\. 
   action var elecharge 8 when Elemental essence has infused every inch of your body\. 
-  action var elecharge 9 when ^Extraplanar power crackles within your body\, leaving you feeling mildly feverish\. 
-  action var elecharge 10 when ^Extraplanar power crackles within your body\, leaving you feeling acutely ill\. 
-  action var elecharge 11 when ^Your body sings and crackles with a barely contained charge\, destroying what little cenesthesia you had left\.
-  action var elecharge 12 when ^You have reached the limits of your body's capacity to store a charge\.
+  action var elecharge 9 when Extraplanar power crackles within your body\, leaving you feeling mildly feverish\. 
+  action var elecharge 10 when Extraplanar power crackles within your body\, leaving you feeling acutely ill\. 
+  action var elecharge 11 when Your body sings and crackles with a barely contained charge\, destroying what little cenesthesia you had left\.
+  action var elecharge 12 when You have reached the limits of your body's capacity to store a charge\.
   var pathwayactive -1
   var domainactive -1
   var elecharge -1
@@ -6426,8 +6426,9 @@ AUTOPATHLOGIC:
     {
       if (matchre("$roomobjs", "vela'tohr (\w+)")) then
       {
+        var velatohritem $0
         gosub LIE
-        gosub TOUCHVELA $0
+        gosub TOUCHVELA %velatohritem
         match RETURN The last of your wounds knit shut, a cool wave of relief washing over you.
         matchwait 180
       }
@@ -11018,6 +11019,7 @@ SUMMWEAPONLOGIC:
     if (%t >= %nextsumm) then
     {
       gosub PATHSENSE
+      if (%elecharge = -1) then put #echo Yellow %alertwindow Unable to detect elemental charge!
       if (%elecharge >= 2) then
       {
         var nextsumm %t
@@ -11039,18 +11041,21 @@ SUMMWEAPONLOGIC:
 PATHWAYLOGIC:  
   if ("$guild" != "Warrior Mage") then return
   
-  if ($Summoning.LearningRate < 34) then var summlock 1
+  if ($Summoning.LearningRate > 33) then var summlock 1
   if ($Summoning.LearningRate < 20) then var summlock 0
   if ($Summoning.Ranks >= 1750) then var summlock 1
   
   if (%summlock != 1) then
   {
-    if (%t > %nextpathway) then
+    #put #echo Yellow Time: %t  NextPathway: %nextpathway
+    if (%t >= %nextpathway) then
     {
       var nextpathway %t
       math nextpathway add 120
+      #put #echo Yellow Time: %t  NextPathway: %nextpathway
       gosub PATHCHECK
       gosub PATHSENSE
+      #put #echo Yellow PathwayActive: %pathwayactive   EleCharge: %elecharge
       if ((%pathwayactive = 0) && (%elecharge > 2)) then 
       {
         gosub PATHSTART %pathwaytype
