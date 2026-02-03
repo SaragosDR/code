@@ -591,16 +591,25 @@ ALERTINIT:
   #SORCERY_ALARMS
   if ("%sorceryalerts" = "YES") then
   {
-    #The spell pattern resists the influx of Elemental mana as a strange itching sensation builds under your skin.  Geysers of uncontrolled mana suddenly erupt from your flesh, illuminating the surroundings in an excruciating display of blue-black fire!
-    
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Nerve damage due to backlash. when The spell pattern resists the influx of (.+) mana though you are able to channel the worst of the backlash into your nervous system.
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Burned skin due to backlash. when The spell pattern resists the influx of (.+) mana as a strange itching sensation builds under your skin.  Geysers of uncontrolled mana suddenly erupt from your flesh, illuminating the surroundings in an excruciating display of blue-black fire!
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Lost scrolls due to backlash. when The spell pattern resists the influx of unfocused mana, overloading your arcane senses and rendering you magically inert\.
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Spell failed due to backlash. when The spell pattern resists the influx of .* mana and fails completely\.
+  
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Stunned due to backlash. when The spell pattern resists the influx of .* mana though the backlash leaves you stunned\!
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Attunement dulled due to backlash. when The spell pattern resists the influx of .* mana.  You are able to contain the backlash but doing so leaves your attunement to the mana streams dulled\.
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Internal head damage due to backlash. when The spell pattern resists the influx of (.+) mana\. You are able to contain the backlash but doing so results in a splitting headache\.
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Nerve damage due to backlash. when The spell pattern resists the influx of (.+) mana though you are able to channel the worst of the backlash into your nervous system\.
+    
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Burned skin due to backlash. when The spell pattern resists the influx of (.+) mana as a strange itching sensation builds under your skin.  Geysers of uncontrolled mana suddenly erupt from your flesh, illuminating the surroundings in an excruciating display of blue-black fire!
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Skills degraded due to backlash. when The spell pattern resists the influx of (.+) mana, overloading your arcane senses in a torrent of uncontrolled power\.
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Hand exploded due to backlash. when An instant rush of black and blue fire explodes into being, consuming your (left|right) hand and turning it into ash!
+    
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Unconsciousness due to backlash! when The spell pattern resists the influx of <mana type> mana and everything goes black.
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Lost scrolls due to backlash. when The spell pattern resists the influx of unfocused mana, overloading your arcane senses and rendering you magically inert\.
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Both hands exploded due to backlash. when An instant rush of black and blue fire explodes into being, consuming your outstretched limbs and turning them into ash!
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Spell failed due to backlash. when The spell pattern resists the influx of .* mana and fails completely\.
+    
+   	action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Incineration due to backlash. when The spell pattern resists the influx of unfocused mana as a strange itching sensation builds under your skin. Geysers of blue-black fire suddenly erupt from your body consuming you in a horrific display of unbridled sorcery
+
+   
+    
     #The spell pattern resists the influx of Life mana, and a strange burning sensation backwashes from the spell pattern into your body.
   }  
   if "$guild" = "Thief" then
@@ -1140,6 +1149,11 @@ COMMANDVARLOAD:
     echo ================Alerts Only===============
     echo
     var scriptmode 0
+    var combat NO
+    var noncombat NO
+    var autoupkeep NO
+    var spiderfeed NO
+    var tarantula NO
     var cyclic NO
     var buff NO
     var gbuff NO
@@ -1149,7 +1163,7 @@ COMMANDVARLOAD:
     var tm NO
     var pathway NO
     var weapons NO
-    var outdoor NO
+    var collect NO
     var attune NO
     var hunting NO
     var perform NO
@@ -1436,13 +1450,18 @@ EMPATHONLY:
   var adcheal $adcheal
   var adcdisease $adcdisease
   var adcpoison $adcpoison
-  var upkeepregen $upkeepregen
-  var upkeepregenmana $upkeepregenmana
+  var regen $regenerate
+  var regeneratemana $regeneratemana
   var absolution $absolution
   var absolutionmana $absolutionmana
   var iztouch $iztouch
   var izmana $izmana
   var iztimer $iztimer
+  
+  var embracevela $embracevela
+  var embracevelamana $embracevelamana
+  var embracevelatown $embracevelatown
+  var embracevelaroom $embracevelaroom
   
   var nextiztouch 0
   var nexthealcast 0
@@ -4822,9 +4841,9 @@ OLDNONCOMBATLOOP:
   #TRADING_TASKS
   if (("%tradingtasks" = "YES") && ("$guild" = "Trader")) then
   {
-    if $Trading.LearningRate > 33 then var tradinglock 1
-    if $Trading.LearningRate < 4 then var tradinglock 0
-    if $Trading.Ranks >= 1750 then var tradinglock 1
+    if ($Trading.LearningRate > 33) then var tradinglock 1
+    if ($Trading.LearningRate < 4) then var tradinglock 0
+    if ($Trading.Ranks >= 1750) then var tradinglock 1
     if (%tradinglock = 0) then
     {
       gosub TASKLOGIC
@@ -5171,6 +5190,8 @@ NEWNONCOMBATCHECKS:
   var noncombatburgleactive 0
   var noncombatsellactive 0
   var noncombattasksactive 0
+  var noncombatevcastactive 0
+  var noncombatevhealactive 0
   var noncombatstudyartactive 0
   var noncombatforgingactive 0
   #BURGLE_CHECKING
@@ -5246,6 +5267,32 @@ NEWNONCOMBATCHECKS:
         if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var noncombatsellactive 1
         if ("%tradingtasks" = "YES") then var noncombattasksactive 1
       }
+    }
+  }
+  #EMBRACE_VELATOHR
+  if ("$guild" = "Empath") then
+  {
+    if ("%embracevela" = "YES") then
+    {
+      #CHECK_EVCAST
+      if ($SpellTimer.EmbraceoftheVelaTohr.active != 1) then
+      {
+        var noncombatactive 1
+        var noncombatevcastactive 1
+        put #echo Yellow noncombatevcastactive: %noncombatevcastactive
+      }
+      #CHECK_EVHEAL
+      if ($Empathy.LearningRate > 33) then var empathylock 1
+      if ($Empathy.LearningRate < 20) then var empathylock 0
+      if ($Empathy.Ranks >= 1750) then var empathylock 1
+      #gosub PERCSELF
+      #put #echo evhealth: %evhealth
+      #put #echo empathylock: %empathylock
+      #if ((%empathylock = 0) || (%evhealth > 5)) then
+      #{
+        #var noncombatactive 1
+        #var noncombatevhealactive 1
+      #}
     }
   }
   #CRAFT_CHECKING
@@ -5594,7 +5641,7 @@ UPKEEPLOGIC:
     gosub STAND
   }
   #EMPATH_REGEN
-  if ("%upkeepregen" = "YES") then
+  if ("%regenerate" = "YES") then
   {
     if ($SpellTimer.Regenerate.active = 0) then
     {
@@ -5604,13 +5651,12 @@ UPKEEPLOGIC:
         gosub RELSYMBIOSIS
       }
       var spellprepping regenerate
-      var prepmana %upkeepregenmana
+      var prepmana %regeneratemana
       var addmana 0
       var casting 1
       gosub PREP
       pause 20
       gosub CAST
-    }
     }
   }
   #AUTOPATH
@@ -8303,10 +8349,12 @@ ARRESTED:
   if ($zoneid = 1) then var arresttown Crossing
   #if ($zoneid = 67) then var arresttown Leth
   #if ($zoneid = 67) then var arresttown Riverhaven
-  #if ($zoneid = 67) then var arresttown Therenborough
+  if ($zoneid = 42) then var arresttown Therenborough
   #if ($zoneid = 67) then var arresttown Fornsted
   #if ($zoneid = 67) then var arresttown Throne City
   if ($zoneid = 67) then var arresttown Shard
+  if ($zoneid = 116) then var arresttown Hibarnhvidar
+  if ($zoneid = 127) then var arresttown Boar Clan
   put #echo %alertwindow Yellow [Justice]: Arrested in %arresttown!
   if ("%arrestaction" = "logout") then
   {
@@ -8642,12 +8690,32 @@ STUDYARTLOGIC:
   math nextartstudy add 108000
   put #var lastartstudy $unixtime
   return
-  
+
+EVCASTLOGIC:
+  put #echo Yellow evcastlogic
+  if (%casting = 1) then
+  {
+    gosub RELSPELL
+    gosub RELSYMBIOSIS
+    gosub CASTCLEANUP
+  }
+  var spellprepping ev
+  var prepmana %embracevelamana
+  var addmana 0
+  var casting 1
+  gosub PREP
+  gosub RITUAL
+  waitfor You feel fully prepared to cast your spell.
+  gosub CAST
+  gosub CASTCLEANUP
+  put #echo %alertwindow [EV]: Cast Embrace of the Vela'Tohr in %embracevelatown, room %embracevelaroom.
+  var noncombatevcastactive 0
+  return  
 
 TASKLOGIC:
-  if $Trading.LearningRate > 33 then var tradinglock 1
-	if $Trading.LearningRate < 4 then var tradinglock 0
-  if $Trading.Ranks >= 1750 then var tradinglock 1
+  if ($Trading.LearningRate > 33) then var tradinglock 1
+	if ($Trading.LearningRate < 4) then var tradinglock 0
+  if ($Trading.Ranks >= 1750) then var tradinglock 1
   if (%tradinglock = 1) then
   {
     var noncombattasksactive 0
@@ -8685,6 +8753,7 @@ TASKLOGIC:
   {
     if ("%foragezone" = "1") then gosub TRAVEL crossing
     if ("%foragezone" = "7") then gosub TRAVEL arthe
+    if ("%foragezone" = "9b") then gosub TRAVEL sorrow
   }
   if ($roomid != %forageroom) then gosub MOVE %forageroom
   gosub AWAKE
@@ -8710,6 +8779,11 @@ CUSTOMFORAGEROOMS:
   {
     var foragezone 7
     var forageroom 116
+  }
+  if ("%forageitem" = "nuloe stem") then
+  {
+    var foragezone 9b
+    var forageroom 8
   }
   if ("%forageitem" = "tea leaf") then
   {
@@ -10918,7 +10992,7 @@ SPELLVARRESET:
       put #var SpellTimer.IcutuZaharenela.active 0
       put #var SpellTimer.IcutuZaharenela.duration 0
     }
-    if ("%upkeepregen" = "YES") then
+    if ("%regenerate" = "YES") then
     {
       put #var SpellTimer.Regenerate.active 0
       put #var SpellTimer.Regenerate.duration 0
@@ -11205,6 +11279,7 @@ NONCOMBATLOOP:
 	gosub NONCOMBATCHOOSE
   if (%noncombatactive = 1) then
   {
+    put #echo Yellow currentnoncombat: %currentnoncmbat
     if ("%currentnoncombat" = "tradingsell") then
     {
       gosub NONCOMBATMOVEMENT
@@ -11216,6 +11291,18 @@ NONCOMBATLOOP:
     {
       gosub NONCOMBATMOVEMENT
       gosub TASKLOGIC
+      gosub NONCOMBATCHOOSE
+    }
+    if ("%currentnoncombat" = "evcast") then
+    {
+      gosub NONCOMBATMOVEMENT
+      gosub EVCASTLOGIC
+      gosub NONCOMBATCHOOSE
+    }
+    if ("%currentnoncombat" = "evheal") then
+    {
+      gosub NONCOMBATMOVEMENT
+      gosub EVHEALLOGIC
       gosub NONCOMBATCHOOSE
     }
     if ("%currentnoncombat" = "burgle") then
@@ -11260,6 +11347,8 @@ NONCOMBATCHOOSE:
   #put #echo Yellow noncombatactive: %noncombatactive
   #put #echo Yellow noncombatsellactive: %noncombatsellactive
   #put #echo Yellow noncombattasksactive: %noncombattasksactive
+  #put #echo Yellow noncombatevcastactive: %noncombatevcastactive
+  #put #echo Yellow noncombatevhealactive: %noncombatevhealactive
   #put #echo Yellow noncombatburgleactive: %noncombatburgleactive
   #put #echo Yellow noncombatperformactive: %noncombatperformactive
   #put #echo Yellow noncombatstudyartactive: %noncombatstudyartactive
@@ -11274,6 +11363,16 @@ NONCOMBATCHOOSE:
   if (%noncombattasksactive = 1) then
   {
     var currentnoncombat tradingtasks
+    return
+  }
+  if (%noncombatevcastactive = 1) then
+  {
+    var currentnoncombat evcast
+    return
+  }
+  if (%noncombatevhealactive = 1) then
+  {
+    var currentnoncombat evheal
     return
   }
   if (%noncombatburgleactive) = 1 then
@@ -11301,7 +11400,8 @@ NONCOMBATCHOOSE:
   return
   
 NONCOMBATMOVEMENT:
-  put #echo Yellow currentnoncombat: %currentnoncombat
+  #put #echo Yellow currentnoncombat: %currentnoncombat
+  #put #echo Yellow noncombatactive: %noncombatactive
   if (%noncombatactive = 1) then
   {
     #TRADING_SELL
@@ -11313,6 +11413,12 @@ NONCOMBATMOVEMENT:
     if ("%currentnoncombat" = "tradingtasks") then
     {
 			gosub NEWTOWNPRESET crossing tradingtask
+    }
+    #EMBRACE_VELATOHR
+    if ("%currentnoncombat" = "evcast") then
+    {
+      put #echo Yellow embracevelatown: %embracevelatown
+			gosub NEWTOWNPRESET crossing evcast
     }
     #BURGLING
     if ("%currentnoncombat" = "burgle") then
@@ -11942,7 +12048,6 @@ ROOMTRAVEL:
   put #echo Yellow rtmovelist: %rtmovelist
   put #echo Yellow rttargetroom: %rttargetroom
   put #echo Yellow rtfindroom: %rtfindroom
-  put #echo Yellow Here
   if (("$zoneid" = "1") && ("$roomid" = "388")) then
   {
     gosub MOVE 386

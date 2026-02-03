@@ -1546,8 +1546,8 @@ SET:
     if tolower("%1") = "adcheal" then goto YESNOSET
     if tolower("%1") = "adcdisease" then goto YESNOSET
     if tolower("%1") = "adcpoison" then goto YESNOSET
-    if tolower("%1") = "upkeepregen" then goto YESNOSET
-    if tolower("%1") = "upkeepregenmana" then goto TEXTSET
+    if tolower("%1") = "regenerate" then goto YESNOSET
+    if tolower("%1") = "regeneratemana" then goto TEXTSET
     if tolower("%1") = "embracevela" then goto YESNOSET
     if tolower("%1") = "embracevelamana" then goto TEXTSET
     if tolower("%1") = "embracevelatown" then goto TEXTSET
@@ -2555,7 +2555,7 @@ DISPLAYGUILD:
       gosub OUTPUT ADCDisease
       gosub OUTPUT ADCPoison
       gosub OUTPUT Absolution AbsolutionMana
-      gosub OUTPUT UpkeepRegen UpkeepRegenMana
+      gosub OUTPUT Regenerate RegenerateMana
       echo
       gosub OUTPUT EmbraceVela EmbraceVelaMana
       gosub OUTPUT EmbraceVelaTown EmbraceVelaRoom

@@ -1,3 +1,15 @@
+02/03/26
+Updated Scripts: train, library, set
+Embrace of the Vela'tohr is implemented for Empaths, for casting only.  Does not heal it on its own yet.
+Fixed bugs with Alerts option for train to make sure it takes no actions.
+Fixes to various subs for fault tolerance in PvP.
+
+
+12/27/25
+Updated Scripts: train, set, cmcatch
+Fixed a bug with Summoning training where pathway identification variable would overwrite the pathway use variable and prevent training.
+Added CMCatch script for Chris' Mass catch game.
+
 12/21/25
 Updated Scripts: train, set, library
 Magic training was taking too much of a timeslice for lower level characters.  Added new variable, FastMagic, for more advanced characters with shorter roundtimes.  For everyone else, casting for training is throttled to one cast per weapon swing.  Other types of casting, such as buffs, remain unthrottled.

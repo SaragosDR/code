@@ -1,18 +1,18 @@
 var lastupdated 04/18/2025
 
-var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mapp|mef|meg|mis|mo|mof|mon|mpp|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|voi|will|ws|worm|wotp|ys|zephyr|
-var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mapp|mpp|mf|pfe|pom|sl|sol|word|
+var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mef|meg|mis|mo|mof|mon|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|staw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|visage|voi|will|ws|worm|wotp|ys|zephyr|
+var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mf|pfe|pom|sl|sol|staw|visage|word|
 var abuffs |etf|nexus|rm|zephyr
 var cyctms |aban|ars|fr|gs|iz|pyre|rim|ros|sa|sls|usol|
 var cycdbs |alb|dalu|dema|ee|hyh|shw|
 var cyclics |ac|ad|af|bes|botf|cs|eye|fae|ghs|gj|hodi|how|mg|mom|regenerate|rev|roc|rog|sanctuary|sov|tr|
 var allcyclics %cyclics-%cyctms-%cycdbs
 var rituals |absolution|aeg|all|ag|bc|bloodthorns|cos|dc|echo|eli|ev|mf|mof|mon|iots|mf|mon|pom|pop|rtr|soul|vos|will|word|
-var augmentation |ease|botf|drum|echo|ecry|fae|harm|mis|rage|soul|wotm|will|word|auspice|benediction|centering|gg|mapp|pom|rev|sap|sol|ad|ags|gol|mef|refresh|tranquility|vigor|art|aus|cv|iots|mt|sap|sco|seer|shadows|ts|tv|bue|emc|ivm|ks|obfuscation|php|rei|rpu|clarity|crc|dig|hes|mo|rw|sr|tr|athleticism|bes|cs|cotc|em|hol|inst|oath|pls|stw|sott|sks|sk|wotp|ws|ava|blur|enrichment|fin|lgv|meg|phk|turi|aeg|mof|substratum|suf|sw|tw|ys|
+var augmentation |ease|botf|drum|echo|ecry|fae|harm|mis|rage|soul|wotm|will|word|auspice|benediction|centering|gg|pom|rev|sap|sol|staw|ad|ags|gol|mef|refresh|tranquility|vigor|art|aus|cv|iots|mt|sap|sco|seer|shadows|ts|tv|bue|emc|ivm|ks|obfuscation|php|rei|rpu|clarity|crc|dig|hes|mo|rw|sr|tr|athleticism|bes|cs|cotc|em|hol|inst|oath|pls|stw|sott|sks|sk|wotp|ws|ava|blur|enrichment|fin|lgv|meg|phk|turi|aeg|mof|substratum|suf|sw|tw|ys|
 var debilitation |burden|dispel|aewo|alb|dalu|dmrs|dema|coz|halo|hulp|hyh|it|malediction|mc|ps|sb|sick|spit|compel|lethargy|nb|calm|dazzle|mb|ms|rend|set|shw|sleep|sod|tf|tv|hp|pv|rof|vs|vod|halt|shatter|sf|cotw|df|de|griz|hb|swarm|flu|anc|al|ee|frostbite|ip|moa|tc|ti|trem|vertigo|wb|
 var targetedmagic |stra|bonegrinder|sif|aban|bos|btn|pyre|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sorrow|sts|
 var utility |gaf|imbue|sec|alb|aot|care|eye|hodi|nexus|resonance|sanctuary|all|bf|bless|ef|it|mre|mf|om|rejuv|rezz|rev|sol|uncurse|vigil|absolution|ad|awaken|bs|cos|cd|ev|fp|foc|gs|heal|hs|hw|hl|innocence|rp|regenerate|vh|bc|contingency|dc|dg|fm|locate|moonblade|mg|pg|rtr|rf|rend|rs|seer|shm|ss|shadowling|sm|sov|tf|teleport|th|unleash|bb|cfb|cfw|cf|devour|eotb|nr|qe|resection|roc|rof|rog|ag|as|bot|ba|crc|da|hoj|how|rue|tr|vos|af|bes|blend|compost|em|mon|sks|nou|rega|stc|ab|etf|foi|ignite|rm|zephyr|
-var warding |lw|maf|fotf|gj|name|repr|ghs|halo|mpp|pfe|sl|sos|spit|ic|pop|tranquility|col|psy|shear|tksh|wd|ch|emc|ghoulflesh|solace|worm|aa|courage|how|sp|tk|bloodthorns|etc|ey|fwb|rits|eli|ir|mom|non|trc|ac|es|gi|gf|voi|
+var warding |lw|maf|fotf|gj|name|repr|ghs|halo|pfe|sl|sos|spit|visage|ic|pop|tranquility|col|psy|shear|tksh|wd|ch|emc|ghoulflesh|solace|worm|aa|courage|how|sp|tk|bloodthorns|etc|ey|fwb|rits|eli|ir|mom|non|trc|ac|es|gi|gf|voi|
 var targeted |stra|bonegrinder|sif|bos|btn|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sts|
 var staraura ava|blur|ir|rega|stc|trc
 
@@ -864,12 +864,14 @@ VARCHECKS:
   if !matchre("$adcheal", "\b(YES|NO)\b") then put #var adcheal NO
   if !matchre("$adcdisease", "\b(YES|NO)\b") then put #var adcdisease NO
   if !matchre("$adcpoison", "\b(YES|NO)\b") then put #var adcpoison NO
-  if !matchre("$upkeepregen", "\b(YES|NO)\b") then put #var upkeepregen NO
-  if $upkeepregenmana >= 0 then
-  else put #var upkeepregenmana 5
+  if !matchre("$regenerate", "\b(YES|NO)\b") then put #var regenerate NO
+  if $regeneratemana >= 0 then
+  else put #var regeneratemana 5
   if !matchre("$embracevela", "\b(YES|NO)\b") then put #var embracevela NO
   if $embracevelamana >= 300 then
   else put #var embracevelamana 300
+  if !matchre("$embracevelatown", "\b(crossing)\b") then put #var embracevelatown crossing
+  
   
   if !matchre("$absolution", "\b(YES|NO)\b") then put #var absolution NO
   if $absolutionmana >= 150 then
@@ -1173,6 +1175,7 @@ NEWTOWNPRESET:
   put #echo Yellow towncheck: %towncheck
   put #echo Yellow towntype: %towntype
   var rttargetroom 0
+  if (%towntype = "evcast") then var rttargetroom %embracevelaroom
   if ("%towncheck" = "muspari") then
 	{
 		var rtzone 47
@@ -1759,7 +1762,7 @@ SPELLSTATCHECK:
   {
     var spellmana 2
     var spelldifficulty 4
-    var spellminmana 300
+    var spellminmana 30
     var spellcapmana 100
   }
   if ("%spelldiffname" = "ff") then
@@ -1839,7 +1842,7 @@ SPELLSTATCHECK:
     var spellminmana 20
     var spellcapmana 66
   }
-  if ("%spelldiffname" = "mapp") then
+  if ("%spelldiffname" = "staw") then
   {
     var spellmana 2
     var spelldifficulty 2
@@ -1867,7 +1870,7 @@ SPELLSTATCHECK:
     var spellminmana 10
     var spellcapmana 66
   }
-  if ("%spelldiffname" = "mpp") then
+  if ("%spelldiffname" = "visage") then
   {
     var spellmana 2
     var spelldifficulty 1
@@ -7806,11 +7809,9 @@ SPELLIDENT:
   if %spellname = "lw" then var spellvar SpellTimer.LayWard
   if %spellname = "lgv" then var spellvar SpellTimer.LastGiftofVithwokIV
   if %spellname = "maf" then var spellvar SpellTimer.ManifestForce
-  if %spellname = "mapp" then var spellvar SpellTimer.MajorPhysicalProtection
   if %spellname = "mef" then var spellvar SpellTimer.MentalFocus
   if %spellname = "meg" then var spellvar SpellTimer.MembrachsGreed
   if %spellname = "mis" then var spellvar SpellTimer.Misdirection
-  if %spellname = "mpp" then var spellvar SpellTimer.MinorPhysicalProtection
   if %spellname = "mf" then var spellvar SpellTimer.MurrulasFlames
   if %spellname = "mo" then var spellvar SpellTimer.MarshalOrder
   if %spellname = "mof" then var spellvar SpellTimer.MantleofFlame
@@ -7847,6 +7848,7 @@ SPELLIDENT:
   if %spellname = "sr" then var spellvar SpellTimer.SentinelsResolve
   if %spellname = "stc" then var spellvar SpellTimer.StellarCollector
   if %spellname = "stw" then var spellvar SpellTimer.SeetheWind
+  if %spellname = "staw" then var spellvar SpellTimer.StarryWaters
   if %spellname = "substratum" then var spellvar SpellTimer.Substratum
   if %spellname = "suf" then var spellvar SpellTimer.SureFooting
   if %spellname = "sw" then var spellvar SpellTimer.SwirlingWinds
@@ -7858,6 +7860,7 @@ SPELLIDENT:
   if %spellname = "tw" then var spellvar SpellTimer.Tailwind
   if %spellname = "voi" then var spellvar SpellTimer.VeilofIce
   if %spellname = "vigor" then var spellvar SpellTimer.Vigor
+  if %spellname = "visage" then var spellvar SpellTimer.Visage
   if %spellname = "will" then var spellvar SpellTimer.WillofWinter
   if %spellname = "ws" then var spellvar SpellTimer.WolfScent
   if %spellname = "wotp" then var spellvar SpellTimer.WisdomofthePack
@@ -8134,7 +8137,7 @@ PVPPREPMAIN:
   matchre PVPPREPP %waitstring
 	matchre RETURN You trace a|You raise your|You raise an|You begin chanting|With rigid|With meditative|With calm|With tense|You mutter|You briskly utter a few sharp words|Darkly gleaming motes of
 	match RETURN As you attempt to prepare the spell, a sense of overwhelming peace washes over you.
-	matchre RETURN You begin to hum|You begin your enchante|The first gentle notes|With a sharp cut to your voice|Low, hummed tones form|You begin to chant a mesmerizing|With a resounding "POP"|You begin to sing, a gentle|Wrapped in winter|You weave a soft|Slow, rich tones|Though softly humming|In a low tone you|The wailing of lost souls|Turning your focus solemnly inward|You hear the slow, rich tones of|as you trace your finger along mana|Images of streaking stars falling from the heavens flash across your vision|With great force, you slap your hands together|You direct your attention toward the heavens|You whistle an intricate sequence|A radiant glow wreathes your hands|A strong wind swirls around you|Glowing geometric patterns arc between|Light withdraws from around you|Calmly reaching out with one hand,|In one fluid motion, you bring your palms|You start frantically flailing your hands|Shadow and light collide wildly around|You gaze skyward and trace the planetary|You spin about wildly, whirling around with a feral|Throwing your head back, you release a savage roar|You gaze at your hands, touching your thumb to each|Accompanied with a flash of light, you clap your hands|Droplets of water coalesce around your fingertips|Turning your head slightly and gazing directly|Inhaling deeply, you adopt a cyclical rhythm in your breaths|You clasp your silvery-white flame shrouded hands together|Focusing intently, you slice seven straight lines through|You exhale softly, your breath flowing into a shimmering cloud|You inhale sharply, invoking the
+	matchre RETURN You begin to hum|You begin your enchante|The first gentle notes|With a sharp cut to your voice|Low, hummed tones form|You begin to chant a mesmerizing|With a resounding "POP"|You begin to sing, a gentle|Wrapped in winter|You weave a soft|Slow, rich tones|Though softly humming|In a low tone you|The wailing of lost souls|Turning your focus solemnly inward|You hear the slow, rich tones of|as you trace your finger along mana|Images of streaking stars falling from the heavens flash across your vision|With great force, you slap your hands together|You direct your attention toward the heavens|You whistle an intricate sequence|A radiant glow wreathes your hands|A strong wind swirls around you|Glowing geometric patterns arc between|Light withdraws from around you|Calmly reaching out with one hand,|In one fluid motion, you bring your palms|You start frantically flailing your hands|Shadow and light collide wildly around|You gaze skyward and trace the planetary|You spin about wildly, whirling around with a feral|Throwing your head back, you release a savage roar|You gaze at your hands, touching your thumb to each|Accompanied with a flash of light, you clap your hands|Droplets of water coalesce around your fingertips|Turning your head slightly and gazing directly|Inhaling deeply, you adopt a cyclical rhythm in your breaths|You clasp your silvery-white flame shrouded hands together|Focusing intently, you slice seven straight lines through|You exhale softly, your breath flowing into a shimmering cloud|You inhale sharply, invoking the|Steeling your resolve, you draw one hand before you
 	matchre PVPPREPREL you're already preparing|You have already fully prepared|You are already preparing
 	match RETURN Something in the area interferes with your spell preparations.
 	put prep %pvpprepstring
@@ -8153,6 +8156,7 @@ PVPTARGETMAIN:
   matchre PVPTARGETP %waitstring
   matchre SPELLCANCEL You are not engaged to anything, so you must specify a target to focus on!|You cannot target
 	matchre RETURN You begin to weave mana lines into
+	match RETURN Your target pattern is already around
 	matchre PREPTARREL you're already preparing|You have already fully prepared|You are already preparing
 	matchre SPELLCANCEL Something in the area interferes with your spell preparations.
 	put target %targetstring
@@ -8731,6 +8735,7 @@ PREPTATTOO:
   matchre PREPTATTOOUNHIDE You cannot use the tattoo while maintaining the effort to stay hidden.
   match RETURN Something in the area is interfering with the magical device.
   match RETURN You are in no condition to do that.
+  match RETURN You brace yourself as you activate your tattoo, but nothing happens as you're already under a heroic effect.
   put invoke tattoo
 	matchwait 5
 	var timeoutsub PREPTATTOO
@@ -9313,6 +9318,7 @@ ORDERP:
 ORDER:
   matchre ORDERP ...wait|type ahead|stunned|while entangled in a web.
   matchre RETURN Brother Durantine nods slowly|Friar Othorp grins broadly|Sister Nongwen smiles and nods|Sister Imadrail smiles and nods
+  match RETURN The barkeep places
   put order %buytarget
   matchwait 5
 	var timeoutsub order
@@ -11129,21 +11135,24 @@ BALLISTARUB:
   var timeoutcommand rub ballista
 	goto TIMEOUT
 
-
+BGATTACK:
+  var bgmon $0
+  put #echo bgmon: %bgmon
+  goto BGATTACKMAIN
 BGATTACKP:
   pause  
-BGATTACK:
+BGATTACKMAIN:
   if %bgdone = 1 then return
   matchre BGATTACKP %waitstring
-  matchre BGATTACK With a sharp overhand motion|With a casual flick of your wrists|You sweep your hands in
+  matchre BGATTACKMAIN With a sharp overhand motion|With a casual flick of your wrists|You sweep your hands in
   #matchre BGNEWTARGET I don't think so.
   matchre RETURN I could not find what you were referring to.|you slap your|I do not understand what you mean.
   #matchre BGLOOT You wave to
   matchre RETURN You point at|You wave to|I don't think so.
   match RETURN You wave.
-  put %bggesture %bgmon
+  put point %bgmon
   matchwait 5
-	var timeoutsub BGATTACK
+	var timeoutsub BGATTACKMAIN
   var timeoutcommand %bggesture %bgmon
 	goto TIMEOUT
 
@@ -11155,7 +11164,7 @@ BGLOOT:
   if $SpellTimer.BlufmorGaraen.active = 1 then
   {
     gosub LOOT
-    goto BGATTACK
+    goto BGATTACKMAIN
   }
   else return
   
@@ -11168,7 +11177,7 @@ BGNEWTARGET:
     return
   }
   gosub MONSTERARRAY
-  goto BGATTACK
+  goto BGATTACKMAIN
   
   
 BREAKWEAPON:
@@ -11220,9 +11229,12 @@ EXHALE:
   var timeoutcommand put exhale
 	goto TIMEOUT
 
+EXHALETARGET:
+  var exhaletarget $0
+  goto ExHALETARGETMAIN
 EXHALETARGETP:
   pause	
-EXHALETARGET:
+EXHALETARGETMAIN:
   var dbready 0
   matchre EXHALEP %waitstring
   matchre RETURN You sharply inhale, drawing upon|You slowly and deliberately empty your filled lungs.|There is nothing else to face!|You'll need to pick a target to exhale fire at.
@@ -11230,14 +11242,14 @@ EXHALETARGET:
   matchre EXHALETLOOT That's just a wee bit pointless now, don't you think?
   put exhale %exhaletarget
   matchwait 5
-	var timeoutsub EXHALETARGET
+	var timeoutsub EXHALETARGETMAIN
   var timeoutcommand exhale %exhaletarget
 	goto TIMEOUT
 
 EXHALETLOOT:
   gosub LOOT
   pause 1
-  goto EXHALETARGET
+  goto EXHALETARGETMAIN
 
 
 PATHCHECKP:
@@ -11794,12 +11806,17 @@ TENDMAIN:
   }
   matchre TENDP %waitstring
   matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove|As you reach for the|You foolishly attempt to remove|You deftly remove|You were not able to find anything to remove\.|There are no areas that are bleeding\.|You carefully attempt|You callously remove
+  match TENDSTOW You must have a hand free to remove
   put tend my %tendlocation
   matchwait 5
 	var timeoutsub TENDMAIN
   var timeoutcommand tend my %tendlocation
 	goto TIMEOUT
-  
+
+TENDSTOW:
+  gosub STOW left
+  goto TENDMAIN
+
 TENDCLEAN:
   var head 0
   var neck 0
