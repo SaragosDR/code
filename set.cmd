@@ -1451,7 +1451,8 @@ SET:
     if tolower("%1") = "spell" then goto YESNOSET
     if tolower("%1") = "spellm2" then goto YESNOSET
     if tolower("%1") = "spellnum" then goto 1THRU4SET
-    if tolower("%1") = "spellnumm2" then goto 1THRU4SET
+    if tolower("%1") = "spellnum2" then goto 1THRU4SET
+    if tolower("%1") = "spellautomana" then goto YESNOSET
     if tolower("%1") = "spell1" then goto TEXTSET
     if tolower("%1") = "spell1mana" then goto TEXTSET
     if tolower("%1") = "spell1symb" then goto YESNOSET
@@ -1890,7 +1891,7 @@ BUFFSET:
 WANDBUFFSET:    
   eval setvar tolower(%1)
   eval input tolower(%2) 
-  if matchre("%input", "hes|mef|rage|rw|sw|will|wotp") then
+  if matchre("%input", "hes|mef|rage|rw|sw|tranquility|will|wotp") then
   { 
     put #var %setvar %input
     put #var save
@@ -2153,8 +2154,8 @@ DISPLAYMAGIC:
     #gosub OUTPUT DBASpell2 DBASpell2Mana
     #gosub OUTPUT DBASpell3 DBASpell3Mana
     put #echo
-    gosub OUTPUT Spell
-    gosub OUTPUT SpellNum
+    gosub OUTPUT Spell SpellNum
+    gosub OUTPUT SpellAutoMana
     gosub OUTPUT Spell1 Spell1Mana
     gosub OUTPUT Spell1Symb
     gosub OUTPUT Spell2 Spell2Mana
@@ -2374,11 +2375,10 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT NonComSanowret
   put #echo
   gosub OUTPUT Crafting
-  gosub OUTPUT Forging
-  gosub OUTPUT Outfitting
   gosub OUTPUT CraftingStorage (should have length at least 15 spans to accomodate all supplies)
   gosub OUTPUT CraftingStorageLocation (CraftingStorage container stored in portal|vault|none when not direclty in use)
-  
+  put #echo
+  gosub OUTPUT Forging 
   gosub OUTPUT ForgingDifficulty
   gosub OUTPUT ForgingDiscipline
   gosub OUTPUT ForgingMaterial
@@ -2387,7 +2387,8 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT ForgingMaxVolumes
   gosub OUTPUT ForgingMaxQuantity
   gosub OUTPUT ForgingSmelting
-
+  put #echo
+  gosub OUTPUT Outfitting
   gosub OUTPUT OutfittingDifficulty
   gosub OUTPUT OutfittingCloth
   gosub OUTPUT OutfittingLeather

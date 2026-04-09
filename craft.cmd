@@ -31,8 +31,8 @@ var material %2
 
 var varset $varset
 gosub CRAFTVARLOAD
-var storage $m%varsetstorage
-var alertwindow >$m%varsetalertwindow
+var storage $storage
+var alertwindow >$alertwindow
 
 var workorder 0
 var quantity 1

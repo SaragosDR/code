@@ -586,7 +586,7 @@ ALERTINIT:
   }
   if ("%backfirealerts" = "YES") then
   {
-    action put #flash; put #play Echo;put #echo %alertwindow [Nerves]: Backfire - %spellprepping when ^Your spell (.*)backfires
+    action put #flash; put #play Echo;var backfire 1;put #echo %alertwindow [Nerves]: Backfire - %spellprepping when ^Your spell (.*)backfires
   }
   #SORCERY_ALARMS
   if ("%sorceryalerts" = "YES") then
@@ -602,7 +602,7 @@ ALERTINIT:
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Skills degraded due to backlash. when The spell pattern resists the influx of (.+) mana, overloading your arcane senses in a torrent of uncontrolled power\.
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Hand exploded due to backlash. when An instant rush of black and blue fire explodes into being, consuming your (left|right) hand and turning it into ash!
     
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Unconsciousness due to backlash! when The spell pattern resists the influx of <mana type> mana and everything goes black.
+    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Unconsciousness due to backlash! when The spell pattern resists the influx of (.+) mana and everything goes black.
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Lost scrolls due to backlash. when The spell pattern resists the influx of unfocused mana, overloading your arcane senses and rendering you magically inert\.
     action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Both hands exploded due to backlash. when An instant rush of black and blue fire explodes into being, consuming your outstretched limbs and turning them into ash!
     
@@ -735,10 +735,9 @@ COMMANDVARLOAD:
     echo ================Climb Practice===============
     echo
     var scriptmode 0
-    var outdoor NO
+    var collect NO
     var perform YES
     var pathway NO
-    var outdoor NO
     var hunting NO
     var spellprepping NO
     var cyclic NO
@@ -766,7 +765,7 @@ COMMANDVARLOAD:
     var gbuff NO
     var pathway NO
     var weapons NO
-    var outdoor NO
+    var collect NO
     var spell NO
     var debil NO
     var tm NO
@@ -796,7 +795,7 @@ COMMANDVARLOAD:
     var speechalerts NO
     var emotealerts NO
     var weapons NO
-    var outdoor NO
+    var collect NO
     var spell NO
     var debil NO
     var tm NO
@@ -823,7 +822,7 @@ COMMANDVARLOAD:
     var scriptmode 0
     var speechalerts NO
     var weapons NO
-    var outdoor NO
+    var collect NO
     var spell NO
     var debil NO
     var tm NO
@@ -858,7 +857,7 @@ COMMANDVARLOAD:
     var textbook NO
     var pathway NO
     var weapons NO
-    var outdoor NO
+    var collect NO
     var spell NO
     var debil NO
     var tm NO
@@ -891,7 +890,7 @@ COMMANDVARLOAD:
     var textbook NO
     var pathway NO
     var weapons NO
-    var outdoor NO
+    var collect NO
     var spell YES
     var debil NO
     var tm NO
@@ -907,7 +906,9 @@ COMMANDVARLOAD:
     var locksmithbox NO
     var skinfatrainer NO
     var autoupkeep NO
-    put #echo >$alertwindow Began noncombat training.
+    var cyclicbuff NO
+    var cyclic NO
+    put #echo >$alertwindow Began noncombat magic training.
   }
   if tolower("%scriptmodename") = "music" then
   {
@@ -919,7 +920,7 @@ COMMANDVARLOAD:
     var buff NO
     var gbuff NO
     var weapons NO
-    var outdoor NO
+    var collect NO
     var spell NO
     var debil NO
     var tm NO
@@ -942,7 +943,7 @@ COMMANDVARLOAD:
     var textbook NOs
     var pathway NO
     var weapons NO
-    var outdoor NO
+    var collect NO
     var spell NO
     var debil NO
     var tm NO
@@ -986,7 +987,7 @@ COMMANDVARLOAD:
     var textbook NO
     var pathway NO
     var weapons NO
-    var outdoor NO
+    var collect NO
     var spell NO
     var debil NO
     var tm NO
@@ -1019,7 +1020,7 @@ COMMANDVARLOAD:
     var textbook NO
     var pathway YES
     var weapons NO
-    var outdoor NO
+    var collect NO
     var spell NO
     var debil NO
     var tm NO
@@ -1063,7 +1064,7 @@ COMMANDVARLOAD:
     var gbuff YES
     var pathway NO
     var weapons NO
-    var outdoor NO
+    var collect NO
     var spell NO
     var debil NO
     var tm NO
@@ -1463,8 +1464,10 @@ EMPATHONLY:
   var embracevelatown $embracevelatown
   var embracevelaroom $embracevelaroom
   
-  var nextiztouch 0
+  var nextevhealcheck 0
   var nexthealcast 0
+  var nextiztouch 0
+  
   if %healthalerts = "YES" then
   {
     action put #flash; put #play JustArrived; put #echo %alertwindow Yellow [Health]: Empathic Shock.  Target: %faceadj %facemon; var goodtarget 0;var shockcritter 1 when Pain blossoms within you, your delicate empathic senses
@@ -2331,7 +2334,7 @@ HUNTINGVARLOAD:
       var movelist gryphons|49
       var targetroom 0
       var findroom YES
-      var findroomlist 93|116|117|118|119
+      var findroomlist 116|117|118|119|93
       var bugoutroom 1
       var nearestportaltown theren
     }
@@ -3469,6 +3472,7 @@ STATUSVARLOAD:
   var nextmanip 0
   var nextmontest 0
   var nexthealthcheck 0
+  var nextmanaadjust 0
   var nextnvstealth 0
   var nextom 0
   var nextpathway 0
@@ -4006,6 +4010,7 @@ MAINVARLOAD:
   else var spell $spellm2
   if (%varset = 1) then var spellnum $spellnum
   else var spellnum $spellnumm2
+  var spellautomana $spellautomana
   var spell1 $spell1
   var spell1mana $spell1mana
   var spell1symb $spell1symb
@@ -4199,6 +4204,7 @@ MAINVARLOAD:
   var burglepawn $burglepawn
   
   var songtype $songtype
+  var songpermission 0
   var instrument $instrument
   var instrumentworn $instrumentworn
   var instrumenthands $instrumenthands
@@ -5285,14 +5291,19 @@ NEWNONCOMBATCHECKS:
       if ($Empathy.LearningRate > 33) then var empathylock 1
       if ($Empathy.LearningRate < 20) then var empathylock 0
       if ($Empathy.Ranks >= 1750) then var empathylock 1
-      #gosub PERCSELF
-      #put #echo evhealth: %evhealth
-      #put #echo empathylock: %empathylock
-      #if ((%empathylock = 0) || (%evhealth > 5)) then
-      #{
-        #var noncombatactive 1
-        #var noncombatevhealactive 1
-      #}
+      if (%t >= %nextevhealcheck) then
+      {
+        gosub PERCSELF
+        var nextevhealcheck %t
+        math nextevhealcheck add 600
+        put #echo evhealth: %evhealth
+        put #echo empathylock: %empathylock
+        if ((%empathylock = 0) || (%evhealth > 5)) then
+        {
+          var noncombatactive 1
+          var noncombatevhealactive 1
+        }
+      }
     }
   }
   #CRAFT_CHECKING
@@ -8712,6 +8723,56 @@ EVCASTLOGIC:
   var noncombatevcastactive 0
   return  
 
+EVHEALLOGIC:
+  if ($Empathy.LearningRate > 33) then var empathylock 1
+  if ($Empathy.LearningRate < 20) then var empathylock 0
+  if ($Empathy.Ranks >= 1750) then var empathylock 1
+  gosub PERCSELF
+  put #echo evhealth: %evhealth
+  put #echo empathylock: %empathylock
+  if ((%empathylock = 1) && (%evhealth < 6)) then return
+  if (%evhealth = 1) then return
+  
+  if (%regenerate = "YES") then
+  {
+    if ($SpellTimer.Regenerate.active != 1) then
+    {
+      gosub RELCYCLIC
+      gosub REGENCAST
+    }
+  }
+  if ($bleeding = 1) then gosub EVHEALWAIT
+  gosub AWAKE
+  gosub EVHEAL
+  gosub PERCSELF
+  goto EVHEALLOGIC
+  return
+
+EVHEAL:
+  var velatohritem -1
+  if (matchre("$roomobjs", "vela'tohr (\w+)")) then
+  {
+    var velatohritem $0
+  }
+  if ("%velatohritem" = "-1") then return
+  goto EVHEALMAIN
+EVHEALP:
+  pause
+EVHEALMAIN:
+  matchre EVHEALP %waitstring
+  match RETURN Roundtime
+  match RETURN 
+  match RETURN You feel a slight warmth that quickly fades, indicating your vela'tohr plant 
+  #within the thicket has no need of healing.
+  put hug %velatohritem
+  matchwait
+
+EVHEALWAIT:
+  if ($bleeding = 0) then return
+  pause 2
+  goto EVHEALWAIT
+
+
 TASKLOGIC:
   if ($Trading.LearningRate > 33) then var tradinglock 1
 	if ($Trading.LearningRate < 4) then var tradinglock 0
@@ -9296,7 +9357,7 @@ PINLOGIC:
     {
       var pindirty 0
       gosub LOOKPIN
-      put echo Yellow Pindirty: %pindirty
+      put #echo Yellow Pindirty: %pindirty
       if %pindirty = 1 then
       {     
         gosub STOWALL
@@ -10518,6 +10579,7 @@ SPELLCHOICELOGIC:
       if %spellleast = 0 then return
       else
       {
+        var trainingspell 1
         if %spellleast = 1 then
         {
           var tmcast 1
@@ -10527,6 +10589,7 @@ SPELLCHOICELOGIC:
           var charged 0
           var harnessed 0
           var usingdebiltm 1
+          var skillname Targeted_Magic
           if %tmfocus = "YES" then var tmfocusinuse 1
           if (%paralysisuse = 1) then
           {
@@ -10561,6 +10624,7 @@ SPELLCHOICELOGIC:
           var charged 0
           var harnessed 0
           var usingdebiltm 1
+          var skillname Debilitation
           var spellprepping %spelldebil
           gosub SPELLSTATCHECK %spellprepping
           if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell) then
@@ -10596,6 +10660,7 @@ SPELLCHOICELOGIC:
           math spellleast subtract 2
           var spellprepping %spell%spellleast
           var skill %spell%spellleastskill
+          gosub SPELLSKILLTEST %spell%spellleastskill
           gosub SPELLSTATCHECK %spellprepping
           if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell") then
           {
@@ -10666,8 +10731,7 @@ SPELLSWITCH:
   {
     if %spellnum > 0 then
     {
-      var skill %spell1skill
-      gosub SPELLSKILLTEST
+      gosub SPELLSKILLTEST %spell1skill
       if ((%skilltest < 34) && (%skillcap != 1)) then
       {
         if ((%spellleast = 0) || (%skilltest < %spellleastnum)) then
@@ -10679,8 +10743,7 @@ SPELLSWITCH:
     }
     if %spellnum > 1 then
     {
-      var skill %spell2skill
-      gosub SPELLSKILLTEST
+      gosub SPELLSKILLTEST %spell2skill
       if ((%skilltest < 34) && (%skillcap != 1)) then
       {
         if ((%spellleast = 0) || (%skilltest < %spellleastnum)) then
@@ -10692,8 +10755,7 @@ SPELLSWITCH:
     }
     if %spellnum > 2 then
     {
-      var skill %spell3skill
-      gosub SPELLSKILLTEST
+      gosub SPELLSKILLTEST %spell3skill
       if ((%skilltest < 34) && (%skillcap != 1)) then
       {
         if ((%spellleast = 0) || (%skilltest < %spellleastnum)) then
@@ -10705,8 +10767,7 @@ SPELLSWITCH:
     }
     if %spellnum > 3 then
     {
-      var skill %spell4skill
-      gosub SPELLSKILLTEST
+      gosub SPELLSKILLTEST %spell4skill
       if ((%skilltest < 34) && (%skillcap != 1)) then
       {
         if ((%spellleast = 0) || (%skilltest < %spellleastnum)) then
@@ -12354,27 +12415,32 @@ WINDBOARDLOGIC:
 
 ###SPELLCASTING###
 SPELLSKILLTEST:
+  var skill $0
   eval skill tolower(%skill)
   var skillcap 0
   if %skill = "warding" then
   {
     if $Warding.Ranks >= 1750 then var skillcap 1
     var skilltest $Warding.LearningRate
+    var skillname Warding
   }
   if %skill = "utility" then
   {
     if $Utility.Ranks >= 1750 then var skillcap 1
     var skilltest $Utility.LearningRate
+    var skillname Utility
   }
   if %skill = "augmentation" then
   {
     if $Augmentation.Ranks >= 1750 then var skillcap 1
     var skilltest $Augmentation.LearningRate
+    var skillname Augmentation
   }
   if %skill = "sorcery" then
   {
     if $Sorcery.Ranks >= 1750 then var skillcap 1
     var skilltest $Sorcery.LearningRate
+    var skillname Sorcery
   }
   return
   

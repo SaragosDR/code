@@ -41,14 +41,14 @@ if_1 then
   {
     if (("%discipline" = "blacksmithing") || ("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing")) then
     {
-      var difficulty $m$varsetforgingdifficulty
-      var material $m$varsetforgingmaterial
+      var difficulty $forgingdifficulty
+      var material $forgingmaterial
     }
     if ("%discipline" = "tailoring") then
     {
-      var difficulty $m$varsetoutfittingdifficulty
-      var cloth $m$varsetoutfittingcloth
-      var leather $m$varsetoutfittingleather
+      var difficulty $outfittingdifficulty
+      var cloth $outfittingcloth
+      var leather $outfittingleather
     }
   }
 }
@@ -57,9 +57,8 @@ else
   goto HELPDISPLAY
 }
 
-var varset $varset
 gosub CRAFTVARLOAD
-var storage $m%varsetstorage
+var storage $storage
 var alertwindow >$alertwindow
 
 var workorder 1

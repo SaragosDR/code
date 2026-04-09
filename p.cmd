@@ -1,5 +1,8 @@
 include library.cmd
 
+if $alertwindow = "Main" then var alertwindow
+else var alertwindow >$alertwindow
+
 var sorcdifficulty1percent 40
 var sorcdifficulty2percent 50
 var sorcdifficulty3percent 60
@@ -29,6 +32,13 @@ var ritualfocus $ritualfocus
 var ritualfocusworn $ritualfocusworn
 var ritualfocusstorage $ritualfocusstorage
 var ritualfocuscontainer $ritualfocuscontainer
+var tattoo $tattoo
+var tattootype $tattootype
+var tattoospell $tattoospell
+var tattooprepmana $tattooprepmana
+
+var shadowlingnoun $shadowlingnoun
+var tktitem $tktitem
 
 if %cambitems > 1 then
 {
@@ -129,7 +139,7 @@ SPECIALSPELLLOGIC:
       var smtarget %4
     }
     else
-    {
+    {      
       var prepmana %capmana
       var ctoverride 1
       var ctoverridevar %2
@@ -351,7 +361,8 @@ CASTSETUP:
     return
   }
   #OTHER_SPELLS
-  var prepmana %spellminmana
+  if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%tattoospell" = "%spell")) then var prepmana %tattooprepmana
+  else var prepmana %spellminmana
   if_3 then
   {
     var addmana %2

@@ -88,6 +88,22 @@ AREAVARINIT:
       var privateforge 655
       var privateforgedoor guarded archway
     }
+    if ("%discipline" = "tailoring") then
+    {
+      var mastername Jakke
+      var masterrange 719|720|722|721|723|724|725
+      var suppliesroom 724
+      var bulkroom 0
+      var toolroom 723
+      var partsroom 0
+      var repairroom 722
+      var repairname clerk
+      var workroom 0
+      var bucketroom 0
+      var privateforge 721
+      var privateforgedoor wooden opening
+      var workrooms 726|727|728|729|730|731
+    }
   }
   #MERKRESH
   if ($zoneid = 107) then
@@ -141,9 +157,9 @@ AREAVARINIT:
   return
 
 CRAFTVARLOAD:
-  var crafting $m%varsetcrafting
-  var forging $m%varsetforging
-  var outfitting $m%varsetoutfitting
+  var crafting $crafting
+  var forging $forging
+  var outfitting $outfitting
   
   var craftingstorage $craftingstorage
   var craftingstoragelocation $craftingstoragelocation
@@ -206,8 +222,8 @@ CRAFTINGEND:
   gosub CLOSEITEM my %craftingstorage
   if ("%craftingstoragelocation" = "portal") then
   {
-    gosub REMITEM %craftingstorage
-    gosub PUTITEM %craftingstorage in my portal
+    gosub REMITEM my %craftingstorage
+    gosub PUTITEM my %craftingstorage in my portal
   }
   return
   
@@ -253,7 +269,7 @@ WORKORDER:
   gosub FINDMASTER
   gosub TASKACQUIRE
   if (%workorderbail = 1) then return
-  gosub PUTITEM %discipline book in %craftingstorage
+  gosub PUTITEM my %discipline book in %craftingstorage
   if ("%crafttype" = "forging") then
   {
     put #echo Yellow Work Order: %quantity %product %quality in %timelimit roisaen.
@@ -283,7 +299,7 @@ WORKORDER:
     if (%goodfabric != 1) then
     {
       #PURCHASING_MATERIAL
-      
+      gosub ORDERMATERIALS
     
       #PURCHASING_PARTS
       #gosub ORDERPARTS
@@ -404,7 +420,7 @@ WORKORDER:
     return
   }
   gosub GIVEMASTERLOG %mastername
-  gosub PUTITEM logbook in my %craftingstorage
+  gosub PUTITEM my logbook in my %craftingstorage
   put #echo Yellow Crafting complete!
   var profit %revenue
   math profit subtract %expenses
@@ -446,7 +462,7 @@ FABRICCHECK:
   put #echo Yellow totalyards: %totalyards
   if (%fabricyards >= %totalyards) then
   {
-    gosub PUTITEM %materialnoun in my %craftingstorage
+    gosub PUTITEM my %materialnoun in my %craftingstorage
     var goodfabric 1
   }
   else
@@ -465,7 +481,7 @@ INGOTCHECK:
   put #echo Yellow ingotvolume: %ingotvolume
   if (%ingotvolume >= %totalvolume) then
   {
-    gosub PUTITEM ingot in my %craftingstorage
+    gosub PUTITEM my ingot in my %craftingstorage
     var goodingot 1
     return
   }
@@ -549,7 +565,7 @@ CRAFTINGMAIN:
     #echo materialnoun: %materialnoun
   }
   gosub STUDYBOOK my %discipline book
-  gosub PUTITEM %discipline book in %craftingstorage
+  gosub PUTITEM my %discipline book in %craftingstorage
   gosub TAPNOUN %product
   var product %nountap
   if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then
@@ -559,7 +575,7 @@ CRAFTINGMAIN:
     {
       gosub GETITEM ingot on anvil
       put #echo %alertwindow Yellow Found $righthand on the anvil before working!  Stowed, please investigate.
-      gosub PUTITEM ingot in my %craftingstorage
+      gosub PUTITEM my ingot in my %craftingstorage
     }
     gosub GETITEM my %material ingot in %craftingstorage
     gosub PUTITEM my %material ingot on anvil
@@ -576,9 +592,9 @@ CRAFTINGMAIN:
   {
     gosub GETITEM logbook
     gosub LOGBOOKBUNDLE %product
-    gosub PUTITEM logbook in my %craftingstorage
+    gosub PUTITEM my logbook in my %craftingstorage
     gosub GETITEM %material ingot in my %craftingstorage
-    gosuB PUTITEM %material ingot in my %craftingstorage
+    gosuB PUTITEM my %material ingot in my %craftingstorage
   }
   else
   {
@@ -600,7 +616,7 @@ ZASELECRAFTINGMAIN:
     gosub LOCATIONCHECK
     gosub FINDZASELENEW
     gosub GETINSTRUCTIONS
-    gosub PUTITEM instructions in my %craftingstorage
+    gosub PUTITEM my instructions in my %craftingstorage
     gosub MOVE dolphin
     gosub GOCORRAL
     gosub MOVE %workroom
@@ -614,8 +630,8 @@ ZASELECRAFTINGMAIN:
   var product %nountap
   if ("%discipline" = "tailoring") then gosub TAILOR
   if ("%discipline" = "knitting") then gosub KNIT
-  gosub PUTITEM $righthand in my %craftingstorage
-  gosub PUTITEM %product in %craftingstorage
+  gosub PUTITEM my $righthand in my %craftingstorage
+  gosub PUTITEM my %product in %craftingstorage
   math craftcount add 1
   goto ZASELECRAFTINGMAIN
   
@@ -674,7 +690,7 @@ KNITMAIN:
   
 KNITUNFINISHED:
   var firstcut 0
-  gosub PUTITEM %material %materialnoun in my %craftingstorage
+  gosub PUTITEM my %material %materialnoun in my %craftingstorage
   var craftaction knitknit
   goto KNITMAIN
 
@@ -682,7 +698,7 @@ KNITKNIT:
   if (%firstcut = 1) then
   {
     var firstcut 0
-    gosub PUTITEM %material %materialnoun in my %craftingstorage
+    gosub PUTITEM my %material %materialnoun in my %craftingstorage
   }
   var craftaction knitknit
   goto KNITMAIN
@@ -691,7 +707,7 @@ KNITPUSH:
   if (%firstcut = 1) then
   {
     var firstcut 0
-    gosub PUTITEM %material %materialnoun in my %craftingstorage
+    gosub PUTITEM my %material %materialnoun in my %craftingstorage
   }
   var craftaction knitpush
   goto KNITMAIN
@@ -700,7 +716,7 @@ KNITTURN:
   if (%firstcut = 1) then
   {
     var firstcut 0
-    gosub PUTITEM %material %materialnoun in my %craftingstorage
+    gosub PUTITEM my %material %materialnoun in my %craftingstorage
   }
   var craftaction knitturn
   goto KNITMAIN
@@ -709,7 +725,7 @@ KNITCAST:
   if (%firstcut = 1) then
   {
     var firstcut 0
-    gosub PUTITEM %material %materialnoun in my %craftingstorage
+    gosub PUTITEM my %material %materialnoun in my %craftingstorage
   }
   var craftaction knitcast
   goto KNITMAIN
@@ -824,7 +840,7 @@ SEW:
     var firstcut 0
     gosub PUTITEM my %scissors in my %craftingstorage
     gosub GETITEM %material %materialnoun
-    gosub PUTITEM %material %materialnoun in my %craftingstorage
+    gosub PUTITEM my %material %materialnoun in my %craftingstorage
   }
   var craftaction sew
   goto TAILORMAIN
@@ -1229,11 +1245,11 @@ SMELTPUTLOOP:
   gosub GETITEM %smeltmaterial %smeltnoun from %craftingstorage
   if ("$righthand" != "Empty") then
   {
-    gosub PUTITEM %smeltmaterial %smeltnoun in crucible
+    gosub PUTITEM my %smeltmaterial %smeltnoun in crucible
     if ("$righthand" != "Empty") then
     {
       gosub TILTCRUC
-      gosub PUTITEM %smeltmaterial %smeltnoun in crucible
+      gosub PUTITEM my %smeltmaterial %smeltnoun in crucible
     }
     goto SMELTPUTLOOP
   }
@@ -1253,7 +1269,7 @@ SMELTP:
 SMELT:
   if (("$righthandnoun" = "ingot") || ("$lefthandnoun" = "ingot")) then
   {
-    gosub PUTITEM %rod in my %craftingstorage
+    gosub PUTITEM my %rod in my %craftingstorage
     return
   }
   if ("$righthandnoun" != "rod") then
@@ -1329,7 +1345,7 @@ COMBINEALLMAIN:
   if (("$righthand" != "Empty") && ("$lefthand" != "Empty")) then gosub COMBINE %combineadj %combinenoun
   else
   {
-    gosub PUTITEM %combineadj %combinenoun in my %craftingstorage
+    gosub PUTITEM my %combineadj %combinenoun in my %craftingstorage
     return
   }
   goto COMBINEALLMAIN
@@ -1478,7 +1494,7 @@ TASKACQUIRE:
   var materialnoun 0
   gosub LOGBOOKASK %mastername %difficulty %discipline
   if (%workorderbail = 1) then return
-  gosub PUTITEM logbook in %craftingstorage
+  gosub PUTITEM my logbook in %craftingstorage
   pause .5
   #eval product replace("%product", "a ", "")
   #eval product replace("%product", "an ", "")
@@ -1641,60 +1657,72 @@ TASKACQUIRE:
   return  
 
 MATERIALSPLITLOOP:
-  if (%volumesleft <= 0) then return
-  if (%massivenum != 0) then
-  {  
-    if (%volumesleft >= 10) then
-    {
-      math volumesleft subtract 10
-      math massiveorder add 1
-      goto MATERIALSPLITLOOP
-    }
-    else
-    {
-      if ("%smallestsize" = "massive") then
+  if ("%crafttype" = "forging") then
+  {
+    if (%volumesleft <= 0) then return
+    if (%massivenum != 0) then
+    {  
+      if (%volumesleft >= 10) then
       {
         math volumesleft subtract 10
         math massiveorder add 1
         goto MATERIALSPLITLOOP
       }
+      else
+      {
+        if ("%smallestsize" = "massive") then
+        {
+          math volumesleft subtract 10
+          math massiveorder add 1
+          goto MATERIALSPLITLOOP
+        }
+      }
     }
-  }
-  if (%hugenum != 0) then
-  {  
-    if (%volumesleft >= 5) then
-    {
-      math volumesleft subtract 5
-      math hugeorder add 1
-      goto MATERIALSPLITLOOP
-    }
-    else
-    {
-      if ("%smallestsize" = "huge") then
+    if (%hugenum != 0) then
+    {  
+      if (%volumesleft >= 5) then
       {
         math volumesleft subtract 5
         math hugeorder add 1
         goto MATERIALSPLITLOOP
       }
+      else
+      {
+        if ("%smallestsize" = "huge") then
+        {
+          math volumesleft subtract 5
+          math hugeorder add 1
+          goto MATERIALSPLITLOOP
+        }
+      }
     }
-  }
-  if (%tinynum != 0) then
-  {  
-    if (%volumesleft >= 1) then
-    {
-      math volumesleft subtract 1
-      math tinyorder add 1
-      goto MATERIALSPLITLOOP
-    }
-    else
-    {
-      if ("%smallestsize" = "tiny") then
+    if (%tinynum != 0) then
+    {  
+      if (%volumesleft >= 1) then
       {
         math volumesleft subtract 1
         math tinyorder add 1
         goto MATERIALSPLITLOOP
       }
+      else
+      {
+        if ("%smallestsize" = "tiny") then
+        {
+          math volumesleft subtract 1
+          math tinyorder add 1
+          goto MATERIALSPLITLOOP
+        }
+      }
     }
+    return
+  }
+  if ("%crafttype" = "outfitting") then
+  {
+    if (%yardsleft <= 0) then return
+    math yardsleft subtract %materialyards
+    math materialorder add 1
+    goto MATERIALSPLITLOOP
+    return
   }
   return
 
@@ -1774,7 +1802,7 @@ ORDERBULK:
     if (%totalvolume < 50) then return
   }
   if ($roomid != %bulkroom) then gosub MOVE %bulkroom
-  echo here!
+
   var immensenum 0
   var giganticnum 0
   var colossalnum 0
@@ -1805,42 +1833,62 @@ ORDERBULK:
   math ingotsused add %giganticorder
   math ingotsused add %immenseorder
   return
-  
+
+
 ORDERMATERIALS: 
   if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
-  var tinynum 0
-  var hugenum 0
-  var massivenum 0
-  action var tinynum $1; var materialnoun $2 when (\d+)\)\.  a tiny %material (ingot|nugget)\.
-  action var hugenum $1; var materialnoun $2 when (\d+)\)\.  a huge %material (ingot|nugget)\.
-  action var massivenum $1; var materialnoun $2 when (\d+)\)\.  a massive %material (ingot|nugget)\.
-  gosub CRAFTINGORDER
-  pause .5
-  echo tinynum %tinynum
-  echo hugenum %hugenum
-  echo massivenum %massivenum
-  
-  echo materialnoun: %materialnoun
-  if (%massivenum != 0) then var smallestsize massive
-  if (%hugeum != 0) then var smallestsize huge
-  if (%tinynum != 0) then var smallestsize tiny
-
-  
-  var massiveorder 0
-  var hugeorder 0
-  var tinyorder 0
-  var volumesleft %totalvolume
-  gosub MATERIALSPLITLOOP
-  if (%tinyorder > 0) then gosub ORDERLOOP %tinynum %tinyorder %materialnoun
-  if (%hugeorder > 0) then gosub ORDERLOOP %hugenum %hugeorder %materialnoun
-  if (%massiveorder > 0) then gosub ORDERLOOP %massivenum %massiveorder %materialnoun
-  put #echo Yellow massiveorder: %massiveorder
-  put #echo Yellow hugeorder: %hugeorder
-  put #echo Yellow tinyorder: %tinyorder
-  var ingotsused %massiveorder
-  math ingotsused add %hugeorder
-  math ingotsused add %tinyorder
-  return
+  if ("%crafttype" = "forging") then
+  {
+    var tinynum 0
+    var hugenum 0
+    var massivenum 0
+    action var tinynum $1; var materialnoun $2 when (\d+)\)\.  a tiny %material (ingot|nugget)\.
+    action var hugenum $1; var materialnoun $2 when (\d+)\)\.  a huge %material (ingot|nugget)\.
+    action var massivenum $1; var materialnoun $2 when (\d+)\)\.  a massive %material (ingot|nugget)\.
+    gosub CRAFTINGORDER
+    pause .5
+    echo tinynum %tinynum
+    echo hugenum %hugenum
+    echo massivenum %massivenum
+    
+    echo materialnoun: %materialnoun
+    if (%massivenum != 0) then var smallestsize massive
+    if (%hugeum != 0) then var smallestsize huge
+    if (%tinynum != 0) then var smallestsize tiny
+    
+    var massiveorder 0
+    var hugeorder 0
+    var tinyorder 0
+    var volumesleft %totalvolume
+    gosub MATERIALSPLITLOOP
+    if (%tinyorder > 0) then gosub ORDERLOOP %tinynum %tinyorder %materialnoun
+    if (%hugeorder > 0) then gosub ORDERLOOP %hugenum %hugeorder %materialnoun
+    if (%massiveorder > 0) then gosub ORDERLOOP %massivenum %massiveorder %materialnoun
+    put #echo Yellow massiveorder: %massiveorder
+    put #echo Yellow hugeorder: %hugeorder
+    put #echo Yellow tinyorder: %tinyorder
+    var ingotsused %massiveorder
+    math ingotsused add %hugeorder
+    math ingotsused add %tinyorder
+    return
+  }
+  if ("%crafttype" = "outfitting") then
+  {
+    if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
+    action var materialnum $1; var materialyards $2; var materialnoun $3 when (\d+)\)\.  (\d+) yards of %material (cloth|leather)\.
+    gosub CRAFTINGORDER
+    pause .5
+    echo materialnum: %materialnum
+    echo materialyards: %materialyards
+    echo materialnoun: %materialnoun
+    var yardsleft %totalyards
+    echo yardsleft: %yardsleft
+    var materialorder 0
+    gosub MATERIALSPLITLOOP
+    echo materialorder: %materialorder
+    gosub ORDERLOOP %materialnum %materialorder %materialnoun
+    return
+  }
   
 ORDERLOOP:
   var ordernum $1
@@ -1850,7 +1898,7 @@ ORDERLOOP:
 ORDERLOOPMAIN:
   if (%ordercount >= %orderlimit) then return
   gosub CRAFTINGORDER %ordernum
-  gosub PUTITEM %ordernoun in my %craftingstorage
+  gosub PUTITEM my %ordernoun in my %craftingstorage
   math ordercount add 1
   goto ORDERLOOPMAIN
 
@@ -1893,7 +1941,7 @@ BUYCRATELOOPMAIN:
   echo cratecount: %cratecount
   if (%cratecount >= %parttotal) then return
   gosub BUYCRATE %partname
-  gosub PUTITEM %partname in my %craftingstorage
+  gosub PUTITEM my %partname in my %craftingstorage
   math cratecount add 1
   goto BUYCRATELOOPMAIN
 
@@ -2079,7 +2127,7 @@ CRAFTGIVETOOL:
 
 CRAFTGIVETOOLSTOW:
   #pause .5
-  gosub PUTITEM $righthand in my %craftingstorage
+  gosub PUTITEM my $righthand in my %craftingstorage
   RETURN
 
 CRAFTTICKETLOOP:
@@ -2095,7 +2143,7 @@ CRAFTTICKETLOOPMAIN:
     return
   }
   gosub GIVETICKETCRAFT
-  gosub PUTITEM $righthand in my %craftingstorage
+  gosub PUTITEM my $righthand in my %craftingstorage
   goto CRAFTTICKETLOOPMAIN
 
 GIVETICKETCRAFTP:
@@ -2104,6 +2152,8 @@ GIVETICKETCRAFT:
   matchre GIVETICKETCRAFTP %waitstring
   matchre RETURN ^You hand (%repairer) your ticket and are handed back|After a moment, he returns and hands you
   match RETURN You hand the clerk your ticket and are handed back
+  match RETURN You hand an Elothean clerk your ticket and are handed back
+  match RETURN An Elothean clerk says, "There isn't a scratch on that, so there's nothing to repair."
 	matchre CRAFTWAITREPAIR ^\w* smiles and says
 	matchre CRAFTWAITREPAIR ^\w* grumbles\, \"Well that isn't gonna be done for another
 	matchre CRAFTWAITREPAIR (A|An).* clerk says politely, "That won't be done for another

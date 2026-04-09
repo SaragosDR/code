@@ -1,3 +1,14 @@
+04/09/26
+Updated Scripts: train, library, set, p, craft, workorder, craftlibrary
+Instrument playing now automatically adjusts your song type.  If you want to change it manually, the SongType variable is now numerical, 0-33.
+Magic now automatically adjusts your mana type up or down for training spells.  If you want to turn this feature off, the SpellAutoMana variable is available.
+
+Bugfixes to crafting scripts and further development of Outfitting training.
+P script is now able to properly cast a spell you have on tattoo, provided your variables are set correctly and it is enabled.
+Bugfix to .TRAIN MAGIC option to ensure that it really only does magical actions.
+Changed room priority order for P2 young gryphons to avoid (but not eliminate) the room that sometimes has mature gryphons wander down.
+
+
 02/03/26
 Updated Scripts: train, library, set
 Embrace of the Vela'tohr is implemented for Empaths, for casting only.  Does not heal it on its own yet.

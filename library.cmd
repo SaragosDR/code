@@ -28,6 +28,7 @@ var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p
 var combatpresetp5 p5-maidenstress|p5-matronstress|p5-dryads|p5-nyads1|p5-blightogres1|p5-nyads2|p5-blightogres2|p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-headsplitters|p5-blackapes|p5-tuskies|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
 var combatpresetlist none|%combatpresetp1|%combatpresetp2|%combatpresetp3|%combatpresetp4|%combatpresetp5
 
+var songlist scales halting|scales|arpeggios|ditty|folk|ballad|waltz|lullaby|march|jig|lament|wedding|hymn|rumba|polka|battle|reel|elegy|serenade|minuet|psalm|dirge|gavotte|tango|tarantella|bolero|nocturne|requiem|fantasia|rondo|aria|sonata|concerto|concerto masterful
 
 var townpresetlist muspari|theren|rossman|riverhaven|dirge|kaerna|crossing|leth|ilaya|fangcove|shard|fangcove|hibarnhvidar|boarclan|ratha|merkresh
 #|aesry|merkresh|jeihrem
@@ -44,12 +45,12 @@ var forgingtownlist none|crossing|shard|merkresh|hibarnhvidar
 var ordinal none|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth
 var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.|You're unconscious!|There is no need for violence here\.|Sorry, system is slow\.  No type ahead allowed\.
 
-#action (combo) var elapsed $gametime; math elapsed subtract %gametimestart; put #echo Yellow Elapsed: %elapsed; 10put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
-action (combo) put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
-action (combo) put #var rushlast $unixtime when ^You angle your .* towards .* and charge forwards!
-action (combo) var barbmane $unixtime; math barbmane subtract 30; put #var %manenamelast %barbmane; put #var save;put #echo Yellow Barbarian Maneuver %manename cooldown reduction! when With expert skill you end the attack and maneuver into a better position\.
-action (combo) var failtest $unixtime; math failtest subtract 80; put #var %manenamelast %failtest; send #echo Yellow ACM is still on cooldown! when You must rest a bit longer before attempting that maneuver again\.
-action (combo) off
+#action (acm) var elapsed $gametime; math elapsed subtract %gametimestart; put #echo Yellow Elapsed: %elapsed; 10put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
+action (acm) put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
+action (acm) put #var rushlast $unixtime when ^You angle your .* towards .* and charge forwards!
+action (acm) var barbmane $unixtime; math barbmane subtract 30; put #var %manenamelast %barbmane; put #var save;put #echo Yellow Barbarian Maneuver %manename cooldown reduction! when With expert skill you end the attack and maneuver into a better position\.
+action (acm) var failtest $unixtime; math failtest subtract 80; put #var %manenamelast %failtest; send #echo Yellow ACM is still on cooldown! when You must rest a bit longer before attempting that maneuver again\.
+action (acm) off
 
 var badforagelist glaysker flower|briarberry root|coffee bean|almond|green moss|rosewood limb|eghmok moss
 #var badforagelist almond|glaysker flower|coffee bean|green moss|jasmine blossom|eghmok moss|plovik leaf|briarberry root|rosewood limb
@@ -439,8 +440,8 @@ VARCHECKS:
   if !matchre("$instruments", "\b(YES|NO)\b") then put #var instrumentassess YES
   if !matchre("$instclean", "\b(YES|NO)\b") then put #var instclean YES
   if !def(instcleancloth) then put #var instcleancloth cloth
-  if ((!def(songtype)) && (def(m1songtype))) then put #var songtype $m1songtype
-  if !def(songtype) then put #var songtype scales
+  if $songtype >= 0 then
+  else put #var songtype 0
   if !matchre("$climbingrope", "\b(YES|NO)\b") then put #var climbingrope NO
   if !def(climbingropename) then put #var climbingropename rope
   if !matchre("$climbingropehum", "\b(YES|NO)\b") then put #var climbingropehum YES
@@ -538,6 +539,7 @@ VARCHECKS:
   if !matchre("$spellm2", "\b(YES|NO)\b") then put #var spellm2 YES
   if !matchre("$spellnum", "\b(1|2|3|4)\b") then put #var spellnum 3
   if !matchre("$spellnumm2", "\b(1|2|3|4)\b") then put #var spellnumm2 3
+  if !matchre("$spellautomana", "\b(YES|NO)\b") then put #var spellautomana YES
   if !def(spell1) then put #var spell1 ys
   if $spell1mana >= 0 then
   else put #var spell1mana 0
@@ -666,10 +668,10 @@ VARCHECKS:
   if !def(wand4item) then put #var wand4item crystal
   if $wand4num > 0 then
   else put #var wand4num 2
-  if !matchre("$wand1spell", "\b(hes|mef|rage|rw|will|wotp)\b") then put #var wand1spell mef
-  if !matchre("$wand2spell", "\b(hes|mef|rage|rw|will|wotp)\b") then put #var wand2spell rage
-  if !matchre("$wand3spell", "\b(hes|mef|rage|rw|will|wotp)\b") then put #var wand2spell hes
-  if !matchre("$wand4spell", "\b(hes|mef|rage|rw|will|wotp)\b") then put #var wand2spell will
+  if !matchre("$wand1spell", "\b(hes|mef|rage|rw|tranquility|will|wotp)\b") then put #var wand1spell mef
+  if !matchre("$wand2spell", "\b(hes|mef|rage|rw|tranquility|will|wotp)\b") then put #var wand2spell rage
+  if !matchre("$wand3spell", "\b(hes|mef|rage|rw|tranquility|will|wotp)\b") then put #var wand3spell hes
+  if !matchre("$wand4spell", "\b(hes|mef|rage|rw|tranquility|will|wotp)\b") then put #var wand4spell will
   
   if !matchre("$gbuff", "\b(YES|NO)\b") then put #var gbuff NO
   if (($gbuffnum >= 0) && ($gbuffnum <= 8)) then
@@ -7427,6 +7429,7 @@ WARHORN:
 #####MAGIC_LOGIC#####
   
 CASTRESET:
+  var backfire 0
 	var cambcharge 0
   var cambcharge1 0
   var cambcharge2 0
@@ -7459,6 +7462,7 @@ CASTRESET:
   var ctoverride 0
   var omcast 0
   var preptime 0
+  var trainingspell 0
   return
 
 CASTINGLOGIC:
@@ -7526,7 +7530,11 @@ CASTINGLOGIC:
   if (%prepped != 1) then
   {
     gosub ARRANGEMANA
-    if ($concentration >= %minconcentration) then gosub PREP
+    if ($concentration >= %minconcentration) then
+    {
+      if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%tattoospell" = "%spell")) then var tattoocast 1
+      gosub PREP
+    }
   }
   #PREPPED
   if (%prepped = 1) then
@@ -7556,6 +7564,18 @@ CASTINGLOGIC:
     }
     #HARNESSING
     if ((%harnmana > 0) && (%harnessed = 0)) then gosub HARNESS
+    if ("%spellautomana" = "YES") then
+    {
+      if (%trainingspell = 1) then
+      {
+        if (("%skillname" != "Targeted_Magic") && ("%skillname" != "Debilitation")) then
+        {
+          #put #echo Yellow Training spell!
+          #put #echo Spellleast: %spellleast
+          var precastlearningrate $%skillname.LearningRate
+        }
+      }
+    }
     gosub CAST
   }
   else
@@ -7683,6 +7703,55 @@ CASTCLEANUPMAIN:
   {
     gosub PREPSYMBIOSIS
     gosub RELSYMBIOSIS
+  }
+  if ("%spellautomana" = "YES") then
+  {
+    if (%trainingspell = 1) then
+    {
+      if (("%skillname" != "Targeted_Magic") && ("%skillname" != "Debilitation")) then
+      {
+        var postcastlearningrate $%skillname.LearningRate
+        var totallearned %postcastlearningrate
+        math totallearned subtract %precastlearningrate
+        put #echo Yellow Skill: %skillname
+        put #echo Yellow PrecastLearningRate: %precastlearningrate // PostCastLearningRate: %postcastlearningrate // Total Learned: %totallearned
+        if (%totallearned = 0) then
+        {
+          if (%backfire = 1) then
+          {
+            var tempmana $spell%spellleastmana
+            math tempmana subtract 1
+            put #echo >$alertwindow Yellow [Magic]: Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
+            put #echo Yellow Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
+            var spell%spellleastmana %tempmana
+            put #var spell%spellleastmana %tempmana
+            put #var save
+            var nextmanaadjust %t
+            math nextmanaadjust add 3600
+          }
+        }
+        if ((%totallearned > 0) && (%totallearned < 2)) then
+        {
+          if (%t >= %nextmanaadjust) then
+          {
+            echo spellmana: %spellmana
+            echo spelldifficulty %spelldifficulty
+            echo spellminmana %spellminmana
+            echo spellcapmana %spellcapmana                            
+            if ($spell%spellleastmana < %spellcapmana) then
+            {
+              var tempmana $spell%spellleastmana
+              math tempmana add 1
+              put #echo >$alertwindow Yellow [Magic]: Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
+              put #echo Yellow Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
+              var spell%spellleastmana %tempmana
+              put #var spell%spellleastmana %tempmana
+              put #var save
+            }
+          }
+        }
+      }
+    }
   }
   if ($Attunement.LearningRate > 33) then var attunelock 1
   if ($Arcana.LearningRate > 33) then var arcanalock 1
@@ -8830,11 +8899,17 @@ PREPSYMBIOSIS:
   matchre PREPSYMBIOSISP %waitstring
   matchre RETURN But you've already prepared the|You recall the exact details of the
   match RETURN As quickly as you form the spell pattern in your mind it slips away from you again.
+  match PREPSYMBSTOPPLAYING You should stop playing before you do that.
   put prepare symbiosis
   matchwait 5
 	var timeoutsub PREPSYMBIOSIS
   var timeoutcommand prepare symbiosis
 	goto TIMEOUT
+
+PREPSYMBSTOPPLAYING:
+  gosub PLAYSTOP
+  goto PREPSYMBIOSIS
+  
 
 
 RELALLP:
@@ -11613,10 +11688,7 @@ ATTACKACMCWRONG:
   exit
 
 ATTACKACMCFAIL:
-  #send #echo Yellow ACM is still on cooldown!
-  #var failtest $unixtime
-  #math failtest subtract 80
-  #put #var %manenamelast %failtest
+  put #var %manenamelast $unixtime
   exit
 
 ATTACKACMCBADNAME:
@@ -12168,13 +12240,46 @@ PLAYP:
   pause
 PLAY:
   matchre PLAYP %waitstring
-  matchre PLAYSUCCESS You're already playing a song!|You begin a|You effortlessly begin|You fumble slightly|You struggle to begin|You begin some
+  matchre PLAYSUCCESS You're already playing a song!|You begin (?:a|some) (?:spritely|quiet|masterful) .* on your .* with only the slightest hint of difficulty\.|You begin (?:a|an) (?:spritely|quiet|masterful) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|an) (?:spritely|quiet|masterful) .* on your .*\.
+  matchre PLAYDOWN You fumble slightly as you begin (?:a|some) (?:spritely|quiet) .* on your .*\.|You struggle to begin (?:a|some) (?:spritely|quiet) .* on your .*\.
+  matchre PLAYUP You effortlessly begin (?:a|some) (?:spritely|quiet) .* on your .*, your heart swelling in pride at your hard-earned skill\.|You begin (?:a|some) (?:spritely|quiet) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|some) (?:spritely|quiet) .* on your .*\.
   match PLAYUNHIDE That would give away your hiding place!
-  put play %songtype on %instrument
+  put play %songlist(%songtype) on %instrument
   matchwait 5
   var timeoutsub PLAY
-  var timeoutcommand play %songtype on %instrument
+  var timeoutcommand play %songlist(%songtype) on %instrument
   goto TIMEOUT
+
+PLAYDOWN:
+  if (%songpermission = 1) then goto PLAYSUCCESS
+  if (%songtype > 0) then
+  {
+    gosub PLAYSTOP
+    math songtype subtract 1
+    put #var songtype %songtype
+    goto PLAY
+  }
+  else
+  {
+    var songpermission 1
+    goto PLAYSUCCESS
+  }
+
+  
+PLAYUP:
+  if (%songpermission = 1) then goto PLAYSUCCESS
+  if (%songtype < 33) then
+  {
+    gosub PLAYSTOP
+    math songtype add 1
+    put #var songtype %songtype
+    goto PLAY
+  }
+  else
+  {
+    var songpermission 1
+    goto PLAYSUCCESS
+  }
 
 PLAYUNHIDE:
   gosub UNHIDE
