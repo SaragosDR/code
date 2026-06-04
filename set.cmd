@@ -929,6 +929,8 @@ SET:
     if tolower("%1") = "tmfocusworn" then goto YESNOSET
     if tolower("%1") = "tmfocusstorage" then goto YESNOSET
     if tolower("%1") = "tmfocuscontainer" then goto TEXTSET
+    if tolower("%1") = "parallelfocus" then goto YESNOSET
+    if tolower("%1") = "parallelfocusitem" then goto TEXTSET
     if tolower("%1") = "tattoo" then goto YESNOSET
     if tolower("%1") = "tattootype" then
     {
@@ -1239,7 +1241,39 @@ SET:
         put #echo mono You can only choose from %forgingtownlist.
         goto END
       }
-    }   
+    }
+    if (tolower("%1") = "outfittingtown") then
+    {
+      if (matchre("%2", "\b(%outfittingtownlist)\b")) then
+      {  
+        var setvar outfittingtown
+        eval input tolower(%2)  
+        put #var %setvar %input
+        put #var save
+        goto VARDISPLAY
+      }
+      else
+      {
+        put #echo mono You can only choose from %outfittingtownlist.
+        goto END
+      }
+    }
+    if (tolower("%1") = "outfittingtownm2") then
+    {
+      if (matchre("%2", "\b(%outfittingtownlist)\b")) then
+      {  
+        var setvar outfittingtownm2
+        eval input tolower(%2)  
+        put #var %setvar %input
+        put #var save
+        goto VARDISPLAY
+      }
+      else
+      {
+        put #echo mono You can only choose from %outfittingtownlist.
+        goto END
+      }
+    } 
     if tolower("%1") = "lootalerts" then goto YESNOSET
     if tolower("%1") = "lootalldead" then goto YESNOSET
     if tolower("%1") = "skinafterlock" then goto YESNOSET
@@ -2112,6 +2146,7 @@ DISPLAYMAGIC:
     gosub OUTPUT RitualFocusStorage RitualFocusContainer
     gosub OUTPUT TMFocus TMFocusItem
     gosub OUTPUT TMFocusStorage TMFocusContainer
+    gosub OUTPUT ParallelFocus ParallelFocusItem
     gosub OUTPUT Tattoo
     gosub OUTPUT TattooType (runic|heroic)
     gosub OUTPUT TattooSpell
@@ -2816,6 +2851,7 @@ DISPLAYHUNTING:
 	gosub OUTPUT PawnTown (%pawntownlist)
   gosub OUTPUT PerformTown (%performtownlist)
   gosub OUTPUT ForgingTown (%forgingtownlist)
+  gosub OUTPUT OutfittingTown (%outfittingtownlist)
   put #echo
   gosub OUTPUT Storage
   gosub OUTPUT BoxStorage
@@ -2872,6 +2908,7 @@ DISPLAYMULTI:
 	gosub OUTPUT PawnTownM2 (%pawntownlist)
   gosub OUTPUT PerformTownM2 (%performtownlist)
   gosub OUTPUT ForgingTownM2 (%forgingtownlist)
+  gosub OUTPUT OutfittingTownM2 (%outfittingtownlist)
   put #echo
   put #echo mono =================== Loot ===================
   gosub OUTPUT LootTypeM2 (treasure|boxes|equipment|goods|all)

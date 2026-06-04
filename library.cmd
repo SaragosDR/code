@@ -41,9 +41,10 @@ var burgletownlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|il
 var pawntownlist none|crossing|riverhaven|shard|hibarnhvidar
 var performtownlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|fangcove|shard|hibarnhvidar|boarclan|ratha|merkresh|mriss
 var forgingtownlist none|crossing|shard|merkresh|hibarnhvidar
+var outfittingtownlist none|crossing|shard|hibarnhvidar
 
 var ordinal none|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth
-var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.|You're unconscious!|There is no need for violence here\.|Sorry, system is slow\.  No type ahead allowed\.
+var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.|You're unconscious!|There is no need for violence here\.|Sorry, system is slow\.  No type ahead allowed\.|You don't seem to be able to move to do that\.
 
 #action (acm) var elapsed $gametime; math elapsed subtract %gametimestart; put #echo Yellow Elapsed: %elapsed; 10put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
 action (acm) put #var %manenamelast $unixtime; put #var save; put #echo Yellow Maneuver %manename complete! when ^You take a step back and (heft|ready) your \w+ behind you\.|^Taking a full step back, you plant your feet and .*\.|^You lower your shoulders and .*\.|^You take a step back and ready an upraised palm\.|^You angle to the side and .*\.|^You crouch down and draw your weapons close\.|^You step to the side and adjust your stance\.|^You take a step back and .*\.|^You square up your feet and arch your back while searching for an engaged enemy to target\.|You raise .* before you and prepare to strike\.|^You brace your shoulder against the .* to increase the power of the next shot\.
@@ -191,7 +192,8 @@ VARCHECKS:
   if !matchre("$burgletownm2", "\b(%townpresetlist)\b") then put #var burgletownm2 crossing
   if !matchre("$pawntownm2", "\b(%townpresetlist)\b") then put #var pawntownm2 crossing
   if !matchre("$performtownm2", "\b(%townpresetlist)\b") then put #var performtownm2 crossing
-  if !matchre("$forgingtownm2", "\b(%townpresetlist)\b") then put #var forgingtownm2 crossing
+  if !matchre("$forgingtownm2", "\b(%forgingtownlist)\b") then put #var forgingtownm2 crossing
+  if !matchre("$outfittingtownm2", "\b(%outfittingtownlist)\b") then put #var outfittingtownm2 crossing
   
   #MOVEMENT
   if !matchre("$movevanish", "\b(YES|NO)\b") then put #var movevanish NO
@@ -210,7 +212,8 @@ VARCHECKS:
   if !matchre("$burgletown", "\b(%townpresetlist)\b") then put #var burgletown crossing
   if !matchre("$pawntown", "\b(%townpresetlist)\b") then put #var pawntown crossing
   if !matchre("$performtown", "\b(%townpresetlist)\b") then put #var performtown crossing
-  if !matchre("$forgingtown", "\b(%townpresetlist)\b") then put #var forgingtown crossing
+  if !matchre("$forgingtown", "\b(%forgingtownlist)\b") then put #var forgingtown crossing
+  if !matchre("$outfittingtown", "\b(%outfittingtownlist)\b") then put #var outfittingtown crossing
   
   if !matchre("$vaulttown", "\b(%townvaultpresetlist)\b") then put #var vaulttown crossing
   if !matchre("$ammobuytown", "\b(%ammopresetlist)\b") then put #var ammobuytown crossing
@@ -524,6 +527,8 @@ VARCHECKS:
   if !def(tmfocusitem) then put #var tmfocusitem wand
   if !matchre("$tmfocusstorage", "\b(YES|NO)\b") then put #var tmfocusstorage NO
   if !matchre("$tmfocusworn", "\b(YES|NO)\b") then put #var tmfocusworn NO
+    if !matchre("$parallelfocus", "\b(YES|NO)\b") then put #var parallelfocus NO
+  if !def(parallelfocusitem) then put #var parallelfocusitem dark cube
   if !matchre("$tattoo", "\b(YES|NO)\b") then put #var tattoo NO
   if !matchre("$tattootype", "\b(runic|heroic)\b") then
   {
@@ -1188,6 +1193,7 @@ NEWTOWNPRESET:
 		if (%towntype = "burgle") then var rttargetroom 0
 		if (%towntype = "perform") then var rttargetroom 0
 		if (%towntype = "forging") then var rttargetroom 0
+		if (%towntype = "outfitting") then var rttargetroom 0
 		if (%towntype = "pawn") then var rttargetroom 0
 	}
   if ("%towncheck" = "theren") then
@@ -1251,6 +1257,8 @@ NEWTOWNPRESET:
 		if (%towntype = "burgle") then var rttargetroom 388
 		if (%towntype = "perform") then var rttargetroom 227
 		if (%towntype = "studyart") then var rttargetroom 534
+		if (%towntype = "forging") then var rttargetroom 865
+		if (%towntype = "outfitting") then var rttargetroom 873
 		if (%towntype = "pawn") then var rttargetroom 433
 		if (%towntype = "tradingsell") then var rttargetroom 1
 		if (%towntype = "tradingtask") then var rttargetroom 379
@@ -1296,6 +1304,7 @@ NEWTOWNPRESET:
 		if (%towntype = "pawn") then var rttargetroom 158
 		if (%towntype = "perform") then var rttargetroom 180
 		if (%towntype = "forging") then var rttargetroom 658
+		if (%towntype = "outfitting") then var rttargetroom 719
 	}
 	if ("%towncheck" = "hibarnhvidar") then
 	{
@@ -1308,6 +1317,7 @@ NEWTOWNPRESET:
 		if (%towntype = "perform") then var rttargetroom 442
 		if (%towntype = "pawn") then var rttargetroom 229
 		if (%towntype = "forging") then var rttargetroom 408
+	  if (%towntype = "outfitting") then var rttargetroom 466
 	}
 	if ("%towncheck" = "boarclan") then
 	{
@@ -4555,8 +4565,10 @@ GETITEMMAIN:
   matchre GETUNTIE You pull at it, but the ties prevent you.  Maybe if you untie it, first?|You should untie the
   matchre RETURN You get|You're already holding|You are already holding that.|You pick up|What were you referring to?|You stop as you realize|You must unload|You fade in for a moment|You remove|You pull|What were you referring to?|You try to grab your|Please rephrase that command\.|You are already holding that\.|You deftly remove the
   match RETURN Get what?
+  match RETURN What were you referring to?
   match RETURN You reach for your sack and retrieve the equipment stored inside.
   match RETURN That can't be picked up.
+  match RETURN That .* needs to be tended to be removed\.
   matchre GETINJURED ^You can't pick that up with your (hand|hands) that damaged\.
   matchre GETITEMBAD You need a free hand to pick that up.
   matchre GETCLIMBPRACBAD You should stop practicing 
@@ -4800,7 +4812,7 @@ STOREDEFAULTMAIN:
   matchre STOREDEFAULTP %waitstring
   matchre STOREDEFAULTGOOD You will now use your .* to store any items you haven't categorized\.
   match RETURN I could not find that container.
-  put store default %storedefaultitemstring
+  put store default my %storedefaultitemstring
   matchwait 5
 	var timeoutsub STOREDEFAULT
 	var timeoutcommand store default %storedefaultitemstring
@@ -7730,7 +7742,7 @@ CASTCLEANUPMAIN:
             math nextmanaadjust add 3600
           }
         }
-        if ((%totallearned > 0) && (%totallearned < 2)) then
+        if ((%totallearned > 0) && (%totallearned < 2) && (%precastlearningrate != 33)) then
         {
           if (%t >= %nextmanaadjust) then
           {

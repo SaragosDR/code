@@ -71,9 +71,12 @@ if (%workorderbail = 1) then return
 gosub CRAFTREPAIR
 
 MAIN:
+  gosub AWAKE
   gosub WORKORDER
   if (%workorderbail = 1) then exit
-  if ($Forging.LearningRate < 25) then goto MAIN
+  if ("%crafttype" = "forging") then var mindstateend $Forging.LearningRate
+  if ("%crafttype" = "outfitting") then var mindstateend $Outfitting.LearningRate
+  if (%mindstateend < 25) then goto MAIN
   else
   {
     gosub CRAFTINGEND

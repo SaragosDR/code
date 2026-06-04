@@ -27,7 +27,12 @@ action math expenses add $1; var currency $2 when The attendant says, "You can p
 action math expenses add $1; var currency $2 when You decide to purchase the \w+, and pay the sales clerk (\d+) (Kronars|Lirums|Dokoras)\.
 action math expenses add $1; var currency $2 when The sentry holds out (?:his|her) hand, saying, "That'll be (\d+) (Kronars|Lirums|Dokoras), (?:sir|madam)\."
 action math expenses add $1; var currency $2 when You hand the clerk (\d+) (Kronars|Lirums|Dokoras) and (?:he|she) gives you back a repair ticket\.
+
+action math expenses add $1; var currency $2 when The attendant says, "You can purchase \d+ yards of \w+ \w+ for (\d+) (Kronars|Lirums|Dokoras)\.
+#The attendant says, "You can purchase 10 yards of burlap cloth for 315 Dokoras.  Just order it again and we'll see it done!"
+
 action var revenue $1; var currency $2 when You hand \w+ your logbook and bundled items, and are given (\d+) (Kronars|Lirums|Dokoras) in return\.
+
 
 goto CRAFTLIBEND
 
@@ -58,16 +63,11 @@ AREAVARINIT:
       var mastername Milline
       var masterrange 873|910|911|912|913|914|915|916
       var suppliesroom 914
-      var bulkroom 0
       var toolroom 913
-      var partsroom 0
       var repairroom 9114
       var repairname clerk
       var workroom 917
-      var bucketroom 921
-      #var privateforge 906
-      #var privateforgedoor stone door
-      #var workrooms 917|918|919|920|921|922|923|924
+      #var bucketroom 921
     }
   }
   #SHARD
@@ -93,16 +93,10 @@ AREAVARINIT:
       var mastername Jakke
       var masterrange 719|720|722|721|723|724|725
       var suppliesroom 724
-      var bulkroom 0
       var toolroom 723
-      var partsroom 0
       var repairroom 722
       var repairname clerk
-      var workroom 0
-      var bucketroom 0
-      var privateforge 721
-      var privateforgedoor wooden opening
-      var workrooms 726|727|728|729|730|731
+      var workroom 178
     }
   }
   #MERKRESH
@@ -147,11 +141,10 @@ AREAVARINIT:
       var mastername Master
       var masterrange 474|466|467|468|469|470|471|472|473
       var suppliesroom 471
-      var bulkroom 0
       var toolroom 473
-      var partsroom 0
       var repairroom 473
       var repairname clerk
+      var workroom
     }
   }
   return
@@ -198,10 +191,11 @@ CRAFTVARLOAD:
   var workorderbail 0
   var expenses 0
   var revenue 0
-  var mindstatebegin $Forging.LearningRate
   var timebegin $gametime
   if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then var crafttype forging
   if ("%discipline" = "tailoring") then var crafttype outfitting
+  if ("%crafttype" = "forging") then var mindstatebegin $Forging.LearningRate
+  if ("%crafttype" = "outfitting") then var mindstatebegin $Outfitting.LearningRate
   var forgingrepairlist %bellows|%hammer|%shovel|%rod|%tongs
   var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
   
@@ -300,12 +294,21 @@ WORKORDER:
     {
       #PURCHASING_MATERIAL
       gosub ORDERMATERIALS
+      echo gosub COMBINEALL %material %materialnoun 
+      gosub COMBINEALL %material %materialnoun 
     
       #PURCHASING_PARTS
-      #gosub ORDERPARTS
-    
+      echo totalpadlarge: %totalpadlarge
+      echo totalpadsmall: %totalpadsmall
+      if ((%totalpadlarge > 0) || (%totalpadsmall > 0)) then
+      {
+        action var padlargenum $1 when (\d+)\)\.  some large cloth padding\.
+        action var padsmallnum $1 when (\d+)\)\.  some small cloth padding\.
+        gosub CRAFTINGORDER
+        if (%totalpadlarge > 0) then gosub ORDERLOOP %padlargenum %totalpadlarge padding
+        if (%totalpadsmall > 0) then gosub ORDERLOOP %padsmallnum %totalpadsmall padding
+      }    
     }
-    exit
   }
   if ("%crafttype" = "forging") then
   {
@@ -370,25 +373,32 @@ WORKORDER:
     }
   }
   #CRAFTING
-  if (%t >= %privateroomuntil) then gosub FINDANVIL
-  else var foundanvil 0
-  if (%foundanvil = 0) then
+  if ("%crafttype" = "forging") then
   {
-    if (("%forgingprivateroom" = "YES") && (%privateforge != 0)) then
+    if (%t >= %privateroomuntil) then gosub FINDANVIL
+    else var foundanvil 0
+    if (%foundanvil = 0) then
     {
-      gosub MOVE %privateforge
-      gosub GOPRIVATEROOM %privateforgedoor
-      var privateroomuntil %t
-      math privateroomuntil add 3550
-      var rentedprivateroom 1
-      var usingprivateroom 1
+      if (("%forgingprivateroom" = "YES") && (%privateforge != 0)) then
+      {
+        gosub MOVE %privateforge
+        gosub GOPRIVATEROOM %privateforgedoor
+        var privateroomuntil %t
+        math privateroomuntil add 3550
+        var rentedprivateroom 1
+        var usingprivateroom 1
+      }
+      else
+      {
+        put #echo %alertwindow Yellow [CRAFT]: No free anvils!  Stopping forging!
+        gosub CRAFTINGABORT
+        return
+      }
     }
-    else
-    {
-      put #echo %alertwindow Yellow [CRAFT]: No free anvils!  Stopping forging!
-      gosub CRAFTINGABORT
-      return
-    }
+  }
+  if ("%crafttype" = "outfitting") then
+  {
+    gosub MOVE %workroom
   }
   gosub GETITEM %discipline book
   if ((!matchre("$righthandnoun", "book")) && (!matchre("$lefthandnoun", "book"))) then
@@ -410,7 +420,7 @@ WORKORDER:
     var usingprivateroom 0
   }
   gosub FINDMASTER  
-  gosub GETITEM logbook from my %craftingstorage
+  gosub GETITEM %crafttype logbook from my %craftingstorage
   put #echo righthandnoun: $righthandnoun
   if (!matchre("$righthandnoun", "logbook")) then
   {
@@ -420,11 +430,15 @@ WORKORDER:
     return
   }
   gosub GIVEMASTERLOG %mastername
-  gosub PUTITEM my logbook in my %craftingstorage
+  gosub PUTITEM my %crafttype logbook in my %craftingstorage
   put #echo Yellow Crafting complete!
   var profit %revenue
   math profit subtract %expenses
-  var mindstatetotal $Forging.LearningRate
+  put #echo Yellow crafttype: %crafttype
+  if ("%crafttype" = "forging") then var mindstatetotal $Forging.LearningRate
+  if ("%crafttype" = "outfitting") then var mindstatetotal $Outfitting.LearningRate
+  put #echo Yellow mindstatetotal: %mindstatetotal
+  put #echo Yellow mindstatebegin: %mindstatebegin
   math mindstatetotal subtract %mindstatebegin
   var timetotal $gametime
   math timetotal subtract %timebegin
@@ -590,11 +604,14 @@ CRAFTINGMAIN:
   }
   if (%workorder = 1) then
   {
-    gosub GETITEM logbook
+    gosub GETITEM %crafttype logbook
     gosub LOGBOOKBUNDLE %product
-    gosub PUTITEM my logbook in my %craftingstorage
-    gosub GETITEM %material ingot in my %craftingstorage
-    gosuB PUTITEM my %material ingot in my %craftingstorage
+    gosub PUTITEM my %crafttype logbook in my %craftingstorage
+    if ("%crafttype" = "forging") then
+    {
+      gosub GETITEM %material ingot in my %craftingstorage
+      gosuB PUTITEM my %material ingot in my %craftingstorage
+    }
   }
   else
   {
@@ -805,10 +822,14 @@ TAILORMAIN:
   match SLICKSTONE A deep crease develops along the fabric, bunching it together awkwardly.
   match YARDSTICK The leather's dimensions appear to have shifted and could benefit from some remeasuring.
   match YARDSTICK The fabric's dimensions appear to have shifted and could benefit from some remeasuring.
-  
+  #match PADDING You need another finished large cloth padding to continue crafting an unfinished insulated burlap hauberk.  You believe you can assemble the two ingredients together once you acquire them.
+  #match ASSEMBLELPAD The links appear ready to be woven into and around a cloth padding.
+  matchre OASSEMBLELPAD You need another finished large cloth padding to continue crafting .*\.
+  matchre OASSEMBLESPAD You need another finished small cloth padding to continue crafting .*\.
   match NEWTHREAD The needles need to have thread put on them before they can be used for sewing.  You think you can STUDY them to learn more.
   #match NEWPINS
-  match RETURN You realize that cannot be repaired, and stop.
+  match TAILORRETURN You realize that cannot be repaired, and stop.
+  matchre TAILORRETURN The .* is not damaged enough to warrant repair\.
   #ACTIONS
 	if ("%craftaction" = "cut") then
 	{
@@ -821,6 +842,10 @@ TAILORMAIN:
   if ("%craftaction" = "slickstone") then put rub my %product with my %slickstone
   if ("%craftaction" = "yardstick") then put measure my %product with my %yardstick
   matchwait
+
+TAILORRETURN:
+  gosub PUTITEM my needles in my %craftingstorage
+  return
 
 AWL:
   var craftaction awl
@@ -869,6 +894,28 @@ NEWTHREAD:
   gosub GETITEM %product
   if ($roomid != %workroom) then gosub MOVE %workroom
   goto TAILORMAIN
+
+OASSEMBLELPADP:
+  pause 
+OASSEMBLELPAD:
+  if (("$righthandnoun" = "needles") || ("$lefthandnoun" = "needles")) then gosub PUTITEM my needles in my %craftingstorage
+  if (("$righthandnoun" != "padding") && ("$lefthandnoun" != "padding")) then gosub GETITEM large padding in my %craftingstorage
+  matchre OASSEMBLELPADP %waitstring
+  matchre SEW You place your padding with your .* and carefully mark where it will attach when you continue crafting\.
+  put assemble my %product with my large padding
+  matchwait
+  
+OASSEMBLESPADP:
+  pause
+OASSEMBLESPAD:
+  if (("$righthandnoun" = "needles") || ("$lefthandnoun" = "needles")) then gosub PUTITEM my needles in my %craftingstorage
+  if (("$righthandnoun" != "padding") && ("$lefthandnoun" != "padding")) then gosub GETITEM small padding in my %craftingstorage
+  matchre OASSEMBLESPADP %waitstring
+  matchre SEW You place your padding with your .* and carefully mark where it will attach when you continue crafting\.
+  put assemble my %product with my small padding
+  matchwait
+
+
 
 #####FORGING_SUBS#####
 ANVILCHECK:
@@ -1342,7 +1389,10 @@ COMBINEALLMAIN:
   gosub GETITEM %combineadj %combinenoun in my %craftingstorage
   echo righthand: $righthand   lefthand: $lefthand
   if (("$righthand" = "Empty") || ("$lefthand" = "Empty")) then gosub GETITEM %combineadj %combinenoun in my %craftingstorage
-  if (("$righthand" != "Empty") && ("$lefthand" != "Empty")) then gosub COMBINE %combineadj %combinenoun
+  if (("$righthand" != "Empty") && ("$lefthand" != "Empty")) then
+  {
+    gosub COMBINE %combineadj %combinenoun
+  }
   else
   {
     gosub PUTITEM my %combineadj %combinenoun in my %craftingstorage
@@ -1351,8 +1401,8 @@ COMBINEALLMAIN:
   goto COMBINEALLMAIN
   
 COMBINE:
-  var combineadjstring %1
-  var combinenounstring %2
+  var combineadjstring $1
+  var combinenounstring $2
   goto COMBINEMAIN
 COMBINEMAIN:
 	matchre RETURN too large
@@ -1473,6 +1523,7 @@ FINDANVILLOOP:
   }
   math findanvilcount add 1
   goto FINDANVILLOOP
+
 
 GOPRIVATEROOM:
   match RETURN You approach .*\.  The sentry holds out (his|her) hand, saying,
@@ -1875,7 +1926,7 @@ ORDERMATERIALS:
   if ("%crafttype" = "outfitting") then
   {
     if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
-    action var materialnum $1; var materialyards $2; var materialnoun $3 when (\d+)\)\.  (\d+) yards of %material (cloth|leather)\.
+    action var materialnum $1; var materialyards $2 when (\d+)\)\.  (\d+) yards of %material (cloth|leather)\.
     gosub CRAFTINGORDER
     pause .5
     echo materialnum: %materialnum

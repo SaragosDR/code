@@ -386,6 +386,8 @@ action var baddisarm 1 when ^However, a \w+ \w+ \w+ is not fully disarmed, makin
 action var cost $1 when the humble sum of (.+) coins for this
 action var cost $1 when and the price of (.+) coins is all I ask
 action var cost $1 when I ask that you give (.+) copper lirum for
+action var cost $1 when If it pleases your heart and soul, I ask that you give (.+) copper dokoras for that item."
+
 action put #var $anloralpin NO; put #echo %alertwindow Exploded an anloral pin due to having the wrong favors!  Turning off anloral pin usage. when Finding no strong affinity to your spirit, the delicate pin begins to vibrate\.
 
 #EPISTEMIC_JOURNAL_TARANTULA
@@ -434,7 +436,7 @@ ALERTINIT:
   if ((%speechalerts = "YES") && (tolower("%scriptmodename") != "combat")) then
   { 
     var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,|The apprentice repairman looks over|A youthful attendant hands you some bundling rope and says,|You hand the apprentice repairman|The apprentice repairman smiles and says|The horse-drawn carriage's driver shouts|Mags calls out,|Aelik scowls and says,|Cormyn scowls and says,
-    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.|An Elothean clerk says|You hand an Elothean clerk
+    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.|An Elothean clerk says|You hand an Elothean clerk|Jakke shuffles through some notes and says,|Jakke boasts,
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "|The shadowling exclaims,|You throw your head back and howl,|After a moment, you see a crystal-clear vision of your|After a moment, you see a vision of your god who calls to you by name,
@@ -2149,7 +2151,6 @@ HUNTINGVARLOAD:
       var bugoutroom 355
       var nearestportaltown crossing
     }
-    #63
     if ("%huntingarea" = "p1-emberbulls") then
     {
       var zone 7
@@ -2158,13 +2159,24 @@ HUNTINGVARLOAD:
       var move NO
       var targetroom 0
       var findroom YES
-      if ("%huntingpremium" = "NO") then var findroomlist 828|829|830|831|832|833|834|835|836
+      if ("%huntingpremium" = "NO") then var findroomlist 828|829|830|831|832|833
       if ("%huntingpremium" = "YES") then var findroomlist 828|829|830|831|832|833|834|835|836
-      if ("%huntingpremium" = "ONLY") then var findroomlist 834|835|836
+      if ("%huntingpremium" = "ONLY") then var findroomlist 846|847
       var bugoutroom 355
       var nearestportaltown crossing
     }
-    #63
+    if ("%huntingarea" = "p1-magmabulls") then
+    {
+      var zone 7
+      var travel YES
+      var traveldest kaerna
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 841|842|843|844|845|846|847
+      var bugoutroom 355
+      var nearestportaltown crossing
+    }
     if ("%huntingarea" = "p1-onyxgargoyles") then
     {
       var zone 7
@@ -3409,6 +3421,7 @@ STATUSVARLOAD:
   var forginglock 0
   var locksmithinglock 0
   var offhandlock 0
+  var outfittinglock 0
   var outdoorlock 0
   var perclock 0
   var performlock 0
@@ -3738,7 +3751,8 @@ MAINVARLOAD:
   else var performtown $performtownm2
   if (%varset = 1) then var forgingtown $forgingtown
   else var forgingtown $forgingtownm2
-  
+  if (%varset = 1) then var outfittingtown $outfittingtown
+  else var forgingtown $outfittingtownm2
   var movevanish $movevanish
 
   
@@ -5200,6 +5214,7 @@ NEWNONCOMBATCHECKS:
   var noncombatevhealactive 0
   var noncombatstudyartactive 0
   var noncombatforgingactive 0
+  var noncombatoutfittingactive 0
   #BURGLE_CHECKING
   if ("%burgle" = "YES") then
   {
@@ -5321,6 +5336,20 @@ NEWNONCOMBATCHECKS:
         var scriptareachange noncombat
         var noncombatactive 1
         var noncombatforgingactive 1
+      }
+    }
+    #OUTFITTING_CHECKING
+    if ("%outfitting" = "YES") then
+    {
+      if ($Outfitting.LearningRate > 20) then var outfittinglock 1
+      if ($Outfitting.LearningRate < 4) then var outfittinglock 0
+      if ($Outfitting.Ranks >= 1750) then var outfittinglock 1
+      if (%outfittinglock != 1) then
+      {
+        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to do outfitting at Outfitting.LearningRate: $Outfitting.LearningRate
+        var scriptareachange noncombat
+        var noncombatactive 1
+        var noncombatoutfittingactive 1
       }
     }
   }
@@ -7796,6 +7825,40 @@ MTFORGINGLOOP:
     var noncombatforgingactive 0
     return
   }
+
+
+MTOUTFITTING:
+  var workorder 1
+  var difficulty %outfittingdifficulty
+  var discipline tailoring
+  #var material %outfittingcloth
+  #var material %outfittingleather
+  gosub CRAFTVARLOAD
+  gosub AREAVARINIT
+  gosub CRAFTINGSTART
+  if (%workorderbail = 1) then return
+  gosub CRAFTREPAIR
+  if (%workorderbail = 1) then return
+  put #echo Yellow Crafting %difficulty %discipline work order in %material.
+  put #echo %alertwindow Yellow [Craft]: Crafting %difficulty %discipline work order in %material.
+  goto MTOUTFITTINGLOOP
+
+MTOUTFITTINGLOOP:
+  gosub WORKORDER
+  if (%workorderbail = 1) then return
+  put #echo Yellow $Outfitting.LearningRate
+  if (($Outfitting.LearningRate < 25) && ("%outfitting" = "YES")) then
+  {
+    gosub CRAFTVARLOAD
+    goto MTOUTFITTINGLOOP
+  }
+  else
+  {
+    gosub CRAFTINGEND
+    var noncombatoutfittingactive 0
+    return
+  }
+
   
 
 ALMANACLOGIC:
@@ -11314,6 +11377,19 @@ NONCOMBATCHECKS:
         var noncombatforgingactive 1
       }
     }
+    #OUTFITTING_CHECKING
+    if ("%outfitting" = "YES") then
+    {
+      if ($Outfitting.LearningRate > 20) then var outfittinglock 1
+      if ($Outfitting.LearningRate < 4) then var outfittinglock 0
+      if ($Outfitting.Ranks >= 1750) then var outfittinglock 1
+      if (%outfittinglock != 1) then
+      {
+        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to forge at Outfitting.LearningRate: $Outfitting.LearningRate
+        var noncombatactive 1
+        var noncombatoutfittingactive 1
+      }
+    }
   }
 	#TRADING_SELL_TASKS
 	if ("$guild" = "Trader") then
@@ -11392,10 +11468,18 @@ NONCOMBATLOOP:
     }
     if ("%currentnoncombat" = "forging") then
     {
-      put #echo Here!
       gosub NONCOMBATMOVEMENT
       gosub STOWALL
       gosub MTFORGING
+      gosub STOWALL
+      gosub STORAGECHECKLOGIC
+      gosub NONCOMBATCHOOSE
+    }
+    if ("%currentnoncombat" = "outfitting") then
+    {
+      gosub NONCOMBATMOVEMENT
+      gosub STOWALL
+      gosub MTOUTFITTING
       gosub STOWALL
       gosub STORAGECHECKLOGIC
       gosub NONCOMBATCHOOSE
@@ -11414,6 +11498,7 @@ NONCOMBATCHOOSE:
   #put #echo Yellow noncombatperformactive: %noncombatperformactive
   #put #echo Yellow noncombatstudyartactive: %noncombatstudyartactive
   #put #echo Yellow noncombatforgingactive: %noncombatforgingactive
+  #put #echo Yellow noncombatforgingactive: %noncombatoutfittingactive
   var currentnoncombat 0
   if (%noncombatactive = 0) then return
   if (%noncombatsellactive = 1) then
@@ -11454,6 +11539,11 @@ NONCOMBATCHOOSE:
   if (%noncombatforgingactive = 1) then
   {
     var currentnoncombat forging
+    return
+  }
+  if (%noncombatoutfittingactive = 1) then
+  {
+    var currentnoncombat outfitting
     return
   }
   var noncombatactive 0
@@ -11500,6 +11590,11 @@ NONCOMBATMOVEMENT:
     if ("%currentnoncombat" = "forging") then
     {
       gosub NEWTOWNPRESET %forgingtown forging
+    }
+    #OUTFITTING
+    if ("%currentnoncombat" = "outfitting") then
+    {
+      gosub NEWTOWNPRESET %outfittingtown outfitting
     }
     if (("%currentnoncombat" != "studyart") && ("%currentnoncombat" != "forging")) then
     {

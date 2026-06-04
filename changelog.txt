@@ -1,3 +1,12 @@
+06/04/26
+Updated Scripts: train, library, set, workorder, craftlibrary, mtfenvol
+Fenvol's Folly script added.
+Outfitting training added to Workorder.
+Outfitting training added to main training script.
+Added outfitting locations of Crossing, Shard, Hib.
+
+Fixed a minor bug with mana change logic.
+
 04/09/26
 Updated Scripts: train, library, set, p, craft, workorder, craftlibrary
 Instrument playing now automatically adjusts your song type.  If you want to change it manually, the SongType variable is now numerical, 0-33.
