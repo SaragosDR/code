@@ -12,6 +12,8 @@ var impaleskill pole
 var twirlskill stave
 var doublestrikeskill $summondoublestrike
 var palmstrikeskill brawl
+var shieldinhand $shieldinhand
+var shielditem $shielditem
 
 var seweapon scimitar
 var leweapon broadsword
@@ -100,8 +102,6 @@ if_1 then
 #TESTING_NEXT_MANEUVER_OFF_COOLDOWN
 gosub MANEUVERTEST
 
-if (matchre("$lefthand", "%shielditem")) then gosub WEARITEM %shielditem
-
 ###GETTING_WEAPON
 var manename %maneuverlist(%maneuver)
 var maneskill %%manenameskill
@@ -115,7 +115,7 @@ if ("%manename" = "doublestrike") then
 else put #echo Yellow Manuever %maneuver: %manename (%maneweapon)
 
 #IS_WEAPON_PRESENT
-if (matchre("$lefthand", "%shielditem")) then gosub STOW left
+#if (matchre("$lefthand", "%shielditem")) then gosub STOW left
 if ("%manename" = "palmstrike") then
 {
   gosub SUMMONWEAPONBREAK $righthandnoun
@@ -149,6 +149,13 @@ else
 		  var offhandcorrect 0
 	  }
 	}
+  
+  #WEARING_SHIELD
+  if ("%shieldinhand" != "YES") then
+  {
+    if (matchre("$lefthand", "%shielditem")) then gosub WEARITEM %shielditem
+  }
+
 
 	#echo weaponexist: %weaponexist
 	#echo weaponcorrect: %weaponcorrect
@@ -162,6 +169,7 @@ else
 	    {
 	      gosub SUMMONWEAPONBREAK $lefthandnoun
 	    }
+	    else gosub WEARITEM %shielditem
 	  }
 	  var offhandexists 1
 	  var offhandcorrect 1
@@ -202,7 +210,10 @@ if (%executemaneuver = 0) then put #var %manenamelast $unixtime
 #EXECUTE_MANEUVER
 if (%executemaneuver = 1) then
 {
+  action (acm) on
   gosub ATTACKACMCOMBO %manename
+  action (acm) off
+  if ("%shieldinhand" = "YES") then gosub REMITEM %shielditem
 }
 exit
 

@@ -1,4 +1,9 @@
 06/06/26
+Updated Scripts: library, slide
+Updated Slide script to work with ShieldInHand variable.
+Bugfix in library for retreat script.
+
+06/06/26
 Updated Scripts: train, library, set, combo, rush, retreat
 New Script - Retreat.  Attempts to keep you at missile range.
 New variable under Other - ShieldInHand.  Will attempt to keep your shield in hand when performing PvP scripts.  Defaults to NO.

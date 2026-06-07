@@ -6730,7 +6730,7 @@ RETREATP:
 RETREAT:
   matchre RETREAT You retreat back to pole range.|You try to back away from|You stop advancing on|You sneak back out|You try to back out of combat but are unable to get away!|You try to sneak out of combat,|discovers you trying to sneak out of combat, revealing your hiding place!|You stop advancing.
   matchre RETURN You retreat from combat.|You are already as far away as you can get!
-  match STAND You must stand first.
+  match RETREATSTAND You must stand first.
   matchre RETREATP %waitstring
   put retreat
   matchwait 5
@@ -6738,6 +6738,9 @@ RETREAT:
   var timeoutcommand retreat
 	goto TIMEOUT
 
+RETREATSTAND:
+  gosub STAND
+  goto RETREAT
 
 SMITETESTP:
   pause
