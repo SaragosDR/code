@@ -13113,6 +13113,7 @@ WANDBUFFLOOP:
           math temp add 1810
           put #var wand%wcounternext %temp
           put #echo %alertwindow [WandBuff]: Successfully activated wand %wcounter.
+          gosub PERCSELF
         }
         else 
         {
@@ -13125,6 +13126,7 @@ WANDBUFFLOOP:
               math temp add 1810
               put #var wand%wcounternext %temp
               put #echo %alertwindow [WandBuff]: Successfully activated second wand %wcounter.
+              gosub PERCSELF
             }
             else
             {
@@ -13142,7 +13144,9 @@ WANDBUFFLOOP:
             put #echo %alertwindow [WandBuff]: Wand %wcounter is down, but only one wand is available.
           }
         }
-        gosub STOWALL
+        #gosub STOWALL
+        gosub PUTITEM my $righthand in my %wandstorage
+        gosub PUTITEM my $lefthand in my %wandstorage
         gosub PERCSELF
       #}    
     }

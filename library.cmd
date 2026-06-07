@@ -51,6 +51,7 @@ action (acm) put #var %manenamelast $unixtime; put #var save; put #echo Yellow M
 action (acm) put #var rushlast $unixtime when ^You angle your .* towards .* and charge forwards!
 action (acm) var barbmane $unixtime; math barbmane subtract 30; put #var %manenamelast %barbmane; put #var save;put #echo Yellow Barbarian Maneuver %manename cooldown reduction! when With expert skill you end the attack and maneuver into a better position\.
 action (acm) var failtest $unixtime; math failtest subtract 80; put #var %manenamelast %failtest; send #echo Yellow ACM is still on cooldown! when You must rest a bit longer before attempting that maneuver again\.
+action (acm) put #var %manenamelast 0; put #var save; put #echo Yellow Maneuver %manename failed due to range! when You aren't close enough to attack\.
 action (acm) off
 
 var badforagelist glaysker flower|briarberry root|coffee bean|almond|green moss|rosewood limb|eghmok moss
@@ -9118,7 +9119,7 @@ WANDINVOKEP:
 WANDINVOKEMAIN:
   var wandinvokegood 1
   matchre WANDINVOKEP %waitstring
-  matchre RETURN The world around you seems to slow as the spell grips your mind\.|The spell pulses through your soul, rekindling your holy rage\.|Mentally steeling yourself in preparation for the unnatural action|A glistening net of coiling tendrils|Your blood rises as images of ferocious battles play across your mind\.  You feel the fervor of combat grip you\.|You harness the currents of air and channel them around yourself\.|The overwhelming sense of unity with your hidden brothers and sisters sharpens your intuition, kin and prey alike\.|Your blood begins to boil and with a mighty shout you allow the rage within to flow outward for all to see\.|^You feel the strange aliveness in your limbs renew itself\.
+  matchre RETURN The world around you seems to slow as the spell grips your mind\.|The spell pulses through your soul, rekindling your holy rage\.|Mentally steeling yourself in preparation for the unnatural action|A glistening net of coiling tendrils|Your blood rises as images of ferocious battles play across your mind\.  You feel the fervor of combat grip you\.|You harness the currents of air and channel them around yourself\.|The overwhelming sense of unity with your hidden brothers and sisters sharpens your intuition, kin and prey alike\.|Your blood begins to boil and with a mighty shout you allow the rage within to flow outward for all to see\.|^You feel the strange aliveness in your limbs renew itself\.|A newfound fluidity of your mind imparts you with enhanced awareness of every nerve in your body\.|You feel somehow more alive and vigorous due to the spell\.|You feel the strange aliveness in your limbs renew itself\.
   match WANDINVOKESTOW You must be able to handle your disc with both hands to use it for a ritual.
   matchre WANDINVOKEBAD ^The \w+ remains inert\.
   match RETURN You are in no condition to do that.
@@ -11663,9 +11664,10 @@ ATTACKACMCOMBOMAIN:
   #match RETURN With a loud twang, you let fly your
   #match ATTACKACMCSTOW You must free up your left hand first.
   matchre ATTACKACMCSTAND You'll need to stand up first\.|You must be standing to perform that maneuver\.
-  matchre ATTACKACMCRANGE ^You aren't close enough to attack\.
+  match ATTACKACMCRANGE You aren't close enough to attack.
   matchre ATTACKACMCGONE ^What are you trying to attack\?
   matchre ATTACKACMCWRONG With your fist\?  That might hurt\.|This weapon lacks the edge necessary to cleave your enemy with\.|Your hands must be empty to deliver such a blow\.|A pike or halberd weapon is necessary to impale your enemy with\.|Only a staff is suitable for the complex motions of the twirl maneuver\.|This works best when you use a suitable ranged weapon\.|This works best when you use a suitable weapon\.|This works best when you are dual wielding suitable weapons\.
+  matchre ATTACKACMcRETURN You are already engaged to \w+ at melee range!
   matchre ATTACKACMCFAIL You must rest a bit longer before attempting that maneuver again\.
   match ATTACKACMCBADNAME You cannot figure out how to do that.
   send maneuver %argument
@@ -11686,6 +11688,7 @@ ATTACKACMCGONE:
   return
 
 ATTACKACMCRANGE:
+  put #echo Yellow Here!
   put #echo Yellow Maneuver failed - range!  Advancing!
   gosub ADV
   goto ATTACKACMCOMBOMAIN

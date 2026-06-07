@@ -1393,6 +1393,7 @@ SET:
     if tolower("%1") = "doublestrikeweapon2" then goto TEXTSET
     if tolower("%1") = "powershotweapon" then goto TEXTSET
     if tolower("%1") = "powershotammo" then goto TEXTSET
+    if tolower("%1") = "shieldinhand" then goto YESNOSET
     
     if tolower("%1") = "summonelement" then goto TEXTSET
     if tolower("%1") = "summoningot" then goto TEXTSET
@@ -2751,6 +2752,7 @@ DISPLAYOTHER:
   gosub OUTPUT DoublestrikeWeapon2
   gosub OUTPUT PowershotWeapon
   gosub OUTPUT PowershotAmmo
+  gosub OUTPUT ShieldInHand
   if ("$guild" = "Warrior Mage") then
   {
     echo

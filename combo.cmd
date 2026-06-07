@@ -16,6 +16,7 @@ var doublestrikeweapon2 $doublestrikeweapon2
 var powershotweapon $powershotweapon
 var powershotammo $powershotammo
 
+var shieldinhand $shieldinhand
 var shielditem $shielditem
 
 MAIN:  
@@ -64,13 +65,16 @@ MAIN:
   }
 
   #WEARING_SHIELD
-  if (matchre("$lefthand", "%shielditem")) then gosub WEARITEM %shielditem
-
+  if ("%shieldinhand" != "YES") then
+  {
+    if (matchre("$lefthand", "%shielditem")) then gosub WEARITEM %shielditem
+  }
+    
   #GETTINGWEAPONS
   #MAIN_WEAPON
   if ("%manename" = "palmstrike") then
   {
-    gosub STOWALL
+    gosub STOW right
   }
   else
   {
@@ -83,7 +87,7 @@ MAIN:
         gosub SWAP
         var offhandexists 0
       }
-      else gosub GETITEM %maneweapon
+      else gosub WIELD %maneweapon
     }
   }
   
@@ -94,7 +98,7 @@ MAIN:
     {
       if (%offhandexists = 1) then gosub STOW left
     }
-    gosub GETITEM %offhandweapon
+    gosub WIELD left %offhandweapon
   }
   else
   {
@@ -107,11 +111,19 @@ MAIN:
   #POWERSHOT_AMMO
   if ("%manename" = "powershot") then
   {
-    gosub GETITEM %powershotammo
-    var ubowmmo %powershotammo
-    gosub BOWLOAD %powershotammo
+    gosub BOWLOADCHECK %powershotweapon
+    if (%bowloadgood = 0) then
+    {
+      gosub GETITEM %powershotammo
+      var ubowmmo %powershotammo
+      gosub BOWLOAD %powershotammo
+      gosub STOWITEM %powershotammo
+    }
   }
   
   #EXECUTE_MANEUVER
+  action (acm) on
   gosub ATTACKACMCOMBO %manename
+  action (acm) off
+  if ("%shieldinhand" = "YES") then gosub REMITEM %shielditem
   exit
