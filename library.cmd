@@ -468,6 +468,7 @@ VARCHECKS:
   if !matchre("$outfittingdifficulty", "\b(easy|challenging|hard)\b") then put #var outfittingdifficulty challenging
   if !def(outfittingcloth) then put #var outfittingcloth burlap
   if !def(outfittingleather) then put #var outfittingleather cougar-pelt
+  if !def(outfittingyarn) then put #var outfittingyarn wool
   if !matchre("$outfittingrepair", "\b(YES|NO)\b") then put #var outfittingrepair YES
   if $outfittingmaxyards >= 0 then
   else put #var outfittingmaxyards 100
@@ -11837,7 +11838,6 @@ TENDCHECKRETURN:
   return
   
 LODGED:
-  
   if ("%tendobject" != "YES") then
   {
     gosub STOWALL
@@ -11856,7 +11856,7 @@ LODGED:
     if (%lodgerighteye = 1) then gosub tend right eye
     if (%lodgelefteye = 1) then gosub tend left eye
   }
-  else gosub TEND objects
+  else gosub TEND my objects
   return
 
 BLEEDING:
@@ -11879,8 +11879,8 @@ BLEEDING:
   }
   else
   {
-    if ((%head = 1) || (%neck = 1) || (%chest = 1) || (%abdomen = 1) || (%back = 1) || (%tail = 1) || (%rightarm = 1) || (%leftarm = 1) || (%righthand = 1) || (%lefthand = 1) || (%rightleg = 1) || (%leftleg = 1) || (%righteye = 1) || (%lefteye = 1)) then gosub TEND external
-    if ((%inthead = 1) || (%intneck = 1) || (%intchest = 1) || (%intabdomen = 1) || (%intback = 1) || (%inttail = 1) || (%intrightarm = 1) || (%intleftarm = 1) || (%intrighthand = 1) || (%intlefthand = 1) || (%intrightleg = 1) || (%intleftleg = 1) || (%intrighteye = 1) || (%intlefteye = 1)) then gosub TEND internal
+    if ((%head = 1) || (%neck = 1) || (%chest = 1) || (%abdomen = 1) || (%back = 1) || (%tail = 1) || (%rightarm = 1) || (%leftarm = 1) || (%righthand = 1) || (%lefthand = 1) || (%rightleg = 1) || (%leftleg = 1) || (%righteye = 1) || (%lefteye = 1)) then gosub TEND my external
+    if ((%inthead = 1) || (%intneck = 1) || (%intchest = 1) || (%intabdomen = 1) || (%intback = 1) || (%inttail = 1) || (%intrightarm = 1) || (%intleftarm = 1) || (%intrighthand = 1) || (%intlefthand = 1) || (%intrightleg = 1) || (%intleftleg = 1) || (%intrighteye = 1) || (%intlefteye = 1)) then gosub TEND my internal
   }
   return
 

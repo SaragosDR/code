@@ -7807,7 +7807,7 @@ MTFORGING:
   gosub CRAFTREPAIR
   if (%workorderbail = 1) then return
   put #echo Yellow Crafting %difficulty %discipline work order in %material.
-  put #echo %alertwindow Yellow [Craft]: Crafting %difficulty %discipline work order in %material.
+  put #echo %alertwindow Yellow [CRAFT]: Crafting %difficulty %discipline work order in %material.
   goto MTFORGINGLOOP
 
 MTFORGINGLOOP:
@@ -7840,7 +7840,7 @@ MTOUTFITTING:
   gosub CRAFTREPAIR
   if (%workorderbail = 1) then return
   put #echo Yellow Crafting %difficulty %discipline work order in %material.
-  put #echo %alertwindow Yellow [Craft]: Crafting %difficulty %discipline work order in %material.
+  put #echo %alertwindow Yellow [Craft]: Crafting %difficulty %discipline work order.
   goto MTOUTFITTINGLOOP
 
 MTOUTFITTINGLOOP:
@@ -13177,8 +13177,8 @@ WANDBUFFLOOP:
             put #echo %alertwindow [WandBuff]: Wand %wcounter is down, but only one wand is available.
           }
         }
-        gosub PUTITEM my first %wand%wcounteritem in %wandstorage
         if (%wand%wcounternum > 1) then gosub PUTITEM my second %wand%wcounteritem in %wandstorage
+        gosub PUTITEM my first %wand%wcounteritem in %wandstorage
         gosub PERCSELF
       #}    
     }

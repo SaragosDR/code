@@ -1,3 +1,11 @@
+06/07/26
+Updated Scripts: train, library, set, workorder
+Added code to make knitting tasks function properly.
+Many bugfixes to Outfitting crafting.
+Bugfixes to Perform automatic difficulty setting.
+Bugfixes to wand handling.
+
+
 06/06/26
 Updated Scripts: library, slide
 Updated Slide script to work with ShieldInHand variable.

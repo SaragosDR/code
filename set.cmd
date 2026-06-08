@@ -967,6 +967,7 @@ SET:
     if tolower("%1") = "outfittingdifficulty" then goto TEXTSET
     if tolower("%1") = "outfittingcloth" then goto TEXTSET
     if tolower("%1") = "outfittingleather" then goto TEXTSET
+    if tolower("%1") = "outfittingyarn" then goto TEXTSET
     if tolower("%1") = "outfittingrepair" then goto YESNOSET
     if tolower("%1") = "outfittingmaxyards" then goto TEXTSET
     if tolower("%1") = "outfittingmaxquantity" then goto YESNOSET
@@ -2428,6 +2429,7 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT OutfittingDifficulty
   gosub OUTPUT OutfittingCloth
   gosub OUTPUT OutfittingLeather
+  gosub OUTPUT OutfittingYarn
   gosub OUTPUT OutfittingRepair
   gosub OUTPUT OutfittingMaxYards
   gosub OUTPUT OutfittingMaxQuantity

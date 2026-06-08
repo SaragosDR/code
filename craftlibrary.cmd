@@ -1,13 +1,6 @@
 var disciplines weaponsmithing|armorsmithing|blacksmithing|tailoring
 var difficulties easy|challenging|hard
 
-action var product $1; var quantity $2; var quality $3; var timelimit $4 when \w+ shuffles through some notes and says, "Alright, this is an order for(?:a|an|some)? ?(.*)\. I need (\d+) (finely-crafted|of superior quality|of exceptional quality), made from any (?:material|leather|fabric) and due in (\d+) roisaen\.
-
-action var chapter $1 when You seem to recall this item being somewhere in chapter (\d+) of the instruction book\.
-action var volume $1 when \(1\) refined metal ingot \((\d+) volume\)
-action var yards $1; var materialnoun cloth when \(1\) finished fabric cloth \((\d+) yards\)
-action var yards $1; var materialnoun leather when \(1\) refined leather material \((\d+) yards\)
-
 action var polelong $1 when \((\d+)\) finished long wooden pole
 action var poleshort $1 when \((\d+)\) finished short wooden pole
 action var haft $1 when \((\d+)\) finished wooden haft
@@ -170,6 +163,7 @@ CRAFTVARLOAD:
   var outfittingdifficulty $outfittingdifficulty
   var outfittingcloth $outfittingcloth
   var outfittingleather $outfittingleather
+  var outfittingyarn $outfittingyarn
   var outfittingrepair $outfittingrepair
   var outfittingmaxquantity $outfittingmaxquantity
   var outfittingmaxyards $outfittingmaxyards
@@ -288,6 +282,7 @@ WORKORDER:
     #CHECKING_EXISTING_MATERIAL
     if ("%materialnoun" = "cloth") then var material %outfittingcloth
     if ("%materialnoun" = "leather") then var material %outfittingleather
+    if ("%materialnoun" = "yarn") then var material %outfittingyarn
     var goodfabric 0
     gosub FABRICCHECK
     if (%goodfabric != 1) then
@@ -565,12 +560,12 @@ CRAFTINGMAIN:
   }
   if (%workorder != 1 ) then
   {
-    action (pageread) on
-    action (pageread) var productcheck $3 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (.*)    \=\-
-    if ("%discipline" = "tailoring") then
-    {
-      action (pageread) var materialnoun $1 when \(\d+\) (?:finished|refined) fabric (cloth|yarn) \(\d+ yards\)
-    }
+    action (productread) on
+    action (productread) var productcheck $3 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (.*)    \=\-
+    action (productread) var volume $1 when \(1\) refined metal ingot \((\d+) volume\)
+    action (productread) var yards $1; var materialnoun cloth when \(1\) finished fabric cloth \((\d+) yards\)
+    action (productread) var yards $1; var materialnoun leather when \(1\) refined leather material \((\d+) yards\)
+    action (productread) var yards $1; var materialnoun yarn when \(1\) refined fabric yarn \((\d+) yards\)
     gosub READBOOK my %discipline book
     gosub TAPNOUN %productcheck
     var product %nountap
@@ -1543,13 +1538,15 @@ TASKACQUIRE:
     return
   }
   var materialnoun 0
+  action (logbookask) on
+  action (logbookask) var product $1; var quantity $2; var quality $3; var timelimit $4 when \w+ shuffles through some notes and says, "Alright, this is an order for(?:a|an|some)? ?(.*)\. I need (\d+) (finely-crafted|of superior quality|of exceptional quality), made from any (?:material|leather|fabric) and due in (\d+) roisaen\.
+  action (logbookask) var chapter $1 when You seem to recall this item being somewhere in chapter (\d+) of the instruction book\.
   gosub LOGBOOKASK %mastername %difficulty %discipline
+  pause 1
+  action (logbookask) off
   if (%workorderbail = 1) then return
   gosub PUTITEM my logbook in %craftingstorage
   pause .5
-  #eval product replace("%product", "a ", "")
-  #eval product replace("%product", "an ", "")
-  #eval product replace("%product", "some ", "")
   echo product: %product
   echo quantity: %quantity
   echo timelimit: %timelimit
@@ -1566,10 +1563,11 @@ TASKACQUIRE:
   gosub TURNBOOK chapter %chapter
   #echo product: %product
   var page 0
-  #action (pageread) var page $1; action (pageread) off when Page (\d+)\:\s*(a|an|some)? (%product)
-  action (pageread) var page $1; action (pageread) off when Page (\d+)\: (%product)
+  action (pageread) on
+  action (pageread) var page $1 when Page (\d+)\: (%product)
   gosub READBOOK my %discipline book
   pause 1
+  action (pageread) off
   echo page: %page
   if (%page = 0) then
   {
@@ -1602,10 +1600,15 @@ TASKACQUIRE:
     var cordlong 0
     var handleleather 0
   }
-  #action var productcheck $4 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (a|an|some)? (.*)    \=\-
-  action var productcheck $3 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (.*)    \=\-
+  action (productread) on
+  action (productread) var productcheck $3 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (.*)    \=\-
+  action (productread) var volume $1 when \(1\) refined metal ingot \((\d+) volume\)
+  action (productread) var yards $1; var materialnoun cloth when \(1\) finished fabric cloth \((\d+) yards\)
+  action (productread) var yards $1; var materialnoun leather when \(1\) refined leather material \((\d+) yards\)
+  action (productread) var yards $1; var materialnoun yarn when \(1\) refined fabric yarn \((\d+) yards\)
   gosub READBOOK my %discipline book
   pause 1
+  action (productread) off
   echo product: %product
   echo productcheck: %productcheck
   if ("%product" != "%productcheck") then
@@ -1927,6 +1930,7 @@ ORDERMATERIALS:
   {
     if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
     action var materialnum $1; var materialyards $2 when (\d+)\)\.  (\d+) yards of %material (cloth|leather)\.
+    
     gosub CRAFTINGORDER
     pause .5
     echo materialnum: %materialnum
