@@ -11042,6 +11042,38 @@ SPELLVARRESET:
     var resetcount 1
     gosub SPELLVARRESETLOOP
   }
+  if ("%wandbuff" = "YES") then
+  {
+    if (%wandbuffnum > 0) then
+    {
+      var spellname %wand1spell
+      gosub SPELLIDENT
+      put #var %spellvar.active 0
+      put #var %spellvar.duration 0
+    }
+    if (%wandbuffnum > 1) then
+    {  
+      var spellname %wand2spell
+      gosub SPELLIDENT
+      put #var %spellvar.active 0
+      put #var %spellvar.duration 0
+    }
+    if (%wandbuffnum > 2) then
+    {
+      var spellname %wand3spell
+      gosub SPELLIDENT
+      put #var %spellvar.active 0
+      put #var %spellvar.duration 0
+    }
+    if (%wandbuffnum > 3) then
+    {
+      var spellname %wand4spell
+      gosub SPELLIDENT
+      echo Spellvar: %spellvar
+      put #var %spellvar.active 0
+      put #var %spellvar.duration 0
+    }
+  }
   #CYCLICS
   if ("%cyclic" = "YES") then
   {
@@ -13092,6 +13124,7 @@ WANDBUFFLOOP:
   if (%wcounter > %wandbuffnum) then return
   if (%wandbuffnum > 0) then
   {
+    #put #echo Yellow $%wand%wcountervar: $%wand%wcountervar.active
     if ($%wand%wcountervar.active != 1) then
     {
       #echo gametime: $gametime   wand%wcounternext: $wand%wcounternext
@@ -13144,9 +13177,8 @@ WANDBUFFLOOP:
             put #echo %alertwindow [WandBuff]: Wand %wcounter is down, but only one wand is available.
           }
         }
-        #gosub STOWALL
-        gosub PUTITEM my $righthand in my %wandstorage
-        gosub PUTITEM my $lefthand in my %wandstorage
+        gosub PUTITEM my first %wand%wcounteritem in %wandstorage
+        if (%wand%wcounternum > 1) then gosub PUTITEM my second %wand%wcounteritem in %wandstorage
         gosub PERCSELF
       #}    
     }

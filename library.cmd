@@ -12260,7 +12260,7 @@ PLAY:
   matchre PLAYP %waitstring
   matchre PLAYSUCCESS You're already playing a song!|You begin (?:a|some) (?:spritely|quiet|masterful) .* on your .* with only the slightest hint of difficulty\.|You begin (?:a|an) (?:spritely|quiet|masterful) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|an) (?:spritely|quiet|masterful) .* on your .*\.
   matchre PLAYDOWN You fumble slightly as you begin (?:a|some) (?:spritely|quiet) .* on your .*\.|You struggle to begin (?:a|some) (?:spritely|quiet) .* on your .*\.
-  matchre PLAYUP You effortlessly begin (?:a|some) (?:spritely|quiet) .* on your .*, your heart swelling in pride at your hard-earned skill\.|You begin (?:a|some) (?:spritely|quiet) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|some) (?:spritely|quiet) .* on your .*\.
+  matchre PLAYUP You effortlessly begin (?:a|some) (?:spritely|quiet|halting) .* on your .*, your heart swelling in pride at your hard-earned skill\.|You begin (?:a|some) (?:spritely|quiet) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|some) (?:spritely|quiet) .* on your .*\.
   match PLAYUNHIDE That would give away your hiding place!
   put play %songlist(%songtype) on %instrument
   matchwait 5
