@@ -1392,6 +1392,11 @@ SPELLSTATCHECK:
   var spelldifficulty 0
   var spellminmana 0
   var spellcapmana 0
+  var spellpreptime 20
+  var spellbattle 0
+  var spellgroup 0
+  var spellcomplex 0
+  var spellarea 0
   
   #AP
   if ("%spelldiffname" = "burden") then
@@ -1400,6 +1405,7 @@ SPELLSTATCHECK:
     var spelldifficulty 1
     var spellminmana 1
     var spellcapmana 33
+    var spellbattle 1
   }
   if ("%spelldiffname" = "dispel") then
   {
@@ -1407,6 +1413,7 @@ SPELLSTATCHECK:
     var spelldifficulty 3
     var spellminmana 15
     var spellcapmana 100
+    var spellbattle 1
   }
   if ("%spelldiffname" = "ease") then
   {
@@ -1435,6 +1442,7 @@ SPELLSTATCHECK:
     var spelldifficulty 2
     var spellminmana 5
     var spellcapmana 100
+    var spellbattle 1
   }
   if ("%spelldiffname" = "maf") then
   {
@@ -1503,6 +1511,7 @@ SPELLSTATCHECK:
     var spelldifficulty 1
     var spellminmana 1
     var spellcapmana 100
+    var spellcomplex 1
   }
   if ("%spelldiffname" = "btn") then
   {
@@ -1531,6 +1540,7 @@ SPELLSTATCHECK:
     var spelldifficulty 1
     var spellminmana 1
     var spellcapmana 100
+    var spellcomplex 1
   }
   if ("%spelldiffname" = "dalu") then
   {
@@ -1573,6 +1583,7 @@ SPELLSTATCHECK:
     var spelldifficulty 1
     var spellminmana 1
     var spellcapmana 100
+    var spellcomplex 1
   }
   if ("%spelldiffname" = "eye") then
   {
@@ -1622,6 +1633,7 @@ SPELLSTATCHECK:
     var spelldifficulty 3
     var spellminmana 10
     var spellcapmana 66
+    var spellarea 1
   }
   if ("%spelldiffname" = "name") then
   {
@@ -1629,6 +1641,7 @@ SPELLSTATCHECK:
     var spelldifficulty 3
     var spellminmana 15
     var spellcapmana 100
+    var spellcomplex 1
   }
   if ("%spelldiffname" = "nexus") then
   {
@@ -1636,6 +1649,7 @@ SPELLSTATCHECK:
     var spelldifficulty 4
     var spellminmana 30
     var spellcapmana 100
+    var spellcomplex 1
   }
   if ("%spelldiffname" = "pyre") then
   {
@@ -1650,6 +1664,7 @@ SPELLSTATCHECK:
     var spelldifficulty 3
     var spellminmana 15
     var spellcapmana 100
+    var spellcomplex 1
   }
   if ("%spelldiffname" = "repr") then
   {
@@ -1657,6 +1672,7 @@ SPELLSTATCHECK:
     var spelldifficulty 2
     var spellminmana 5
     var spellcapmana 100
+    var spellcomplex 1
   }
   if ("%spelldiffname" = "resonance") then
   {
@@ -2405,6 +2421,7 @@ SPELLSTATCHECK:
     var spelldifficulty 2
     var spellminmana 5
     var spellcapmana 100
+    var spellbattle 1
   }
   if ("%spelldiffname" = "rtr") then
   {
@@ -3423,6 +3440,7 @@ SPELLSTATCHECK:
     var spelldifficulty 4
     var spellminmana 4
     var spellcapmana 25
+    var spellbattle 1
   }
   if ("%spelldiffname" = "aethrolysis") then
   {
@@ -3493,6 +3511,7 @@ SPELLSTATCHECK:
     var spelldifficulty 3
     var spellminmana 15
     var spellcapmana 100
+    var spellcomplex 1
   }
   if ("%spelldiffname" = "es") then
   {
@@ -3500,6 +3519,7 @@ SPELLSTATCHECK:
     var spelldifficulty 1
     var spellminmana 1
     var spellcapmana 100
+    var spellcomplex 1
   }
   if ("%spelldiffname" = "fb") then
   {
@@ -3528,6 +3548,7 @@ SPELLSTATCHECK:
     var spelldifficulty 4
     var spellminmana 30
     var spellcapmana 100
+    var spellcomplex 1
   }
   if ("%spelldiffname" = "frs") then
   {
@@ -3689,6 +3710,7 @@ SPELLSTATCHECK:
     var spelldifficulty 3
     var spellminmana 10
     var spellcapmana 66
+    var spellarea 1
   }
   if ("%spelldiffname" = "ti") then
   {
@@ -3724,6 +3746,7 @@ SPELLSTATCHECK:
     var spelldifficulty 2
     var spellminmana 1
     var spellcapmana 33
+    var spellbattle 1
   }
   if ("%spelldiffname" = "ys") then
   {
@@ -7603,6 +7626,7 @@ CASTINGLOGIC:
   }
   return
 
+
 ARRANGEMANA:
   var harnmana 0
   var cambmana 0
@@ -8197,7 +8221,7 @@ CAST:
 	  }
 	}
   matchre CASTP %waitstring
-	matchre CASTCLEANUP You gesture.|You gesture at|You wave your hand|With a wave of your hand|You roll your hands in an elliptical|You clasp your hands together|You cup your hand before|You clap your hands once|Your spell|You press your fist|You reach with your fist toward the ground.|You speak a few words of righteousness|You whisper|Tendrils of flame|You make a holy gesture|You close your eyes and take several slow|You clench your hands into fists and grit your teeth|You don't think you can manage to ignite another weapon at the moment.|The flames dancing along your fingertips|Mentally steeling yourself in preparation for|You shudder involuntarily|You release an accompaniment of elemental|You thrust your (right|left) arm before you, fingers splayed\.|With a wave of your hand, your vitality is fully restored\.|You strike your heel against the ground|A sense of calm focus|Roundtime|Your heart skips a beat as your spell|You clench your fists, pressing your fingernails painfully into your flesh\.|You place your hands on your temples\.|You raise your fist toward the sun\.|You raise your hand in an imaginary toast to Glythtide\.|You drop briefly to one knee as you firmly press your palms into the ground\.|You steeple your fingers together to channel the spell's energies\.|You close your eyes and focus on the old hero, Lirisa\.|You swear|With a chirurgeon's care, you press your fingertips against the side of your neck\.|As you gesture an ethereal vela'tohr
+	matchre CASTCLEANUP You gesture.|You gesture at|You wave your hand|With a wave of your hand|You roll your hands in an elliptical|You clasp your hands together|You cup your hand before|You clap your hands once|Your spell|You press your fist|You reach with your fist toward the ground.|You speak a few words of righteousness|You whisper|Tendrils of flame|You make a holy gesture|You close your eyes and take several slow|You clench your hands into fists and grit your teeth|You don't think you can manage to ignite another weapon at the moment.|The flames dancing along your fingertips|Mentally steeling yourself in preparation for|You shudder involuntarily|You release an accompaniment of elemental|You thrust your (right|left) arm before you, fingers splayed\.|With a wave of your hand, your vitality is fully restored\.|You strike your heel against the ground|A sense of calm focus|Roundtime|Your heart skips a beat as your spell|You clench your fists, pressing your fingernails painfully into your flesh\.|You place your hands on your temples\.|You raise your fist toward the sun\.|You raise your hand in an imaginary toast to Glythtide\.|You drop briefly to one knee as you firmly press your palms into the ground\.|You steeple your fingers together to channel the spell's energies\.|You close your eyes and focus on the old hero, Lirisa\.|You swear|With a chirurgeon's care, you press your fingertips against the side of your neck\.|As you gesture an ethereal vela'tohr|Steadying your breath, you briefly point one arm up and the other towards the ground, forming a conduit through your body.
 	matchre CASTBAD Currently lacking the skill|You don't have a spell prepared!|Your target pattern dissipates because|You can't cast that on anyone else!|You strain, but are too|The spell pattern resists the influx|I could not find what you were referring to.|You must specify one of the thirteen planets\.|The spell pattern resists the influx of .* mana and fails completely\.|You attempt to quiet your mind, focusing on your planar link\.|Steadying your breath, you briefly point one arm up and the other towards the ground, forming a conduit through your body\.
 	#match CASTFACE You can't cast that at yourself!
 	#matchre CASTLOOT is already dead, so that's a bit pointless.

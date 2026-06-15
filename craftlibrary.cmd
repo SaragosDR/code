@@ -15,6 +15,20 @@ action var padsmall $1 when \((\d+)\) finished small cloth padding
 action var backinglarge $1 when \((\d+)\) finished large leather backing
 action var backingsmall $1 when \((\d+)\) finished small leather backing
 
+action (logbookask) var product $1; var quantity $2; var quality $3; var timelimit $4 when \w+ shuffles through some notes and says, "Alright, this is an order for(?:a|an|some)? ?(.*)\. I need (\d+) (finely-crafted|of superior quality|of exceptional quality), made from any (?:material|leather|fabric) and due in (\d+) roisaen\.
+action (logbookask) var chapter $1 when You seem to recall this item being somewhere in chapter (\d+) of the instruction book\.
+
+action (productread) var productcheck $3 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (.*)    \=\-
+action (productread) var volume $1 when \(1\) refined metal ingot \((\d+) volume\)
+action (productread) var yards $1; var materialnoun cloth when \(1\) finished fabric cloth \((\d+) yards\)
+action (productread) var yards $1; var materialnoun leather when \(1\) refined leather material \((\d+) yards\)
+action (productread) var yards $1; var materialnoun yarn when \(1\) refined fabric yarn \((\d+) yards\)
+
+action (ingotcheck) var ingotvolume $1 when About (\d+) volume of metal was used in this item's construction\.
+
+action (purchaseparts) var padlargenum $1 when (\d+)\)\.  some large cloth padding\.
+action (purchaseparts) var padsmallnum $1 when (\d+)\)\.  some small cloth padding\.
+
 action math expenses add $1; var currency $2 when The attendant says, "You can purchase (?:a|an|some) \w+ \w+ \w+ for (\d+) (Kronars|Lirums|Dokoras)\.
 action math expenses add $1; var currency $2 when The attendant says, "You can purchase (?:a|an|some) \w+ \w+ for (\d+) (Kronars|Lirums|Dokoras)\.
 action math expenses add $1; var currency $2 when You decide to purchase the \w+, and pay the sales clerk (\d+) (Kronars|Lirums|Dokoras)\.
@@ -289,7 +303,6 @@ WORKORDER:
     {
       #PURCHASING_MATERIAL
       gosub ORDERMATERIALS
-      echo gosub COMBINEALL %material %materialnoun 
       gosub COMBINEALL %material %materialnoun 
     
       #PURCHASING_PARTS
@@ -297,9 +310,9 @@ WORKORDER:
       echo totalpadsmall: %totalpadsmall
       if ((%totalpadlarge > 0) || (%totalpadsmall > 0)) then
       {
-        action var padlargenum $1 when (\d+)\)\.  some large cloth padding\.
-        action var padsmallnum $1 when (\d+)\)\.  some small cloth padding\.
+        action (purchaseparts) on
         gosub CRAFTINGORDER
+        action (purchaseparts) off
         if (%totalpadlarge > 0) then gosub ORDERLOOP %padlargenum %totalpadlarge padding
         if (%totalpadsmall > 0) then gosub ORDERLOOP %padsmallnum %totalpadsmall padding
       }    
@@ -484,7 +497,7 @@ FABRICCHECK:
 INGOTCHECK:
   gosub GETITEM %material ingot in my %craftingstorage
   if ("$righthand" = "Empty") then return
-  action (ingotcheck) var ingotvolume $1 when About (\d+) volume of metal was used in this item's construction\.
+  action (ingotcheck) on
   gosub ANALYZECRAFT %material ingot
   action (ingotcheck) off
   put #echo Yellow ingotvolume: %ingotvolume
@@ -561,15 +574,33 @@ CRAFTINGMAIN:
   if (%workorder != 1 ) then
   {
     action (productread) on
-    action (productread) var productcheck $3 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (.*)    \=\-
-    action (productread) var volume $1 when \(1\) refined metal ingot \((\d+) volume\)
-    action (productread) var yards $1; var materialnoun cloth when \(1\) finished fabric cloth \((\d+) yards\)
-    action (productread) var yards $1; var materialnoun leather when \(1\) refined leather material \((\d+) yards\)
-    action (productread) var yards $1; var materialnoun yarn when \(1\) refined fabric yarn \((\d+) yards\)
+    var yards 0
+    var materialnoun 0
+    var volume 0
     gosub READBOOK my %discipline book
     gosub TAPNOUN %productcheck
     var product %nountap
-    action (pageread) off
+    pause 1
+    action (productread) off
+    echo crafttype: %crafttype
+    if ("%crafttype" = "forging") then
+    {
+      if ("%volume" = "0") then
+      {
+        put #echo %alertwindow Yellow Misread on ProductRead!  Exiting!
+        put #echo Yellow Misread on ProductRead!  Exiting!
+        exit
+      }
+    }
+    if ("%crafttype" = "outfitting") then
+    {
+      if (("%volume" = "0") || ("%yards" = "0") || ("%materialnoun" = "0")) then
+      {
+        put #echo %alertwindow Yellow Misread on ProductRead!  Exiting!
+        put #echo Yellow Misread on ProductRead!  Exiting!
+        exit
+      }
+    }
     #echo product: %product
     #echo materialnoun: %materialnoun
   }
@@ -595,7 +626,8 @@ CRAFTINGMAIN:
   {
     gosub GETITEM my %material %materialnoun in %craftingstorage
     gosub SWAP
-    gosub TAILOR
+    if ("%materialnoun" = "yarn") then gosub KNIT
+    else gosub TAILOR
   }
   if (%workorder = 1) then
   {
@@ -688,7 +720,7 @@ KNITMAIN:
   match KNITKNIT The needles doesn't appear suitable for working on an unfinished
   matchre KNITUNFINISHED You are already knitting an .*\.  You must finish this before starting another project\.
   match RETURN The needles doesn't appear suitable for working on
-  match RETURN You add a row of double stitches to
+  match KNITFINISH You add a row of double stitches to
   #ACTIONS
 	if ("%craftaction" = "knitknit") then
 	{
@@ -741,6 +773,10 @@ KNITCAST:
   }
   var craftaction knitcast
   goto KNITMAIN
+  
+KNITFINISH:
+  gosub PUTITEM my %knittingneedles in my %craftingstorage
+  return
 
 
 #####TAILORING_SUBS#####
@@ -1539,14 +1575,12 @@ TASKACQUIRE:
   }
   var materialnoun 0
   action (logbookask) on
-  action (logbookask) var product $1; var quantity $2; var quality $3; var timelimit $4 when \w+ shuffles through some notes and says, "Alright, this is an order for(?:a|an|some)? ?(.*)\. I need (\d+) (finely-crafted|of superior quality|of exceptional quality), made from any (?:material|leather|fabric) and due in (\d+) roisaen\.
-  action (logbookask) var chapter $1 when You seem to recall this item being somewhere in chapter (\d+) of the instruction book\.
   gosub LOGBOOKASK %mastername %difficulty %discipline
   pause 1
   action (logbookask) off
   if (%workorderbail = 1) then return
   gosub PUTITEM my logbook in %craftingstorage
-  pause .5
+  pause 2
   echo product: %product
   echo quantity: %quantity
   echo timelimit: %timelimit
@@ -1561,18 +1595,14 @@ TASKACQUIRE:
     return
   }
   gosub TURNBOOK chapter %chapter
-  #echo product: %product
+  echo product: %product
   var page 0
-  action (pageread) on
-  action (pageread) var page $1 when Page (\d+)\: (%product)
   gosub READBOOK my %discipline book
-  pause 1
-  action (pageread) off
   echo page: %page
   if (%page = 0) then
   {
-    put #echo %alertwindow Yellow Failed to select a proper page!  Please investigate, turning off forging!
-    put #echo Yellow Failed to select a proper page!  Please investigate, turning off forging!
+    put #echo %alertwindow Yellow Failed to select a proper page!  Please investigate, turning off crafting!
+    put #echo Yellow Failed to select a proper page!  Please investigate, turning off crafting!
     gosub CRAFTINGABORT
     return
   }
@@ -1599,16 +1629,32 @@ TASKACQUIRE:
     var padsmall 0
     var cordlong 0
     var handleleather 0
+    var yards 0
+    var materialnoun 0
   }
   action (productread) on
-  action (productread) var productcheck $3 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (.*)    \=\-
-  action (productread) var volume $1 when \(1\) refined metal ingot \((\d+) volume\)
-  action (productread) var yards $1; var materialnoun cloth when \(1\) finished fabric cloth \((\d+) yards\)
-  action (productread) var yards $1; var materialnoun leather when \(1\) refined leather material \((\d+) yards\)
-  action (productread) var yards $1; var materialnoun yarn when \(1\) refined fabric yarn \((\d+) yards\)
   gosub READBOOK my %discipline book
   pause 1
   action (productread) off
+  if ("%crafttype" = "forging") then
+  {
+    if ("%volume" = "0") then
+    {
+      put #echo %alertwindow Yellow Misread on ProductRead!  Exiting!
+      put #echo Yellow Misread on ProductRead!  Exiting!
+      exit
+    }
+  }
+  if ("%crafttype" = "outfitting") then
+  {
+    if (("%volume" = "0") || ("%yards" = "0") || ("%materialnoun" = "0")) then
+    {
+      put #echo %alertwindow Yellow Misread on ProductRead!  Exiting!
+      put #echo Yellow Misread on ProductRead!  Exiting!
+      exit
+    }
+  }
+  
   echo product: %product
   echo productcheck: %productcheck
   if ("%product" != "%productcheck") then
@@ -1896,11 +1942,13 @@ ORDERMATERIALS:
     var tinynum 0
     var hugenum 0
     var massivenum 0
-    action var tinynum $1; var materialnoun $2 when (\d+)\)\.  a tiny %material (ingot|nugget)\.
-    action var hugenum $1; var materialnoun $2 when (\d+)\)\.  a huge %material (ingot|nugget)\.
-    action var massivenum $1; var materialnoun $2 when (\d+)\)\.  a massive %material (ingot|nugget)\.
-    gosub CRAFTINGORDER
+    action (ordermats) on
+    #action (ordermats) var tinynum $1; var materialnoun $2 when (\d+)\)\.  a tiny %material (ingot|nugget)\.
+    #action (ordermats) var hugenum $1; var materialnoun $2 when (\d+)\)\.  a huge %material (ingot|nugget)\.
+    #action (ordermats) var massivenum $1; var materialnoun $2 when (\d+)\)\.  a massive %material (ingot|nugget)\.
+    gosub CRAFTINGORDERREAD
     pause .5
+    action (ordermats) off
     echo tinynum %tinynum
     echo hugenum %hugenum
     echo massivenum %massivenum
@@ -1929,10 +1977,21 @@ ORDERMATERIALS:
   if ("%crafttype" = "outfitting") then
   {
     if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
-    action var materialnum $1; var materialyards $2 when (\d+)\)\.  (\d+) yards of %material (cloth|leather)\.
-    
-    gosub CRAFTINGORDER
-    pause .5
+    action (ordermats) on
+    echo material: %material
+    echo materialnoun: %materialnoun
+    var materialnum 0
+    var materialyards 0
+   
+    gosub CRAFTINGORDERREAD
+    pause 2
+    action (ordermats) off
+    if (("%materialnum" = "0") || ("%materialyards" = "0")) then
+    {
+      put #echo %alertwindow Yellow Misread on materials order!  Exiting!
+      put #echo Yellow Misread on materials order!  Exiting!
+      exit
+    }
     echo materialnum: %materialnum
     echo materialyards: %materialyards
     echo materialnoun: %materialnoun
@@ -2015,9 +2074,33 @@ CRAFTINGORDERREADP:
   pause
 CRAFTINGORDERREAD:
   matchre CRAFTINGORDERREADP %waitstring
+  matchre CRAFTINGORDERYARDS (\d+)\)\.  (\d+) yards of %material %materialnoun\.
+  matchre CRAFTINGORDERTINY (\d+)\)\.  a tiny %material (ingot|nugget)\.
+  matchre CRAFTINGORDERHUGE (\d+)\)\.  a huge %material (ingot|nugget)\.
+  matchre CRAFTINGORDERMASSIVE (\d+)\)\.  a massive %material (ingot|nugget)\.
   put order
   matchwait
 
+CRAFTINGORDERYARDS:
+  var materialnum $1
+  var materialyards $2
+  return
+
+CRAFTINGORDERTINY:
+  var tinynum $1
+  var materialnoun $2
+  return
+
+CRAFTINGORDERHUGE:
+  var hugenum $1
+  var materialnoun $2
+  return
+  
+CRAFTINGORDERMASSIVE:
+  var massivenum $1
+  var materialnoun $2
+  return
+  
 
 CRAFTINGORDER:
   var craftingorderstring $0
@@ -2030,8 +2113,11 @@ CRAFTINGORDERMAIN:
   match CRAFTINGORDERMAIN The attendant says, "You can purchase
   match CRAFTINGORDERNOMONEY The attendant shrugs and says, "Ugh, you don't have enough coins to purchase
   match RETURN The attendant takes some coins from you and hands you
+
   put order %craftingorderstring
   matchwait
+
+
 
 CRAFTINGORDERNOMONEY:
   var startroom $roomid
@@ -2061,9 +2147,15 @@ READBOOKP:
   pause
 READBOOKMAIN:
   matchre READBOOKP %waitstring
-  match RETURN Page
+  matchre READBOOKRETURN Page (\d+)\: %product
+  match RETURN [You may TURN MY BOOK TO PAGE # for specific information on another item or process within this chapter, TURN MY BOOK TO CHAPTER # to view another chapter, TURN MY BOOK TO FOREWORD for broad information on this discipline, or TURN MY BOOK TO INDEX to view other chapters.]
+  #match RETURN Page
   put read %readbookstring
   matchwait
+  
+READBOOKRETURN:
+  var page $1
+  return
   
 STUDYBOOK:
   var studystring $0
