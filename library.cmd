@@ -6787,6 +6787,15 @@ SMITEBAD:
   return
 
 
+SPLASHP:
+  pause
+SPLASH:
+  matchre SPLASHP %waitstring
+  matchre RETURN You splash some naphtha on .*, soaking (?:his|her|its) .* with the smelly mixture!
+  matchre RETURN You splash some naphtha at .*, but the gooey liquid completely misses!
+  put splash
+  matchwait
+
 STANCECHANGEP:
   pause
 STANCECHANGE:
@@ -7754,8 +7763,8 @@ CASTCLEANUPMAIN:
         var postcastlearningrate $%skillname.LearningRate
         var totallearned %postcastlearningrate
         math totallearned subtract %precastlearningrate
-        put #echo Yellow Skill: %skillname
-        put #echo Yellow PrecastLearningRate: %precastlearningrate // PostCastLearningRate: %postcastlearningrate // Total Learned: %totallearned
+        #put #echo Yellow Skill: %skillname
+        #put #echo Yellow PrecastLearningRate: %precastlearningrate // PostCastLearningRate: %postcastlearningrate // Total Learned: %totallearned
         if (%totallearned = 0) then
         {
           if (%backfire = 1) then
@@ -9295,6 +9304,7 @@ VAULTPAY:
   matchre VAULTPAYP %waitstring
   match VAULTPAYNOMONEY You don't have that much money!
   match RETURN You hand the Dwarven clerk your payment.
+  match RETURN The clerk shuffles some papers.  "I have a note here that I'm supposed to waive yer fee," he says.  "So I'll just update yer record and you hang on to yer coins."
   put pay 5000
   matchwait
   var timeoutsub VAULTPAY
@@ -12282,7 +12292,7 @@ PLAYP:
   pause
 PLAY:
   matchre PLAYP %waitstring
-  matchre PLAYSUCCESS You're already playing a song!|You begin (?:a|some) (?:spritely|quiet|masterful) .* on your .* with only the slightest hint of difficulty\.|You begin (?:a|an) (?:spritely|quiet|masterful) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|an) (?:spritely|quiet|masterful) .* on your .*\.
+  matchre PLAYSUCCESS You're already playing a song!|You begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .* with only the slightest hint of difficulty\.|You begin (?:a|an) (?:spritely|quiet|masterful) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|an) (?:spritely|quiet|masterful) .* on your .*\.
   matchre PLAYDOWN You fumble slightly as you begin (?:a|some) (?:spritely|quiet) .* on your .*\.|You struggle to begin (?:a|some) (?:spritely|quiet) .* on your .*\.
   matchre PLAYUP You effortlessly begin (?:a|some) (?:spritely|quiet|halting) .* on your .*, your heart swelling in pride at your hard-earned skill\.|You begin (?:a|some) (?:spritely|quiet) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|some) (?:spritely|quiet) .* on your .*\.
   match PLAYUNHIDE That would give away your hiding place!
@@ -12459,10 +12469,10 @@ ARTMOVELOOP:
   if (%artroomscounter > %artroomslen) then return
   gosub MOVE %artrooms(%artroomscounter)
   gosub STUDYLOOP
-  if $Scholarship.LearningRate > 33 then var scholarlock 1
-  if $Scholarship.LearningRate < 21 then var scholarlock 0
-  if $Scholarship.Ranks >= 1750 then var scholarlock 1
-  if %scholarlock = 1 then return
+  if ($Scholarship.LearningRate > 33) then var scholarlock 1
+  if ($Scholarship.LearningRate < 21) then var scholarlock 0
+  if ($Scholarship.Ranks >= 1750) then var scholarlock 1
+  if (%scholarlock = 1) then return
   math artroomscounter add 1
   goto ARTMOVELOOP
 
@@ -12473,10 +12483,10 @@ STUDYLOOP:
 STUDYLOOPMAIN:
   if (%studyloopcounter > %artlistlen) then return
   gosub STUDYART %artlist(%studyloopcounter)
-  if $Scholarship.LearningRate > 33 then var scholarlock 1
-  if $Scholarship.LearningRate < 21 then var scholarlock 0
-  if $Scholarship.Ranks >= 1750 then var scholarlock 1
-  if %scholarlock = 1 then return
+  if ($Scholarship.LearningRate > 33) then var scholarlock 1
+  if ($Scholarship.LearningRate < 21) then var scholarlock 0
+  if ($Scholarship.Ranks >= 1750) then var scholarlock 1
+  if (%scholarlock = 1) then return
   math studyloopcounter add 1
   goto STUDYLOOPMAIN
 

@@ -433,7 +433,7 @@ ALERTINIT:
   if %alertwindow = "Main" then var alertwindow
   else var alertwindow >%alertwindow
   ##AWARENESS_TRIGGERS##
-  if ((%speechalerts = "YES") && (tolower("%scriptmodename") != "combat")) then
+  if (("%speechalerts" = "YES") && (tolower("%scriptmodename") != "combat")) then
   { 
     var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,|The apprentice repairman looks over|A youthful attendant hands you some bundling rope and says,|You hand the apprentice repairman|The apprentice repairman smiles and says|The horse-drawn carriage's driver shouts|Mags calls out,|Aelik scowls and says,|Cormyn scowls and says,
     var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.|An Elothean clerk says|You hand an Elothean clerk|Jakke shuffles through some notes and says,|Jakke boasts,
@@ -511,7 +511,7 @@ ALERTINIT:
     action put #beep;put #echo %alertwindow Yellow Alarm: Script when old hag
     action put #beep;put #echo %alertwindow Yellow Alarm: Script when mouse
   }
-  if (%almanacalerts = "YES") then
+  if ("%almanacalerts" = "YES") then
   {
     action put #echo %alertwindow [Almanac]: $2. when ^You set about studying your (.*) intently.  You believe you've learned something significant about (.+)!
   }
@@ -616,7 +616,7 @@ ALERTINIT:
   }  
   if "$guild" = "Thief" then
   {
-    if ((%bugout = "YES") && (%scriptmode = 1)) then
+    if (("%bugout" = "YES") && (%scriptmode = 1)) then
     {
       action if %buggingout = 0 then goto BUGOUT; if $concentration < %lastconc then put #play Echo; if $concentration < %lastconc then put #flash; if $concentration < %lastconc then put #echo %alertwindow Yellow [Khri]: Possible Khri crash.  Bugging!; var lastconc $concentration when eval $concentration <= 10
     }
@@ -723,7 +723,7 @@ COMMANDVARLOAD:
     var outdoortimer 0
     var textbooktimer 0
     var appraisetarget bundle
-    if ((%research = "YES") && (%spell = YES)) then var research NO
+    if (("%research" = "YES") && ("%spell" = "YES")) then var research NO
     var buff NO
     var tm NO
     var debil NO
@@ -3330,9 +3330,9 @@ WEAPONVARLOAD:
 VALIDROOMCHECK:
   if %scriptmode = 1 then
   {
-    if ((%autoupkeep = "YES") || (%bugout = "YES")) then
+    if (("%autoupkeep" = "YES") || ("%bugout" = "YES")) then
     {
-      if %premiumring = "YES" then 
+      if ("%premiumring" = "YES") then 
       {
         put #var roomid 0
         pause 1
@@ -4368,12 +4368,12 @@ COMBATLOOP:
   }
   #STANCE_CHECKING
   gosub BOWSTANCECHECK
-  if ((%stance != "%stancemain") && (%usingbow = 0)) then
+  if (("%stance" != "%stancemain") && (%usingbow = 0)) then
   {
     var stance %stancemain
     gosub STANCECHANGE
   }
-  if ((%stance != "shield") && (%usingbow = 1)) then
+  if (("%stance" != "shield") && (%usingbow = 1)) then
   {
     var stance shield
     gosub STANCECHANGE
@@ -4403,7 +4403,7 @@ COMBATLOOP:
     if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
   }
   #DOMAIN
-  if (("$guild" = "Warrior Mage") && (%domain = "YES")) then
+  if (("$guild" = "Warrior Mage") && ("%domain" = "YES")) then
   {
     echo DomainActive: %domainactive
     if %domainactive = 1 then echo DomainActiveType: %domainactivetype
@@ -4429,7 +4429,7 @@ COMBATLOOP:
   if %teaching = "YES" then gosub TEACHINGLOGIC
   
   #NONVIOLENT_TACTICS
-  if ((%avoidshock = "YES") && (%tactics = "YES")) then
+  if (("%avoidshock" = "YES") && ("%tactics" = "YES")) then
   {
     if %shockcritter = 1 then
     {
@@ -4456,7 +4456,7 @@ COMBATLOOP:
     var slowmagic 0
   }
   #NVSTEALTH
-  if ((%avoidshock = "YES") && (%stealth = "YES")) then
+  if (("%avoidshock" = "YES") && ("%stealth" = "YES")) then
   {
     if %shockcritter = 1 then
     {
@@ -4465,7 +4465,7 @@ COMBATLOOP:
       if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
     }
   }
-  if (("$guild" = "Paladin") && (%stealth = "YES")) then
+  if (("$guild" = "Paladin") && ("%stealth" = "YES")) then
   {
     gosub NVSTEALTHLOGIC
     gosub STATUSCHECK
@@ -4608,7 +4608,7 @@ COMBATLOOP:
  	if (("$guild" = "Cleric") && ("%theurgy" = "YES")) then
  	{
  	  #COMMUNE_DETECTION
- 	  if ((%meraudcommune = "YES") || (%elunedcommune = "YES") || (%tamsinecommune = "YES")) then
+ 	  if (("%meraudcommune" = "YES") || ("%elunedcommune" = "YES") || ("%tamsinecommune" = "YES")) then
     {
       if (%firstcommsense = 1) then
       {
@@ -4643,7 +4643,7 @@ COMBATLOOP:
       if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
     }
     #MERAUDCOMMUNE
-    if ((%meraudcommune = "YES") || (%elunedcommune = "YES") || (%tamsinecommune = "YES")) then
+    if (("%meraudcommune" = "YES") || ("%elunedcommune" = "YES") || ("%tamsinecommune" = "YES")) then
     {
       gosub COMMUNELOGIC
       gosub STATUSCHECK
@@ -4665,7 +4665,7 @@ COMBATLOOP:
     }
   }
   #SUMMONING
-  if (($guild = "Warrior Mage") && (%summoning = "YES")) then
+  if (("$guild" = "Warrior Mage") && ("%summoning" = "YES")) then
   {
     if ("%summonweapon" = "YES") then
     {
@@ -5130,7 +5130,7 @@ NEWAREADECISION:
       var scriptareachange upkeep
       return
     }
-    put #echo noncombat: %noncombat
+    #put #echo noncombat: %noncombat
     if ("%noncombat" = "YES") then
     {
       gosub NEWNONCOMBATCHECKS
@@ -5259,11 +5259,10 @@ NEWNONCOMBATCHECKS:
 	  {
 	    var gametimetest $unixtime
 	    math gametimetest subtract $lastartstudy
-	    #put #echo t: %t
-	    #put #echo nextartstudy: %nextartstudy
-	    #put #echo unixtime: $unixtime
-	    #put #echo gametimetest: %gametimetest
-      if ((%t >= %nextartstudy) && (%gametimetest >= 1800)) then
+	    #put #echo Yellow unixtime: $unixtime
+	    #put #echo Yellow lastartstudy: $lastartstudy
+	    #put #echo Yellow gametimetest: %gametimetest
+      if (%gametimetest >= 1800) then
       {
         var scriptareachange noncombat
         var noncombatactive 1
@@ -8159,7 +8158,7 @@ BURGLEEND:
     put #echo %alertwindow [Burgle]: Unable to burgle, still on cooldown.
     return
   }
-  var burgletext Burgled using a %burgletoolchosen for %grabs grabs
+  var burgletext Burgled using a %burgletoolchosen for %grabs searches
   if ("%burgleloot" = "YES") then
   {
     if ("%burglelootlist" != "0") then
@@ -8760,9 +8759,9 @@ STUDYARTLOGIC:
   var artroomscounter 0
   put #echo %alertwindow [Noncombat]: Studying art in Raven's Court.
   gosub ARTMOVELOOP
-  var nextartstudy %t
-  math nextartstudy add 108000
+  var noncombatstudyartactive 0
   put #var lastartstudy $unixtime
+  put #var save
   return
 
 EVCASTLOGIC:
@@ -8858,8 +8857,10 @@ TASKLOGIC:
     pause 1
   }
   if ("%forageitem" = "branche") then var forageitem branch
+  if ("%forageitem" = "grasse") then var forageitem grass
   if ("%forageitem" = "berrie") then var forageitem berries
   if (matchre("%forageitem", "(\w+) branches")) then var forageitem $1 branch
+  if (matchre("%forageitem", "(\w+) grasses")) then var forageitem $1 grass
   if (matchre("%forageitem", "(\w+) leave")) then var forageitem $1 leaf
   if (matchre("%forageitem", "riolur leaf")) then var forageitem riolur leaves
   if (matchre("%forageitem", "%badforagelist")) then
@@ -9698,7 +9699,7 @@ BLESSCAST:
 
 
 RECALLLOGIC:
-  if ((%usingtactics = 1) || (%usingexpert = 1)) then return
+  #if ((%usingtactics = 1) || (%usingexpert = 1)) then return
   if (%t >= %nextrecall) then
   {
     if $Scholarship.LearningRate > 33 then var scholarlock 1

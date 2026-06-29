@@ -1,3 +1,19 @@
+06/28/26
+Updated Scripts: train, library, mags
+Bugfixes to performance.
+Many bugfixes to art study.
+Bugfixes to vault payment for Plat.
+Bugfixes to Mags usage.
+
+
+06/15/26
+Updated Scripts: train, library, set, workorder, craftlibrary, pf
+Added PF, a script to use parallel foci.
+Added parallel focus variables to main training script.
+Many, many bugfixes to crafting.
+
+
+
 06/07/26
 Updated Scripts: train, library, set, workorder
 Added code to make knitting tasks function properly.
