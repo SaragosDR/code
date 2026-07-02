@@ -2130,7 +2130,7 @@ DISPLAYMAGIC:
   var varmatch 1
 	put #echo mono  =================== Magic ====================
 	put #echo
-  if (($guild != "Barbarian") && ($guild != "Thief")) then
+  if (("$guild" != "Barbarian") && ("$guild" != "Thief")) then
   {
     gosub OUTPUT MinConcentration
     gosub OUTPUT MinMana
@@ -2265,7 +2265,6 @@ DISPLAYUPKEEP:
 	gosub OUTPUT Exchange
 	gosub OUTPUT AutoPath (yes|no|premium)
 	gosub OUTPUT Repair
-  gosub OUTPUT VaultTown
 	gosub OUTPUT BundleSell
   gosub OUTPUT BundleVault
   gosub OUTPUT VaultMove
@@ -2851,6 +2850,7 @@ DISPLAYHUNTING:
   put #echo Gray --P5: %combatpresetp5
   put #echo
 	gosub OUTPUT UpkeepTown (%townpresetlist)
+	gosub OUTPUT VaultTown
   gosub OUTPUT BurgleTown (%burgletownlist)
 	gosub OUTPUT PawnTown (%pawntownlist)
   gosub OUTPUT PerformTown (%performtownlist)

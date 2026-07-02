@@ -4,6 +4,7 @@ action var forageitem $2 when The firewood peddler Mags in The Crossing wants yo
 action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) sprigs of (.*)\.
 action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) some (.*)\.
 action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) bits of (.*)\.
+action var forageitem $2 when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) pieces of wild (.*)\.
 action var forageitem stick when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) sticks, branches or limbs.
 action var forageitem leaf when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) leaves.
 action var quantity $1 when You need to turn in (\d*) more\.

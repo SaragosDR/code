@@ -20,9 +20,9 @@ action (logbookask) var chapter $1 when You seem to recall this item being somew
 
 action (productread) var productcheck $3 when \-\=   Chapter (\d+), Page (\d+)\: Instructions for crafting (.*)    \=\-
 action (productread) var volume $1 when \(1\) refined metal ingot \((\d+) volume\)
-action (productread) var yards $1; var materialnoun cloth when \(1\) finished fabric cloth \((\d+) yards\)
-action (productread) var yards $1; var materialnoun leather when \(1\) refined leather material \((\d+) yards\)
-action (productread) var yards $1; var materialnoun yarn when \(1\) refined fabric yarn \((\d+) yards\)
+action (productread) var yards $1; var materialnoun cloth when \(1\) finished fabric cloth \((\d+) (?:yard|yards)\)
+action (productread) var yards $1; var materialnoun leather when \(1\) refined leather material \((\d+) (?:yard|yards)\)
+action (productread) var yards $1; var materialnoun yarn when \(1\) refined fabric yarn \((\d+) (?:yard|yards)\)
 
 action (ingotcheck) var ingotvolume $1 when About (\d+) volume of metal was used in this item's construction\.
 

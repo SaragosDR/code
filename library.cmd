@@ -81,11 +81,11 @@ SETDEFAULTS:
   if (($multimindstep > 0) && ($multimindstep < 35)) then
   else put #var multimindstep 10
   if !def(mode1list) then put #var mode1list thb|bow|sling|sb|lb
-  if $mode1step > 0 then
+  if ($mode1step > 0) then
   else put #var mode1step 10 
   if !matchre("$mode1priority", "\b(YES|NO)\b") then put #var mode1priority NO
   if !def(mode2list) then put #var mode2list se|stave|brawl|xbow|lt|pole|ht|le|the
-  if $mode2step > 0 then
+  if ($mode2step > 0) then
   else put #var mode2step 10 
   if !matchre("$mode2priority", "\b(YES|NO)\b") then put #var mode2priority NO
   
@@ -142,7 +142,7 @@ VARCHECKS:
   if !matchre("$tendarea", "\b(YES|NO)\b") then put #var tendarea NO
   if !matchre("$tendobject", "\b(YES|NO)\b") then put #var tendobject NO
   if !matchre("$bugout", "\b(YES|NO)\b") then put #var bugout NO
-  if $bugoutnum > 0 then
+  if ($bugoutnum > 0) then
   else put #var bugoutnum 1
   if !matchre("$bugoutonbleed", "\b(YES|NO)\b") then put #var bugoutonbleed NO
   if !matchre("$bugoutonsend", "\b(YES|NO)\b") then put #var bugoutonsend YES
@@ -151,7 +151,7 @@ VARCHECKS:
   if (!def(blacklist)) then put #var blacklist Zehira|Agalea
   
   if !matchre("$textbook", "\b(YES|NO)\b") then put #var textbook NO
-  if $textbooktimer >= 0 then
+  if ($textbooktimer >= 0) then
   else put #var textbooktimer 60
   if !def(textbookitem) then put #var textbookitem tome
   if !def(textbooklist) then put #var textbooklist human|elf|elothean 
@@ -163,7 +163,7 @@ VARCHECKS:
   if !matchre("$almanacalerts", "\b(YES|NO)\b") then put #var almanacalerts NO
   if !matchre("$ejournal", "\b(YES|NO)\b") then put #var ejournal NO
   if !def(ejournalitem) then put #var ejournalitem journal
-  if $ejournalstates > 0 then
+  if ($ejournalstates > 0) then
   else put #var ejournalstates 600
   if !def(nextejournal) then put #var nextejournal 0
   if !matchre("$tarantula", "\b(YES|NO)\b") then put #var tarantula NO  
@@ -171,15 +171,15 @@ VARCHECKS:
   if !def(tarantulaskill1) then put #var tarantulaskill1 evasion
   if !def(tarantulaskill2) then put #var tarantulaskill2 shield
   if !matchre("$locksmithbox", "\b(YES|NO)\b") then put #var locksmithbox NO
-  if $locksmithboxtimer >= 0 then
+  if ($locksmithboxtimer >= 0) then
   else put #var locksmithboxtimer 120
   if !def(locksmithboxitem) then put #var locksmithboxitem training box
   if !matchre("$skinfatrainer", "\b(YES|NO)\b") then put #var skinfatrainer NO
-  if $skinfatrainertimer >= 0 then
+  if ($skinfatrainertimer >= 0) then
   else put #var skinfatrainertimer 120
   if !def(skinfatraineritem) then put #var skinfatraineritem blue-belly crocodile
   if !matchre("$windboard", "\b(YES|NO)\b") then put #var windboard NO
-  if $windboardtimer >= 0 then
+  if ($windboardtimer >= 0) then
   else put #var windboardtimer 120
   if !def(windboardtrick) then put #var windboardtrick tilt
   if ($windboardcharge >= 0) then
@@ -201,7 +201,7 @@ VARCHECKS:
 
   if !matchre("$killbeforemove", "\b(YES|NO)\b") then put #var killbeforemove YES
   if !matchre("$sleepontravel", "\b(YES|NO)\b") then put #var sleepontravel YES
-  if $movetimeout > 0 then
+  if ($movetimeout > 0) then
   else put #var movetimeout 300
   if !matchre("$huntingpremium", "\b(YES|NO|ONLY)\b") then put #var huntingpremium NO
   if !matchre("$prefergroup", "\b(YES|NO)\b") then put #var prefergroup NO
@@ -223,18 +223,18 @@ VARCHECKS:
   #UPKEEP
   if !matchre("$autoupkeep", "\b(YES|NO)\b") then put #var autoupkeep YES
   if !matchre("$auonhealth", "\b(YES|NO)\b") then put #var auonhealth YES
-  if $auhealthnum >= 0 then
+  if ($auhealthnum >= 0) then
   else put #var auhealthnum 70
   if !matchre("$auonbleed", "\b(YES|NO)\b") then put #var auonbleed YES
   if !matchre("$auonpoison", "\b(YES|NO)\b") then put #var auonpoison YES
   if !matchre("$auonfire", "\b(YES|NO)\b") then put #var auonfire YES
   if !matchre("$auonnerves", "\b(YES|NO)\b") then put #var auonnerves YES
   if !matchre("$auonburden", "\b(YES|NO)\b") then put #var auonburden YES
-  if $auburdennum >= 0 then
+  if ($auburdennum >= 0) then
   else put #var auburdennum 3
   if !matchre("$auonammo", "\b(YES|NO)\b") then put #var auonammo NO
   if !matchre("$auonboxes", "\b(YES|NO)\b") then put #var auonboxes NO
-  if $minmoney >= 0 then
+  if ($minmoney >= 0) then
   else put #var minmoney 2
   if !matchre("$minmoney", "\b(platinum|gold|silver)\b") then put #var minmoneytype platinum
   if !matchre("$exchange", "\b(YES|NO)\b") then put #var exchange YES
@@ -244,18 +244,18 @@ VARCHECKS:
   if !matchre("$bundlevault", "\b(YES|NO)\b") then put #var bundlevault NO
   if (($bundlevault = "YES") && ($bundlesell = "YES")) then put #var bundlesell NO
   if !matchre("$vaultmove", "\b(YES|NO)\b") then put #var vaultmove NO
-  if $bundlerope >= 0 then
+  if ($bundlerope >= 0) then
   else put #var bundlerope 3
   if !matchre("$gemsell", "\b(YES|NO)\b") then put #var gemsell NO
   if !matchre("$gemvault", "\b(YES|NO)\b") then put #var gemvault YES
-  if $gempouches >= 0 then
+  if ($gempouches >= 0) then
   else put #var gempouches 5
   if !matchre("$nuggetsell", "\b(YES|NO)\b") then put #var nuggetsell YES
   if !matchre("$barsell", "\b(YES|NO)\b") then put #var barsell YES
   if !matchre("$ammobuy", "\b(YES|NO)\b") then put #var ammobuy NO
   if !def(ammobuylist) then put #var ammobuylist bow|xbow|sling
   if !def(ammocontainer) then put #var ammocontainer backpack
-  if $ammomin >= 0 then
+  if ($ammomin >= 0) then
   else put #var ammomin 100
   if !matchre("$lockpickbuy", "\b(YES|NO)\b") then put #var lockpickbuy NO
   if !def(lockpickstacker) then put #var lockpickstacker lockpick ring
@@ -265,14 +265,14 @@ VARCHECKS:
   if !def(bucketitem) then put #var bucketitem none
   if !matchre("$dismantletype", "\b(none|bash|bunny|caravan|chomp|claw|crush|fire|focus|jump|pray|press|roar|salvage|shriek|slam|slip|stomp|thump|tinker|whistle)\b") then put #var dismantletype none
   if !matchre("$boxpopbuff", "\b(none|drum|hol|mt)\b") then put #var boxpopbuff none
-  if $boxpopbuffprepmana >= 0 then
+  if ($boxpopbuffprepmana >= 0) then
   else put #var boxpopbuffprepmana 1
-  if $boxpopbuffaddmana >= 0 then
+  if ($boxpopbuffaddmana >= 0) then
   else put #var boxpopbuffaddmana 0
   if !matchre("$appfocus", "\b(YES|NO)\b") then put #var appfocus NO
   if !def(appfocusitem) then put #var appfocusitem shark
   if !matchre("$spiderfeed", "\b(YES|NO)\b") then put #var spiderfeed NO
-  if $incense >= 0 then
+  if ($incense >= 0) then
   else put #var incense 0
 
   #LOOT
@@ -393,12 +393,12 @@ VARCHECKS:
   if !matchre("$retreatdelay", "\b(YES|NO)\b") then put #var retreatdelay NO
   if !matchre("$appraise", "\b(YES|NO)\b") then put #var appraise YES
   if !matchre("$appraisetarget", "\b(bundle|creature)\b") then put #var appraisetarget creature
-  if $appraisetimer >= 75 then
+  if ($appraisetimer >= 75) then
   else put #var appraisetimer 75
   if !matchre("$appsaveitem", "\b(none|tight|lumpy)\b") then put #var appsaveitem none
   if !def(appsaveitemstorage) then put #var appsaveitemstorage haversack
   if !matchre("$collect", "\b(YES|NO)\b") then put #var collect YES
-  if $collecttimer >= 0 then
+  if ($collecttimer >= 0) then
   else put #var collecttimer 120
   if !matchre("$collectitem", "\b(rock|bunny)\b") then put #var collectitem rock
   if !matchre("$teaching", "\b(YES|NO)\b") then put #var teaching NO
@@ -431,7 +431,7 @@ VARCHECKS:
   if !matchre("$burglehide", "\b(YES|NO)\b") then put #var burglehide NO
   if !matchre("$burglemaxgrabs", "\b(0|1|2|3|4|5|6)\b") then put #var burglemaxgrabs 6
   if !matchre("$burgleloot", "\b(YES|NO)\b") then put #var burgleloot NO
-  if $burglekeeplist = "%burglekeeplist" then put #var burglekeeplist none
+  if ("$burglekeeplist" = "%burglekeeplist") then put #var burglekeeplist none
   if !def(burglekeeplist) then put #var burglekeeplist none
   if !matchre("$burglepawn", "\b(YES|NO)\b") then put #var burglepawn NO
   
@@ -444,7 +444,7 @@ VARCHECKS:
   if !matchre("$instruments", "\b(YES|NO)\b") then put #var instrumentassess YES
   if !matchre("$instclean", "\b(YES|NO)\b") then put #var instclean YES
   if !def(instcleancloth) then put #var instcleancloth cloth
-  if $songtype >= 0 then
+  if ($songtype >= 0) then
   else put #var songtype 0
   if !matchre("$climbingrope", "\b(YES|NO)\b") then put #var climbingrope NO
   if !def(climbingropename) then put #var climbingropename rope
@@ -460,9 +460,9 @@ VARCHECKS:
   if !def(forgingmaterial) then put #var forgingmaterial bronze
   if !matchre("$forgingrepair", "\b(YES|NO)\b") then put #var forgingrepair YES
   if !matchre("$forgingprivateroom", "\b(YES|NO)\b") then put #var forgingprivateroom NO
-  if $forgingmaxvolumes >= 0 then
+  if ($forgingmaxvolumes >= 0) then
   else put #var forgingmaxvolumes 200
-  if $forgingmaxquantity >= 0 then
+  if ($forgingmaxquantity >= 0) then
   else put #var forgingmaxquantity 4
   if !matchre("$forgingsmelting", "\b(YES|NO)\b") then put #var forgingsmelting YES
   if !matchre("$outfittingdifficulty", "\b(easy|challenging|hard)\b") then put #var outfittingdifficulty challenging
@@ -470,9 +470,9 @@ VARCHECKS:
   if !def(outfittingleather) then put #var outfittingleather cougar-pelt
   if !def(outfittingyarn) then put #var outfittingyarn wool
   if !matchre("$outfittingrepair", "\b(YES|NO)\b") then put #var outfittingrepair YES
-  if $outfittingmaxyards >= 0 then
+  if ($outfittingmaxyards >= 0) then
   else put #var outfittingmaxyards 100
-  if $outfittingmaxquantity >= 0 then
+  if ($outfittingmaxquantity >= 0) then
   else put #var outfittingmaxquantity 4
   if !def(awl) then put #var awl awl
   if !def(bellows) then put #var bellows leather bellows
@@ -489,36 +489,36 @@ VARCHECKS:
 
   
   #MAGIC
-  if $minconcentration >= 0 then
+  if ($minconcentration >= 0) then
   else put #var minconcentration 80
-  if $minmana >= 10 then
+  if ($minmana >= 10) then
   else put #var minmana 30
   if !matchre("$fastmagic", "\b(YES|NO)\b") then put #var fastmagic NO
   if !matchre("$straightcast", "\b(YES|NO)\b") then put #var straightcast NO
-  if $difficulty1percent >= 0 then
+  if ($difficulty1percent >= 0) then
   else put #var difficulty1percent 100
-  if $difficulty2percent >= 0 then
+  if ($difficulty2percent >= 0) then
   else put #var difficulty2percent 100
-  if $difficulty3percent >= 0 then
+  if ($difficulty3percent >= 0) then
   else put #var difficulty3percent 100
-  if $difficulty4percent >= 0 then
+  if ($difficulty4percent >= 0) then
   else put #var difficulty4percent 100
-  if $difficulty5percent >= 0 then
+  if ($difficulty5percent >= 0) then
   else put #var difficulty5percent 100
   
   if !matchre("$harnessing", "\b(YES|NO)\b") then put #var harnessing YES
-  if $harnessmax >= 5 then
+  if ($harnessmax >= 5) then
   else put #var harnessmax 20
   if !matchre("$cambrinth", "\b(YES|NO)\b") then put #var cambrinth NO
   if !matchre("$dedicatedcambrinth", "\b(YES|NO)\b") then put #var dedicatedcambrinth NO
   if (($cambitems >= 0) && ($cambitems < 3)) then
   else put #var cambitems 1
   if !def(cambitem1) then put #var cambitem1 armband
-  if $cambitem1mana >= 1 then
+  if ($cambitem1mana >= 1) then
   else put #var cambitem1mana 1
   if !matchre("$cambitem1worn", "\b(YES|NO)\b") then put #var cambitem1worn YES
   if !def(cambitem2) then put #var cambitem2 armband
-  if $cambitem2mana >= 1 then
+  if ($cambitem2mana >= 1) then
   else put #var cambitem2mana 1
   if !matchre("$cambitem2worn", "\b(YES|NO)\b") then put #var cambitem2worn YES
   if !def(ritualfocus) then put #var ritualfocus rod
@@ -538,7 +538,7 @@ VARCHECKS:
     put #var tattootype runic
   }
   if !def(tattoospell) then put #var tattoospell none
-  if $tattooprepmana >= 1 then
+  if ($tattooprepmana >= 1) then
   else put #var tattooprepmana 5
 
 #SPELL
@@ -548,31 +548,31 @@ VARCHECKS:
   if !matchre("$spellnumm2", "\b(1|2|3|4)\b") then put #var spellnumm2 3
   if !matchre("$spellautomana", "\b(YES|NO)\b") then put #var spellautomana YES
   if !def(spell1) then put #var spell1 ys
-  if $spell1mana >= 0 then
+  if ($spell1mana >= 0) then
   else put #var spell1mana 0
   if !matchre("$spell1symb", "\b(YES|NO)\b") then put #var spell1symb NO
   if !def(spell2) then put #var spell2 ab
-  if $spell2mana >= 0 then
+  if ($spell2mana >= 0) then
   else put #var spell2mana 0
   if !matchre("$spell2symb", "\b(YES|NO)\b") then put #var spell2symb NO
   if !def(spell3) then put #var spell3 maf
-  if $spell3mana >= 0 then
+  if ($spell3mana >= 0) then
   else put #var spell3mana 0
   if !matchre("$spell3symb", "\b(YES|NO)\b") then put #var spell3symb NO
   if !def(spell4) then put #var spell4 bless
-  if $spell4mana >= 0 then
+  if ($spell4mana >= 0) then
   else put #var spell4mana 0
   if !matchre("$spell4symb", "\b(YES|NO)\b") then put #var spell4symb NO
   if !matchre("$tmdbprior", "\b(YES|NO)\b") then put #var tmdbprior NO
   if !matchre("$tm", "\b(YES|NO)\b") then put #var tm NO
   if !matchre("$tmm2", "\b(YES|NO)\b") then put #var tmm2 NO
   if !def(spelltm) then put #var spelltm fb
-  if $spelltmmana >= 0 then
+  if ($spelltmmana >= 0) then
   else put #var spelltmmana 0
   if !matchre("$debil", "\b(YES|NO)\b") then put #var debil NO
   if !matchre("$debilm2", "\b(YES|NO)\b") then put #var debilm2 NO
   if !def(spelldebil) then put #var spelldebil frb
-  if $spelldebilmana >= 0 then
+  if ($spelldebilmana >= 0) then
   else put #var spelldebilmana 0
   if !matchre("$cyclic", "\b(YES|NO)\b") then put #var cyclic NO
   if !matchre("$cyclicm2", "\b(YES|NO)\b") then put #var cyclicm2 NO
@@ -580,100 +580,100 @@ VARCHECKS:
   if !matchre("$spellcnum", "\b(1|2|3)\b") then put #var spellcnum 1
   if !matchre("$spellcnumm2", "\b(1|2|3)\b") then put #var spellcnumm2 1
   if !def(spellc1) then put #var spellc1 ac
-  if $spellc1prepmana >= 1 then
+  if ($spellc1prepmana >= 1) then
   else put #var spellc1prepmana 1
   if !def(spellc2) then put #var spellc2 sov
-  if $spellc2prepmana >= 1 then
+  if ($spellc2prepmana >= 1) then
   else put #var spellc2prepmana 1
   if !def(spellc3) then put #var spellc3 how
-  if $spellc3prepmana >= 1 then
+  if ($spellc3prepmana >= 1) then
   else put #var spellc3prepmana 1
   if !matchre("$cyctm", "\b(YES|NO)\b") then put #var cyctm NO
   if !matchre("$cyctmm2", "\b(YES|NO)\b") then put #var cyctmm2 NO
   if !def(spellcyctm) then put #var spellcyctm rim
-  if $spellcyctmmana >= 1 then
+  if ($spellcyctmmana >= 1) then
   else put #var spellcyctmmana 1
   if !matchre("$cycdebil", "\b(YES|NO)\b") then put #var cycdebil NO
   if !matchre("$cycdebilm2", "\b(YES|NO)\b") then put #var cycdebilm2 NO
   if !def(spellcycdebil) then put #var spellcycdebil ee
-  if $spellcycdebilmana >= 1 then
+  if ($spellcycdebilmana >= 1) then
   else put #var spellcycdebilmana 1
   if !matchre("$buff", "\b(YES|NO)\b") then put #var buff NO
   if (($buffnum >= 0) && ($buffnum <= 16)) then
   else put #var buffnum 0
   if !def(buff1) then put #var buff1 maf
-  if $buff1mana >= 0 then
+  if ($buff1mana >= 0) then
   else put #var buff1mana 100
   if !def(buff2) then put #var buff2 maf
-  if $buff2mana >= 0 then
+  if ($buff2mana >= 0) then
   else put #var buff2mana 100
   if !def(buff3) then put #var buff3 maf
-  if $buff3mana >= 0 then
+  if ($buff3mana >= 0) then
   else put #var buff3mana 100
   if !def(buff4) then put #var buff4 maf
-  if $buff4mana >= 0 then
+  if ($buff4mana >= 0) then
   else put #var buff4mana 100
   if !def(buff5) then put #var buff5 maf
-  if $buff5mana >= 0 then
+  if ($buff5mana >= 0) then
   else put #var buff5mana 100
   if !def(buff6) then put #var buff6 maf
-  if $buff6mana >= 0 then
+  if ($buff6mana >= 0) then
   else put #var buff6mana 100
   if !def(buff7) then put #var buff7 maf
-  if $buff7mana >= 0 then
+  if ($buff7mana >= 0) then
   else put #var buff7mana 100
   if !def(buff8) then put #var buff8 maf
-  if $buff8mana >= 0 then
+  if ($buff8mana >= 0) then
   else put #var buff8mana 100
   if !def(buff9) then put #var buff9 maf
-  if $buff9mana >= 0 then
+  if ($buff9mana >= 0) then
   else put #var buff9mana 100
   if !def(buff10) then put #var buff10 maf
-  if $buff10mana >= 0 then
+  if ($buff10mana >= 0) then
   else put #var buff10mana 100
   if !def(buff11) then put #var buff11 maf
-  if $buff11mana >= 0 then
+  if ($buff11mana >= 0) then
   else put #var buff11mana 100
   if !def(buff12) then put #var buff12 maf
-  if $buff12mana >= 0 then
+  if ($buff12mana >= 0) then
   else put #var buff12mana 100
   if !def(buff13) then put #var buff13 maf
-  if $buff13mana >= 0 then
+  if ($buff13mana >= 0) then
   else put #var buff13mana 100
   if !def(buff14) then put #var buff14 maf
-  if $buff14mana >= 0 then
+  if ($buff14mana >= 0) then
   else put #var buff14mana 100
   if !def(buff15) then put #var buff15 maf
-  if $buff15mana >= 0 then
+  if ($buff15mana >= 0) then
   else put #var buff15mana 100
   if !def(buff16) then put #var buff16 maf
-  if $buff16mana >= 0 then
+  if ($buff16mana >= 0) then
   else put #var buff16mana 100
   if !matchre("$symbiosisbuff", "\b(YES|NO)\b") then put #var symbiosisbuff NO
   if !def(symbiosisspell) then put #var symbiosisspell ab
-  if $symbiosismana >= 0 then
+  if ($symbiosismana >= 0) then
   else put #var symbiosismana 100
   if !matchre("$tattoobuff", "\b(YES|NO)\b") then put #var tattoobuff NO
-  if $tattooaddmana >= 0 then
+  if ($tattooaddmana >= 0) then
   else put #var tattooaddmana 0
   if !matchre("$wandbuff", "\b(YES|NO)\b") then put #var wandbuff NO
   if !matchre("$wandbuffnum", "\b(1|2|3|4)\b") then put #var wandbuffnum 1
   if !def(wandstorage) then put #var wandstorage backpack
   if !def(wand1spell) then put #var wand1spell mef 
   if !def(wand1item) then put #var wand1item bloodwood branch
-  if $wand1num > 0 then
+  if ($wand1num > 0) then
   else put #var wand1num 2
   if !def(wand2spell) then put #var wand2spell rage
   if !def(wand2item) then put #var wand2item indurium phoenix
-  if $wand2num > 0 then
+  if ($wand2num > 0) then
   else put #var wand2num 2
   if !def(wand3spell) then put #var wand3spell hes
   if !def(wand3item) then put #var wand3item ironwood wand
-  if $wand3num > 0 then
+  if ($wand3num > 0) then
   else put #var wand3num 2
   if !def(wand4spell) then put #var wand4spell will
   if !def(wand4item) then put #var wand4item crystal
-  if $wand4num > 0 then
+  if ($wand4num > 0) then
   else put #var wand4num 2
   if !matchre("$wand1spell", "\b(hes|mef|rage|rw|tranquility|will|wotp)\b") then put #var wand1spell mef
   if !matchre("$wand2spell", "\b(hes|mef|rage|rw|tranquility|will|wotp)\b") then put #var wand2spell rage
@@ -684,44 +684,44 @@ VARCHECKS:
   if (($gbuffnum >= 0) && ($gbuffnum <= 8)) then
   else put #var gbuffnum 0
   if !def(gbuff1) then put #var gbuff1 maf
-  if $gbuff1prepmana >= 0 then
+  if ($gbuff1prepmana >= 0) then
   else put #var gbuff1prepmana 1
-  if $gbuff1addmana >= 0 then
+  if ($gbuff1addmana >= 0) then
   else put #var gbuff1addmana 0
   if !def(gbuff2) then put #var gbuff2 maf
-  if $gbuff2prepmana >= 0 then
+  if ($gbuff2prepmana >= 0) then
   else put #var gbuff2prepmana 1
-  if $gbuff2addmana >= 0 then
+  if ($gbuff2addmana >= 0) then
   else put #var gbuff2addmana 0
   if !def(gbuff3) then put #var gbuff3 maf
-  if $gbuff3prepmana >= 0 then
+  if ($gbuff3prepmana >= 0) then
   else put #var gbuff3prepmana 1
-  if $gbuff3addmana >= 0 then
+  if ($gbuff3addmana >= 0) then
   else put #var gbuff3addmana 0
   if !def(gbuff4) then put #var gbuff4 maf
-  if $gbuff4prepmana >= 0 then
+  if ($gbuff4prepmana >= 0) then
   else put #var gbuff4prepmana 1
-  if $gbuff4addmana >= 0 then
+  if ($gbuff4addmana >= 0) then
   else put #var gbuff4addmana 0
   if !def(gbuff5) then put #var gbuff5 maf
-  if $gbuff5prepmana >= 0 then
+  if ($gbuff5prepmana >= 0) then
   else put #var gbuff5prepmana 1
-  if $gbuff5addmana >= 0 then
+  if ($gbuff5addmana >= 0) then
   else put #var gbuff5addmana 0
   if !def(gbuff6) then put #var gbuff6 maf
-  if $gbuff6prepmana >= 0 then
+  if ($gbuff6prepmana >= 0) then
   else put #var gbuff6prepmana 1
-  if $gbuff6addmana >= 0 then
+  if ($gbuff6addmana >= 0) then
   else put #var gbuff6addmana 0
   if !def(gbuff7) then put #var gbuff7 maf
-  if $gbuff7prepmana >= 0 then
+  if ($gbuff7prepmana >= 0) then
   else put #var gbuff7prepmana 1
-  if $gbuff7addmana >= 0 then
+  if ($gbuff7addmana >= 0) then
   else put #var gbuff7addmana 0
   if !def(gbuff8) then put #var gbuff8 maf
-  if $gbuff8prepmana >= 0 then
+  if ($gbuff8prepmana >= 0) then
   else put #var gbuff8prepmana 1
-  if $gbuff8addmana >= 0 then
+  if ($gbuff8addmana >= 0) then
   else put #var gbuff8addmana 0
   
   if !matchre("$debilassist", "\b(YES|NO)\b") then put #var debilassist NO
@@ -740,9 +740,9 @@ VARCHECKS:
   
   
   if !matchre("$research", "\b(YES|NO)\b") then put #var research NO
-  if $gafmana >= 5 then
+  if ($gafmana >= 5) then
   else put #var gafmana 100
-  if $gafaddmana >= 0 then
+  if ($gafaddmana >= 0) then
   else put #var gafaddmana 0
   if !matchre("$researchnum", "\b(1|2|3|4|5)\b") then put #var researchnum 1
   #if !matchre("$researchtype1", "\b(fundamental|augmentation|stream|sorcery|utility|warding|energy|field|plane|spell)\b") then put #var researchtype1 fundamental
@@ -761,13 +761,13 @@ VARCHECKS:
   if !matchre("$warhorn", "\b(YES|NO)\b") then put #var warhorn NO
   if !def(warhornitem) then put #var warhornitem warhorn
   
-  if $mininnerfire >= 0 then
+  if ($mininnerfire >= 0) then
   else put #var mininnerfire 20
   if !matchre("$berserkava", "\b(YES|NO)\b") then put #var berserkava NO
-  if $avafatigue >= 0 then
+  if ($avafatigue >= 0) then
   else put #var avafatigue 90
   if !matchre("$berserkfamine", "\b(YES|NO)\b") then put #var berserkfamine NO
-  if $faminevit >= 0 then
+  if ($faminevit >= 0) then
   else put #var faminevit 90
   if !matchre("$meditatestaunch", "\b(YES|NO)\b") then put #var meditatestaunch NO
   
@@ -812,10 +812,10 @@ VARCHECKS:
   if !matchre("$movewhistle", "\b(YES|NO)\b") then put #var movewhistle NO
   if !matchre("$movescream", "\b(YES|NO)\b") then put #var movescream NO
   if !matchre("$eilliescry", "\b(YES|NO)\b") then put #var eilliescry NO
-  if $eilliescrymana >= 1 then
+  if ($eilliescrymana >= 1) then
   else put #var eilliescrymana 1
   if !matchre("$misdirection", "\b(YES|NO)\b") then put #var misdirection NO
-  if $misdirectionmana >= 0 then
+  if ($misdirectionmana >= 0) then
   else put #var misdirectionmana 100
   #GUILD-CLERIC
   if !matchre("$theurgy", "\b(YES|NO)\b") then put #var theurgy NO
@@ -828,7 +828,7 @@ VARCHECKS:
   if !matchre("$meraudcommune", "\b(YES|NO)\b") then put #var meraudcommune NO
   if !matchre("$elunedcommune", "\b(YES|NO)\b") then put #var elunedcommune NO
   if !matchre("$tamsinecommune", "\b(YES|NO)\b") then put #var tamsinecommune NO
-  if $blessdelay >= 0 then
+  if ($blessdelay >= 0) then
   else put #var blessdelay 2
   if !matchre("$dirtstacker", "\b(YES|NO)\b") then put #var dirtstacker NO
   if !def(dirtstackeritem) then put #var dirtstackeritem pouch
@@ -845,9 +845,9 @@ VARCHECKS:
   if !matchre("$hyhcast", "\b(coz|male|male offense|male defense)\b") then put #var hyhcast male
   if !matchre("$sapcast", "\b(augmentation|utility|warding|debilitation)\b") then put #var sapcast augmentation
   if !matchre("$osrelmeraud", "\b(YES|NO)\b") then put #var osrelmeraud NO
-  if $ommana >= 30 then
+  if ($ommana >= 30) then
   else put #var ommana 30
-  if $ombuffnum >= 0 then
+  if ($ombuffnum >= 0) then
   else put #var ombuffnum 0
   
   #GUILD-EMPATH
@@ -856,56 +856,56 @@ VARCHECKS:
   if !matchre("$manipulate", "\b(YES|NO)\b") then put #var manipulate NO
   if !matchre("$manipnum", "\b(1|2)\b") then put #var manipnum 2
   if !matchre("$paralysis", "\b(YES|NO)\b") then put #var paralysis NO
-  if $paralysismana >= 10 then
+  if ($paralysismana >= 10) then
   else put #var paralysismana 2
   if !matchre("$vitheal", "\b(YES|NO)\b") then put #var vitheal NO
-  if $vithealmana >= 5 then
+  if ($vithealmana >= 5) then
   else put #var vithealmana 5
   if !matchre("$heal", "\b(YES|NO)\b") then put #var heal NO
-  if $healmana >= 15 then
+  if ($healmana >= 15) then
   else put #var healmana 15
   if !matchre("$curedisease", "\b(YES|NO)\b") then put #var curedisease NO
-  if $curediseasemana >= 15 then
+  if ($curediseasemana >= 15) then
   else put #var curediseasemana 15
   if !matchre("$flushpoisons", "\b(YES|NO)\b") then put #var flushpoisons NO
-  if $flushpoisonsmana >= 15 then
+  if ($flushpoisonsmana >= 15) then
   else put #var flushpoisonsmana 15
   if !matchre("$adcheal", "\b(YES|NO)\b") then put #var adcheal NO
   if !matchre("$adcdisease", "\b(YES|NO)\b") then put #var adcdisease NO
   if !matchre("$adcpoison", "\b(YES|NO)\b") then put #var adcpoison NO
   if !matchre("$regenerate", "\b(YES|NO)\b") then put #var regenerate NO
-  if $regeneratemana >= 0 then
+  if ($regeneratemana >= 0) then
   else put #var regeneratemana 5
   if !matchre("$embracevela", "\b(YES|NO)\b") then put #var embracevela NO
-  if $embracevelamana >= 300 then
+  if ($embracevelamana >= 300) then
   else put #var embracevelamana 300
   if !matchre("$embracevelatown", "\b(crossing)\b") then put #var embracevelatown crossing
   
   
   if !matchre("$absolution", "\b(YES|NO)\b") then put #var absolution NO
-  if $absolutionmana >= 150 then
+  if ($absolutionmana >= 150) then
   else put #var absolutionmana 150
   if !matchre("$iztouch", "\b(YES|NO)\b") then put #var iztouch NO
-  if $izmana >= 0 then
+  if ($izmana >= 0) then
   else put #var izmana 15
-  if $iztimer >= 0 then
+  if ($iztimer >= 0) then
   else put #var iztimer 30
   #GUILD-MM
   if !matchre("$astro", "\b(YES|NO)\b") then put #var astro NO
-  if $astrotimer >= 0 then
+  if ($astrotimer >= 0) then
   else put #var astrotimer 60
   if !def(tktitem) then put #var tktitem dagger
   if !def(shadowlingnoun) then put #var shadowlingnoun shadowling
   if !matchre("$predictiontool", "\b(none|bones|mirror)\b") then put #var predictiontool none
   if !def(predictiontoolitem) then put #var predictiontoolitem bones
   if !matchre("$piercinggaze", "\b(YES|NO)\b") then put #var piercinggaze YES
-  if $piercinggazemana >= 5 then
+  if ($piercinggazemana >= 5) then
   else put #var piercinggazemana 5
   if !matchre("$mindshout", "\b(YES|NO)\b") then put #var mindshout NO
-  if $mindshoutmana >= 5 then
+  if ($mindshoutmana >= 5) then
   else put #var mindshoutmana 20
   if !matchre("$burglerf", "\b(YES|NO)\b") then put #var burglerf NO
-  if $burglerfdelay >= 0 then
+  if ($burglerfdelay >= 0) then
   else put #var burglerfdelay 10 
   
   #GUILD-NECRO
@@ -913,26 +913,26 @@ VARCHECKS:
   if !matchre("$necrosafety", "\b(YES|NO)\b") then put #var necrosafety NO
   if !def(necrowhitelist) then put #var necrowhitelist person1|person2
   if !matchre("$riteofgrace", "\b(YES|NO)\b") then put #var riteofgrace NO
-  if $rogmana > 4 then
+  if ($rogmana > 4) then
   else put #var rogmana 5
   if !matchre("$rogcycle", "\b(YES|NO)\b") then put #var rogcycle NO
   if !matchre("$devour", "\b(YES|NO)\b") then put #var devour NO
-  if $devourmana >= 30 then
+  if ($devourmana >= 30) then
   else put #var devourmana 30
   if !matchre("$siphonvit", "\b(YES|NO)\b") then put #var siphonvit NO
-  if $siphonvitmana >= 30 then
+  if ($siphonvitmana >= 30) then
   else put #var siphonvitmana 10
-  if $siphonvitnum >= 0 then
+  if ($siphonvitnum >= 0) then
   else put #var siphonvitnum 80
   
   if !matchre("$preserve", "\b(YES|NO)\b") then put #var preserve NO
   if !matchre("$harvest", "\b(YES|NO)\b") then put #var harvest NO
   if !matchre("$harveststore", "\b(YES|NO)\b") then put #var harveststore NO
-  if $harveststorenum >= 0 then
+  if ($harveststorenum >= 0) then
   else put #var harveststorenum 5
   if !matchre("$eotbrel", "\b(YES|NO)\b") then put #var eotbrel NO
   if !matchre("$burgleeotb", "\b(YES|NO)\b") then put #var burgleeotb NO
-  if $burgleeotbdelay >= 0 then
+  if ($burgleeotbdelay >= 0) then
   else put #var burgleeotbdelay 10
   
   #GUILD-PALADIN  
@@ -994,7 +994,7 @@ VARCHECKS:
   #GUILD-WM
   if !matchre("$summoning", "\b(YES|NO)\b") then put #var summoning YES
   if !matchre("$summonweapon", "\b(YES|NO)\b") then put #var summonweapon NO
-  if $summonweapontimer >= 0 then
+  if ($summonweapontimer >= 0) then
   else put #var summonweapontimer 120
   if !matchre("$pathway", "\b(YES|NO)\b") then put #var pathway NO
   if !def(pathwaytype) then put #var pathwaytype precise
@@ -1002,20 +1002,20 @@ VARCHECKS:
   if !matchre("$domaintype", "\b(fire|air|earth|water|electricity|aether|metal)\b") then put #var domaintype fire
   if !matchre("$chargeafterlock", "\b(YES|NO)\b") then put #var chargeafterlock NO
   if !def(calspell) then put #var calspell ab
-  if $calprepmana >= 1 then
+  if ($calprepmana >= 1) then
   else put #var calprepmana 100
-  if $caladdmana >= 1 then
+  if ($caladdmana >= 1) then
   else put #var caladdmana 0
   if !def(ignitebackup) then put #var ignitebackup scimitar
   if !matchre("$platring", "\b(YES|NO)\b") then put #var platring NO
   if !def(platringitem) then put #var platringitem scimitar
   
   #CONDITIONAL_VARIABLE_SWITCHES
-  if $premiumring = "YES" then put #var upkeeptown fangcove
+  if ("$premiumring" = "YES") then put #var upkeeptown fangcove
   if (($bugoutonbleed = "YES") && ($auonbleed = "YES") && ($autoupkeep = "YES")) then put #var bugoutonbleed NO
-  if $harvest = "YES" then put #var preserve YES
-  if $tmfocus = "YES" then put #var tmdbprior YES
-  if %necrostate = "forsaken" then
+  if ("$harvest" = "YES") then put #var preserve YES
+  if ("$tmfocus" = "YES") then put #var tmdbprior YES
+  if ("%necrostate" = "forsaken") then
   {
     put #var autopath NO
   }
@@ -1025,7 +1025,7 @@ VARCHECKS:
     put #var cycdebil NO
     put #var cyclic NO
   }
-  if %iztouch = "YES" then
+  if ("%iztouch" = "YES") then
   {
     put #var cyclic NO
     put #var cyctm NO
@@ -1081,13 +1081,13 @@ WEAPONLISTCHECKMAIN:
   
 VARCHECKOTHER:
   #KILL_SCRIPT_CONDITIONALS
-  if $m%checkmodekilltmfocus = "YES" then put #var m%checkmodekillweapon NO
-  if $m%checkmodebgdbcombo = "YES" then
+  if ("$m%checkmodekilltmfocus" = "YES") then put #var m%checkmodekillweapon NO
+  if ("$m%checkmodebgdbcombo" = "YES") then
   {
     put #var m%checkmodekilltm YES
     put #var m%checkmodekilltmspell bg
-    if $m%checkmodekilltmprepmana < 30 then put #var m%checkmodekilltmprepmana 30
-    if $m%checkmodekilltmaddmana > 70 then put #var m%checkmodekilltmaddmana 70 
+    if ($m%checkmodekilltmprepmana < 30) then put #var m%checkmodekilltmprepmana 30
+    if ($m%checkmodekilltmaddmana > 70) then put #var m%checkmodekilltmaddmana 70 
   }
   
   #OTHER-ASTRAL
@@ -1120,40 +1120,40 @@ VARCHECKOTHER:
   if !matchre("$killbuffing", "\b(YES|NO)\b") then put #var killbuffing NO
   if !matchre("$killcyclic", "\b(YES|NO)\b") then put #var killcyclic NO
   if !def(killcycspell) then put #var killcycspell rim
-  if $killcycprepmana >= 0 then
+  if ($killcycprepmana >= 0) then
   else put #var killcycprepmana 0
   if !matchre("$killdb", "\b(YES|NO)\b") then put #var killdb NO
   if !def(killdbspell) then put #var killdbspell ip
-  if $killdbprepmana >= 0 then
+  if ($killdbprepmana >= 0) then
   else put #var killdbprepmana 0
-  if $killdbaddmana >= 0 then
+  if ($killdbaddmana >= 0) then
   else put #var killdbaddmana 0
   if !matchre("$killtm", "\b(YES|NO)\b") then put #var killtm NO
   if !def(killtmspell) then put #var killtmspell cl
-  if $killtmprepmana >= 0 then
+  if ($killtmprepmana >= 0) then
   else put #var killtmprepmana 0
-  if $killtmaddmana >= 0 then
+  if ($killtmaddmana >= 0) then
   else put #var killtmaddmana 0
   
   if !matchre("$beckonthenaga", "\b(YES|NO)\b") then put #var beckonthenaga NO
-  if $btnprepmana >= 30 then
+  if ($btnprepmana >= 30) then
   else put #var btnprepmana 30
-  if $btnaddmana >= 0 then
+  if ($btnaddmana >= 0) then
   else put #var btnaddmana 0
   if !matchre("$dragonsbreath", "\b(YES|NO)\b") then put #var dragonsbreath NO
-  if $dbprepmana >= 30 then
+  if ($dbprepmana >= 30) then
   else put #var dbprepmana 15
-  if $dbaddmana >= 0 then
+  if ($dbaddmana >= 0) then
   else put #var dbaddmana 0
   if !matchre("$blufmorgaraen", "\b(YES|NO)\b") then put #var blufmorgaraen NO
-  if $bgprepmana >= 30 then
+  if ($bgprepmana >= 30) then
   else put #var bgprepmana 15
-  if $bgaddmana >= 0 then
+  if ($bgaddmana >= 0) then
   else put #var bgaddmana 0
   if !matchre("$magneticballista", "\b(YES|NO)\b") then put #var magneticballista NO
-  if $mabprepmana >= 30 then
+  if ($mabprepmana >= 30) then
   else put #var mabprepmana 15
-  if $mabaddmana >= 0 then
+  if ($mabaddmana >= 0) then
   else put #var mabaddmana 0
   
   if !matchre("$killweapon", "\b(YES|NO)\b") then put #var killweapon NO
@@ -3823,7 +3823,7 @@ STATUSCHECK:
   if ((%scriptmode = 1) && (%buffingonly != 1) then
   {
     gosub COLLECTINGAMMO
-    if %feetcheck = 1 then
+    if (%feetcheck = 1) then
     {
       var feetcheck 0
       gosub STOWFEET
@@ -3833,19 +3833,19 @@ STATUSCHECK:
   if ((%scriptmode = 1) && (%buffingonly != 1)) then
   {
     gosub MONTEST
-    if %tmdead = 1 then
+    if (%tmdead = 1) then
     {
-      if %casting = 1 then
+      if (%casting = 1) then
       {
-        if %tmcast = 1 then gosub RETARGET
+        if (%tmcast = 1) then gosub RETARGET
       }
       var tmdead 0
     }
-    if %eotbrel = "YES" then
+    if ("%eotbrel" = "YES") then
     {
-      if $SpellTimer.EyesoftheBlind.active = 1 then
+      if ($SpellTimer.EyesoftheBlind.active = 1) then
       {
-        if %t > %nexteotbrel then
+        if (%t > %nexteotbrel) then
         {
           gosub RELINVIS
           var nexteotbrel %t
@@ -3853,7 +3853,7 @@ STATUSCHECK:
         }
       }
     }
-    if %aimready = 1 then gosub FIRE
+    if (%aimready = 1) then gosub FIRE
   }
   #TARGET_SELECTION
   if ((%scriptmode = 1) && (%buffingonly != 1) && (%upkeepactive != 1) && (%noncombatactive != 1)) then
@@ -3894,7 +3894,7 @@ STATUSCHECK:
   #TMFOCUS
   if ((%tmfocus = "YES") && (%scriptmode = 1)) then
   {
-    if %tmfocusinuse = 1 then
+    if (%tmfocusinuse = 1) then
     {
       if (matchre("$righthand", "%tmfocusitem")) then
       else
@@ -4057,8 +4057,8 @@ RPLAYERSCRUB:
   return
 	
 RPLAYERSORT:
-  if %rcounter > %nsafenum then return
-  if %rplayernum > 0 then eval roomplayers replace("%roomplayers", "%necrowhitelist(%rcounter)|", "")
+  if (%rcounter > %nsafenum) then return
+  if (%rplayernum > 0) then eval roomplayers replace("%roomplayers", "%necrowhitelist(%rcounter)|", "")
   else eval roomplayers replace("%roomplayers", "%necrowhitelist(%rcounter)", "")
   math rcounter add 1
   goto RPLAYERSORT
@@ -4073,14 +4073,14 @@ TIMEOUT:
   if ($dead = 1) then goto DEADLOGIC
   if ($connected = 0) then gosub CONNECTEDLOGIC
   math timeoutcount add 1
-  if %timeoutcount >= 1 then 
+  if (%timeoutcount >= 1) then 
   {
     var timeouttext %timeoutsub has timed out!  Trying again.  If you see this repeatedly, there is a problem with the script that needs to be addressed.  Input text was "%timeoutcommand".
     if !def(alertwindow) then put #echo Yellow %timeouttext
     else put #echo >$alertwindow Yellow %timeouttext
     put #flash
     put #play JustArrived
-    if %timeoutcount >= 10 then
+    if (%timeoutcount >= 10) then
     {
       if ("%bugout" = "YES") then
       {
@@ -4257,8 +4257,8 @@ ACTIVEWEAPONS:
   goto ACTIVEWEAPONSLOOP
   
 ACTIVEWEAPONSLOOP:
-  if %weaponnum < %activeweaponscount then return
-  if %activeweaponscount =  1 then
+  if (%weaponnum < %activeweaponscount) then return
+  if (%activeweaponscount =  1) then
   {
     eval tempawl tolower(%weapon1)
     var activeweaponslist |%tempawl|
@@ -4280,7 +4280,7 @@ AMMOGETMAINP:
 AMMOGETMAIN:
   #put #echo roomobjs: $roomobjs
   #put #echo ubowammo: %ubowammo
-  if matchre ("$roomobjs", "\b%ubowammo\b") then
+  if matchre("$roomobjs", "\b%ubowammo\b") then
   {
 	  matchre AMMOGETMAINP %waitstring
 	  matchre AMMOGETMAIN You pick up|You pull a|out of the pile of rubble.|You pull a small rock out|You fade in|You put your
@@ -4432,46 +4432,46 @@ COILROPE:
 
 COLLECTINGAMMO:
   #put #echo Yellow activeweaponslist: %activeweaponslist
-  if %collectammo = "YES" then
+  if ("%collectammo" = "YES") then
   {
-    if contains("%activeweaponslist", "|bow|") then
+    if (contains("%activeweaponslist", "|bow|")) then
     {
-      if matchre ("$roomobjs", "%bowammo") then
+      if (matchre("$roomobjs", "%bowammo")) then
       {
         gosub AMMOGET %bowammo
       }
     }
-    if contains("%activeweaponslist", "|xbow|") then
+    if (contains("%activeweaponslist", "|xbow|")) then
     {
-      if matchre ("$roomobjs", "%xbowammo") then
+      if (matchre("$roomobjs", "%xbowammo")) then
       {
         gosub AMMOGET %xbowammo
       }
     }
-    if contains("%activeweaponslist", "|sling|") then
+    if (contains("%activeweaponslist", "|sling|")) then
     {
-      if matchre ("$roomobjs", "%slingammo") then
+      if (matchre("$roomobjs", "%slingammo")) then
       {
         gosub AMMOGET %slingammo
       }
     }
   }
-  if contains("%activeweaponslist", "|ht|") then
+  if (contains("%activeweaponslist", "|ht|")) then
   {
-    if matchre ("$roomobjs", "%htweapon") then
+    if (matchre("$roomobjs", "%htweapon")) then
     {
-      if %htbond = "YES" then put invoke bond
+      if ("%htbond" = "YES") then put invoke bond
       else
       {
         gosub GETITEM %htweapon 
       }
     }
   }
-  if contains("%activeweaponslist", "|lt|") then
+  if (contains("%activeweaponslist", "|lt|")) then
   {
-    if matchre ("$roomobjs", "%ltweapon") then
+    if (matchre("$roomobjs", "%ltweapon")) then
     {  
-      if %ltbond = "YES" then put invoke bond
+      if ("%ltbond" = "YES") then put invoke bond
       else
       {
         gosub GETITEM %ltweapon 
@@ -4561,7 +4561,7 @@ DUMPITEM:
   var dumpitemstring $0
   goto DUMPITEMMAIN
 DUMPITEMMAIN:
-	if matchre ("$roomobjs", "(waste receptacle|bucket|large stone turtle|disposal bin|waste bin|tree hollow|oak crate|firewood bin|ivory urn|trash receptacle|marble statue|waste basket)") then
+	if matchre("$roomobjs", "(waste receptacle|bucket|large stone turtle|disposal bin|waste bin|tree hollow|oak crate|firewood bin|ivory urn|trash receptacle|marble statue|waste basket)") then
 	{
 	  gosub PUTITEM %dumpitemstring in $1
 	}
@@ -4882,7 +4882,7 @@ STOWMAIN:
     var stowcustomsuccess 0
     var stowsource STOW
     gosub STOWCUSTOM $%stowhandstringhand
-    if %stowcustomsuccess = 1 then return
+    if (%stowcustomsuccess = 1) then return
   }
   var cleanstow 0
   matchre STOWP %waitstring
@@ -5013,26 +5013,26 @@ STOWFEETFULL:
   
 STOWCUSTOM:
   var stowcustomstring $0
-  if matchre ("%stowcustomstring", "%tomeofloreitem") then 
+  if matchre("%stowcustomstring", "%tomeofloreitem") then 
   {
     var tomeofloreready 1
   }
-  if matchre ("%stowcustomstring", "%monsterskins") then
+  if matchre("%stowcustomstring", "%monsterskins") then
   {
     gosub BUNDLE
     return
   }
-  if %platring = "YES" then
+  if ("%platring" = "YES") then
   {
-    if matchre ("%stowcustomstring", "%platringitem") then
+    if (matchre("%stowcustomstring", "%platringitem")) then
     {
-      if %stowhandstring = "left" then gosub SWAP
+      if ("%stowhandstring" = "left") then gosub SWAP
       gosub PLATRING
       var stowcustomsuccess 1
       return
     }
   }
-  if matchre ("%stowcustomstring", "%shielditem") then
+  if (matchre("%stowcustomstring", "%shielditem")) then
   {
     gosub WEARITEM %shielditem
   }
@@ -5056,18 +5056,18 @@ STOWCUSTOM:
   }
   else
   {
-    if matchre ("%stowcustomstring", "%cambitem1") then
+    if (matchre("%stowcustomstring", "%cambitem1")) then
     {
-      if %cambitem1worn = "YES" then
+      if ("%cambitem1worn" = "YES") then
       {
         gosub WEARITEM %cambitem1
         var stowcustomsuccess 1
         return
       }
     }
-    if matchre ("%stowcustomstring", "%cambitem2") then
+    if matchre("%stowcustomstring", "%cambitem2") then
     {
-      if %cambitem2worn = "YES" then
+      if ("%cambitem2worn" = "YES") then
       {
         gosub WEARITEM %cambitem2
         var stowcustomsuccess 1
@@ -5075,18 +5075,18 @@ STOWCUSTOM:
       }
     }
   }
-  if matchre ("%stowcustomstring", "%bowweapon") then 
+  if matchre("%stowcustomstring", "%bowweapon") then 
   {
-    if %bowworn = "YES" then
+    if ("%bowworn" = "YES") then
     {
       gosub WEARITEM %bowweapon
       var stowcustomsuccess 1
       return
     }
   }
-  if matchre ("%stowcustomstring", "%xbowweapon") then
+  if matchre("%stowcustomstring", "%xbowweapon") then
   {
-    if %xbowworn = "YES" then
+    if ("%xbowworn" = "YES") then
     {
       gosub WEARITEM %xbowweapon
       var stowcustomsuccess 1
@@ -5094,15 +5094,15 @@ STOWCUSTOM:
     }
     return
   }
-  if matchre ("%stowcustomstring", "%poleweapon") then
+  if matchre("%stowcustomstring", "%poleweapon") then
   {
-    if %poleworn = "YES" then
+    if ("%poleworn" = "YES") then
     {
       gosub WEARITEM %poleweapon
       var stowcustomsuccess 1
       return
     }
-    if %poletied = "YES" then
+    if ("%poletied" = "YES") then
     {
       var wearitemname %poleweapon
       gosub TIEITEM
@@ -5110,15 +5110,15 @@ STOWCUSTOM:
       return
     }
   }
-  if matchre ("%stowcustomstring", "%staveweapon") then
+  if matchre("%stowcustomstring", "%staveweapon") then
   {
-    if %staveworn = "YES" then
+    if ("%staveworn" = "YES") then
     {
       gosub WEARITEM %staveweapon
       var stowcustomsuccess 1
       return
     }
-    if %stavetied = "YES" then
+    if ("%stavetied" = "YES") then
     {
       var wearitemname %staveweapon
       gosub TIEITEM
@@ -5126,55 +5126,55 @@ STOWCUSTOM:
       return
     }
   }
-  if %ritualfocusstorage = "YES" then
+  if ("%ritualfocusstorage" = "YES") then
   {
-    if matchre ("%stowcustomstring", "%ritualfocus") then
+    if matchre("%stowcustomstring", "%ritualfocus") then
     {
       gosub PUTITEM my %ritualfocus in my %ritualfocuscontainer
       var stowcustomsuccess 1
       return
     }
   }
-  if %ritualfocusworn = "YES" then
+  if ("%ritualfocusworn" = "YES") then
   {
-    if matchre ("%stowcustomstring", "%ritualfocus") then
+    if matchre("%stowcustomstring", "%ritualfocus") then
     {
       gosub WEARITEM %ritualfocus
       var stowcustomsuccess 1
       return
     }
   }
-  if %tmfocusstorage = "YES" then
+  if ("%tmfocusstorage" = "YES") then
   {
-    if matchre ("%stowcustomstring", "%tmfocusitem") then
+    if matchre("%stowcustomstring", "%tmfocusitem") then
     {
       gosub PUTITEM my %tmfocusitem in my %tmfocuscontainer
       var stowcustomsuccess 1
       return
     }
   }
-  if %tmfocusworn = "YES" then
+  if ("%tmfocusworn" = "YES") then
   {
-    if matchre ("%stowcustomstring", "%tmfocus") then
+    if matchre("%stowcustomstring", "%tmfocus") then
     {
       gosub WEARITEM %tmfocusitem
       var stowcustomsuccess 1
       return     
     }
   }
-  if matchre ("%stowcustomstring", "%wand1item") then
+  if matchre("%stowcustomstring", "%wand1item") then
   {
     gosub PUTITEM my %wand1item in my %wandstorage
     var stowcustomsuccess 1
     return
   }
-  if matchre ("%stowcustomstring", "%wand2item") then
+  if matchre("%stowcustomstring", "%wand2item") then
   {
     gosub PUTITEM my %wand2item in my %wandstorage
     var stowcustomsuccess 1
     return
   }
-  if matchre ("%stowcustomstring", "%nonwornweapons") then
+  if matchre("%stowcustomstring", "%nonwornweapons") then
   {
     gosub SHEATHEHAND %stowhandstring
     var stowcustomsuccess 1
@@ -5470,11 +5470,11 @@ SWAPSWORDP:
 SWAPSWORDMAIN:
   if tolower("%weapon%currentweapon") = "le" then
   {
-    if %bastardsword = 1 then return
+    if (%bastardsword = 1) then return
   }
   if tolower("%weapon%currentweapon") = "the" then
   {
-    if %bastardsword = 2 then return
+    if (%bastardsword = 2) then return
   }
   match SWAPSWORDSTOW You must have two free hands
   matchre SSWAPLE as a heavy edged weapon|to a heavy edged grip
@@ -5498,7 +5498,7 @@ SSWAPTHE:
   GOTO SWAPSWORDMAIN
   
 SWAPSWORDSTOW:
-  if %getitemhand = "right" then
+  if ("%getitemhand" = "right") then
   {
     gosub STOW left
   }
@@ -5519,11 +5519,11 @@ SWAPBARMACEP:
 SWAPBARMACEMAIN:
   if tolower("%weapon%currentweapon") = "lb" then
   {
-    if %barmace = 1 then return
+    if (%barmace = 1) then return
   }
   if tolower("%weapon%currentweapon") = "thb" then
   {
-    if %barmace = 2 then return
+    if (%barmace = 2) then return
   }
   matchre SWAPBARMACEP %waitstring
   match SWAPBMSTOW You must have two free hands
@@ -5544,7 +5544,7 @@ SWAPBARMACEGET:
   goto SWAPBARMACEMAIN
 
 SWAPBMSTOW:
-  if %hand = "right" then
+  if ("%hand" = "right") then
   {
     gosub STOW left
   }
@@ -5574,15 +5574,15 @@ SWAPRISTEP:
 SWAPRISTEMAIN:
   if tolower("%weapon%currentweapon") = "lb" then
   {
-    if %nriste = 1 then return
+    if (%nriste = 1) then return
   }
   if tolower("%weapon%currentweapon") = "le" then
   {
-    if %nriste = 2 then return
+    if (%nriste = 2) then return
   }
   if tolower("%weapon%currentweapon") = "thb" then
   {
-    if %nriste = 3 then return
+    if (%nriste = 3) then return
   }
   match SWAPRSTOW You must have two free hands
   matchre SWAPRLB as a heavy blunt weapon|to a heavy blunt grip
@@ -5611,7 +5611,7 @@ SWAPPABLEINJURED:
   return
 	
 SWAPRSTOW:
-  if %getitemhand = "right" then
+  if ("%getitemhand" = "right") then
   {
     gosub STOW left
   }
@@ -5646,15 +5646,15 @@ SWAPHHRISTEMAIN:
   #echo hhriste: %hhriste
   if tolower("%weapon%currentweapon") = "sb" then
   {
-    if %hhriste = 1 then return
+    if (%hhriste = 1) then return
   }
   if tolower("%weapon%currentweapon") = "se" then
   {
-    if %hhriste = 2 then return
+    if (%hhriste = 2) then return
   }
   if tolower("%weapon%currentweapon") = "thb" then
   {
-    if %hhriste = 3 then return
+    if (%hhriste = 3) then return
   }
   match SWAPHHSTOW You must have two free hands
   matchre SWAPHHRTHB as a two-handed blunt weapon|to a two-handed blunt grip
@@ -5681,7 +5681,7 @@ SWAPHHRTHB:
   goto SWAPHHRISTEMAIN
 
 SWAPHHSTOW:
-  if %getitemhand = "right" then
+  if ("%getitemhand" = "right") then
   {
     gosub STOW left
   }
@@ -5703,11 +5703,11 @@ SWAPICONP:
 SWAPICONMAIN:
   if tolower("%weapon%currentweapon") = "the" then
   {
-    if %waricon = 1 then return
+    if (%waricon = 1) then return
   }
     if tolower("%weapon%currentweapon") = "thb" then
   {
-    if %waricon = 2 then return
+    if (%waricon = 2) then return
   }
   match SWAPISTOW You must have two free hands
   matchre SWAPITHE as a two-handed edged weapon|to a two-handed edged grip
@@ -5729,7 +5729,7 @@ SWAPITHB:
   goto SWAPICONMAIN
 
 SWAPISTOW:
-  if %getitemhand = "right" then
+  if ("%getitemhand" = "right") then
   {
     gosub STOW left
   }
@@ -5846,13 +5846,13 @@ WIELDGET:
   return
 
 WIELDBOND:
-  if matchre ("%wielditemstring", "%ltweapon") then
+  if matchre("%wielditemstring", "%ltweapon") then
   {
-    if %ltbond = "YES" then goto THROWBOND
+    if ("%ltbond" = "YES") then goto THROWBOND
   }
-  if matchre ("%wielditemstring", "%htweapon") then
+  if matchre("%wielditemstring", "%htweapon") then
   {
-    if %htbond = "YES" then goto THROWBOND
+    if ("%htbond" = "YES") then goto THROWBOND
   }
   return
 
@@ -5937,18 +5937,18 @@ BOWLOADLOGIC:
 	{
 		if ((%dualload = "YES") && ($SpellTimer.KhriSteady.active = 1) && (%weapontype = "bow")) then var usingdualload 1
 	}
-  if %usingacm = 1 then var usingdualload 0
+  if (%usingacm = 1) then var usingdualload 0
   #echo usingdualload: %usingdualload
-  if %usingdualload != 1 then
+  if (%usingdualload != 1) then
   {
     gosub GETITEM my %ubowammo
-    if matchre ("$righthand", "(%ubowammo)") then gosub SWAP
-    if matchre ("$lefthand", "(%ubowammo)") then
+    if matchre("$righthand", "(%ubowammo)") then gosub SWAP
+    if matchre("$lefthand", "(%ubowammo)") then
     {
       gosub BOWLOAD %ubowammo
       if (%goupkeep = 1) then return
       gosub STOW left
-      if %usingacm = 1 then goto ATTACKACM
+      if (%usingacm = 1) then goto ATTACKACM
       else goto BOWAIM
     }
     else
@@ -5977,7 +5977,7 @@ BOWLOADLOGIC:
 ADVP:
 	pause
 ADV:
-  if %avoidshock = "YES" then gosub TARGETSELECT
+  if ("%avoidshock" = "YES") then gosub TARGETSELECT
   matchre FACE You stop advancing|You have lost sight|advance towards?
   matchre ADVRETURN to melee range|already at melee|You are already advancing|You begin to|^The .* is already quite dead\.$
   matchre ADVP %waitstring
@@ -6039,7 +6039,7 @@ ANAFLYING:
 ANAFACE:
   if ($monstercount < 1) then RETURN
   gosub FACE
-  if %badface = 1 then
+  if (%badface = 1) then
   {
     var badface 0
     return
@@ -6097,17 +6097,17 @@ ATTACKACMSTAND:
 
 ATTACKACMLOAD:
   gosub GETITEM my %ubowammo
-  if matchre ("$righthand", "(%ubowammo)") then gosub SWAP
+  if matchre("$righthand", "(%ubowammo)") then gosub SWAP
   gosub BOWLOAD %ubowammo
   if (%goupkeep = 1) then return
-  if matchre ("$lefthand", "(%ubowammo)") then gosub STOW left
+  if matchre("$lefthand", "(%ubowammo)") then gosub STOW left
   goto ATTACKACM
 
 ATTACKACMSUCCESS:
   #put #echo %alertwindow Yellow Used ACM %acmtype!
   var nextacm%acmtype %t
   math nextacm%acmtype add 90
-  if %acmtype = "doublestrike" then
+  if ("%acmtype" = "doublestrike") then
   {
     if (%hand = "right") then gosub STOW left
     else gosub STOW right
@@ -6118,7 +6118,7 @@ ATTACKACMBARBSUCCESS:
   #put #echo %alertwindow Yellow Used ACM %acmtype with Barbarian success!
   var nextacm%acmtype %t
   math nextacm%acmtype add 55
-  if %acmtype = "doublestrike" then
+  if ("%acmtype" = "doublestrike") then
   {
     if (%hand = "right") then gosub STOW left
     else gosub STOW right
@@ -6137,7 +6137,7 @@ ATTACKACMBADNAME:
 
 ATTACKACMFACE:
   gosub FACE
-  if %badface = 1 then
+  if (%badface = 1) then
   {
     var badface 0
     return
@@ -6201,7 +6201,7 @@ ATTACKBADBACKSTAB:
 
 ATTACKFACE:
   gosub FACE
-  if %badface = 1 then
+  if (%badface = 1) then
   {
     var badface 0
     return
@@ -6209,15 +6209,15 @@ ATTACKFACE:
   else goto ATTACKMELEE
 
 ATTACKBRAWLFAIL:
-  if %usingtactics = 1 then var tacticsdone 1
-  if %usingexpert = 1 then
+  if (%usingtactics = 1) then var tacticsdone 1
+  if (%usingexpert = 1) then
   {
     var expertdone 1
     var expertpause 1
   }
-  if %avoidshock = "YES" then var facebrawlfail 1
+  if ("%avoidshock" = "YES") then var facebrawlfail 1
   gosub FACENEXT
-  if %badface = 1 then
+  if (%badface = 1) then
   {
     var badface 0
     return
@@ -6227,7 +6227,7 @@ ATTACKBRAWLFAIL:
 ATTMELEEFLYING:
   if $hidden = 1 then gosub UNHIDE
   gosub FACE
-  if %badface = 1 then
+  if (%badface = 1) then
   {
     var badface 0
     return
@@ -6240,8 +6240,8 @@ ATTACKGOODHIT:
   return
 
 ATTACKTWOHANDSTOW:
-  if matchre ("$righthand", "%cambitem1") then put wear %cambitem1
-  if matchre ("$lefthand", "%cambitem1") then put wear %cambitem1
+  if matchre("$righthand", "%cambitem1") then put wear %cambitem1
+  if matchre("$lefthand", "%cambitem1") then put wear %cambitem1
   gosub STOW left
   goto ATTACKMELEE
 
@@ -6270,7 +6270,7 @@ ATTACKTHROWN:
 	match THROWGET What are you trying to lob?
 	matchre THROWSTOW You need a free hand to
 	#matchre ATTACKTHROWNSWAP You must hold the
-  if %hand = "left" then var attackcommand %att left
+  if ("%hand" = "left") then var attackcommand %att left
   else var attackcommand %att
   put %attackcommand
   matchwait 5
@@ -6279,7 +6279,7 @@ ATTACKTHROWN:
 	goto TIMEOUT
 
 THROWSTOW:
-  if %hand = "left" then gosub STOW right
+  if ("%hand" = "left") then gosub STOW right
   else gosub STOW left
   goto ATTACKTHROWN
 
@@ -6323,7 +6323,7 @@ ATTACKWHIRLWINDSTOW:
 BOWAIMP:
 	pause
 BOWAIM:
-  if %aiming = 1 then return
+  if (%aiming = 1) then return
 	#ACM_POWERSHOT
 	if ((%acms = "YES") && (%powershot = "YES") && (%usingstealth != 1) && (%t >= %nextacmpowershot)) then
   {
@@ -6370,20 +6370,20 @@ BOWLOADMAIN:
 	match BOWNOSTW Such a feat would be impossible without the winds to guide you\.
 	match BOWNOSTEADY Such a feat would be impossible without steadier hands.
 	match BOWNOAMMO What weapon are you trying to load?
-	if %usingdualload = 1 then put load my %bowloadammos
+	if (%usingdualload = 1) then put load my %bowloadammos
 	else put load my %bowloadammo
 	matchwait 5
 	var timeoutsub BOWLOADMAIN
-  if %usingdualload = 1 then var timeoutcommand load my %bowloadammos
+  if (%usingdualload = 1) then var timeoutcommand load my %bowloadammos
   else var timeoutcommand load my %bowloadammo
 	goto TIMEOUT
 
 BOWLOADSTOW:
-  if matchre ("$lefthand", "%ubowammo") then gosub STOWITEM %bowloadammo
+  if matchre("$lefthand", "%ubowammo") then gosub STOWITEM %bowloadammo
   return
 
 BOWLOADGETITEM:
-  if %usingdualload = 1 then goto BOWNOAMMO
+  if (%usingdualload = 1) then goto BOWNOAMMO
   gosub STOW left
   gosub GETITEM %bowloadammo
   goto BOWLOADMAIN
@@ -6469,7 +6469,7 @@ EANAADV:
 FACENEXTP:
 	pause
 FACENEXT:
-	if %avoidshock = "YES" then
+	if ("%avoidshock" = "YES") then
 	{
 	  gosub TARGETSELECT
 	  var facebrawlfail 0
@@ -6575,7 +6575,7 @@ FACETARGETMAIN:
 FACEINVALID:
   var badface 1
   var goodtarget 0
-  if %avoidshock = "YES" then
+  if ("%avoidshock" = "YES") then
   {
     var shockcritter 1
     var currentcritter 0
@@ -6620,7 +6620,7 @@ FIRE:
   {
     if (($guild = "Thief") || ($guild = "Ranger")) then
     {
-      if $snipe = "YES" then put snipe
+      if ("$snipe" = "YES") then put snipe
       else put poach
     }
     else put poach
@@ -6637,27 +6637,27 @@ FIREAMMOGET:
 
 
 HIDELOGIC:
-  if matchre ("%bufflist", "rm") then
+  if matchre("%bufflist", "rm") then
   {
-    if %mist != 1 then return
+    if (%mist != 1) then return
   }
-  if %misdirection = "YES" then
+  if ("%misdirection" = "YES") then
   {
     if $SpellTimer.Misdirection.active != 1 then return
   }
-  if %pantherform = "YES" then
+  if ("%pantherform" = "YES") then
   {
     if $SpellTimer.Panther.active != 1 then return
   }
-  if matchre ("%bufflist", "shadows") then
+  if matchre("%bufflist", "shadows") then
   {
     if $SpellTimer.Shadows.active != 1 then return
   }
-  if matchre ("%bufflist", "obfuscation") then 
+  if matchre("%bufflist", "obfuscation") then 
   {
     if $SpellTimer.Obfuscation.active != 1 then return
   }
-  if matchre ("%bufflist", "mis") then
+  if matchre("%bufflist", "mis") then
   {
     if $SpellTimer.Misdirection.active != 1 then return
   }
@@ -6672,7 +6672,7 @@ FLEERETREAT:
 FLEERETREATMAINP:
   pause
 FLEERETREATMAIN:
-  if %retreatcount > 6 then
+  if (%retreatcount > 6) then
   {
     var fleegood 0
     goto FLEE
@@ -6708,7 +6708,7 @@ FLEE:
   goto TIMEOUT
   
 FLEECONT:
-  if %fleegood = 1 then return
+  if (%fleegood = 1) then return
   pause .1
   goto FLEECONT
 
@@ -6716,7 +6716,7 @@ FLEECONT:
 HIDEP:
 	pause
 HIDE:
-  if %hideattempts >= 2 then return
+  if (%hideattempts >= 2) then return
   if $hidden != 0 then RETURN
   matchre RETURN You melt into the background,|But you're already hidden!|You blend in with your surroundings
 	matchre HIDEP %waitstring
@@ -6811,15 +6811,15 @@ STANCECHANGE:
 THROWBONDP:
   pause
 THROWBOND:
-  if %weapontype = "lt" then
+  if ("%weapontype" = "lt") then
   {
-    if %ltbond != "YES" then return
+    if ("%ltbond" != "YES") then return
   }
   else
   {
-    if %weapontype = "ht" then
+    if ("%weapontype" = "ht") then
     {
-      if %htbond != "YES" then return
+      if ("%htbond" != "YES") then return
     }
   }
   matchre RETURN and flies toward you!|suddenly leaps toward you!|You don't have any bonds to invoke!|Strong magic shields the bonded item from your grasp.|Are you sure you want to do that?|Roundtime
@@ -6954,7 +6954,7 @@ OLDMOVE:
 
 MOVE.RETRY:
   math move.retry add 1
-  if %move.retry > 3 then goto move.fail
+  if (%move.retry != 3) then goto move.fail
   echo ***
   echo *** Retrying move to $1 $2 in %move.retry second(s).
   echo ***
@@ -7028,8 +7028,8 @@ MOVEANYROOMRET:
   
 
 MOVELOOP:
-  if %mlmovetarget > %mlcount then return
-  if %roomtarget = "galley" then
+  if (%mlmovetarget > %mlcount) then return
+  if ("%roomtarget" = "galley") then
   {
     action (speech) off
     var galleydone 0
@@ -7038,9 +7038,9 @@ MOVELOOP:
   }
   else
   {
-    if %mlstring(%mlmovetarget) = "start" then
+    if ("%mlstring(%mlmovetarget)" = "start") then
     {
-      if %startingroom != 0 then
+      if (%startingroom != 0) then
       {
         gosub MOVE %startingroom
       }
@@ -7065,7 +7065,7 @@ MOVELOOP:
 GALLEYTRAVEL:
   action (galley) on
   put #echo %alertwindow [UPKEEP] Starting galley travel from Zone: $zoneid, Room: $roomid.
-  if $zoneid = "107a" then echo Waiting to arrive.
+  if ("$zoneid" = "107a") then echo Waiting to arrive.
   else
   {
     if $zoneid = 107 then
@@ -7092,7 +7092,7 @@ GALLEYTRAVEL:
   goto GALLEYLOOP
 
 GALLEYLOOP:
-  if %galleydone = 1 then goto GALLEYEND
+  if (%galleydone = 1) then goto GALLEYEND
   pause 1
   goto GALLEYLOOP
   
@@ -7455,7 +7455,7 @@ ROAR:
 
 ROARFACE:
   gosub FACE
-  if %badface = 1 then
+  if (%badface = 1) then
   {
     var badface 0
     return
@@ -7631,7 +7631,7 @@ CASTINGLOGIC:
   {
     var preptimetest %t
     math preptimetest subtract %preptime
-    if %preptimetest > 300 then gosub SPELLCANCEL
+    if (%preptimetest > 300) then gosub SPELLCANCEL
   }
   return
 
@@ -7642,12 +7642,12 @@ ARRANGEMANA:
   #Lock_checking
   if (%buffingonly != 1) then
   {
-    if $Arcana.LearningRate < 20 then var arcanalock 0
-    if $Arcana.LearningRate > 31 then var arcanalock 1
-    if $Arcana.Ranks >= 1750 then var arcanalock 1
-    if $Attunement.LearningRate < 20 then var attunelock 0
-    if $Attunement.LearningRate > 31 then var attunelock 1
-    if $Attunement.Ranks >= 1750 then var attunelock 1
+    if ($Arcana.LearningRate < 20) then var arcanalock 0
+    if ($Arcana.LearningRate > 31) then var arcanalock 1
+    if ($Arcana.Ranks >= 1750) then var arcanalock 1
+    if ($Attunement.LearningRate < 20) then var attunelock 0
+    if ($Attunement.LearningRate > 31) then var attunelock 1
+    if ($Attunement.Ranks >= 1750) then var attunelock 1
   }
   else
   {
@@ -7699,9 +7699,9 @@ ARRANGEMANA:
   }
   else
   {
-    if %cambrinth = "YES" then
+    if ("%cambrinth" = "YES") then
     {
-      if %addmana <= %totalcamb then var cambmana %addmana
+      if (%addmana <= %totalcamb) then var cambmana %addmana
       else var cambmana %totalcamb
     }
     else
@@ -7719,29 +7719,29 @@ CASTCLEANUP:
   goto CASTCLEANUPMAIN
 
 CASTCLEANUPSIMPLE:
-  if %spellprepping = "shadowling" then gosub INVOKESHADOW
-  if %spellprepping = "iots" then put invoke circle
-  if %spellprepping = "bg" then
+  if ("%spellprepping" = "shadowling") then gosub INVOKESHADOW
+  if ("%spellprepping" = "iots") then put invoke circle
+  if ("%spellprepping" = "bg") then
   {
     gosub PERCSELF
     var bgdone 0
 	}
-	if %spellprepping = "mab" then
+	if ("%spellprepping" = "mab") then
 	{
 	  send prep cantrip r s
 	  send gesture ballista
 	  pause 1
 	  gosub BALLISTARUB
 	}
-	if %pcast = 1 then put #parse PCASTING COMPLETE!
-	if %astralcast = 1 then return
-  if %kcast = 1 then
+	if (%pcast = 1) then put #parse PCASTING COMPLETE!
+	if (%astralcast = 1) then return
+  if (%kcast = 1) then
   {
     if (%buffing = 1) then gosub PERCSELF
     gosub CASTRESET
     return
   }
-  if %multicast = 1 then goto MULTICASTRESET
+  if (%multicast = 1) then goto MULTICASTRESET
   exit
   
 CASTCLEANUPMAIN:
@@ -7831,7 +7831,7 @@ CASTCLEANUPMAIN:
     gosub STOWITEM %tktitem
 	}
 	gosub CASTRESET
-	if %buffing = 1 then gosub PERCSELF
+	if (%buffing = 1) then gosub PERCSELF
 	var nextcast %t
 	math nextcast add %castingthrottle
 	return
@@ -7848,7 +7848,7 @@ SPELLCANCEL:
 
 SPELLVARSLOOP:
   math spellvarscount add 1
-  if %spellvarscount > %buffnum then return
+  if (%spellvarscount > %buffnum) then return
   var spellname %buff%spellvarscount
   gosub SPELLIDENT
   var buff%spellvarscountvar %spellvar
@@ -7857,7 +7857,7 @@ SPELLVARSLOOP:
 
 OMSPELLVARSLOOP:
   math spellvarscount add 1
-  if %spellvarscount > %ombuffnum then return
+  if (%spellvarscount > %ombuffnum) then return
   var spellname %ombuff%spellvarscount
   gosub SPELLIDENT
   var ombuff%spellvarscountvar %spellvar
@@ -7865,185 +7865,185 @@ OMSPELLVARSLOOP:
   goto OMSPELLVARSLOOP
 
 SPELLIDENT:
-  if %spellname = "aa" then var spellvar SpellTimer.AspirantsAegis
-  if %spellname = "ab" then var spellvar SpellTimer.AirBubble
-  if %spellname = "abs" then var spellvar SpellTimer.Absolution
-  if %spellname = "aeg" then var spellvar SpellTimer.AegisofGranite 
-  if %spellname = "ags" then var spellvar SpellTimer.AggressiveStance
-  if %spellname = "art" then var spellvar SpellTimer.ArtificersEye
-  if %spellname = "as" then var spellvar SpellTimer.AntiStun
-  if %spellname = "aus" then var spellvar SpellTimer.AuraSight
-  if %spellname = "auspice" then var spellvar SpellTimer.Auspice
-  if %spellname = "ava" then var spellvar SpellTimer.AvrenAevareae
-  if %spellname = "awaken" then var spellvar SpellTimer.Awaken
-  if %spellname = "bc" then var spellvar SpellTimer.BraunsConjecture
-  if %spellname = "benediction" then var spellvar SpellTimer.Benediction
-  if %spellname = "bless" then var spellvar SpellTimer.Bless
-  if %spellname = "bloodthorns" then var spellvar SpellTimer.Bloodthorns
-  if %spellname = "bs" then var spellvar SpellTimer.BloodStaunching
-  if %spellname = "bg" then var spellvar SpellTimer.BlufmorGaraen
-  if %spellname = "blur" then var spellvar SpellTimer.Blur
-  if %spellname = "bue" then var spellvar SpellTimer.ButchersEye
-  if %spellname = "care" then var spellvar SpellTimer.CaressoftheSun
-  if %spellname = "centering" then var spellvar SpellTimer.Centering
-  if %spellname = "ch" then var spellvar SpellTimer.CalcifiedHide
-  if %spellname = "clarity" then var spellvar SpellTimer.Clarity
-  if %spellname = "col" then var spellvar SpellTimer.CageofLight
-  if %spellname = "cotc" then var spellvar SpellTimer.ClawsoftheCougar
-  if %spellname = "courage" then var spellvar SpellTimer.Courage
-  if %spellname = "cv" then var spellvar SpellTimer.ClearVision
-  if %spellname = "da" then var spellvar SpellTimer.DivineArmor
-  if %spellname = "dc" then var spellvar SpellTimer.DestinyCipher
-  if %spellname = "db" then var spellvar SpellTimer.DragonsBreath
-  if %spellname = "dema" then var spellvar SpellTimer.DesertsMaelstrom
-  if %spellname = "dr" then var spellvar SpellTimer.DivineRadiance
-  if %spellname = "drum" then var spellvar SpellTimer.DrumsoftheSnake
-  if %spellname = "ease" then var spellvar SpellTimer.EaseBurden
-  if %spellname = "echo" then var spellvar SpellTimer.EchoesofAether
-  if %spellname = "ecry" then var spellvar SpellTimer.EilliesCry
-  if %spellname = "eli" then var spellvar SpellTimer.Elision
-  if %spellname = "em" then var spellvar SpellTimer.EarthMeld
-  if %spellname = "emc" then var spellvar SpellTimer.EmuinsCandlelight
-  if %spellname = "enrichment" then var spellvar SpellTimer.Enrichment
-  if %spellname = "es" then var spellvar SpellTimer.EtherealShield
-  if %spellname = "etc" then var spellvar SpellTimer.EmbedtheCycle
-  if %spellname = "ey" then var spellvar SpellTimer.EssenceofYew
-  if %spellname = "fin" then var spellvar SpellTimer.Finesse
-  if %spellname = "fotf" then var spellvar SpellTimer.FailureoftheForge
-  if %spellname = "gf" then var spellvar SpellTimer.GroundingField
-  if %spellname = "gg" then var spellvar SpellTimer.GlythtidesGift
-  if %spellname = "ghoulflesh" then var spellvar SpellTimer.Ghoulflesh
-  if %spellname = "gi" then var spellvar SpellTimer.GamIrnan
-  if %spellname = "gol" then var spellvar SpellTimer.GiftofLife
-  if %spellname = "halo" then var spellvar SpellTimer.Halo
-  if %spellname = "harm" then var spellvar SpellTimer.Harmony
-  if %spellname = "hes" then var spellvar SpellTimer.HeroicStrength
-  if %spellname = "hol" then var spellvar SpellTimer.HandsofLirisa
-  if %spellname = "ignite" then var spellvar SpellTimer.Ignite
-  if %spellname = "ic" then var spellvar SpellTimer.IronConstitution
-  if %spellname = "inst" then var spellvar SpellTimer.Instinct
-  if %spellname = "iots" then var spellvar SpellTimer.InvocationoftheSpheres
-  if %spellname = "ivm" then var spellvar SpellTimer.IvoryMask
-  if %spellname = "ks" then var spellvar SpellTimer.KuraSilma
-  if %spellname = "lw" then var spellvar SpellTimer.LayWard
-  if %spellname = "lgv" then var spellvar SpellTimer.LastGiftofVithwokIV
-  if %spellname = "maf" then var spellvar SpellTimer.ManifestForce
-  if %spellname = "mef" then var spellvar SpellTimer.MentalFocus
-  if %spellname = "meg" then var spellvar SpellTimer.MembrachsGreed
-  if %spellname = "mis" then var spellvar SpellTimer.Misdirection
-  if %spellname = "mf" then var spellvar SpellTimer.MurrulasFlames
-  if %spellname = "mo" then var spellvar SpellTimer.MarshalOrder
-  if %spellname = "mof" then var spellvar SpellTimer.MantleofFlame
-  if %spellname = "mon" then var spellvar SpellTimer.MemoryofNature
-  if %spellname = "name" then var spellvar SpellTimer.NamingofTears
-  if %spellname = "non" then var spellvar SpellTimer.Nonchalance
-  if %spellname = "nou" then var spellvar SpellTimer.Noumena
-  if %spellname = "oath" then var spellvar SpellTimer.OathoftheFirstborn
-  if %spellname = "obfuscation" then var spellvar SpellTimer.Obfuscation
-  if %spellname = "phk" then var spellvar SpellTimer.PlatinumHandsofKertigen
-  if %spellname = "php" then var spellvar SpellTimer.PhilosophersPreservation
-  if %spellname = "pg" then var spellvar SpellTimer.PiercingGaze
-  if %spellname = "pom" then var spellvar SpellTimer.PersistenceofMana
-  if %spellname = "pop" then var spellvar SpellTimer.PerseveranceofPeriel
-  if %spellname = "pfe" then var spellvar SpellTimer.ProtectionfromEvil
-  if %spellname = "psy" then var spellvar SpellTimer.PsychicShield
-  if %spellname = "rage" then var spellvar SpellTimer.RageoftheClans
-  if %spellname = "repr" then var spellvar SpellTimer.RedeemersPride
-  if %spellname = "refresh" then var spellvar SpellTimer.Refresh
-  if %spellname = "rei" then var spellvar SpellTimer.ResearchersInsight
-  if %spellname = "rits" then var spellvar SpellTimer.RiverintheSky
-  if %spellname = "rw" then var spellvar SpellTimer.RighteousWrath
-  if %spellname = "sl" then var spellvar SpellTimer.SanyuLyba
-  if %spellname = "seer" then var spellvar SpellTimer.SeersSense
-  if %spellname = "shadowling" then var spellvar SpellTimer.Shadowling
-  if %spellname = "shadows" then var spellvar SpellTimer.Shadows
-  if %spellname = "sk" then var spellvar SpellTimer.SyamelyoKuniyo
-  if %spellname = "sks" then var spellvar SpellTimer.SkeinofShadows
-  if %spellname = "sol" then var spellvar SpellTimer.ShieldofLight
-  if %spellname = "solace" then var spellvar SpellTimer.Solace
-  if %spellname = "sos" then var spellvar SpellTimer.SoulShield
-  if %spellname = "sott" then var spellvar SpellTimer.SensesoftheTiger
-  if %spellname = "soul" then var spellvar SpellTimer.SoulAblaze
-  if %spellname = "sr" then var spellvar SpellTimer.SentinelsResolve
-  if %spellname = "stc" then var spellvar SpellTimer.StellarCollector
-  if %spellname = "stw" then var spellvar SpellTimer.SeetheWind
-  if %spellname = "staw" then var spellvar SpellTimer.StarryWaters
-  if %spellname = "substratum" then var spellvar SpellTimer.Substratum
-  if %spellname = "suf" then var spellvar SpellTimer.SureFooting
-  if %spellname = "sw" then var spellvar SpellTimer.SwirlingWinds
-  if %spellname = "tk" then var spellvar SpellTimer.TamsinesKiss
-  if %spellname = "tksh" then var spellvar SpellTimer.TelekineticShield
-  if %spellname = "tranquility" then var spellvar SpellTimer.Tranquility
-  if %spellname = "trc" then var spellvar SpellTimer.TrabeChalice
-  if %spellname = "turi" then var spellvar SpellTimer.TurmarIllumination
-  if %spellname = "tw" then var spellvar SpellTimer.Tailwind
-  if %spellname = "voi" then var spellvar SpellTimer.VeilofIce
-  if %spellname = "vigor" then var spellvar SpellTimer.Vigor
-  if %spellname = "visage" then var spellvar SpellTimer.Visage
-  if %spellname = "will" then var spellvar SpellTimer.WillofWinter
-  if %spellname = "ws" then var spellvar SpellTimer.WolfScent
-  if %spellname = "wotp" then var spellvar SpellTimer.WisdomofthePack
-  if %spellname = "worm" then var spellvar SpellTimer.WormsMist
-  if %spellname = "ys" then var spellvar SpellTimer.YntrelSechra
+  if ("%spellname" = "aa") then var spellvar SpellTimer.AspirantsAegis
+  if ("%spellname" = "ab") then var spellvar SpellTimer.AirBubble
+  if ("%spellname" = "abs") then var spellvar SpellTimer.Absolution
+  if ("%spellname" = "aeg") then var spellvar SpellTimer.AegisofGranite 
+  if ("%spellname" = "ags") then var spellvar SpellTimer.AggressiveStance
+  if ("%spellname" = "art") then var spellvar SpellTimer.ArtificersEye
+  if ("%spellname" = "as") then var spellvar SpellTimer.AntiStun
+  if ("%spellname" = "aus") then var spellvar SpellTimer.AuraSight
+  if ("%spellname" = "auspice") then var spellvar SpellTimer.Auspice
+  if ("%spellname" = "ava") then var spellvar SpellTimer.AvrenAevareae
+  if ("%spellname" = "awaken") then var spellvar SpellTimer.Awaken
+  if ("%spellname" = "bc") then var spellvar SpellTimer.BraunsConjecture
+  if ("%spellname" = "benediction") then var spellvar SpellTimer.Benediction
+  if ("%spellname" = "bless") then var spellvar SpellTimer.Bless
+  if ("%spellname" = "bloodthorns") then var spellvar SpellTimer.Bloodthorns
+  if ("%spellname" = "bs") then var spellvar SpellTimer.BloodStaunching
+  if ("%spellname" = "bg") then var spellvar SpellTimer.BlufmorGaraen
+  if ("%spellname" = "blur") then var spellvar SpellTimer.Blur
+  if ("%spellname" = "bue") then var spellvar SpellTimer.ButchersEye
+  if ("%spellname" = "care") then var spellvar SpellTimer.CaressoftheSun
+  if ("%spellname" = "centering") then var spellvar SpellTimer.Centering
+  if ("%spellname" = "ch") then var spellvar SpellTimer.CalcifiedHide
+  if ("%spellname" = "clarity") then var spellvar SpellTimer.Clarity
+  if ("%spellname" = "col") then var spellvar SpellTimer.CageofLight
+  if ("%spellname" = "cotc") then var spellvar SpellTimer.ClawsoftheCougar
+  if ("%spellname" = "courage") then var spellvar SpellTimer.Courage
+  if ("%spellname" = "cv") then var spellvar SpellTimer.ClearVision
+  if ("%spellname" = "da") then var spellvar SpellTimer.DivineArmor
+  if ("%spellname" = "dc") then var spellvar SpellTimer.DestinyCipher
+  if ("%spellname" = "db") then var spellvar SpellTimer.DragonsBreath
+  if ("%spellname" = "dema") then var spellvar SpellTimer.DesertsMaelstrom
+  if ("%spellname" = "dr") then var spellvar SpellTimer.DivineRadiance
+  if ("%spellname" = "drum") then var spellvar SpellTimer.DrumsoftheSnake
+  if ("%spellname" = "ease") then var spellvar SpellTimer.EaseBurden
+  if ("%spellname" = "echo") then var spellvar SpellTimer.EchoesofAether
+  if ("%spellname" = "ecry") then var spellvar SpellTimer.EilliesCry
+  if ("%spellname" = "eli") then var spellvar SpellTimer.Elision
+  if ("%spellname" = "em") then var spellvar SpellTimer.EarthMeld
+  if ("%spellname" = "emc") then var spellvar SpellTimer.EmuinsCandlelight
+  if ("%spellname" = "enrichment") then var spellvar SpellTimer.Enrichment
+  if ("%spellname" = "es") then var spellvar SpellTimer.EtherealShield
+  if ("%spellname" = "etc") then var spellvar SpellTimer.EmbedtheCycle
+  if ("%spellname" = "ey") then var spellvar SpellTimer.EssenceofYew
+  if ("%spellname" = "fin") then var spellvar SpellTimer.Finesse
+  if ("%spellname" = "fotf") then var spellvar SpellTimer.FailureoftheForge
+  if ("%spellname" = "gf") then var spellvar SpellTimer.GroundingField
+  if ("%spellname" = "gg") then var spellvar SpellTimer.GlythtidesGift
+  if ("%spellname" = "ghoulflesh") then var spellvar SpellTimer.Ghoulflesh
+  if ("%spellname" = "gi") then var spellvar SpellTimer.GamIrnan
+  if ("%spellname" = "gol") then var spellvar SpellTimer.GiftofLife
+  if ("%spellname" = "halo") then var spellvar SpellTimer.Halo
+  if ("%spellname" = "harm") then var spellvar SpellTimer.Harmony
+  if ("%spellname" = "hes") then var spellvar SpellTimer.HeroicStrength
+  if ("%spellname" = "hol") then var spellvar SpellTimer.HandsofLirisa
+  if ("%spellname" = "ignite") then var spellvar SpellTimer.Ignite
+  if ("%spellname" = "ic") then var spellvar SpellTimer.IronConstitution
+  if ("%spellname" = "inst") then var spellvar SpellTimer.Instinct
+  if ("%spellname" = "iots") then var spellvar SpellTimer.InvocationoftheSpheres
+  if ("%spellname" = "ivm") then var spellvar SpellTimer.IvoryMask
+  if ("%spellname" = "ks") then var spellvar SpellTimer.KuraSilma
+  if ("%spellname" = "lw") then var spellvar SpellTimer.LayWard
+  if ("%spellname" = "lgv") then var spellvar SpellTimer.LastGiftofVithwokIV
+  if ("%spellname" = "maf") then var spellvar SpellTimer.ManifestForce
+  if ("%spellname" = "mef") then var spellvar SpellTimer.MentalFocus
+  if ("%spellname" = "meg") then var spellvar SpellTimer.MembrachsGreed
+  if ("%spellname" = "mis") then var spellvar SpellTimer.Misdirection
+  if ("%spellname" = "mf") then var spellvar SpellTimer.MurrulasFlames
+  if ("%spellname" = "mo") then var spellvar SpellTimer.MarshalOrder
+  if ("%spellname" = "mof") then var spellvar SpellTimer.MantleofFlame
+  if ("%spellname" = "mon") then var spellvar SpellTimer.MemoryofNature
+  if ("%spellname" = "name") then var spellvar SpellTimer.NamingofTears
+  if ("%spellname" = "non") then var spellvar SpellTimer.Nonchalance
+  if ("%spellname" = "nou") then var spellvar SpellTimer.Noumena
+  if ("%spellname" = "oath") then var spellvar SpellTimer.OathoftheFirstborn
+  if ("%spellname" = "obfuscation") then var spellvar SpellTimer.Obfuscation
+  if ("%spellname" = "phk") then var spellvar SpellTimer.PlatinumHandsofKertigen
+  if ("%spellname" = "php") then var spellvar SpellTimer.PhilosophersPreservation
+  if ("%spellname" = "pg") then var spellvar SpellTimer.PiercingGaze
+  if ("%spellname" = "pom") then var spellvar SpellTimer.PersistenceofMana
+  if ("%spellname" = "pop") then var spellvar SpellTimer.PerseveranceofPeriel
+  if ("%spellname" = "pfe") then var spellvar SpellTimer.ProtectionfromEvil
+  if ("%spellname" = "psy") then var spellvar SpellTimer.PsychicShield
+  if ("%spellname" = "rage") then var spellvar SpellTimer.RageoftheClans
+  if ("%spellname" = "repr") then var spellvar SpellTimer.RedeemersPride
+  if ("%spellname" = "refresh") then var spellvar SpellTimer.Refresh
+  if ("%spellname" = "rei") then var spellvar SpellTimer.ResearchersInsight
+  if ("%spellname" = "rits") then var spellvar SpellTimer.RiverintheSky
+  if ("%spellname" = "rw") then var spellvar SpellTimer.RighteousWrath
+  if ("%spellname" = "sl") then var spellvar SpellTimer.SanyuLyba
+  if ("%spellname" = "seer") then var spellvar SpellTimer.SeersSense
+  if ("%spellname" = "shadowling") then var spellvar SpellTimer.Shadowling
+  if ("%spellname" = "shadows") then var spellvar SpellTimer.Shadows
+  if ("%spellname" = "sk") then var spellvar SpellTimer.SyamelyoKuniyo
+  if ("%spellname" = "sks") then var spellvar SpellTimer.SkeinofShadows
+  if ("%spellname" = "sol") then var spellvar SpellTimer.ShieldofLight
+  if ("%spellname" = "solace") then var spellvar SpellTimer.Solace
+  if ("%spellname" = "sos") then var spellvar SpellTimer.SoulShield
+  if ("%spellname" = "sott") then var spellvar SpellTimer.SensesoftheTiger
+  if ("%spellname" = "soul") then var spellvar SpellTimer.SoulAblaze
+  if ("%spellname" = "sr") then var spellvar SpellTimer.SentinelsResolve
+  if ("%spellname" = "stc") then var spellvar SpellTimer.StellarCollector
+  if ("%spellname" = "stw") then var spellvar SpellTimer.SeetheWind
+  if ("%spellname" = "staw") then var spellvar SpellTimer.StarryWaters
+  if ("%spellname" = "substratum") then var spellvar SpellTimer.Substratum
+  if ("%spellname" = "suf") then var spellvar SpellTimer.SureFooting
+  if ("%spellname" = "sw") then var spellvar SpellTimer.SwirlingWinds
+  if ("%spellname" = "tk") then var spellvar SpellTimer.TamsinesKiss
+  if ("%spellname" = "tksh") then var spellvar SpellTimer.TelekineticShield
+  if ("%spellname" = "tranquility") then var spellvar SpellTimer.Tranquility
+  if ("%spellname" = "trc") then var spellvar SpellTimer.TrabeChalice
+  if ("%spellname" = "turi") then var spellvar SpellTimer.TurmarIllumination
+  if ("%spellname" = "tw") then var spellvar SpellTimer.Tailwind
+  if ("%spellname" = "voi") then var spellvar SpellTimer.VeilofIce
+  if ("%spellname" = "vigor") then var spellvar SpellTimer.Vigor
+  if ("%spellname" = "visage") then var spellvar SpellTimer.Visage
+  if ("%spellname" = "will") then var spellvar SpellTimer.WillofWinter
+  if ("%spellname" = "ws") then var spellvar SpellTimer.WolfScent
+  if ("%spellname" = "wotp") then var spellvar SpellTimer.WisdomofthePack
+  if ("%spellname" = "worm") then var spellvar SpellTimer.WormsMist
+  if ("%spellname" = "ys") then var spellvar SpellTimer.YntrelSechra
   return  
 
 
 KHRIVARS:
-  if %khridebiltype = prowess then var khridebilvar SpellTimer.KhriProwess
-  if %khridebiltype = guile then var khridebilvar SpellTimer.KhriGuile
-  if %khridebiltype = credence then var khridebilvar SpellTimer.KhriCredence
-  if %khridebiltype = terrify then var khridebilvar SpellTimer.KhriTerrify
-  if %khridebiltype = intimidate then var khridebilvar SpellTimer.KhriIntimidate
-  if %khridebiltype = eliminate then var khridebilvar SpellTimer.KhriEliminate
+  if ("%khridebiltype" = "prowess") then var khridebilvar SpellTimer.KhriProwess
+  if ("%khridebiltype" = "guile") then var khridebilvar SpellTimer.KhriGuile
+  if ("%khridebiltype" = "credence") then var khridebilvar SpellTimer.KhriCredence
+  if ("%khridebiltype" = "terrify") then var khridebilvar SpellTimer.KhriTerrify
+  if ("%khridebiltype" = "intimidate") then var khridebilvar SpellTimer.KhriIntimidate
+  if ("%khridebiltype" = "eliminate") then var khridebilvar SpellTimer.KhriEliminate
   return
 
 
 
 CYCSPELLVARSLOOP:
   math spellvarscount add 1
-  if %spellvarscount > 3 then return
-  if %spellc%spellvarscount = "ac" then var spellc%spellvarscountvar SpellTimer.AetherCloak
-  if %spellc%spellvarscount = "ad" then var spellc%spellvarscountvar SpellTimer.AesandryDarlaeth
-  if %spellc%spellvarscount = "af" then var spellc%spellvarscountvar SpellTimer.AwakenForest
-  if %spellc%spellvarscount = "bes" then var spellc%spellvarscountvar SpellTimer.BearStrength
-  if %spellc%spellvarscount = "botf" then var spellc%spellvarscountvar SpellTimer.BlessingoftheFae
-  if %spellc%spellvarscount = "care" then var spellc%spellvarscountvar SpellTimer.CaressoftheSun
-  if %spellc%spellvarscount = "cs" then var spellc%spellvarscountvar SpellTimer.CheetahSwiftness
-  if %spellc%spellvarscount = "eye" then var spellc%spellvarscountvar SpellTimer.EyeofKertigen
-  if %spellc%spellvarscount = "fae" then var spellc%spellvarscountvar SpellTimer.FaenellasGrace
-  if %spellc%spellvarscount = "ghs" then var spellc%spellvarscountvar SpellTimer.GhostShroud
-  if %spellc%spellvarscount = "ghs" then var spellc%spellvarscountvar SpellTimer.GhostShroud
-  if %spellc%spellvarscount = "gj" then var spellc%spellvarscountvar SpellTimer.GlythtidesJoy
-  if %spellc%spellvarscount = "hodi" then var spellc%spellvarscountvar SpellTimer.HodiernasLilt
-  if %spellc%spellvarscount = "how" then var spellc%spellvarscountvar SpellTimer.HolyWarrior
-  if %spellc%spellvarscount = "mom" then var spellc%spellvarscountvar SpellTimer.MaskoftheMoons
-  if %spellc%spellvarscount = "regenerate" then var spellc%spellvarscountvar SpellTimer.Regenerate
-  if %spellc%spellvarscount = "rev" then var spellc%spellvarscountvar SpellTimer.Revelation
-  if %spellc%spellvarscount = "roc" then var spellc%spellvarscountvar SpellTimer.RiteofContrition
-  if %spellc%spellvarscount = "rog" then var spellc%spellvarscountvar SpellTimer.RiteofGrace
-  if %spellc%spellvarscount = "sanctuary" then var spellc%spellvarscountvar SpellTimer.Sanctuary
-  if %spellc%spellvarscount = "sov" then var spellc%spellvarscountvar SpellTimer.StepsofVuan
-  if %spellc%spellvarscount = "tr" then var spellc%spellvarscountvar SpellTimer.TruffenyisRally  
+  if (%spellvarscount != 3) then return
+  if ("%spellc%spellvarscount" = "ac") then var spellc%spellvarscountvar SpellTimer.AetherCloak
+  if ("%spellc%spellvarscount" = "ad") then var spellc%spellvarscountvar SpellTimer.AesandryDarlaeth
+  if ("%spellc%spellvarscount" = "af") then var spellc%spellvarscountvar SpellTimer.AwakenForest
+  if ("%spellc%spellvarscount" = "bes") then var spellc%spellvarscountvar SpellTimer.BearStrength
+  if ("%spellc%spellvarscount" = "botf") then var spellc%spellvarscountvar SpellTimer.BlessingoftheFae
+  if ("%spellc%spellvarscount" = "care") then var spellc%spellvarscountvar SpellTimer.CaressoftheSun
+  if ("%spellc%spellvarscount" = "cs") then var spellc%spellvarscountvar SpellTimer.CheetahSwiftness
+  if ("%spellc%spellvarscount" = "eye") then var spellc%spellvarscountvar SpellTimer.EyeofKertigen
+  if ("%spellc%spellvarscount" = "fae") then var spellc%spellvarscountvar SpellTimer.FaenellasGrace
+  if ("%spellc%spellvarscount" = "ghs") then var spellc%spellvarscountvar SpellTimer.GhostShroud
+  if ("%spellc%spellvarscount" = "ghs") then var spellc%spellvarscountvar SpellTimer.GhostShroud
+  if ("%spellc%spellvarscount" = "gj") then var spellc%spellvarscountvar SpellTimer.GlythtidesJoy
+  if ("%spellc%spellvarscount" = "hodi") then var spellc%spellvarscountvar SpellTimer.HodiernasLilt
+  if ("%spellc%spellvarscount" = "how") then var spellc%spellvarscountvar SpellTimer.HolyWarrior
+  if ("%spellc%spellvarscount" = "mom") then var spellc%spellvarscountvar SpellTimer.MaskoftheMoons
+  if ("%spellc%spellvarscount" = "regenerate") then var spellc%spellvarscountvar SpellTimer.Regenerate
+  if ("%spellc%spellvarscount" = "rev") then var spellc%spellvarscountvar SpellTimer.Revelation
+  if ("%spellc%spellvarscount" = "roc") then var spellc%spellvarscountvar SpellTimer.RiteofContrition
+  if ("%spellc%spellvarscount" = "rog") then var spellc%spellvarscountvar SpellTimer.RiteofGrace
+  if ("%spellc%spellvarscount" = "sanctuary") then var spellc%spellvarscountvar SpellTimer.Sanctuary
+  if ("%spellc%spellvarscount" = "sov") then var spellc%spellvarscountvar SpellTimer.StepsofVuan
+  if ("%spellc%spellvarscount" = "tr") then var spellc%spellvarscountvar SpellTimer.TruffenyisRally  
   goto CYCSPELLVARSLOOP
 
 CYCTMDBVARS:
-  if %spellcyctm = "aban" then var spellc4var SpellTimer.AbandonedHeart
-  if %spellcyctm = "ars" then var spellc4var SpellTimer.ArbitersStylus
-  if %spellcyctm = "fr" then var spellc4var SpellTimer.FireRain
-  if %spellcyctm = "gs" then var spellc4var SpellTimer.GuardianSpirit
-  if %spellcyctm = "iz" then var spellc4var SpellTimer.IcutuZaharenela
-  if %spellcyctm = "pyre" then var spellc4var SpellTimer.Pyre
-  if %spellcyctm = "rim" then var spellc4var SpellTimer.Rimefang
-  if %spellcyctm = "ros" then var spellc4var SpellTimer.RingofSpears
-  if %spellcyctm = "sa" then var spellc4var SpellTimer.SoulAttrition
-  if %spellcyctm = "sls" then var spellc4var SpellTimer.StarlightSphere
-  if %spellcyctm = "usol" then var spellc4var SpellTimer.UniversalSolvent
-  if %spellcycdebil = "alb" then var spellc5var SpellTimer.AlbredasBalm
-  if %spellcycdebil = "dalu" then var spellc5var SpellTimer.DamarisLullaby
-  if %spellcycdebil = "dema" then var spellc5var SpellTimer.DesertsMaelstrom
-  if %spellcycdebil = "ee" then var spellc5var SpellTimer.ElectrostaticEddy
-  if %spellcycdebil = "hyh" then var spellc5var SpellTimer.HydraHex
-  if %spellcycdebil = "shw" then var spellc5var SpellTimer.ShadowWeb
+  if ("%spellcyctm" = "aban") then var spellc4var SpellTimer.AbandonedHeart
+  if ("%spellcyctm" = "ars") then var spellc4var SpellTimer.ArbitersStylus
+  if ("%spellcyctm" = "fr") then var spellc4var SpellTimer.FireRain
+  if ("%spellcyctm" = "gs") then var spellc4var SpellTimer.GuardianSpirit
+  if ("%spellcyctm" = "iz") then var spellc4var SpellTimer.IcutuZaharenela
+  if ("%spellcyctm" = "pyre") then var spellc4var SpellTimer.Pyre
+  if ("%spellcyctm" = "rim") then var spellc4var SpellTimer.Rimefang
+  if ("%spellcyctm" = "ros") then var spellc4var SpellTimer.RingofSpears
+  if ("%spellcyctm" = "sa") then var spellc4var SpellTimer.SoulAttrition
+  if ("%spellcyctm" = "sls") then var spellc4var SpellTimer.StarlightSphere
+  if ("%spellcyctm" = "usol") then var spellc4var SpellTimer.UniversalSolvent
+  if ("%spellcycdebil" = "alb") then var spellc5var SpellTimer.AlbredasBalm
+  if ("%spellcycdebil" = "dalu") then var spellc5var SpellTimer.DamarisLullaby
+  if ("%spellcycdebil" = "dema") then var spellc5var SpellTimer.DesertsMaelstrom
+  if ("%spellcycdebil" = "ee") then var spellc5var SpellTimer.ElectrostaticEddy
+  if ("%spellcycdebil" = "hyh") then var spellc5var SpellTimer.HydraHex
+  if ("%spellcycdebil" = "shw") then var spellc5var SpellTimer.ShadowWeb
   return
 
 
@@ -8054,22 +8054,22 @@ CASTP:
 	pause
 CAST:
   var casttarget
-  if %spellprepping = "aeg" then
+  if ("%spellprepping" = "aeg") then
   {
     if $SpellTimer.MantleofFlame.active = 1 then gosub RELNSPELL mof
   }
-  if %spellprepping = "mof" then
+  if ("%spellprepping" = "mof") then
   {
     if $SpellTimer.AegisofGranite.active = 1 then gosub RELNSPELL aeg
   }
-  if %spellprepping = "sap" then var casttarget %sapcast
-  if %spellprepping = "bless" then
+  if ("%spellprepping" = "sap") then var casttarget %sapcast
+  if ("%spellprepping" = "bless") then
   {
     if ("$righthandnoun" = "wine") then var casttarget wine
   }
   if (%spellprepping = "devour") then
   {
-    if matchre ("$roomobjs", "(\w+) ((which|that) appears dead|\(dead\))") then
+    if matchre("$roomobjs", "(\w+) ((which|that) appears dead|\(dead\))") then
 	  {
 	    var ritualmonster $1
 	    gosub CONSUME
@@ -8093,9 +8093,9 @@ CAST:
       }
 	  }
   }
-  if %spellprepping = "ignite" then
+  if ("%spellprepping" = "ignite") then
   {
-    if %ctoverride != 1 then
+    if (%ctoverride != 1) then
     {
       if ("$righthand" != "Empty") then var irighthandnoun $righthandnoun
       else var irighthandnoun ----
@@ -8128,19 +8128,20 @@ CAST:
       {
         gosub RELNSPELL ignite
         #if %lastignite != %casttarget then waitfor The flames dancing
+        #if %lastignite != %casttarget then waitfor The flames dancing
         #var lastignite %casttarget
       }
     }
     else if $SpellTimer.Ignite.active = 1 then gosub RELNSPELL ignite
   }
-  if %spellprepping = "hyh" then var casttarget male offense
-  if %spellprepping = "om" then var casttarget orb
-  if %spellprepping = "resection" then gosub PERFORMCUT
-  if %spellprepping = "rits" then var casttarget %ritstype
-  #if %spellprepping = "shadowling" then put release shadowling
-  if %spellprepping = "tks" then
+  if ("%spellprepping" = "hyh") then var casttarget male offense
+  if ("%spellprepping" = "om") then var casttarget orb
+  if ("%spellprepping" = "resection") then gosub PERFORMCUT
+  if ("%spellprepping" = "rits") then var casttarget %ritstype
+  #if ("%spellprepping" = "shadowling") then put release shadowling
+  if ("%spellprepping" = "tks") then
 	{
-	  if matchre ("$roomobjs", "%tktitem") then
+	  if matchre("$roomobjs", "%tktitem") then
     {
     }
     else
@@ -8149,9 +8150,9 @@ CAST:
       gosub DROPITEM %tktitem
     }
   }
-  if %spellprepping = "tkt" then
+  if ("%spellprepping" = "tkt") then
 	{
-    if matchre ("$roomobjs", "%tktitem") then
+    if matchre("$roomobjs", "%tktitem") then
     {
     }
     else
@@ -8160,18 +8161,18 @@ CAST:
       gosub DROPITEM %tktitem
     }
   }
-  if %cycliccast = 1 then
+  if (%cycliccast = 1) then
 	{
 	  var nextcyc %t
     math nextcyc add 300
 	}
-	if %debilcast = 1 then
+	if (%debilcast = 1) then
 	{
 	  var casttarget creature  
-	  if %spellprepping = "pv" then var casttarget
-		if %spellprepping = "rend" then var casttarget %rendtarget
+	  if ("%spellprepping" = "pv") then var casttarget
+		if ("%spellprepping" = "rend") then var casttarget %rendtarget
 	}
-  if %tmcast = 1 then
+  if (%tmcast = 1) then
  	{
  	  var casttarget
  	  if $SpellTimer.AetherCloak.active = 1 then
@@ -8180,11 +8181,11 @@ CAST:
 	    var nextcyc 0
 	    put rel ac
 	  }
-	  if %spellprepping = "acs" then var casttarget
+	  if ("%spellprepping" = "acs") then var casttarget
 	  var deadcheck 1
 	}
- 	if %spellprepping = "etf" then var casttarget electricity
-  if %spellprepping = "col" then
+ 	if ("%spellprepping" = "etf") then var casttarget electricity
+  if ("%spellprepping" = "col") then
   {
     if $Time.isKatambaUp = 1 then var casttarget katamba
 	  else
@@ -8197,31 +8198,31 @@ CAST:
       }
     }
   }
-  if %spellprepping = "hyh" then var casttarget %hyhcast
-	if %spellprepping = "hw" then var casttarget chest  
-	if %spellprepping = "iots" then
+  if ("%spellprepping" = "hyh") then var casttarget %hyhcast
+	if ("%spellprepping" = "hw") then var casttarget chest  
+	if ("%spellprepping" = "iots") then
 	{
 	  gosub RELNSPELL iots
 	  #echo %verena|%szeldia|%dawgolesh|%merewalda
-	  if %verena = 1 then
+	  if (%verena = 1) then
 	  {
 	    var casttarget verena
 	  }
 	  else
 	  {
-	    if %szeldia = 1 then
+	    if (%szeldia = 1) then
 	    {
 	      var casttarget szeldia
 	    }
 	    else
 	    {
-	      if %dawgolesh = 1 then
+	      if (%dawgolesh = 1) then
 	      {
 	        var casttarget dawgolesh
 	      }
 	      else
 	      {
-	        if %merewalda = 1 then
+	        if (%merewalda = 1) then
 	        {
 	          var casttarget merewalda
 	        }
@@ -8236,12 +8237,12 @@ CAST:
 	#matchre CASTLOOT is already dead, so that's a bit pointless.
 	match CASTCLEANUP You can't cast that at yourself!
 	matchre CASTCLEANUP is already dead, so that's a bit pointless.
-	if %ctoverride = 1 then var casttarget %ctoverridevar
-	if %omcast = 1 then put touch orb
+	if (%ctoverride = 1) then var casttarget %ctoverridevar
+	if (%omcast = 1) then put touch orb
 	else put cast %casttarget
 	matchwait 5
 	var timeoutsub CAST
-	if %omcast = 1 then var timeoutcommand touch orb
+	if (%omcast = 1) then var timeoutcommand touch orb
 	else var timeoutcommand cast %casttarget
 	goto TIMEOUT
 
@@ -8312,7 +8313,7 @@ CASTBAD:
 CASTFACE:
   var castfacecheck 1
   gosub FACE
-  if %badface = 1 then
+  if (%badface = 1) then
   {
     var badface 0
     return
@@ -8322,22 +8323,22 @@ CASTFACE:
 
 
 CHARGE:
-  if %cambmana = 0 then
+  if (%cambmana = 0) then
   {
     var charged 1
     return
   }
-  if %cambtapped > 0 then
+  if (%cambtapped != 0) then
   {
-    if %t > %cambtapped then
+    if (%t > %cambtapped) then
     {
       goto CHARGELOOP
     }
     else return
   }
   #CAMBRINTH_DEVICE_SPLITTING
-  if %cambmana > %totalcamb then var cambmana %totalcamb
-  if %cambmana > %cambitem1mana then
+  if (%cambmana > %totalcamb) then var cambmana %totalcamb
+  if (%cambmana > %cambitem1mana) then
   {
     var cambnumber 2
     var cambmodulus %cambmana
@@ -8348,13 +8349,13 @@ CHARGE:
     var cambmana2 %cambmana1
     math cambmana1 add %cambmodulus
     var cambnumber 2
-    if %cambmana1 > %cambitem1mana then
+    if (%cambmana1 > %cambitem1mana) then
     {
       var cambmana1 %cambitem1mana
       var cambmana2 %cambmana
       math cambmana2 subtract %cambmana1
     }
-    if %cambmana2 > %cambitem2mana then
+    if (%cambmana2 > %cambitem2mana) then
     {
       var cambmana2 %cambitem2mana
       var cambmana1 %cambmana
@@ -8401,7 +8402,7 @@ CHARGESPLITLOOP:
   }
 
 CHARGESPLITLOOP2:
-  if %splitcounter2 > %splitcounter then
+  if (%splitcounter2 > %splitcounter) then
   { 
     math camb%cambnumbercountsplit1 add %cambitem%cambnumbercountmod
     math ctotal%cambnumbercount add %camb%cambnumbercountsplit1
@@ -8416,7 +8417,7 @@ CHARGESPLITLOOP2:
   
 
 CHARGESPLIT:
-  if %cambnumbercount > %cambnumber then return
+  if (%cambnumbercount > %cambnumber) then return
   var cambitems %cambnumbercount
   if (%cambmana%cambnumbercount > %harnessmax) then
   {
@@ -8435,10 +8436,10 @@ CHARGESPLIT:
 CHARGELOOPP:
   pause
 CHARGELOOP:
-  if %cambcount > %cambitems then goto INVOKECAMB
-  if %cambitem%cambcountsplit > 1 then
+  if (%cambcount > %cambitems) then goto INVOKECAMB
+  if (%cambitem%cambcountsplit > 1) then
   {
-    if %splitcount > %cambitem%cambcountsplit then
+    if (%splitcount > %cambitem%cambcountsplit) then
     {
       math cambcount add 1
       var splitcount 1
@@ -8452,7 +8453,7 @@ CHARGELOOP:
   }
   else var workingcambitem %cambitem%cambcount
   
-  if %cambitem%cambcountworn = "NO" then
+  if ("%cambitem%cambcountworn" = "NO") then
   {
     if ((matchre ("$righthandnoun", "%cambitem%cambcount")) || (matchre ("$lefthandnoun", "%cambitem%cambcount"))) then
     else
@@ -8471,11 +8472,11 @@ CHARGELOOP:
   match CHARGEGET I could not find what you were referring to.
   #echo cambcount: %cambcount
   #echo splitcount: %splitcount
-  if %cambitem%cambcountsplit > 1 then put charge my %workingcambitem %camb%cambcountsplit%splitcount
+  if (%cambitem%cambcountsplit > 1) then put charge my %workingcambitem %camb%cambcountsplit%splitcount
   else put charge my %workingcambitem %cambmana%cambcount
   matchwait 5
 	var timeoutsub CHARGELOOP
-	if %cambitem%cambcountsplit > 1 then var timeoutcommand charge my %workingcambitem %camb%cambcountsplit%splitcount
+	if (%cambitem%cambcountsplit > 1) then var timeoutcommand charge my %workingcambitem %camb%cambcountsplit%splitcount
   else var timeoutcommand charge my %workingcambitem %cambmana%cambcount
 	goto TIMEOUT
 
@@ -8515,11 +8516,11 @@ CHARGEFAIL:
   goto CHARGEFAIL
 
 CHARGESUCC:
-  if %cambitem%cambcountsplit > 1 then
+  if (%cambitem%cambcountsplit > 1) then
   {
     math cambcharge add %camb%cambcount%splitcount
     math cambcharge%cambcount add %camb%cambcount%splitcount
-    if %splitcount > %cambitem%cambcountsplit then
+    if (%splitcount > %cambitem%cambcountsplit) then
     {
       math cambcount add 1
       var splitcount 1
@@ -8527,7 +8528,7 @@ CHARGESUCC:
 	    {
 		    gosub STOWITEM %workingcambitem
 	    }
-      #if %cambitem%cambcountworn = "NO" then
+      #if ("%cambitem%cambcountworn" = "NO") then
       #{
       #  gosub STOWITEM %cambitem%cambcount
       #}
@@ -8574,7 +8575,7 @@ INVOKECAMB:
     if (%invokecount = 2) then var workingcambitem second %cambitem%invokecount
   }
   else var workingcambitem %cambitem%invokecount
-	if %cambitem%invokecountworn = "NO" then
+	if ("%cambitem%invokecountworn" = "NO") then
   {
     if ((matchre ("$righthandnoun", "%cambitem%invokecount")) || (matchre ("$lefthandnoun", "%cambitem%invokecount"))) then
     else
@@ -8586,11 +8587,11 @@ INVOKECAMB:
 	matchre INVOKESUCC You reach for its center|Your link to|dim, almost magically null.
 	matchre INVOKEREM Try though you may
 	#echo ctotal%invokecount: %ctotal%invokecount
-	if %dedicatedcambrinth != "YES" then put invoke my %workingcambitem %ctotal%invokecount
+	if ("%dedicatedcambrinth" != "YES") then put invoke my %workingcambitem %ctotal%invokecount
 	else put invoke my %workingcambitem %ctotal%invokecount spell
 	matchwait 5
 	var timeoutsub INVOKECAMB
-  if %dedicatedcambrinth != "YES" then var timeoutcommand invoke %workingcambitem %ctotal%invokecount
+  if ("%dedicatedcambrinth" != "YES") then var timeoutcommand invoke %workingcambitem %ctotal%invokecount
 	else var timeoutcommand invoke %workingcambitem %ctotal%invokecount spell
 	goto TIMEOUT
 
@@ -8599,7 +8600,7 @@ INVOKESUCC:
 	{
 		gosub STOWITEM %workingcambitem
 	}
-  if %cambnumber > %invokecount then
+  if (%cambnumber > %invokecount) then
   {
     math invokecount add 1
     goto INVOKECAMB
@@ -8616,7 +8617,7 @@ INVOKEREM:
 
 
 HARNESS:
-  if %harnmana = 0 then
+  if (%harnmana = 0) then
   {
     var harnessed 1
     return
@@ -8635,7 +8636,7 @@ HARNESS:
 HARNSPLITLOOP:
   var harnsplitting %harnmana
   math harnsplitting divide %hsplitcounter
-  if %harnsplitting <= %harnessmax then
+  if (%harnsplitting <= %harnessmax) then
   {
     var harnnumber %hsplitcounter
     var harnmanamod %harnmana
@@ -8654,7 +8655,7 @@ HARNSPLITLOOP:
   }
 
 HARNSPLITLOOP2:
-  if %hsplitcounter2 > %hsplitcounter then
+  if (%hsplitcounter2 > %hsplitcounter) then
   { 
     math harnmana1 add %harnmanamod
     #echo Harnmana1: %harnmana1
@@ -8669,7 +8670,7 @@ HARNLOOPP:
   pause 1
 HARNLOOP:
   var harntapped 0
-  if %harncount > %harnnumber then return
+  if (%harncount > %harnnumber) then return
   matchre HARNLOOP %waitstring
   match HARNSUCC You tap into the mana
   match HARNTAP Strain though you may
@@ -8685,9 +8686,9 @@ HARNSUCC:
   goto HARNLOOP
 
 HARNTAP:
-  if %harnnumber >  1 then
+  if (%harnnumber > 1) then
   {
-    if %harncount = 2 then 
+    if (%harncount = 2) then 
     {
       #echo harnmana%harncount: %harnmana%harncount
       math harnmana subtract %harnmana%harncount
@@ -8760,10 +8761,10 @@ PREP:
 	if (%tattoocast = 1) then 
 	{
 	  gosub PREPTATTOO
-	  if %tmcast = 1 then gosub RETARGET
+	  if (%tmcast = 1) then gosub RETARGET
     return
   }
-  if %tmcast = 1 then
+  if (%tmcast = 1) then
   {
     gosub PREPTAR
     return
@@ -8784,7 +8785,7 @@ PREPSPELL:
 	match SPELLCANCEL As quickly as you form the spell pattern in your mind it slips away from you again.
 	match PREPPLAYING You should stop playing before you do that.
 	match PREPBADUNKNOWN You have no idea how to cast that spell.
-	if %prepmana != 0 then var prepstring %spellprepping %prepmana
+	if (%prepmana != 0) then var prepstring %spellprepping %prepmana
 	else var prepstring %spellprepping
 	put prep %prepstring
 	matchwait 5
@@ -8880,7 +8881,7 @@ PREPTAR:
 	matchre PREPTARREL you're already preparing|You have already fully prepared|You are already preparing
 	matchre SPELLCANCEL Something in the area interferes with your spell preparations.
 	matchre PREPTARP %waitstring
-  if %ctoverride = 1 then var targetstring %spellprepping %prepmana %ctoverridevar
+  if (%ctoverride = 1) then var targetstring %spellprepping %prepmana %ctoverridevar
   else var targetstring %spellprepping %prepmana
 	put target %targetstring
 	matchwait 5
@@ -9040,7 +9041,7 @@ RELCYCLIC:
 	  {
 	    if $SpellTimer.RiteofGrace.active = 1 then
 	    {
-	      if %releaserog != 1 then return
+	      if (%releaserog != 1) then return
 	    }
 	  }
 	}
@@ -9216,12 +9217,12 @@ BUNDLEROPEGETLOOP:
   gosub ROPEASK
   gosub STOWALL
   math ropestoget subtract 1
-  if %ropestoget < 1 then return
+  if (%ropestoget < 1) then return
   else goto BUNDLEROPEGETLOOP
 
 
 BUYLOOP:
-  if %buyloopcount > %buylooptotal then RETURN
+  if (%buyloopcount > %buylooptotal) then RETURN
   gosub ORDER
   pause 1
   gosub PAY
@@ -9387,7 +9388,7 @@ GEMPOUCHGETLOOP:
   gosub GEMPOUCHASK
   gosub STOWALL
   math pouchestoget subtract 1
-  if %pouchestoget < 1 then return
+  if (%pouchestoget < 1) then return
   else goto GEMPOUCHGETLOOP
 
 GEMPOUCHASKP:
@@ -9561,7 +9562,7 @@ ARRANGEP:
 	pause
 ARRANGE:
   #pause 1
-	if %arrcount < 1 then return
+	if (%arrcount < 1) then return
   matchre RETURN You complete|That has already been arranged as much as you can manage.
   match ARRANGENOSKIN That creature cannot produce skins.
   matchre ARRANGEP %waitstring
@@ -9835,73 +9836,73 @@ WORDTONUMLOOP:
   var wordtonumlist $0
   var wordtonumtotal 0
 WORDTONUMMAIN:
-  if %wordnumindex > %wordtonumcount then return
+  if (%wordnumindex > %wordtonumcount) then return
   var wordnumber 0
   gosub WORDTONUMBER %wordtonumlist(%wordnumindex)
   math wordtonumtotal add %wordnumber
-  if %wordnumber != 0 then
+  if (%wordnumber != 0) then
   {
-		#if %wordnumindex = 0 then var wordnumstring %wordnumber
+		#if (%wordnumindex = 0) then var wordnumstring %wordnumber
 		#else var wordnumstring %wordnumstring|%wordnumber
   }
   else
   {
-    #if %wordnumindex = 0 then var wordnumstring %wordtonumlist(%wordnumindex)
+    #if (%wordnumindex = 0) then var wordnumstring %wordtonumlist(%wordnumindex)
 		#else var wordnumstring %wordnumstring|%wordtonumlist(%wordnumindex)
   }
   math wordnumindex add 1 
   goto WORDTONUMMAIN
 
 WORDTONUMBER:
-  if $0 = "one" then var wordnumber 1
-  if $0 = "two" then var wordnumber 2
-  if $0 = "three" then var wordnumber 3
-  if $0 = "four" then var wordnumber 4
-  if $0 = "five" then var wordnumber 5
-  if $0 = "six" then var wordnumber 6
-  if $0 = "seven" then var wordnumber 7
-  if $0 = "eight" then var wordnumber 8
-  if $0 = "nine" then var wordnumber 9
-  if $0 = "ten" then var wordnumber 10
-  if $0 = "eleven" then var wordnumber 11
-  if $0 = "twelve" then var wordnumber 12
-  if $0 = "thirteen" then var wordnumber 13
-  if $0 = "fourteen" then var wordnumber 14
-  if $0 = "fifteen" then var wordnumber 15
-  if $0 = "sixteen" then var wordnumber 16
-  if $0 = "seventeen" then var wordnumber 17
-  if $0 = "eighteen" then var wordnumber 18
-  if $0 = "nineteen" then var wordnumber 19
-  if $0 = "twenty" then var wordnumber 20
-  if $0 = "thirty" then var wordnumber 30
-  if $0 = "forty" then var wordnumber 40
-  if $0 = "fifty" then var wordnumber 50
-  if $0 = "sixty" then var wordnumber 60
-  if $0 = "seventy" then var wordnumber 70
-  if $0 = "eighty" then var wordnumber 80
-  if $0 = "ninety" then var wordnumber 90
-  if $0 = "one hundred" then var wordnumber 100
-  if $0 = "two hundred" then var wordnumber 200
-  if $0 = "three hundred" then var wordnumber 300
-  if $0 = "four hundred" then var wordnumber 400
-  if $0 = "five hundred" then var wordnumber 500
-  if $0 = "six hundred" then var wordnumber 600
-  if $0 = "seven hundred" then var wordnumber 700
-  if $0 = "eight hundred" then var wordnumber 800
-  if $0 = "nine hundred" then var wordnumber 900
+  if ("$0" = "one") then var wordnumber 1
+  if ("$0" = "two") then var wordnumber 2
+  if ("$0" = "three") then var wordnumber 3
+  if ("$0" = "four") then var wordnumber 4
+  if ("$0" = "five") then var wordnumber 5
+  if ("$0" = "six") then var wordnumber 6
+  if ("$0" = "seven") then var wordnumber 7
+  if ("$0" = "eight") then var wordnumber 8
+  if ("$0" = "nine") then var wordnumber 9
+  if ("$0" = "ten") then var wordnumber 10
+  if ("$0" = "eleven") then var wordnumber 11
+  if ("$0" = "twelve") then var wordnumber 12
+  if ("$0" = "thirteen") then var wordnumber 13
+  if ("$0" = "fourteen") then var wordnumber 14
+  if ("$0" = "fifteen") then var wordnumber 15
+  if ("$0" = "sixteen") then var wordnumber 16
+  if ("$0" = "seventeen") then var wordnumber 17
+  if ("$0" = "eighteen") then var wordnumber 18
+  if ("$0" = "nineteen") then var wordnumber 19
+  if ("$0" = "twenty") then var wordnumber 20
+  if ("$0" = "thirty") then var wordnumber 30
+  if ("$0" = "forty") then var wordnumber 40
+  if ("$0" = "fifty") then var wordnumber 50
+  if ("$0" = "sixty") then var wordnumber 60
+  if ("$0" = "seventy") then var wordnumber 70
+  if ("$0" = "eighty") then var wordnumber 80
+  if ("$0" = "ninety") then var wordnumber 90
+  if ("$0" = "one hundred") then var wordnumber 100
+  if ("$0" = "two hundred") then var wordnumber 200
+  if ("$0" = "three hundred") then var wordnumber 300
+  if ("$0" = "four hundred") then var wordnumber 400
+  if ("$0" = "five hundred") then var wordnumber 500
+  if ("$0" = "six hundred") then var wordnumber 600
+  if ("$0" = "seven hundred") then var wordnumber 700
+  if ("$0" = "eight hundred") then var wordnumber 800
+  if ("$0" = "nine hundred") then var wordnumber 900
   return
   
   
 GEMPOUCHCOUNT:
   math pouchcount add 1
-  if %pouchcount > 11 then return
+  if (%pouchcount > 11) then return
   gosub NUMBERTOWORD
   gosub GEMPOUCHLOOK
-  if %pouchfull = 0 then
+  if (%pouchfull = 0) then
   {
     math gempouchesnum add 1
   }
-  if %pouchfull = -1 then
+  if (%pouchfull = -1) then
   {
     var pouchcount 12
     return
@@ -9911,11 +9912,11 @@ GEMPOUCHCOUNT:
 
 GEMFINDEMPTYPOUCH:
   math pouchcount add 1
-  if %pouchcount > 11 then return
+  if (%pouchcount > 11) then return
   gosub NUMBERTOWORD
   gosub GEMPOUCHLOOK
-  if %pouchfull = 0 then return
-  if %pouchfull = 12 then
+  if (%pouchfull = 0) then return
+  if (%pouchfull = 12) then
   {
     var pouchcount -1
     return
@@ -9925,11 +9926,11 @@ GEMFINDEMPTYPOUCH:
 
 GEMFINDFULLPOUCH:
   math pouchcount add 1
-  if %pouchcount > 11 then return
+  if (%pouchcount > 11) then return
   gosub NUMBERTOWORD
   gosub GEMPOUCHLOOK
-  if %pouchfull = 1 then return
-  if %pouchfull = -1 then
+  if (%pouchfull = 1) then return
+  if (%pouchfull = -1) then
   {
     var pouchcount 12
     return
@@ -9937,17 +9938,17 @@ GEMFINDFULLPOUCH:
   goto GEMFINDFULLPOUCH
 
 NUMBERTOWORD:
-  if %pouchcount = 1 then var pouchnum first
-  if %pouchcount = 2 then var pouchnum second
-  if %pouchcount = 3 then var pouchnum third
-  if %pouchcount = 4 then var pouchnum fourth
-  if %pouchcount = 5 then var pouchnum fifth
-  if %pouchcount = 6 then var pouchnum sixth
-  if %pouchcount = 7 then var pouchnum seventh
-  if %pouchcount = 8 then var pouchnum eighth
-  if %pouchcount = 9 then var pouchnum ninth
-  if %pouchcount = 10 then var pouchnum tenth
-  if %pouchcount = 11 then var pouchnum eleventh
+  if (%pouchcount = 1) then var pouchnum first
+  if (%pouchcount = 2) then var pouchnum second
+  if (%pouchcount = 3) then var pouchnum third
+  if (%pouchcount = 4) then var pouchnum fourth
+  if (%pouchcount = 5) then var pouchnum fifth
+  if (%pouchcount = 6) then var pouchnum sixth
+  if (%pouchcount = 7) then var pouchnum seventh
+  if (%pouchcount = 8) then var pouchnum eighth
+  if (%pouchcount = 9) then var pouchnum ninth
+  if (%pouchcount = 10) then var pouchnum tenth
+  if (%pouchcount = 11) then var pouchnum eleventh
   return
 
 
@@ -10031,7 +10032,7 @@ GEMPOUCHFULL:
   gosub STOWITEM gem pouch
   var pouchcount 0
   gosub GEMFINDEMPTYPOUCH
-  if %pouchcount = 12 then goto GEMPOUCHNONE
+  if (%pouchcount = 12) then goto GEMPOUCHNONE
   gosub GETITEM %pouchnum gem pouch
   gosub WEARITEM gem pouch
   gosub STORE gem gem pouch
@@ -10040,15 +10041,15 @@ GEMPOUCHFULL:
 
 
 GWETHGET:
-  if matchre ("$roomobjs", "\b(%goodgweths)\b(,|\.| and)") then
+  if matchre("$roomobjs", "\b(%goodgweths)\b(,|\.| and)") then
   {
     if ("%savegwethstones" = "YES") then
     {
-      if matchre ("$roomobjs", "\bwaermodi stones\b") then var stoneget waermodi stones
-      if matchre ("$roomobjs", "\bjadeite stones\b") then var stoneget jadeite stones
-      if matchre ("$roomobjs", "\bkyanite stones\b") then var stoneget kyanite stones
+      if matchre("$roomobjs", "\bwaermodi stones\b") then var stoneget waermodi stones
+      if matchre("$roomobjs", "\bjadeite stones\b") then var stoneget jadeite stones
+      if matchre("$roomobjs", "\bkyanite stones\b") then var stoneget kyanite stones
       gosub GETITEM %stoneget
-      if %lootalerts = "YES" then put #echo %alertwindow Yellow [Treasure]: Found a gweth stone!
+      if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a gweth stone!
       gosub PUTITEM my stones in my %storage
     }
     if (matchre ("$roomobjs", "\b(%goodgweths)\b")) then goto GWETHGET
@@ -10056,11 +10057,11 @@ GWETHGET:
   return
 
 BOXGET:
-  if matchre ("$roomobjs", "\b(%boxtype) (%boxes)\b(,|\.| and)") then
+  if matchre("$roomobjs", "\b(%boxtype) (%boxes)\b(,|\.| and)") then
   {
     var boxitem $1 $2
     gosub GETITEM %boxitem
-    #if %lootalerts = "YES" then put #echo %alertwindow [Treasure]: Found a box!
+    #if ("%lootalerts" = "YES") then put #echo %alertwindow [Treasure]: Found a box!
     gosub PUTITEM my %boxitem in my %boxstorage
     if (%putsucceed = 0) then
     {
@@ -10083,7 +10084,7 @@ BOXGET:
       return
     }
   }
-  if matchre ("$roomobjs", "(%boxtype) (%boxes)") then goto BOXGET
+  if matchre("$roomobjs", "(%boxtype) (%boxes)") then goto BOXGET
   return
 
 
@@ -10133,36 +10134,36 @@ LOOTCHECK:
 
 
 MAPGET:
-  if matchre ("$roomobjs", "\b(%treasuremaps)\b(,|\.| and)") then
+  if matchre("$roomobjs", "\b(%treasuremaps)\b(,|\.| and)") then
   {
     gosub GETITEM map
-    if %lootalerts = "YES" then put #echo %alertwindow Yellow [Treasure]: Found a treasure map!
+    if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a treasure map!
     gosub STOWITEM map
   }
-  if matchre ("$roomobjs", "\b(%treasuremaps)\b(,|\.| and)") then goto MAPGET
+  if matchre("$roomobjs", "\b(%treasuremaps)\b(,|\.| and)") then goto MAPGET
   return
 
 MATERIALSGET:
-  if matchre ("$roomobjs", "\b(%materials) (%materialsnouns)\b(,|\.| and)") then
+  if matchre("$roomobjs", "\b(%materials) (%materialsnouns)\b(,|\.| and)") then
   {
     var materialadj $1
     var materialnoun $2
     gosub GETITEM %materialnoun
-    if %lootalerts = "YES" then put #echo %alertwindow Yellow [Treasure]: Found a %materialadj %materialnoun rare material!
+    if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a %materialadj %materialnoun rare material!
     gosub STOWITEM %materialnoun
   }
-  if matchre ("$roomobjs", "\b(%materials) (%materialsnouns)\b(,|\.| and)") then goto MATERIALSGET
+  if matchre("$roomobjs", "\b(%materials) (%materialsnouns)\b(,|\.| and)") then goto MATERIALSGET
   return
 
 
 MISCGETP:
   pause
 MISCGET:
-  if %miscgetcounter > %keeplistnum then return
+  if (%miscgetcounter > %keeplistnum) then return
   #echo keepitem: %misckeeplist(%miscgetcounter)
-  if matchre ("$roomobjs", "%misckeeplist(%miscgetcounter)") then
+  if matchre("$roomobjs", "%misckeeplist(%miscgetcounter)") then
   {
-    if %lootalerts = "YES" then put #echo %alertwindow Yellow [Treasure]: Found a misc item - %misckeeplist(%miscgetcounter)!
+    if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a misc item - %misckeeplist(%miscgetcounter)!
     gosub GETITEM %misckeeplist(%miscgetcounter)
     gosub STOWITEM %misckeeplist(%miscgetcounter)
   }
@@ -10171,26 +10172,26 @@ MISCGET:
 
 
 NUGGETSGET:
-  if matchre ("$roomobjs", "\b(%nuggetmaterials) nugget\b(,|\.| and)") then
+  if matchre("$roomobjs", "\b(%nuggetmaterials) nugget\b(,|\.| and)") then
   {
     var nuggetadj $1
     gosub GETITEM nugget
-    #if %lootalerts = "YES" then put #echo %alertwindow Yellow [Treasure]: Found a %nuggetadj nugget
+    #if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a %nuggetadj nugget
     gosub STOWITEM nugget
   }
-  if matchre ("$roomobjs", "\b(%nuggetmaterials) nugget\b(,|\.| and)") then goto NUGGETSGET
+  if matchre("$roomobjs", "\b(%nuggetmaterials) nugget\b(,|\.| and)") then goto NUGGETSGET
   return
 
 
 BARSGET:
-  if matchre ("$roomobjs", "\b(%nuggetmaterials) bar\b(,|\.| and)") then
+  if matchre("$roomobjs", "\b(%nuggetmaterials) bar\b(,|\.| and)") then
   {
     var baradj $1
     gosub GETITEM bar
-    #if %lootalerts = "YES" then put #echo %alertwindow Yellow [Treasure]: Found a %baradj bar!
+    #if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a %baradj bar!
     gosub STOWITEM my bar
   }
-  if matchre ("$roomobjs", "\b(%nuggetmaterials) bar\b(,|\.| and)") then goto BARSGET
+  if matchre("$roomobjs", "\b(%nuggetmaterials) bar\b(,|\.| and)") then goto BARSGET
   return
 
 
@@ -10198,7 +10199,7 @@ SCROLLGET:
   if matchre("$roomobjs", ".*(?<!page of )(?<!fetid antelope )\b(%scrolls)\b(,|\.| and)") then
   {
     var foundscroll $1
-    if %lootalerts = "YES" then put #echo %alertwindow Yellow [Treasure]: Found a scroll - %foundscroll! 
+    if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a scroll - %foundscroll! 
     gosub STOWITEM %foundscroll
   }
   if matchre("$roomobjs", ".*(?<!page of )(?<!fetid antelope )\b(%scrolls)\b(,|\.| and)") then goto SCROLLGET
@@ -10264,8 +10265,8 @@ TIEPOUCH:
 TIEGEMGETP:
   pause
 TIEGEMGET:
-  if matchre ("$righthandnoun", "\b(%gems1|%gems2|%gems3|%gems4|%gweths)\b(,|\.| and)") then gosub STOW right
-  if matchre ("$lefthandnoun", "\b(%gems1|%gems2|%gems3|%gems4|%gweths)\b(,|\.| and)") then gosub STOW left
+  if matchre("$righthandnoun", "\b(%gems1|%gems2|%gems3|%gems4|%gweths)\b(,|\.| and)") then gosub STOW right
+  if matchre("$lefthandnoun", "\b(%gems1|%gems2|%gems3|%gems4|%gweths)\b(,|\.| and)") then gosub STOW left
   goto GEMGET
 
 
@@ -10384,7 +10385,7 @@ ARMORPROBLEM:
     
 ARMORCHECKLOOP:
   math armorloop add 1
-  if %armorloop > %armornum then return
+  if (%armorloop > %armornum) then return
   gosub WEARARMOR %armor%armorloopitem
   if (%weararmorworn != 1) then
   {
@@ -10468,7 +10469,7 @@ BOXFILLPOUCHFULL:
   gosub STOWITEM gem pouch
   var pouchcount 0
   gosub GEMFINDEMPTYPOUCH
-  if %pouchcount = 12 then goto GEMPOUCHNONE
+  if (%pouchcount = 12) then goto GEMPOUCHNONE
   gosub GETITEM %pouchnum gem pouch
   gosub WEARITEM gem pouch
   gosub STORE gem gem pouch
@@ -10717,11 +10718,11 @@ BOXPOPPINGKHRI:
   return
 
 LOCKSMITHCAST:
-  if %burglerf = "YES" then
+  if ("%burglerf" = "YES") then
   {
     if (($SpellTimer.RefractiveField.active = 0) || ($SpellTimer.RefractiveField.duration < 2)) then
     {
-      if %casting = 1 then
+      if (%casting = 1) then
       {
         gosub RELSPELL
         gosub RELSYMBIOSIS
@@ -10821,7 +10822,7 @@ COUNTMATERIAL:
 DEVOURLOOP:
   gosub CASTINGLOGIC
   pause 1
-  if %casting != 1 then
+  if (%casting != 1) then
   {
     return
   }
@@ -10831,7 +10832,7 @@ DEVOURLOOP:
 NSAFETYCHECK:
   var necrogood 1
   eval roomplayerslength length("$roomplayers")
-  if %roomplayerslength != 0 then 
+  if (%roomplayerslength != 0) then 
   {
     var roomplayers $roomplayers
     gosub RPLAYERSCRUB
@@ -10842,7 +10843,7 @@ NSAFETYCHECK:
     eval roomplayers tolower("%roomplayers")
     eval necrowhitelist tolower("%necrowhitelist")
     gosub RPLAYERSORT
-    if %roomplayers != "" then
+    if ("%roomplayers" != "") then
     {
       echo Not engaging in spellcasting for Necro Safety!  Player(s) in the room: %roomplayers.
       var necrogood 0       
@@ -10853,14 +10854,14 @@ NSAFETYCHECK:
 
 NRITUAL:
   var necroskin 0
-  if matchre ("$roomobjs", "(\w+) ((which|that) appears dead|\(dead\))") then var ritualmonster $1
+  if matchre("$roomobjs", "(\w+) ((which|that) appears dead|\(dead\))") then var ritualmonster $1
   if ("%preserve" = "YES") then gosub PRESERVE
   if ("%devour" = "YES") then
   {
     if $SpellTimer.Devour.active != 1 then
     {
       gosub HEALTHCHECK
-      if %healthcheckgood != 1 then
+      if (%healthcheckgood != 1) then
       {
         gosub CASTRESET
         var spellprepping devour
@@ -10981,7 +10982,7 @@ HARVESTDISP:
   if ("%harveststore" = "YES") then
   {
     gosub COUNTMATERIAL
-    if %materialnum > %harveststorenum then goto HARVESTDROP
+    if (%materialnum > %harveststorenum) then goto HARVESTDROP
     else
     {
       gosub STOWITEM material
@@ -11216,12 +11217,12 @@ TASKFORAGEBAD:
   goto TASKFORAGE
 
 TASKFORAGEFULL:
-  if matchre ("$righthand", "%braidtarget") then
+  if matchre("$righthand", "%braidtarget") then
   else
   {
     gosub STOW right
   }
-  if matchre ("$lefthand", "%braidtarget") then
+  if matchre("$lefthand", "%braidtarget") then
   else
   {
     gosub STOW left
@@ -11268,7 +11269,7 @@ BGATTACK:
 BGATTACKP:
   pause  
 BGATTACKMAIN:
-  if %bgdone = 1 then return
+  if (%bgdone = 1) then return
   matchre BGATTACKP %waitstring
   matchre BGATTACKMAIN With a sharp overhand motion|With a casual flick of your wrists|You sweep your hands in
   #matchre BGNEWTARGET I don't think so.
@@ -11295,7 +11296,7 @@ BGLOOT:
   else return
   
 BGNEWTARGET:
-  if $monstercount < 1 then
+  if ($monstercount < 1) then
   {
     var goodtarget 0
     var shockcritter 1
@@ -11450,7 +11451,7 @@ PATHSTOP:
 SUMMONP:
 	pause
 SUMMON:
-  if %summfull = 1 then var summarg impedance
+  if (%summfull = 1) then var summarg impedance
   else var summarg admittance
   matchre RETURN you feel that you can still gather|you feel that you have reached your limit|You align yourself to it, briefly decreasing|You continue meditating
   matchre SUMMFULL You so heavily embody the Elemental Plane
@@ -11759,22 +11760,22 @@ COMBOERROR:
 ###ARMOR_SUBS###
 ARMORSET:
   math testcount add 1
-  if %testcount > 4 then return
+  if (%testcount > 4) then return
   gosub ARMORSETRUN
   goto ARMORSET
   
 ARMORSETRUNP:
   pause
 ARMORSETRUN:
-  if %%armortypearmor%testcountworn = 0 then
+  if (%%armortypearmor%testcountworn = 0) then
   {
-    if %%armorotypearmor%testcount != "none" then
+    if ("%%armorotypearmor%testcount" != "none") then
     {
       gosub REMITEM %%armorotypearmor%testcount
       var %armorotypearmor%testcountworn 0
       gosub STOWITEM %%armorotypearmor%testcount
     }
-    if %%armortypearmor%testcount != "none" then
+    if ("%%armortypearmor%testcount" != "none") then
     {
       gosub GETITEM %%armortypearmor%testcount
       var %armortypearmor%testcountworn 1
@@ -11989,7 +11990,7 @@ TENDCLEAN:
   return
   
 HEALTHCHECK2:
-  if $guild = "Empath" then 
+  if ("$guild" = "Empath") then 
   {
     gosub HEALTHRESET
     gosub HEALTHPERC
@@ -12226,8 +12227,8 @@ KICKP:
 	pause
 KICK:
   if $standing != 1 then gosub STAND
-  #if matchre ("$roomobjs", "a pile of rocks") then var kickitem rock
-  #if matchre ("$roomobjs", "a pile of dust bunnies") then var kickitem bunnies
+  #if matchre("$roomobjs", "a pile of rocks") then var kickitem rock
+  #if matchre("$roomobjs", "a pile of dust bunnies") then var kickitem bunnies
   matchre KICKP %waitstring
   match KICK You take a step back
   matchre KICKS You can't do that from your position.|You can't quite manage
@@ -12372,13 +12373,13 @@ HUMSUCCESS:
   return
 
 INSTMAINTAIN:
-  if matchre ("$lefthand", "%instrument") then gosub SWAP
-  if matchre ("$righthand", "%instrument") then
+  if matchre("$lefthand", "%instrument") then gosub SWAP
+  if matchre("$righthand", "%instrument") then
   else
   {
     gosub GETITEM %instrument
   }
-  if matchre ("$lefthand", "%instrument") then gosub SWAP
+  if matchre("$lefthand", "%instrument") then gosub SWAP
   if ("$lefthand" != "Empty") then
   {
     gosub STOW left
@@ -12756,7 +12757,7 @@ TURNP:
   pause
 TURN:
   math turncount add 1
-  if %turncount = 1 then
+  if (%turncount = 1) then
   {
     put turn compendium
     match STUDY You turn to the section
@@ -12870,9 +12871,9 @@ WINDCFULL:
 
 WINDCSUCC:
   math windboardcharge add 10
-  if %windboardcharge > 49 then var windboardcharge 50
+  if (%windboardcharge > 49) then var windboardcharge 50
   put #var windboardcharge %windboardcharge
-  if %windboardcharge = 50 then return
+  if (%windboardcharge = 50) then return
   else goto WINDCHARGE
 
 WINDMOUNTP:
@@ -12950,7 +12951,7 @@ APPRAISECREATURE:
   eval appraisemon element("%monsterarray", %arraylen)
   #echo AppraiseMon: %appraisemon
   #echo ArrayLen: %arraylen
-  if %arraylen = 0 then
+  if (%arraylen = 0) then
   {  
     var nextrecall %t
     return
@@ -12978,7 +12979,7 @@ RECALL:
   eval monsterarray replace("%monsterarray", " ", "|")
   eval arraylen count("%monsterarray", "|")
   eval recallmon element("%monsterarray", %arraylen)
-  if %arraylen = 0 then
+  if (%arraylen = 0) then
   {  
     var nextrecall %t
     return
@@ -13020,12 +13021,12 @@ FORAGE:
 	matchwait
 
 FORAGEFULL:
-  if matchre ("$righthand", "%braidtarget") then
+  if matchre("$righthand", "%braidtarget") then
   else
   {
     gosub STOW right
   }
-  if matchre ("$lefthand", "%braidtarget") then
+  if matchre("$lefthand", "%braidtarget") then
   else
   {
     gosub STOW left
@@ -13049,10 +13050,10 @@ DUMPJUNK:
   matchwait
   
 BRAID:
-  if matchre ("$righthand", "%braidobjects") then gosub BRAIDING
+  if matchre("$righthand", "%braidobjects") then gosub BRAIDING
   else
   { 
-    if matchre ("$lefthand", "%braidobjects") then
+    if matchre("$lefthand", "%braidobjects") then
     {
       gosub BRAIDING
     }
@@ -13078,12 +13079,12 @@ BRAIDING:
 	matchwait
 
 BRAIDSTOW:
-  if matchre ("$righthand", "%braidtarget") then
+  if matchre("$righthand", "%braidtarget") then
   else
   {
     gosub STOW right
   }
-  if matchre ("$lefthand", "%braidtarget") then
+  if matchre("$lefthand", "%braidtarget") then
   else
   {
     gosub STOW left
@@ -13120,7 +13121,7 @@ CLIMBPRACTICE:
   matchre RETURN The rope's will quickly fades away|You finish practicing your climbing skill|Your focus diverts away from the rope
   matchre CLIMBTOOHARD This climb is too difficult, so you stop practicing\.|This climb is no challenge at all
   matchre CLIMBSTAND You should probably be standing to attempt this.
-  if %climbingrope = "YES" then put climb %climbobject
+  if ("%climbingrope" = "YES") then put climb %climbobject
   else put climb practice %climbobject
   matchwait
 
@@ -13337,7 +13338,7 @@ DANCELOGIC:
   math dancetest add 610
   if ($unixtime >= %dancetest) then
   {
-    if %mercomup = 1 then
+    if (%mercomup = 1) then
     {
       var dancetarget
       gosub DANCE
@@ -13454,9 +13455,9 @@ CLEANPIN:
   matchwait
 
 CLEANPINNOWATER:
-  if %elunedcommune = "YES" then 
+  if ("%elunedcommune" = "YES") then 
   {
-    if %elunedgood = 1 then
+    if (%elunedgood = 1) then
     {
       gosub COMMUNEELUNED
       gosub STOWALL
@@ -13482,7 +13483,7 @@ STAYIN:
   return
   
 CLEANPINNOBLESS:
-  if $guild = "Cleric" then gosub BLESSCAST
+  if ("$guild" = "Cleric") then gosub BLESSCAST
   goto CLEANPIN
 
 
@@ -13508,7 +13509,7 @@ TARGETSELECT:
     {
       #echo MonsterArray: %monsterarray 
       #echo Element: %tsloop
-      if %facebrawlfail = 1 then var faceadj next
+      if (%facebrawlfail = 1) then var faceadj next
       else var faceadj first
       var currentcritter %montest
       var shockcritter 0
@@ -13519,29 +13520,29 @@ TARGETSELECT:
   }
   else
   {
-    if %justmanipulated = 1 then
+    if (%justmanipulated = 1) then
     {
-      if %manipcount < 1 then
+      if (%manipcount < 1) then
       {
         var goodtarget 0
         var currentcritter 0
         var shockcritter 1
         return
       }
-      if %mlcounter <= %malength then math mlcounter add 1
+      if (%mlcounter <= %malength) then math mlcounter add 1
       eval facemon element("%monsterarray", %mlcounter)
       eval facemon replace("%facemon", " ", "|")
       eval arraylen count("%facemon", "|")
       eval facemon element("%facemon", %arraylen)
       var facenum 0
-      if %facemon = %mon1 then math facenum add 1
-      if %manipcount > 1 then
+      if ("%facemon" = "%mon1") then math facenum add 1
+      if (%manipcount > 1) then
       {
-        if %facemon = %mon2 then math facenum add 1
+        if ("%facemon" = "%mon2") then math facenum add 1
       }
-      if %facenum = 0 then var faceadj first
-      if %facenum = 1 then var faceadj second
-      if %facenum = 2 then var faceadj third
+      if (%facenum = 0) then var faceadj first
+      if (%facenum = 1) then var faceadj second
+      if (%facenum = 2) then var faceadj third
       var goodtarget 1
       var justmanipulated 0
       var shockcritter 1
@@ -13554,7 +13555,7 @@ TARGETSELECT:
       var targetlist %critters 
       var goodtarget 0
       gosub TARGETSELECTLOOP
-      if %goodtarget = 1 then
+      if (%goodtarget = 1) then
       {
         gosub FACETARGET first %montest
         var currentcritter %montest
@@ -13565,9 +13566,9 @@ TARGETSELECT:
   return
    
 TARGETSELECTLOOP:
-  if %tsloop > %tslength then return
+  if (%tsloop > %tslength) then return
   eval montest element("%monsterarray", %tsloop)
-  if matchre ("%montest", "%targetlist") then
+  if matchre("%montest", "%targetlist") then
   {
     eval montest replace("%montest", " ", "|")
     eval arraylen count("%montest", "|")
@@ -13609,7 +13610,7 @@ TAPNOUN:
   eval tap replace("%tap", " ", "|"
   eval taplength count("%tap","|")
   #echo taplength: %taplength
-  if %taplength > 0 then var nountap %tap(%taplength)
+  if (%taplength > 0) then var nountap %tap(%taplength)
   else var nountap %tap(0)
   return
 
@@ -13621,7 +13622,7 @@ TAPSHORTEN:
   eval tap replacere("%tap", "\bsome\b\|", ""
   eval taplength count("%tap","|")
   #echo taplength: %taplength
-  if %taplength > 0 then var shorttap %tap(0) %tap(%taplength)
+  if (%taplength > 0) then var shorttap %tap(0) %tap(%taplength)
   else var shorttap %tap(0)
   return
   
@@ -13635,7 +13636,7 @@ TAPSHORTENMAT:
   #echo taplength: %taplength
   var matadj %taplength
   math matadj subtract 1
-  if %taplength > 0 then var shorttap %tap(%matadj) %tap(%taplength)
+  if (%taplength > 0) then var shorttap %tap(%matadj) %tap(%taplength)
   else var shorttap %tap(0)
   return
 
