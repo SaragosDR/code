@@ -1,3 +1,13 @@
+07/03/26
+Updated Scripts: train, library, set, craftlibrary
+Bugfixes to full crucible in forging.
+Tweaks to spell mana changing.
+Magic section in set split into Magic and Spells
+Bugfix to cambrinth matching.
+Bugfix to cyclic variable matching.
+Added string to prevent art studying from locking if an expected art item isn't present.
+
+
 07/02/26
 Updated Scripts: train, library, mags, set, craftlibrary
 Moved VaultTown to the Hunting section.

@@ -99,8 +99,8 @@ var nuggetmaterials brass|bronze|coal|copper|covellite|iron|lead|nickel|oravir|p
 
 
 #JUSTICE_TRIGGERS
-action put #echo %alertwindow Yellow [Justice]: Charged with forbidden practices in $1!  Please investigate! when "Burn him!  Burn him!"  You hear the cries echo around you as everyone in the vicinity suddenly moves away, giving you a wide berth!  It goes without saying you'll be wanted for forbidden practices in City of (\w+) now\.
-action put #echo %alertwindow Yellow [Justice]: Charged with endangering the public in $1!  Please investigate! when A sudden shout of "The man's dangerous!" heralds a nearby citizen to run for the guards.  It won't be long before the (\w+) authorities will try to bring you in for endangering the public\.
+action put #echo >$alertwindow Yellow [Justice]: Charged with forbidden practices in $1!  Please investigate! when "Burn him!  Burn him!"  You hear the cries echo around you as everyone in the vicinity suddenly moves away, giving you a wide berth!  It goes without saying you'll be wanted for forbidden practices in City of (\w+) now\.
+action put #echo >$alertwindow Yellow [Justice]: Charged with endangering the public in $1!  Please investigate! when A sudden shout of "The man's dangerous!" heralds a nearby citizen to run for the guards.  It won't be long before the (\w+) authorities will try to bring you in for endangering the public\.
 
 action (arrest) var arrested 1; goto ARRESTED when ^Before you really realize .* you are marched off.|wrestle you to the ground, bind you in chains, and drag you off to jail|ushered to a cell, the door opened just long enough for you to be shoved inside|\[Guard House, Jail Cell\]|^The guard looks you over.* and leads you firmly off to jail|A sparkling cloud of silver motes envelops your body like a mist of stars|Although your head is still ringing from the assault|The sentinel brings you to the jail|^You slowly wake up again to find that all your belongings have been stripped
 
@@ -195,8 +195,8 @@ action var symbiosis 0 when symbiosis from your memory?
 action put #var Time.isKatambaUp 0;echo Fixing time! when Katamba is on the wrong side of Elanthia and is not visible.
 action put #var Time.isXibarUp 0 when Xibar is on the wrong side of Elanthia and is not visible.
 action put #var Time.isYavashUp 0 when Yavash is on the wrong side of Elanthia and is not visible.
-action put #var tattoobuff NO; var tattoobuff NO; put #var spelldbtattoo NO; var spelldbtattoo NO; put #echo %alertwindow Failed to cast using a tattoo.  Turning off tattoo usage. when You fail to spread the mana evenly through the tattoo's tunnels, mangling the spell pattern before it could form.
-action put #play Echo; put #echo %alertwindow Yellow [Magic] Attempting to cast %spellprepping without enough starlight or moonlight!; when There isn't enough starlight or moonlight for this spell!
+action put #var tattoobuff NO; var tattoobuff NO; put #var spelldbtattoo NO; var spelldbtattoo NO; put #echo >$alertwindow Failed to cast using a tattoo.  Turning off tattoo usage. when You fail to spread the mana evenly through the tattoo's tunnels, mangling the spell pattern before it could form.
+action put #play Echo; put #echo >$alertwindow Yellow [Magic] Attempting to cast %spellprepping without enough starlight or moonlight!; when There isn't enough starlight or moonlight for this spell!
 
 #action var something 1 when The complementary nature of the spell empowers you.
 
@@ -388,13 +388,13 @@ action var cost $1 when and the price of (.+) coins is all I ask
 action var cost $1 when I ask that you give (.+) copper lirum for
 action var cost $1 when If it pleases your heart and soul, I ask that you give (.+) copper dokoras for that item."
 
-action put #var $anloralpin NO; put #echo %alertwindow Exploded an anloral pin due to having the wrong favors!  Turning off anloral pin usage. when Finding no strong affinity to your spirit, the delicate pin begins to vibrate\.
+action put #var $anloralpin NO; put #echo >$alertwindow Exploded an anloral pin due to having the wrong favors!  Turning off anloral pin usage. when Finding no strong affinity to your spirit, the delicate pin begins to vibrate\.
 
 #EPISTEMIC_JOURNAL_TARANTULA
-#action var nextejournal %t; var nextejournalwork $1; math nextejournalwork multiply 60; math nextejournalwork multiply 60; math nextejournal add %nextejournalwork; put #echo %alertwindow Epistemic journal can be used in $1 hours. when \[You can do that again in about (.+) (hour|hours)\.\]
-#action var nextejournal %t; var nextejournalwork $1; math nextejournalwork multiply 60; math nextejournal add %nextejournalwork; put #echo %alertwindow Epistemic journal can be used in $1 minutes. when \[You can do that again in about (.+) minutes\.\]
-action var nextejournal $gametime; var nextejournalwork $1; math nextejournalwork multiply 60; math nextejournalwork multiply 60; math nextejournal add %nextejournalwork; put #var nextejournal %nextejournal; put #echo %alertwindow Epistemic journal can be used in $1 hours. when \[You can do that again in about (.+) (hour|hours)\.\]
-action var nextejournal $gametime; var nextejournalwork $1; math nextejournalwork multiply 60; math nextejournal add %nextejournalwork; put #var nextejournal %nextejournal; put #echo %alertwindow Epistemic journal can be used in $1 minutes. when \[You can do that again in about (.+) minutes\.\]
+#action var nextejournal %t; var nextejournalwork $1; math nextejournalwork multiply 60; math nextejournalwork multiply 60; math nextejournal add %nextejournalwork; put #echo >$alertwindow Epistemic journal can be used in $1 hours. when \[You can do that again in about (.+) (hour|hours)\.\]
+#action var nextejournal %t; var nextejournalwork $1; math nextejournalwork multiply 60; math nextejournal add %nextejournalwork; put #echo >$alertwindow Epistemic journal can be used in $1 minutes. when \[You can do that again in about (.+) minutes\.\]
+action var nextejournal $gametime; var nextejournalwork $1; math nextejournalwork multiply 60; math nextejournalwork multiply 60; math nextejournal add %nextejournalwork; put #var nextejournal %nextejournal; put #echo >$alertwindow Epistemic journal can be used in $1 hours. when \[You can do that again in about (.+) (hour|hours)\.\]
+action var nextejournal $gametime; var nextejournalwork $1; math nextejournalwork multiply 60; math nextejournal add %nextejournalwork; put #var nextejournal %nextejournal; put #echo >$alertwindow Epistemic journal can be used in $1 minutes. when \[You can do that again in about (.+) minutes\.\]
 action var nexttarantula $2; math nexttarantula multiply 10; math nexttarantula add 10 when You try, but the (.*) is unresponsive.  It needs approximately (\d+) roisaen to generate enough venom again.
 
 action (galley) put go galley when glides into the dock.
@@ -405,7 +405,7 @@ action (galley) off
 action (sack) var sacklist $1 when ^In the .+ you see (.*)\.
 action (sack) off
 
-#action put #echo %alertwindow YellowPicking up a crossbow bolt would push you over the item limit of 500 items.  Please reduce your inventory count before you try again.
+#action put #echo >$alertwindow YellowPicking up a crossbow bolt would push you over the item limit of 500 items.  Please reduce your inventory count before you try again.
 
 #######
 timer clear
@@ -416,7 +416,7 @@ var mstarget 0
 var modestart 0
 var multiarea NO
 
-var scriptmodename %1
+eval scriptmodename tolower(%1)
 var scriptmode -1
 
 var varset 1
@@ -430,13 +430,11 @@ goto SWITCHBOARD
 
 
 ALERTINIT:
-  if ("%alertwindow" = "Main") then var alertwindow
-  else var alertwindow >%alertwindow
   ##AWARENESS_TRIGGERS##
-  if (("%speechalerts" = "YES") && (tolower("%scriptmodename") != "combat")) then
+  if (("%speechalerts" = "YES") && ("%scriptmodename" != "combat")) then
   { 
     var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,|The apprentice repairman looks over|A youthful attendant hands you some bundling rope and says,|You hand the apprentice repairman|The apprentice repairman smiles and says|The horse-drawn carriage's driver shouts|Mags calls out,|Aelik scowls and says,|Cormyn scowls and says,
-    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.|An Elothean clerk says|You hand an Elothean clerk|Jakke shuffles through some notes and says,|Jakke boasts,
+    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.|An Elothean clerk says|You hand an Elothean clerk|Jakke shuffles through some notes and says,|Jakke boasts,|Milline shuffles through some notes and
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "|The shadowling exclaims,|You throw your head back and howl,|After a moment, you see a crystal-clear vision of your|After a moment, you see a vision of your god who calls to you by name,
@@ -445,128 +443,128 @@ ALERTINIT:
     var speechwhitelist %generalspeech|%craftingspeech|%ferryspeech|%monsterspeech|%spellspeech|%hespeech|%artspeech
     var namementionwhitelist Welcome back, (Sir|Madam)|Farewell, (Sir|Madam)|Take care, (Sir|Madam)|Thanks,|Thank you very much,|Searching methodically through the shelves, you finally manage to locate the jar labeled
     action (speech) var speechspeaker $1; var speechtext $2; var speechdiff2 %t; math speechdiff2 subtract %lastspeech; var speechdiff %speechdiff2 when ^(?!%speechwhitelist)(.{0,40}).*\, "(?!Say Ahh!)(.+)"
-    action (speech) put #echo %alertwindow Yellow [Speech] %speechspeaker...; put #play Speech; put #flash; var lastspeech %t when eval %speechdiff >= 1
-    action (speech) put #echo %alertwindow Yellow [Speech]: Name mention.; put #play Speech; put #flash when \"(?!%namementionwhitelist).*$charactername.*\"
-    action (speech) put #echo %alertwindow Yellow [Speech]: Foreign Language; put #play Speech; put #flash; when something in \w+\.
-    action (speech) put #play Speech;put #flash;put #echo %alertwindow Yellow [Speech]: Hidden: $1... when ^You hear (a voice|the voice of \S+|a male .+ voice|a female .+ voice) .+, \".+\"
-    action (speech) put #play Speech;put #flash;put #echo %alertwindow Yellow [Speech]: Yell $1... when ^You hear (.+) voice yell from the \w+, \".+\"
-    action (speech) put #play Speech;put #flash;put #echo %alertwindow Yellow [Speech]: $1 when ^\S+ (chants|sings) in a \w+ voice:|^You hear .+ voice (chanting|singing) from the shadows:
-    action (speech) put #play Speech;put #flash;put #echo %alertwindow Yellow [Speech]: $1 when (^\S+ recites:|You hear .+ recite from the shadows:)
-    action (speech) put #play Speech;put #flash;put #echo %alertwindow Yellow [Speech]: intone. when ^\S+ voice drops in pitch and (he|she) intones:|You hear .+ voice from the shadows intone:
-    action (speech) put #play Speech;put #flash;put #echo %alertwindow Yellow [Speech]: whisper. when ^\S+ whispers, \".+\"|^\S+ leans over and whispers, \".+\"
-    action put #play ThinkTo;put #flash;put #echo %alertwindow Yellow [Speech]: ESP when \[\S+\] \"\<(to you|to you faintly)\>\"
-    action put #play ThinkTo;put #flash;put #echo %alertwindow Yellow [Speech]: ESP when ^You hear \S+ thoughts in your head|^You hear \S+'s (faint|loud) thoughts in your head
+    action (speech) put #echo >$alertwindow Yellow [Speech] %speechspeaker...; put #play Speech; put #flash; var lastspeech %t when eval %speechdiff >= 1
+    action (speech) put #echo >$alertwindow Yellow [Speech]: Name mention.; put #play Speech; put #flash when \"(?!%namementionwhitelist).*$charactername.*\"
+    action (speech) put #echo >$alertwindow Yellow [Speech]: Foreign Language; put #play Speech; put #flash; when something in \w+\.
+    action (speech) put #play Speech;put #flash;put #echo >$alertwindow Yellow [Speech]: Hidden: $1... when ^You hear (a voice|the voice of \S+|a male .+ voice|a female .+ voice) .+, \".+\"
+    action (speech) put #play Speech;put #flash;put #echo >$alertwindow Yellow [Speech]: Yell $1... when ^You hear (.+) voice yell from the \w+, \".+\"
+    action (speech) put #play Speech;put #flash;put #echo >$alertwindow Yellow [Speech]: $1 when ^\S+ (chants|sings) in a \w+ voice:|^You hear .+ voice (chanting|singing) from the shadows:
+    action (speech) put #play Speech;put #flash;put #echo >$alertwindow Yellow [Speech]: $1 when (^\S+ recites:|You hear .+ recite from the shadows:)
+    action (speech) put #play Speech;put #flash;put #echo >$alertwindow Yellow [Speech]: intone. when ^\S+ voice drops in pitch and (he|she) intones:|You hear .+ voice from the shadows intone:
+    action (speech) put #play Speech;put #flash;put #echo >$alertwindow Yellow [Speech]: whisper. when ^\S+ whispers, \".+\"|^\S+ leans over and whispers, \".+\"
+    action put #play ThinkTo;put #flash;put #echo >$alertwindow Yellow [Speech]: ESP when \[\S+\] \"\<(to you|to you faintly)\>\"
+    action put #play ThinkTo;put #flash;put #echo >$alertwindow Yellow [Speech]: ESP when ^You hear \S+ thoughts in your head|^You hear \S+'s (faint|loud) thoughts in your head
   }
   if ("%arrivalalerts" = "YES") then
   {
-    action put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes-Arrival when ^\S+ just arrived.
+    action put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes-Arrival when ^\S+ just arrived.
   }
-  if (("%emotealerts" = "YES") && (tolower("%scriptmodename") != "combat")) then then
+  if (("%emotealerts" = "YES") && ("%scriptmodename" != "combat")) then then
   { 
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 bows. when ^(\S+) bows to you.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 curtsies. when ^(\S+) curtsies to you.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 flails. when ^(\S+) flails (his|her) arms about.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 frowns. when ^(\S+) frowns\.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 frowns at $2. when ^(\S+) frowns at (\S+)\.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 hugs $2. when ^(\S+) hugs (\S+)
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 glares. when ^(\S+) glares
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 grins. when ^(\S+) grins at
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 giggles. when ^(\S+) giggles
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 hails you. when ^(\S+) hails you with a superior nod.|^\S+ hails you with a clenched fist over her heart and a respectful nod, the traditional Kaldaran greeting
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 leans on you. when ^(\S+) leans on you
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 licks you. when ^(\S+) leans over and licks you.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $2 nods to you. when ^(?!(He|She) nods to you slightly\.)(\S+) nods to you.|^(\S+) gives you (a slight|an amiable|an emphatic|a meek) nod.|^(\S+) tips (his|her) \S+ to you with a courteous nod.|^(\S+) nods politely to you.|^(\S+) nods graciously at you, giving you a polite smile.|^(\S+) gives you a slight nods at you, obviously agreeing with your views.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 nudges. when ^(\S+) nudges
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 peers. when ^(\S+) peers quizically
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 pokes you. when ^(\S+) pokes you in the ribs.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 shakes you. when ^(\S+) shakes you
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 stares at you. when ^(\S+) stares at you|^(\S+) fixes you with a serene, lofty stare\.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 tickled you. when ^(\S+) just tickled you.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 sighs. when ^(\S+) sighs
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 taps you. when ^(\S+) taps you
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 waves. when ^(\S+) waves\.|^\S+ waves to you.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 waves a hand in front of your face. when ^(\S+) waves a hand in front of your face.
-    action (emote) put #play Speech;put #echo %alertwindow Yellow Alarm: Emotes - $1 winks. when ^(\S+) winks
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 bows. when ^(\S+) bows to you.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 curtsies. when ^(\S+) curtsies to you.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 flails. when ^(\S+) flails (his|her) arms about.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 frowns. when ^(\S+) frowns\.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 frowns at $2. when ^(\S+) frowns at (\S+)\.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 hugs $2. when ^(\S+) hugs (\S+)
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 glares. when ^(\S+) glares
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 grins. when ^(\S+) grins at
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 giggles. when ^(\S+) giggles
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 hails you. when ^(\S+) hails you with a superior nod.|^\S+ hails you with a clenched fist over her heart and a respectful nod, the traditional Kaldaran greeting
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 leans on you. when ^(\S+) leans on you
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 licks you. when ^(\S+) leans over and licks you.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $2 nods to you. when ^(?!(He|She) nods to you slightly\.)(\S+) nods to you.|^(\S+) gives you (a slight|an amiable|an emphatic|a meek) nod.|^(\S+) tips (his|her) \S+ to you with a courteous nod.|^(\S+) nods politely to you.|^(\S+) nods graciously at you, giving you a polite smile.|^(\S+) gives you a slight nods at you, obviously agreeing with your views.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 nudges. when ^(\S+) nudges
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 peers. when ^(\S+) peers quizically
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 pokes you. when ^(\S+) pokes you in the ribs.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 shakes you. when ^(\S+) shakes you
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 stares at you. when ^(\S+) stares at you|^(\S+) fixes you with a serene, lofty stare\.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 tickled you. when ^(\S+) just tickled you.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 sighs. when ^(\S+) sighs
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 taps you. when ^(\S+) taps you
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 waves. when ^(\S+) waves\.|^\S+ waves to you.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 waves a hand in front of your face. when ^(\S+) waves a hand in front of your face.
+    action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 winks. when ^(\S+) winks
   }
   if ("%gmalerts" = "YES") then
   {
-    action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: SEND [$1] $2 when ^SEND\[(\w+)\] (.*)
-    action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: PAGE when \[PAGE!\] \w+, a member of staff is trying to get your attention.  Please respond!
-    action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: Question Asked when .*\* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \*(.*)
+    action put #flash; put #play MiniFanfare3;put #echo >$alertwindow Yellow [GM]: SEND [$1] $2 when ^SEND\[(\w+)\] (.*)
+    action put #flash; put #play MiniFanfare3;put #echo >$alertwindow Yellow [GM]: PAGE when \[PAGE!\] \w+, a member of staff is trying to get your attention.  Please respond!
+    action put #flash; put #play MiniFanfare3;put #echo >$alertwindow Yellow [GM]: Question Asked when .*\* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \* \*(.*)
     action (questionlooker) put #class +questionreader -questionlooker when ^.(\s*(?:\*\s)+\s*).$
-    action (questionreader) put #class -questionreader +questionlooker; put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: Question - $1 when ^\s*(.*\?.*)$
+    action (questionreader) put #class -questionreader +questionlooker; put #flash; put #play MiniFanfare3;put #echo >$alertwindow Yellow [GM]: Question - $1 when ^\s*(.*\?.*)$
     action (questionlooker) on
     action (questionreader) off
-    #action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: Question 3 - $1 when ^. ((?=.*?\b\w{2,}\b).*).$
-    action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: GM Logon when \bGameMaster\b(?!.*joins the adventure\.$)
-    action put #flash; put #play MiniFanfare3;put #echo %alertwindow Yellow [GM]: Announcement when (^System Announcement:.*)
+    #action put #flash; put #play MiniFanfare3;put #echo >$alertwindow Yellow [GM]: Question 3 - $1 when ^. ((?=.*?\b\w{2,}\b).*).$
+    action put #flash; put #play MiniFanfare3;put #echo >$alertwindow Yellow [GM]: GM Logon when \bGameMaster\b(?!.*joins the adventure\.$)
+    action put #flash; put #play MiniFanfare3;put #echo >$alertwindow Yellow [GM]: Announcement when (^System Announcement:.*)
     
   }
   if ("%paranoiatalerts" = "YES") then
   {
-    action put #beep;put #echo %alertwindow Yellow Alarm: Script when (([^\Wa-z0-9]\s){2,})
-    action put #beep;put #echo %alertwindow Yellow Alarm: Script when (\b[^\Wa-z0-9]{2,}\b)(?<!(TO|PIRP|SKILL|EXP|HELP|STOP|PULL|LISTENING|BANNGG|STOW|HR|INVENTORY|APPRAISE|POP|FACE))
-    action put #beep;put #echo %alertwindow Yellow Alarm: Script when (([A-Z]\s){3,})
-    action put #beep;put #echo %alertwindow Yellow Alarm: Script when yellow duck
-    action put #beep;put #echo %alertwindow Yellow Alarm: Script when old hag
-    action put #beep;put #echo %alertwindow Yellow Alarm: Script when mouse
+    action put #beep;put #echo >$alertwindow Yellow Alarm: Script when (([^\Wa-z0-9]\s){2,})
+    action put #beep;put #echo >$alertwindow Yellow Alarm: Script when (\b[^\Wa-z0-9]{2,}\b)(?<!(TO|PIRP|SKILL|EXP|HELP|STOP|PULL|LISTENING|BANNGG|STOW|HR|INVENTORY|APPRAISE|POP|FACE))
+    action put #beep;put #echo >$alertwindow Yellow Alarm: Script when (([A-Z]\s){3,})
+    action put #beep;put #echo >$alertwindow Yellow Alarm: Script when yellow duck
+    action put #beep;put #echo >$alertwindow Yellow Alarm: Script when old hag
+    action put #beep;put #echo >$alertwindow Yellow Alarm: Script when mouse
   }
   if ("%almanacalerts" = "YES") then
   {
-    action put #echo %alertwindow [Almanac]: $2. when ^You set about studying your (.*) intently.  You believe you've learned something significant about (.+)!
+    action put #echo >$alertwindow [Almanac]: $2. when ^You set about studying your (.*) intently.  You believe you've learned something significant about (.+)!
   }
   #RPA
-  action var rpastatus 1; put #echo %alertwindow [RPA]: RPA started. when You suddenly feel charged with a fierce joy for life and realize that you have come to understand a little bit more about yourself, and the world about you.
-  action var rpastatus 1; put #echo %alertwindow [RPA]: RPA started. when You gaze about yourself for a moment, struck by a momentary passing thought that seems to bring to light some of what you have learned in the past.  You laugh inwardly in delight at this scrap of personal philosophy, the joy of the realization filling you warmly.
-  action var rpastatus 1; put #echo %alertwindow [RPA]: RPA started. when A memory of something you were told once by an old teacher of yours suddenly flashes through your mind.  Though you didn't understand what he told you then, you suddenly grasp the full meaning of it now!
-  action var rpastatus 1; put #echo %alertwindow [RPA]: RPA unpaused. when You unpause your level (.+) roleplaying award.
-  action (rpa) var rpastatus 1;put #echo %alertwindow [RPA]: Active. when Status: Active
-  action (rpa) var rpastatus -1;put #echo %alertwindow [RPA]: Not Active. when Status: Paused
+  action var rpastatus 1; put #echo >$alertwindow [RPA]: RPA started. when You suddenly feel charged with a fierce joy for life and realize that you have come to understand a little bit more about yourself, and the world about you.
+  action var rpastatus 1; put #echo >$alertwindow [RPA]: RPA started. when You gaze about yourself for a moment, struck by a momentary passing thought that seems to bring to light some of what you have learned in the past.  You laugh inwardly in delight at this scrap of personal philosophy, the joy of the realization filling you warmly.
+  action var rpastatus 1; put #echo >$alertwindow [RPA]: RPA started. when A memory of something you were told once by an old teacher of yours suddenly flashes through your mind.  Though you didn't understand what he told you then, you suddenly grasp the full meaning of it now!
+  action var rpastatus 1; put #echo >$alertwindow [RPA]: RPA unpaused. when You unpause your level (.+) roleplaying award.
+  action (rpa) var rpastatus 1;put #echo >$alertwindow [RPA]: Active. when Status: Active
+  action (rpa) var rpastatus -1;put #echo >$alertwindow [RPA]: Not Active. when Status: Paused
   action (rpa) var rpastatus -1 when None.
   action (rpa) off
   if ("%pvpstealthalerts" = "YES") then
   {
-    action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: Stealth when ^You notice (\S+) attempting to conceal (his|her) spell preparations from a hidden location.
-    action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: Stealth when ^\S+ reveals (himself|herself).
-    action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: Stealth when ^You hear someone chanting.
-    action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: Stealth when ^You notice (\S+) slip into a hiding place.
-    action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: Stealth when ^You notice (\S+) come out of hiding.
-    action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: Stealth when ^You notice (\S+), who is quite obviously attempting to remain hidden.
-    action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: Stealth when ^You notice the vague silhouette of
-    action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: Stealth when ^You see signs that someone is about, but fail to discover their location.
+    action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: Stealth when ^You notice (\S+) attempting to conceal (his|her) spell preparations from a hidden location.
+    action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: Stealth when ^\S+ reveals (himself|herself).
+    action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: Stealth when ^You hear someone chanting.
+    action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: Stealth when ^You notice (\S+) slip into a hiding place.
+    action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: Stealth when ^You notice (\S+) come out of hiding.
+    action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: Stealth when ^You notice (\S+), who is quite obviously attempting to remain hidden.
+    action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: Stealth when ^You notice the vague silhouette of
+    action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: Stealth when ^You see signs that someone is about, but fail to discover their location.
   }
   if ("%inventoryalerts" = "YES") then
   {
-    action put #flash; put #play Speech;put #echo %alertwindow Yellow [Inventory]: Large number of items. when WARNING:  You have a large number of items on your person.
-    action put #flash; put #play Speech;put #echo %alertwindow Yellow [Inventory]: Extremely large number of items. when WARNING: You are carrying an extremely large number of items on your person.  
+    action put #flash; put #play Speech;put #echo >$alertwindow Yellow [Inventory]: Large number of items. when WARNING:  You have a large number of items on your person.
+    action put #flash; put #play Speech;put #echo >$alertwindow Yellow [Inventory]: Extremely large number of items. when WARNING: You are carrying an extremely large number of items on your person.  
   }
-  action put #flash; put #play Speech;put #echo %alertwindow Yellow [Inventory]: Completely full inventory! when would push you over the item limit of 500 items.  Please reduce your inventory count before you try again.
+  action put #flash; put #play Speech;put #echo >$alertwindow Yellow [Inventory]: Completely full inventory! when would push you over the item limit of 500 items.  Please reduce your inventory count before you try again.
 
   #HEALTH_ALARMS
   if ("%healthalerts" = "YES") then
   {
-    action put #flash; put #play JustArrived;put #echo %alertwindow Yellow [Health]: Stunned when stunning you
-    action put #flash; put #play JustArrived;put #echo %alertwindow [Health]: Stunned when dealing you a vicious stun.
-    #action put #flash; put #play JustArrived;put #echo %alertwindow [Health]: Stunned when You are still stunned.
-    action put #flash; put #play Body;put #echo %alertwindow Yellow [Health]: Dead; #send avoid all;#flash; goto DEADLOGIC when ^Your death cry echoes in your brain
-    action put #flash; put #play Body; put #echo %alertwindow Yellow [Health]: Dead; goto DEADLOGIC when DEAD> 
-    action if $health < %lasthealth then put #flash; if $health < %lasthealth then put #play Advance; if $health < %lasthealth then put #echo %alertwindow Yellow [Health]: Low Health; var lasthealth $health when eval $health <= %healthalertnum
-    action put #flash; put #play Advance;put #echo %alertwindow Yellow [Health]: Infection;var infection 1;var nexthealcheck 0 when You feel a wave of nausea rising from your gut as you notice a sickly green fluid oozing from
-    action put #flash; put #play Advance;put #echo %alertwindow Yellow [Health]: Infection - Infection;var infection 1;var nexthealcheck 0 when Your wounds are infected.
+    action put #flash; put #play JustArrived;put #echo >$alertwindow Yellow [Health]: Stunned when stunning you
+    action put #flash; put #play JustArrived;put #echo >$alertwindow [Health]: Stunned when dealing you a vicious stun.
+    #action put #flash; put #play JustArrived;put #echo >$alertwindow [Health]: Stunned when You are still stunned.
+    action put #flash; put #play Body;put #echo >$alertwindow Yellow [Health]: Dead; #send avoid all;#flash; goto DEADLOGIC when ^Your death cry echoes in your brain
+    action put #flash; put #play Body; put #echo >$alertwindow Yellow [Health]: Dead; goto DEADLOGIC when DEAD> 
+    action if $health < %lasthealth then put #flash; if $health < %lasthealth then put #play Advance; if $health < %lasthealth then put #echo >$alertwindow Yellow [Health]: Low Health; var lasthealth $health when eval $health <= %healthalertnum
+    action put #flash; put #play Advance;put #echo >$alertwindow Yellow [Health]: Infection;var infection 1;var nexthealcheck 0 when You feel a wave of nausea rising from your gut as you notice a sickly green fluid oozing from
+    action put #flash; put #play Advance;put #echo >$alertwindow Yellow [Health]: Infection - Infection;var infection 1;var nexthealcheck 0 when Your wounds are infected.
     action var nexthealcheck 0 when You try to creep out of hiding but your injuries cause you to stumble and crash to the ground!
     action var nexthealcheck 0 when Your (.+) is too injured for you to do that.
   }  
   if (("%bugout" = "YES") && (%scriptmode = 1)) then
   {
-    action if (%buggingout = 0) then goto BUGOUT; put #echo %alertwindow Yellow [Bugout]: Bugging out due to low health! when eval $health <= %bugoutnum
+    action if (%buggingout = 0) then goto BUGOUT; put #echo >$alertwindow Yellow [Bugout]: Bugging out due to low health! when eval $health <= %bugoutnum
     if ("%bugoutonbleed" = "YES") then
     {
-      action if (%buggingout = 0) then goto BUGOUT;put #echo %alertwindow Yellow [Bugout]: Bugging out due to bleeding! when eval $bleeding = 1
+      action if (%buggingout = 0) then goto BUGOUT;put #echo >$alertwindow Yellow [Bugout]: Bugging out due to bleeding! when eval $bleeding = 1
     }
     if ("%bugoutonsend" = "YES") then
     {
-      action put #echo %alertwindow Yellow [GM]: SEND [$1] $2; put #echo %alertwindow Yellow [Bugout]: Bugging out due to GM SEND!;goto BUGOUT when ^SEND\[(\w+)\] (.*)
-      action put #echo %alertwindow Yellow [GM]: PAGE; put #echo %alertwindow Yellow [Bugout]: Bugging out due to GM PAGE!;goto BUGOUT when ^\[PAGE!\] \w+, a member of staff is trying to get your attention.  Please respond!
+      action put #echo >$alertwindow Yellow [GM]: SEND [$1] $2; put #echo >$alertwindow Yellow [Bugout]: Bugging out due to GM SEND!;goto BUGOUT when ^SEND\[(\w+)\] (.*)
+      action put #echo >$alertwindow Yellow [GM]: PAGE; put #echo >$alertwindow Yellow [Bugout]: Bugging out due to GM PAGE!;goto BUGOUT when ^\[PAGE!\] \w+, a member of staff is trying to get your attention.  Please respond!
     }
   }
   if ("%autoupkeep" = "YES") then
@@ -580,35 +578,35 @@ ALERTINIT:
     action var goupkeep 1;var autype wounds when You are in no condition to do that.
     action var goupkeep 1; var autype manual when ^UPKEEP!!!
   }
-  action put #flash; put #play JustArrived;put #echo %alertwindow Yellow [Health]: when The silt and sand starts to shift and slide
+  action put #flash; put #play JustArrived;put #echo >$alertwindow Yellow [Health]: when The silt and sand starts to shift and slide
   if ("%nervealerts" = "YES") then
   {
-    action put #flash; put #play Echo;put #echo %alertwindow [Nerves]: Nerve Damage when ^You sense (.*) amount of mana slip away from you\.
-    action put #flash; put #play Echo;put #echo %alertwindow [Nerves]: Nerve Damage when The mana you were holding dissipates.
+    action put #flash; put #play Echo;put #echo >$alertwindow [Nerves]: Nerve Damage when ^You sense (.*) amount of mana slip away from you\.
+    action put #flash; put #play Echo;put #echo >$alertwindow [Nerves]: Nerve Damage when The mana you were holding dissipates.
   }
   if ("%backfirealerts" = "YES") then
   {
-    action put #flash; put #play Echo;var backfire 1;put #echo %alertwindow [Nerves]: Backfire - %spellprepping when ^Your spell (.*)backfires
+    action put #flash; put #play Echo;var backfire 1;put #echo >$alertwindow [Nerves]: Backfire - %spellprepping when ^Your spell (.*)backfires
   }
   #SORCERY_ALARMS
   if ("%sorceryalerts" = "YES") then
   {
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Spell failed due to backlash. when The spell pattern resists the influx of .* mana and fails completely\.
+    action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Spell failed due to backlash. when The spell pattern resists the influx of .* mana and fails completely\.
   
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Stunned due to backlash. when The spell pattern resists the influx of .* mana though the backlash leaves you stunned\!
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Attunement dulled due to backlash. when The spell pattern resists the influx of .* mana.  You are able to contain the backlash but doing so leaves your attunement to the mana streams dulled\.
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Internal head damage due to backlash. when The spell pattern resists the influx of (.+) mana\. You are able to contain the backlash but doing so results in a splitting headache\.
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Nerve damage due to backlash. when The spell pattern resists the influx of (.+) mana though you are able to channel the worst of the backlash into your nervous system\.
+    action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Stunned due to backlash. when The spell pattern resists the influx of .* mana though the backlash leaves you stunned\!
+    action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Attunement dulled due to backlash. when The spell pattern resists the influx of .* mana.  You are able to contain the backlash but doing so leaves your attunement to the mana streams dulled\.
+    action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Internal head damage due to backlash. when The spell pattern resists the influx of (.+) mana\. You are able to contain the backlash but doing so results in a splitting headache\.
+    action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Nerve damage due to backlash. when The spell pattern resists the influx of (.+) mana though you are able to channel the worst of the backlash into your nervous system\.
     
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Burned skin due to backlash. when The spell pattern resists the influx of (.+) mana as a strange itching sensation builds under your skin.  Geysers of uncontrolled mana suddenly erupt from your flesh, illuminating the surroundings in an excruciating display of blue-black fire!
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Skills degraded due to backlash. when The spell pattern resists the influx of (.+) mana, overloading your arcane senses in a torrent of uncontrolled power\.
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Hand exploded due to backlash. when An instant rush of black and blue fire explodes into being, consuming your (left|right) hand and turning it into ash!
+    action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Burned skin due to backlash. when The spell pattern resists the influx of (.+) mana as a strange itching sensation builds under your skin.  Geysers of uncontrolled mana suddenly erupt from your flesh, illuminating the surroundings in an excruciating display of blue-black fire!
+    action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Skills degraded due to backlash. when The spell pattern resists the influx of (.+) mana, overloading your arcane senses in a torrent of uncontrolled power\.
+    action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Hand exploded due to backlash. when An instant rush of black and blue fire explodes into being, consuming your (left|right) hand and turning it into ash!
     
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Unconsciousness due to backlash! when The spell pattern resists the influx of (.+) mana and everything goes black.
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Lost scrolls due to backlash. when The spell pattern resists the influx of unfocused mana, overloading your arcane senses and rendering you magically inert\.
-    action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Both hands exploded due to backlash. when An instant rush of black and blue fire explodes into being, consuming your outstretched limbs and turning them into ash!
+    action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Unconsciousness due to backlash! when The spell pattern resists the influx of (.+) mana and everything goes black.
+    action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Lost scrolls due to backlash. when The spell pattern resists the influx of unfocused mana, overloading your arcane senses and rendering you magically inert\.
+    action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Both hands exploded due to backlash. when An instant rush of black and blue fire explodes into being, consuming your outstretched limbs and turning them into ash!
     
-   	action put #flash; put #play Echo;put #echo %alertwindow [Sorcery]: Incineration due to backlash. when The spell pattern resists the influx of unfocused mana as a strange itching sensation builds under your skin. Geysers of blue-black fire suddenly erupt from your body consuming you in a horrific display of unbridled sorcery
+   	action put #flash; put #play Echo;put #echo >$alertwindow [Sorcery]: Incineration due to backlash. when The spell pattern resists the influx of unfocused mana as a strange itching sensation builds under your skin. Geysers of blue-black fire suddenly erupt from your body consuming you in a horrific display of unbridled sorcery
 
    
     
@@ -618,43 +616,43 @@ ALERTINIT:
   {
     if (("%bugout" = "YES") && (%scriptmode = 1)) then
     {
-      action if (%buggingout = 0) then goto BUGOUT; if $concentration < %lastconc then put #play Echo; if $concentration < %lastconc then put #flash; if $concentration < %lastconc then put #echo %alertwindow Yellow [Khri]: Possible Khri crash.  Bugging!; var lastconc $concentration when eval $concentration <= 10
+      action if (%buggingout = 0) then goto BUGOUT; if $concentration < %lastconc then put #play Echo; if $concentration < %lastconc then put #flash; if $concentration < %lastconc then put #echo >$alertwindow Yellow [Khri]: Possible Khri crash.  Bugging!; var lastconc $concentration when eval $concentration <= 10
     }
     else
     {
-      action if $concentration < %lastconc then put #flash; if $concentration < %lastconc then put #play Echo; if $concentration < %lastconc then put #echo %alertwindow Yellow [Khri]: Possible Khri crash.  Please investigate!; var lastconc $concentration when eval $concentration <= 5
+      action if $concentration < %lastconc then put #flash; if $concentration < %lastconc then put #play Echo; if $concentration < %lastconc then put #echo >$alertwindow Yellow [Khri]: Possible Khri crash.  Please investigate!; var lastconc $concentration when eval $concentration <= 5
     }
   }
   #PVP_ALARMS
   if ("%pvpalerts" = "YES") then
   {
-		action put #flash; put #play Body;put #echo %alertwindow Yellow [PVP]: Empath - $1 when ^You feel a warmth radiate from (\w+)'s touch\.
-		action put #flash; put #play Body;put #echo %alertwindow Yellow [PVP]: Locate when ^You get an odd feeling that someone is watching you.
-		action put #flash; put #play Body;put #echo %alertwindow Yellow [PVP]: Risen when ^A (.*) wanders into the area, looking for you.
-		action put #flash; put #play Body;put #echo %alertwindow Yellow [PVP]: Risen when ^A (.*) gazes about the area with an intent look, watching the goings on.
-		action put #flash; put #play Body;put #echo %alertwindow Yellow [PVP]: Familiar when begins to watch the goings on carefully.
-		action put #flash; put #play Body;put #echo %alertwindow Yellow [PVP]: Companion arrived. when A \w* (raccoon|wolf) pads into the area\.
-		action put #flash; put #play Body;put #echo %alertwindow Yellow [PVP]: Companion wants to give you something. when A \w* (raccoon|wolf) nudges at you (anxiously|excitedly)\.
-		action put #flash; put #play Body;put #echo %alertwindow Yellow [PVP]: Companion when A \w* (raccoon|wolf) (whines|sits down|stands back up)\.
-		action put #flash; put #play Body;put #echo %alertwindow Yellow [PVP]: Companion leaves. when A \w* (raccoon|wolf)  pads off\.
-		action put #flash; put #play Body;put #echo %alertwindow Yellow [PVP]: Riftal Summons when A gaping rift of 
-		action put #flash; put #play JustArrived;put #echo %alertwindow Yellow [PVP]: Thump when catches you in the throat with the edge of
-		#action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]:  when snipes
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 when ^(\S+) gestures at you.
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 when ^(\S+) begins to advance on you!
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 when You notice \S+ attempting to stealthily advance upon you!
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 when ^(\S+) is still a distance away from you and is closing steadily.
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 when ^(\S+) closes to pole weapon range on you!
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 when ^(\S+) closes to melee range on you!
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 when ^(\S+) turns to face you.
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 when ^(\S+) begins to focus intently on you!
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 when ^Not having any room, (\S+) stops advancing on you.
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 when ^(\S+) appears to be aiming at you
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 when ^You notice (\S+) focusing intently on you while remaining hidden!
+		action put #flash; put #play Body;put #echo >$alertwindow Yellow [PVP]: Empath - $1 when ^You feel a warmth radiate from (\w+)'s touch\.
+		action put #flash; put #play Body;put #echo >$alertwindow Yellow [PVP]: Locate when ^You get an odd feeling that someone is watching you.
+		action put #flash; put #play Body;put #echo >$alertwindow Yellow [PVP]: Risen when ^A (.*) wanders into the area, looking for you.
+		action put #flash; put #play Body;put #echo >$alertwindow Yellow [PVP]: Risen when ^A (.*) gazes about the area with an intent look, watching the goings on.
+		action put #flash; put #play Body;put #echo >$alertwindow Yellow [PVP]: Familiar when begins to watch the goings on carefully.
+		action put #flash; put #play Body;put #echo >$alertwindow Yellow [PVP]: Companion arrived. when A \w* (raccoon|wolf) pads into the area\.
+		action put #flash; put #play Body;put #echo >$alertwindow Yellow [PVP]: Companion wants to give you something. when A \w* (raccoon|wolf) nudges at you (anxiously|excitedly)\.
+		action put #flash; put #play Body;put #echo >$alertwindow Yellow [PVP]: Companion when A \w* (raccoon|wolf) (whines|sits down|stands back up)\.
+		action put #flash; put #play Body;put #echo >$alertwindow Yellow [PVP]: Companion leaves. when A \w* (raccoon|wolf)  pads off\.
+		action put #flash; put #play Body;put #echo >$alertwindow Yellow [PVP]: Riftal Summons when A gaping rift of 
+		action put #flash; put #play JustArrived;put #echo >$alertwindow Yellow [PVP]: Thump when catches you in the throat with the edge of
+		#action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]:  when snipes
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 when ^(\S+) gestures at you.
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 when ^(\S+) begins to advance on you!
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 when You notice \S+ attempting to stealthily advance upon you!
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 when ^(\S+) is still a distance away from you and is closing steadily.
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 when ^(\S+) closes to pole weapon range on you!
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 when ^(\S+) closes to melee range on you!
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 when ^(\S+) turns to face you.
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 when ^(\S+) begins to focus intently on you!
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 when ^Not having any room, (\S+) stops advancing on you.
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 when ^(\S+) appears to be aiming at you
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 when ^You notice (\S+) focusing intently on you while remaining hidden!
 		
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: Someone roared at you. when You are frozen with fear!
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: $1 roared at you. when You feel incredibly startled by (\S+), and glance down just in time to see that your footing has become unbalanced\.
-		action put #flash; put #play Evil;put #echo %alertwindow Yellow [PVP]: Someone roared at you. when You feel weaker and less sure of your ability to attack\.
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: Someone roared at you. when You are frozen with fear!
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: $1 roared at you. when You feel incredibly startled by (\S+), and glance down just in time to see that your footing has become unbalanced\.
+		action put #flash; put #play Evil;put #echo >$alertwindow Yellow [PVP]: Someone roared at you. when You feel weaker and less sure of your ability to attack\.
   }
   return
 
@@ -695,9 +693,9 @@ GUILDVARLOAD:
 
 
 COMMANDVARLOAD:
-  if tolower("%scriptmodename") = "1" then var multiarea NO
-  if tolower("%scriptmodename") = "2" then var multiarea NO
-  if (tolower("%scriptmodename") = "combat") then
+  if ("%scriptmodename" = "1") then var multiarea NO
+  if ("%scriptmodename" = "2") then var multiarea NO
+  if ("%scriptmodename" = "combat") then
   {
     echo
     echo ================Combat Training Only===============
@@ -715,7 +713,7 @@ COMMANDVARLOAD:
     else var varset 1
     put #echo >$alertwindow Began combat only training in Mode %varset.
   }
-  if (tolower("%scriptmodename") = "noncombat") then
+  if ("%scriptmodename" = "noncombat") then
   {
     var scriptmode 0
     echo Out of Combat Training!
@@ -731,7 +729,7 @@ COMMANDVARLOAD:
     var bugout NO
     put #echo >$alertwindow Began noncombat training.
   }
-  if tolower("%scriptmodename") = "climb" then
+  if ("%scriptmodename" = "climb") then
   {
     echo
     echo ================Climb Practice===============
@@ -754,7 +752,7 @@ COMMANDVARLOAD:
     var bugout NO
     var autoupkeep NO
   }
-  if tolower("%scriptmodename") = "devotion" then
+  if ("%scriptmodename" = "devotion") then
   {
     echo
     echo ================Devotion===============
@@ -788,7 +786,7 @@ COMMANDVARLOAD:
     var skinfatrainer NO
     var autoupkeep NO
   }
-  if tolower("%scriptmodename") = "quiet" then
+  if ("%scriptmodename" = "quiet") then
   {
     echo
     echo ================Quiet Training===============
@@ -816,7 +814,7 @@ COMMANDVARLOAD:
     var skinfatrainer NO
     var autoupkeep NO
   }
-  if tolower("%scriptmodename") = "silent" then
+  if ("%scriptmodename" = "silent") then
   {
     echo
     echo ================Silent Training===============
@@ -844,7 +842,7 @@ COMMANDVARLOAD:
     var autoupkeep NO
     var almanac NO
   }
-  if tolower("%scriptmodename") = "nort" then
+  if ("%scriptmodename" = "nort") then
   {
     echo
     echo ================No-RT Training===============
@@ -879,7 +877,7 @@ COMMANDVARLOAD:
     var research NO
     var autoupkeep NO
   }
-  if tolower("%scriptmodename") = "magic" then
+  if ("%scriptmodename" = "magic") then
   {
     echo
     echo ================Magic===============
@@ -909,10 +907,10 @@ COMMANDVARLOAD:
     var skinfatrainer NO
     var autoupkeep NO
     var cyclicbuff NO
-    var cyclic NO
+    #var cyclic NO
     put #echo >$alertwindow Began noncombat magic training.
   }
-  if tolower("%scriptmodename") = "music" then
+  if ("%scriptmodename" = "music") then
   {
     echo
     echo ================Music===============
@@ -932,7 +930,7 @@ COMMANDVARLOAD:
     var bugout NO
     var autoupkeep NO
   }
-  if tolower("%scriptmodename") = "research" then
+  if ("%scriptmodename" = "research") then
   {
     echo
     echo ================Research===============
@@ -976,7 +974,7 @@ COMMANDVARLOAD:
       var researchnum 1
     }
   }
-  if tolower("%scriptmodename") = "teach" then
+  if ("%scriptmodename" = "teach") then
   {
     echo
     echo ================Teaching===============
@@ -1008,7 +1006,7 @@ COMMANDVARLOAD:
     var skinfatrainer NO
     var autoupkeep NO
   }
-  if tolower("%scriptmodename") = "focus" then
+  if ("%scriptmodename" = "focus") then
   {
     echo
     echo ================Appraise Focus===============
@@ -1042,7 +1040,7 @@ COMMANDVARLOAD:
     var almanac NO
     var ejournal NO
   }
-  if tolower("%scriptmodename") = "buff" then
+  if ("%scriptmodename" = "buff") then
   {
     var scriptmode 2
     var speechalerts NO
@@ -1054,7 +1052,7 @@ COMMANDVARLOAD:
     }
     put #echo >$alertwindow Began buffing in Mode %varset.
   }
-  if tolower("%scriptmodename") = "gbuff" then
+  if ("%scriptmodename" = "gbuff") then
   {
     echo
     echo ================Group Buffing===============
@@ -1093,7 +1091,7 @@ COMMANDVARLOAD:
     var skinfatrainer NO
     var autoupkeep NO
   }
-  if tolower("%scriptmodename") = "upkeep" then
+  if ("%scriptmodename" = "upkeep") then
   {
     echo
     echo ================Upkeep===============
@@ -1108,7 +1106,7 @@ COMMANDVARLOAD:
     var autoupkeep NO
     var armorcheck NO
   }
-  if tolower("%scriptmodename") = "burgle" then
+  if ("%scriptmodename" = "burgle") then
   {
     echo
     echo ================Burgle===============
@@ -1122,7 +1120,7 @@ COMMANDVARLOAD:
     var healthalertnum 0
     var autoupkeep NO
   }
-  if tolower("%scriptmodename") = "burglepawn" then
+  if ("%scriptmodename" = "burglepawn") then
   {
     echo
     echo ================Burgle & Pawn===============
@@ -1137,7 +1135,7 @@ COMMANDVARLOAD:
     var autoupkeep NO
     var burglepawn YES
   }
-  if tolower("%scriptmodename") = "multi" then
+  if ("%scriptmodename" = "multi") then
   {
     echo
     echo ================Multi-Area Training===============
@@ -1146,7 +1144,7 @@ COMMANDVARLOAD:
     var multiarea YES
     put #echo >$alertwindow Began combat training in Multi-Area Mode.
   }
-  if tolower("%scriptmodename") = "alerts" then
+  if ("%scriptmodename" = "alerts") then
   {
     echo
     echo ================Alerts Only===============
@@ -1204,8 +1202,8 @@ COMMANDPARSE:
   if_1 then
   {  
     var varset 1
-    if tolower("%scriptmodename") = "help" then goto MAINHELP
-    if ((tolower("%scriptmodename") = "1") || (tolower("%scriptmodename") = "2")) then
+    if ("%scriptmodename" = "help") then goto MAINHELP
+    if (("%scriptmodename" = "1") || ("%scriptmodename" = "2")) then
     {
       var scriptmode 1
       gosub TITLE
@@ -1225,7 +1223,7 @@ COMMANDPARSE:
     }
     else
     {
-      if ((tolower("%scriptmodename") = "1") || (tolower("%scriptmodename") = "2") || (tolower("%scriptmodename") = "combat") || (tolower("%scriptmodename") = "research") || (tolower("%scriptmodename") = "teach") || (tolower("%scriptmodename") = "focus") || (tolower("%scriptmodename") = "buff")) || (tolower("%scriptmodename") = "gbuff") || (tolower("%scriptmodename") = "upkeep") || (tolower("%scriptmodename") = "burgle") || (tolower("%scriptmodename") = "burglepawn") || (tolower("%scriptmodename") = "multi") || (tolower("%scriptmodename") = "alerts") || (tolower("%scriptmodename") = "noncombat") || (tolower("%scriptmodename") = "climb") || (tolower("%scriptmodename") = "devotion") || (tolower("%scriptmodename") = "quiet") || (tolower("%scriptmodename") = "silent") || (tolower("%scriptmodename") = "nort") || (tolower("%scriptmodename") = "magic") || (tolower("%scriptmodename") = "music")) then
+      if (("%scriptmodename" = "1") || ("%scriptmodename" = "2") || ("%scriptmodename" = "combat") || ("%scriptmodename" = "research") || ("%scriptmodename" = "teach") || ("%scriptmodename" = "focus") || ("%scriptmodename" = "buff")) || ("%scriptmodename" = "gbuff") || ("%scriptmodename" = "upkeep") || ("%scriptmodename" = "burgle") || ("%scriptmodename" = "burglepawn") || ("%scriptmodename" = "multi") || ("%scriptmodename" = "alerts") || ("%scriptmodename" = "noncombat") || ("%scriptmodename" = "climb") || ("%scriptmodename" = "devotion") || ("%scriptmodename" = "quiet") || ("%scriptmodename" = "silent") || ("%scriptmodename" = "nort") || ("%scriptmodename" = "magic") || ("%scriptmodename" = "music")) then
       { 
         var varset 1
         put #echo mono Train script beginning.
@@ -1326,8 +1324,8 @@ BARBARIANONLY:
   action var edamage 0 when You sense your ability to land deadly blows decrease as the battle shifts before you\. 	
   action var edamage 1 when Utilizing flawless combat expertise you execute an attack combination and increase the damage of your next few attacks\.
   
-  #action math nextacm%acmtype subtract 45;put #echo %alertwindow Subtracting 45 seconds from %acmtype timer - %nextacm%acmtype. when With expert skill you end the attack and maneuver into a better position\.
-  #;put #echo %alertwindow Subtracting 45 seconds from %acmtype timer. 
+  #action math nextacm%acmtype subtract 45;put #echo >$alertwindow Subtracting 45 seconds from %acmtype timer - %nextacm%acmtype. when With expert skill you end the attack and maneuver into a better position\.
+  #;put #echo >$alertwindow Subtracting 45 seconds from %acmtype timer. 
   return
 
 
@@ -1340,7 +1338,7 @@ BARDONLY:
   return
 
 CLERICONLY:
-  #action var osrelmeraud NO; put #echo %alertwindow Yellow [BUffing]: Unable to find an orb to cast OM on.  Turning off OM use. when Crackling blue essence swirls over your hands, unable to reach the .+ orb.
+  #action var osrelmeraud NO; put #echo >$alertwindow Yellow [BUffing]: Unable to find an orb to cast OM on.  Turning off OM use. when Crackling blue essence swirls over your hands, unable to reach the .+ orb.
   var theurgy $theurgy
   var pray $pray
   var praydeity $praydeity
@@ -1472,9 +1470,9 @@ EMPATHONLY:
   
   if ("%healthalerts" = "YES") then
   {
-    action put #flash; put #play JustArrived; put #echo %alertwindow Yellow [Health]: Empathic Shock.  Target: %faceadj %facemon; var goodtarget 0;var shockcritter 1 when Pain blossoms within you, your delicate empathic senses
-    action put #flash; put #play JustArrived;put #echo %alertwindow Yellow [Health]: Empathic Shock.  Target: %faceadj %facemon;var goodtarget 0;var shockcritter 1 when Pain blossoms within you, your empathic shock deepening, but you compose yourself\.
-    action put #flash; put #play JustArrived;put #echo %alertwindow Yellow [Health]: Total Empathic Shock!  Target: %faceadj %facemon;var goodtarget 0;var shockcritter 1 when You realize that you can no longer sense the life essences around you, a numb coldness gripping you\.
+    action put #flash; put #play JustArrived; put #echo >$alertwindow Yellow [Health]: Empathic Shock.  Target: %faceadj %facemon; var goodtarget 0;var shockcritter 1 when Pain blossoms within you, your delicate empathic senses
+    action put #flash; put #play JustArrived;put #echo >$alertwindow Yellow [Health]: Empathic Shock.  Target: %faceadj %facemon;var goodtarget 0;var shockcritter 1 when Pain blossoms within you, your empathic shock deepening, but you compose yourself\.
+    action put #flash; put #play JustArrived;put #echo >$alertwindow Yellow [Health]: Total Empathic Shock!  Target: %faceadj %facemon;var goodtarget 0;var shockcritter 1 when You realize that you can no longer sense the life essences around you, a numb coldness gripping you\.
   }
   action var alfarcommand 1 when A (\S+) alfar warrior calmly strides in and surveys the area\.
   return
@@ -1999,7 +1997,7 @@ HUNTINGVARLOAD:
     {
       var zone 9b
       var travel YES
-      var traveldest sorrow
+      var traveldest sorrow's reach
       var move NO
       var targetroom 0
       var findroom YES
@@ -3346,7 +3344,7 @@ VALIDROOMCHECK:
         {
           put #flash
           put #play JustArrived
-          put #echo %alertwindow Yellow [UPKEEP]: Multi-Area Training, AutoUpkeep or Bugout is turned on, but the script is starting up in an unrecognized room!  Restart script when $roomid is something other than 0!
+          put #echo >$alertwindow Yellow [UPKEEP]: Multi-Area Training, AutoUpkeep or Bugout is turned on, but the script is starting up in an unrecognized room!  Restart script when $roomid is something other than 0!
           put #echo Yellow [UPKEEP]: AutoUpkeep or Bugout is turned on, but the script is starting up in an unrecognized room!  Restart script when $roomid is something other than 0!
           exit
         }
@@ -5333,7 +5331,7 @@ NEWNONCOMBATCHECKS:
       if ($Forging.Ranks >= 1750) then var forginglock 1
       if (%forginglock != 1) then
       {
-        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to forge at Forging.LearningRate: $Forging.LearningRate
+        #if (%killbeforeleave != 0) then put #echo >$alertwindow Yellow Decided to forge at Forging.LearningRate: $Forging.LearningRate
         var scriptareachange noncombat
         var noncombatactive 1
         var noncombatforgingactive 1
@@ -5347,7 +5345,7 @@ NEWNONCOMBATCHECKS:
       if ($Outfitting.Ranks >= 1750) then var outfittinglock 1
       if (%outfittinglock != 1) then
       {
-        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to do outfitting at Outfitting.LearningRate: $Outfitting.LearningRate
+        #if (%killbeforeleave != 0) then put #echo >$alertwindow Yellow Decided to do outfitting at Outfitting.LearningRate: $Outfitting.LearningRate
         var scriptareachange noncombat
         var noncombatactive 1
         var noncombatoutfittingactive 1
@@ -5378,7 +5376,7 @@ NEWAREAMOVEMENT:
           if ("$zoneid" = "%zone") then
           else
           {
-            put #echo %alertwindow Script was in combat mode in a maze, but found itself in the wrong zone.  Moving back to hunting area.
+            put #echo >$alertwindow Script was in combat mode in a maze, but found itself in the wrong zone.  Moving back to hunting area.
             gosub ROOMTRAVELCOMBAT
             gosub STATUSCHECK
           }
@@ -5390,7 +5388,7 @@ NEWAREAMOVEMENT:
           if (("$zoneid" = "%zone") && (contains("|%findroomlist|", "|$roomid|"))) then
           else
           {
-            put #echo %alertwindow Script was in combat mode, but found itself in the wrong zone or area.  Moving back to hunting area.
+            put #echo >$alertwindow Script was in combat mode, but found itself in the wrong zone or area.  Moving back to hunting area.
             gosub ROOMTRAVELCOMBAT
             gosub STATUSCHECK
           }
@@ -5427,17 +5425,17 @@ NEWAREAMOVEMENT:
             else
             {
               var killbeforeleave 0
-              put #echo %alertwindow Waiting for kill before leaving for NonCombat.
+              put #echo >$alertwindow Waiting for kill before leaving for NonCombat.
             }
           }
           ##KILL_NEXT
           if (%killbeforeleave != 1) then return
           var killbeforeleave -1
-          #put #echo %alertwindow [Train]: Ended Combat training.
+          #put #echo >$alertwindow [Train]: Ended Combat training.
         }
         else
         {
-          #put #echo %alertwindow [Train]: Ended Combat training.
+          #put #echo >$alertwindow [Train]: Ended Combat training.
         }
       }
     }
@@ -5468,21 +5466,21 @@ NEWAREAMOVEMENT:
           }
         }
       }
-      put #echo %alertwindow [Train]: Completed Upkeep.
+      put #echo >$alertwindow [Train]: Completed Upkeep.
     }
     #COMING_FROM_NONCOMBAT
     if ("%scriptarea" = "noncombat") then
     {
       put #echo Yellow Noncombat ended!
-      put #echo %alertwindow [Train]: Ended NonCombat training.
+      put #echo >$alertwindow [Train]: Ended NonCombat training.
       if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
     } 
     
     #GOING_TO_COMBAT
     if ("%scriptareachange" = "combat") then
     {
-      if ("%scriptarea" = "0") then put #echo %alertwindow [Train]: Starting training in %scriptareachange.
-      else put #echo %alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
+      if ("%scriptarea" = "0") then put #echo >$alertwindow [Train]: Starting training in %scriptareachange.
+      else put #echo >$alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
       var noncombatactive 0
       var scriptareachange 0 
       var scriptarea combat
@@ -5493,7 +5491,7 @@ NEWAREAMOVEMENT:
         {
           if (("%buff" = "YES") && (%buffnum > 0)) then
           {
-            put #echo %alertwindow [Combat]: Buffing before combat.
+            put #echo >$alertwindow [Combat]: Buffing before combat.
             gosub BUFFINGONLYLOOP
           }
         }
@@ -5513,8 +5511,8 @@ NEWAREAMOVEMENT:
     #GOING_TO_NONCOMBAT
     if ("%scriptareachange" = "noncombat") then
     {
-      if ("%scriptarea" = "0") then put #echo %alertwindow [Train]: Starting training in %scriptareachange.
-      else put #echo %alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
+      if ("%scriptarea" = "0") then put #echo >$alertwindow [Train]: Starting training in %scriptareachange.
+      else put #echo >$alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
       
       var scriptareachange 0
       var scriptarea noncombat
@@ -5527,29 +5525,29 @@ NEWAREAMOVEMENT:
     #GOING_TO_UPKEEP
     if ("%scriptareachange" = "upkeep") then
     {
-      if ("%scriptarea" = "0") then put #echo %alertwindow [Train]: Starting training in %scriptareachange.
-      else put #echo %alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
+      if ("%scriptarea" = "0") then put #echo >$alertwindow [Train]: Starting training in %scriptareachange.
+      else put #echo >$alertwindow [Train]: Transitioning to %scriptareachange from %scriptarea.
       var scriptareachange 0
       var scriptarea upkeep
       var goupkeep 0
       var upkeepactive 1
       #MESSAGING
       put #echo Yellow AUType: %autype
-      if ("%autype" = "health") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to low health.
-      if ("%autype" = "fire") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to being on fire.
-      if ("%autype" = "burden") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to burden of %encumbrance.
-      if ("%autype" = "bundle") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to lacking space for bundle.
-      if ("%autype" = "gem") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to lacking gem pouches.
-      if ("%autype" = "bleed") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to bleeding.
-      if ("%autype" = "nerves") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to nerve damage.
-      if ("%autype" = "poison") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to poison.
-      if ("%autype" = "onfire") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to being on fire.
-      if ("%autype" = "wounds") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to significant wounds.
-      if ("%autype" = "hands") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to missing hand(s).
-      if ("%autype" = "ammo") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to running out of ammo.
-      if ("%autype" = "boxes") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to lacking space for boxes.
-      if ("%autype" = "manual") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep due to manual trigger.
-      if ("%autype" = "test") then put #echo %alertwindow [UPKEEP]: Started AutoUpkeep to test the route.
+      if ("%autype" = "health") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to low health.
+      if ("%autype" = "fire") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to being on fire.
+      if ("%autype" = "burden") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to burden of %encumbrance.
+      if ("%autype" = "bundle") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to lacking space for bundle.
+      if ("%autype" = "gem") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to lacking gem pouches.
+      if ("%autype" = "bleed") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to bleeding.
+      if ("%autype" = "nerves") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to nerve damage.
+      if ("%autype" = "poison") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to poison.
+      if ("%autype" = "onfire") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to being on fire.
+      if ("%autype" = "wounds") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to significant wounds.
+      if ("%autype" = "hands") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to missing hand(s).
+      if ("%autype" = "ammo") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to running out of ammo.
+      if ("%autype" = "boxes") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to lacking space for boxes.
+      if ("%autype" = "manual") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep due to manual trigger.
+      if ("%autype" = "test") then put #echo >$alertwindow [UPKEEP]: Started AutoUpkeep to test the route.
       if ("%sleepontravel" = "YES") then gosub DEEPSLEEP
       if (%rpastatus = 1) then gosub RPATOGGLE
     	if ($invisible = 1) then gosub RELINVIS
@@ -5658,9 +5656,9 @@ UPKEEPLOGIC:
   {
     if ("%autoupkeep" = "YES") then
     {
-      put #echo %alertwindow [UPKEEP]: Upkeep not started in a valid location!  Somewthing went wrong with AutoUpkeep!
+      put #echo >$alertwindow [UPKEEP]: Upkeep not started in a valid location!  Somewthing went wrong with AutoUpkeep!
     }
-    else put #echo %alertwindow [UPKEEP]: Upkeep not started in a valid location!  Go to a town!
+    else put #echo >$alertwindow [UPKEEP]: Upkeep not started in a valid location!  Go to a town!
     return
   }
   gosub STOWALL
@@ -5994,7 +5992,7 @@ UPKEEPLOGIC:
     else var outputtext %outputtext, app Focus not complete
   }
   var outputtext %outputtext.
-  put #echo %alertwindow [UPKEEP]: %outputtext
+  put #echo >$alertwindow [UPKEEP]: %outputtext
   action (speech) on
   action (emote) on
   var upkeepactive 0
@@ -6628,13 +6626,13 @@ BOXPOPPINGLOGIC:
       gosub KHRISTOP
       gosub BOXPOPPINGKHRI
     }
-    put #echo %alertwindow Yellow Box popping started.
+    put #echo >$alertwindow Yellow Box popping started.
     if ("%skeletonkey" != "YES") then gosub ARMORREMBOXPOP
     var boxindex 0
     var boxespoppedsession 0
     gosub BOXPOPPINGLOOP
     math boxespoppedtotal add %boxespoppedsession
-    put #echo %alertwindow Yellow Box popping ended.  Boxes popped: %boxespoppedsession.  Total this session: %boxespoppedtotal.
+    put #echo >$alertwindow Yellow Box popping ended.  Boxes popped: %boxespoppedsession.  Total this session: %boxespoppedtotal.
     if (("$guild" = "Thief") || ("$guild" = "Barbarian") && ("%skeletonkey" != "YES")) then
     {
       if ("$guild" = "Thief") then
@@ -7253,7 +7251,7 @@ LOCKPICKCOUNTBAD:
   return
 
 BADLOCKPICKSTACKER:
-  put #echo %alertwindow [Upkeep]: Unable to find lockpick stacker.  Turning off lockpick buying!
+  put #echo >$alertwindow [Upkeep]: Unable to find lockpick stacker.  Turning off lockpick buying!
   var lockpickbuy NO
   put #var lockpickbuy NO
   return
@@ -7808,7 +7806,7 @@ MTFORGING:
   gosub CRAFTREPAIR
   if (%workorderbail = 1) then return
   put #echo Yellow Crafting %difficulty %discipline work order in %material.
-  put #echo %alertwindow Yellow [CRAFT]: Crafting %difficulty %discipline work order in %material.
+  put #echo >$alertwindow Yellow [CRAFT]: Crafting %difficulty %discipline work order in %material.
   goto MTFORGINGLOOP
 
 MTFORGINGLOOP:
@@ -7841,7 +7839,7 @@ MTOUTFITTING:
   gosub CRAFTREPAIR
   if (%workorderbail = 1) then return
   put #echo Yellow Crafting %difficulty %discipline work order in %material.
-  put #echo %alertwindow Yellow [Craft]: Crafting %difficulty %discipline work order.
+  put #echo >$alertwindow Yellow [Craft]: Crafting %difficulty %discipline work order.
   goto MTOUTFITTINGLOOP
 
 MTOUTFITTINGLOOP:
@@ -8152,12 +8150,12 @@ BURGLEEND:
 	if ($invisible = 1) then gosub RELINVIS
   if (%justice != 1) then
   {
-    put #echo %alertwindow [Burgle]: Unable to burgle, not in a justice zone.
+    put #echo >$alertwindow [Burgle]: Unable to burgle, not in a justice zone.
     return
   }
   if (%burgleready = 0) then
   {
-    put #echo %alertwindow [Burgle]: Unable to burgle, still on cooldown.
+    put #echo >$alertwindow [Burgle]: Unable to burgle, still on cooldown.
     return
   }
   var burgletext Burgled using a %burgletoolchosen for %grabs searches
@@ -8191,15 +8189,15 @@ BURGLEEND:
     }
   }
   else var burgletext %burgletext.  No loot was kept.
-  put #echo %alertwindow [Burgle]: %burgletext
+  put #echo >$alertwindow [Burgle]: %burgletext
   #if (%arrested = 1) then
   #{
   #  pause 2
-  #  put #echo %alertwindow Yellow [Burgle]: Arrested!  You plead guilty and your fine was %fine.
+  #  put #echo >$alertwindow Yellow [Burgle]: Arrested!  You plead guilty and your fine was %fine.
   #}
   #if (%arrested = 2) then
   #{
-  #  put #echo %alertwindow Yellow [Burgle]: Arrested by clan justice and had your hand chopped off!
+  #  put #echo >$alertwindow Yellow [Burgle]: Arrested by clan justice and had your hand chopped off!
   #}
   return
 
@@ -8234,7 +8232,7 @@ BURGLETOOLGET:
       gosub GETITEM %burglepickitem
       if ("$righthandnoun" != "lockpick") then
       {
-        put #echo %alertwindow Yellow Could not get the lockpick for burgling!  Please investigate!
+        put #echo >$alertwindow Yellow Could not get the lockpick for burgling!  Please investigate!
       }
     }
   }
@@ -8244,7 +8242,7 @@ BURGLETOOLGET:
     gosub GETITEM %burgleropeitem
     if ("$righthandnoun" != "rope") then
     {
-      put #echo %alertwindow Yellow Could not get the rope for burgling!  Please investigate!
+      put #echo >$alertwindow Yellow Could not get the rope for burgling!  Please investigate!
     }
   }
   return
@@ -8349,7 +8347,7 @@ BURGLEMOVE:
       echo reverse(priorgrab): %reverse(%priorgrab)
       echo priorexit(%room): %priorexit(%room)
       var footsteps 1
-      put #echo %alertwindow Yellow [Burgle]: Did not find a valid exit in the first room!  Please investigate!
+      put #echo >$alertwindow Yellow [Burgle]: Did not find a valid exit in the first room!  Please investigate!
       return
     }
     else
@@ -8393,7 +8391,7 @@ BURGLESEARCH:
       else
       {
         gosub DROPITEM $righthandnoun
-        put #echo %alertwindow Yellow Unable to stow some loot during burgling.
+        put #echo >$alertwindow Yellow Unable to stow some loot during burgling.
         put #flash
         put #play JustArrived
       }
@@ -8430,10 +8428,10 @@ ARRESTED:
   if ($zoneid = 67) then var arresttown Shard
   if ($zoneid = 116) then var arresttown Hibarnhvidar
   if ($zoneid = 127) then var arresttown Boar Clan
-  put #echo %alertwindow Yellow [Justice]: Arrested in %arresttown!
+  put #echo >$alertwindow Yellow [Justice]: Arrested in %arresttown!
   if ("%arrestaction" = "logout") then
   {
-    put #echo %alertwindow Yellow You were arrested!  Logging out!
+    put #echo >$alertwindow Yellow You were arrested!  Logging out!
     put quit
     exit
   }
@@ -8445,7 +8443,7 @@ ARRESTED:
   if (%arrested = 2) then
   {
     #clan_justice
-    put #echo %alertwindow Yellow [Justice]: Arrested by clan justice and had your hand chopped off!
+    put #echo >$alertwindow Yellow [Justice]: Arrested by clan justice and had your hand chopped off!
   }
   exit
   
@@ -8467,12 +8465,12 @@ ARRESTEDNOTPAID:
   gosub DEBTPAY %fine
   gosub MOVE guard
   gosub GETITEM $charactername sack
-  put #echo %alertwindow Yellow [Justice]: Pled guilty.  Withdrew money to pay your fine of %fine.
+  put #echo >$alertwindow Yellow [Justice]: Pled guilty.  Withdrew money to pay your fine of %fine.
   if ("$righthand" = "small sack") then goto ARRESTEDRECOVER
   else goto ARRESTEDFAIL
 
 ARRESTEDFAIL:
-  put #echo %alertwindow Yellow Failure to recover after being arrested!  Emergency!
+  put #echo >$alertwindow Yellow Failure to recover after being arrested!  Emergency!
 ARRESTEDFAIL2:
   put #echo Yellow ===FAILED TO RECOVER FROM ARREST!===
   put #flash
@@ -8481,7 +8479,7 @@ ARRESTEDFAIL2:
   goto ARRESTEDFAIL2
 
 ARRESTEDPAID:
-  put #echo %alertwindow Yellow [Justice]: Pled guilty.  Paid your fine of %fine automatically.
+  put #echo >$alertwindow Yellow [Justice]: Pled guilty.  Paid your fine of %fine automatically.
   goto ARRESTEDRECOVER
   
 ARRESTEDRECOVER:
@@ -8504,7 +8502,7 @@ ARRESTEDRECOVER:
   gosub ARRESTSACKCHECK
   if (%jailsackclean = 0) then goto ARRESTEDPAID
   gosub DUMPITEM small sack
-  put #echo %alertwindow Yellow [Justice]: Gear reacquired.  Restarting training.
+  put #echo >$alertwindow Yellow [Justice]: Gear reacquired.  Restarting training.
   goto ARRESTEDRESTART
   
 ARRESTEDRESTART:
@@ -8663,13 +8661,13 @@ TRADINGSELLLOGIC:
   #put #echo >Log hasvault: %hasvault
   if (%hasvault != 1) then 
   {
-    put #echo %alertwindow No vault is recognized in this town, so TradingSell cannot be completed!
+    put #echo >$alertwindow No vault is recognized in this town, so TradingSell cannot be completed!
     return
   }
   #put #echo >Log vaulttown: %vaulttown     townname: %townname
   if ("%vaulttown" != "%townname") then
   {
-    put #echo %alertwindow Your vault is not set to be in this town, so TradingSell cannot be completed!
+    put #echo >$alertwindow Your vault is not set to be in this town, so TradingSell cannot be completed!
     return
   }
   else
@@ -8698,7 +8696,7 @@ TRADINGSELLLOGIC:
         echo righthand: $righthand
         if ("$righthand" = "Empty") then
         {
-          put #echo %alertwindow No bundles or pouches could be found, so TradingSell cannot be completed!  Turning off TradingSell.
+          put #echo >$alertwindow No bundles or pouches could be found, so TradingSell cannot be completed!  Turning off TradingSell.
           var tradingsell NO
           put #var tradingsell NO
           put #var save
@@ -8759,7 +8757,7 @@ STUDYARTLOGIC:
   var artrooms 534|535|536|537|538
   eval artroomslen count("%artrooms", "|")
   var artroomscounter 0
-  put #echo %alertwindow [Noncombat]: Studying art in Raven's Court.
+  put #echo >$alertwindow [Noncombat]: Studying art in Raven's Court.
   gosub ARTMOVELOOP
   var noncombatstudyartactive 0
   put #var lastartstudy $unixtime
@@ -8783,7 +8781,7 @@ EVCASTLOGIC:
   waitfor You feel fully prepared to cast your spell.
   gosub CAST
   gosub CASTCLEANUP
-  put #echo %alertwindow [EV]: Cast Embrace of the Vela'Tohr in %embracevelatown, room %embracevelaroom.
+  put #echo >$alertwindow [EV]: Cast Embrace of the Vela'Tohr in %embracevelatown, room %embracevelaroom.
   var noncombatevcastactive 0
   return  
 
@@ -9021,7 +9019,7 @@ EJOURNALLOGIC:
       gosub WRITEJOURNAL
       if (%ejournalused = 1) then
       {
-        put #echo %alertwindow Used Epistemic Journal.
+        put #echo >$alertwindow Used Epistemic Journal.
         var nextejournal $gametime
         math nextejournal add 86400
         put #var nextejournal %nextejournal
@@ -9431,7 +9429,7 @@ PINLOGIC:
         gosub GETITEM %watercontainer
         gosub CLEANPIN
         gosub STOWALL
-        put #echo %alertwindow Anoral cleaned.
+        put #echo >$alertwindow Anoral cleaned.
       }      
       var nextpin %t
       math nextpin add 3660
@@ -9470,7 +9468,7 @@ COMMUNELOGIC:
         gosub SWAP
         if ("$lefthandnoun" != "incense") then
         {
-          put #echo %alertwindow Yellow Out of incense!  Turning off Meraud commune.
+          put #echo >$alertwindow Yellow Out of incense!  Turning off Meraud commune.
           put #flash
           put #play JustArrived
           var meraudcommune NO
@@ -9490,7 +9488,7 @@ COMMUNELOGIC:
           }
           else
           {
-            put #echo %alertwindow Yellow No lighter or flint!  Turning off Meraud commune.
+            put #echo >$alertwindow Yellow No lighter or flint!  Turning off Meraud commune.
             put #flash
             put #play JustArrived
             var meraudcommune NO
@@ -9508,7 +9506,7 @@ COMMUNELOGIC:
         var commgood 0
         var commsense %t
         math commsense add 600
-        put #echo %alertwindow Meraud's commune used.
+        put #echo >$alertwindow Meraud's commune used.
         return
       }
       else
@@ -9537,12 +9535,12 @@ COMMUNELOGIC:
               var commgood 0
               var commsense %t
               math commsense add 600
-              put #echo %alertwindow Eluned's commune used.
+              put #echo >$alertwindow Eluned's commune used.
               return
             }
             else
             {
-              put #echo %alertwindow Yellow Water container is out of holy water and no dirt is remaining!  Turning off Meraud, Eluned, and Tamsine commune.
+              put #echo >$alertwindow Yellow Water container is out of holy water and no dirt is remaining!  Turning off Meraud, Eluned, and Tamsine commune.
               put #flash
               put #play JustArrived
               var meraudcommune NO
@@ -9555,7 +9553,7 @@ COMMUNELOGIC:
         }
         else
         {
-          put #echo %alertwindow Yellow Water container is out of holy water!  Turning off Meraud and Tamsine commune.
+          put #echo >$alertwindow Yellow Water container is out of holy water!  Turning off Meraud and Tamsine commune.
           put #flash
           put #play JustArrived
           var meraudcommune NO
@@ -9567,10 +9565,10 @@ COMMUNELOGIC:
 
     }
     #ELUNED
-    #put #echo %alertwindow Elunedgood: %elunedgood   Theurgy.LearningRate: $Theurgy.LearningRate
+    #put #echo >$alertwindow Elunedgood: %elunedgood   Theurgy.LearningRate: $Theurgy.LearningRate
     if ((%elunedcommune = "YES") && (%elunedgood = 1) && ($Theurgy.LearningRate < 11) && (%devotion > 4)) then
     {
-      #put #echo %alertwindow Eluned checking
+      #put #echo >$alertwindow Eluned checking
       gosub COMMUNEELUNED
       return
     }
@@ -9593,7 +9591,7 @@ COMMUNELOGIC:
         }
         else
         {
-          put #echo %alertwindow Yellow Water container is out of holy water!  Turning off Tamsine and Meraud commune.
+          put #echo >$alertwindow Yellow Water container is out of holy water!  Turning off Tamsine and Meraud commune.
           put #flash
           put #play JustArrived
           var meraudcommune NO
@@ -9609,7 +9607,7 @@ COMMUNELOGIC:
       var commgood 0
       var commsense %t
       math commsense add 600
-      put #echo %alertwindow Tamsine's commune used.
+      put #echo >$alertwindow Tamsine's commune used.
       return
     }
   }
@@ -9632,11 +9630,11 @@ COMMUNEELUNED:
     var commgood 0
     var commsense %t
     math commsense add 600
-    put #echo %alertwindow Eluned's commune used.
+    put #echo >$alertwindow Eluned's commune used.
   }
   else
   {
-    put #echo %alertwindow Yellow Water container is out of holy water and no dirt is remaining!  Turning off Meraud, Eluned, and Tamsine commune.
+    put #echo >$alertwindow Yellow Water container is out of holy water and no dirt is remaining!  Turning off Meraud, Eluned, and Tamsine commune.
     put #flash
     put #play JustArrived
     var meraudcommune NO
@@ -9722,7 +9720,7 @@ POUNCELOGIC:
     gosub MONSTERARRAY
     if matchre("%monsterarray", "%critters") then
     {
-      #put #echo %alertwindow Pounced!
+      #put #echo >$alertwindow Pounced!
       gosub POUNCE
       var pounceready 0
     }
@@ -10267,14 +10265,14 @@ MAINSPELLLOGICNC:
     if ("%cyclic" = "YES") then
     {
       gosub SPELLCYCLOGIC
-      gosub STATUSCHECK
+      #gosub STATUSCHECK
       if (%casting = 1) then return
     }
     #SPELLCASTING
     if ("%spell" = "YES") then
     {
       gosub SPELLCHOICELOGIC
-      gosub STATUSCHECK
+      #gosub STATUSCHECK
       if (%casting = 1) then return
     }
   }
@@ -10306,9 +10304,10 @@ SPELLCYCLOGIC:
     #RECASTING_IF_UNDETECTED
     if (%currentcyc != 0) then
     {
+      #put #echo Yellow %spellc%currentcycvar.active: $%spellc%currentcycvar.active
       if (($%spellc%currentcycvar.active != 1) && (%playing != 1)) then 
       { 
-        put #flash; put #play Echo;put #echo %alertwindow Yellow Replacing Cyclic because it's not being detected.
+        put #flash; put #play Echo;put #echo >$alertwindow Yellow Replacing Cyclic because it's not being detected.
         if (%currentcyc < 4) then gosub CYCLICSET
         if (%currentcyc = 4) then gosub SPELLCYCTMSET
         if (%currentcyc = 5) then gosub SPELLCYCDBSET
@@ -11255,7 +11254,7 @@ SUMMWEAPONLOGIC:
     if (%t >= %nextsumm) then
     {
       gosub PATHSENSE
-      if (%elecharge = -1) then put #echo Yellow %alertwindow Unable to detect elemental charge!
+      if (%elecharge = -1) then put #echo Yellow >$alertwindow Unable to detect elemental charge!
       if (%elecharge >= 2) then
       {
         var nextsumm %t
@@ -11410,7 +11409,7 @@ NONCOMBATCHECKS:
       if ($Forging.Ranks >= 1750) then var forginglock 1
       if (%forginglock != 1) then
       {
-        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to forge at Forging.LearningRate: $Forging.LearningRate
+        #if (%killbeforeleave != 0) then put #echo >$alertwindow Yellow Decided to forge at Forging.LearningRate: $Forging.LearningRate
         var noncombatactive 1
         var noncombatforgingactive 1
       }
@@ -11423,7 +11422,7 @@ NONCOMBATCHECKS:
       if ($Outfitting.Ranks >= 1750) then var outfittinglock 1
       if (%outfittinglock != 1) then
       {
-        #if (%killbeforeleave != 0) then put #echo %alertwindow Yellow Decided to forge at Outfitting.LearningRate: $Outfitting.LearningRate
+        #if (%killbeforeleave != 0) then put #echo >$alertwindow Yellow Decided to forge at Outfitting.LearningRate: $Outfitting.LearningRate
         var noncombatactive 1
         var noncombatoutfittingactive 1
       }
@@ -11666,7 +11665,7 @@ STORAGECHECKLOGIC:
   if (%storedefaultsuccess = 0) then
   {
     put #echo Yellow Could not find default storage container %rucksack!  Exiting.
-    put #echo %alertwindow Yellow [TRAIN]: Could not find default storage container %rucksack!  Exiting.
+    put #echo >$alertwindow Yellow [TRAIN]: Could not find default storage container %rucksack!  Exiting.
     exit
   }
   if ("%craftingstoragelocation" = "portal") then
@@ -11765,7 +11764,7 @@ TEXTLOGIC:
       gosub TURNTEXT
       if (%badtextturn = 1) then
       {
-        put #echo %alertwindow Bad textbook entry - %textmonster!  Turning off textbooks!
+        put #echo >$alertwindow Bad textbook entry - %textmonster!  Turning off textbooks!
         var textbook NO
         if ((matchre ("$righthand", "%textbookitem")) || (matchre ("$lefthand", "%textbookitem"))) then
         {
@@ -11775,7 +11774,7 @@ TEXTLOGIC:
       }
       gosub STUDYTEXT
       if (%textagain = 1) then goto TEXTLOGIC
-      #put #echo %alertwindow Studied Textbook.
+      #put #echo >$alertwindow Studied Textbook.
       if ($First_Aid.LearningRate > 33) then var firstaidlock 1
       if ($Scholarship.LearningRate > 33) then var scholarlock 1
       if ((matchre ("$righthand", "%textbookitem")) || (matchre ("$lefthand", "%textbookitem"))) then
@@ -13136,7 +13135,7 @@ WANDBUFFLOOP:
       #echo gametime: $gametime   wand%wcounternext: $wand%wcounternext
       var wandtest $wand%wcounternext
       math wandtest subtract $gametime
-      #if ($gametime < $wand%wcounternext) then put #echo %alertwindow Yellow [WandBuff]: Wand %wcounter down, but still has a wait of %wandtest seconds
+      #if ($gametime < $wand%wcounternext) then put #echo >$alertwindow Yellow [WandBuff]: Wand %wcounter down, but still has a wait of %wandtest seconds
       #else
       #{
         #put #echo %wand%wcountervar.active: $%wand%wcountervar.active 
@@ -13151,7 +13150,7 @@ WANDBUFFLOOP:
           var temp $gametime
           math temp add 1810
           put #var wand%wcounternext %temp
-          put #echo %alertwindow [WandBuff]: Successfully activated wand %wcounter.
+          put #echo >$alertwindow [WandBuff]: Successfully activated wand %wcounter.
           gosub PERCSELF
         }
         else 
@@ -13164,7 +13163,7 @@ WANDBUFFLOOP:
               var temp $gametime
               math temp add 1810
               put #var wand%wcounternext %temp
-              put #echo %alertwindow [WandBuff]: Successfully activated second wand %wcounter.
+              put #echo >$alertwindow [WandBuff]: Successfully activated second wand %wcounter.
               gosub PERCSELF
             }
             else
@@ -13172,7 +13171,7 @@ WANDBUFFLOOP:
               var temp $gametime
               math temp add 10
               put #var wand%wcounternext %temp
-              put #echo %alertwindow Yellow [WandBuff]: Unable to activate wand %wcounter.
+              put #echo >$alertwindow Yellow [WandBuff]: Unable to activate wand %wcounter.
             }
           }
           else
@@ -13180,7 +13179,7 @@ WANDBUFFLOOP:
             var temp $gametime
             math temp add 1810
             put #var wand%wcounternext %temp
-            put #echo %alertwindow [WandBuff]: Wand %wcounter is down, but only one wand is available.
+            put #echo >$alertwindow [WandBuff]: Wand %wcounter is down, but only one wand is available.
           }
         }
         if (%wand%wcounternum > 1) then gosub PUTITEM my second %wand%wcounteritem in %wandstorage
@@ -14228,7 +14227,7 @@ WEAPONGET:
 			gosub STOW %hand
 			if ("$%handhand" != "Empty") then
 			{
-			  put #echo %alertwindow Yellow [Weapons] Unable to clear desired hand when switching weapons!  Please investigate!
+			  put #echo >$alertwindow Yellow [Weapons] Unable to clear desired hand when switching weapons!  Please investigate!
 			  put #flash
 			}
 		}
@@ -14245,7 +14244,7 @@ WEAPONGET:
 		}
 		if !matchre ("$%handhand", "%weaponname") then
 		{
-		  put #echo %alertwindow Yellow [Weapons] Unable to wield the %weaponname in the desired %hand hand when switching weapons!  Please investigate!  
+		  put #echo >$alertwindow Yellow [Weapons] Unable to wield the %weaponname in the desired %hand hand when switching weapons!  Please investigate!  
 		  put #flash
     }
 		if ((%weaponname = "%bastardsworditem") || (%%handhand = "%bastardsworditem")) then gosub SWAPSWORD %weaponname
@@ -15110,7 +15109,7 @@ LEAVEROOM:
 BUGOUT:
   put #flash
   put #play Soul
-  put #echo %alertwindow Yellow [Bugout]: Bugging Out!
+  put #echo >$alertwindow Yellow [Bugout]: Bugging Out!
   var buggingout 1
   if ("%collectammo" = "YES") then gosub COLLECTINGAMMO
   gosub LEAVEROOM

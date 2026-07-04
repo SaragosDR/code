@@ -3780,7 +3780,7 @@ STATUSCHECK:
   #MAELDRYTH
   if matchre("$roomobjs", "a maeldryth") then
   {
-    put #echo %alertwindow Yellow [GM]: Maeldryth in the area.
+    put #echo >$alertwindow Yellow [GM]: Maeldryth in the area.
     pause .5
     put #play Evil
     pause .5
@@ -3799,7 +3799,7 @@ STATUSCHECK:
         {
           put #flash
           put #play JustArrived
-          put #echo %alertwindow Yellow [Upkeep]: Genie has lost track of your room number!
+          put #echo >$alertwindow Yellow [Upkeep]: Genie has lost track of your room number!
         }
       }
     }
@@ -4093,7 +4093,7 @@ TIMEOUT:
 DEADLOGIC:
   if ("%deathaction" = "logout") then
   {
-    put #echo %alertwindow Yellow You are dead!  Logging out!
+    put #echo >$alertwindow Yellow You are dead!  Logging out!
     put quit
     exit
   }
@@ -4108,7 +4108,7 @@ DEADWAIT:
 CONNECTEDLOGIC:
   if ("%disconnectaction" = "quit") then
   {
-    put #echo %alertwindow Yellow Disconnected!  Quitting.
+    put #echo >$alertwindow Yellow Disconnected!  Quitting.
     put #flash
     put #play JustArrived
     exit
@@ -4145,21 +4145,21 @@ BURGLE:
 BURGLEATHRETURN:
   if ("%burgletoolchosen" = "pick") then
   {
-    put #echo %alertwindow Yellow Climbed to burgle when you were meant to use a pick!  Please investigate!
+    put #echo >$alertwindow Yellow Climbed to burgle when you were meant to use a pick!  Please investigate!
   }
   return
   
 BURGLEPICKRETURN:
   if ("%burgletoolchosen" = "rope") then
   {
-    put #echo %alertwindow Yellow Picked to burgle when you were meant to use a rope!  Please investigate!
+    put #echo >$alertwindow Yellow Picked to burgle when you were meant to use a rope!  Please investigate!
   }
   return
 
 BURGLENOTOOL:
   if (("%burgletoolchosen" = "rope") || ("%burgletoolchosen" = "pick")) then
   {
-    put #echo %alertwindow Yellow Failed to burgle because you had no tool!  Turning off burgling.  Please investigate.
+    put #echo >$alertwindow Yellow Failed to burgle because you had no tool!  Turning off burgling.  Please investigate.
     var burgle NO
     put #var burgle NO
   }
@@ -4722,6 +4722,7 @@ PUTITEMMAIN:
 	matchre RETURN You just can't get the .* to fit in the .*\, no matter how you arrange it\.
   matchre PUTITEMSTOW A bored-looking Human boy raises an eyebrow in your direction.
   matchre RETURN The anvil already has a \w+ ingot on it\.
+  match RETURN That is far too hot to touch!  The molten metal will be poured into an ingot mold once finished, or you can empty the crucible early by TILTing it.  This will DESTROY any metal inside!
 	put put %putitemstring
 	matchwait 5
 	var timeoutsub PUTITEMMAIN
@@ -6088,7 +6089,7 @@ ATTACKACMSTOW:
   goto ATTACKACM
 
 ATTACKACMWRONG:
-  put #echo %alertwindow Yellow Tried to use ACM %acmtype with the wrong weapon!  righthand: $righthand  lefthand: $lefthand  weapontype: %weapontype  weaponname: %weaponname  offhand: %%offhandlowestweapon
+  put #echo >$alertwindow Yellow Tried to use ACM %acmtype with the wrong weapon!  righthand: $righthand  lefthand: $lefthand  weapontype: %weapontype  weaponname: %weaponname  offhand: %%offhandlowestweapon
   return
   
 ATTACKACMSTAND:
@@ -6104,7 +6105,7 @@ ATTACKACMLOAD:
   goto ATTACKACM
 
 ATTACKACMSUCCESS:
-  #put #echo %alertwindow Yellow Used ACM %acmtype!
+  #put #echo >$alertwindow Yellow Used ACM %acmtype!
   var nextacm%acmtype %t
   math nextacm%acmtype add 90
   if ("%acmtype" = "doublestrike") then
@@ -6115,7 +6116,7 @@ ATTACKACMSUCCESS:
   return
 
 ATTACKACMBARBSUCCESS:
-  #put #echo %alertwindow Yellow Used ACM %acmtype with Barbarian success!
+  #put #echo >$alertwindow Yellow Used ACM %acmtype with Barbarian success!
   var nextacm%acmtype %t
   math nextacm%acmtype add 55
   if ("%acmtype" = "doublestrike") then
@@ -6126,13 +6127,13 @@ ATTACKACMBARBSUCCESS:
   return
 
 ATTACKACMFAIL:
-  #put #echo %alertwindow Yellow Guessed wrong on timer for ACM %acmtype.  t: %t  nextacm%acmtype: %nextacm%acmtype
+  #put #echo >$alertwindow Yellow Guessed wrong on timer for ACM %acmtype.  t: %t  nextacm%acmtype: %nextacm%acmtype
   var nextacm%acmtype %t
   math nextacm%acmtype add 20
   return
 
 ATTACKACMBADNAME:
-  put #echo %alertwindow Yellow Tried to use ACM %acmtype, but it's an invalid type.
+  put #echo >$alertwindow Yellow Tried to use ACM %acmtype, but it's an invalid type.
   return
 
 ATTACKACMFACE:
@@ -6310,7 +6311,7 @@ ATTACKWHIRLWINDRETURN:
   return
 
 ATTACKWHIRLBAD:
-  put #echo %alertwindow Yellow Attempted to whirlwind when the character is not able to!  Turning whirlwind off.
+  put #echo >$alertwindow Yellow Attempted to whirlwind when the character is not able to!  Turning whirlwind off.
   var whirlwind NO
   put #var whirlwind NO
   return
@@ -7064,7 +7065,7 @@ MOVELOOP:
 
 GALLEYTRAVEL:
   action (galley) on
-  put #echo %alertwindow [UPKEEP] Starting galley travel from Zone: $zoneid, Room: $roomid.
+  put #echo >$alertwindow [UPKEEP] Starting galley travel from Zone: $zoneid, Room: $roomid.
   if ("$zoneid" = "107a") then echo Waiting to arrive.
   else
   {
@@ -7103,7 +7104,7 @@ GALLEYEND:
   if matchre("$roomexits", "southwest" then put sw
   if matchre("$roomexits", "north" then put n
   pause 1
-  put #echo %alertwindow [UPKEEP] Completed galley travel in Zone: $zoneid.
+  put #echo >$alertwindow [UPKEEP] Completed galley travel in Zone: $zoneid.
   action (galley) off
   return
 
@@ -7275,7 +7276,7 @@ BERSERKMAIN:
 	goto TIMEOUT
 	
 BERSERKALREADY:
-  put #echo %alertwindow Yellow Attempted to start a berserk that was already up!
+  put #echo >$alertwindow Yellow Attempted to start a berserk that was already up!
   goto BERSERKRETURN
 
 BERSERKPAUSE:
@@ -7764,7 +7765,7 @@ CASTCLEANUPMAIN:
         var totallearned %postcastlearningrate
         math totallearned subtract %precastlearningrate
         #put #echo Yellow Skill: %skillname
-        #put #echo Yellow PrecastLearningRate: %precastlearningrate // PostCastLearningRate: %postcastlearningrate // Total Learned: %totallearned
+        put #echo Yellow PrecastLearningRate: %precastlearningrate // PostCastLearningRate: %postcastlearningrate // Total Learned: %totallearned
         if (%totallearned = 0) then
         {
           if (%backfire = 1) then
@@ -7779,15 +7780,31 @@ CASTCLEANUPMAIN:
             var nextmanaadjust %t
             math nextmanaadjust add 3600
           }
+          else
+          {
+            if (%t >= %nextmanaadjust) then
+            {
+              if ($spell%spellleastmana < %spellcapmana) then
+              {
+                var tempmana $spell%spellleastmana
+                math tempmana add 1
+                put #echo >$alertwindow Yellow [Magic]: Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
+                put #echo Yellow Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
+                var spell%spellleastmana %tempmana
+                put #var spell%spellleastmana %tempmana
+                put #var save
+              }
+            }
+          }
         }
         if ((%totallearned > 0) && (%totallearned < 2) && (%precastlearningrate != 33)) then
         {
           if (%t >= %nextmanaadjust) then
           {
-            echo spellmana: %spellmana
-            echo spelldifficulty %spelldifficulty
-            echo spellminmana %spellminmana
-            echo spellcapmana %spellcapmana                            
+            #echo spellmana: %spellmana
+            #echo spelldifficulty %spelldifficulty
+            #echo spellminmana %spellminmana
+            #echo spellcapmana %spellcapmana                            
             if ($spell%spellleastmana < %spellcapmana) then
             {
               var tempmana $spell%spellleastmana
@@ -8001,7 +8018,7 @@ KHRIVARS:
 
 CYCSPELLVARSLOOP:
   math spellvarscount add 1
-  if (%spellvarscount != 3) then return
+  if (%spellvarscount > 3) then return
   if ("%spellc%spellvarscount" = "ac") then var spellc%spellvarscountvar SpellTimer.AetherCloak
   if ("%spellc%spellvarscount" = "ad") then var spellc%spellvarscountvar SpellTimer.AesandryDarlaeth
   if ("%spellc%spellvarscount" = "af") then var spellc%spellvarscountvar SpellTimer.AwakenForest
@@ -8446,7 +8463,7 @@ CHARGELOOP:
       goto CHARGELOOP
     }
   }
-  if (("%cambitem1" = "%cambitem2") then
+  if ("%cambitem1" = "%cambitem2") then
   {
     if (%cambcount = 1) then var workingcambitem first %cambitem%cambcount
     if (%cambcount = 2) then var workingcambitem second %cambitem%cambcount
@@ -8809,14 +8826,14 @@ PREPBADHEAVYTM:
 PREPBADUNKNOWN:
   if ("%bugout" = "YES") then
   {
-    put #echo %alertwindow [Magic] Tried to prep a spell you don't know!  Bugging out.
+    put #echo >$alertwindow [Magic] Tried to prep a spell you don't know!  Bugging out.
     put #flash
     put #play JustArrived
     goto BUGOUT
   }
   else
   {
-    put #echo %alertwindow [Magic] Tried to prep a spell you don't know!
+    put #echo >$alertwindow [Magic] Tried to prep a spell you don't know!
     put #flash
     put #play JustArrived
     goto PREPBADUNKNOWN2
@@ -8867,7 +8884,7 @@ PREPTATTOOUNHIDE:
   goto PREPTATTOO
 
 PREPTATTOOBAD:
-  put #echo %alertwindow [Magic] Tried to invoke a tattoo, but did not have one!  Turning off variable.
+  put #echo >$alertwindow [Magic] Tried to invoke a tattoo, but did not have one!  Turning off variable.
   var tattoobuff NO
   put #var tattoobuff NO
   return
@@ -10049,7 +10066,7 @@ GWETHGET:
       if matchre("$roomobjs", "\bjadeite stones\b") then var stoneget jadeite stones
       if matchre("$roomobjs", "\bkyanite stones\b") then var stoneget kyanite stones
       gosub GETITEM %stoneget
-      if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a gweth stone!
+      if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a gweth stone!
       gosub PUTITEM my stones in my %storage
     }
     if (matchre ("$roomobjs", "\b(%goodgweths)\b")) then goto GWETHGET
@@ -10061,7 +10078,7 @@ BOXGET:
   {
     var boxitem $1 $2
     gosub GETITEM %boxitem
-    #if ("%lootalerts" = "YES") then put #echo %alertwindow [Treasure]: Found a box!
+    #if ("%lootalerts" = "YES") then put #echo >$alertwindow [Treasure]: Found a box!
     gosub PUTITEM my %boxitem in my %boxstorage
     if (%putsucceed = 0) then
     {
@@ -10073,7 +10090,7 @@ BOXGET:
       }
       else
       {
-        put #echo %alertwindow Yellow [Treasure]: Failed to put %boxitem in box storage!  Turning off box collecting and revering loot type to 'treasure'.
+        put #echo >$alertwindow Yellow [Treasure]: Failed to put %boxitem in box storage!  Turning off box collecting and revering loot type to 'treasure'.
         gosub DUMPITEM %boxitem
         var loottype treasure
         put #var m%varsetloottype treasure
@@ -10137,7 +10154,7 @@ MAPGET:
   if matchre("$roomobjs", "\b(%treasuremaps)\b(,|\.| and)") then
   {
     gosub GETITEM map
-    if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a treasure map!
+    if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a treasure map!
     gosub STOWITEM map
   }
   if matchre("$roomobjs", "\b(%treasuremaps)\b(,|\.| and)") then goto MAPGET
@@ -10149,7 +10166,7 @@ MATERIALSGET:
     var materialadj $1
     var materialnoun $2
     gosub GETITEM %materialnoun
-    if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a %materialadj %materialnoun rare material!
+    if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a %materialadj %materialnoun rare material!
     gosub STOWITEM %materialnoun
   }
   if matchre("$roomobjs", "\b(%materials) (%materialsnouns)\b(,|\.| and)") then goto MATERIALSGET
@@ -10163,7 +10180,7 @@ MISCGET:
   #echo keepitem: %misckeeplist(%miscgetcounter)
   if matchre("$roomobjs", "%misckeeplist(%miscgetcounter)") then
   {
-    if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a misc item - %misckeeplist(%miscgetcounter)!
+    if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a misc item - %misckeeplist(%miscgetcounter)!
     gosub GETITEM %misckeeplist(%miscgetcounter)
     gosub STOWITEM %misckeeplist(%miscgetcounter)
   }
@@ -10176,7 +10193,7 @@ NUGGETSGET:
   {
     var nuggetadj $1
     gosub GETITEM nugget
-    #if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a %nuggetadj nugget
+    #if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a %nuggetadj nugget
     gosub STOWITEM nugget
   }
   if matchre("$roomobjs", "\b(%nuggetmaterials) nugget\b(,|\.| and)") then goto NUGGETSGET
@@ -10188,7 +10205,7 @@ BARSGET:
   {
     var baradj $1
     gosub GETITEM bar
-    #if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a %baradj bar!
+    #if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a %baradj bar!
     gosub STOWITEM my bar
   }
   if matchre("$roomobjs", "\b(%nuggetmaterials) bar\b(,|\.| and)") then goto BARSGET
@@ -10199,7 +10216,7 @@ SCROLLGET:
   if matchre("$roomobjs", ".*(?<!page of )(?<!fetid antelope )\b(%scrolls)\b(,|\.| and)") then
   {
     var foundscroll $1
-    if ("%lootalerts" = "YES") then put #echo %alertwindow Yellow [Treasure]: Found a scroll - %foundscroll! 
+    if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a scroll - %foundscroll! 
     gosub STOWITEM %foundscroll
   }
   if matchre("$roomobjs", ".*(?<!page of )(?<!fetid antelope )\b(%scrolls)\b(,|\.| and)") then goto SCROLLGET
@@ -10288,7 +10305,7 @@ ARMORCHECK:
       }
       else
       {
-        put #echo %alertwindow Yellow [Armor]: Could not wear shield!  Please address!
+        put #echo >$alertwindow Yellow [Armor]: Could not wear shield!  Please address!
         put #echo Yellow Could not wear shield!  Please address!
         if ("%bugout" = "YES") then goto BUGOUT
         else goto ARMORPROBLEM
@@ -10296,7 +10313,7 @@ ARMORCHECK:
     }
     else
     {
-      put #echo %alertwindow Yellow [Armor]: Could not find shield to wear!  Please address!
+      put #echo >$alertwindow Yellow [Armor]: Could not find shield to wear!  Please address!
       put #echo Yellow Could not find shield to wear!  Please address!
       if ("%bugout" = "YES") then goto BUGOUT
       else goto ARMORPROBLEM
@@ -10321,7 +10338,7 @@ ARMORCHECK:
       }
       else
       {
-        put #echo %alertwindow Yellow [Armor]: Could not wear parry stick!  Please address!
+        put #echo >$alertwindow Yellow [Armor]: Could not wear parry stick!  Please address!
         put #echo Yellow Could not wear parry stick!  Please address!
         if ("%bugout" = "YES") then goto BUGOUT
         else goto ARMORPROBLEM
@@ -10329,7 +10346,7 @@ ARMORCHECK:
     }
     else
     {
-      put #echo %alertwindow Yellow [Armor]: Could not find parry stick to wear!  Please address!
+      put #echo >$alertwindow Yellow [Armor]: Could not find parry stick to wear!  Please address!
       put #echo Yellow Could not find parry stick to wear!  Please address!
       if ("%bugout" = "YES") then goto BUGOUT
       else goto ARMORPROBLEM
@@ -10354,7 +10371,7 @@ ARMORCHECK:
       }
       else
       {
-        put #echo %alertwindow Yellow [Armor]: Could not wear knuckles!  Please address!
+        put #echo >$alertwindow Yellow [Armor]: Could not wear knuckles!  Please address!
         put #echo Yellow Could not wear knuckles!  Please address!
         if ("%bugout" = "YES") then goto BUGOUT
         else goto ARMORPROBLEM
@@ -10362,7 +10379,7 @@ ARMORCHECK:
     }
     else
     {
-      put #echo %alertwindow Yellow [Armor]: Could not find knuckles to wear!  Please address!
+      put #echo >$alertwindow Yellow [Armor]: Could not find knuckles to wear!  Please address!
       put #echo Yellow Could not find knuckles to wear!  Please address!
       if ("%bugout" = "YES") then goto BUGOUT
       else goto ARMORPROBLEM
@@ -10400,7 +10417,7 @@ ARMORCHECKLOOP:
       }
       else
       {
-        put #echo %alertwindow Yellow [Armor]: Could not wear Armor %armorloop!  Please address!
+        put #echo >$alertwindow Yellow [Armor]: Could not wear Armor %armorloop!  Please address!
         put #echo Yellow Could not wear Armor %armorloop!  Please address!
         if ("%bugout" = "YES") then goto BUGOUT
         else goto ARMORPROBLEM
@@ -10408,7 +10425,7 @@ ARMORCHECKLOOP:
     }
     else
     {
-      put #echo %alertwindow Yellow [Armor]: Could not find Armor %armorloop to wear!  Please address!
+      put #echo >$alertwindow Yellow [Armor]: Could not find Armor %armorloop to wear!  Please address!
       put #echo Yellow Could not find Armor %armorloop to wear!  Please address!
       if ("%bugout" = "YES") then goto BUGOUT
       else goto ARMORPROBLEM
@@ -12452,6 +12469,7 @@ STUDYARTP:
 STUDYARTMAIN:
   matchre STUDYARTP %waitstring
   match RETURN Roundtime:
+  match RETURN Study what?
   put study %artstring
   matchwait 5
   var timeoutsub STUDYARTMAIN
@@ -12631,7 +12649,7 @@ TTURNGOOD:
   return
 
 TARANTULATURNBAD:
-  put #echo %alertwindow Could not turn tarantula to the %tarantulaskill%tskill.  Please investigate.  Turning off tarantula use.
+  put #echo >$alertwindow Could not turn tarantula to the %tarantulaskill%tskill.  Please investigate.  Turning off tarantula use.
   var tarantula NO
   return
 
@@ -12648,7 +12666,7 @@ TARANTULARUB:
   goto TIMEOUT
   
 TRUBGOOD:
-  #put #echo %alertwindow Used tarantula on %tarantulaskill%tskill.
+  #put #echo >$alertwindow Used tarantula on %tarantulaskill%tskill.
   return
   
 STUDYP:
@@ -13396,7 +13414,7 @@ BADGELOGIC:
         if ("%pilgrimbadgeworn" != "YES") then gosub STOWITEM pilgrim's badge
         else gosub WEARITEM pilgrim's badge
         put #var lastpilgrimbadge $unixtime
-        put #echo %alertwindow Used pilgrim badge.
+        put #echo >$alertwindow Used pilgrim badge.
       }
     }
   }
@@ -13470,7 +13488,7 @@ CLEANPINNOWATER:
   }
   else
   {
-    put #echo %alertwindow Yellow Water container is out of holy water you don't know the Eluned commune.  Turning off anloral pin.
+    put #echo >$alertwindow Yellow Water container is out of holy water you don't know the Eluned commune.  Turning off anloral pin.
     put #flash
     put #play JustArrived
     var anloralpin NO
@@ -13687,7 +13705,7 @@ PREMBADRETURN:
     var goodring 0
     return
   }
-  put #echo %alertwindow Yellow [UPKEEP]: Unable to return yet due to premium ring timer.  Waiting and retrying.
+  put #echo >$alertwindow Yellow [UPKEEP]: Unable to return yet due to premium ring timer.  Waiting and retrying.
   pause 60
   goto PREMIUMRINGBACK
 

@@ -1399,6 +1399,7 @@ TILTCRUC:
   matchre TILTCRUCP %waitstring
   match TILTCRUC You grab the crucible's side and prepare to dump it out.
   match RETURN You grab one side of the crucible and pour the hot metal into a slag collecting bin.
+  put tilt crucible
   matchwait
 
 

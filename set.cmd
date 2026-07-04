@@ -1691,7 +1691,8 @@ MAINHELP:
   put #echo mono  .SET DISPLAY HUNTING - Variables for where you train and how you loot.
   put #echo mono  .SET DISPLAY COMBAT - Variables for skills trained in combat.
   put #echo mono  .SET DISPLAY NONCOMBAT - Variables for skills trained out of combat.
-  put #echo mono  .SET DISPLAY MAGIC - Magic and spell variables.
+  put #echo mono  .SET DISPLAY MAGIC - Magic-related variables.
+  put #echo mono  .SET DISPLAY SPELL - Spell variables.
   put #echo mono  .SET DISPLAY GUILD - Guild-specific variables.
   put #echo mono  .SET DISPLAY MULTI - Multi-Area variables.
 	put #echo
@@ -2052,6 +2053,7 @@ DISPLAY:
     gosub TITLE
     if tolower("%2") = "general" then gosub DISPLAYGENERAL
     if tolower("%2") = "magic" then gosub DISPLAYMAGIC
+    if tolower("%2") = "spell" then gosub DISPLAYMAGIC2
     if tolower("%2") = "hunting" then gosub DISPLAYHUNTING
     if tolower("%2") = "multi" then gosub DISPLAYMULTI
     if tolower("%2") = "upkeep" then gosub DISPLAYUPKEEP
@@ -2135,6 +2137,7 @@ DISPLAYMAGIC:
     gosub OUTPUT MinConcentration
     gosub OUTPUT MinMana
     gosub OUTPUT HarnessMax (The maximum amount that will be harnessed or charged into cambrinth in one go.)
+    echo
     gosub OUTPUT Harnessing (Do you harness mana for casting.)
     gosub OUTPUT Cambrinth (Do you use cambrinth for casting.)
     gosub OUTPUT DedicatedCambrinth (Do you have the Dedicated Cambrinth feat.)
@@ -2143,70 +2146,29 @@ DISPLAYMAGIC:
     gosub OUTPUT CambItem1Worn
     gosub OUTPUT CambItem2 CambItem2Mana
     gosub OUTPUT CambItem2Worn
+    echo
     gosub OUTPUT RitualFocus
     gosub OUTPUT RitualFocusWorn
     gosub OUTPUT RitualFocusStorage RitualFocusContainer
+    echo
     gosub OUTPUT TMFocus TMFocusItem
     gosub OUTPUT TMFocusStorage TMFocusContainer
     gosub OUTPUT ParallelFocus ParallelFocusItem
+    echo
     gosub OUTPUT Tattoo
     gosub OUTPUT TattooType (runic|heroic)
     gosub OUTPUT TattooSpell
     gosub OUTPUT TattooPrepMana TattooAddMana
     gosub OUTPUT TattooBuff (Tattoo is cast and maintained as a buff)
     put #echo
-    gosub OUTPUT Cyclic
-    gosub OUTPUT CyclicBuff
-    gosub OUTPUT SpellCNum
-    gosub OUTPUT SpellC1 SpellC1PrepMana 
-    gosub OUTPUT SpellC2 SpellC2PrepMana
-    gosub OUTPUT SpellC3 SpellC3PrepMana
-    put #echo
-    gosub OUTPUT CycTM
-    gosub OUTPUT SpellCycTM SpellCycTMMana
-    gosub OUTPUT CycDebil
-    gosub OUTPUT SpellCycDebil SpellCycDebilMana
-    put #echo
-    gosub OUTPUT Buff
-    gosub OUTPUT BuffNum
-    var buffloop 0
-    gosub DISPLAYBUFFLOOP
-    echo
-    gosub OUTPUT SymbiosisBuff
-    gosub OUTPUT SymbiosisSpell SymbiosisMana
-    echo
-    gosub OUTPUT Misdirection MisdirectionMana
-    #put #echo
-    #gosub OUTPUT GBuff
-    #gosub OUTPUT GBuffNum
-    #gosub OUTPUT GBuffTarget
-    #var buffloop 0
-    #gosub DISPLAYGBUFFLOOP
-    #put #echo
-    #gosub OUTPUT DebilAssist
-    #gosub OUTPUT DBANum
-    #put #echo mono DBAPause: $m$varsetdbapause     (the pause between casts of debilitation spells, in seconds)
-    #gosub OUTPUT DBAList
-    #gosub OUTPUT DBASpell1 DBASpell1Mana
-    #gosub OUTPUT DBASpell2 DBASpell2Mana
-    #gosub OUTPUT DBASpell3 DBASpell3Mana
-    put #echo
-    gosub OUTPUT Spell SpellNum
-    gosub OUTPUT SpellAutoMana
-    gosub OUTPUT Spell1 Spell1Mana
-    gosub OUTPUT Spell1Symb
-    gosub OUTPUT Spell2 Spell2Mana
-    gosub OUTPUT Spell2Symb
-    gosub OUTPUT Spell3 Spell3Mana
-    gosub OUTPUT Spell3Symb
-    gosub OUTPUT Spell4 Spell4Mana
-    gosub OUTPUT Spell4Symb
-    put #echo
-    gosub OUTPUT TMDBPrior (Gives priority to TM and Debil over other spell training.)
-    gosub OUTPUT TM
-    gosub OUTPUT SpellTM SpellTMMana
-    gosub OUTPUT Debil
-    gosub OUTPUT SpellDebil SpellDebilMana
+    put #echo Gray mono -----Advanced Options-----
+    gosub OUTPUT FastMagic (more rapid casting for experienced casters with shorter roundtimes.)
+    gosub OUTPUT StraightCast (Prep spells at your cap when Arcana and Attunement are locked.  For advanced casters.)
+    gosub OUTPUT Difficulty1Percent (Percentage of full prep to wait for on intro spells.)
+    gosub OUTPUT Difficulty2Percent (Percentage of full prep to wait for on basic spells.)
+    gosub OUTPUT Difficulty3Percent (Percentage of full prep to wait for on intermediate spells.)
+    gosub OUTPUT Difficulty4Percent (Percentage of full prep to wait for on advanced spells.)
+    gosub OUTPUT Difficulty5Percent (Percentage of full prep to wait for on esoteric spells.)
   }
   else
   {
@@ -2226,20 +2188,52 @@ DISPLAYMAGIC:
   gosub OUTPUT Wand3Item Wand3Num
   gosub OUTPUT Wand4Spell
   gosub OUTPUT Wand4Item Wand4num
-  if (($guild != "Barbarian") && ($guild != "Thief")) then
-  {
-    put #echo
-    put #echo Gray mono -----Advanced Options-----
-    gosub OUTPUT FastMagic (more rapid casting for experienced casters with shorter roundtimes.)
-    gosub OUTPUT StraightCast (Prep spells at your cap when Arcana and Attunement are locked.  For advanced casters.)
-    gosub OUTPUT Difficulty1Percent (Percentage of full prep to wait for on intro spells.)
-    gosub OUTPUT Difficulty2Percent (Percentage of full prep to wait for on basic spells.)
-    gosub OUTPUT Difficulty3Percent (Percentage of full prep to wait for on intermediate spells.)
-    gosub OUTPUT Difficulty4Percent (Percentage of full prep to wait for on advanced spells.)
-    gosub OUTPUT Difficulty5Percent (Percentage of full prep to wait for on esoteric spells.)
-  }
   return
 
+DISPLAYSPELL:
+  var varmatch 1
+	put #echo mono  =================== Spell ====================
+	put #echo
+  if (("$guild" != "Barbarian") && ("$guild" != "Thief")) then
+  {
+    gosub OUTPUT Buff BuffNum
+    var buffloop 0
+    gosub DISPLAYBUFFLOOP
+    echo
+    gosub OUTPUT SymbiosisBuff
+    gosub OUTPUT SymbiosisSpell SymbiosisMana
+    echo
+    gosub OUTPUT Cyclic SpellCNum
+    gosub OUTPUT CyclicBuff
+    gosub OUTPUT SpellC1 SpellC1PrepMana 
+    gosub OUTPUT SpellC2 SpellC2PrepMana
+    gosub OUTPUT SpellC3 SpellC3PrepMana
+    put #echo
+    gosub OUTPUT CycTM
+    gosub OUTPUT SpellCycTM SpellCycTMMana
+    gosub OUTPUT CycDebil
+    gosub OUTPUT SpellCycDebil SpellCycDebilMana
+    put #echo
+    gosub OUTPUT Misdirection MisdirectionMana
+    put #echo
+    gosub OUTPUT Spell SpellNum
+    gosub OUTPUT SpellAutoMana
+    gosub OUTPUT Spell1 Spell1Mana
+    gosub OUTPUT Spell1Symb
+    gosub OUTPUT Spell2 Spell2Mana
+    gosub OUTPUT Spell2Symb
+    gosub OUTPUT Spell3 Spell3Mana
+    gosub OUTPUT Spell3Symb
+    gosub OUTPUT Spell4 Spell4Mana
+    gosub OUTPUT Spell4Symb
+    put #echo
+    gosub OUTPUT TMDBPrior (Gives priority to TM and Debil over other spell training.)
+    gosub OUTPUT TM
+    gosub OUTPUT SpellTM SpellTMMana
+    gosub OUTPUT Debil
+    gosub OUTPUT SpellDebil SpellDebilMana
+  }
+  return
 
 DISPLAYUPKEEP:
   var varmatch 1
