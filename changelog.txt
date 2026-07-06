@@ -1,3 +1,19 @@
+07/05/26
+Updated Scripts: train, library, set, craftlibrary
+Buffs will now automatically check and update mana levels once per day during the Buffing Before Combat cycle.
+Georin grass now has a custom forage location in Willow Walk.
+Trading tasks will now attempt to do Invest (if enabled) before doing tasks to avoid wasting time.
+
+Fixed endrus serpents to properly use Leth portal when traveling to Fang Cove.
+Various parentheses added/fixed to prepare for Genie 5.
+Added more missing text to speech squelching when crafting.
+Bugfixes to song selection in Performance training.
+Bugfixes to message output and full crucible handling in crafting.
+Tweaked the time between art studying to avoid getting timed out on learning.
+Fixed a bug with script output (but not performance) for noncombat modes.
+Added strawberries for Mags tasks.
+
+
 07/03/26
 Updated Scripts: train, library, set, craftlibrary
 Bugfixes to full crucible in forging.

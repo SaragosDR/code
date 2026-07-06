@@ -582,6 +582,7 @@ SET:
     if tolower("%1") = "tomeofloreitem" then goto TEXTSET
     
     if tolower("%1") = "noncombat" then goto YESNOSET
+    if tolower("%1") = "preferoutdoors" then goto YESNOSET
     if tolower("%1") = "burgle" then goto YESNOSET
     if tolower("%1") = "perform" then goto YESNOSET
     if tolower("%1") = "crafting" then goto YESNOSET
@@ -867,6 +868,8 @@ SET:
         }
       }
     }
+    if tolower("%1") = "finesse" then goto YESNOSET
+    if tolower("%1") = "finessemana" then goto TEXTSET
     if tolower("%1") = "tradingtasks" then goto YESNOSET
     if tolower("%1") = "ttbadforagelist" then goto LISTSET
     if tolower("%1") = "summoning" then goto YESNOSET
@@ -1720,7 +1723,7 @@ YESNOSET:
 TEXTSET:
   eval setvar tolower(%1)
   gosub TEXTSETTRIM
-  if ((%"input" = "2he") || ("%input" = "2HE")) then var input "2he"
+  if (("%input" = "2he") || ("%input" = "2HE")) then var input "2he"
   else eval input1 tolower(%input)
   put #var %setvar %input
   put #var save
@@ -2053,7 +2056,7 @@ DISPLAY:
     gosub TITLE
     if tolower("%2") = "general" then gosub DISPLAYGENERAL
     if tolower("%2") = "magic" then gosub DISPLAYMAGIC
-    if tolower("%2") = "spell" then gosub DISPLAYMAGIC2
+    if tolower("%2") = "spell" then gosub DISPLAYSPELL
     if tolower("%2") = "hunting" then gosub DISPLAYHUNTING
     if tolower("%2") = "multi" then gosub DISPLAYMULTI
     if tolower("%2") = "upkeep" then gosub DISPLAYUPKEEP
@@ -2084,9 +2087,9 @@ DISPLAYGENERAL:
 	gosub OUTPUT Guild
 	gosub OUTPUT Circle
 	put #echo
-	put #echo mono DeathAction: $deathaction     (logout or alert)
-	put #echo mono DisconnectAction: $disconnectaction     (reconnect or quit)
-	put #echo mono ArrestAction: $arrestaction     (logout or alert)
+	gosub OUTPUT DeathAction (logout or alert)
+	gosub OUTPUT DisconnectAction (reconnect or quit)
+	gosub OUTPUT ArrestAction (logout or alert)
 	put #echo
 	gosub OUTPUT AlertWindow
   gosub OUTPUT HealthAlerts HealthAlertNum
@@ -2373,6 +2376,7 @@ DISPLAYNONCOMBAT:
 	put #echo mono  =================== Noncombat ====================
   put #echo
   gosub OUTPUT NonCombat
+  gosub OUTPUT PreferOutdoors (if enabled, will prefer to train noncombat skills outdoors instead of indoors)
 	put #echo
   gosub OUTPUT Burgle BurgleStorage (Should be a large container that ideally contains no other items)
 	gosub OUTPUT BurgleTool (pick, rope, or both, which chooses tool based on learningrates)  
@@ -2483,8 +2487,8 @@ DISPLAYGUILD:
     put #echo
     put #echo mono  =================== Guild ====================
 	  put #echo
-    put #echo mono Guild: $guild
-    if $guild = "Barbarian" then
+    gosub OUTPUT Guild
+    if ("$guild" = "Barbarian") then
     {
       gosub OUTPUT Expertise
       gosub OUTPUT ExpAccuracy
@@ -2700,6 +2704,7 @@ DISPLAYGUILD:
       gosub OUTPUT TradingSell
       #gosub OUTPUT TradingSellSource (vault or portal)
       gosub OUTPUT TradingSellTown
+      gosub OUTPUT Finessse FinesseMana
       gosub OUTPUT TradingTasks TTBadForageList
     }
     if $guild = "Warrior Mage" then
@@ -2725,7 +2730,7 @@ DISPLAYGUILD:
   if %buffloop >= 1 then
   {  
     if %buffloop > $ombuffnum then return
-    put #echo mono OMBuff%buffloop: $ombuff%buffloop
+    gosub OUTPUT OMBuff%buffloop
     math buffloop add 1
     goto DISPLAYGUILD
   }
@@ -2963,7 +2968,7 @@ OUTPUT:
       math dotnum subtract 2
       var dotcount 0
       gosub DOTLOOP
-      put #echo mono %displayvar: %actualvar%dotvar%displayvar2: %actualvar2
+      put #echo white mono %displayvar: %actualvar%dotvar%displayvar2: %actualvar2
     }
     else
     {
@@ -2971,10 +2976,10 @@ OUTPUT:
       #put #echo Yellow helpoutput: %helpoutput
       eval helpoutput replace("%helpoutput", "$1", "")
       #put #echo Yellow helpoutput: %helpoutput
-      put #echo mono %displayvar: %actualvar     %helpoutput
+      put #echo white mono %displayvar: %actualvar     %helpoutput
     }
   }
-  else put #echo mono %displayvar: %actualvar
+  else put #echo white mono %displayvar: %actualvar
   return
   
 OUTPUTMULTI:

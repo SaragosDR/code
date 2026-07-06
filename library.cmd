@@ -151,6 +151,7 @@ VARCHECKS:
   if (!def(blacklist)) then put #var blacklist Zehira|Agalea
   
   if !matchre("$textbook", "\b(YES|NO)\b") then put #var textbook NO
+  if (!def(textbooktimer)) then put #var textbooktimer 0
   if ($textbooktimer >= 0) then
   else put #var textbooktimer 60
   if !def(textbookitem) then put #var textbookitem tome
@@ -171,17 +172,21 @@ VARCHECKS:
   if !def(tarantulaskill1) then put #var tarantulaskill1 evasion
   if !def(tarantulaskill2) then put #var tarantulaskill2 shield
   if !matchre("$locksmithbox", "\b(YES|NO)\b") then put #var locksmithbox NO
+  if (!def(locksmithboxtimer)) then put #var locksmithboxtimer 0
   if ($locksmithboxtimer >= 0) then
   else put #var locksmithboxtimer 120
   if !def(locksmithboxitem) then put #var locksmithboxitem training box
   if !matchre("$skinfatrainer", "\b(YES|NO)\b") then put #var skinfatrainer NO
+  if (!def(skinfatrainertimer)) then put #var skinfatrainertimer 0
   if ($skinfatrainertimer >= 0) then
   else put #var skinfatrainertimer 120
   if !def(skinfatraineritem) then put #var skinfatraineritem blue-belly crocodile
   if !matchre("$windboard", "\b(YES|NO)\b") then put #var windboard NO
+  if (!def(windboardtimer)) then put #var windboardtimer 0
   if ($windboardtimer >= 0) then
   else put #var windboardtimer 120
   if !def(windboardtrick) then put #var windboardtrick tilt
+  if (!def(windboardcharge)) then put #var windboardcharge 0
   if ($windboardcharge >= 0) then
   else put #var windboardcharge 50
   
@@ -223,6 +228,7 @@ VARCHECKS:
   #UPKEEP
   if !matchre("$autoupkeep", "\b(YES|NO)\b") then put #var autoupkeep YES
   if !matchre("$auonhealth", "\b(YES|NO)\b") then put #var auonhealth YES
+  if (!def(auhealthnum)) then put #var auhealthnum 0
   if ($auhealthnum >= 0) then
   else put #var auhealthnum 70
   if !matchre("$auonbleed", "\b(YES|NO)\b") then put #var auonbleed YES
@@ -230,10 +236,12 @@ VARCHECKS:
   if !matchre("$auonfire", "\b(YES|NO)\b") then put #var auonfire YES
   if !matchre("$auonnerves", "\b(YES|NO)\b") then put #var auonnerves YES
   if !matchre("$auonburden", "\b(YES|NO)\b") then put #var auonburden YES
+  if (!def(auburdennum)) then put #var auburdennum 0
   if ($auburdennum >= 0) then
   else put #var auburdennum 3
   if !matchre("$auonammo", "\b(YES|NO)\b") then put #var auonammo NO
   if !matchre("$auonboxes", "\b(YES|NO)\b") then put #var auonboxes NO
+  if (!def(minmoney)) then put #var minmoney 0
   if ($minmoney >= 0) then
   else put #var minmoney 2
   if !matchre("$minmoney", "\b(platinum|gold|silver)\b") then put #var minmoneytype platinum
@@ -244,10 +252,12 @@ VARCHECKS:
   if !matchre("$bundlevault", "\b(YES|NO)\b") then put #var bundlevault NO
   if (($bundlevault = "YES") && ($bundlesell = "YES")) then put #var bundlesell NO
   if !matchre("$vaultmove", "\b(YES|NO)\b") then put #var vaultmove NO
+  if (!def(bundlerope)) then put #var bundlerope 0
   if ($bundlerope >= 0) then
   else put #var bundlerope 3
   if !matchre("$gemsell", "\b(YES|NO)\b") then put #var gemsell NO
   if !matchre("$gemvault", "\b(YES|NO)\b") then put #var gemvault YES
+  if (!def(gempouches)) then put #var gempouches 0
   if ($gempouches >= 0) then
   else put #var gempouches 5
   if !matchre("$nuggetsell", "\b(YES|NO)\b") then put #var nuggetsell YES
@@ -255,6 +265,7 @@ VARCHECKS:
   if !matchre("$ammobuy", "\b(YES|NO)\b") then put #var ammobuy NO
   if !def(ammobuylist) then put #var ammobuylist bow|xbow|sling
   if !def(ammocontainer) then put #var ammocontainer backpack
+  if (!def(ammomin)) then put #var ammomin 0
   if ($ammomin >= 0) then
   else put #var ammomin 100
   if !matchre("$lockpickbuy", "\b(YES|NO)\b") then put #var lockpickbuy NO
@@ -265,13 +276,16 @@ VARCHECKS:
   if !def(bucketitem) then put #var bucketitem none
   if !matchre("$dismantletype", "\b(none|bash|bunny|caravan|chomp|claw|crush|fire|focus|jump|pray|press|roar|salvage|shriek|slam|slip|stomp|thump|tinker|whistle)\b") then put #var dismantletype none
   if !matchre("$boxpopbuff", "\b(none|drum|hol|mt)\b") then put #var boxpopbuff none
+  if (!def(boxpopbuffprepmana)) then put #var boxpopbuffprepmana 0
   if ($boxpopbuffprepmana >= 0) then
   else put #var boxpopbuffprepmana 1
+  if (!def(boxpopbuffaddmana)) then put #var boxpopbuffaddmana 0
   if ($boxpopbuffaddmana >= 0) then
   else put #var boxpopbuffaddmana 0
   if !matchre("$appfocus", "\b(YES|NO)\b") then put #var appfocus NO
   if !def(appfocusitem) then put #var appfocusitem shark
   if !matchre("$spiderfeed", "\b(YES|NO)\b") then put #var spiderfeed NO
+  if (!def(incense)) then put #var incense 0
   if ($incense >= 0) then
   else put #var incense 0
 
@@ -398,6 +412,7 @@ VARCHECKS:
   if !matchre("$appsaveitem", "\b(none|tight|lumpy)\b") then put #var appsaveitem none
   if !def(appsaveitemstorage) then put #var appsaveitemstorage haversack
   if !matchre("$collect", "\b(YES|NO)\b") then put #var collect YES
+  if (!def(collecttimer)) then put #var collecttimer 0
   if ($collecttimer >= 0) then
   else put #var collecttimer 120
   if !matchre("$collectitem", "\b(rock|bunny)\b") then put #var collectitem rock
@@ -410,6 +425,7 @@ VARCHECKS:
   
   #NONCOMBAT
   if !matchre("$noncombat", "\b(YES|NO)\b") then put #var noncombat NO
+  if !matchre("$preferoutdoors", "\b(YES|NO)\b") then put #var preferoutdoors NO
   if !matchre("$burgle", "\b(YES|NO)\b") then put #var burgle NO
   if !matchre("$perform", "\b(YES|NO)\b") then put #var perform NO
   if !matchre("$crafting", "\b(YES|NO)\b") then put #var crafting NO
@@ -444,6 +460,7 @@ VARCHECKS:
   if !matchre("$instruments", "\b(YES|NO)\b") then put #var instrumentassess YES
   if !matchre("$instclean", "\b(YES|NO)\b") then put #var instclean YES
   if !def(instcleancloth) then put #var instcleancloth cloth
+  if (!def(songtype)) then put #var songtype 0
   if ($songtype >= 0) then
   else put #var songtype 0
   if !matchre("$climbingrope", "\b(YES|NO)\b") then put #var climbingrope NO
@@ -460,8 +477,10 @@ VARCHECKS:
   if !def(forgingmaterial) then put #var forgingmaterial bronze
   if !matchre("$forgingrepair", "\b(YES|NO)\b") then put #var forgingrepair YES
   if !matchre("$forgingprivateroom", "\b(YES|NO)\b") then put #var forgingprivateroom NO
+  if (!def(forgingmaxvolumes)) then put #var forgingmaxvolumes 0
   if ($forgingmaxvolumes >= 0) then
   else put #var forgingmaxvolumes 200
+  if (!def(forgingmaxquantity)) then put #var forgingmaxquantity 0
   if ($forgingmaxquantity >= 0) then
   else put #var forgingmaxquantity 4
   if !matchre("$forgingsmelting", "\b(YES|NO)\b") then put #var forgingsmelting YES
@@ -470,8 +489,10 @@ VARCHECKS:
   if !def(outfittingleather) then put #var outfittingleather cougar-pelt
   if !def(outfittingyarn) then put #var outfittingyarn wool
   if !matchre("$outfittingrepair", "\b(YES|NO)\b") then put #var outfittingrepair YES
+  if (!def(outfittingmaxyards)) then put #var outfittingmaxyards 0
   if ($outfittingmaxyards >= 0) then
   else put #var outfittingmaxyards 100
+  if (!def(outfittingmaxquantity)) then put #var outfittingmaxquantity 0
   if ($outfittingmaxquantity >= 0) then
   else put #var outfittingmaxquantity 4
   if !def(awl) then put #var awl awl
@@ -489,20 +510,26 @@ VARCHECKS:
 
   
   #MAGIC
+  if (!def(minconcentration)) then put #var minconcentration 0
   if ($minconcentration >= 0) then
   else put #var minconcentration 80
   if ($minmana >= 10) then
   else put #var minmana 30
   if !matchre("$fastmagic", "\b(YES|NO)\b") then put #var fastmagic NO
   if !matchre("$straightcast", "\b(YES|NO)\b") then put #var straightcast NO
+  if (!def(difficulty1percent)) then put #var difficulty1percent 0
   if ($difficulty1percent >= 0) then
   else put #var difficulty1percent 100
+  if (!def(difficulty2percent)) then put #var difficulty2percent 0
   if ($difficulty2percent >= 0) then
   else put #var difficulty2percent 100
+  if (!def(difficulty3percent)) then put #var difficulty3percent 0
   if ($difficulty3percent >= 0) then
   else put #var difficulty3percent 100
+  if (!def(difficulty4percent)) then put #var difficulty4percent 0
   if ($difficulty4percent >= 0) then
   else put #var difficulty4percent 100
+  if (!def(difficulty5percent)) then put #var difficulty5percent 0
   if ($difficulty5percent >= 0) then
   else put #var difficulty5percent 100
   
@@ -514,10 +541,12 @@ VARCHECKS:
   if (($cambitems >= 0) && ($cambitems < 3)) then
   else put #var cambitems 1
   if !def(cambitem1) then put #var cambitem1 armband
+  if (!def(cambitem1mana)) then put #var cambitem1mana 1
   if ($cambitem1mana >= 1) then
   else put #var cambitem1mana 1
   if !matchre("$cambitem1worn", "\b(YES|NO)\b") then put #var cambitem1worn YES
   if !def(cambitem2) then put #var cambitem2 armband
+  if (!def(cambitem2mana)) then put #var cambitem2mana 1
   if ($cambitem2mana >= 1) then
   else put #var cambitem2mana 1
   if !matchre("$cambitem2worn", "\b(YES|NO)\b") then put #var cambitem2worn YES
@@ -528,6 +557,7 @@ VARCHECKS:
   if !matchre("$tmfocus", "\b(YES|NO)\b") then put #var tmfocus NO
   if !def(tmfocusitem) then put #var tmfocusitem wand
   if !matchre("$tmfocusstorage", "\b(YES|NO)\b") then put #var tmfocusstorage NO
+  if !def(tmfocuscontainer) then put #var tmfocuscontainer backpack
   if !matchre("$tmfocusworn", "\b(YES|NO)\b") then put #var tmfocusworn NO
     if !matchre("$parallelfocus", "\b(YES|NO)\b") then put #var parallelfocus NO
   if !def(parallelfocusitem) then put #var parallelfocusitem dark cube
@@ -538,6 +568,7 @@ VARCHECKS:
     put #var tattootype runic
   }
   if !def(tattoospell) then put #var tattoospell none
+  if (!def(tattooprepmana)) then put #var tattooprepmana 1
   if ($tattooprepmana >= 1) then
   else put #var tattooprepmana 5
 
@@ -548,18 +579,23 @@ VARCHECKS:
   if !matchre("$spellnumm2", "\b(1|2|3|4)\b") then put #var spellnumm2 3
   if !matchre("$spellautomana", "\b(YES|NO)\b") then put #var spellautomana YES
   if !def(spell1) then put #var spell1 ys
+  if (!def(spell1mana)) then put #var spell1mana 0
+  if (!def(spell1mana)) then put #var spell1mana 0
   if ($spell1mana >= 0) then
   else put #var spell1mana 0
   if !matchre("$spell1symb", "\b(YES|NO)\b") then put #var spell1symb NO
   if !def(spell2) then put #var spell2 ab
+  if (!def(spell2mana)) then put #var spell2mana 0
   if ($spell2mana >= 0) then
   else put #var spell2mana 0
   if !matchre("$spell2symb", "\b(YES|NO)\b") then put #var spell2symb NO
   if !def(spell3) then put #var spell3 maf
+  if (!def(spell3mana)) then put #var spell3mana 0
   if ($spell3mana >= 0) then
   else put #var spell3mana 0
   if !matchre("$spell3symb", "\b(YES|NO)\b") then put #var spell3symb NO
   if !def(spell4) then put #var spell4 bless
+  if (!def(spell4mana)) then put #var spell4mana 0
   if ($spell4mana >= 0) then
   else put #var spell4mana 0
   if !matchre("$spell4symb", "\b(YES|NO)\b") then put #var spell4symb NO
@@ -567,11 +603,13 @@ VARCHECKS:
   if !matchre("$tm", "\b(YES|NO)\b") then put #var tm NO
   if !matchre("$tmm2", "\b(YES|NO)\b") then put #var tmm2 NO
   if !def(spelltm) then put #var spelltm fb
+  if (!def(spelltmmana)) then put #var spelltmmana 0
   if ($spelltmmana >= 0) then
   else put #var spelltmmana 0
   if !matchre("$debil", "\b(YES|NO)\b") then put #var debil NO
   if !matchre("$debilm2", "\b(YES|NO)\b") then put #var debilm2 NO
   if !def(spelldebil) then put #var spelldebil frb
+  if (!def(spelldebilmana)) then put #var spelldebilmana 0
   if ($spelldebilmana >= 0) then
   else put #var spelldebilmana 0
   if !matchre("$cyclic", "\b(YES|NO)\b") then put #var cyclic NO
@@ -580,80 +618,103 @@ VARCHECKS:
   if !matchre("$spellcnum", "\b(1|2|3)\b") then put #var spellcnum 1
   if !matchre("$spellcnumm2", "\b(1|2|3)\b") then put #var spellcnumm2 1
   if !def(spellc1) then put #var spellc1 ac
+  if (!def(spellc1prepmana)) then put #var spellc1prepmana 1
   if ($spellc1prepmana >= 1) then
   else put #var spellc1prepmana 1
   if !def(spellc2) then put #var spellc2 sov
+  if (!def(spellc2prepmana)) then put #var spellc2prepmana 1
   if ($spellc2prepmana >= 1) then
   else put #var spellc2prepmana 1
   if !def(spellc3) then put #var spellc3 how
+  if (!def(spellc3prepmana)) then put #var spellc3prepmana 1
   if ($spellc3prepmana >= 1) then
   else put #var spellc3prepmana 1
   if !matchre("$cyctm", "\b(YES|NO)\b") then put #var cyctm NO
   if !matchre("$cyctmm2", "\b(YES|NO)\b") then put #var cyctmm2 NO
   if !def(spellcyctm) then put #var spellcyctm rim
+  if (!def(spellcyctmmana)) then put #var spellcyctmmana 1
   if ($spellcyctmmana >= 1) then
   else put #var spellcyctmmana 1
   if !matchre("$cycdebil", "\b(YES|NO)\b") then put #var cycdebil NO
   if !matchre("$cycdebilm2", "\b(YES|NO)\b") then put #var cycdebilm2 NO
   if !def(spellcycdebil) then put #var spellcycdebil ee
+  if (!def(spellcycdebilmana)) then put #var spellcycdebilmana 1
   if ($spellcycdebilmana >= 1) then
   else put #var spellcycdebilmana 1
   if !matchre("$buff", "\b(YES|NO)\b") then put #var buff NO
   if (($buffnum >= 0) && ($buffnum <= 16)) then
   else put #var buffnum 0
   if !def(buff1) then put #var buff1 maf
+  if (!def(buff1mana)) then put #var buff1mana 0
   if ($buff1mana >= 0) then
   else put #var buff1mana 100
   if !def(buff2) then put #var buff2 maf
+  if (!def(buff2mana)) then put #var buff2mana 0
   if ($buff2mana >= 0) then
   else put #var buff2mana 100
   if !def(buff3) then put #var buff3 maf
+  if (!def(buff3mana)) then put #var buff3mana 0
   if ($buff3mana >= 0) then
   else put #var buff3mana 100
   if !def(buff4) then put #var buff4 maf
+  if (!def(buff4mana)) then put #var buff4mana 0
   if ($buff4mana >= 0) then
   else put #var buff4mana 100
   if !def(buff5) then put #var buff5 maf
+  if (!def(buff5mana)) then put #var buff5mana 0
   if ($buff5mana >= 0) then
   else put #var buff5mana 100
   if !def(buff6) then put #var buff6 maf
+  if (!def(buff6mana)) then put #var buff6mana 0
   if ($buff6mana >= 0) then
   else put #var buff6mana 100
   if !def(buff7) then put #var buff7 maf
+  if (!def(buff7mana)) then put #var buff7mana 0
   if ($buff7mana >= 0) then
   else put #var buff7mana 100
   if !def(buff8) then put #var buff8 maf
+  if (!def(buff8mana)) then put #var buff8mana 0
   if ($buff8mana >= 0) then
   else put #var buff8mana 100
   if !def(buff9) then put #var buff9 maf
+  if (!def(buff9mana)) then put #var buff9mana 0
   if ($buff9mana >= 0) then
   else put #var buff9mana 100
   if !def(buff10) then put #var buff10 maf
+  if (!def(buff10mana)) then put #var buff10mana 0
   if ($buff10mana >= 0) then
   else put #var buff10mana 100
   if !def(buff11) then put #var buff11 maf
+  if (!def(buff11mana)) then put #var buff11mana 0
   if ($buff11mana >= 0) then
   else put #var buff11mana 100
   if !def(buff12) then put #var buff12 maf
+  if (!def(buff12mana)) then put #var buff12mana 0
   if ($buff12mana >= 0) then
   else put #var buff12mana 100
   if !def(buff13) then put #var buff13 maf
+  if (!def(buff13mana)) then put #var buff13mana 0
   if ($buff13mana >= 0) then
   else put #var buff13mana 100
   if !def(buff14) then put #var buff14 maf
+  if (!def(buff14mana)) then put #var buff14mana 0
   if ($buff14mana >= 0) then
   else put #var buff14mana 100
   if !def(buff15) then put #var buff15 maf
+  if (!def(buff15mana)) then put #var buff15mana 0
   if ($buff15mana >= 0) then
   else put #var buff15mana 100
   if !def(buff16) then put #var buff16 maf
+  if (!def(buff16mana)) then put #var buff16mana 0
   if ($buff16mana >= 0) then
   else put #var buff16mana 100
   if !matchre("$symbiosisbuff", "\b(YES|NO)\b") then put #var symbiosisbuff NO
   if !def(symbiosisspell) then put #var symbiosisspell ab
+  if (!def(symbiosismana)) then put #var symbiosismana 0
   if ($symbiosismana >= 0) then
   else put #var symbiosismana 100
   if !matchre("$tattoobuff", "\b(YES|NO)\b") then put #var tattoobuff NO
+  if (!def(tattooaddmana)) then put #var tattooaddmana 0
   if ($tattooaddmana >= 0) then
   else put #var tattooaddmana 0
   if !matchre("$wandbuff", "\b(YES|NO)\b") then put #var wandbuff NO
@@ -684,43 +745,59 @@ VARCHECKS:
   if (($gbuffnum >= 0) && ($gbuffnum <= 8)) then
   else put #var gbuffnum 0
   if !def(gbuff1) then put #var gbuff1 maf
+  if (!def(gbuff1prepmana)) then put #var gbuff1prepmana 0
   if ($gbuff1prepmana >= 0) then
   else put #var gbuff1prepmana 1
+  if (!def(gbuff1addmana)) then put #var gbuff1addmana 0
   if ($gbuff1addmana >= 0) then
   else put #var gbuff1addmana 0
   if !def(gbuff2) then put #var gbuff2 maf
+  if (!def(gbuff2prepmana)) then put #var gbuff2prepmana 0
   if ($gbuff2prepmana >= 0) then
   else put #var gbuff2prepmana 1
+  if (!def(gbuff2addmana)) then put #var gbuff2addmana 0
   if ($gbuff2addmana >= 0) then
   else put #var gbuff2addmana 0
   if !def(gbuff3) then put #var gbuff3 maf
+  if (!def(gbuff3prepmana)) then put #var gbuff3prepmana 0
   if ($gbuff3prepmana >= 0) then
   else put #var gbuff3prepmana 1
+  if (!def(gbuff3addmana)) then put #var gbuff3addmana 0
   if ($gbuff3addmana >= 0) then
   else put #var gbuff3addmana 0
   if !def(gbuff4) then put #var gbuff4 maf
+  if (!def(gbuff4prepmana)) then put #var gbuff4prepmana 0
   if ($gbuff4prepmana >= 0) then
   else put #var gbuff4prepmana 1
+  if (!def(gbuff4addmana)) then put #var gbuff4addmana 0
   if ($gbuff4addmana >= 0) then
   else put #var gbuff4addmana 0
   if !def(gbuff5) then put #var gbuff5 maf
+  if (!def(gbuff5prepmana)) then put #var gbuff5prepmana 0
   if ($gbuff5prepmana >= 0) then
   else put #var gbuff5prepmana 1
+  if (!def(gbuff5addmana)) then put #var gbuff5addmana 0
   if ($gbuff5addmana >= 0) then
   else put #var gbuff5addmana 0
   if !def(gbuff6) then put #var gbuff6 maf
+  if (!def(gbuff6prepmana)) then put #var gbuff6prepmana 0
   if ($gbuff6prepmana >= 0) then
   else put #var gbuff6prepmana 1
+  if (!def(gbuff6addmana)) then put #var gbuff6addmana 0
   if ($gbuff6addmana >= 0) then
   else put #var gbuff6addmana 0
   if !def(gbuff7) then put #var gbuff7 maf
+  if (!def(gbuff7prepmana)) then put #var gbuff7prepmana 0
   if ($gbuff7prepmana >= 0) then
   else put #var gbuff7prepmana 1
+  if (!def(gbuff7addmana)) then put #var gbuff7addmana 0
   if ($gbuff7addmana >= 0) then
   else put #var gbuff7addmana 0
   if !def(gbuff8) then put #var gbuff8 maf
+  if (!def(gbuff8prepmana)) then put #var gbuff8prepmana 0
   if ($gbuff8prepmana >= 0) then
   else put #var gbuff8prepmana 1
+  if (!def(gbuff8addmana)) then put #var gbuff8addmana 0
   if ($gbuff8addmana >= 0) then
   else put #var gbuff8addmana 0
   
@@ -742,6 +819,7 @@ VARCHECKS:
   if !matchre("$research", "\b(YES|NO)\b") then put #var research NO
   if ($gafmana >= 5) then
   else put #var gafmana 100
+  if (!def(gafaddmana)) then put #var gafaddmana 0
   if ($gafaddmana >= 0) then
   else put #var gafaddmana 0
   if !matchre("$researchnum", "\b(1|2|3|4|5)\b") then put #var researchnum 1
@@ -761,12 +839,15 @@ VARCHECKS:
   if !matchre("$warhorn", "\b(YES|NO)\b") then put #var warhorn NO
   if !def(warhornitem) then put #var warhornitem warhorn
   
+  if (!def(mininnerfire)) then put #var mininnerfire 0
   if ($mininnerfire >= 0) then
   else put #var mininnerfire 20
   if !matchre("$berserkava", "\b(YES|NO)\b") then put #var berserkava NO
+  if (!def(avafatigue)) then put #var avafatigue 0
   if ($avafatigue >= 0) then
   else put #var avafatigue 90
   if !matchre("$berserkfamine", "\b(YES|NO)\b") then put #var berserkfamine NO
+  if (!def(faminevit)) then put #var faminevit 0
   if ($faminevit >= 0) then
   else put #var faminevit 90
   if !matchre("$meditatestaunch", "\b(YES|NO)\b") then put #var meditatestaunch NO
@@ -812,9 +893,11 @@ VARCHECKS:
   if !matchre("$movewhistle", "\b(YES|NO)\b") then put #var movewhistle NO
   if !matchre("$movescream", "\b(YES|NO)\b") then put #var movescream NO
   if !matchre("$eilliescry", "\b(YES|NO)\b") then put #var eilliescry NO
+  if (!def(eilliescrymana)) then put #var eilliescrymana 1
   if ($eilliescrymana >= 1) then
   else put #var eilliescrymana 1
   if !matchre("$misdirection", "\b(YES|NO)\b") then put #var misdirection NO
+  if (!def(misdirectionmana)) then put #var misdirectionmana 0
   if ($misdirectionmana >= 0) then
   else put #var misdirectionmana 100
   #GUILD-CLERIC
@@ -828,6 +911,7 @@ VARCHECKS:
   if !matchre("$meraudcommune", "\b(YES|NO)\b") then put #var meraudcommune NO
   if !matchre("$elunedcommune", "\b(YES|NO)\b") then put #var elunedcommune NO
   if !matchre("$tamsinecommune", "\b(YES|NO)\b") then put #var tamsinecommune NO
+  if (!def(blessdelay)) then put #var blessdelay 0
   if ($blessdelay >= 0) then
   else put #var blessdelay 2
   if !matchre("$dirtstacker", "\b(YES|NO)\b") then put #var dirtstacker NO
@@ -847,6 +931,7 @@ VARCHECKS:
   if !matchre("$osrelmeraud", "\b(YES|NO)\b") then put #var osrelmeraud NO
   if ($ommana >= 30) then
   else put #var ommana 30
+  if (!def(ombuffnum)) then put #var ombuffnum 0
   if ($ombuffnum >= 0) then
   else put #var ombuffnum 0
   
@@ -874,6 +959,7 @@ VARCHECKS:
   if !matchre("$adcdisease", "\b(YES|NO)\b") then put #var adcdisease NO
   if !matchre("$adcpoison", "\b(YES|NO)\b") then put #var adcpoison NO
   if !matchre("$regenerate", "\b(YES|NO)\b") then put #var regenerate NO
+  if (!def(regeneratemana)) then put #var regeneratemana 0
   if ($regeneratemana >= 0) then
   else put #var regeneratemana 5
   if !matchre("$embracevela", "\b(YES|NO)\b") then put #var embracevela NO
@@ -886,12 +972,15 @@ VARCHECKS:
   if ($absolutionmana >= 150) then
   else put #var absolutionmana 150
   if !matchre("$iztouch", "\b(YES|NO)\b") then put #var iztouch NO
+  if (!def(izmana)) then put #var izmana 0
   if ($izmana >= 0) then
   else put #var izmana 15
+  if (!def(iztimer)) then put #var iztimer 0
   if ($iztimer >= 0) then
   else put #var iztimer 30
   #GUILD-MM
   if !matchre("$astro", "\b(YES|NO)\b") then put #var astro NO
+  if (!def(astrotimer)) then put #var astrotimer 0
   if ($astrotimer >= 0) then
   else put #var astrotimer 60
   if !def(tktitem) then put #var tktitem dagger
@@ -905,6 +994,7 @@ VARCHECKS:
   if ($mindshoutmana >= 5) then
   else put #var mindshoutmana 20
   if !matchre("$burglerf", "\b(YES|NO)\b") then put #var burglerf NO
+  if (!def(burglerfdelay)) then put #var burglerfdelay 0
   if ($burglerfdelay >= 0) then
   else put #var burglerfdelay 10 
   
@@ -922,16 +1012,19 @@ VARCHECKS:
   if !matchre("$siphonvit", "\b(YES|NO)\b") then put #var siphonvit NO
   if ($siphonvitmana >= 30) then
   else put #var siphonvitmana 10
+  if (!def(siphonvitnum)) then put #var siphonvitnum 0
   if ($siphonvitnum >= 0) then
   else put #var siphonvitnum 80
   
   if !matchre("$preserve", "\b(YES|NO)\b") then put #var preserve NO
   if !matchre("$harvest", "\b(YES|NO)\b") then put #var harvest NO
   if !matchre("$harveststore", "\b(YES|NO)\b") then put #var harveststore NO
+  if (!def(harveststorenum)) then put #var harveststorenum 0
   if ($harveststorenum >= 0) then
   else put #var harveststorenum 5
   if !matchre("$eotbrel", "\b(YES|NO)\b") then put #var eotbrel NO
   if !matchre("$burgleeotb", "\b(YES|NO)\b") then put #var burgleeotb NO
+  if (!def(burgleeotbdelay)) then put #var burgleeotbdelay 0
   if ($burgleeotbdelay >= 0) then
   else put #var burgleeotbdelay 10
   
@@ -989,11 +1082,16 @@ VARCHECKS:
   if !matchre("$tradingsell", "\b(YES|NO)\b") then put #var tradingsell NO
   if !matchre("$tradingselltown", "\b(%townvaultpresetlist)\b") then put #var tradingselltown none
   if !matchre("$tradingsellsource", "\b(vault|portal)\b") then put #var tradingsellsource vault
+  if !matchre("$finesse", "\b(YES|NO)\b") then put #var finesse NO
+  if (!def(finessemana)) then put #var finessemana 1
+  if ($finessemana >= 1) then
+  else var finessemana 5
   if !matchre("$tradingtasks", "\b(YES|NO)\b") then put #var tradingtasks NO
   if !def(ttbadforagelist) then put #var ttbadforagelist none
   #GUILD-WM
   if !matchre("$summoning", "\b(YES|NO)\b") then put #var summoning YES
   if !matchre("$summonweapon", "\b(YES|NO)\b") then put #var summonweapon NO
+  if (!def(summonweapontimer)) then put #var summonweapontimer 0
   if ($summonweapontimer >= 0) then
   else put #var summonweapontimer 120
   if !matchre("$pathway", "\b(YES|NO)\b") then put #var pathway NO
@@ -1002,8 +1100,10 @@ VARCHECKS:
   if !matchre("$domaintype", "\b(fire|air|earth|water|electricity|aether|metal)\b") then put #var domaintype fire
   if !matchre("$chargeafterlock", "\b(YES|NO)\b") then put #var chargeafterlock NO
   if !def(calspell) then put #var calspell ab
+  if (!def(calprepmana)) then put #var calprepmana 1
   if ($calprepmana >= 1) then
   else put #var calprepmana 100
+  if (!def(caladdmana)) then put #var caladdmana 1
   if ($caladdmana >= 1) then
   else put #var caladdmana 0
   if !def(ignitebackup) then put #var ignitebackup scimitar
@@ -1039,7 +1139,7 @@ VARCHECKS:
     put #var expaccuracy NO
     put #var expdamage NO
   }
-  if (($guild = "Barbarian") || ($guild = "Thief")) then
+  if (("$guild" = "Barbarian") || ("$guild" = "Thief")) then
   {
     put #var attune NO
     put #var spellprepping NO
@@ -1108,7 +1208,7 @@ VARCHECKOTHER:
   if !def(summoningot) then put #var summoningot none
   if !def(summonlist) then put #var summonlist cleave|crash|twirl|impale|doublestrike|palmstrike
   if !def(summoncleave) then put #var summoncleave 2he
-  if !def(summoncrash then put #var summoncrash 2hb
+  if !def(summoncrash) then put #var summoncrash 2hb
   if !def(summondoublestrike) then put #var summondoublestrike se
     
   #OTHER-KILL
@@ -1120,39 +1220,48 @@ VARCHECKOTHER:
   if !matchre("$killbuffing", "\b(YES|NO)\b") then put #var killbuffing NO
   if !matchre("$killcyclic", "\b(YES|NO)\b") then put #var killcyclic NO
   if !def(killcycspell) then put #var killcycspell rim
+  if (!def(killcycprepmana)) then put #var killcycprepmana 0
   if ($killcycprepmana >= 0) then
   else put #var killcycprepmana 0
   if !matchre("$killdb", "\b(YES|NO)\b") then put #var killdb NO
   if !def(killdbspell) then put #var killdbspell ip
+  if (!def(killdbprepmana)) then put #var killdbprepmana 0
   if ($killdbprepmana >= 0) then
   else put #var killdbprepmana 0
+  if (!def(killdbaddmana)) then put #var killdbaddmana 0
   if ($killdbaddmana >= 0) then
   else put #var killdbaddmana 0
   if !matchre("$killtm", "\b(YES|NO)\b") then put #var killtm NO
   if !def(killtmspell) then put #var killtmspell cl
+  if (!def(killtmprepmana)) then put #var killtmprepmana 0
   if ($killtmprepmana >= 0) then
   else put #var killtmprepmana 0
+  if (!def(killtmaddmana)) then put #var killtmaddmana 0
   if ($killtmaddmana >= 0) then
   else put #var killtmaddmana 0
   
   if !matchre("$beckonthenaga", "\b(YES|NO)\b") then put #var beckonthenaga NO
   if ($btnprepmana >= 30) then
   else put #var btnprepmana 30
+  if (!def(btnaddmana)) then put #var btnaddmana 0
   if ($btnaddmana >= 0) then
   else put #var btnaddmana 0
   if !matchre("$dragonsbreath", "\b(YES|NO)\b") then put #var dragonsbreath NO
   if ($dbprepmana >= 30) then
   else put #var dbprepmana 15
+  if (!def(dbaddmana)) then put #var dbaddmana 0
   if ($dbaddmana >= 0) then
   else put #var dbaddmana 0
   if !matchre("$blufmorgaraen", "\b(YES|NO)\b") then put #var blufmorgaraen NO
   if ($bgprepmana >= 30) then
   else put #var bgprepmana 15
+  if (!def(bgaddmana)) then put #var bgaddmana 0
   if ($bgaddmana >= 0) then
   else put #var bgaddmana 0
   if !matchre("$magneticballista", "\b(YES|NO)\b") then put #var magneticballista NO
   if ($mabprepmana >= 30) then
   else put #var mabprepmana 15
+  if (!def(mabaddmana)) then put #var mabaddmana 0
   if ($mabaddmana >= 0) then
   else put #var mabaddmana 0
   
@@ -3820,7 +3929,7 @@ STATUSCHECK:
   #TENDING_BLEEDING_LODGED
   if (%t > %nextbleed) then gosub TENDCHECK
   #COLLECTAMMO
-  if ((%scriptmode = 1) && (%buffingonly != 1) then
+  if ((%scriptmode = 1) && (%buffingonly != 1)) then
   {
     gosub COLLECTINGAMMO
     if (%feetcheck = 1) then
@@ -5798,7 +5907,7 @@ WEARITEMP:
   pause
 WEARITEMMAIN:
   matchre WEARITEMP %waitstring
-  matchre RETURN You put|You slip|You sling|You work your way into|You attach|You slide your|You hang|You are already wearing that.|You slide|You drape
+  matchre RETURN You put|You slip|You sling|You work your way into|You attach|You slide your|You hang|You are already wearing that.|You slide|You drape|Wear what?
   matchre WEARCANT You can't wear any more items like that.
   matchre WEARUNLOAD You need to unload|You should unload
   match RETURN But that is already in your inventory.
@@ -7528,7 +7637,7 @@ CASTINGLOGIC:
   {
     if (%spelldifficulty > 0) then
     {
-      if ((%spellmana != %nativemana) && (%spellmana != 0) then
+      if ((%spellmana != %nativemana) && (%spellmana != 0)) then
       {
         var spellpercent 100
         #var spellpercent %sorcdifficulty%spelldifficultypercent
@@ -7548,7 +7657,7 @@ CASTINGLOGIC:
   else var spellpercent 100
   #put #echo Yellow spellpercent: %spellpercent
   #EARLY_READINESS
-  if ((%spelldifficulty > 0) && (%spellpercent < 100) then
+  if ((%spelldifficulty > 0) && (%spellpercent < 100)) then
   {
     var spellpreptest $spelltime
     math spellpreptest divide $spellpreptime
@@ -8580,6 +8689,25 @@ CHARGESTOW:
 CHARGETAP:
   var cambtapped %t
   math cambtapped add 5
+  return
+
+
+DISCERN:
+  var discernspell $1
+  goto DISCERNMAIN
+DISCERNP:
+  pause
+DISCERNMAIN:
+  matchre DISCERNP %waitstring
+  matchre DISCERNRETURN The spell requires at minimum \d+ mana streams and you think you can reinforce it with \d+ more, for a total of (\d+) streams\.
+  put discern %discernspell
+  matchwait 5
+  var timeoutsub DISCERNMAIN
+  var timeoutcommand discern %discernspell
+	goto TIMEOUT
+
+DISCERNRETURN:
+  var discernmax $1
   return
 
 
@@ -11947,7 +12075,7 @@ TENDMAIN:
     return
   }
   matchre TENDP %waitstring
-  matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove|As you reach for the|You foolishly attempt to remove|You deftly remove|You were not able to find anything to remove\.|There are no areas that are bleeding\.|You carefully attempt|You callously remove
+  matchre RETURN ^You work|^That area|^Look again|^Your .+ too injured|TEND {MY|<character>} {area}|You are a bit too busy performing to do that.|^You fumble|That area is not bleeding\.|You skillfully remove|As you reach for the|You foolishly attempt to remove|You deftly remove|You were not able to find anything to remove\.|There are no areas that are bleeding\.|You carefully attempt|You callously remove|There are no areas that need to be tended\.
   match TENDSTOW You must have a hand free to remove
   put tend my %tendlocation
   matchwait 5
@@ -12310,9 +12438,10 @@ PLAYP:
   pause
 PLAY:
   matchre PLAYP %waitstring
-  matchre PLAYSUCCESS You're already playing a song!|You begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .* with only the slightest hint of difficulty\.|You begin (?:a|an) (?:spritely|quiet|masterful) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|an) (?:spritely|quiet|masterful) .* on your .*\.
+  matchre PLAYSUCCESS You're already playing a song!|You begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .* with only the slightest hint of difficulty\.
   matchre PLAYDOWN You fumble slightly as you begin (?:a|some) (?:spritely|quiet) .* on your .*\.|You struggle to begin (?:a|some) (?:spritely|quiet) .* on your .*\.
-  matchre PLAYUP You effortlessly begin (?:a|some) (?:spritely|quiet|halting) .* on your .*, your heart swelling in pride at your hard-earned skill\.|You begin (?:a|some) (?:spritely|quiet) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|some) (?:spritely|quiet) .* on your .*\.
+  matchre PLAYUP You effortlessly begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .*, your heart swelling in pride at your hard-earned skill\.|You begin (?:a|an|some) (?:spritely|quiet|masterful) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .*\.
+
   match PLAYUNHIDE That would give away your hiding place!
   put play %songlist(%songtype) on %instrument
   matchwait 5
@@ -12321,12 +12450,14 @@ PLAY:
   goto TIMEOUT
 
 PLAYDOWN:
+  echo playdown
   if (%songpermission = 1) then goto PLAYSUCCESS
   if (%songtype > 0) then
   {
     gosub PLAYSTOP
     math songtype subtract 1
     put #var songtype %songtype
+    put #var save
     goto PLAY
   }
   else
@@ -12337,12 +12468,14 @@ PLAYDOWN:
 
   
 PLAYUP:
+  echo playup
   if (%songpermission = 1) then goto PLAYSUCCESS
   if (%songtype < 33) then
   {
     gosub PLAYSTOP
     math songtype add 1
     put #var songtype %songtype
+    put #var save
     goto PLAY
   }
   else

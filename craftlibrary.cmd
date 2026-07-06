@@ -237,7 +237,7 @@ CRAFTINGSTART:
     {
       if ("%forgingtown" != "%vaulttown") then
       {
-        put #echo %alertwindow Yellow CraftingStorageLocation is Vault, but VaultTown != ForgingTown!  Ending crafting.
+        put #echo >$alertwindow Yellow CraftingStorageLocation is Vault, but VaultTown != ForgingTown!  Ending crafting.
         gosub CRAFTINGABORT
         return
       }
@@ -252,13 +252,13 @@ CRAFTINGSTART:
       }
       else
       {
-        put #echo %alertwindow Yellow [CRAFT]: Could not find crafting storage.
+        put #echo >$alertwindow Yellow [CRAFT]: Could not find crafting storage.
         exit
       }
     }
     else
     {
-      put #echo %alertwindow Yellow [CRAFT]: Could not find crafting storage.
+      put #echo >$alertwindow Yellow [CRAFT]: Could not find crafting storage.
       exit
     }
   }
@@ -374,7 +374,7 @@ WORKORDER:
       else
       {
         put #echo Yellow Needed more than one ingot, but smelting is turned off!  Turning off crafting.
-        put #echo %alertwindow Yellow Needed more than one ingot, but smelting is turned off!  Turning off crafting.
+        put #echo >$alertwindow Yellow Needed more than one ingot, but smelting is turned off!  Turning off crafting.
         gosub CRAFTINGABORT
         return
       }
@@ -398,7 +398,7 @@ WORKORDER:
       }
       else
       {
-        put #echo %alertwindow Yellow [CRAFT]: No free anvils!  Stopping forging!
+        put #echo >$alertwindow Yellow [CRAFT]: No free anvils!  Stopping forging!
         gosub CRAFTINGABORT
         return
       }
@@ -412,7 +412,7 @@ WORKORDER:
   if ((!matchre("$righthandnoun", "book")) && (!matchre("$lefthandnoun", "book"))) then
   {
     put #echo Yellow Could not find %discipline book!  Turning off crafting.
-    put #echo %alertwindow Yellow Could not find %discipline book!  Turning off crafting.
+    put #echo >$alertwindow Yellow Could not find %discipline book!  Turning off crafting.
     gosub CRAFTINGABORT
     return
   }
@@ -432,7 +432,7 @@ WORKORDER:
   put #echo righthandnoun: $righthandnoun
   if (!matchre("$righthandnoun", "logbook")) then
   {
-    put #echo %alertwindow Yellow Could not find logbook!  Ending crafting.
+    put #echo >$alertwindow Yellow Could not find logbook!  Ending crafting.
     put #echo Yellow Could not find logbook!  Ending crafting.
     gosub CRAFTINGABORT
     return
@@ -567,7 +567,7 @@ CRAFTINGMAIN:
   if ((!matchre("$righthandnoun", "book")) && (!matchre("$lefthandnoun", "book"))) then
   {
     put #echo Yellow Could not find %discipline book!  Turning off crafting.
-    put #echo %alertwindow Yellow Could not find %discipline book!  Turning off crafting.
+    put #echo >$alertwindow Yellow Could not find %discipline book!  Turning off crafting.
     gosub CRAFTINGABORT
     return
   }
@@ -587,7 +587,7 @@ CRAFTINGMAIN:
     {
       if ("%volume" = "0") then
       {
-        put #echo %alertwindow Yellow Misread on ProductRead!  Exiting!
+        put #echo >$alertwindow Yellow Misread on ProductRead!  Exiting!
         put #echo Yellow Misread on ProductRead!  Exiting!
         exit
       }
@@ -596,7 +596,7 @@ CRAFTINGMAIN:
     {
       if (("%volume" = "0") || ("%yards" = "0") || ("%materialnoun" = "0")) then
       {
-        put #echo %alertwindow Yellow Misread on ProductRead!  Exiting!
+        put #echo >$alertwindow Yellow Misread on ProductRead!  Exiting!
         put #echo Yellow Misread on ProductRead!  Exiting!
         exit
       }
@@ -614,7 +614,7 @@ CRAFTINGMAIN:
     if (%cleananvil = 2) then
     {
       gosub GETITEM ingot on anvil
-      put #echo %alertwindow Yellow Found $righthand on the anvil before working!  Stowed, please investigate.
+      put #echo >$alertwindow Yellow Found $righthand on the anvil before working!  Stowed, please investigate.
       gosub PUTITEM my ingot in my %craftingstorage
     }
     gosub GETITEM my %material ingot in %craftingstorage
@@ -1570,7 +1570,7 @@ TASKACQUIRE:
   if (("$righthandnoun" != "logbook") && ("$lefthandnoun" != "logbook")) then
   {
     put #echo Yellow Could not find %crafttype logbook!  Turning off crafting.
-    put #echo %alertwindow Yellow Could not find %crafttype logbook!  Turning off crafting.
+    put #echo >$alertwindow Yellow Could not find %crafttype logbook!  Turning off crafting.
     gosub CRAFTINGABORT
     return
   }
@@ -1591,7 +1591,7 @@ TASKACQUIRE:
   if ((!matchre("$righthandnoun", "book")) && (!matchre("$lefthandnoun", "book"))) then
   {
     put #echo Yellow Could not find %discipline book!  Turning off crafting.
-    put #echo %alertwindow Yellow Could not find %discipline book!  Turning off crafting.
+    put #echo >$alertwindow Yellow Could not find %discipline book!  Turning off crafting.
     gosub CRAFTINGABORT
     return
   }
@@ -1602,7 +1602,7 @@ TASKACQUIRE:
   echo page: %page
   if (%page = 0) then
   {
-    put #echo %alertwindow Yellow Failed to select a proper page!  Please investigate, turning off crafting!
+    put #echo >$alertwindow Yellow Failed to select a proper page!  Please investigate, turning off crafting!
     put #echo Yellow Failed to select a proper page!  Please investigate, turning off crafting!
     gosub CRAFTINGABORT
     return
@@ -1641,7 +1641,7 @@ TASKACQUIRE:
   {
     if ("%volume" = "0") then
     {
-      put #echo %alertwindow Yellow Misread on ProductRead!  Exiting!
+      put #echo >$alertwindow Yellow Misread on ProductRead!  Exiting!
       put #echo Yellow Misread on ProductRead!  Exiting!
       exit
     }
@@ -1650,7 +1650,7 @@ TASKACQUIRE:
   {
     if (("%volume" = "0") || ("%yards" = "0") || ("%materialnoun" = "0")) then
     {
-      put #echo %alertwindow Yellow Misread on ProductRead!  Exiting!
+      put #echo >$alertwindow Yellow Misread on ProductRead!  Exiting!
       put #echo Yellow Misread on ProductRead!  Exiting!
       exit
     }
@@ -1989,7 +1989,7 @@ ORDERMATERIALS:
     action (ordermats) off
     if (("%materialnum" = "0") || ("%materialyards" = "0")) then
     {
-      put #echo %alertwindow Yellow Misread on materials order!  Exiting!
+      put #echo >$alertwindow Yellow Misread on materials order!  Exiting!
       put #echo Yellow Misread on materials order!  Exiting!
       exit
     }
@@ -2217,11 +2217,11 @@ LOGBOOKBUNDLEMAIN:
   
 LOGBOOKBUNDLEBAD:
   put #echo Yellow Made an item of inferior quality!
-  put #echo %alertwindow Yellow Made an item of inferior quality!
+  put #echo >$alertwindow Yellow Made an item of inferior quality!
   return
 
 LOGBOOKBAD:
-  put #echo %alertwindow Yellow [CRAFT]: You have a logbook that's not bonded to you!  Stopping forging.
+  put #echo >$alertwindow Yellow [CRAFT]: You have a logbook that's not bonded to you!  Stopping forging.
   gosub CRAFTINGABORT
   return
 

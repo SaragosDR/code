@@ -434,12 +434,12 @@ ALERTINIT:
   if (("%speechalerts" = "YES") && ("%scriptmodename" != "combat")) then
   { 
     var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,|The apprentice repairman looks over|A youthful attendant hands you some bundling rope and says,|You hand the apprentice repairman|The apprentice repairman smiles and says|The horse-drawn carriage's driver shouts|Mags calls out,|Aelik scowls and says,|Cormyn scowls and says,
-    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.|An Elothean clerk says|You hand an Elothean clerk|Jakke shuffles through some notes and says,|Jakke boasts,|Milline shuffles through some notes and
+    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.|An Elothean clerk says|You hand an Elothean clerk|Jakke shuffles through some notes and says,|Jakke boasts,|Milline shuffles through some notes and|Milline folds her arms across her chest and says
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "|The shadowling exclaims,|You throw your head back and howl,|After a moment, you see a crystal-clear vision of your|After a moment, you see a vision of your god who calls to you by name,
     var hespeech A voice on the wind whispers|A pair of Merelew guards assist you into the water|The libik (?:shouts|yells),|The seedy monger looks up to you and|The Monger's voice booms out,|The Monger's booming voice comes from the booth,|One of the attendants glances at you and says,|One of the monger's assistants addresses you, saying,|^An attendant in an otter costume exclaims|\w+ chants, "C'mon! I feel the luck of Eluned smiling on you all!
-    var artspeech Painted with lush color and housed in a polished rectangle of walnut|A single crystal rose sits perfectly balanced upon the point|Fiendish lacerations exposing bare bone and dripping blood|Standing resolute in the face of an advancing horde of undead|The bright frame illuminates the rich color of the dark scene|Gracefully composed, the artwork features bold black strokes and pale watercolors|The sculpture itself is made from a single piece of gnarled copperwood|The kneeling figure of the chained man sits the height|Careful use of shading diverts your eyes away from the|At first glance, the piece appears dark and featureless|Rendered in dark bronze and rising three feet tall|Rich, polished mahogany frames this exquisite work of art|About the size of a Gor'Tog's skull, this smooth orb rests on an ornate|The panel is a worked slab of fine-grained pink sandstone standing four hands tall|Framed in a magnificent rectangle of rich mahogany, the bright bedroom|Framed in a square of goldenoak, the picture is presented against a backdrop of black velvet|As you take a look at this unique display, the first thing you notice|This display features a drape of black velvet overhead to protect
+    var artspeech Painted with lush color and housed in a polished rectangle of walnut|A single crystal rose sits perfectly balanced upon the point|Fiendish lacerations exposing bare bone and dripping blood|Standing resolute in the face of an advancing horde of undead|The bright frame illuminates the rich color of the dark scene|Gracefully composed, the artwork features bold black strokes and pale watercolors|The sculpture itself is made from a single piece of gnarled copperwood|The kneeling figure of the chained man sits the height|Careful use of shading diverts your eyes away from the|At first glance, the piece appears dark and featureless|Rendered in dark bronze and rising three feet tall|Rich, polished mahogany frames this exquisite work of art|About the size of a Gor'Tog's skull, this smooth orb rests on an ornate|The panel is a worked slab of fine-grained pink sandstone standing four hands tall|Framed in a magnificent rectangle of rich mahogany, the bright bedroom|Framed in a square of goldenoak, the picture is presented against a backdrop of black velvet|As you take a look at this unique display, the first thing you notice|This display features a drape of black velvet overhead to protect|The sky is dark, red and foreboding.
     var speechwhitelist %generalspeech|%craftingspeech|%ferryspeech|%monsterspeech|%spellspeech|%hespeech|%artspeech
     var namementionwhitelist Welcome back, (Sir|Madam)|Farewell, (Sir|Madam)|Take care, (Sir|Madam)|Thanks,|Thank you very much,|Searching methodically through the shelves, you finally manage to locate the jar labeled
     action (speech) var speechspeaker $1; var speechtext $2; var speechdiff2 %t; math speechdiff2 subtract %lastspeech; var speechdiff %speechdiff2 when ^(?!%speechwhitelist)(.{0,40}).*\, "(?!Say Ahh!)(.+)"
@@ -459,7 +459,7 @@ ALERTINIT:
   {
     action put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes-Arrival when ^\S+ just arrived.
   }
-  if (("%emotealerts" = "YES") && ("%scriptmodename" != "combat")) then then
+  if (("%emotealerts" = "YES") && ("%scriptmodename" != "combat")) then
   { 
     action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 bows. when ^(\S+) bows to you.
     action (emote) put #play Speech;put #echo >$alertwindow Yellow Alarm: Emotes - $1 curtsies. when ^(\S+) curtsies to you.
@@ -1223,7 +1223,7 @@ COMMANDPARSE:
     }
     else
     {
-      if (("%scriptmodename" = "1") || ("%scriptmodename" = "2") || ("%scriptmodename" = "combat") || ("%scriptmodename" = "research") || ("%scriptmodename" = "teach") || ("%scriptmodename" = "focus") || ("%scriptmodename" = "buff")) || ("%scriptmodename" = "gbuff") || ("%scriptmodename" = "upkeep") || ("%scriptmodename" = "burgle") || ("%scriptmodename" = "burglepawn") || ("%scriptmodename" = "multi") || ("%scriptmodename" = "alerts") || ("%scriptmodename" = "noncombat") || ("%scriptmodename" = "climb") || ("%scriptmodename" = "devotion") || ("%scriptmodename" = "quiet") || ("%scriptmodename" = "silent") || ("%scriptmodename" = "nort") || ("%scriptmodename" = "magic") || ("%scriptmodename" = "music")) then
+      if (("%scriptmodename" = "1") || ("%scriptmodename" = "2") || ("%scriptmodename" = "combat") || ("%scriptmodename" = "research") || ("%scriptmodename" = "teach") || ("%scriptmodename" = "focus") || ("%scriptmodename" = "buff") || ("%scriptmodename" = "gbuff") || ("%scriptmodename" = "upkeep") || ("%scriptmodename" = "burgle") || ("%scriptmodename" = "burglepawn") || ("%scriptmodename" = "multi") || ("%scriptmodename" = "alerts") || ("%scriptmodename" = "noncombat") || ("%scriptmodename" = "climb") || ("%scriptmodename" = "devotion") || ("%scriptmodename" = "quiet") || ("%scriptmodename" = "silent") || ("%scriptmodename" = "nort") || ("%scriptmodename" = "magic") || ("%scriptmodename" = "music")) then
       { 
         var varset 1
         put #echo mono Train script beginning.
@@ -1698,6 +1698,8 @@ TRADERONLY:
   var tradingsell $tradingsell
   var tradingselltown $tradingselltown
   var tradingsellsource $tradingsellsource
+  var finesse $finesse
+  var finessemana $finessemana
   var tradingtasks $tradingtasks
   var ttbadforagelist $ttbadforagelist
   if ("%ttbadforagelist" != "none") then var badforagelist %badforagelist|%ttbadforagelist
@@ -1997,7 +1999,7 @@ HUNTINGVARLOAD:
     {
       var zone 9b
       var travel YES
-      var traveldest sorrow's reach
+      var traveldest sorrow
       var move NO
       var targetroom 0
       var findroom YES
@@ -2040,7 +2042,7 @@ HUNTINGVARLOAD:
       var findroom YES
       var findroomlist 147|148|149|150|151|152|153|154|155
       var bugoutroom 14
-      var nearestportaltown crossing
+      var nearestportaltown leth
     }
     if ("%huntingarea" = "p1-snowbeasts") then
     {
@@ -3210,7 +3212,7 @@ MAGICVARLOAD:
 
   #SPELL_SKILLS
   gosub SPELLSTATCHECK %spell1
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spell1skill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var spell1skill sorcery
   else
   {
     if contains("%augmentation", "|%spell1|") then var spell1skill augmentation
@@ -3218,7 +3220,7 @@ MAGICVARLOAD:
     if contains("%warding", "|%spell1|") then var spell1skill warding
   }
   gosub SPELLSTATCHECK %spell2
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spell2skill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var spell2skill sorcery
   else
   {
     if contains("%augmentation", "|%spell2|") then var spell2skill augmentation
@@ -3226,7 +3228,7 @@ MAGICVARLOAD:
     if contains("%warding", "|%spell2|") then var spell2skill warding
   }
   gosub SPELLSTATCHECK %spell3
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spell3skill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var spell3skill sorcery
   else
   {
     if contains("%augmentation", "|%spell3|") then var spell3skill augmentation
@@ -3234,7 +3236,7 @@ MAGICVARLOAD:
     if contains("%warding", "|%spell3|") then var spell3skill warding
   }
   gosub SPELLSTATCHECK %spell4
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spell4skill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var spell4skill sorcery
   else
   {
     if contains("%augmentation", "|%spell4|") then var spell4skill augmentation
@@ -3248,7 +3250,7 @@ MAGICVARLOAD:
   
   #CYCLICS_SKILLS
   gosub SPELLSTATCHECK %spellc1
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spellc1skill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var spellc1skill sorcery
   else
   {
     if contains("%augmentation", "|%spellc1|") then var spellc1skill augmentation
@@ -3256,7 +3258,7 @@ MAGICVARLOAD:
     if contains("%warding", "|%spellc1|") then var spellc1skill warding
   }
   gosub SPELLSTATCHECK %spellc2
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spellc2skill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var spellc2skill sorcery
   else
   {
     if contains("%augmentation", "|%spellc2|") then var spellc2skill augmentation
@@ -3264,7 +3266,7 @@ MAGICVARLOAD:
     if contains("%warding", "|%spellc2|") then var spellc2skill warding
   }
   gosub SPELLSTATCHECK %spellc3
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spellc3skill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var spellc3skill sorcery
   else
   {
     if contains("%augmentation", "|%spellc3|") then var spellc3skill augmentation
@@ -3272,7 +3274,7 @@ MAGICVARLOAD:
     if contains("%warding", "|%spellc3|") then var spellc3skill warding
   }
   gosub SPELLSTATCHECK %spellc4
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var spellc4skill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var spellc4skill sorcery
   else
   {
     if contains("%augmentation", "|%spellc4|") then var spellc4skill augmentation
@@ -3285,7 +3287,7 @@ MAGICVARLOAD:
   #echo spellc4skill: %spellc4skill
   #PERFORM_CYCLICS
   gosub SPELLSTATCHECK %pspellc1
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var pspellc1skill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var pspellc1skill sorcery
   else
   {
     if contains("%augmentation", "|%pspellc1|") then var pspellc1skill augmentation
@@ -3293,7 +3295,7 @@ MAGICVARLOAD:
     if contains("%warding", "|%pspellc1|") then var pspellc1skill warding
   }
   gosub SPELLSTATCHECK %pspellc2
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var pspellc2skill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var pspellc2skill sorcery
   else
   {
     if contains("%augmentation", "|%pspellc2|") then var pspellc2skill augmentation
@@ -3301,19 +3303,19 @@ MAGICVARLOAD:
     if contains("%warding", "|%pspellc2|") then var pspellc2skill warding
   }
   gosub SPELLSTATCHECK %pspellc3
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var pspellc3skill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var pspellc3skill sorcery
   else
   {
-    if contains("%augmentation", "|%pspellc3|") then var pspellc3skill augmentation
-    if contains("%utility", "|%pspellc3|") then var pspellc3skill utility
-    if contains("%warding", "|%pspellc3|") then var pspellc3skill warding
+    if (contains("%augmentation", "|%pspellc3|")) then var pspellc3skill augmentation
+    if (contains("%utility", "|%pspellc3|")) then var pspellc3skill utility
+    if (contains("%warding", "|%pspellc3|")) then var pspellc3skill warding
   }
   
   gosub SPELLSTATCHECK %spelltm
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var tmskill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var tmskill sorcery
   else var tmskill tm
   gosub SPELLSTATCHECK %spelldebil
-  if ((%spellmana != %nativemana) && (%spellmana != 0) then var debilskill sorcery
+  if ((%spellmana != %nativemana) && (%spellmana != 0)) then var debilskill sorcery
   else var debilskill debil
   return
 
@@ -4193,6 +4195,7 @@ MAINVARLOAD:
   #NONCOMBAT
   if (%varset = 1) then var noncombat $noncombat
   else var noncombat $noncombatm2
+  var preferoutdoors $preferoutdoors
   if (%varset = 1) then var burgle $burgle
   else var burgle $burglem2
   if (%varset = 1) then var perform $perform
@@ -4680,14 +4683,14 @@ COMBATLOOP:
       if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
     }
   }
-  #TRADING
+  #INSTINCT
   if (($guild = "Ranger") && ("%pounce" = "YES")) then
   {
     gosub POUNCELOGIC
     gosub STATUSCHECK
     if ((%scriptareachange != 0) || (%goupkeep = 1)) then goto MAINLOOP
   }
-  #TRADING
+  #TRADING_INVEST
   if (($guild = "Trader") && ("%invest" = "YES")) then
   {
     gosub INVESTLOGIC
@@ -5262,7 +5265,7 @@ NEWNONCOMBATCHECKS:
 	    #put #echo Yellow unixtime: $unixtime
 	    #put #echo Yellow lastartstudy: $lastartstudy
 	    #put #echo Yellow gametimetest: %gametimetest
-      if (%gametimetest >= 1800) then
+      if (%gametimetest >= 2400) then
       {
         var scriptareachange noncombat
         var noncombatactive 1
@@ -5491,6 +5494,22 @@ NEWAREAMOVEMENT:
         {
           if (("%buff" = "YES") && (%buffnum > 0)) then
           {
+            #ONCE_DAILY_DISCERN_CHECK
+            if ("%spellautomana" = "YES") then
+            {
+              var gametimetest $unixtime
+              math gametimetest subtract $lastbuffdiscern
+              #echo unixtime: $unixtime
+              #echo lastbuffdiscern: $lastbuffdiscern
+              #echo gametimetest: %gametimetest compared to 86400
+              if (%gametimetest >= 86400) then
+              {
+                put #echo >$alertwindow [Combat]: Checking mana levels before buffing.
+                gosub BUFFADJUST
+                put #var lastbuffdiscern $gametime
+                put #var save
+              }
+            }
             put #echo >$alertwindow [Combat]: Buffing before combat.
             gosub BUFFINGONLYLOOP
           }
@@ -5563,6 +5582,54 @@ NEWAREAMOVEMENT:
     }
   }
   return
+
+
+BUFFADJUST:
+  var counter 0
+BUFFADJUSTLOOP:  
+  math counter add 1
+  if (%counter > %buffnum) then return
+  gosub SPELLSTATCHECK %buff%counter
+  if ($buff%countermana < %spellcapmana) then
+  {
+    gosub DISCERN %buff%counter
+    if (%discernmax < 50) then
+    {
+      #UNDER_50
+      var workingmana %discernmax
+      var manamod %workingmana
+      math workingmana multiply .9
+      #SHOULD_BE_MIN
+      if (%workingmana <= %spellminmana) then
+      {
+        var workingmana %spellminmana
+      }
+    }
+    else
+    {
+      #SHOULD_BE_MAX
+      if (%discernmax = %spellcapmana) then
+      {
+        var workingmana %spellcapmana
+      }
+      else
+      {
+        #OVER_50
+        var workingmana %discernmax
+        math workingmana multiply .95
+      }
+    }
+    var manamod %workingmana
+    math manamod modulus 1
+    math workingmana subtract %manamod
+    if ($buff%countermana != %workingmana) then
+    {
+      put #echo Yellow Adjusting Buff%counterMana from $buff%countermana to %workingmana.
+      put #var buff%countermana %workingmana
+      put #var save
+    }
+  }
+  goto BUFFADJUSTLOOP
 
 
 BUFFINGONLYLOOP:
@@ -8724,6 +8791,25 @@ TRADINGSELLLOGIC:
         }
         gosub MOVE bundle
       }
+      if ("%finesse" = "YES") then
+      {
+        if (SpellTimer.Finesse.active != 1) then
+        {
+          if (%casting = 1) then
+          {
+            gosub RELSPELL
+            gosub RELSYMBIOSIS
+          }
+          var spellprepping fin
+          var prepmana 5
+          var addmana %finessemana
+          math addmana subtract %prepmana
+          var casting 1
+          gosub PREP
+          pause 20
+          gosub CAST
+        }
+      }
       put #echo >Log [Trading] Selling bundle.
       gosub SELLITEM bundle
       if ("$righthand" = "bundling rope") then gosub DUMPITEM bundling rope
@@ -8758,6 +8844,9 @@ STUDYARTLOGIC:
   eval artroomslen count("%artrooms", "|")
   var artroomscounter 0
   put #echo >$alertwindow [Noncombat]: Studying art in Raven's Court.
+  gosub AWAKE
+  put #var lastartstudy $unixtime
+  put #var save
   gosub ARTMOVELOOP
   var noncombatstudyartactive 0
   put #var lastartstudy $unixtime
@@ -8859,6 +8948,7 @@ TASKLOGIC:
   if ("%forageitem" = "branche") then var forageitem branch
   if ("%forageitem" = "grasse") then var forageitem grass
   if ("%forageitem" = "berrie") then var forageitem berries
+  if ("%forageitem" = "strawberrie") then var forageitem strawberries
   if (matchre("%forageitem", "(\w+) branches")) then var forageitem $1 branch
   if (matchre("%forageitem", "(\w+) grasses")) then var forageitem $1 grass
   if (matchre("%forageitem", "(\w+) leave")) then var forageitem $1 leaf
@@ -8914,6 +9004,11 @@ CUSTOMFORAGEROOMS:
   {
     var foragezone 7
     var forageroom 313
+  }
+  if ("%forageitem" = "georin grass") then
+  {
+    var foragezone 1
+    var forageroom 260
   }
   return
 
@@ -11453,7 +11548,7 @@ NONCOMBATLOOP:
 	gosub NONCOMBATCHOOSE
   if (%noncombatactive = 1) then
   {
-    put #echo Yellow currentnoncombat: %currentnoncmbat
+    put #echo Yellow currentnoncombat: %currentnoncombat
     if ("%currentnoncombat" = "tradingsell") then
     {
       gosub NONCOMBATMOVEMENT
@@ -11464,6 +11559,12 @@ NONCOMBATLOOP:
     if ("%currentnoncombat" = "tradingtasks") then
     {
       gosub NONCOMBATMOVEMENT
+      #INVESTING_BEFORE_TASKS
+      if ("%invest" = "YES") then
+      {
+        gosub INVESTLOGIC
+        gosub STATUSCHECK
+      }
       gosub TASKLOGIC
       gosub NONCOMBATCHOOSE
     }
@@ -13278,7 +13379,7 @@ BUFFINGLOOP:
         if (%casting = 1) then return
         else goto BUFFINGLOOP
       }
-      if (matchre("%buff%buffloop", "%staraura") then
+      if (matchre("%buff%buffloop", "%staraura")) then
       {
         if (%t > %nextstarcheck) then gosub STARLIGHTCHECK
         if (%starlight = 1) then gosub BUFFINGFUNC
