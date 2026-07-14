@@ -1695,6 +1695,7 @@ TRADERONLY:
   action var forageitem leaf when The firewood peddler Mags in The Crossing wants you to retrieve (\d*) leaves.
   action var quantity $1 when You need to turn in (\d*) more\.
   var invest $invest
+  var slabuff $slabuff
   var tradingsell $tradingsell
   var tradingselltown $tradingselltown
   var tradingsellsource $tradingsellsource
@@ -5487,7 +5488,8 @@ NEWAREAMOVEMENT:
       var noncombatactive 0
       var scriptareachange 0 
       var scriptarea combat
-      if ((%scriptmode != 3) && ("$guild" != "Barbarian") && ("$guild" != "Thief")) then
+      #if ((%scriptmode != 3) && ("$guild" != "Barbarian") && ("$guild" != "Thief")) then
+      if (%scriptmode != 3) then
       {
         if (("$zoneid" = "%zone") && (contains("|%findroomlist|", "|$roomid|"))) then
         else
@@ -13383,6 +13385,10 @@ BUFFINGLOOP:
       {
         if (%t > %nextstarcheck) then gosub STARLIGHTCHECK
         if (%starlight = 1) then gosub BUFFINGFUNC
+        else
+        {
+          if ("%slabuff" = "YES") then gosub BUFFINGFUNC
+        }
         if (%casting = 1) then return
         else goto BUFFINGLOOP
       } 

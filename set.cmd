@@ -833,6 +833,7 @@ SET:
     if tolower("%1") = "smite" then goto YESNOSET
     if tolower("%1") = "tithe" then goto YESNOSET
     if tolower("%1") = "invest" then goto YESNOSET
+    if tolower("%1") = "slabuff" then goto YESNOSET
     if tolower("%1") = "tradingsell" then goto YESNOSET
     if tolower("%1") = "tradingselltown" then
     {
@@ -2062,6 +2063,7 @@ DISPLAY:
     if tolower("%2") = "upkeep" then gosub DISPLAYUPKEEP
     if tolower("%2") = "combat" then gosub DISPLAYCOMBAT
     if tolower("%2") = "noncombat" then gosub DISPLAYNONCOMBAT
+    if tolower("%2") = "craft" then gosub DISPLAYCRAFT
     if tolower("%2") = "guild" then
     {
       var buffloop 0
@@ -2408,6 +2410,19 @@ DISPLAYNONCOMBAT:
   put #echo
   gosub OUTPUT NonComSanowret
   put #echo
+	gosub OUTPUT Research
+	gosub OUTPUT GAFMana
+  gosub OUTPUT ResearchNum
+  gosub OUTPUT ResearchType1 ResearchType2
+  gosub OUTPUT ResearchType3 ResearchType4
+  gosub OUTPUT ResearchType5
+  put #echo
+	return
+	
+DISPLAYCRAFT:
+  var varmatch 1
+	put #echo mono  =================== Craft ====================
+  put #echo
   gosub OUTPUT Crafting
   gosub OUTPUT CraftingStorage (should have length at least 15 spans to accomodate all supplies)
   gosub OUTPUT CraftingStorageLocation (CraftingStorage container stored in portal|vault|none when not direclty in use)
@@ -2431,22 +2446,22 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT OutfittingMaxYards
   gosub OUTPUT OutfittingMaxQuantity
   put #echo
+  gosub OUTPUT Engineering
+  gosub OUTPUT EngineeringDifficulty
+  gosub OUTPUT EngineeringDiscipline
+  gosub OUTPUT EngineeringStone
+  put #echo
 	gosub OUTPUT awl bellows
+	gosub OUTPUT bonesaw chisels
 	gosub OUTPUT hammer knittingneedles
-	gosub OUTPUT pliers scissors
+	gosub OUTPUT pliers rasp 
+	gosub OUTPUT rifflers scissors
 	gosub OUTPUT sewingneedles shovel
 	gosub OUTPUT slickstone rod
 	gosub OUTPUT tongs yardstick
 	put #echo
-	gosub OUTPUT Research
-	gosub OUTPUT GAFMana
-  gosub OUTPUT ResearchNum
-  gosub OUTPUT ResearchType1 ResearchType2
-  gosub OUTPUT ResearchType3 ResearchType4
-  gosub OUTPUT ResearchType5
-  put #echo
 	return
-	
+
 
 DISPLAYBUFFLOOP:
   math buffloop add 1
@@ -2701,6 +2716,7 @@ DISPLAYGUILD:
     if $guild = "Trader" then
     {
       gosub OUTPUT Invest
+      gosub OUTPUT SLABuff (use SLA on buffs when starlight isn't available)
       gosub OUTPUT TradingSell
       #gosub OUTPUT TradingSellSource (vault or portal)
       gosub OUTPUT TradingSellTown

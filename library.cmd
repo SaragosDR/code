@@ -14,7 +14,7 @@ var targetedmagic |stra|bonegrinder|sif|aban|bos|btn|pyre|ae|chs|fou|ff|hot|he|h
 var utility |gaf|imbue|sec|alb|aot|care|eye|hodi|nexus|resonance|sanctuary|all|bf|bless|ef|it|mre|mf|om|rejuv|rezz|rev|sol|uncurse|vigil|absolution|ad|awaken|bs|cos|cd|ev|fp|foc|gs|heal|hs|hw|hl|innocence|rp|regenerate|vh|bc|contingency|dc|dg|fm|locate|moonblade|mg|pg|rtr|rf|rend|rs|seer|shm|ss|shadowling|sm|sov|tf|teleport|th|unleash|bb|cfb|cfw|cf|devour|eotb|nr|qe|resection|roc|rof|rog|ag|as|bot|ba|crc|da|hoj|how|rue|tr|vos|af|bes|blend|compost|em|mon|sks|nou|rega|stc|ab|etf|foi|ignite|rm|zephyr|
 var warding |lw|maf|fotf|gj|name|repr|ghs|halo|pfe|sl|sos|spit|visage|ic|pop|tranquility|col|psy|shear|tksh|wd|ch|emc|ghoulflesh|solace|worm|aa|courage|how|sp|tk|bloodthorns|etc|ey|fwb|rits|eli|ir|mom|non|trc|ac|es|gi|gf|voi|
 var targeted |stra|bonegrinder|sif|bos|btn|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sts|
-var staraura ava|blur|ir|rega|stc|trc
+var staraura blur|ir|rega|stc|trc
 
 var heavytm bos|ms
 var transnecro |ivm|ks|bue|worm|ch|php|
@@ -428,16 +428,9 @@ VARCHECKS:
   if !matchre("$preferoutdoors", "\b(YES|NO)\b") then put #var preferoutdoors NO
   if !matchre("$burgle", "\b(YES|NO)\b") then put #var burgle NO
   if !matchre("$perform", "\b(YES|NO)\b") then put #var perform NO
-  if !matchre("$crafting", "\b(YES|NO)\b") then put #var crafting NO
-  if !matchre("$forging", "\b(YES|NO)\b") then put #var forging NO
-  if !matchre("$outfitting", "\b(YES|NO)\b") then put #var outfitting NO
   if !matchre("$noncombatm2", "\b(YES|NO)\b") then put #var noncombatm2 NO
   if !matchre("$burglem2", "\b(YES|NO)\b") then put #var burglem2 NO
   if !matchre("$performm2", "\b(YES|NO)\b") then put #var performm2 NO
-  if !matchre("$craftingm2", "\b(YES|NO)\b") then put #var craftingm2 NO
-  if !matchre("$forgingm2", "\b(YES|NO)\b") then put #var forgingm2 NO
-  if !matchre("$outfittingm2", "\b(YES|NO)\b") then put #var outfittingm2 NO
-
   
   if !def(burglestorage) then put #var burglestorage haversack
   if !matchre("$burgletool", "\b(pick|rope|both)\b") then put #var burgletool both
@@ -470,6 +463,13 @@ VARCHECKS:
   if !matchre("$studyart", "\b(YES|NO)\b") then put #var studyart NO
   if !matchre("$noncomsanowret", "\b(YES|NO)\b") then put #var noncomsanowret NO
   
+  #CRAFTING
+  if !matchre("$crafting", "\b(YES|NO)\b") then put #var crafting NO
+  if !matchre("$forging", "\b(YES|NO)\b") then put #var forging NO
+  if !matchre("$outfitting", "\b(YES|NO)\b") then put #var outfitting NO
+  if !matchre("$craftingm2", "\b(YES|NO)\b") then put #var craftingm2 NO
+  if !matchre("$forgingm2", "\b(YES|NO)\b") then put #var forgingm2 NO
+  if !matchre("$outfittingm2", "\b(YES|NO)\b") then put #var outfittingm2 NO
   if !def(craftingstorage) then put #var craftingstorage crafting satchel
   if !matchre("$craftingstoragelocation", "\b(none|portal|vault)\b") then put #var craftingstoragelocation none
   if !matchre("$forgingdifficulty", "\b(easy|challenging|hard)\b") then put #var forgingdifficulty challenging
@@ -495,11 +495,21 @@ VARCHECKS:
   if (!def(outfittingmaxquantity)) then put #var outfittingmaxquantity 0
   if ($outfittingmaxquantity >= 0) then
   else put #var outfittingmaxquantity 4
+  
+  if !matchre("$engineering", "\b(YES|NO)\b") then put #var engineering NO
+  if !matchre("$engineeringdifficulty", "\b(easy|challenging|hard)\b") then put #var engineeringdifficulty challenging
+  if !matchre("$engineeringdiscipline", "\b(weaponsmithing|armorsmithing|blacksmithing)\b") then put #var engineeringdiscipline carving
+  if (!def(engineeringstone)) then put #var engineeringstone alabaster
+  
   if !def(awl) then put #var awl awl
   if !def(bellows) then put #var bellows leather bellows
+  if !def(bonesaw) then put #var bonesaw bone saw
+  if !def(chisels) then put #var chisels chisels
   if !def(hammer) then put #var hammer diagonal-peen hammer
   if !def(knittingneedles) then put #var knittingneedles knitting needles
   if !def(pliers) then put #var pliers pliers
+  if !def(rasp) then put #var rasp rasp
+  if !def(rifflers) then put #var rifflers rifflers
   if !def(scissors) then put #var scissors scissors
   if !def(sewingneedles) then put #var sewingneedles sewing needles
   if !def(shovel) then put #var shovel curved shovel
@@ -1079,6 +1089,7 @@ VARCHECKS:
   if !matchre("$boxpopkhrisight", "\b(YES|NO)\b") then put #var boxpopkhrisight NO
   #GUILD-TRADER
   if !matchre("$invest", "\b(YES|NO)\b") then put #var invest NO
+  if !matchre("$slabuff", "\b(YES|NO)\b") then put #var slabuff NO
   if !matchre("$tradingsell", "\b(YES|NO)\b") then put #var tradingsell NO
   if !matchre("$tradingselltown", "\b(%townvaultpresetlist)\b") then put #var tradingselltown none
   if !matchre("$tradingsellsource", "\b(vault|portal)\b") then put #var tradingsellsource vault
@@ -1366,7 +1377,11 @@ NEWTOWNPRESET:
 		var rtmove NO
 		if (%towntype = "upkeep") then var upkeepzone 1
 		if (%towntype = "burgle") then var rttargetroom 388
-		if (%towntype = "perform") then var rttargetroom 227
+		if (%towntype = "perform") then
+		{
+		  if ("%preferoutdoors" = "YES") then var rttargetroom 278
+		  else var rttargetroom 227
+		}
 		if (%towntype = "studyart") then var rttargetroom 534
 		if (%towntype = "forging") then var rttargetroom 865
 		if (%towntype = "outfitting") then var rttargetroom 873
@@ -1413,7 +1428,12 @@ NEWTOWNPRESET:
 		if (%towntype = "upkeep") then var upkeepzone 67
 		if (%towntype = "burgle") then var rttargetroom 194
 		if (%towntype = "pawn") then var rttargetroom 158
-		if (%towntype = "perform") then var rttargetroom 180
+	  if (%towntype = "perform") then
+		{
+		  if ("%preferoutdoors" = "YES") then var rttargetroom 198
+		  else var rttargetroom 180
+		  echo rttargetroom: %rttargetroom
+		}
 		if (%towntype = "forging") then var rttargetroom 658
 		if (%towntype = "outfitting") then var rttargetroom 719
 	}
