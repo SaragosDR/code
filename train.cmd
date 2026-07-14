@@ -8952,7 +8952,7 @@ TASKLOGIC:
   if ("%forageitem" = "berrie") then var forageitem berries
   if ("%forageitem" = "strawberrie") then var forageitem strawberries
   if (matchre("%forageitem", "(\w+) branches")) then var forageitem $1 branch
-  if (matchre("%forageitem", "(\w+) grasses")) then var forageitem $1 grass
+  if (matchre("%forageitem", "(\w+) grasse")) then var forageitem $1 grass
   if (matchre("%forageitem", "(\w+) leave")) then var forageitem $1 leaf
   if (matchre("%forageitem", "riolur leaf")) then var forageitem riolur leaves
   if (matchre("%forageitem", "%badforagelist")) then
