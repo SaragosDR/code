@@ -1,3 +1,26 @@
+07/16/26
+Updated Scripts: train, library
+Trading tasks and selling now happen after crafting to make sure Trading experience isn't being wasted.
+Added p1-silverbackedbears hunting area.
+Added forging towns in Dirge and Riverhaven.
+Added outfitting town in Riverhaven.
+Added Trading mindstates output to crafting for Traders.
+Added outdoor outfitting for Crossing, Riverhaven, Shard, and Hib for the PreferOutdoors variable.
+Added outdoor performing for Crossing, Riverhaven, Leth, Ilaya, Shard, Hib, and Boar Clan for the PreferOutdoors variable.
+
+Fixed an issue where outfitting work orders would not properly buy padding when needed.
+Fixed an issue where workorders could sometimes order 1 more of a material than needed.
+Fixed an issue where the script might not move to the right room to order padding for Outfitting in some cities.
+
+
+07/13/26
+Updated Scripts: train, library, set, box
+Turned on PreferOutdoors variable for performing in Crossing or Shard.
+New Variable - SLABuff.  Will choose to use SLA to power buff spells that require SLA if the conditions are not right.
+Fixed a bug that caused Barbarians and Thieves not to properly buff before entering combat.
+Fixed a bug in variable setting in box popping script.
+
+
 07/05/26
 Updated Scripts: train, library, set, craftlibrary
 Buffs will now automatically check and update mana levels once per day during the Buffing Before Combat cycle.

@@ -2058,6 +2058,18 @@ HUNTINGVARLOAD:
       var bugoutroom 97
       var nearestportaltown leth
     }
+    if ("%huntingarea" = "p1-silverbackedbears") then
+    {
+      var zone 4
+      var travel YES
+      var traveldest wolf
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 319|318|320|312|313
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
     if ("%huntingarea" = "p1-crocodiles") then
     {
       var huntingareamaze 1
@@ -5224,7 +5236,7 @@ NEWNONCOMBATCHECKS:
   {
     if (($Athletics.Ranks < 1750) || ($Locksmithing.Ranks < 1750) || ($Thievery.Ranks < 1750) || ($Stealth.Ranks < 1750)) then
     {
-      if ((%t >= %nextburgle) && (%killbeforeleave != 0) then
+      if ((%t >= %nextburgle) && (%killbeforeleave != 0)) then
       {
         gosub BURGLERECALL
         if (%t >= %nextburgle) then
@@ -5271,25 +5283,6 @@ NEWNONCOMBATCHECKS:
         var scriptareachange noncombat
         var noncombatactive 1
         var noncombatstudyartactive 1
-      }
-    }
-  }
-  #TRADING_SELL_TASKS
-  if ("$guild" = "Trader") then
-  { 
-    #put #echo >Log Yellow tradingsell: %tradingsell
-    if (("%tradingsell" = "YES") || ("%tradingtasks" = "YES")) then
-    {
-      if ($Trading.LearningRate > 28) then var tradinglock 1
-      if ($Trading.LearningRate < 4) then var tradinglock 0
-      if ($Trading.Ranks >= 1750) then var tradinglock 1
-      #put #echo >Log Yellow tradinglock: %tradinglock
-      if (%tradinglock != 1) then
-      {
-        var scriptareachange noncombat
-        var noncombatactive 1
-        if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var noncombatsellactive 1
-        if ("%tradingtasks" = "YES") then var noncombattasksactive 1
       }
     }
   }
@@ -5353,6 +5346,25 @@ NEWNONCOMBATCHECKS:
         var scriptareachange noncombat
         var noncombatactive 1
         var noncombatoutfittingactive 1
+      }
+    }
+  }
+  #TRADING_SELL_TASKS
+  if ("$guild" = "Trader") then
+  { 
+    #put #echo >Log Yellow tradingsell: %tradingsell
+    if (("%tradingsell" = "YES") || ("%tradingtasks" = "YES")) then
+    {
+      if ($Trading.LearningRate > 28) then var tradinglock 1
+      if ($Trading.LearningRate < 4) then var tradinglock 0
+      if ($Trading.Ranks >= 1750) then var tradinglock 1
+      #put #echo >Log Yellow tradinglock: %tradinglock
+      if (%tradinglock != 1) then
+      {
+        var scriptareachange noncombat
+        var noncombatactive 1
+        if (("%tradingsell" = "YES") && ("%tradingselltown" != "none")) then var noncombatsellactive 1
+        if ("%tradingtasks" = "YES") then var noncombattasksactive 1
       }
     }
   }
@@ -10054,7 +10066,7 @@ RESEARCHCHOOSELOOP:
 MAINSPELLLOGIC:
   if (("$guild" = "Barbarian") || ("$guild" = "Thief")) then return
   if (%playing = 1) then return
-  if ((("%scriptarea" = "combat") && (%scriptareachange = 0)) then
+  if (("%scriptarea" = "combat") && (%scriptareachange = 0)) then
   else return
   if ((%noncombatactive = 1) || (%upkeepactive = 1)) then return
   if (%t < %nextcast) then return
@@ -11630,8 +11642,6 @@ NONCOMBATLOOP:
 
 NONCOMBATCHOOSE:
   #put #echo Yellow noncombatactive: %noncombatactive
-  #put #echo Yellow noncombatsellactive: %noncombatsellactive
-  #put #echo Yellow noncombattasksactive: %noncombattasksactive
   #put #echo Yellow noncombatevcastactive: %noncombatevcastactive
   #put #echo Yellow noncombatevhealactive: %noncombatevhealactive
   #put #echo Yellow noncombatburgleactive: %noncombatburgleactive
@@ -11639,18 +11649,10 @@ NONCOMBATCHOOSE:
   #put #echo Yellow noncombatstudyartactive: %noncombatstudyartactive
   #put #echo Yellow noncombatforgingactive: %noncombatforgingactive
   #put #echo Yellow noncombatforgingactive: %noncombatoutfittingactive
+  #put #echo Yellow noncombatsellactive: %noncombatsellactive
+  #put #echo Yellow noncombattasksactive: %noncombattasksactive
   var currentnoncombat 0
   if (%noncombatactive = 0) then return
-  if (%noncombatsellactive = 1) then
-  {
-    var currentnoncombat tradingsell
-    return
-  }
-  if (%noncombattasksactive = 1) then
-  {
-    var currentnoncombat tradingtasks
-    return
-  }
   if (%noncombatevcastactive = 1) then
   {
     var currentnoncombat evcast
@@ -11684,6 +11686,16 @@ NONCOMBATCHOOSE:
   if (%noncombatoutfittingactive = 1) then
   {
     var currentnoncombat outfitting
+    return
+  }
+  if (%noncombatsellactive = 1) then
+  {
+    var currentnoncombat tradingsell
+    return
+  }
+  if (%noncombattasksactive = 1) then
+  {
+    var currentnoncombat tradingtasks
     return
   }
   var noncombatactive 0
@@ -13383,7 +13395,8 @@ BUFFINGLOOP:
       }
       if (matchre("%buff%buffloop", "%staraura")) then
       {
-        if (%t > %nextstarcheck) then gosub STARLIGHTCHECK
+        #if (%t > %nextstarcheck) then gosub STARLIGHTCHECK
+        gosub STARLIGHTCHECK
         if (%starlight = 1) then gosub BUFFINGFUNC
         else
         {
@@ -14371,9 +14384,9 @@ BOWSTANCECHECK:
   if matchre ("$lefthand", "%bowweapon") then var usingbow 1
   if matchre ("$lefthand", "%xbowweapon") then var usingbow 1
   if matchre ("$lefthand", "%slingweapon") then var usingbow 1
-  if matchre ("$righthand, "%bowweapon") then var usingbow 1
-  if matchre ("$righthand, "%xbowweapon") then var usingbow 1
-  if matchre ("$righthand, "%slingweapon") then var usingbow 1
+  if matchre ("$righthand", "%bowweapon") then var usingbow 1
+  if matchre ("$righthand", "%xbowweapon") then var usingbow 1
+  if matchre ("$righthand", "%slingweapon") then var usingbow 1
   if (%usingbow = 1) then
   {
     if ("%stance" != "shield") then
@@ -14641,7 +14654,7 @@ MOVECHOOSE:
 			else gosub PIERCECOMBO
 		}
 		#echo Balance: %balance    Fatigue: $stamina%
-		if ((%balance = "off") || (%balance = "badly") || (%balance = "solidly") || (%balance = "extremely") || (%balance = "hopelessly") || (%balance = "completely") then
+		if ((%balance = "off") || (%balance = "badly") || (%balance = "solidly") || (%balance = "extremely") || (%balance = "hopelessly") || (%balance = "completely")) then
 		{
 			var att %lowattack
 			return

@@ -21,7 +21,7 @@ var transnecro |ivm|ks|bue|worm|ch|php|
 var aimweapons bow|xbow|sling
 var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|field|plane|planes|road|spell|symbiosis strengthen|symbiosis endure|symbiosis avoid|symbiosis spring|symbiosis remember|symbiosis resolve|symbiosis impress|symbiosis discern|symbiosis explore|symbiosis watch|symbiosis harvest|symbiosis heal|symbiosis learn|symbiosis examine|symbiosis perform|symbiosis cast|symbiosis harness|symbiosis activate
 
-var combatpresetp1 p1-shiprats|p1-louts|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-revenantconscripts|p1-lipopods|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-bloodwolves|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-forestbandits|p1-guardians|p1-giantbears|p1-onyxgargoyles|p1-emberbulls|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
+var combatpresetp1 p1-shiprats|p1-louts|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-revenantconscripts|p1-lipopods|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-bloodwolves|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-silverbackedbears|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-forestbandits|p1-guardians|p1-giantbears|p1-onyxgargoyles|p1-emberbulls|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
 var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-gryphonsbaby|p2-gryphonsyoung|p2-seordmaors|p2-fibrousslayers|p2-clayslayers|p2-glazedslayers
 var combatpresetp3 p3-snippets|p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-sylphs|p3-quartzgargoyles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-windbags|p3-windbags2|p3-frostcrones|p3-prerenielder|p3-gryphons|p3-beltunumshi|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-malchata|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-icearchons|p3-adanfsorcs|p3-adanfblades
 var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p4-merkreshcelpeze4|p4-armadillosjuve|p4-armadillosadult|p4-armadilloselder
@@ -40,8 +40,8 @@ var lockpickpresetlist crossing|shard|riverhaven
 var burgletownlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|shard|hibarnhvidar|boarclan|ratha|merkresh|mriss
 var pawntownlist none|crossing|riverhaven|shard|hibarnhvidar
 var performtownlist none|muspari|theren|rossman|riverhaven|dirge|crossing|leth|ilaya|fangcove|shard|hibarnhvidar|boarclan|ratha|merkresh|mriss
-var forgingtownlist none|crossing|shard|merkresh|hibarnhvidar
-var outfittingtownlist none|crossing|shard|hibarnhvidar
+var forgingtownlist none|crossing|riverhaven|dirge|shard|merkresh|hibarnhvidar
+var outfittingtownlist none|crossing|riverhaven|shard|hibarnhvidar
 
 var ordinal none|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth
 var waitstring  ^\.\.\.wait|^Sorry\, you may only type ahead|^You are still stunned|^You can\'t do that while|^You don\'t seem to be able|Between the ringing in your head|Strangely, you don't feel like fighting right now\.|Your desire to prepare this offensive spell suddenly slips away\.|You're unconscious!|There is no need for violence here\.|Sorry, system is slow\.  No type ahead allowed\.|You don't seem to be able to move to do that\.
@@ -397,7 +397,8 @@ VARCHECKS:
   if !matchre("$attune", "\b(YES|NO)\b") then put #var attune YES
   if !matchre("$recall", "\b(YES|NO)\b") then put #var recall YES
   if !matchre("$hunting", "\b(YES|NO)\b") then put #var hunting YES
-  if $huntingtimer >=75 then
+  if (!def(huntingtimer)) then put #var huntingtimer 75
+  if ($huntingtimer >= 75) then
   else put #var huntingtimer 75
   if !matchre("$stealth", "\b(YES|NO)\b") then put #var stealth NO
   if !matchre("$stealthm2", "\b(YES|NO)\b") then put #var stealthm2 NO
@@ -407,6 +408,7 @@ VARCHECKS:
   if !matchre("$retreatdelay", "\b(YES|NO)\b") then put #var retreatdelay NO
   if !matchre("$appraise", "\b(YES|NO)\b") then put #var appraise YES
   if !matchre("$appraisetarget", "\b(bundle|creature)\b") then put #var appraisetarget creature
+  if (!def(appraisetimer)) then put #var appraisetimer 75
   if ($appraisetimer >= 75) then
   else put #var appraisetimer 75
   if !matchre("$appsaveitem", "\b(none|tight|lumpy)\b") then put #var appsaveitem none
@@ -1348,6 +1350,8 @@ NEWTOWNPRESET:
 		if (%towntype = "burgle") then var rttargetroom 250
 		if (%towntype = "perform") then var rttargetroom 219
 		if (%towntype = "pawn") then var rttargetroom 297
+		if (%towntype = "forging") then var rttargetroom 398
+		if (%towntype = "outfitting") then var rttargetroom 448
 	}
 	if ("%towncheck" = "dirge") then
 	{
@@ -1358,6 +1362,13 @@ NEWTOWNPRESET:
 		if (%towntype = "upkeep") then var upkeepzone 13
 		if (%towntype = "burgle") then var rttargetroom 0
 		if (%towntype = "perform") then var rttargetroom 55
+		if (%towntype = "forging") then
+		{
+		  var rtzone 7
+		  var rttravel YES
+		  var rttraveldest kaerna
+		  var rttargetroom 775
+		}
 	}
 	if ("%towncheck" = "kaerna") then
 	{
@@ -1397,7 +1408,13 @@ NEWTOWNPRESET:
 		var rtmove NO
 		if (%towntype = "upkeep") then var upkeepzone 61
 		if (%towntype = "burgle") then var rttargetroom 206
-		if (%towntype = "perform") then var rttargetroom 207
+	  if (%towntype = "perform") then
+		{
+		  if ("%preferoutdoors" = "YES") then var rttargetroom 159
+		  else var rttargetroom 207
+		}
+	  if (%towntype = "forging") then var rttargetroom 238
+		if (%towntype = "outfitting") then var rttargetroom 267
 	}
 	if ("%towncheck" = "ilaya") then
 	{
@@ -1417,7 +1434,11 @@ NEWTOWNPRESET:
 		var rtmove NO
 		if (%towntype = "upkeep") then var upkeepzone 150
 		if (%towntype = "burgle") then var rttargetroom 0
-		if (%towntype = "perform") then var rttargetroom 189
+		if (%towntype = "perform") then
+		{
+			if ("%preferoutdoors" = "YES") then var rttargetroom 189
+		  else var rttargetroom 186
+		}
 	}
 	if ("%towncheck" = "shard") then
 	{
@@ -1432,7 +1453,6 @@ NEWTOWNPRESET:
 		{
 		  if ("%preferoutdoors" = "YES") then var rttargetroom 198
 		  else var rttargetroom 180
-		  echo rttargetroom: %rttargetroom
 		}
 		if (%towntype = "forging") then var rttargetroom 658
 		if (%towntype = "outfitting") then var rttargetroom 719
@@ -1445,7 +1465,11 @@ NEWTOWNPRESET:
 		var rtmove NO
 		if (%towntype = "upkeep") then var upkeepzone 116
 		if (%towntype = "burgle") then var rttargetroom 64
-		if (%towntype = "perform") then var rttargetroom 442
+		if (%towntype = "perform") then
+		{
+			if ("%preferoutdoors" = "YES") then var rttargetroom 52
+		  else var rttargetroom 442
+		}
 		if (%towntype = "pawn") then var rttargetroom 229
 		if (%towntype = "forging") then var rttargetroom 408
 	  if (%towntype = "outfitting") then var rttargetroom 466
@@ -1458,7 +1482,11 @@ NEWTOWNPRESET:
 		var rtmove NO
 		if (%towntype = "upkeep") then var upkeepzone 127
 		if (%towntype = "burgle") then var rttargetroom 29
-		if (%towntype = "perform") then var rttargetroom 233
+		if (%towntype = "perform") then
+		{
+      if ("%preferoutdoors" = "YES") then var rttargetroom 48
+		  else var rttargetroom 233
+		}
 	}
   if ("%towncheck" = "ratha") then
 	{
@@ -11250,6 +11278,48 @@ STARLIGHTCHECK:
   }
   return
 
+STARLIGHTCHECKLONG:
+  gosub PERCEIVEAURA
+  if (%starlight != 1) then
+  {
+    var badxibar 0
+    var badyavash 0
+    gosub TRADEROBSERVE
+    #var nextstarcheck %t
+    #math nextstarcheck add 900
+    echo badxibar: %badxibar
+    echo badyavash: %badyavash
+    if ($Time.isDay = 0) && ((%badxibar = 0) || (%badyavash = 0)) then 
+    {
+      var starlight 1
+    }
+  }
+  return
+  
+  
+PERCEIVEAURAP:
+  pause 
+PERCEIVEAURA:
+  matchre PERCEIVEAURAP %waitstring
+  match PERCEIVEAURABAD Local conditions are hindering the growth of your aura.
+  match PERCEIVEAURABAD Local conditions are prohibiting the growth of your aura.
+  match PERCEIVEAURAGOOD Local conditions permit optimal growth of your aura.
+  put perceive aura
+  matchwait 5
+  var timeoutsub PERCEIVEAURA
+  var timeoutcommand observe heavens
+	goto TIMEOUT
+	
+PERCEIVEAURAGOOD:
+  var starlight 1
+  return
+  
+PERCIEVEAURABAD:
+  var starlight 0
+  return
+
+OBSERVEMOONS:
+
 TRADEROBSERVEP:
   pause
 TRADEROBSERVE:
@@ -12457,10 +12527,11 @@ ASSESSINSTWOUNDED:
 PLAYP:
   pause
 PLAY:
+  #put #echo Yellow playsub!
   matchre PLAYP %waitstring
-  matchre PLAYSUCCESS You're already playing a song!|You begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .* with only the slightest hint of difficulty\.
+  matchre PLAYSUCCESS You're already playing a song!|You begin (?:a|an|some) (?:spritely|quiet|masterful|halting) .* on your .* with only the slightest hint of difficulty\.
   matchre PLAYDOWN You fumble slightly as you begin (?:a|some) (?:spritely|quiet) .* on your .*\.|You struggle to begin (?:a|some) (?:spritely|quiet) .* on your .*\.
-  matchre PLAYUP You effortlessly begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .*, your heart swelling in pride at your hard-earned skill\.|You begin (?:a|an|some) (?:spritely|quiet|masterful) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .*\.
+  matchre PLAYUP You effortlessly begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .*, your heart swelling in pride at your hard-earned skill\.|You begin (?:a|an|some) (?:spritely|quiet|masterful|halting) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .*\.
 
   match PLAYUNHIDE That would give away your hiding place!
   put play %songlist(%songtype) on %instrument
@@ -12470,7 +12541,7 @@ PLAY:
   goto TIMEOUT
 
 PLAYDOWN:
-  echo playdown
+  #put #echo Yellow playdown
   if (%songpermission = 1) then goto PLAYSUCCESS
   if (%songtype > 0) then
   {
@@ -12488,7 +12559,7 @@ PLAYDOWN:
 
   
 PLAYUP:
-  echo playup
+  #put #echo Yellow  playup
   if (%songpermission = 1) then goto PLAYSUCCESS
   if (%songtype < 33) then
   {
@@ -12510,6 +12581,7 @@ PLAYUNHIDE:
   goto PLAY
 
 PLAYSUCCESS:
+  #put #echo Yellow  playsuccess
   var playing 1
   return
 
