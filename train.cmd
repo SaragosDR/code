@@ -13395,8 +13395,7 @@ BUFFINGLOOP:
       }
       if (matchre("%buff%buffloop", "%staraura")) then
       {
-        #if (%t > %nextstarcheck) then gosub STARLIGHTCHECK
-        gosub STARLIGHTCHECK
+        if (%t > %nextstarcheck) then gosub STARLIGHTCHECK
         if (%starlight = 1) then gosub BUFFINGFUNC
         else
         {

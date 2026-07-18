@@ -1,4 +1,10 @@
 07/16/26
+Updated Scripts: train, library, craftlibrary
+Bugfixes to Trader observing.
+Bugfixes to shield handle, long and short cord acquisition for Outfitting.
+
+
+07/16/26
 Updated Scripts: train, library
 Trading tasks and selling now happen after crafting to make sure Trading experience isn't being wasted.
 Added p1-silverbackedbears hunting area.

@@ -1,4 +1,4 @@
-var disciplines weaponsmithing|armorsmithing|blacksmithing|tailoring
+var disciplines weaponsmithing|armorsmithing|blacksmithing|tailoring|carving|shaping
 var difficulties easy|challenging|hard
 
 action var polelong $1 when \((\d+)\) finished long wooden pole
@@ -73,10 +73,67 @@ AREAVARINIT:
       var toolroom 913
       var repairroom 9114
       var repairname clerk
-      var workroom 917
+      if ("%preferoutdoors" = "YES") then var workroom 278
+      else var workroom 917
       #var bucketroom 921
     }
   }
+  #DIRGE
+  if ($zoneid = 7) then
+  {
+    if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then
+    {
+      var mastername Borneas
+      var masterrange 775|776|777|778|781|782|779|783|784|780|785|786
+      var suppliesroom 775
+      var bulkroom 0
+      var toolroom 777
+      var partsroom 777
+      var repairroom 777
+      var repairname clerk
+      var cruciblerange 778|782|779|780|786
+      var anvilrange 783|784|785|781
+      var bucketroom 779
+      var privateforge 0
+      var privateforgedoor
+    }
+  }
+  #RIVERHAVEN
+  if ($zoneid = 30) then
+  {
+    if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then
+    {
+      var mastername Fereldrin
+      var masterrange 441|442|443|398|402|403|399|406|407|408|409|400|561|410|411|401
+      var suppliesroom 400
+      var bulkroom 561
+      var toolroom 399
+      var partsroom 399
+      var repairroom 398
+      var repairname clerk
+      var cruciblerange 402|406|408|410|
+      var anvilrange 403|407|409|411|
+      var bucketroom 0
+      var privateforge 398
+      var privateforgedoor alcove
+    }
+    if ("%discipline" = "tailoring") then
+    {
+      var mastername Hagim
+      var masterrange 448|449|450|451|452|453|454|455|456|457|458|459|460
+      var suppliesroom 450
+      var toolroom 453
+      var repairroom 9114
+      var repairname clerk
+      if ("%preferoutdoors" = "YES") then var workroom 272
+      else var workroom 219
+      var bucketroom 455
+      var privateforge 449
+      var privateforgedoor archway
+    }
+  }
+  #LETH
+
   #SHARD
   if ($zoneid = 67) then
   {
@@ -103,7 +160,8 @@ AREAVARINIT:
       var toolroom 723
       var repairroom 722
       var repairname clerk
-      var workroom 178
+      if ("%preferoutdoors" = "YES") then var workroom 198
+      else var workroom 178
     }
   }
   #MERKRESH
@@ -151,7 +209,8 @@ AREAVARINIT:
       var toolroom 473
       var repairroom 473
       var repairname clerk
-      var workroom
+      if ("%preferoutdoors" = "YES") then var workroom 52
+		  else var workroom 442
     }
   }
   return
@@ -160,6 +219,7 @@ CRAFTVARLOAD:
   var crafting $crafting
   var forging $forging
   var outfitting $outfitting
+  var engineering $engineering
   
   var craftingstorage $craftingstorage
   var craftingstoragelocation $craftingstoragelocation
@@ -172,7 +232,6 @@ CRAFTVARLOAD:
   var forgingmaxvolumes $forgingmaxvolumes  
   var forgingmaxquantity $forgingmaxquantity
   var forgingsmelting $forgingsmelting
-  
 
   var outfittingdifficulty $outfittingdifficulty
   var outfittingcloth $outfittingcloth
@@ -182,11 +241,19 @@ CRAFTVARLOAD:
   var outfittingmaxquantity $outfittingmaxquantity
   var outfittingmaxyards $outfittingmaxyards
   
+  var engineeringdifficulty $engineeringdifficulty
+  var engineeringdiscipline $engineeringdiscipline
+  var engineeringstone $engineeringstone
+  
   var awl $awl
   var bellows $bellows
+  var bonesaw $bonesaw
+  var chisels $chisels
   var hammer $hammer
   var knittingneedles $knittingneedles
   var pliers $pliers
+  var rasp $rasp
+  var rifflers $rifflers
   var scissors $scissors
   var sewingneedles $sewingneedles
   var shovel $shovel
@@ -202,11 +269,14 @@ CRAFTVARLOAD:
   var timebegin $gametime
   if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then var crafttype forging
   if ("%discipline" = "tailoring") then var crafttype outfitting
+  if (("%discipline" = "carving") || ("%discipline" = "shaping")) then var crafttype engineering
+  if ("%guild" = "Trader") then var tradingmindstatebegin $Trading.LearningRate
   if ("%crafttype" = "forging") then var mindstatebegin $Forging.LearningRate
   if ("%crafttype" = "outfitting") then var mindstatebegin $Outfitting.LearningRate
+  if ("%crafttype" = "engineering") then var mindstatebegin $Engineering.LearningRate
   var forgingrepairlist %bellows|%hammer|%shovel|%rod|%tongs
   var outfittingrepairlist %sewingneedles|%scissors|%awl|%yardstick|%slickstone|%knittingneedles
-  
+  var engineeringrepairlist %bonesaw|%chisels|%rasp|%rifflers
   return
 
 #####WORKORDER_SUBS#####
@@ -289,6 +359,8 @@ WORKORDER:
     put #echo Yellow Yards: %totalyards.....MaterialNoun: %materialnoun
     #put #echo Yellow CordLong: %totalcordlong.....HandleLeather: %totalhandleleather
     put #echo Yellow PadLarge: %totalpadlarge.....PadSmall: %totalpadsmall
+    put #echo Yellow CordLong: %totalcordlong.....CordShort: %totalcordshort
+    put #echo Yellow Handles: %totalhandle
   }
   #MATERIALS_PURCHASE
   if ("%crafttype" = "outfitting") then
@@ -303,20 +375,26 @@ WORKORDER:
     {
       #PURCHASING_MATERIAL
       gosub ORDERMATERIALS
-      gosub COMBINEALL %material %materialnoun 
-    
-      #PURCHASING_PARTS
-      echo totalpadlarge: %totalpadlarge
-      echo totalpadsmall: %totalpadsmall
-      if ((%totalpadlarge > 0) || (%totalpadsmall > 0)) then
-      {
-        action (purchaseparts) on
-        gosub CRAFTINGORDER
-        action (purchaseparts) off
-        if (%totalpadlarge > 0) then gosub ORDERLOOP %padlargenum %totalpadlarge padding
-        if (%totalpadsmall > 0) then gosub ORDERLOOP %padsmallnum %totalpadsmall padding
-      }    
+      gosub COMBINEALL %material %materialnoun   
     }
+    #PURCHASING_PARTS
+    echo totalpadlarge: %totalpadlarge
+    echo totalpadsmall: %totalpadsmall
+    echo totalcordlong: %totalcordlong
+    echo totalcordshort: %totalcordshort
+    echo totalhandle: %totalhandle
+    if ((%totalpadlarge > 0) || (%totalpadsmall > 0)) then
+    {
+      if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
+      action (purchaseparts) on
+      gosub CRAFTINGORDER
+      action (purchaseparts) off
+      if (%totalpadlarge > 0) then gosub ORDERLOOP %padlargenum %totalpadlarge padding
+      if (%totalpadsmall > 0) then gosub ORDERLOOP %padsmallnum %totalpadsmall padding
+      if (%totalcordlong > 0) then gosub ORDERLOOP %padsmallnum %totalcordlong padding
+      if (%totalcordshort > 0) then gosub ORDERLOOP %padsmallnum %totalcordshort padding
+      if (%totalhandle > 0) then gosub ORDERLOOP %padsmallnum %totalhandle handle
+    }  
   }
   if ("%crafttype" = "forging") then
   {
@@ -448,6 +526,11 @@ WORKORDER:
   put #echo Yellow mindstatetotal: %mindstatetotal
   put #echo Yellow mindstatebegin: %mindstatebegin
   math mindstatetotal subtract %mindstatebegin
+  if ("%guild" = "Trader") then
+  {
+    var tradingmindstatetotal $Trading.LearningRate
+    math tradingmindstatetotal subtract %tradingmindstatebegin
+  }
   var timetotal $gametime
   math timetotal subtract %timebegin
   var timetotalmod %timetotal
@@ -455,7 +538,8 @@ WORKORDER:
   math timetotal subtract %timetotalmod
   var timetotalminutes %timetotal
   math timetotalminutes / 60
-  put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material.  Revenue: %revenue - Expenses: %expenses = Profit: %profit %currency.  Mindstates gained: %mindstatetotal in %timetotalminutes minutes.
+  if ("$guild" = "Trader") then put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material.  Revenue: %revenue - Expenses: %expenses = Profit: %profit %currency.  Mindstates gained: %mindstatetotal, Trading gained: %tradingmindstatetotal in %timetotalminutes minutes.
+  else put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material.  Revenue: %revenue - Expenses: %expenses = Profit: %profit %currency.  Mindstates gained: %mindstatetotal in %timetotalminutes minutes.
   return
 
 CRAFTREPAIR:
@@ -593,6 +677,15 @@ CRAFTINGMAIN:
       }
     }
     if ("%crafttype" = "outfitting") then
+    {
+      if (("%volume" = "0") || ("%yards" = "0") || ("%materialnoun" = "0")) then
+      {
+        put #echo >$alertwindow Yellow Misread on ProductRead!  Exiting!
+        put #echo Yellow Misread on ProductRead!  Exiting!
+        exit
+      }
+    }
+    if ("%crafttype" = "engineering") then
     {
       if (("%volume" = "0") || ("%yards" = "0") || ("%materialnoun" = "0")) then
       {
@@ -2114,7 +2207,7 @@ CRAFTINGORDERMAIN:
   match CRAFTINGORDERMAIN The attendant says, "You can purchase
   match CRAFTINGORDERNOMONEY The attendant shrugs and says, "Ugh, you don't have enough coins to purchase
   match RETURN The attendant takes some coins from you and hands you
-
+  match RETURN Order what?
   put order %craftingorderstring
   matchwait
 
