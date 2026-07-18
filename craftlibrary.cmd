@@ -270,7 +270,7 @@ CRAFTVARLOAD:
   if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then var crafttype forging
   if ("%discipline" = "tailoring") then var crafttype outfitting
   if (("%discipline" = "carving") || ("%discipline" = "shaping")) then var crafttype engineering
-  if ("%guild" = "Trader") then var tradingmindstatebegin $Trading.LearningRate
+  if ("$guild" = "Trader") then var tradingmindstatebegin $Trading.LearningRate
   if ("%crafttype" = "forging") then var mindstatebegin $Forging.LearningRate
   if ("%crafttype" = "outfitting") then var mindstatebegin $Outfitting.LearningRate
   if ("%crafttype" = "engineering") then var mindstatebegin $Engineering.LearningRate
@@ -526,10 +526,12 @@ WORKORDER:
   put #echo Yellow mindstatetotal: %mindstatetotal
   put #echo Yellow mindstatebegin: %mindstatebegin
   math mindstatetotal subtract %mindstatebegin
-  if ("%guild" = "Trader") then
+  if ("$guild" = "Trader") then
   {
     var tradingmindstatetotal $Trading.LearningRate
+    #put #echo >Log tradingmindstatetotal: %tradingmindstatetotal.....tradingmindstatebegin: %tradingmindstatebegin
     math tradingmindstatetotal subtract %tradingmindstatebegin
+    #put #echo >Log tradingmindstatetotal: %tradingmindstatetotal
   }
   var timetotal $gametime
   math timetotal subtract %timebegin

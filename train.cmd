@@ -2070,6 +2070,32 @@ HUNTINGVARLOAD:
       var bugoutroom 1
       var nearestportaltown crossing
     }
+    if ("%huntingarea" = "p1-youngogres") then
+    {
+      var zone 4
+      var travel YES
+      var traveldest wolf
+      var move NO
+      var targetroom 0
+      var findroom YES
+      if ("%huntingpremium" = "NO") then var findroomlist 335|336|337|338|339|340
+      if ("%huntingpremium" = "YES") then var findroomlist 335|336|337|338|339|340|480|479|481
+      if ("%huntingpremium" = "ONLY") then var findroomlist 480|479|481
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
+    if ("%huntingarea" = "p1-scoutogres") then
+    {
+      var zone 4
+      var travel YES
+      var traveldest wolf
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 332|331|330|328|3299
+      var bugoutroom 1
+      var nearestportaltown crossing
+    }
     if ("%huntingarea" = "p1-crocodiles") then
     {
       var huntingareamaze 1

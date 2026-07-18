@@ -1,4 +1,9 @@
-07/16/26
+07/17/26
+Updated Scripts: train, library, craftlibrary
+Bugfix to trading experience reporting.
+Added p1-youngogres and p1-scoutogres hunting area.
+
+07/17/26
 Updated Scripts: train, library, craftlibrary
 Bugfixes to Trader observing.
 Bugfixes to shield handle, long and short cord acquisition for Outfitting.
