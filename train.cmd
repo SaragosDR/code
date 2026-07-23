@@ -3687,6 +3687,7 @@ STATUSVARLOAD:
   var killbeforeleave -1
   var lastcast 0
   var lasthit 1
+  var tmfailcount 0
   var lastignite 0
   var lastspellcheck 0
   var lastweapon 0
@@ -14594,16 +14595,29 @@ MOVECHOOSE:
     if (%tacticsdone = 1) then gosub TACTICSRESET
     if (%analyzedone != 1) then
     {
+      var tacticsstart $Tactics.LearningRate
       gosub ANALYZE
-      if ($Tactics.LearningRate > 33) then var tacticslock 1
-      if ($Tactics.LearningRate < 20) then var tacticslock 0
-      if (%tacticslock = 1) then
+      var tacticstotal $Tactics.LearningRate
+      math tacticstotal subtract %tacticsstart
+      #put #echo Yellow TacticsTotal: %tacticstotal
+      if (%tacticstotal >= 1) then
       {
+        if ($Tactics.LearningRate > 33) then var tacticslock 1
+        if ($Tactics.LearningRate < 20) then var tacticslock 0
+        if (%tacticslock = 1) then
+        {
+          var usingtactics 0
+          goto MOVECHOOSE
+        }
+      }
+      else
+      {
+        put #echo >$alertwindow Yellow [Combat]: Tactics isn't learning well enough in this area.  Turning it off.
+        var tactics NO
         var usingtactics 0
         goto MOVECHOOSE
       }
     }
-    #echo tacticsmax: %tacticsmax
     if (%tacticsmax = 0) then gosub TACTICSSET
     if (%tacticsdone = 1) then goto MOVECHOOSE
     if (%lasthit = 1) then

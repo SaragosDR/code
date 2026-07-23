@@ -28,6 +28,8 @@ action (ingotcheck) var ingotvolume $1 when About (\d+) volume of metal was used
 
 action (purchaseparts) var padlargenum $1 when (\d+)\)\.  some large cloth padding\.
 action (purchaseparts) var padsmallnum $1 when (\d+)\)\.  some small cloth padding\.
+action (purchaseparts) var handleleathernum $1 when (\d+)\)\.  a leather shield handle\.
+action (purchaseparts) var cordlongnum $1 when (\d+)\)\.  a long leather cord\.
 
 action math expenses add $1; var currency $2 when The attendant says, "You can purchase (?:a|an|some) \w+ \w+ \w+ for (\d+) (Kronars|Lirums|Dokoras)\.
 action math expenses add $1; var currency $2 when The attendant says, "You can purchase (?:a|an|some) \w+ \w+ for (\d+) (Kronars|Lirums|Dokoras)\.
@@ -234,6 +236,7 @@ CRAFTVARLOAD:
   var forgingsmelting $forgingsmelting
 
   var outfittingdifficulty $outfittingdifficulty
+  var outfittingtype $outfittingtype
   var outfittingcloth $outfittingcloth
   var outfittingleather $outfittingleather
   var outfittingyarn $outfittingyarn
@@ -270,7 +273,6 @@ CRAFTVARLOAD:
   if (("%discipline" = "weaponsmithing") || ("%discipline" = "armorsmithing") || ("%discipline" = "blacksmithing")) then var crafttype forging
   if ("%discipline" = "tailoring") then var crafttype outfitting
   if (("%discipline" = "carving") || ("%discipline" = "shaping")) then var crafttype engineering
-  if ("$guild" = "Trader") then var tradingmindstatebegin $Trading.LearningRate
   if ("%crafttype" = "forging") then var mindstatebegin $Forging.LearningRate
   if ("%crafttype" = "outfitting") then var mindstatebegin $Outfitting.LearningRate
   if ("%crafttype" = "engineering") then var mindstatebegin $Engineering.LearningRate
@@ -357,10 +359,8 @@ WORKORDER:
   {
     put #echo Yellow Work Order: %quantity %product %quality in %timelimit roisaen.
     put #echo Yellow Yards: %totalyards.....MaterialNoun: %materialnoun
-    #put #echo Yellow CordLong: %totalcordlong.....HandleLeather: %totalhandleleather
     put #echo Yellow PadLarge: %totalpadlarge.....PadSmall: %totalpadsmall
-    put #echo Yellow CordLong: %totalcordlong.....CordShort: %totalcordshort
-    put #echo Yellow Handles: %totalhandle
+    put #echo Yellow CordLong: %totalcordlong.....HandleLeather: %totalhandleleather
   }
   #MATERIALS_PURCHASE
   if ("%crafttype" = "outfitting") then
@@ -377,13 +377,28 @@ WORKORDER:
       gosub ORDERMATERIALS
       gosub COMBINEALL %material %materialnoun   
     }
-    #PURCHASING_PARTS
-    echo totalpadlarge: %totalpadlarge
-    echo totalpadsmall: %totalpadsmall
-    echo totalcordlong: %totalcordlong
-    echo totalcordshort: %totalcordshort
-    echo totalhandle: %totalhandle
-    if ((%totalpadlarge > 0) || (%totalpadsmall > 0)) then
+    
+    #COUNT_PARTS
+    gosub COUNTPARTS
+    math totalbackinglarge subtract %backinglargecount
+    math totalbackingsmall subtract %backingsmallcount
+    math totalboss subtract %bosscount
+    math totalcordlong subtract %cordlongcount
+    math totalcordshort subtract %cordshortcount
+    math totalhaft subtract %haftcount
+    math totalhandle subtract %handlecount
+    math totalhilt subtract %hiltcount
+    math totalhandleleather subtract %handleleathercount
+    math totalpolelong subtract %polelongcount
+    math totalpoleshort subtract %poleshortcount
+    math totalstrips subtract %stripscount
+    
+      #PURCHASING_PARTS
+      echo totalpadlarge: %totalpadlarge
+      echo totalpadsmall: %totalpadsmall
+      echo totalcordlong: %totalcordlong
+      echo totalhandleleather: %totalhandleleather
+      if ((%totalpadlarge > 0) || (%totalpadsmall > 0) || (%totalcordlong > 0) || (%totaltotalhandleleather > 0)) then
     {
       if ($roomid != %suppliesroom) then gosub MOVE %suppliesroom
       action (purchaseparts) on
@@ -391,9 +406,8 @@ WORKORDER:
       action (purchaseparts) off
       if (%totalpadlarge > 0) then gosub ORDERLOOP %padlargenum %totalpadlarge padding
       if (%totalpadsmall > 0) then gosub ORDERLOOP %padsmallnum %totalpadsmall padding
-      if (%totalcordlong > 0) then gosub ORDERLOOP %padsmallnum %totalcordlong padding
-      if (%totalcordshort > 0) then gosub ORDERLOOP %padsmallnum %totalcordshort padding
-      if (%totalhandle > 0) then gosub ORDERLOOP %padsmallnum %totalhandle handle
+      if (%totalcordlong > 0) then gosub ORDERLOOP %cordlongnum %totalcordlong padding
+      if (%totalhandleleather > 0) then gosub ORDERLOOP %handleleathernum %totalhandleleather handle
     }  
   }
   if ("%crafttype" = "forging") then
@@ -507,7 +521,7 @@ WORKORDER:
   }
   gosub FINDMASTER  
   gosub GETITEM %crafttype logbook from my %craftingstorage
-  put #echo righthandnoun: $righthandnoun
+  #put #echo righthandnoun: $righthandnoun
   if (!matchre("$righthandnoun", "logbook")) then
   {
     put #echo >$alertwindow Yellow Could not find logbook!  Ending crafting.
@@ -515,6 +529,7 @@ WORKORDER:
     gosub CRAFTINGABORT
     return
   }
+  if ("$guild" = "Trader") then var tradingmindstatebegin $Trading.LearningRate
   gosub GIVEMASTERLOG %mastername
   gosub PUTITEM my %crafttype logbook in my %craftingstorage
   put #echo Yellow Crafting complete!
@@ -540,7 +555,7 @@ WORKORDER:
   math timetotal subtract %timetotalmod
   var timetotalminutes %timetotal
   math timetotalminutes / 60
-  if ("$guild" = "Trader") then put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material.  Revenue: %revenue - Expenses: %expenses = Profit: %profit %currency.  Mindstates gained: %mindstatetotal, Trading gained: %tradingmindstatetotal in %timetotalminutes minutes.
+  if ("$guild" = "Trader") then put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material.  Revenue: %revenue - Expenses: %expenses = Profit: %profit %currency.  Mindstates gained: %mindstatetotal in %timetotalminutes minutes. Trading gained from work order: %tradingmindstatetotal. 
   else put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material.  Revenue: %revenue - Expenses: %expenses = Profit: %profit %currency.  Mindstates gained: %mindstatetotal in %timetotalminutes minutes.
   return
 
@@ -728,6 +743,7 @@ CRAFTINGMAIN:
   {
     gosub GETITEM %crafttype logbook
     gosub LOGBOOKBUNDLE %product
+    if (%restartorder = 1) then return
     gosub PUTITEM my %crafttype logbook in my %craftingstorage
     if ("%crafttype" = "forging") then
     {
@@ -948,8 +964,9 @@ TAILORMAIN:
   match SLICKSTONE A deep crease develops along the fabric, bunching it together awkwardly.
   match YARDSTICK The leather's dimensions appear to have shifted and could benefit from some remeasuring.
   match YARDSTICK The fabric's dimensions appear to have shifted and could benefit from some remeasuring.
-  #match PADDING You need another finished large cloth padding to continue crafting an unfinished insulated burlap hauberk.  You believe you can assemble the two ingredients together once you acquire them.
-  #match ASSEMBLELPAD The links appear ready to be woven into and around a cloth padding.
+  
+  matchre OASSEMBLELONGCORD You need another finished long leather cord to continue crafting .*\.
+  matchre OASSEMBLEHANDLE You need another finished leather shield handle to continue crafting .*\.
   matchre OASSEMBLELPAD You need another finished large cloth padding to continue crafting .*\.
   matchre OASSEMBLESPAD You need another finished small cloth padding to continue crafting .*\.
   match NEWTHREAD The needles need to have thread put on them before they can be used for sewing.  You think you can STUDY them to learn more.
@@ -1020,6 +1037,26 @@ NEWTHREAD:
   gosub GETITEM %product
   if ($roomid != %workroom) then gosub MOVE %workroom
   goto TAILORMAIN
+
+OASSEMBLEHANDLEP:
+  pause 
+OASSEMBLEHANDLE:
+  if (("$righthandnoun" = "needles") || ("$lefthandnoun" = "needles")) then gosub PUTITEM my needles in my %craftingstorage
+  if (("$righthandnoun" != "handle") && ("$lefthandnoun" != "handle")) then gosub GETITEM shield handle in my %craftingstorage
+  matchre OASSEMBLEHANDLEP %waitstring
+  matchre SEW You place your handle with your target shield and carefully mark where it will attach when you continue crafting\.
+  put assemble my %product with my shield handle
+  matchwait
+  
+OASSEMBLELONGCORDP:
+  pause
+OASSEMBLELONGCORD:
+  if (("$righthandnoun" = "needles") || ("$lefthandnoun" = "needles")) then gosub PUTITEM my needles in my %craftingstorage
+  if (("$righthandnoun" != "cord") && ("$lefthandnoun" != "cord")) then gosub GETITEM long cord in my %craftingstorage
+  matchre OASSEMBLELONGCORDP %waitstring
+  matchre SEW You place your cord with your .* and carefully mark where it will attach when you continue crafting\.
+  put assemble my %product with my long cord
+  matchwait
 
 OASSEMBLELPADP:
   pause 
@@ -1782,6 +1819,8 @@ TASKACQUIRE:
     math totalyards * %quantity
     var totalcordlong %cordlong
     math totalcordlong * %quantity
+    var totalcordshort %cordshort
+    math totalcordshort * %quantity
     var totalhandleleather %handleleather
     math totalhandleleather * %quantity
     var totalpadlarge %padlarge
@@ -2114,6 +2153,23 @@ ORDERLOOPMAIN:
 
 
 ORDERPARTS:
+ 
+  #COUNT_PARTS
+  gosub COUNTPARTS
+  math totalbackinglarge subtract %backinglargecount
+  math totalbackingsmall subtract %backingsmallcount
+  math totalboss subtract %bosscount
+  math totalcordlong subtract %cordlongcount
+  math totalcordshort subtract %cordshortcount
+  math totalhaft subtract %haftcount
+  math totalhandle subtract %handlecount
+  math totalhilt subtract %hiltcount
+  math totalhandleleather subtract %handleleathercount
+  math totalpolelong subtract %polelongcount
+  math totalpoleshort subtract %poleshortcount
+  math totalstrips subtract %stripscount
+  
+  #PURCHASE_PARTS
   echo totalcordlong: %totalcordlong
   echo totalcordshort: %totalcordshort
   echo totalhaft: %totalhaft
@@ -2140,6 +2196,41 @@ ORDERPARTS:
   if (%totalbackinglarge > 0) then gosub BUYCRATELOOP large backing %totalbackinglarge
   if (%totalbackingsmall > 0) then gosub BUYCRATELOOP small backing %totalbackingsmall
   return
+
+
+COUNTPARTS:
+  var backinglargecount 0
+  var backingsmallcount 0
+  var bosscount 0
+  var cordlongcount 0
+  var cordshortcount 0
+  var haftcount 0
+  var handlecount 0
+  var hiltcount 0
+  var handleleathercount 0
+  var polelongcount 0
+  var poleshortcount 0
+  var stripscount 0
+  goto COUNTPARTSMAIN
+COUNTPARTSMAIN:
+  action (partscount) on
+  gosub RUMMAGE %craftingstorage
+  pause .5
+  action (partscount) off
+  eval backinglargecount count("%rummagetext","some large leather backing")
+  eval backingsmallcount count("%rummagetext","some small leather backing")
+  eval bosscount count("%rummagetext","an iron shield boss")
+  eval cordlongcount count("%rummagetext","a long leather cord")
+  eval cordshortcount count("%rummagetext","a short leather cord")
+  eval haftcount count("%rummagetext","a simple oak haft")
+  eval handlecount count("%rummagetext","a leather shield handle")
+  eval handleleathercount count("%rummagetext","an iron shield handle")
+  eval hiltcount count("%rummagetext","a simple oak hilt")
+  eval polelongcount count("%rummagetext","a long oak pole")
+  eval poleshortcount count("%rummagetext","a short oak pole")
+  eval stripscount count("%rummagetext","some leather strips
+  return
+
 
 BUYCRATELOOP:
   var partname $1 $2
@@ -2313,6 +2404,8 @@ LOGBOOKBUNDLEMAIN:
 LOGBOOKBUNDLEBAD:
   put #echo Yellow Made an item of inferior quality!
   put #echo >$alertwindow Yellow Made an item of inferior quality!
+  gosub DUMPITEM %logbundlestring
+  var restartorder 1
   return
 
 LOGBOOKBAD:

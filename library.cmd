@@ -487,6 +487,7 @@ VARCHECKS:
   else put #var forgingmaxquantity 4
   if !matchre("$forgingsmelting", "\b(YES|NO)\b") then put #var forgingsmelting YES
   if !matchre("$outfittingdifficulty", "\b(easy|challenging|hard)\b") then put #var outfittingdifficulty challenging
+  if !matchre("$outfittingtype", "\b(cloth|leather|knit|all)\b") then put #var outfittingtype all
   if !def(outfittingcloth) then put #var outfittingcloth burlap
   if !def(outfittingleather) then put #var outfittingleather cougar-pelt
   if !def(outfittingyarn) then put #var outfittingyarn wool
@@ -7912,6 +7913,29 @@ CASTCLEANUPMAIN:
     gosub PREPSYMBIOSIS
     gosub RELSYMBIOSIS
   }
+  if (("%tm" = "YES") && (%tmcast = 1)) then
+  {
+    var tmtotal $Targeted_Magic.LearningRate
+    math tmtotal subtract %tmstart
+    #put #echo Yellow TMTotal: %tmtotal
+    if (%tmtotal < 1) then
+    {
+      math tmfailcount add 1
+      if (%tmfailcount > 2) then
+      {
+        put #echo >$alertwindow Yellow [Magic]: TM isn't learning well enough in this area.  Turning it off.
+        var tm NO
+      }
+      else
+      {
+        put #echo >$alertwindow Yellow tmfailcount: %tmfailcount
+      }
+    }
+    else
+    {
+      var tmfailcount 0
+    }
+  }
   if ("%spellautomana" = "YES") then
   {
     if (%trainingspell = 1) then
@@ -7922,7 +7946,7 @@ CASTCLEANUPMAIN:
         var totallearned %postcastlearningrate
         math totallearned subtract %precastlearningrate
         #put #echo Yellow Skill: %skillname
-        put #echo Yellow PrecastLearningRate: %precastlearningrate // PostCastLearningRate: %postcastlearningrate // Total Learned: %totallearned
+        #put #echo Yellow PrecastLearningRate: %precastlearningrate // PostCastLearningRate: %postcastlearningrate // Total Learned: %totallearned
         if (%totallearned = 0) then
         {
           if (%backfire = 1) then
@@ -8348,6 +8372,10 @@ CAST:
 	}
   if (%tmcast = 1) then
  	{
+ 	  if ("%tm" = "YES") then
+ 	  {
+ 	    var tmstart $Targeted_Magic.LearningRate
+ 	  }
  	  var casttarget
  	  if $SpellTimer.AetherCloak.active = 1 then
 	  {

@@ -1,7 +1,18 @@
+07/22/26
+Updated Scripts: train, library, set, craftlibrary
+Tactics will now automatically shut off if it hasn't gained any mindstates over a complete analyze cycle.
+TM will now automatically shut off if it hasn't gained any mindstates from three TM casts in a row, whether from missing or lack of skill.
+
+Crafting an inferior product will now cause the workorder to be restarted instead of failing without recovery.
+Crafting will now check your crafting storage container to see if you already have any parts that it needs.
+More work on fixing Tailoring to properly buy and assemble long cords and leather handles.
+
+
 07/17/26
 Updated Scripts: train, library, craftlibrary
 Bugfix to trading experience reporting.
 Added p1-youngogres and p1-scoutogres hunting area.
+
 
 07/17/26
 Updated Scripts: train, library, craftlibrary

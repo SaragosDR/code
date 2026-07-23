@@ -133,7 +133,7 @@ SET:
       if matchre("%2", "\b(1|2|3|4|5|6|7|8|9|10|11)\b") then
       {  
         var setvar auburdennum
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -169,7 +169,7 @@ SET:
       if (matchre("%2", "\b(%townvaultpresetlist)\b")) then
       {  
         var setvar vaulttown
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -196,7 +196,7 @@ SET:
       if matchre("%2", "\b(%ammopresetlist)\b") then
       {  
         var setvar ammobuytown
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -212,7 +212,7 @@ SET:
       if matchre("%2", "\b(%lockpickpresetlist)\b") then
       {  
         var setvar lockpickbuytown
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -303,7 +303,7 @@ SET:
       if matchre("%2", "\b(slice|puncture)\b") then
       {  
         var setvar secombo
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -334,7 +334,7 @@ SET:
       if matchre("%2", "\b(slice|puncture)\b") then
       {  
         var setvar polecombo
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -373,7 +373,7 @@ SET:
       if matchre("%2", "\b(throw|lob|hurl)\b") then
       {  
         var setvar ltverb
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -407,7 +407,7 @@ SET:
       if matchre("%2", "\b(throw|lob|hurl)\b") then
       {  
         var setvar htverb
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -473,7 +473,7 @@ SET:
       if matchre("%2", "\b(prowess|guile|credence|terrify|intimidate|eliminate)\b") then
       {  
         var setvar khridebiltype
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -493,7 +493,7 @@ SET:
       if matchre("%2", "\b(unsullied|forsaken|redeemed)\b") then
       {  
         var setvar necrostate
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -563,7 +563,7 @@ SET:
       if matchre("%2", "\b(rock|bunny)\b") then
       {  
         var setvar collectitem
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -669,7 +669,7 @@ SET:
       if matchre("%2", "\b(any|low|mid|high)\b") then
       {  
         var setvar ritstype
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -762,10 +762,10 @@ SET:
     if tolower("%1") = "recite" then goto YESNOSET
     if tolower("%1") = "recitation" then gosub TEXTSET
     #{
-    #  eval setvar tolower(%1)
+    #  eval setvar tolower("%1")
     #  gosub TEXTSETTRIM
     #  if ((%"input" = "2he") || ("%input" = "2HE")) then var input "2he"
-    #  else eval input1 tolower(%input)
+    #  else eval input1 tolower("%input")
     #  put #var %setvar %input
     #  put #var save
     #  goto VARDISPLAY
@@ -779,7 +779,7 @@ SET:
       if matchre("%input", "\b(coz|male|male offense|male defense)\b") then
       {  
         var setvar hyhcast
-        eval input tolower(%input)  
+        eval input tolower("%input")  
         put #var %setvar %input
         put #var save
         goto REGVARDISPLAY
@@ -810,7 +810,7 @@ SET:
       if matchre("%2", "\b(none|bones|mirror)\b") then
       {  
         var setvar predictiontool
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -840,7 +840,7 @@ SET:
       if (matchre("%2", "\b(%townvaultpresetlist)\b")) then
       {  
         var setvar tradingselltown
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -941,7 +941,7 @@ SET:
       if matchre("%2", "\b(runic|heroic)\b") then
       {
         var setvar tattootype
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -969,6 +969,7 @@ SET:
     if tolower("%1") = "forgingsmelting" then goto YESNOSET
     
     if tolower("%1") = "outfittingdifficulty" then goto TEXTSET
+    if tolower("%1") = "outfittingtype" then goto TEXTSET
     if tolower("%1") = "outfittingcloth" then goto TEXTSET
     if tolower("%1") = "outfittingleather" then goto TEXTSET
     if tolower("%1") = "outfittingyarn" then goto TEXTSET
@@ -1060,7 +1061,7 @@ SET:
       if matchre("%2", "\b(%combatpresetlist)\b") then
       {  
         var setvar huntingarea
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1076,7 +1077,7 @@ SET:
       if matchre("%2", "\b(%combatpresetlist)\b") then
       {  
         var setvar huntingaream2
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1092,7 +1093,7 @@ SET:
       if (matchre("%2", "\b(%townpresetlist)\b")) then
       {  
         var setvar upkeeptown
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1108,7 +1109,7 @@ SET:
       if (matchre("%2", "\b(%townpresetlist)\b")) then
       {  
         var setvar upkeeptownm2
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1124,7 +1125,7 @@ SET:
       if (matchre("%2", "\b(%burgletownlist)\b")) then
       {  
         var setvar burgletown
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1140,7 +1141,7 @@ SET:
       if (matchre("%2", "\b(%burgletownlist)\b")) then
       {  
         var setvar burgletownm2
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1156,7 +1157,7 @@ SET:
       if (matchre("%2", "\b(%pawntownlist)\b")) then
       {  
         var setvar pawntown
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1172,7 +1173,7 @@ SET:
       if (matchre("%2", "\b(%pawntownlist)\b")) then
       {  
         var setvar pawntownm2
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1188,7 +1189,7 @@ SET:
       if (matchre("%2", "\b(%performtownlist)\b")) then
       {  
         var setvar performtown
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1204,7 +1205,7 @@ SET:
       if (matchre("%2", "\b(%performtownlist)\b")) then
       {  
         var setvar performtownm2
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1220,7 +1221,7 @@ SET:
       if (matchre("%2", "\b(%forgingtownlist)\b")) then
       {  
         var setvar forgingtown
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1236,7 +1237,7 @@ SET:
       if (matchre("%2", "\b(%forgingtownlist)\b")) then
       {  
         var setvar forgingtownm2
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1252,7 +1253,7 @@ SET:
       if (matchre("%2", "\b(%outfittingtownlist)\b")) then
       {  
         var setvar outfittingtown
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1268,7 +1269,7 @@ SET:
       if (matchre("%2", "\b(%outfittingtownlist)\b")) then
       {  
         var setvar outfittingtownm2
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1289,7 +1290,7 @@ SET:
       if matchre("%2", "\b(treasure|boxes|equipment|goods|all)\b") then
       {  
         var setvar loottype
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1339,7 +1340,7 @@ SET:
       if matchre("%2", "\b(treasure|boxes|equipment|goods|all)\b") then
       {  
         var setvar loottype
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1429,7 +1430,7 @@ SET:
       if matchre("%2", "\b(melee|brawl|aimed|thrown)\b") then
       {  
         var setvar killweapontype
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1445,7 +1446,7 @@ SET:
       if matchre("%2", "\b(edged|blunt|piercing)\b") then
       {  
         var setvar killweaponcombo
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1461,7 +1462,7 @@ SET:
       if matchre("%2", "\b(lob|throw|hurl)\b") then
       {  
         var setvar killthrownverb
-        eval input tolower(%2)  
+        eval input tolower("%2")  
         put #var %setvar %input
         put #var save
         goto VARDISPLAY
@@ -1707,7 +1708,7 @@ MAINHELP:
 
 
 YESNOSET:
-  eval setvar tolower(%1)
+  eval setvar tolower("%1")
   eval input toupper(%2) 
   if matchre("%input", "\b(YES|NO)\b") then
   {
@@ -1722,10 +1723,10 @@ YESNOSET:
   }
 
 TEXTSET:
-  eval setvar tolower(%1)
+  eval setvar tolower("%1")
   gosub TEXTSETTRIM
   if (("%input" = "2he") || ("%input" = "2HE")) then var input "2he"
-  else eval input1 tolower(%input)
+  else eval input1 tolower("%input")
   put #var %setvar %input
   put #var save
   goto VARDISPLAY
@@ -1771,7 +1772,7 @@ LISTSET:
 0THRU8SET:
   if matchre("%2", "\b(0|1|2|3|4|5|6|7|8)\b") then
   {  
-    eval setvar tolower(%1)
+    eval setvar tolower("%1")
     eval input toupper(%2)  
     put #var %setvar %input
     put #var save
@@ -1787,7 +1788,7 @@ LISTSET:
 0THRU16SET:
   if matchre("%2", "\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)\b") then
   {  
-    eval setvar tolower(%1)
+    eval setvar tolower("%1")
     eval input toupper(%2)  
     put #var %setvar %input
     put #var save
@@ -1803,8 +1804,8 @@ LISTSET:
 0THRU34SET:
   if matchre("%2", "\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34)\b") then
   {
-    eval setvar tolower(%1)
-    eval input1 tolower(%2) 
+    eval setvar tolower("%1")
+    eval input1 tolower("%2") 
     var input %input1
     put #var m$varset%setvar %input
     put #var save
@@ -1819,8 +1820,8 @@ LISTSET:
 1THRU60SET:
   if matchre("%2", "\b(0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60)\b") then
   {
-    eval setvar tolower(%1)
-    eval input1 tolower(%2) 
+    eval setvar tolower("%1")
+    eval input1 tolower("%2") 
     var input %input1
     put #var m$varset%setvar %input
     put #var save
@@ -1835,8 +1836,8 @@ LISTSET:
 1THRU3SET:
   if matchre("%2", "\b(1|2|3)\b") then
   {
-    eval setvar tolower(%1)
-    eval input1 tolower(%2) 
+    eval setvar tolower("%1")
+    eval input1 tolower("%2") 
     var input %input1
     put #var m$varset%setvar %input
     put #var save
@@ -1851,8 +1852,8 @@ LISTSET:
 REG1THRU3SET:
   if matchre("%2", "\b(1|2|3)\b") then
   {
-    eval setvar tolower(%1)
-    eval input1 tolower(%2) 
+    eval setvar tolower("%1")
+    eval input1 tolower("%2") 
     var input %input1
     put #var %setvar %input
     put #var save
@@ -1867,8 +1868,8 @@ REG1THRU3SET:
 1THRU4SET:
   if matchre("%2", "\b(1|2|3|4)\b") then
   {
-    eval setvar tolower(%1)
-    eval input1 tolower(%2) 
+    eval setvar tolower("%1")
+    eval input1 tolower("%2") 
     var input %input1
     put #var %setvar %input
     put #var save
@@ -1883,8 +1884,8 @@ REG1THRU3SET:
 1THRU5SET:
   if matchre("%2", "\b(1|2|3|4|5)\b") then
   {
-    eval setvar tolower(%1)
-    eval input1 tolower(%2) 
+    eval setvar tolower("%1")
+    eval input1 tolower("%2") 
     var input %input1
     put #var m$varset%setvar %input
     put #var save
@@ -1899,8 +1900,8 @@ REG1THRU3SET:
 REG1THRU5SET:
   if matchre("%2", "\b(1|2|3|4|5)\b") then
   {
-    eval setvar tolower(%1)
-    eval input1 tolower(%2) 
+    eval setvar tolower("%1")
+    eval input1 tolower("%2") 
     var input %input1
     put #var %setvar %input
     put #var save
@@ -1913,8 +1914,8 @@ REG1THRU5SET:
   }
 
 BUFFSET:
-  eval setvar tolower(%1)
-  eval input tolower(%2) 
+  eval setvar tolower("%1")
+  eval input tolower("%2") 
   #if matchre("%input", "%buffs") then
   if contains("%buffs", "|%input|") then
   { 
@@ -1930,8 +1931,8 @@ BUFFSET:
   }  
 
 WANDBUFFSET:    
-  eval setvar tolower(%1)
-  eval input tolower(%2) 
+  eval setvar tolower("%1")
+  eval input tolower("%2") 
   if matchre("%input", "hes|mef|rage|rw|sw|tranquility|will|wotp") then
   { 
     put #var %setvar %input
@@ -1946,8 +1947,8 @@ WANDBUFFSET:
   }  
 
 OMBUFFSET:
-  eval setvar tolower(%1)
-  eval input tolower(%2) 
+  eval setvar tolower("%1")
+  eval input tolower("%2") 
   if matchre("%input", "%ombuffs") then
   { 
     put #var m$varset%setvar %input
@@ -1962,9 +1963,9 @@ OMBUFFSET:
   } 
 
 CYCTMSET:
-  eval setvar tolower(%1)
-  eval input1 tolower(%2)
-  eval input2 tolower(%3)
+  eval setvar tolower("%1")
+  eval input1 tolower("%2")
+  eval input2 tolower("%3")
   if 3 then var input %input1 %input2
   else var input %input1 
   if contains("%cyctms", "|%input|") then
@@ -1981,8 +1982,8 @@ CYCTMSET:
   }  
 
 CYCDBSET:
-  eval setvar tolower(%1)
-  eval input tolower(%2) 
+  eval setvar tolower("%1")
+  eval input tolower("%2") 
   if contains("%cycdbs", "|%input|") then
   { 
     put #var %setvar %input
@@ -1997,8 +1998,8 @@ CYCDBSET:
   }  
 
 CYCLICSET:
-  eval setvar tolower(%1)
-  eval input tolower(%2) 
+  eval setvar tolower("%1")
+  eval input tolower("%2") 
   if contains("%cyclics", "|%input|") then
   { 
     put #var m$varset%setvar %input
@@ -2014,8 +2015,8 @@ CYCLICSET:
 
 
 REGCYCLICSET:
-  eval setvar tolower(%1)
-  eval input tolower(%2) 
+  eval setvar tolower("%1")
+  eval input tolower("%2") 
   if contains("%allcyclics", "|%input|") then
   { 
     put #var %setvar %input
@@ -2439,6 +2440,7 @@ DISPLAYCRAFT:
   put #echo
   gosub OUTPUT Outfitting
   gosub OUTPUT OutfittingDifficulty
+  #gosub OUTPUT OutfittingType (cloth|leather|knit|all)
   gosub OUTPUT OutfittingCloth
   gosub OUTPUT OutfittingLeather
   gosub OUTPUT OutfittingYarn
