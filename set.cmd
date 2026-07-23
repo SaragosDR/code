@@ -1696,6 +1696,7 @@ MAINHELP:
   put #echo mono  .SET DISPLAY HUNTING - Variables for where you train and how you loot.
   put #echo mono  .SET DISPLAY COMBAT - Variables for skills trained in combat.
   put #echo mono  .SET DISPLAY NONCOMBAT - Variables for skills trained out of combat.
+  put #echo mono  .SET DISPLAY CRAFT - Crafting variables.
   put #echo mono  .SET DISPLAY MAGIC - Magic-related variables.
   put #echo mono  .SET DISPLAY SPELL - Spell variables.
   put #echo mono  .SET DISPLAY GUILD - Guild-specific variables.
