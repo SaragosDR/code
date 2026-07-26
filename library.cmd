@@ -22,7 +22,7 @@ var aimweapons bow|xbow|sling
 var researches fundamental|stream|augmentation|utility|warding|sorcery|energy|field|plane|planes|road|spell|symbiosis strengthen|symbiosis endure|symbiosis avoid|symbiosis spring|symbiosis remember|symbiosis resolve|symbiosis impress|symbiosis discern|symbiosis explore|symbiosis watch|symbiosis harvest|symbiosis heal|symbiosis learn|symbiosis examine|symbiosis perform|symbiosis cast|symbiosis harness|symbiosis activate
 
 var combatpresetp1 p1-shiprats|p1-louts|p1-muskhogs|p1-goblins|p1-fellhogs|p1-badgers|p1-origami|p1-pothanits|p1-giantwasps|p1-trollkin|p1-cougarsgrendels|p1-grasseels|p1-revenantconscripts|p1-lipopods|p1-woodtrolls|p1-animateditems|p1-beisswurms|p1-cavebears|p1-copperheads|p1-bloodwolves|p1-rocktrolls|p1-endrusserpents|p1-snowbeasts|p1-silverbackedbears|p1-youngogres|p1-crocodiles|p1-direbears|p1-vipers|p1-leucros|p1-forestbandits|p1-guardians|p1-giantbears|p1-onyxgargoyles|p1-emberbulls|p1-warklins|p1-scuttlers|p1-stormbulls|p1-lavadrakes
-var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-brocketdeerelder|p2-gryphonsbaby|p2-gryphonsyoung|p2-seordmaors|p2-fibrousslayers|p2-clayslayers|p2-glazedslayers
+var combatpresetp2 p2-brocketdeeryoung|p2-marauders|p2-swamptrolls|p2-piruatiserpents|p2-brocketdeer|p2-orcscouts|p2-brocketdeerelder|p2-orcbandit|p2-orcreivers|p2-gryphonsbaby|p2-gryphonsyoung|p2-orcraiders|p2-orcclanchiefs|p2-seordmaors|p2-fibrousslayers|p2-clayslayers|p2-glazedslayers
 var combatpresetp3 p3-snippets|p3-rocktrolls1|p3-snowbeasts|p3-rocktrolls2|p3-gargoyles|p3-eidolonsteeds|p3-crocodiles|p3-sylphs|p3-quartzgargoyles|p3-prereniyoung|p3-redleucros|p3-prereni|p3-windbags|p3-windbags2|p3-frostcrones|p3-prerenielder|p3-gryphons|p3-beltunumshi|p3-adanfblood|p3-cloudrats|p3-dragonpriests|p3-adanfspirit|p3-malchata|p3-stormbulls|p3-wyvernsyoung|p3-wyvernsjuve|p3-wyvernsadult|p3-icearchons|p3-adanfsorcs|p3-adanfblades
 var combatpresetp4 p4-merkreshcelpeze1|p4-merkreshcelpeze2|p4-merkreshcelpeze3|p4-merkreshcelpeze4|p4-armadillosjuve|p4-armadillosadult|p4-armadilloselder
 var combatpresetp5 p5-maidenstress|p5-matronstress|p5-dryads|p5-nyads1|p5-blightogres1|p5-nyads2|p5-blightogres2|p5-iceadders|p5-dpcrones|p5-mountaingiants|p5-marblegargoyles|p5-shalswars|p5-stompers|p5-maulers|p5-headsplitters|p5-blackapes|p5-tuskies|p5-fuliginmoths|p5-voidmoths|p5-shadowmoths
@@ -590,7 +590,7 @@ VARCHECKS:
   if !matchre("$spellm2", "\b(YES|NO)\b") then put #var spellm2 YES
   if !matchre("$spellnum", "\b(1|2|3|4)\b") then put #var spellnum 3
   if !matchre("$spellnumm2", "\b(1|2|3|4)\b") then put #var spellnumm2 3
-  if !matchre("$spellautomana", "\b(YES|NO)\b") then put #var spellautomana YES
+  if !matchre("$automana", "\b(YES|NO)\b") then put #var automana YES
   if !def(spell1) then put #var spell1 ys
   if (!def(spell1mana)) then put #var spell1mana 0
   if (!def(spell1mana)) then put #var spell1mana 0
@@ -7772,11 +7772,19 @@ CASTINGLOGIC:
     }
     #HARNESSING
     if ((%harnmana > 0) && (%harnessed = 0)) then gosub HARNESS
-    if ("%spellautomana" = "YES") then
+    if ("%automana" = "YES") then
     {
       if (%trainingspell = 1) then
       {
-        if (("%skillname" != "Targeted_Magic") && ("%skillname" != "Debilitation")) then
+        if (("%skillname" = "Targeted_Magic") || ("%skillname" = "Debilitation")) then
+        {
+          if ((%spellmana != %nativemana) && (%spellmana != 0)) then
+          {
+            #put #echo Yellow Sorcerous TM or Debil!
+            var precastlearningrate $Sorcery.LearningRate
+          }
+        }
+        else
         {
           #put #echo Yellow Training spell!
           #put #echo Spellleast: %spellleast
@@ -7928,7 +7936,7 @@ CASTCLEANUPMAIN:
       }
       else
       {
-        put #echo >$alertwindow Yellow tmfailcount: %tmfailcount
+        #put #echo >$alertwindow Yellow tmfailcount: %tmfailcount
       }
     }
     else
@@ -7936,67 +7944,38 @@ CASTCLEANUPMAIN:
       var tmfailcount 0
     }
   }
-  if ("%spellautomana" = "YES") then
+  if ("%automana" = "YES") then
   {
     if (%trainingspell = 1) then
     {
-      if (("%skillname" != "Targeted_Magic") && ("%skillname" != "Debilitation")) then
+      if (("%skillname" = "Targeted_Magic") || ("%skillname" = "Debilitation")) then
+      {
+        if ((%spellmana != %nativemana) && (%spellmana != 0)) then
+        {
+          var postcastlearningrate $Sorcery.LearningRate
+          var totallearned %postcastlearningrate
+          math totallearned subtract %precastlearningrate
+          #put #echo Yellow Skill: Sorcery
+          #put #echo Yellow PrecastLearningRate: %precastlearningrate // PostCastLearningRate: %postcastlearningrate // Total Learned: %totallearned
+          if ((%totallearned < 2) && (%precastlearningrate < 33)) then
+          {
+            if ("%skillname" = "Targeted_Magic") then var amstring tm
+            if ("%skillname" = "Debilitation") then var amstring debil
+            gosub AUTOMANASET
+          }
+        }
+      }
+      else
       {
         var postcastlearningrate $%skillname.LearningRate
         var totallearned %postcastlearningrate
         math totallearned subtract %precastlearningrate
         #put #echo Yellow Skill: %skillname
         #put #echo Yellow PrecastLearningRate: %precastlearningrate // PostCastLearningRate: %postcastlearningrate // Total Learned: %totallearned
-        if (%totallearned = 0) then
+        if ((%totallearned < 2) && (%precastlearningrate < 33)) then
         {
-          if (%backfire = 1) then
-          {
-            var tempmana $spell%spellleastmana
-            math tempmana subtract 1
-            put #echo >$alertwindow Yellow [Magic]: Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
-            put #echo Yellow Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
-            var spell%spellleastmana %tempmana
-            put #var spell%spellleastmana %tempmana
-            put #var save
-            var nextmanaadjust %t
-            math nextmanaadjust add 3600
-          }
-          else
-          {
-            if (%t >= %nextmanaadjust) then
-            {
-              if ($spell%spellleastmana < %spellcapmana) then
-              {
-                var tempmana $spell%spellleastmana
-                math tempmana add 1
-                put #echo >$alertwindow Yellow [Magic]: Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
-                put #echo Yellow Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
-                var spell%spellleastmana %tempmana
-                put #var spell%spellleastmana %tempmana
-                put #var save
-              }
-            }
-          }
-        }
-        if ((%totallearned > 0) && (%totallearned < 2) && (%precastlearningrate != 33)) then
-        {
-          if (%t >= %nextmanaadjust) then
-          {
-            #echo spellmana: %spellmana
-            #echo spelldifficulty %spelldifficulty
-            #echo spellminmana %spellminmana
-            #echo spellcapmana %spellcapmana                            
-            if ($spell%spellleastmana < %spellcapmana) then
-            {
-              var tempmana $spell%spellleastmana
-              math tempmana add 1
-              put #echo >$alertwindow Yellow [Magic]: Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
-              put #echo Yellow Adjusting Spell %spellleast mana from $spell%spellleastmana to %tempmana.
-              var spell%spellleastmana %tempmana
-              put #var spell%spellleastmana %tempmana
-              put #var save
-            }
-          }
+          var amstring %spellleast
+          gosub AUTOMANASET
         }
       }
     }
@@ -8035,6 +8014,37 @@ CASTCLEANUPMAIN:
 	return
 
 
+AUTOMANASET:
+  if (%backfire = 1) then
+  {
+    var tempmana $spell%amstringmana
+    math tempmana subtract 1
+    put #echo >$alertwindow Yellow [Magic]: Adjusting Spell %amstring mana from $spell%amstringmana to %tempmana.
+    put #echo Yellow Adjusting Spell %amstring mana from $spell%amstringmana to %tempmana.
+    var spell%amstringmana %tempmana
+    put #var spell%amstringmana %tempmana
+    put #var save
+    var nextmanaadjust %t
+    math nextmanaadjust add 3600
+  }
+  else
+  {
+    if (%t >= %nextmanaadjust) then
+    {                            
+      if ($spell%amstringmana < %spellcapmana) then
+      {
+        var tempmana $spell%amstringmana
+        math tempmana add 1
+        put #echo >$alertwindow Yellow [Magic]: Adjusting Spell %amstring mana from $spell%amstringmana to %tempmana.
+        put #echo Yellow Adjusting Spell %amstring mana from $spell%amstringmana to %tempmana.
+        var spell%amstringmana %tempmana
+        put #var spell%amstringmana %tempmana
+        put #var save
+      }
+    }
+  }
+  return
+  
 
 SPELLCANCEL:
   var scancel 0

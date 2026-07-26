@@ -2351,6 +2351,18 @@ HUNTINGVARLOAD:
       var bugoutroom 1
       var nearestportaltown langenfirth
     }
+    if ("%huntingarea" = "p2-orcscouts") then
+    {
+      var zone 34
+      var travel YES
+      var traveldest rossman
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 23|24|25|26|27|28|29|30|31|32|34|35|36|37
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
     if ("%huntingarea" = "p2-brocketdeerelder") then
     {
       var zone 40a
@@ -2363,6 +2375,18 @@ HUNTINGVARLOAD:
       var findroomlist 155|154|153|152
       var bugoutroom 1
       var nearestportaltown langenfirth
+    }
+    if ("%huntingarea" = "p2-orcbandits") then
+    {
+      var zone 34
+      var travel YES
+      var traveldest rossman
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58
+      var bugoutroom 1
+      var nearestportaltown theren
     }
     if ("%huntingarea" = "p2-gryphonsbaby") then
     {
@@ -2387,6 +2411,30 @@ HUNTINGVARLOAD:
       var targetroom 0
       var findroom YES
       var findroomlist 116|117|118|119|93
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
+    if ("%huntingarea" = "p2-orcreivers") then
+    {
+      var zone 34
+      var travel YES
+      var traveldest rossman
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 59|60|61|62|63|65|66|67
+      var bugoutroom 1
+      var nearestportaltown theren
+    }
+    if ("%huntingarea" = "p2-orcclanchiefs") then
+    {
+      var zone 34
+      var travel YES
+      var traveldest rossman
+      var move NO
+      var targetroom 0
+      var findroom YES
+      var findroomlist 69|70|71|72|73|74|75|76|77|78|79|80|81|82|83
       var bugoutroom 1
       var nearestportaltown theren
     }
@@ -4066,7 +4114,7 @@ MAINVARLOAD:
   else var spell $spellm2
   if (%varset = 1) then var spellnum $spellnum
   else var spellnum $spellnumm2
-  var spellautomana $spellautomana
+  var automana $automana
   var spell1 $spell1
   var spell1mana $spell1mana
   var spell1symb $spell1symb
@@ -5536,7 +5584,7 @@ NEWAREAMOVEMENT:
           if (("%buff" = "YES") && (%buffnum > 0)) then
           {
             #ONCE_DAILY_DISCERN_CHECK
-            if ("%spellautomana" = "YES") then
+            if ("%automana" = "YES") then
             {
               var gametimetest $unixtime
               math gametimetest subtract $lastbuffdiscern
@@ -5663,7 +5711,7 @@ BUFFADJUSTLOOP:
     var manamod %workingmana
     math manamod modulus 1
     math workingmana subtract %manamod
-    if ($buff%countermana != %workingmana) then
+    if ($buff%countermana < %workingmana) then
     {
       put #echo Yellow Adjusting Buff%counterMana from $buff%countermana to %workingmana.
       put #var buff%countermana %workingmana

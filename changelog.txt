@@ -1,3 +1,11 @@
+07/25/26
+Updated Scripts: train, library, set, craftlibrary
+Added new variable: OutfittingType.  Allows you to set a particular type of outfitting task to accept - cloth, leather, knit, or all.
+Added Orc scouts, orc raiders, orc reivers, and orc clan chiefs to P2.
+Automatic mana adjusting on buffs now will only adjust upwards so that you can tune your buff mana higher if you choose.
+Automatic mana adjusting will now know if your TM or Debil spell is Sorcerous and adjust it up or down based on Sorcery learning rather than the base skill.
+
+
 07/22/26
 Updated Scripts: train, library, set, craftlibrary
 Tactics will now automatically shut off if it hasn't gained any mindstates over a complete analyze cycle.

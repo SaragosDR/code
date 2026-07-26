@@ -1827,6 +1827,31 @@ TASKACQUIRE:
     math totalpadlarge * %quantity
     var totalpadsmall %padsmall
     math totalpadsmall * %quantity
+    put #echo Yellow materialnoun: %materialnoun
+    if ("%outfittingtype" = "cloth") then
+    {
+      if ("%materialnoun" != "cloth") then
+      {
+        put #echo Yellow Task type didn't match OutfittingType.  Trying again.
+        goto TASKACQUIRE
+      }
+    }
+    if ("%outfittingtype" = "leather") then
+    {
+      if ("%materialnoun" != "leather") then
+      {
+        put #echo Yellow Task type didn't match OutfittingType.  Trying again.
+        goto TASKACQUIRE
+      }
+    }
+    if ("%outfittingtype" = "knit") then
+    {
+      if ("%materialnoun" != "yarn") then
+      {
+        put #echo Yellow Task type didn't match OutfittingType.  Trying again.
+        goto TASKACQUIRE
+      }
+    }
     if (%outfittingmaxquantity != 0) then
     {
       if (%quantity > %outfittingmaxquantity) then

@@ -1493,7 +1493,7 @@ SET:
     if tolower("%1") = "spellm2" then goto YESNOSET
     if tolower("%1") = "spellnum" then goto 1THRU4SET
     if tolower("%1") = "spellnum2" then goto 1THRU4SET
-    if tolower("%1") = "spellautomana" then goto YESNOSET
+    if tolower("%1") = "automana" then goto YESNOSET
     if tolower("%1") = "spell1" then goto TEXTSET
     if tolower("%1") = "spell1mana" then goto TEXTSET
     if tolower("%1") = "spell1symb" then goto YESNOSET
@@ -2203,6 +2203,8 @@ DISPLAYSPELL:
 	put #echo
   if (("$guild" != "Barbarian") && ("$guild" != "Thief")) then
   {
+    gosub OUTPUT AutoMana
+    echo
     gosub OUTPUT Buff BuffNum
     var buffloop 0
     gosub DISPLAYBUFFLOOP
@@ -2224,7 +2226,6 @@ DISPLAYSPELL:
     gosub OUTPUT Misdirection MisdirectionMana
     put #echo
     gosub OUTPUT Spell SpellNum
-    gosub OUTPUT SpellAutoMana
     gosub OUTPUT Spell1 Spell1Mana
     gosub OUTPUT Spell1Symb
     gosub OUTPUT Spell2 Spell2Mana
@@ -2441,7 +2442,7 @@ DISPLAYCRAFT:
   put #echo
   gosub OUTPUT Outfitting
   gosub OUTPUT OutfittingDifficulty
-  #gosub OUTPUT OutfittingType (cloth|leather|knit|all)
+  gosub OUTPUT OutfittingType (cloth|leather|knit|all)
   gosub OUTPUT OutfittingCloth
   gosub OUTPUT OutfittingLeather
   gosub OUTPUT OutfittingYarn
@@ -2718,12 +2719,15 @@ DISPLAYGUILD:
     }
     if $guild = "Trader" then
     {
-      gosub OUTPUT Invest
+      gosub OUTPUT Finessse FinesseMana
+      gosub OUTPUT Noumena NoumenaMana
       gosub OUTPUT SLABuff (use SLA on buffs when starlight isn't available)
+      echo
+      gosub OUTPUT Invest
       gosub OUTPUT TradingSell
       #gosub OUTPUT TradingSellSource (vault or portal)
       gosub OUTPUT TradingSellTown
-      gosub OUTPUT Finessse FinesseMana
+      
       gosub OUTPUT TradingTasks TTBadForageList
     }
     if $guild = "Warrior Mage" then
