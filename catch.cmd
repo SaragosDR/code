@@ -1,0 +1,144 @@
+include library.cmd
+include helibrary.cmd
+
+if ("$zoneid" = "599q") then
+{
+  var critterlist marionette|puppet|doll|effigy|figurine 
+  var critterrooms 6000|6001|6002|6003|6004|6005|6006|6007|6008
+  var shrineroom 6000
+  var shrinename wagon
+  var baditemlist bloodwood splinter
+  var bucketroom 6000
+  var bucketitem barrel
+}
+if ("$zoneid" = "600") then
+{
+  var critterlist spriggan|gremlin|sprite|boggle|welkin
+  var critterrooms 28|29|30|31|32|33|34
+  var shrineroom 31
+  var shrinename worktable
+  var bucketroom 0
+}
+if ("$zoneid" = "612") then
+{
+  var critterlist shark|tigerfish|barracuda|piranha|bloodfish
+  var critterrooms 56|57|58|59|60|61|62|63|64|48|41|42|43|44|45|46|47|48|53
+  var shrineroom 56
+  var shrinename shrine
+  var bucketroom 0
+}
+
+eval roomcount count("%critterrooms", "|")
+var storage $gamestorage
+
+action goto END when ^Without warning, .* spontaneously combusts!  Ack!
+action put #echo >Log Yellow Caught one!  Won $1. when The helper places (.*) in your hand\.
+
+gosub STOWALL
+if (("$righthand") = "Empty") && ("$lefthand" = "Empty")) then
+else
+{
+  put #echo Yellow Could not empty hands!  Address and restart script!
+  put #play JustArrived
+  exit
+}
+  
+MAIN:
+  if ("$righthand" = "Empty") then
+  {
+    put look
+    if matchre("$roomobjs", "\b%critterlist\b") then
+    {
+      var critter $0
+      echo critter: %critter
+      gosub STAND
+      gosub GETCRITTER
+      gosub STAND
+    }
+    else
+    {
+      var searchcount 0
+      gosub CRITTERSEARCH
+      goto MAIN
+    }
+  }
+  if ("$righthand" != "Empty") then
+  {
+    if match("$righthand", "%baditemlist") then
+    {
+      if (%bucketroom != 0) then
+      {
+        if ($roomid != %shrineroom) then
+        {
+          gosub MOVE %shrineroom
+        }
+        gosub TAPSHORTEN $righthand
+        gosub DUMPITEM %shorttap
+      }
+      else
+      {
+        gosub TAPSHORTEN $righthand
+        if (%storage != 0) then gosub PUTITEM %shorttap in my %storage
+        else gosub STOWALL
+      }
+    }
+  }
+  if ("$righthand" != "Empty") then
+  {
+    if ($roomid != %shrineroom) then
+    {
+      gosub MOVE %shrineroom
+    }
+  }
+  if ("$righthand" != "Empty") then gosub PUTCRITTER
+  pause .1
+  goto MAIN
+
+CRITTERSEARCH:
+  if (%searchcount > %roomcount) then return
+  if ($roomid != %critterrooms(%searchcount)) then gosub MOVE %critterrooms(%searchcount)
+  #put #echo >Log %critterrooms(%searchcount)  searchcount: %searchcount  roomcount: %roomcount
+  put look
+  if (matchre("$roomobjs", "%critterlist")) then return
+  else
+  {
+    math searchcount add 1
+    goto CRITTERSEARCH
+  }
+  
+
+GETCRITTERP:
+  pause
+GETCRITTER:
+  matchre GETCRITTERP %waitstring
+  match RETURN What were you referring to?
+  match RETURN You try, but you're too distracted by your impending doom to concentrate!
+  match RETURN Roundtime:
+  put get %critter
+  matchwait 2
+  return
+
+PUTCRITTERP:
+  pause
+PUTCRITTER:
+  matchre PUTCRITTERP %waitstring
+  match PUTSUCCESS A helper runs up to you and says, "Thank you friend!  Here's a token of our appreciation for returning our lost
+  match RETURN What were you referring to?
+  put put my $righthandnoun on %shrinename
+  matchwait 2
+  return
+  
+PUTSUCCESS:
+  if ("$righthand" = "Empty") then gosub SWAP
+  gosub TAPSHORTEN $righthand
+  if (%storage != 0) then gosub PUTITEM %shorttap in my %storage
+  else gosub STOWALL
+  if ("$righthand" != "Empty") then
+  {
+    put #echo Yellow Could not empty hands!  Address and restart script!
+    put #play JustArrived
+    exit
+  }
+  return
+
+END:
