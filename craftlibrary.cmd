@@ -2512,9 +2512,10 @@ GIVETICKETCRAFTP:
 GIVETICKETCRAFT:
   matchre GIVETICKETCRAFTP %waitstring
   matchre RETURN ^You hand (%repairer) your ticket and are handed back|After a moment, he returns and hands you
-  match RETURN You hand the clerk your ticket and are handed back
+  matchre RETURN You hand (?:the|a) clerk your ticket and are handed back
   match RETURN You hand an Elothean clerk your ticket and are handed back
   match RETURN An Elothean clerk says, "There isn't a scratch on that, so there's nothing to repair."
+  match RETURN A clerk says, "There isn't a scratch on that, so there's nothing to repair."
 	matchre CRAFTWAITREPAIR ^\w* smiles and says
 	matchre CRAFTWAITREPAIR ^\w* grumbles\, \"Well that isn't gonna be done for another
 	matchre CRAFTWAITREPAIR (A|An).* clerk says politely, "That won't be done for another

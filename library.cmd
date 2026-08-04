@@ -1,4 +1,4 @@
-var lastupdated 04/18/2025
+var lastupdated 08/03/2026
 
 var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mef|meg|mis|mo|mof|mon|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|staw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|visage|voi|will|ws|worm|wotp|ys|zephyr|
 var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mf|pfe|pom|sl|sol|staw|visage|word|
@@ -7869,7 +7869,14 @@ ARRANGEMANA:
     if ("%cambrinth" = "YES") then
     {
       if (%addmana <= %totalcamb) then var cambmana %addmana
-      else var cambmana %totalcamb
+      else
+      { 
+        var cambmana %totalcamb
+        var addprep %addmana
+        math addprep subtract %totalcamb
+        math prepmana add %addprep
+        put #echo >$alertwindow Yellow [Magic]: Script wants to add more mana to a spell than you have cambrinth for.  Moving that mana to spell prep amount.
+      }
     }
     else
     {
@@ -7879,6 +7886,29 @@ ARRANGEMANA:
   }
   
   return
+
+
+#STANDALONE_CASTING_SUB
+CASTSPELL:
+  if (%casting = 1) then
+  {
+    gosub RELSPELL
+    gosub RELSYMBIOSIS
+  }
+  var spellprepping $1
+  gosub SPELLSTATCHECK %spellprepping
+  var prepmana %spellminmana  
+  var addmana $2
+  math addmana subtract %prepmana
+  if (%addmana < 0) then var addmana 0
+  var casting 1
+  var scancel 0
+  
+CASTSPELLLOOP:
+  if (%casting != 1) then return
+  gosub CASTINGLOGIC
+  pause .1
+  goto CASTSPELLLOOP
 
 
 CASTCLEANUP:

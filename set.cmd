@@ -2141,11 +2141,11 @@ DISPLAYMAGIC:
 	put #echo
   if (("$guild" != "Barbarian") && ("$guild" != "Thief")) then
   {
-    gosub OUTPUT MinConcentration
-    gosub OUTPUT MinMana
-    gosub OUTPUT HarnessMax (The maximum amount that will be harnessed or charged into cambrinth in one go.)
+    gosub OUTPUT MinConcentration ( Minimumc concentration to cast spells at.)
+    gosub OUTPUT MinMana (Minimum mana to cast spells at.  Should be enough to cast your biggest spell.)
     echo
-    gosub OUTPUT Harnessing (Do you harness mana for casting.)
+    gosub OUTPUT HarnessMax (The maximum amount that will be harnessed or charged into cambrinth in one go.)
+    gosub OUTPUT Harnessing (Do you prefer to harness mana for casting if Arcana is locked.)
     gosub OUTPUT Cambrinth (Do you use cambrinth for casting.)
     gosub OUTPUT DedicatedCambrinth (Do you have the Dedicated Cambrinth feat.)
     gosub OUTPUT CambItems

@@ -1,7 +1,7 @@
 ########################################
 ###Training scripts by player of Saragos.
 ###Version 2.0
-###Last Updated: 12/21/2025
+###Last Updated: 08/03/2026
 ########################################
 
 include library.cmd
@@ -434,7 +434,7 @@ ALERTINIT:
   if (("%speechalerts" = "YES") && ("%scriptmodename" != "combat")) then
   { 
     var generalspeech ^Your mind hears|^A soft voice from somewhere near|^Your shadow babbles|^Your shadow mumbles|^Your shadow exclaims|^You (?:ask|exclaim|growl|hiss|lecture|say|shout|yell)|^From your hiding place you|^A loud voice bellows|^A scavenger troll strolls in|A \*very\* loud voice intones|^A grumbling janitor wanders into the|^A raggedy young Gnome dashes up beside|^Seamstress Zasele|^Rangu|^You hand Rangu|Out of the corner of your eye, you spy|^The attendant says,|^An attendant walks over and asks|^Their purpose is to serve, translate, and speak for Harawep's creatures,|^After a moment the leader steps forward grimly|^The figure intones solemnly|Aligning your thoughts with the song of|You grumble ominously,|^\S+ shakes his head and says|^\S+ looks puzzled,|The Human driver says, "I'm leaving shortly,|Occasional small twigs and pine needles|Downhill to the southeast, the gurgle of the|Quentin whispers,|Yrisa exclaims|Yrisa reaches into a pocket|The firewood peddler Mags says|Mags frowns and shakes her head.|The firewood peddler Mags takes|The firewood peddler Mags looks at you and says|Your head fills with the psychic backlash of the Negotiants' chatter|Feeble light from an ancient lantern does little to lessen the shadows|^\w+ regards you with a blank, slack-jawed stare, showing that nothing has sunk in\.  You mutter under your breath\,|A monotone voice with a Dwarven accent interrupts your thoughts,|The apprentice repairman looks over|A youthful attendant hands you some bundling rope and says,|You hand the apprentice repairman|The apprentice repairman smiles and says|The horse-drawn carriage's driver shouts|Mags calls out,|Aelik scowls and says,|Cormyn scowls and says,
-    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.|An Elothean clerk says|You hand an Elothean clerk|Jakke shuffles through some notes and says,|Jakke boasts,|Milline shuffles through some notes and|Milline folds her arms across her chest and says
+    var craftingspeech Juln shuffles through some notes and says|A Dwarven clerk says politely,|Juln watches you closely before saying,|An Elothean clerk says|Serric shuffles through some notes and says,|Serric boasts,|An Elothean clerk looks over|You hand the clerk|Serric folds his arms across his chest and says,|Kapric shuffles through some notes and says|A clerk says,|A clerk says politely,|A clerk looks over the \w+ and says,|Yalda shuffles through some notes and says,|Yalda folds her arms across her chest and says,|You approach a guarded archway.  The sentry holds out|Yalda boasts,|You approach some broad stone doors.  The sentry holds out|Serric pulls out an ivory comb and hand mirror and begins to comb his hair\.|An Elothean clerk says|You hand an Elothean clerk|Jakke shuffles through some notes and says,|Jakke boasts,|Milline shuffles through some notes and|Milline folds her arms across her chest and says|^You hand a clerk
     var ferryspeech ^You hear a bell ring out|^You hear a shrill whistle sound and|^A voice calls, "All aboard who's going aboard!"|^From forward comes the cry "Cast off,"|Tumbling through the lower slopes|(?:He|She) says, "Farewell, (?:Sir|Madam)|(?:He|She) bows (?:graciously|quickly)\.  "Welcome back, (?:Sir|Madam)|(?:He|She) says, "Take care, (?:Sir|Madam)|A building quite out of place to the rest of the city lords over a large part of this portion of Sunstone Street\.|^A loud voice calls out, "Leaving in one minute!"  From below, another voice yells, "Shift change!"|^Someone shouts, "Leaving in thirty seconds!"  From below comes the cry, "Out oars," followed by the clatter of wood on wood\.|^A voice calls, "All ashore who's going ashore!"|A loud voice calls out, "Leaving in one minute!"
     var monsterspeech A \w+ blightwater nyad gazes wistfully at the mountain, whispering|A rotting deadwood dryad whispers to the desiccated trees all around|With a sibilant hiss, the blightwater nyad whispers|A rotting deadwood dryad weeps quietly to herself|The blood warrior roars in challenge|A low growl trickles from the gargoyle's mouth.|^A Dragon Priest assassin|The troll laughs monstrously and chants|A Dragon Priest purifier glides slowly into the area and hisses|A Dragon Priest purifier draws in a deep|Teardrops of flame ignite the air about an arthelun cabalist|A red-bristled gremlin jumps up and down|A black marble gargoyle throws its head back and screams|A Dragon Priest zealot (?:gasps|snarls|bellows|charges|hisses)|^An .*Adan'f (?:.*)+ falls to the ground with a crash and screams|^An .*Adan'f (?:.*) screams out|The Adan'f blademaster roars in challenge
     var spellspeech ^\S+ swears\, "|^Dark golden light glares forth from you|^You lift your voice|^You glance heavenward|^You make a holy|^\S+ makes a holy|^You swear\, "|The shadowling exclaims,|You throw your head back and howl,|After a moment, you see a crystal-clear vision of your|After a moment, you see a vision of your god who calls to you by name,
@@ -7738,19 +7738,21 @@ PERFORMLOOP:
   {
     if (($SpellTimer.EilliesCry.active != 1) || ($SpellTimer.EilliesCry.duration <= %buffbuffer)) then
     {
-      if (%casting != 1) then
+      if (%playing != 1) then
       {
-        if (%playing != 1) then
-        {
-          var spellprepping ecry
-          gosub SPELLSTATCHECK %spellprepping
-          var prepmana %spellminmana  
-          var addmana %eilliescrymanamana
-          math addmana subtract %prepmana
-          if (%addmana < 0) then var addmana 0
-	        var casting 1
-	        var scancel 0
-        }
+        gosub CASTSPELL ecry %eilliescrymana
+      }
+    }
+    gosub STATUSCHECK
+  }
+  #NOUMENA
+  if ("%noumena" = "YES") then
+  {
+    if (($SpellTimer.Noumena.active != 1) || ($SpellTimer.Noumena.duration <= %buffbuffer)) then
+    {
+      if (%playing != 1) then
+      {
+        gosub CASTSPELL nou %noumenamana
       }
     }
     gosub STATUSCHECK
