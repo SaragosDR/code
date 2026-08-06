@@ -8867,6 +8867,8 @@ TRADINGSELLLOGIC:
     if (($zoneid = 150) && ($roomid = 0)) then move west
   }
   #put #echo >Log [Trading] Attempting to sell bundle or pouch.
+  #FINESSE
+  
   #BUNDLE_SELLING
   if ("$righthandnoun" = "bundle") then
   {
@@ -11640,25 +11642,6 @@ NONCOMBATLOOP:
   if (%noncombatactive = 1) then
   {
     put #echo Yellow currentnoncombat: %currentnoncombat
-    if ("%currentnoncombat" = "tradingsell") then
-    {
-      gosub NONCOMBATMOVEMENT
-      var foundsellitem 0
-      gosub TRADINGSELLLOGIC
-      gosub NONCOMBATCHOOSE
-    }
-    if ("%currentnoncombat" = "tradingtasks") then
-    {
-      gosub NONCOMBATMOVEMENT
-      #INVESTING_BEFORE_TASKS
-      if ("%invest" = "YES") then
-      {
-        gosub INVESTLOGIC
-        gosub STATUSCHECK
-      }
-      gosub TASKLOGIC
-      gosub NONCOMBATCHOOSE
-    }
     if ("%currentnoncombat" = "evcast") then
     {
       gosub NONCOMBATMOVEMENT
@@ -11713,6 +11696,25 @@ NONCOMBATLOOP:
       gosub STORAGECHECKLOGIC
       gosub NONCOMBATCHOOSE
     }
+  }
+  if ("%currentnoncombat" = "tradingsell") then
+  {
+    gosub NONCOMBATMOVEMENT
+    var foundsellitem 0
+    gosub TRADINGSELLLOGIC
+    gosub NONCOMBATCHOOSE
+  }
+  if ("%currentnoncombat" = "tradingtasks") then
+  {
+    gosub NONCOMBATMOVEMENT
+    #INVESTING_BEFORE_TASKS
+    if ("%invest" = "YES") then
+    {
+      gosub INVESTLOGIC
+      gosub STATUSCHECK
+    }
+    gosub TASKLOGIC
+    gosub NONCOMBATCHOOSE
   }
 	goto MAINLOOP	
 	

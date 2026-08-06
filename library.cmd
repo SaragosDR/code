@@ -1,6 +1,7 @@
 var lastupdated 08/03/2026
 
 var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mef|meg|mis|mo|mof|mon|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|staw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|visage|voi|will|ws|worm|wotp|ys|zephyr|
+var craftingbuffs |art|mt|phk|rei|wotm|
 var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mf|pfe|pom|sl|sol|staw|visage|word|
 var abuffs |etf|nexus|rm|zephyr
 var cyctms |aban|ars|fr|gs|iz|pyre|rim|ros|sa|sls|usol|
@@ -467,13 +468,16 @@ VARCHECKS:
   
   #CRAFTING
   if !matchre("$crafting", "\b(YES|NO)\b") then put #var crafting NO
-  if !matchre("$forging", "\b(YES|NO)\b") then put #var forging NO
-  if !matchre("$outfitting", "\b(YES|NO)\b") then put #var outfitting NO
   if !matchre("$craftingm2", "\b(YES|NO)\b") then put #var craftingm2 NO
-  if !matchre("$forgingm2", "\b(YES|NO)\b") then put #var forgingm2 NO
-  if !matchre("$outfittingm2", "\b(YES|NO)\b") then put #var outfittingm2 NO
   if !def(craftingstorage) then put #var craftingstorage crafting satchel
   if !matchre("$craftingstoragelocation", "\b(none|portal|vault)\b") then put #var craftingstoragelocation none
+  if !matchre("$phk", "\b(YES|NO)\b") then put #var phk NO
+  if (!def(phkmana)) then put #var phkmana 15
+  if ($songtype >= 15) then
+  else put #var phkmana 15
+  
+  if !matchre("$forging", "\b(YES|NO)\b") then put #var forging NO
+  if !matchre("$forgingm2", "\b(YES|NO)\b") then put #var forgingm2 NO
   if !matchre("$forgingdifficulty", "\b(easy|challenging|hard)\b") then put #var forgingdifficulty challenging
   if !matchre("$forgingdiscipline", "\b(weaponsmithing|armorsmithing|blacksmithing)\b") then put #var forgingdiscipline weaponsmithing
   if !def(forgingmaterial) then put #var forgingmaterial bronze
@@ -486,6 +490,9 @@ VARCHECKS:
   if ($forgingmaxquantity >= 0) then
   else put #var forgingmaxquantity 4
   if !matchre("$forgingsmelting", "\b(YES|NO)\b") then put #var forgingsmelting YES
+  
+  if !matchre("$outfitting", "\b(YES|NO)\b") then put #var outfitting NO
+  if !matchre("$outfittingm2", "\b(YES|NO)\b") then put #var outfittingm2 NO
   if !matchre("$outfittingdifficulty", "\b(easy|challenging|hard)\b") then put #var outfittingdifficulty challenging
   if !matchre("$outfittingtype", "\b(cloth|leather|knit|all)\b") then put #var outfittingtype all
   if !def(outfittingcloth) then put #var outfittingcloth burlap
@@ -1092,6 +1099,9 @@ VARCHECKS:
   if !matchre("$boxpopkhrisight", "\b(YES|NO)\b") then put #var boxpopkhrisight NO
   #GUILD-TRADER
   if !matchre("$invest", "\b(YES|NO)\b") then put #var invest NO
+  if !matchre("$noumena", "\b(YES|NO)\b") then put #var noumena NO
+  if !matchre("$finesse", "\b(YES|NO)\b") then put #var finesse NO
+  
   if !matchre("$slabuff", "\b(YES|NO)\b") then put #var slabuff NO
   if !matchre("$tradingsell", "\b(YES|NO)\b") then put #var tradingsell NO
   if !matchre("$tradingselltown", "\b(%townvaultpresetlist)\b") then put #var tradingselltown none
@@ -7966,7 +7976,7 @@ CASTCLEANUPMAIN:
       }
       else
       {
-        #put #echo >$alertwindow Yellow tmfailcount: %tmfailcount
+        put #echo >$alertwindow Yellow tmfailcount: %tmfailcount
       }
     }
     else
@@ -8049,13 +8059,16 @@ AUTOMANASET:
   {
     var tempmana $spell%amstringmana
     math tempmana subtract 1
-    put #echo >$alertwindow Yellow [Magic]: Adjusting Spell %amstring mana from $spell%amstringmana to %tempmana.
-    put #echo Yellow Adjusting Spell %amstring mana from $spell%amstringmana to %tempmana.
-    var spell%amstringmana %tempmana
-    put #var spell%amstringmana %tempmana
-    put #var save
-    var nextmanaadjust %t
-    math nextmanaadjust add 3600
+    if (%tempmana > %spellminmana) then
+    {
+      put #echo >$alertwindow Yellow [Magic]: Adjusting Spell %amstring mana from $spell%amstringmana to %tempmana.
+      put #echo Yellow Adjusting Spell %amstring mana from $spell%amstringmana to %tempmana.
+      var spell%amstringmana %tempmana
+      put #var spell%amstringmana %tempmana
+      put #var save
+      var nextmanaadjust %t
+      math nextmanaadjust add 3600
+    }
   }
   else
   {

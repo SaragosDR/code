@@ -958,6 +958,9 @@ SET:
     if tolower("%1") = "sanowretitem" then goto TEXTSET
     if tolower("%1") = "craftingstorage" then goto TEXTSET
     if tolower("%1") = "craftingstoragelocation" then goto TEXTSET
+    if tolower("%1") = "phk" then gosub YESNOSET
+    if tolower("%1") = "phkmana" then goto TEXTSET
+    
     
     if tolower("%1") = "forgingdifficulty" then goto TEXTSET
     if tolower("%1") = "forgingdiscipline" then goto TEXTSET
@@ -975,7 +978,7 @@ SET:
     if tolower("%1") = "outfittingyarn" then goto TEXTSET
     if tolower("%1") = "outfittingrepair" then goto YESNOSET
     if tolower("%1") = "outfittingmaxyards" then goto TEXTSET
-    if tolower("%1") = "outfittingmaxquantity" then goto YESNOSET
+    if tolower("%1") = "outfittingmaxquantity" then goto TEXTSET
     if tolower("%1") = "awl" then goto TEXTSET
     if tolower("%1") = "bellows" then goto TEXTSET
     if tolower("%1") = "hammer" then goto TEXTSET
@@ -2045,6 +2048,7 @@ DISPLAY:
     {
       gosub TITLE
       gosub DISPLAYGENERAL
+      gosub DISPLAYITEM
       gosub DISPLAYHUNTING
       gosub DISPLAYUPKEEP
       gosub DISPLAYNONCOMBAT
@@ -2058,6 +2062,7 @@ DISPLAY:
         
     gosub TITLE
     if tolower("%2") = "general" then gosub DISPLAYGENERAL
+    if tolower("%2") = "item" then gosub DISPLAYITEM
     if tolower("%2") = "magic" then gosub DISPLAYMAGIC
     if tolower("%2") = "spell" then gosub DISPLAYSPELL
     if tolower("%2") = "hunting" then gosub DISPLAYHUNTING
@@ -2134,6 +2139,73 @@ DISPLAYGENERAL:
 	put #echo
   return
 
+DISPLAYITEM:
+	var varmatch 1
+	put #echo mono =================== Item ====================
+	put #echo
+  gosub OUTPUT SEWeapon SEOffhand
+	gosub OUTPUT SECombo
+	gosub OUTPUT LEWeapon LEOffhand
+  gosub OUTPUT THEWeapon
+  gosub OUTPUT SBWeapon SBOffhand
+	gosub OUTPUT LBWeapon LBOffhand
+  gosub OUTPUT THBWeapon
+	gosub OUTPUT StaveWeapon StaveOffhand
+	gosub OUTPUT StaveWorn StaveTied
+  gosub OUTPUT PoleWeapon PoleCombo
+  gosub OUTPUT PoleWorn PoleTied
+  put #echo
+	gosub OUTPUT BastardSwordItem (Text should match exactly the weapon name in other variables, ristes should always be two words to prevent confusion between riste types).
+	gosub OUTPUT BarMaceItem
+	gosub OUTPUT HolyIconItem
+	gosub OUTPUT RisteItem
+	gosub OUTPUT HHRisteItem
+	put #echo
+	gosub OUTPUT LTWeapon LTOffhand
+	gosub OUTPUT LTBond LTVerb
+	gosub OUTPUT HTWeapon HTOffhand 
+  gosub OUTPUT HTBond HTVerb
+	put #echo
+	gosub OUTPUT XbowWeapon XbowAmmo
+	gosub OUTPUT XbowWorn
+	gosub OUTPUT BowWeapon BowAmmo
+	gosub OUTPUT BowWorn
+	gosub OUTPUT SlingWeapon SlingAmmo
+  put #echo
+  gosub OUTPUT Tattoo
+  gosub OUTPUT TattooType (runic|heroic)
+  gosub OUTPUT TattooSpell
+  gosub OUTPUT TattooPrepMana TattooAddMana
+  gosub OUTPUT TattooBuff (Tattoo is cast and maintained as a buff)    
+  put #echo
+  gosub OUTPUT WandBuff
+  gosub OUTPUT WandStorage
+  gosub OUTPUT WandBuffNum
+  gosub OUTPUT Wand1Spell 
+  gosub OUTPUT Wand1Item Wand1Num
+  gosub OUTPUT Wand2Spell
+  gosub OUTPUT Wand2Item Wand2num
+  gosub OUTPUT Wand3Spell 
+  gosub OUTPUT Wand3Item Wand3Num
+  gosub OUTPUT Wand4Spell
+  gosub OUTPUT Wand4Item Wand4num
+  put #echo
+  gosub OUTPUT Almanac AlmanacItem
+	gosub OUTPUT AlmanacAlerts
+	gosub OUTPUT EJournal EJournalItem
+	gosub OUTPUT EJournalStates
+	gosub OUTPUT LocksmithBox LocksmithBoxTimer
+  gosub OUTPUT LocksmithBoxItem
+	gosub OUTPUT SkinFATrainer SkinFATrainerTimer
+  gosub OUTPUT SkinFATrainerItem
+	gosub OUTPUT Tarantula TarantulaItem
+	gosub OUTPUT TarantulaSkill1 TarantulaSkill2
+	gosub OUTPUT Textbook TextbookTimer
+	gosub OUTPUT TextbookItem TextbookList
+	gosub OUTPUT TomeOfLore TomeOfLoreItem
+  gosub OUTPUT Windboard WindboardTimer
+  gosub OUTPUT WindboardTrick WindboardCharge
+  return
 
 DISPLAYMAGIC:
   var varmatch 1
@@ -2429,6 +2501,8 @@ DISPLAYCRAFT:
   gosub OUTPUT Crafting
   gosub OUTPUT CraftingStorage (should have length at least 15 spans to accomodate all supplies)
   gosub OUTPUT CraftingStorageLocation (CraftingStorage container stored in portal|vault|none when not direclty in use)
+  gosub OUTPUT PHK PHKMana
+  gosub OUTPUT PHKWand PHKWandNum
   put #echo
   gosub OUTPUT Forging 
   gosub OUTPUT ForgingDifficulty

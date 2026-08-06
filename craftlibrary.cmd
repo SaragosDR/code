@@ -42,7 +42,6 @@ action math expenses add $1; var currency $2 when The attendant says, "You can p
 
 action var revenue $1; var currency $2 when You hand \w+ your logbook and bundled items, and are given (\d+) (Kronars|Lirums|Dokoras) in return\.
 
-
 goto CRAFTLIBEND
 
 #####VARIABLE_SUBS#####
@@ -225,6 +224,8 @@ CRAFTVARLOAD:
   
   var craftingstorage $craftingstorage
   var craftingstoragelocation $craftingstoragelocation
+  var phk $phk
+  var phkmana $phkmana
 
   var forgingdifficulty $forgingdifficulty
   var forgingmaterial $forgingmaterial
@@ -472,6 +473,26 @@ WORKORDER:
       }
     }
   }
+  
+  #BUFFS
+  if ("%phk" = "YES") then
+  {
+    if (("%crafttype" = "forging") || ("%crafttype" = "outfitting") || ("%crafttype" = "engineering")) then
+    {
+      if (($SpellTimer.PlatinumHandsofKertigen.active = 0) || ($SpellTimer.PlatinumHandsofKertigen.duration < 20)) then
+      {
+        gosub CASTSPELL phk %phkmana
+      }
+    }
+  }
+  if ("%noumena" = "YES") then
+  {
+    if (($SpellTimer.Noumena.active = 0) || ($SpellTimer.Noumena.duration < 20)) then
+    {
+      gosub CASTSPELL nou %noumenamana
+    }    
+  }
+  
   #CRAFTING
   if ("%crafttype" = "forging") then
   {
@@ -555,8 +576,8 @@ WORKORDER:
   math timetotal subtract %timetotalmod
   var timetotalminutes %timetotal
   math timetotalminutes / 60
-  if ("$guild" = "Trader") then put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material.  Revenue: %revenue - Expenses: %expenses = Profit: %profit %currency.  Mindstates gained: %mindstatetotal in %timetotalminutes minutes. Trading gained from work order: %tradingmindstatetotal. 
-  else put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material.  Revenue: %revenue - Expenses: %expenses = Profit: %profit %currency.  Mindstates gained: %mindstatetotal in %timetotalminutes minutes.
+  if ("$guild" = "Trader") then put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material at %quantity quantity.  Revenue: %revenue - Expenses: %expenses = Profit: %profit %currency.  Mindstates gained: %mindstatetotal in %timetotalminutes minutes. Trading gained from work order: %tradingmindstatetotal. 
+  else put #echo >Log [CRAFT] Completed %difficulty %discipline work order in %material at %quantity quantity.  Revenue: %revenue - Expenses: %expenses = Profit: %profit %currency.  Mindstates gained: %mindstatetotal in %timetotalminutes minutes.
   return
 
 CRAFTREPAIR:
