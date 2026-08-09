@@ -164,6 +164,38 @@ action var ready 0;var scancel 1 when Your pattern dissipates with the loss of y
 action var ready 0;var scancel 1 when You have lost the spell you were preparing.
 #action var ready 0;var scancel 1 when You let your concentration lapse and feel the spell's energies dissipate.
 
+#MISSED_TM
+#AP
+action var missedtm 1 when ^(?:A|An) .* manages to avoid the crackling cloud, and it dissolves into fragments of quickly scattering yellow light\.
+#BARD
+action var missedtm 1 when ^It manages to get out of the way\!
+action var missedtm 1 when The slurry splatters harmlessly around it\.
+#CLERIC
+action var missedtm 1 when ^The (?:first|second|third|fourth|final) globe misses\!
+action var missedtm 1 when ^(?:A|An) .* manages to move out of the way of the lava\.
+action var missedtm 1 when ^(?:A|An|The) .* is unaffected.
+action var missedtm 1 when ^The writhing tendrils strike .* benignly, billowing rapidly into a sheaf of ghostly fog around it\.
+#EMPATH
+action var msisedtm 1 when ^The stream of energy sloshes past (?:a|an) .*\!
+#MM
+action var missedtm 1 when ^The beam barely misses .*, leaving a small scorch mark upon the ground where it strikes\.
+action var missedtm 1 when ^(?:A|An) .* manages to evade the noose\!
+action var missedtm 1 when ^(?:A|An|The) .* manages to get out of the way\!
+#NECROMANCER
+action var missedtm 1 when ^The viridian globe careens past (?:a|an) .*, exploding into a sizzling spray on the ground behind it\.
+action var missedtm 1 when ^(?:A|An) .* manages to avoid the tendril, which dissolves harmlessly into the very air\.
+#RANGER
+action var missedtm 1 when ^(?:A|An) .* manages to avoid the soaring eagle, which rises back into the air and vanishes\.
+#TRADER
+action var missedtm 1 when ^The crystalline dart misses completely\!
+action var missedtm 1 when ^(?:A|An) .* ducks beneath a flying crystal pebble\.
+#WM
+action var missedtm 1 when It manages to get out of the way of the (?:first|second|third|fourth|final) arcing blast of electricity\!
+action var missedtm 1 when (?:A|An) .* looks pale as the lightning bolt strikes nearby\!
+action var missedtm 1 when (?:A|An) .* manages to avoid the raging ball of fire, as it flies past it\.
+action var missedtm 1 when It manages to get out of the way of the spinning scythe\!
+action var missedtm 1 when A bolt of lightning narrowly misses (?:a|an) .*\!
+
 action var bgdone 1;put #var SpellTimer.BlufmorGaraen.active 0 when The winds encircling your forearms disperse.
 action var heavytmready 1 when You feel sufficiently recovered to craft another major manifestation of offensive magic.
 action var heavytmready 0 when You are still too fatigued from your previous efforts to manifest another major feat of offensive magic.
@@ -3741,6 +3773,7 @@ STATUSVARLOAD:
   var lastweapon 0
   var mercomup 0
   var meraudgood 1
+  var missedtm 0
   var mist 0
   var movenum 0
   var needscleaning 0
@@ -5675,13 +5708,35 @@ NEWAREAMOVEMENT:
 
 BUFFADJUST:
   var counter 0
+  gosub BUFFADJUSTLOOP
+  if ("%noumena" = "YES") then
+  {
+    gosub BUFFADJUSTLOGIC nou %noumenamana noumenamana
+  }
+  if ("%finesse" = "YES") then
+  {
+    gosub BUFFADJUSTLOGIC fin %finessemana finessemana
+  }
+  if ("%phk" = "YES") then
+  {
+    gosub BUFFADJUSTLOGIC phk %phkmana phkmana
+  }
+  return
+  
 BUFFADJUSTLOOP:  
   math counter add 1
   if (%counter > %buffnum) then return
-  gosub SPELLSTATCHECK %buff%counter
-  if ($buff%countermana < %spellcapmana) then
+  gosub BUFFADJUSTLOGIC %buff%counter %buff%countermana buff%countermana
+  goto BUFFADJUSTLOOP
+
+BUFFADJUSTLOGIC:
+  var adjustspell $1
+  var adjustspellmana $2
+  var adjustspellmanavar $3
+  gosub SPELLSTATCHECK %adjustspell
+  if (%adjustspellmana < %spellcapmana) then
   {
-    gosub DISCERN %buff%counter
+    gosub DISCERN %adjustspell
     if (%discernmax < 50) then
     {
       #UNDER_50
@@ -5711,14 +5766,14 @@ BUFFADJUSTLOOP:
     var manamod %workingmana
     math manamod modulus 1
     math workingmana subtract %manamod
-    if ($buff%countermana < %workingmana) then
+    if (%adjustspellmana < %workingmana) then
     {
-      put #echo Yellow Adjusting Buff%counterMana from $buff%countermana to %workingmana.
-      put #var buff%countermana %workingmana
+      put #echo Yellow Adjusting %adjustspellmanavar from %adjustspellmana to %workingmana.
+      put #var %adjustspellmanavar %workingmana
       put #var save
     }
   }
-  goto BUFFADJUSTLOOP
+  return
 
 
 BUFFINGONLYLOOP:
@@ -13159,6 +13214,26 @@ BUFFLOGIC:
       }
     }
   }
+  #NOUMENA
+  if (%casting != 1) then
+  {
+    if ("%noumena" = "YES") then
+    {
+      if ((($SpellTimer.Noumena.active = 1) && ($SpellTimer.Noumena.duration < %buffbuffer)) || ($SpellTimer.Noumena.active != 1)) then
+      {
+        var anybuff 1
+        var casting 1
+        var scancel 0
+        var buffing 1
+        var spellprepping nou
+        gosub SPELLSTATCHECK %spellprepping
+        var prepmana %spellminmana
+        var addmana %noumenamana
+        math addmana subtract %prepmana
+        if (%addmana < 0) then var addmana 0
+      }  
+    }
+  }
   if (%casting != 1) then
   {
 	  #BUFFS
@@ -13233,6 +13308,26 @@ BUFFLOGIC:
         gosub SPELLSTATCHECK %spellprepping
         var prepmana %spellminmana
         var addmana %piercinggazemana
+        math addmana subtract %prepmana
+        if (%addmana < 0) then var addmana 0
+      }  
+    }
+  }
+  #FINESSE
+  if (%casting != 1) then
+  {
+    if ("%finesse" = "YES") then
+    {
+      if ((($SpellTimer.Finesse.active = 1) && ($SpellTimer.Finesse.duration < %buffbuffer)) || ($SpellTimer.Finesse.active != 1)) then
+      {
+        var anybuff 1
+        var casting 1
+        var scancel 0
+        var buffing 1
+        var spellprepping fin
+        gosub SPELLSTATCHECK %spellprepping
+        var prepmana %spellminmana
+        var addmana %finessemana
         math addmana subtract %prepmana
         if (%addmana < 0) then var addmana 0
       }  

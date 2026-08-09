@@ -1,4 +1,4 @@
-var lastupdated 08/03/2026
+var lastupdated 08/08/2026
 
 var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mef|meg|mis|mo|mof|mon|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|staw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|visage|voi|will|ws|worm|wotp|ys|zephyr|
 var craftingbuffs |art|mt|phk|rei|wotm|
@@ -16,6 +16,7 @@ var utility |gaf|imbue|sec|alb|aot|care|eye|hodi|nexus|resonance|sanctuary|all|b
 var warding |lw|maf|fotf|gj|name|repr|ghs|halo|pfe|sl|sos|spit|visage|ic|pop|tranquility|col|psy|shear|tksh|wd|ch|emc|ghoulflesh|solace|worm|aa|courage|how|sp|tk|bloodthorns|etc|ey|fwb|rits|eli|ir|mom|non|trc|ac|es|gi|gf|voi|
 var targeted |stra|bonegrinder|sif|bos|btn|ae|chs|fou|ff|hot|he|hh|paralysis|burn|do|pd|tks|tkt|acs|blb|sv|vivisection|fst|reb|smh|cac|devi|ec|stampede|crd|star|aethrolysis|ala|cl|fb|fs|fls|frs|gz|geyser|lb|pw|shockwave|sts|
 var staraura blur|ir|rega|stc|trc
+var specialbuffs |ecry|fin|nou|pg|phk|
 
 var heavytm bos|ms
 var transnecro |ivm|ks|bue|worm|ch|php|
@@ -473,8 +474,12 @@ VARCHECKS:
   if !matchre("$craftingstoragelocation", "\b(none|portal|vault)\b") then put #var craftingstoragelocation none
   if !matchre("$phk", "\b(YES|NO)\b") then put #var phk NO
   if (!def(phkmana)) then put #var phkmana 15
-  if ($songtype >= 15) then
+  if ($phkmana >= 15) then
   else put #var phkmana 15
+  if !matchre("$phkwand", "\b(YES|NO)\b") then put #var phkwand NO
+  if (!def(phkwandnum)) then put #var phkwandnum 2
+  if ($phkwandnum < 1) then
+  else put #var phkmanawandnum 2
   
   if !matchre("$forging", "\b(YES|NO)\b") then put #var forging NO
   if !matchre("$forgingm2", "\b(YES|NO)\b") then put #var forgingm2 NO
@@ -1100,16 +1105,19 @@ VARCHECKS:
   #GUILD-TRADER
   if !matchre("$invest", "\b(YES|NO)\b") then put #var invest NO
   if !matchre("$noumena", "\b(YES|NO)\b") then put #var noumena NO
+  if (!def(noumenamana)) then put #var noumenamana 1
+  if ($noumenamana >= 1) then
+  else var noumenamana 1
   if !matchre("$finesse", "\b(YES|NO)\b") then put #var finesse NO
+  if (!def(finessemana)) then put #var finessemana 1
+  if ($finessemana >= 1) then
+  else var finessemana 5
   
   if !matchre("$slabuff", "\b(YES|NO)\b") then put #var slabuff NO
   if !matchre("$tradingsell", "\b(YES|NO)\b") then put #var tradingsell NO
   if !matchre("$tradingselltown", "\b(%townvaultpresetlist)\b") then put #var tradingselltown none
   if !matchre("$tradingsellsource", "\b(vault|portal)\b") then put #var tradingsellsource vault
-  if !matchre("$finesse", "\b(YES|NO)\b") then put #var finesse NO
-  if (!def(finessemana)) then put #var finessemana 1
-  if ($finessemana >= 1) then
-  else var finessemana 5
+
   if !matchre("$tradingtasks", "\b(YES|NO)\b") then put #var tradingtasks NO
   if !def(ttbadforagelist) then put #var ttbadforagelist none
   #GUILD-WM
@@ -7681,6 +7689,7 @@ CASTRESET:
   var omcast 0
   var preptime 0
   var trainingspell 0
+  var missedtm 0
   return
 
 CASTINGLOGIC:
@@ -7940,7 +7949,15 @@ CASTCLEANUPSIMPLE:
 	  pause 1
 	  gosub BALLISTARUB
 	}
-	if (%pcast = 1) then put #parse PCASTING COMPLETE!
+	if (%pcast = 1) then
+	{
+	  put #parse PCASTING COMPLETE!
+    if (%tmcast = 1) then
+    {
+      if (%missedtm = 1) then put #echo Yellow TM missed!
+      else put #echo Yellow TM hit!
+    }
+	}
 	if (%astralcast = 1) then return
   if (%kcast = 1) then
   {
@@ -7961,22 +7978,22 @@ CASTCLEANUPMAIN:
     gosub PREPSYMBIOSIS
     gosub RELSYMBIOSIS
   }
-  if (("%tm" = "YES") && (%tmcast = 1)) then
+  if (("%tm" = "YES") && (%tmcast = 1) && ("%spellprepping" != "ae")) then
   {
     var tmtotal $Targeted_Magic.LearningRate
     math tmtotal subtract %tmstart
     #put #echo Yellow TMTotal: %tmtotal
     if (%tmtotal < 1) then
     {
-      math tmfailcount add 1
+      if (%missedtm != 1) then
+      {
+        math tmfailcount add 1
+        put #echo >$alertwindow Yellow tmfailcount: %tmfailcount
+      }
       if (%tmfailcount > 2) then
       {
         put #echo >$alertwindow Yellow [Magic]: TM isn't learning well enough in this area.  Turning it off.
         var tm NO
-      }
-      else
-      {
-        put #echo >$alertwindow Yellow tmfailcount: %tmfailcount
       }
     }
     else
@@ -12611,7 +12628,7 @@ PLAY:
   #put #echo Yellow playsub!
   matchre PLAYP %waitstring
   matchre PLAYSUCCESS You're already playing a song!|You begin (?:a|an|some) (?:spritely|quiet|masterful|halting) .* on your .* with only the slightest hint of difficulty\.
-  matchre PLAYDOWN You fumble slightly as you begin (?:a|some) (?:spritely|quiet) .* on your .*\.|You struggle to begin (?:a|some) (?:spritely|quiet) .* on your .*\.
+  matchre PLAYDOWN You fumble slightly as you begin (?:a|some) (?:spritely|quiet) .* on your .*\.|You struggle to begin (?:a|some) (?:spritely|quiet) .* on your .*\.|You fumble slightly as you begin (?:a|an) .* on your .*\.
   matchre PLAYUP You effortlessly begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .*, your heart swelling in pride at your hard-earned skill\.|You begin (?:a|an|some) (?:spritely|quiet|masterful|halting) .* on your .*, your skill in your craft showcased in every note\.|You begin (?:a|some) (?:spritely|quiet|masterful|halting) .* on your .*\.
 
   match PLAYUNHIDE That would give away your hiding place!

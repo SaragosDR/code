@@ -1,3 +1,20 @@
+08/08/26
+Updated Scripts: train, library, set, craftlibrary, workorder
+Significant changeups for Set menus.  Most items are now under the ITEM heading, loot variables are under COMBAT, and movement and hunting area variables are under GENERAL.
+
+The script should now understand misses from TM spells and excuse them from tracking for gauging whether you're actually learning from a creature.  TMFailCount messaging is back in the Log window for tracking purposes as I test this.
+Added Noumena and NoumenaMana variables for Traders to try to keep this spell up during NonCombat use and to make sure it's cast first before buffs.  This will maintain the spell in combat as well.
+Added Finesse and FinesseMana variables for use during selling of bundles or gems for Traders.  This will maintain the spell in combat as well.
+Added EilliesCry and EilliesCryMana variables for Bards to use during Performance training.
+Added PHK and PHKMana variables for use during Forging, Outfitting, and Enginneering crafts.  Standalone workorder script will respect these variables.
+Noumena, Finesse, PHK, and PiercingGaze will now auto-adjust mana as your skill increases.
+
+Workorder script now is smarter about parsing variables, and allows you to just use the syntax .workorder <discipline>.
+Bugfixes to some variable validation.
+Bugfix for performing song choice.
+Bugfix to crafting item name parsing for an issue that could cause it to misread an item with "an" in the middle of the name.
+
+
 07/25/26
 Updated Scripts: train, library, set, craftlibrary
 Added new variable: OutfittingType.  Allows you to set a particular type of outfitting task to accept - cloth, leather, knit, or all.

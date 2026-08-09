@@ -1695,10 +1695,10 @@ MAINHELP:
 	put #echo mono  .SET DISPLAY ALL  - Displays all variables
 	put #echo
   put #echo mono  .SET DISPLAY GENERAL - General variables.
+  put #echo mono  .SET DISPLAY ITEM - Variables for storage/weapon/armor/magic/experience items.
   put #echo mono  .SET DISPLAY UPKEEP - In-town upkeep variables.
-  put #echo mono  .SET DISPLAY HUNTING - Variables for where you train and how you loot.
-  put #echo mono  .SET DISPLAY COMBAT - Variables for skills trained in combat.
-  put #echo mono  .SET DISPLAY NONCOMBAT - Variables for skills trained out of combat.
+  put #echo mono  .SET DISPLAY COMBAT - Combat training variables.
+  put #echo mono  .SET DISPLAY NONCOMBAT - Training types that can't be done in combat variables.
   put #echo mono  .SET DISPLAY CRAFT - Crafting variables.
   put #echo mono  .SET DISPLAY MAGIC - Magic-related variables.
   put #echo mono  .SET DISPLAY SPELL - Spell variables.
@@ -2049,7 +2049,6 @@ DISPLAY:
       gosub TITLE
       gosub DISPLAYGENERAL
       gosub DISPLAYITEM
-      gosub DISPLAYHUNTING
       gosub DISPLAYUPKEEP
       gosub DISPLAYNONCOMBAT
       gosub DISPLAYCOMBAT
@@ -2092,8 +2091,7 @@ DISPLAYGENERAL:
 	var varmatch 1
 	put #echo mono =================== General ====================
 	put #echo
-	gosub OUTPUT CharacterName
-	gosub OUTPUT Guild
+	gosub OUTPUT CharacterName Guild
 	gosub OUTPUT Circle
 	put #echo
 	gosub OUTPUT DeathAction (logout or alert)
@@ -2102,47 +2100,56 @@ DISPLAYGENERAL:
 	put #echo
 	gosub OUTPUT AlertWindow
   gosub OUTPUT HealthAlerts HealthAlertNum
-	gosub OUTPUT NerveAlerts
-	gosub OUTPUT BackfireAlerts
-	gosub OUTPUT SorceryAlerts
-	gosub OUTPUT InventoryAlerts
+	gosub OUTPUT NerveAlerts InventoryAlerts
+	gosub OUTPUT BackfireAlerts SorceryAlerts
 	put #echo
-	gosub OUTPUT SpeechAlerts
-	gosub OUTPUT EmoteAlerts
+	gosub OUTPUT SpeechAlerts EmoteAlerts
+	gosub OUTPUT PvPAlerts PvPStealthAlerts 
 	gosub OUTPUT GMAlerts
-	gosub OUTPUT PvPAlerts
-	gosub OUTPUT PvPStealthAlerts
 	gosub OUTPUT ArrivalAlerts
   gosub OUTPUT ParanoiaAlerts
   put #echo
-  gosub OUTPUT TendArea
-  gosub OUTPUT TendObject
+  gosub OUTPUT TendArea TendObject
   put #echo
   gosub OUTPUT Whitelist
-  gosub OUTPUT BlackList
+  gosub OUTPUT Blacklist
   put #echo
-  gosub OUTPUT Almanac AlmanacItem
-	gosub OUTPUT AlmanacAlerts
-	gosub OUTPUT EJournal EJournalItem
-	gosub OUTPUT EJournalStates
-	gosub OUTPUT LocksmithBox LocksmithBoxTimer
-  gosub OUTPUT LocksmithBoxItem
-	gosub OUTPUT SkinFATrainer SkinFATrainerTimer
-  gosub OUTPUT SkinFATrainerItem
-	gosub OUTPUT Tarantula TarantulaItem
-	gosub OUTPUT TarantulaSkill1 TarantulaSkill2
-	gosub OUTPUT Textbook TextbookTimer
-	gosub OUTPUT TextbookItem TextbookList
-	gosub OUTPUT TomeOfLore TomeOfLoreItem
-  gosub OUTPUT Windboard WindboardTimer
-  gosub OUTPUT WindboardTrick WindboardCharge
-	put #echo
+  put #echo mono ========== Movement Variables ==========
+  put #echo
+  gosub OUTPUT KillBeforeMove     (Finish your kill before leaving combat for other training.)
+  gosub OUTPUT SleepOnTravel
+  gosub OUTPUT MoveTimeout     (Timeout, in seconds, before the Travel or AutoMapper script will be restarted.)
+  gosub OUTPUT PreferGroup     (Prefer hunting with people on your WhiteList to an empty room)
+  gosub OUTPUT HuntingPremium (YES, NO, or ONLY if you wish to select only from Premium rooms.)
+  gosub OUTPUT PremiumRing PremiumRingItem
+  put #echo
+  gosub OUTPUT HuntingArea
+  put #echo Gray mono Options: 
+  put #echo Gray --P1: %combatpresetp1
+  put #echo Gray --P2: %combatpresetp2
+  put #echo Gray --P3: %combatpresetp3
+  put #echo Gray --P4: %combatpresetp4
+  put #echo Gray --P5: %combatpresetp5
+  put #echo
+	gosub OUTPUT UpkeepTown (%townpresetlist)
+	gosub OUTPUT VaultTown
+  gosub OUTPUT BurgleTown (%burgletownlist)
+	gosub OUTPUT PawnTown (%pawntownlist)
+  gosub OUTPUT PerformTown (%performtownlist)
+  gosub OUTPUT ForgingTown (%forgingtownlist)
+  gosub OUTPUT OutfittingTown (%outfittingtownlist)
+  put #echo
   return
 
 DISPLAYITEM:
 	var varmatch 1
 	put #echo mono =================== Item ====================
 	put #echo
+  gosub OUTPUT Storage
+  gosub OUTPUT BoxStorage
+	put #echo
+  put #echo mono ========== Weapons ==========
+  put #echo
   gosub OUTPUT SEWeapon SEOffhand
 	gosub OUTPUT SECombo
 	gosub OUTPUT LEWeapon LEOffhand
@@ -2172,15 +2179,26 @@ DISPLAYITEM:
 	gosub OUTPUT BowWorn
 	gosub OUTPUT SlingWeapon SlingAmmo
   put #echo
+  put #echo mono ========== Armor ==========
+  put #echo
+  gosub OUTPUT ArmorCheck
+  gosub OUTPUT ShieldItem ParryStickItem
+  gosub OUTPUT ArmorNum
+  gosub OUTPUT Armor1Item Armor2Item
+  gosub OUTPUT Armor3Item Armor4Item
+  gosub OUTPUT Armor5Item Armor6Item 
+  gosub OUTPUT KnucklesItem
+  put #echo
+  put #echo mono ========== Tattoos/Wands ==========
+  put #echo
   gosub OUTPUT Tattoo
   gosub OUTPUT TattooType (runic|heroic)
   gosub OUTPUT TattooSpell
   gosub OUTPUT TattooPrepMana TattooAddMana
   gosub OUTPUT TattooBuff (Tattoo is cast and maintained as a buff)    
   put #echo
-  gosub OUTPUT WandBuff
+  gosub OUTPUT WandBuff WandBuffNum
   gosub OUTPUT WandStorage
-  gosub OUTPUT WandBuffNum
   gosub OUTPUT Wand1Spell 
   gosub OUTPUT Wand1Item Wand1Num
   gosub OUTPUT Wand2Spell
@@ -2189,6 +2207,8 @@ DISPLAYITEM:
   gosub OUTPUT Wand3Item Wand3Num
   gosub OUTPUT Wand4Spell
   gosub OUTPUT Wand4Item Wand4num
+  put #echo
+  put #echo mono ========== Experience Items ==========
   put #echo
   gosub OUTPUT Almanac AlmanacItem
 	gosub OUTPUT AlmanacAlerts
@@ -2234,12 +2254,6 @@ DISPLAYMAGIC:
     gosub OUTPUT TMFocusStorage TMFocusContainer
     gosub OUTPUT ParallelFocus ParallelFocusItem
     echo
-    gosub OUTPUT Tattoo
-    gosub OUTPUT TattooType (runic|heroic)
-    gosub OUTPUT TattooSpell
-    gosub OUTPUT TattooPrepMana TattooAddMana
-    gosub OUTPUT TattooBuff (Tattoo is cast and maintained as a buff)
-    put #echo
     put #echo Gray mono -----Advanced Options-----
     gosub OUTPUT FastMagic (more rapid casting for experienced casters with shorter roundtimes.)
     gosub OUTPUT StraightCast (Prep spells at your cap when Arcana and Attunement are locked.  For advanced casters.)
@@ -2249,24 +2263,6 @@ DISPLAYMAGIC:
     gosub OUTPUT Difficulty4Percent (Percentage of full prep to wait for on advanced spells.)
     gosub OUTPUT Difficulty5Percent (Percentage of full prep to wait for on esoteric spells.)
   }
-  else
-  {
-    gosub OUTPUT Tattoo
-    gosub OUTPUT TattooType (runic|heroic)
-    gosub OUTPUT TattooBuff (Tattoo is cast and maintained as a buff)
-  }
-  put #echo
-  gosub OUTPUT WandBuff
-  gosub OUTPUT WandStorage
-  gosub OUTPUT WandBuffNum
-  gosub OUTPUT Wand1Spell 
-  gosub OUTPUT Wand1Item Wand1Num
-  gosub OUTPUT Wand2Spell
-  gosub OUTPUT Wand2Item Wand2num
-  gosub OUTPUT Wand3Spell 
-  gosub OUTPUT Wand3Item Wand3Num
-  gosub OUTPUT Wand4Spell
-  gosub OUTPUT Wand4Item Wand4num
   return
 
 DISPLAYSPELL:
@@ -2383,52 +2379,15 @@ DISPLAYCOMBAT:
   put #echo
 	gosub OUTPUT Weapons
 	gosub OUTPUT WeaponList
+	gosub OUTPUT LowestFirst (trains weapons in reverse order of rank, rather than list order)
 	gosub OUTPUT StanceMain (a primary stance for combat that involves all 3 defenses)
-  gosub OUTPUT LowestFirst
   gosub OUTPUT KillAfterLock (continues killing creatures after weapons are locked)
   gosub OUTPUT Offhand
 	gosub OUTPUT ACMs
 	put #echo
-	gosub OUTPUT SEWeapon SEOffhand
-	gosub OUTPUT SECombo
-	gosub OUTPUT LEWeapon LEOffhand
-  gosub OUTPUT THEWeapon
-  gosub OUTPUT SBWeapon SBOffhand
-	gosub OUTPUT LBWeapon LBOffhand
-  gosub OUTPUT THBWeapon
-	gosub OUTPUT StaveWeapon StaveOffhand
-	gosub OUTPUT StaveWorn StaveTied
-  gosub OUTPUT PoleWeapon PoleCombo
-  gosub OUTPUT PoleWorn PoleTied
-  put #echo
-	gosub OUTPUT BastardSwordItem (Text should match exactly the weapon name in other variables, ristes should always be two words to prevent confusion between riste types).
-	gosub OUTPUT BarMaceItem
-	gosub OUTPUT HolyIconItem
-	gosub OUTPUT RisteItem
-	gosub OUTPUT HHRisteItem
-	put #echo
-	gosub OUTPUT LTWeapon LTOffhand
-	gosub OUTPUT LTBond LTVerb
-	gosub OUTPUT HTWeapon HTOffhand 
-  gosub OUTPUT HTBond HTVerb
-	put #echo
-	gosub OUTPUT XbowWeapon XbowAmmo
-	gosub OUTPUT XbowWorn
-	gosub OUTPUT BowWeapon BowAmmo
-	gosub OUTPUT BowWorn
-	gosub OUTPUT SlingWeapon SlingAmmo
 	gosub OUTPUT Collectammo
 	put #echo
-  gosub OUTPUT ArmorCheck
-  gosub OUTPUT ShieldItem
-  gosub OUTPUT ParryStickItem
-  gosub OUTPUT ArmorNum
-  gosub OUTPUT Armor1Item Armor2Item
-  gosub OUTPUT Armor3Item Armor4Item
-  gosub OUTPUT Armor5Item Armor6Item 
-  gosub OUTPUT KnucklesItem
-  put #echo
-  gosub OUTPUT Attune
+	gosub OUTPUT Attune
   gosub OUTPUT Recall
   gosub OUTPUT Hunting HuntingTimer
   gosub OUTPUT Stealth
@@ -2445,6 +2404,26 @@ DISPLAYCOMBAT:
   put #echo
   gosub OUTPUT Teaching TeachTargets
   gosub OUTPUT TeachSkill (must equal the full text of the skill)
+  put #echo
+	put #echo mono ========== Loot Variables ==========
+  put #echo
+	gosub OUTPUT LootType (treasure|boxes|equipment|goods|all)
+  gosub OUTPUT Skinning (yes|no)
+	gosub OUTPUT Arrange
+  gosub OUTPUT ArrangeForPart
+  gosub OUTPUT Dissect
+  put #echo
+  gosub OUTPUT LootAlerts
+	gosub OUTPUT LootAllDead (not group-hunting friendly)  
+	gosub OUTPUT CollectBoxes CollectCoin	
+	gosub OUTPUT CollectGem CollectNuggets
+  gosub OUTPUT SaveGwethStones
+  gosub OUTPUT CollectBars CollectMaterials
+	gosub OUTPUT CollectMaps CollectScroll
+	gosub OUTPUT MiscKeepList (list of loot items to be kept, separated by the | character)
+	gosub OUTPUT SkinAfterLock
+  gosub OUTPUT DropSkins
+  put #echo
 	return
 	
 
@@ -2793,7 +2772,7 @@ DISPLAYGUILD:
     }
     if $guild = "Trader" then
     {
-      gosub OUTPUT Finessse FinesseMana
+      gosub OUTPUT Finesse FinesseMana
       gosub OUTPUT Noumena NoumenaMana
       gosub OUTPUT SLABuff (use SLA on buffs when starlight isn't available)
       echo
@@ -2924,60 +2903,6 @@ DISPLAYKILL:
   put #echo
   return
 
-DISPLAYHUNTING:
-  var varmatch 1
-  put #echo
-  put #echo mono ========== Movement Variables ==========
-  put #echo
-  gosub OUTPUT KillBeforeMove     (Finish your kill before leaving combat for other training.)
-  gosub OUTPUT SleepOnTravel
-  gosub OUTPUT MoveTimeout     (Timeout, in seconds, before the Travel or AutoMapper script will be restarted.)
-  gosub OUTPUT PreferGroup     (Prefer hunting with people on your WhiteList to an empty room)
-  gosub OUTPUT HuntingPremium (YES, NO, or ONLY if you wish to select only from Premium rooms.)
-  gosub OUTPUT PremiumRing
-	gosub OUTPUT PremiumRingItem
-  put #echo
-  gosub OUTPUT HuntingArea
-  put #echo Gray mono Options: 
-  put #echo Gray --P1: %combatpresetp1
-  put #echo Gray --P2: %combatpresetp2
-  put #echo Gray --P3: %combatpresetp3
-  put #echo Gray --P4: %combatpresetp4
-  put #echo Gray --P5: %combatpresetp5
-  put #echo
-	gosub OUTPUT UpkeepTown (%townpresetlist)
-	gosub OUTPUT VaultTown
-  gosub OUTPUT BurgleTown (%burgletownlist)
-	gosub OUTPUT PawnTown (%pawntownlist)
-  gosub OUTPUT PerformTown (%performtownlist)
-  gosub OUTPUT ForgingTown (%forgingtownlist)
-  gosub OUTPUT OutfittingTown (%outfittingtownlist)
-  put #echo
-  gosub OUTPUT Storage
-  gosub OUTPUT BoxStorage
-  gosub OUTPUT LootAlerts
-	gosub OUTPUT LootAllDead (not group-hunting friendly)  
-	gosub OUTPUT CollectBoxes
-	gosub OUTPUT CollectCoin	
-	gosub OUTPUT CollectGem
-	gosub OUTPUT SaveGwethStones
-	gosub OUTPUT CollectMaps
-	gosub OUTPUT CollectNuggets
-	gosub OUTPUT CollectBars
-	gosub OUTPUT CollectMaterials
-	gosub OUTPUT CollectScroll
-	gosub OUTPUT MiscKeepList (list of loot items to be kept, separated by the | character)
-	gosub OUTPUT SkinAfterLock
-  gosub OUTPUT DropSkins
-	put #echo
-	put #echo mono ========== Loot Variables ==========
-  put #echo
-	gosub OUTPUT LootType (treasure|boxes|equipment|goods|all)
-  gosub OUTPUT Skinning (yes|no)
-	gosub OUTPUT Arrange
-  gosub OUTPUT ArrangeForPart
-  gosub OUTPUT Dissect
-  return
 
 DISPLAYMULTI:
   var varmatch 1

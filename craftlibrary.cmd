@@ -1821,9 +1821,9 @@ TASKACQUIRE:
     put #echo Yellow Could not properly calculate quantities!
     exit
   }
-  eval product replace("%product", "a ", "")
-  eval product replace("%product", "an ", "")
-  eval product replace("%product", "some ", "")
+  eval product replacere("%product", "^a ", "")
+  eval product replacere("%product", "^an ", "")
+  eval product replacere("%product", "^some ", "")
   #MATERIAL_CALCULATIONS
   if ("%crafttype" = "outfitting") then
   {
