@@ -1,3 +1,17 @@
+08/22/26
+Updated Scripts: train, library, set, craftlibrary, workorder
+AutoMana option added on Train to force the script to set your mana values.  This works on buffs right now, but I will be adding more in the future.
+New variable added: combat.  This allows all fighting to be turned off with a single variable and will facilitate streamlining things on the backend.
+
+Fixed a bug with the script not handling musical instrument cleaning in a rainstorm for characters that train outside.
+CambItems variable has been removed in favor the script automatically figuring out how many cambrinth items you have based on how many are defined.
+Fixed storing your crafting bag from the vault completely not working.
+Fixed a bug with casting percentage being misapplied to new characters.
+More code cleanup for the transition to Genie 5.
+Added Trader spells to the variable cleanup functions.
+Added PiercingGaze to automatic mana adjustment.
+
+
 08/08/26
 Updated Scripts: train, library, set, craftlibrary, workorder
 Significant changeups for Set menus.  Most items are now under the ITEM heading, loot variables are under COMBAT, and movement and hunting area variables are under GENERAL.

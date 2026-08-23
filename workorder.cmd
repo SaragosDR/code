@@ -31,6 +31,9 @@ var tattootype $tattootype
 var tattoospell $tattoospell
 var tattooprepmana $tattooprepmana
 
+var vaulttown $vaulttown
+var forgingtown $forgingtown
+
 action var ready 0;var scancel 1 when Your concentration slips for a moment, and your spell is lost.
 action var ready 1 when You feel fully prepared to cast your spell.
 action var ready 1 when Your spell pattern snaps into shape with little preparation!
@@ -164,8 +167,8 @@ gosub AREAVARINIT
 gosub STOWALL
 
 #CRAFTING_STORAGE
-gosub CRAFTINGSTART
-if (%workorderbail = 1) then return
+gosub CRAFTSTORAGEGET
+if (%workorderbail = 1) then exit
 gosub CRAFTREPAIR
 
 MAIN:
@@ -178,6 +181,7 @@ MAIN:
   else
   {
     gosub CRAFTINGEND
+    gosub CRAFTSTORAGESTOW
     exit
   }
   

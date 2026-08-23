@@ -1,4 +1,4 @@
-var lastupdated 08/08/2026
+var lastupdated 08/13/2026
 
 var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mef|meg|mis|mo|mof|mon|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|staw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|visage|voi|will|ws|worm|wotp|ys|zephyr|
 var craftingbuffs |art|mt|phk|rei|wotm|
@@ -238,8 +238,8 @@ VARCHECKS:
   if !matchre("$auonfire", "\b(YES|NO)\b") then put #var auonfire YES
   if !matchre("$auonnerves", "\b(YES|NO)\b") then put #var auonnerves YES
   if !matchre("$auonburden", "\b(YES|NO)\b") then put #var auonburden YES
-  if (!def(auburdennum)) then put #var auburdennum 0
-  if ($auburdennum >= 0) then
+  if (!def(auburdennum)) then put #var auburdennum 3
+  if ($auburdennum > 0) then
   else put #var auburdennum 3
   if !matchre("$auonammo", "\b(YES|NO)\b") then put #var auonammo NO
   if !matchre("$auonboxes", "\b(YES|NO)\b") then put #var auonboxes NO
@@ -323,6 +323,7 @@ VARCHECKS:
 
 
   #COMBAT
+  if !matchre("$combat", "\b(YES|NO)\b") then put #var combat YES
   if !matchre("$weapons", "\b(YES|NO)\b") then put #var weapons YES
   if !matchre("$weaponsm2", "\b(YES|NO)\b") then put #var weaponsm2 YES
   if (!def(weaponlist)) then put #var weaponlist se|le|the|sb|lb|thb|stave|pole|brawl|lt|ht|bow|xbow|sling
@@ -542,20 +543,20 @@ VARCHECKS:
   else put #var minmana 30
   if !matchre("$fastmagic", "\b(YES|NO)\b") then put #var fastmagic NO
   if !matchre("$straightcast", "\b(YES|NO)\b") then put #var straightcast NO
-  if (!def(difficulty1percent)) then put #var difficulty1percent 0
-  if ($difficulty1percent >= 0) then
+  if (!def(difficulty1percent)) then put #var difficulty1percent 100
+  if ($difficulty1percent > 0) then
   else put #var difficulty1percent 100
-  if (!def(difficulty2percent)) then put #var difficulty2percent 0
-  if ($difficulty2percent >= 0) then
+  if (!def(difficulty2percent)) then put #var difficulty2percent 100
+  if ($difficulty2percent > 0) then
   else put #var difficulty2percent 100
-  if (!def(difficulty3percent)) then put #var difficulty3percent 0
-  if ($difficulty3percent >= 0) then
+  if (!def(difficulty3percent)) then put #var difficulty3percent 100
+  if ($difficulty3percent > 0) then
   else put #var difficulty3percent 100
-  if (!def(difficulty4percent)) then put #var difficulty4percent 0
-  if ($difficulty4percent >= 0) then
+  if (!def(difficulty4percent)) then put #var difficulty4percent 100
+  if ($difficulty4percent > 0) then
   else put #var difficulty4percent 100
-  if (!def(difficulty5percent)) then put #var difficulty5percent 0
-  if ($difficulty5percent >= 0) then
+  if (!def(difficulty5percent)) then put #var difficulty5percent 100
+  if ($difficulty5percent > 0) then
   else put #var difficulty5percent 100
   
   if !matchre("$harnessing", "\b(YES|NO)\b") then put #var harnessing YES
@@ -563,8 +564,19 @@ VARCHECKS:
   else put #var harnessmax 20
   if !matchre("$cambrinth", "\b(YES|NO)\b") then put #var cambrinth NO
   if !matchre("$dedicatedcambrinth", "\b(YES|NO)\b") then put #var dedicatedcambrinth NO
-  if (($cambitems >= 0) && ($cambitems < 3)) then
-  else put #var cambitems 1
+  
+  #if (($cambitems >= 0) && ($cambitems < 3)) then
+  #else put #var cambitems 1
+  if ($cambitems = 0) then
+  {
+    put #unvar cambitems
+    put #var cambitem1 none
+  }
+  if ($cambitems = 1) then
+  {
+    put #unvar cambitems
+    put #var cambitem2 none
+  }
   if !def(cambitem1) then put #var cambitem1 armband
   if (!def(cambitem1mana)) then put #var cambitem1mana 1
   if ($cambitem1mana >= 1) then
@@ -4585,7 +4597,7 @@ CLOSEITEMP:
   pause
 CLOSEITEMMAIN:
   matchre CLOSEITEMP %waitstring
-  matchre RETURN What were you referring to?|You close your|That is already closed\.
+  matchre RETURN What were you referring to?|You close your|That is already closed\.|You quickly close
   put close %closeitemstring
   matchwait 5
 	var timeoutsub CLOSEITEMMAIN
@@ -7082,6 +7094,79 @@ LIE:
 	goto TIMEOUT
 
 
+ROOMTRAVEL:
+  put #echo Yellow rtzone: %rtzone
+  put #echo Yellow rttravel: %rttravel
+  put #echo Yellow rttraveldest: %rttraveldest
+  put #echo Yellow rtmove: %rtmove
+  put #echo Yellow rtmovelist: %rtmovelist
+  put #echo Yellow rttargetroom: %rttargetroom
+  put #echo Yellow rtfindroom: %rtfindroom
+  if (("$zoneid" = "1") && ("$roomid" = "388")) then
+  {
+    gosub MOVE 386
+    gosub MOVE 145
+  }
+  if ("$zoneid" != "%rtzone") then
+  {
+    if (%rtzone != 0) then
+		{
+			if ("%rttravel" = "YES") then
+			{
+			  if ("$zoneid" = "150") then
+			  {
+          #FANGCOVE
+          var fangcovevist 0
+          if ("%premiumring" = "YES") then
+          {
+            gosub LEAVEROOM
+            gosub PREMIUMRINGBACK portal
+            if (%goodring != 1) then
+            {
+              #FANGCOVE_PORTAL
+              gosub MOVE portal
+              move go exit portal
+            }    
+          }
+          else
+          {
+            #FANGCOVE_PORTAL
+            gosub MOVE portal
+            move go exit portal
+          }
+			  }
+				gosub TRAVEL %rttraveldest
+			}
+			if ("%rtmove" = "YES") then
+			{
+				var mlmovetarget 0
+				var mlstring %rtmovelist
+				eval mlcount count("%rtmovelist","|")
+				gosub MOVELOOP 
+			}
+			if ("%rttravel" = "YES") then
+			{
+			  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
+		  }
+		}
+  }
+  #put #echo Yellow Zoneid: $zoneid
+  #put #echo Yellow RTZone: %rtzone
+  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
+  if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then
+  {
+    if (("$zoneid" = "1") && ("%rttargetroom" = "388")) then
+    {
+      gosub MOVE 145
+      gosub MOVE 386
+    }
+    gosub MOVE %rttargetroom
+    #if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then goto ROOMTRAVEL
+  }
+  if ("%rtfindroom" = "YES") then gosub FINDROOMLOGIC
+  return
+
+
 MOVE:
   var roomtarget $0
   var nextstarcheck 0
@@ -7733,6 +7818,9 @@ CASTINGLOGIC:
     if (%spellpreptest >= %spellpercent) then
     {
       var ready 1
+      var spellpreptestmod %spellpreptest
+      math spellpreptestmod modulus 1
+      math spellpreptest subtract %spellpreptestmod
       put #echo Yellow Ready due to being %spellpreptest% done vs %spellpercent% for the difficulty!
     }
   }
@@ -7935,7 +8023,11 @@ CASTCLEANUP:
   goto CASTCLEANUPMAIN
 
 CASTCLEANUPSIMPLE:
-  if ("%spellprepping" = "shadowling") then gosub INVOKESHADOW
+  if ("%spellprepping" = "shadowling") then
+  {
+    put release shadowling
+    gosub INVOKESHADOW
+  }
   if ("%spellprepping" = "iots") then put invoke circle
   if ("%spellprepping" = "bg") then
   {
@@ -8058,7 +8150,11 @@ CASTCLEANUPMAIN:
 	  gosub BALLISTARUB
 	}
 	if ("%spellprepping" = "iots") then put invoke circle
-  if ("%spellprepping" = "shadowling") then gosub INVOKESHADOW
+  if ("%spellprepping" = "shadowling") then
+  {
+    put release shadowling
+    gosub INVOKESHADOW
+	}
 	if (("%spellprepping" = "tkt") || ("%spellprepping" = "tks")) then
 	{
   	gosub GETITEM %tktitem
@@ -8846,11 +8942,16 @@ DISCERNP:
 DISCERNMAIN:
   matchre DISCERNP %waitstring
   matchre DISCERNRETURN The spell requires at minimum \d+ mana streams and you think you can reinforce it with \d+ more, for a total of (\d+) streams\.
+  matchre DISCERNMIN You don't think you are able to cast this spell.
   put discern %discernspell
   matchwait 5
   var timeoutsub DISCERNMAIN
   var timeoutcommand discern %discernspell
 	goto TIMEOUT
+
+DISCERNMIN:
+  var discernmax 0
+  return
 
 DISCERNRETURN:
   var discernmax $1
@@ -9521,6 +9622,19 @@ BUYLOOP:
   math buyloopcount add 1
   goto BUYLOOP
 
+
+MOVEVAULT:
+  if !matchre("$roomobjs", "uniformed Dwarven attendant") then
+  {
+   if (%multizone = 1) then
+   {
+     var upkeepzone %vaultzone
+     gosub UPKEEPZONEMOVE
+   }
+   gosub MOVE carousel
+  }
+  if (!matchre("$roomname", "Carousel")) then goto MOVEVAULT
+   return
 
 ENTERVAULTP:
   pause
@@ -11069,7 +11183,7 @@ INVOKESHADOW:
   put invoke %shadowlingnoun
   matchwait 5
 	var timeoutsub INVOKESHADOW
-  var timeoutcommand invoke shadowling
+  var timeoutcommand invoke %shadowlingnoun
 	goto TIMEOUT
 
 
@@ -12736,7 +12850,7 @@ INSTCLEAN:
   matchre INSTCLEANP %waitstring
   matchre RETURN Roundtime|(is|are) not in need of cleaning.
   matchre INSTCLEANGET You must be holding
-  matchre INSTDRY Maybe you should dry (it|them) off before attempting to clean (it|them).
+  matchre INSTDRY Maybe you should dry (it|them) off before attempting to clean (it|them)\.|Your .* (is|are) so wet that (they are|it is) still dripping\!
   put clean %instrument with %instcleancloth
   matchwait 5
   var timeoutsub INSTCLEAN
@@ -12754,7 +12868,7 @@ INSTDRY:
   matchre INSTDRYP %waitstring
   matchre RETURN is not in need of drying.
   match INSTDRYNONE You must be holding
-  matchre INSTWRING Your cloth absorbs the water without too much trouble, but remains very wet afterwards.|Using your cloth, you expertly drain|You stare at your
+  matchre INSTWRING Your cloth absorbs the water without too much trouble, but remains very wet afterwards.|Using your cloth, you expertly drain|You stare at your|Your cloth is sopping wet!
   match RETURN You're a bit too injured to be attempting something like that.
   match INSTDRYPLAYING You are a bit too busy performing to do that.
   put wipe my %instrument with %instcleancloth
@@ -12771,8 +12885,8 @@ INSTWRINGP:
   pause
 INSTWRING:
   matchre INSTWRINGP %waitstring
-  matchre INSTCLEAN squeezing out the last bit of water.
-  matchre INSTWRING water dribbling down your hands to splash at your feet.|water pouring out to splash at your feet.
+  matchre INSTCLEAN You wring a dry .* into a twisted rope, then shake it out again\.
+  matchre INSTWRING water dribbling down your hands to splash at your feet.|water pouring out to splash at your feet.|squeezing out the last bit of water.
   put wring my %instcleancloth
   matchwait 5
   var timeoutsub INSTWRING
@@ -13957,10 +14071,10 @@ TAPNOUN:
 
 TAPSHORTEN:
   var tap $0
-  eval tap replace("%tap", " ", "|"
-  eval tap replacere("%tap", "\ba\b\|", ""
-  eval tap replacere("%tap", "\ban\b\|", ""
-  eval tap replacere("%tap", "\bsome\b\|", ""
+  eval tap replace("%tap", " ", "|")
+  eval tap replacere("%tap", "\ba\b\|", "")
+  eval tap replacere("%tap", "\ban\b\|", "")
+  eval tap replacere("%tap", "\bsome\b\|", "")
   eval taplength count("%tap","|")
   #echo taplength: %taplength
   if (%taplength > 0) then var shorttap %tap(0) %tap(%taplength)
@@ -14005,7 +14119,6 @@ PREMIUMRINGBAD:
   return
 
 PREMIUMRINGBACK:
-  var premringleaving $0
   goto PREMIUMRINGBACKMAIN
 PREMIUMRINGBACKP:
   pause
@@ -14013,7 +14126,7 @@ PREMIUMRINGBACKMAIN:
   matchre PREMIUMRINGBACKP %waitstring
   matchre RETURN The world grows blurry and indistinct for a moment.  You look around and find yourself at...
   match RETURN You need to be in Fang Cove to do that!
-  match RETURN The metal band pulses weakly, but nothing else happens.
+  matchre RETURN The .* pulses weakly, but nothing else happens\.
   matchre PREMBADRETURN cannot do that again yet\.
   put pull %premiumringitem
   matchwait

@@ -13,6 +13,7 @@ include craftlibrary.cmd
 #ScriptMode 2 = Buffing
 #ScriptMode 3 = Upkeep
 #ScriptMode 4 = Burgle
+#ScriptMode 5 = AutoMana
 
 START:
   
@@ -747,18 +748,21 @@ COMMANDVARLOAD:
   }
   if ("%scriptmodename" = "noncombat") then
   {
-    var scriptmode 0
+    var scriptmode 1
+    #var scriptmode 0
+    var noncombat YES
+    var upkeep NO
     echo Out of Combat Training!
     var combat NO
-    var outdoortimer 0
-    var textbooktimer 0
+    #var outdoortimer 0
+    #var textbooktimer 0
     var appraisetarget bundle
     if (("%research" = "YES") && ("%spell" = "YES")) then var research NO
-    var buff NO
-    var tm NO
-    var debil NO
-    var autoupkeep NO
-    var bugout NO
+    #var buff NO
+    #var tm NO
+    #var debil NO
+    #var autoupkeep NO
+    #var bugout NO
     put #echo >$alertwindow Began noncombat training.
   }
   if ("%scriptmodename" = "climb") then
@@ -947,20 +951,19 @@ COMMANDVARLOAD:
     echo
     echo ================Music===============
     echo
-    var scriptmode 0
-    var buffingonly 0
-    var buff NO
-    var gbuff NO
-    var weapons NO
-    var collect NO
-    var spell NO
-    var debil NO
-    var tm NO
+    var scriptmode 1
+    var combat NO
+    var noncombat YES
     var perform YES
-    var appraise YES
-    var research NO
-    var bugout NO
     var autoupkeep NO
+    var burgle NO
+    var crafting NO
+    var studyart NO
+    var research NO
+    var performtown none
+    var tradingtasks NO
+    var tradingsell NO
+    var embracevela NO
   }
   if ("%scriptmodename" = "research") then
   {
@@ -1071,6 +1074,10 @@ COMMANDVARLOAD:
     var autoupkeep NO
     var almanac NO
     var ejournal NO
+  }
+  if ("%scriptmodename" = "automana") then
+  {
+    var scriptmode 5
   }
   if ("%scriptmodename" = "buff") then
   {
@@ -1255,7 +1262,7 @@ COMMANDPARSE:
     }
     else
     {
-      if (("%scriptmodename" = "1") || ("%scriptmodename" = "2") || ("%scriptmodename" = "combat") || ("%scriptmodename" = "research") || ("%scriptmodename" = "teach") || ("%scriptmodename" = "focus") || ("%scriptmodename" = "buff") || ("%scriptmodename" = "gbuff") || ("%scriptmodename" = "upkeep") || ("%scriptmodename" = "burgle") || ("%scriptmodename" = "burglepawn") || ("%scriptmodename" = "multi") || ("%scriptmodename" = "alerts") || ("%scriptmodename" = "noncombat") || ("%scriptmodename" = "climb") || ("%scriptmodename" = "devotion") || ("%scriptmodename" = "quiet") || ("%scriptmodename" = "silent") || ("%scriptmodename" = "nort") || ("%scriptmodename" = "magic") || ("%scriptmodename" = "music")) then
+      if (("%scriptmodename" = "1") || ("%scriptmodename" = "2") || ("%scriptmodename" = "combat") || ("%scriptmodename" = "research") || ("%scriptmodename" = "teach") || ("%scriptmodename" = "focus") || ("%scriptmodename" = "buff") || ("%scriptmodename" = "gbuff") || ("%scriptmodename" = "upkeep") || ("%scriptmodename" = "burgle") || ("%scriptmodename" = "burglepawn") || ("%scriptmodename" = "multi") || ("%scriptmodename" = "alerts") || ("%scriptmodename" = "noncombat") || ("%scriptmodename" = "climb") || ("%scriptmodename" = "devotion") || ("%scriptmodename" = "quiet") || ("%scriptmodename" = "silent") || ("%scriptmodename" = "nort") || ("%scriptmodename" = "magic") || ("%scriptmodename" = "music") || ("%scriptmodename" = "automana")) then
       { 
         var varset 1
         put #echo mono Train script beginning.
@@ -1731,6 +1738,8 @@ TRADERONLY:
   var tradingsell $tradingsell
   var tradingselltown $tradingselltown
   var tradingsellsource $tradingsellsource
+  var noumena $noumena
+  var noumenamana $noumenamana
   var finesse $finesse
   var finessemana $finessemana
   var tradingtasks $tradingtasks
@@ -3497,31 +3506,28 @@ MAINHELP:
 	put #echo mono ================================================
 	put #echo
 	echo Options are:
-	echo TRAIN COMBAT - Combat training with no movement in the room that you're in.
-  echo TRAIN COMBAT 2 - The above, with Mode 2 variables.
-	echo TRAIN MULTI - Multi-Variable Set training.
-  echo TRAIN NONCOMBAT - Out-of-combat training.
-	echo TRAIN UPKEEP - Performs upkeep while inside a town.
+	echo .TRAIN COMBAT <1 or 2> - Combat training only with no movement and no noncombat in the room that you're in.  Add the number for training mode.
+	echo .TRAIN NONCOMBAT - Out-of-combat training with no noncombat.
+	echo .TRAIN MULTI - Force Multi-Variable Set training.
+	echo .TRAIN UPKEEP - Performs only upkeep while inside a town.
 	echo
-	echo TRAIN QUIET - Quiet, but not silent training for RP situations.
-	echo TRAIN SILENT - Completely silent training for RP situations.
-	echo TRAIN ALERTS - Alerts only for idling situations.  No training. Health, Speech, Emote, and GM alerts forced active.
-	echo TRAIN NORT - Only actions that provoke no RT and produce minimal room spam.
+	echo .TRAIN QUIET - Quiet, but not silent training for RP situations.
+	echo .TRAIN SILENT - Completely silent training for RP situations.
+	echo .TRAIN ALERTS - Alerts only for idling situations.  No training. Health, Speech, Emote, and GM alerts forced active.
+	echo .TRAIN NORT - Only actions that provoke no RT and produce minimal room spam.
 	echo
-  echo TRAIN BURGLE - Attempts to peform burglary in the room that you're in.
-	echo TRAIN MAGIC - Trains out of combat magic skills.
-	echo TRAIN MUSIC - Trains performance and compatible skills that are enabled.
-	echo TRAIN CLIMB <object> - Trains climb practice as well as any set noncombat skills.
-	echo TRAIN RESEARCH <research type> - Performs spell research.  If a modifier is used, it will research only that type.  If not, it will go by variables.
-	echo TRAIN FOCUS - Performs an appraisal focus and trains skills that can be done at the same time.
+  echo .TRAIN BURGLE - Attempts to peform burglary in the room that you're in.
+	echo .TRAIN MAGIC - Trains out of combat magic skills with no movement.
+	echo .TRAIN MUSIC - Trains performance and compatible skills only that are enabled with no movement.
+	echo .TRAIN CLIMB <object> - Trains climb practice as well as any set noncombat skills.
+	echo .TRAIN RESEARCH <research type> - Performs spell research.  If a modifier is used, it will research only that type.  If not, it will go by variables.
+	echo .TRAIN AUTOMANA - Automatically adjusts mana levels.
+	echo .TRAIN FOCUS - Performs an appraisal focus and trains skills that can be done at the same time.
 	if "$guild" = "Cleric" then echo TRAIN DEVOTION - Builds devotion.
 	echo
-	echo TRAIN BUFF <minutes> - Casting personal buffs only.  Spells with durations remaining below <minutes> will be recast.
-  echo TRAIN GBUFF	- Casting group buffs only.
+	echo .TRAIN BUFF <minutes> - Casting personal buffs only.  Spells with durations remaining below <minutes> will be recast.
+  #echo TRAIN GBUFF	- Casting group buffs only.
   #if "$guild" = "Cleric" then echo TRAIN OMBUFF - Casts OM and casts buffs inside it.
-  echo
-	echo SET DISPLAY - displays current settings,
-	echo SET <variable> <value> - Changes script variables.
 	#echo TRAIN TEACH - Teaching only.
 	goto END
 
@@ -3700,6 +3706,7 @@ STATUSVARLOAD:
   var askclass 0
   var askstudent 0
   var noncombatactive 0
+  var backfire 0
   var balance solidly
   var barmace 0
   var bastardsword 0
@@ -3927,6 +3934,7 @@ MAINVARLOAD:
   
  
   #COMBAT 
+  var combat $combat
   if (%varset = 1) then var weapons $weapons
   else var weapons $weaponsm2
   #WEAPONLIST
@@ -4123,6 +4131,12 @@ MAINVARLOAD:
   var cambrinth $cambrinth
   var dedicatedcambrinth $dedicatedcambrinth  
   var cambitems $cambitems
+  if ("%cambitem2" = "none") then
+  {
+    if ("%cambitem1" = "none") then var cambitems 0
+    else var cambitems 1
+  }
+  else var cambitems 2
   var cambitem1 $cambitem1
   var cambitem1mana $cambitem1mana
   var cambitem1worn $cambitem1worn
@@ -4424,6 +4438,12 @@ SWITCHBOARD:
     gosub BURGLELOGIC
     put #flash
     put #play NewRank
+    exit
+  }
+  if (%scriptmode = 5) then
+  {
+    gosub BUFFADJUST
+    gosub SPELLADJUST
     exit
   }
   exit
@@ -4830,21 +4850,6 @@ COMBATLOOP:
   goto MAINLOOP
 
 NONCOMBATONLYLOOP:
-  var noncombatperformactive 0
-  #PERFORM
-  if ("%perform" = "YES") then
-  {
-    if ($Performance.LearningRate > 20) then var performlock 1
-    if ($Performance.LearningRate < 4) then var performlock 0
-    if ($Performance.Ranks >= 1750) then var performlock 1
-    if (%performlock != 1) then 
-    {
-      var noncombatperformactive = 1
-      gosub MTPERFORMLOOP
-    }
-    else var noncombatperformactive = 1
-    put #echo Yellow loop passed.
-  }
   #MAGIC_AND_MISC
   #ATTUNEMENT
   if ("%attune" = "YES") then
@@ -4933,221 +4938,6 @@ NONCOMBATONLYLOOP:
   goto NONCOMBATONLYLOOP
 
 
-OLDNONCOMBATLOOP:
-  #PRERUN_ACTIONS
-  if (%firststowall = 1) then
-  {
-    if tolower("%1") != "alerts" then gosub STOWALL
-    var firststowall 0
-  }
-  if (%firstrel = 1) then
-  {
-    if (($guild = "Thief") || ($guild = "Barbarian")) then
-    else
-    {  
-      if ("%spell" = "YES") then
-      {
-        if ((%spell1symb = "YES") || (%spell2symb = "YES") || (%spell3symb = "YES") || (%symbiosisbuff = "YES")) then
-        {
-          gosub SYMBCLEAR
-        }
-      }
-      if ("%necrosafety" = "YES") then
-      {
-        gosub RELMANA
-        gosub RELSPELL
-      }
-      else gosub RELALL
-    }
-    var firstrel 0
-  }
-  if ((%appfocusonly = 0) && (%alertsonly = 0)) then
-  {
-    if (%firstawake = 1) then
-    {
-      gosub AWAKE
-      var firstawake 0
-    }
-  }
-  #TRADING_SELL
-  if (("%tradingsell" = "YES") && ("$guild" = "Trader")) then
-  {
-    #put #echo >Log Yellow tradingsell: %tradingsell Logic started.
-    if ($Trading.LearningRate > 28) then var tradinglock 1
-    if ($Trading.LearningRate < 4) then var tradinglock 0
-    if ($Trading.Ranks >= 1750) then var tradinglock 1
-    if (%tradinglock = 0) then
-    {
-      #put #echo >Log [Train] Attempting to sell bundle.
-      gosub TRADINGSELLLOGIC
-    }
-  }
-  #TRADING_TASKS
-  if (("%tradingtasks" = "YES") && ("$guild" = "Trader")) then
-  {
-    if ($Trading.LearningRate > 33) then var tradinglock 1
-    if ($Trading.LearningRate < 4) then var tradinglock 0
-    if ($Trading.Ranks >= 1750) then var tradinglock 1
-    if (%tradinglock = 0) then
-    {
-      gosub TASKLOGIC
-    }
-  }
-  #HEALING
-  if (%selfheal = 1) then gosub HEALTHCHECK
-  #APPFOCUS
-  if (%appfocusonly = 1) then
-  { 
-    if ("%appfocus" = "YES") then
-    {
-      gosub APPFOCUSLOGIC
-    }
-  }
-  #DEVOTION
-  if (%devotiononly = 1) then
-  {
-    gosub DEVOTIONLOGIC
-    exit
-  }
-  #ALMANAC
-  if ("%almanac" = "YES") then
-  {
-    if (%t >= %nextalmanac) then
-    {
-      gosub ALMANACLOGIC
-    }
-  }
-  #TEACHING
-  if ("%teaching" = "YES") then gosub TEACHINGLOGIC
-  #PERFORMING_CLIMBING
-  if ((%perform = "YES") || (%climbing = "YES") | (%climbingrope = "YES")) then
-  {
-    if ((%climbing = "YES") || (%climbingrope = "YES")) then
-    {
-      if ($Athletics.LearningRate < 20) then var athleticslock 0
-      if ($Athletics.LearningRate = 34) then var athleticslock 1
-      if ($Athletics.LearningRate >= 1750) then var athleticslock 1
-      if (%athleticslock = 1) then gosub STOWITEM %climbingropename
-    }
-    else var athleticslock 1
-    if ($Performance.LearningRate < 20) then var performlock 0
-    if ($Performance.LearningRate = 34) then var performlock 1
-    if ($Performance.Ranks >= 1750) then var performlock 1
-    if ("%perform" = "NO") then var performlock 1
-    if ((%performlock = 0) || (%athleticslock = 0)) then
-    {
-      gosub PERFORMLOOP
-      goto OLDNONCOMBATLOOP
-    }
-    else
-    {
-      if (%playing = 1) then
-      { 
-        gosub PLAYSTOP
-        if ((matchre ("$righthand", "%instrument") || (matchre ("$lefthand", "%instrument"))) then
-        {
-          gosub STOWITEM %instrument
-        }
-      }
-    }
-  }
-  #LOCKSMITHBOX
-  if ("%locksmithbox" = "YES") then
-  {
-    gosub LOCKSMITHLOGIC
-    gosub STATUSCHECK
-  }
-  #SKINFATRAINER
-  if ("%skinfatrainer" = "YES") then
-  {
-    gosub SKINFATRAINERLOGIC
-    gosub STATUSCHECK
-  }
-  #WINDBOARD
-  if ("%windboard" = "YES") then
-  {
-    if (%buffing = 0) then
-    {
-      if ((%usingtactics != 1) && (%usingexpert != 1)) then
-      {
-        gosub WINDBOARDLOGIC
-        gosub STATUSCHECK
-      }
-    }
-  }
-  #PERCEIVE_HEALTH
-  if ("%perchealth" = "YES") then
-  {
-    gosub PERCHEALTHLOGIC
-    gosub STATUSCHECK
-  }
-  #ATTUNEMENT
-  if ("%attune" = "YES") then
-  {
-    gosub ATTUNELOGIC
-	  gosub STATUSCHECK
-  }
-  #SPELLCASTING
-	gosub MAINSPELLLOGICNC
-	gosub STATUSCHECK
-  #RESEARCH
-	if ("%research" = "YES") then
-  {
-    if (%casting != 1) then
-    { 
-      gosub RESEARCHLOGIC
-    }
-  }
-	#SANOWRET
-  if ("%noncomsanowret" = "YES") then
-  {
-    gosub SANOWRETLOGIC
-    gosub STATUSCHECK
-  }
-  #SANOWRET
-  if ("%noncomsanowret" = "YES") then
-  {
-    gosub SANOWRETLOGIC
-    gosub STATUSCHECK
-  }
-  #TEXTBOOK
-	if ("%textbook" = "YES") then
-	{
-	  gosub TEXTLOGIC
-    gosub STATUSCHECK
-  }
-  #HUNTING
-	if ("%hunting" = "YES") then
-	{
-	  gosub HUNTLOGIC
-	  gosub STATUSCHECK
-	}
-  #COLLECTING
-  if ("%collect" = "YES") then
-  {
-    gosub COLLECTLOGIC
-    gosub STATUSCHECK
-  }
-  #ASTROLOGY
-  if ("%astro" = "YES") then
-  {
-    gosub ASTROLOGIC
-    gosub STATUSCHECK
-  }
-  #SUMMONING
-  if (($guild = "Warrior Mage") && (%summoning = "YES")) then
-  {
-    if ("%pathway" = "YES") then
-    {
-      gosub PATHWAYLOGIC
-      gosub STATUSCHECK
-    }
-  }
-  pause 1
-  gosub STATUSCHECK
-  goto OLDNONCOMBATLOOP
-
-
 #################################################
 
 
@@ -5162,11 +4952,11 @@ SCRIPTBEGINCHECKS:
   {
     if ("%crafting" = "YES") then
     {
+      gosub CRAFTSTORAGESTOW
       var firststoragecheck 0
-      gosub STORAGECHECKLOGIC
     }
   }
-  if (("%armorcheck" = "YES") && (%firstarmorcheck = 0)) then
+  if (("%armorcheck" = "YES") && ("%combat" = "YES") && (%firstarmorcheck = 0)) then
   {
     gosub ARMORCHECK
   }
@@ -5231,8 +5021,10 @@ NEWAREADECISION:
     gosub AUTOUPKEEPCHECKS
   }
   if ("%scriptareachange" != "0") then return
+  #FIRST_RUN_CHECKING
   if ("%scriptarea" = "0") then
   {
+    #UPKEEP_CHECKING
     if (%goupkeep = 1) then
     {
       if (("%autype" = "bleed") || ("%autype" = "wounds")) then
@@ -5254,7 +5046,7 @@ NEWAREADECISION:
       var scriptareachange upkeep
       return
     }
-    #put #echo noncombat: %noncombat
+    #NONCOMBAT_CHECKING
     if ("%noncombat" = "YES") then
     {
       gosub NEWNONCOMBATCHECKS
@@ -5264,9 +5056,19 @@ NEWAREADECISION:
         return
       }
     }
-    if (%noncombatactive != 1) then var scriptareachange combat
+    #COMBAT_CHECKING
+    if (%noncombatactive != 1) then
+    {
+      if ("%combat" = "YES") then var scriptareachange combat
+    }
     else var scriptareachange noncombat
+    if ("%scriptareachange" = "0") then
+    {
+      put #echo >$alertwindow Yellow [Train]: No valid areas to train!  Exiting.
+      exit
+    }
   }
+  #REGULAR_RUN_CHECKING
   if ("%scriptarea" = "upkeep") then
   {
     if (%upkeepactive = 0) then
@@ -5280,14 +5082,13 @@ NEWAREADECISION:
           return
         }
       }
-      var scriptareachange combat
+      if ("%combat" = "YES") then var scriptareachange combat
       return
     }
     else return
   }
   if ("%scriptarea" = "noncombat") then
   {
-    #echo noncombatactive: %noncombatactive
     if (%noncombatactive = 0) then
     {
       if (%goupkeep = 1) then
@@ -5295,7 +5096,7 @@ NEWAREADECISION:
         var scriptareachange upkeep
         return
       }
-      var scriptareachange combat
+      if ("%combat" = "YES") then var scriptareachange combat
       return
     }
     else
@@ -5366,6 +5167,7 @@ NEWNONCOMBATCHECKS:
     if ($Performance.LearningRate > 20) then var performlock 1
     if ($Performance.LearningRate < 4) then var performlock 0
     if ($Performance.Ranks >= 1750) then var performlock 1
+    if ("%scriptmodename" = "music") then var performlock 0
     if (%performlock != 1) then
     {
       var scriptareachange noncombat
@@ -5706,9 +5508,24 @@ NEWAREAMOVEMENT:
   return
 
 
+SPELLADJUST:
+  gosub SPELLSTATCHECK %spell1
+  if (%spell1mana < %spellminmana) then
+  {
+    put #var spell1mana %spellminmana
+  }
+  put #var save
+  return
+
 BUFFADJUST:
   var counter 0
   gosub BUFFADJUSTLOOP
+  #MM
+  if ("%piercinggaze" = "YES") then
+  {
+    gosub BUFFADJUSTLOGIC pg %piercinggazemana piercinggazemana
+  }
+  #TRADER
   if ("%noumena" = "YES") then
   {
     gosub BUFFADJUSTLOGIC nou %noumenamana noumenamana
@@ -5737,6 +5554,7 @@ BUFFADJUSTLOGIC:
   if (%adjustspellmana < %spellcapmana) then
   {
     gosub DISCERN %adjustspell
+    if (%discernmax = 0) then var discernmax %spellminmana
     if (%discernmax < 50) then
     {
       #UNDER_50
@@ -5766,8 +5584,9 @@ BUFFADJUSTLOGIC:
     var manamod %workingmana
     math manamod modulus 1
     math workingmana subtract %manamod
-    if (%adjustspellmana < %workingmana) then
+    if (%adjustspellmana != %workingmana) then
     {
+      put #echo >$alertwindow [Magic]: Adjusting %adjustspellmanavar from %adjustspellmana to %workingmana.
       put #echo Yellow Adjusting %adjustspellmanavar from %adjustspellmana to %workingmana.
       put #var %adjustspellmanavar %workingmana
       put #var save
@@ -5950,7 +5769,7 @@ UPKEEPLOGIC:
       gosub BUNDLEROPELOGIC
     }
   }
-  if (($zoneid = 150) && ($roomid = 0)) then move out
+  if (("$zoneid" = "150") && ($roomid = 0)) then move out
   if ("%exchange" = "YES") then gosub EXCHANGELOGIC
   if (%minmoney > 0) then gosub MINMONEYLOGIC
   #BUNDLEVAULT
@@ -5964,7 +5783,7 @@ UPKEEPLOGIC:
         if ((%tightbundlesnum > 0 ) || (%gemvault = "YES")) then
         {
           gosub VAULTLOGIC
-          if (($zoneid = 150) && ($roomid = 0)) then move west
+          if (("$zoneid" = "150") && ($roomid = 0)) then move west
         }
       }
     }
@@ -6023,7 +5842,7 @@ UPKEEPLOGIC:
   #REPAIR
   if ("%repair" = "YES") then gosub REPAIRLOGIC
   if (%minmoney > 0) then gosub MINMONEYLOGIC 
-  if ($zoneid = 4) then
+  if ("$zoneid" = "4") then
   {
     gosub MOVE crossing
   }
@@ -6229,7 +6048,7 @@ UPKEEPSET:
   var taskgiver 0
   var boxpoproom 0
   #CROSSING
-  if (($zoneid = 1) || ($zoneid = 4)) then
+  if (("$zoneid" = "1") || ("$zoneid" = "4")) then
   {
     var townname crossing
     var multizone 1
@@ -6270,7 +6089,7 @@ UPKEEPSET:
     var boxpopzone 1
   }
   #DIRGE
-  if ($zoneid = 13) then
+  if ("$zoneid" = "13") then
   {
     var townname dirge
     var goodupkeep 1
@@ -6287,7 +6106,7 @@ UPKEEPSET:
     var boxpoproom 176
   }
   #RIVERHAVEN
-  if ($zoneid = 30) then
+  if ("$zoneid" = "30") then
   {
     var townname riverhaven
     var goodupkeep 1
@@ -6308,7 +6127,7 @@ UPKEEPSET:
     var lockpickroom locksmith
   }
   #ROSSMANS
-  if ($zoneid = 34a) then
+  if ("$zoneid" = "34a") then
   {
     var townname rossman
     var furrier Drinak
@@ -6321,7 +6140,7 @@ UPKEEPSET:
     var boxpoproom 128
   }
   #LANGENFIRTH_THEREN
-  if (($zoneid = 40) || ($zoneid = 42)) then
+  if (("$zoneid" = "40") || ("$zoneid" = "42")) then
   {
     var townname theren
     var multizone 1
@@ -6352,7 +6171,7 @@ UPKEEPSET:
     var boxpopzone 42
   }
   #MOOSE_PARTY
-  if (($zoneid = 47) || ($zoneid = 48)) then
+  if (("$zoneid" = "47") || ("$zoneid" = "48")) then
   {
     var townname muspari
     var goodupkeep 1
@@ -6365,7 +6184,7 @@ UPKEEPSET:
     var boxpoproom 131
   }
   #LETH
-  if ($zoneid = 61) then
+  if ("$zoneid" = "61") then
   {
     var townname leth
     var goodupkeep 1
@@ -6379,7 +6198,7 @@ UPKEEPSET:
     var boxpoproom 227
   }
   #ILAYA
-  if ($zoneid = 112) then
+  if ("$zoneid" = "112") then
   {
     var townname ilaya
     var goodupkeep 1
@@ -6391,7 +6210,7 @@ UPKEEPSET:
     var boxpoproom 190
   }
   #SHARD
-  if (($zoneid = 66) || ($zoneid = 67) || ($zoneid = 68) || ($zoneid = 69)) then
+  if (("$zoneid" = "66") || ("$zoneid" = "67") || ("$zoneid" = "68") || ("$zoneid" = "69")) then
   {
     var townname shard
     var multizone 1
@@ -6402,7 +6221,7 @@ UPKEEPSET:
     var lrepzone 66
     var furrier Tremagis
     var furrierzone 66
-    var appraiser Veilex
+    var appraiser Fatimi
     var appraiserzone 67
     var financedappraiser Mhar
     var financedappraiserzone 68
@@ -6427,7 +6246,7 @@ UPKEEPSET:
     var lockpickzone 67
   }
   #RATHA
-  if ($zoneid = 90) then
+  if ("$zoneid" = "90") then
   {
     var townname ratha
     var goodupkeep 1
@@ -6445,7 +6264,7 @@ UPKEEPSET:
     var boxpoproom 558
   }
   #AESRY
-  if ($zoneid = 99) then
+  if ("$zoneid" = "99") then
   {
     var townname aesry
     var goodupkeep 1
@@ -6461,7 +6280,7 @@ UPKEEPSET:
     var boxpoproom 144
   }
   #KRESH    
-  if ($zoneid = 107) then
+  if ("$zoneid" = "107") then
   {
     var townname merkresh
     var goodupkeep 1
@@ -6476,7 +6295,7 @@ UPKEEPSET:
     var boxpoproom 10
   }
   #HIB
-  if ($zoneid = 116) then
+  if ("$zoneid" = "116") then
   {
     var townname hibarnhvidar
     var goodupkeep 1
@@ -6493,7 +6312,7 @@ UPKEEPSET:
     var boxpoproom 258
   }
   #RAVENS_POINT
-  if ($zoneid = 123) then
+  if ("$zoneid" = "123") then
   {
     var townname ravenspoint
     var goodupkeep 1
@@ -6504,7 +6323,7 @@ UPKEEPSET:
     var upkeependroom 136
   }
   #BOAR_CLAN
-  if ($zoneid = 127) then
+  if ("$zoneid" = "127") then
   {
     var townname boarclan
     var goodupkeep 1
@@ -6518,7 +6337,7 @@ UPKEEPSET:
     var boxpoproom 523
   }
   #FANG_COVE
-  if ($zoneid = 150) then
+  if ("$zoneid" = "150") then
   {
     var townname fangcove
     var goodupkeep 1
@@ -6691,7 +6510,7 @@ AUTOPATHLOGIC:
   if (%healthcheckgood != 1) then
   {
     var didautopath 1
-    if ((matchre("$roomobjs" "%healer")) || (matchre("$roomdesc" "%healer")) || (matchre("$roomname" "%healer"))) then
+    if ((matchre("$roomobjs", "%healer")) || (matchre("$roomdesc", "%healer")) || (matchre("$roomname", "%healer"))) then
     else
     {
       if (%multizone = 1) then
@@ -6700,10 +6519,10 @@ AUTOPATHLOGIC:
         gosub UPKEEPZONEMOVE
       }  
       #HEALER_MOVES
-      if (($zoneid = 30) || ($zoneid = 42) || ($zoneid = 67)) then gosub MOVE healer
+      if (("$zoneid" = "30") || ("$zoneid" = "42") || ("$zoneid" = "67")) then gosub MOVE healer
       else gosub MOVE %healer
       put #echo Yellow Healer: %healer
-      if ((matchre("$roomobjs" "%healer")) || (matchre("$roomdesc" "%healer") || (matchre("$roomname" "%healer"))) then
+      if ((matchre("$roomobjs", "%healer")) || (matchre("$roomdesc", "%healer")) || (matchre("$roomname", "%healer"))) then
       else
       {
         echo Something's wrong!  Can't find the healer!
@@ -6711,7 +6530,7 @@ AUTOPATHLOGIC:
         return
       }
     }
-    if ($zoneid = 1) then
+    if ("$zoneid" = "1") then
     {
       var didautopath 1
       gosub MOVE healer   
@@ -6978,7 +6797,7 @@ REPAIR:
   return
 
 REPAIRMOVE:
-  if ((matchre("$roomobjs" "%repairer")) || (matchre("$roomdesc" "%repairer"))) then
+  if ((matchre("$roomobjs", "%repairer")) || (matchre("$roomdesc", "%repairer"))) then
   else
   {
     if ("%repairer" = "Lakyan") then
@@ -7014,7 +6833,7 @@ REPAIRMOVE:
     }
     else
     {
-      if ((matchre("$roomobjs" "%repairer")) || (matchre("$roomdesc" "%repairer"))) then
+      if ((matchre("$roomobjs", "%repairer")) || (matchre("$roomdesc", "%repairer"))) then
       else
       {
         echo Something's wrong!  Can't find the repairer!
@@ -7027,12 +6846,12 @@ REPAIRMOVE:
 
 	
 REPAIRALL:
-  if ($zoneid = 150) then
+  if ("$zoneid" = "150") then
   {
-    if matchre("$roomobjs" "repairman") then var actualrepairer repairman
+    if matchre("$roomobjs", "repairman") then var actualrepairer repairman
     else
     {
-      if matchre("$roomobjs" "Lakyan") then var actualrepairer Lakyan
+      if matchre("$roomobjs", "Lakyan") then var actualrepairer Lakyan
       else
       {
         pause 60
@@ -7071,12 +6890,12 @@ REPAIRLOOP:
 REPAIRLISTP:
   pause
 REPAIRLIST:
-  if ($zoneid = 150) then
+  if ("$zoneid" = "150") then
   {
-    if matchre("$roomobjs" "repairman") then var actualrepairer repairman
+    if matchre("$roomobjs", "repairman") then var actualrepairer repairman
     else
     {
-      if matchre("$roomobjs" "Lakyan") then var actualrepairer Lakyan
+      if matchre("$roomobjs", "Lakyan") then var actualrepairer Lakyan
       else
       {
 				echo Waiting for Lakyan or the repairman.
@@ -7088,7 +6907,8 @@ REPAIRLIST:
   else var actualrepairer %repairer
   matchre REPAIRLISTP %waitstring
   matchre NOMONEY You will need more coin if I am to be repairing that!
-  matchre REPAIRLISTSTOW I will not repair something that isn't broken|I'm sorry, but I don't work on those.|Lucky for you!  That isn't damaged!|Read the sign on the wall!|There isn't a scratch on that,|Read the hide on the wall, please|Please don't lose the ticket|Please don't lose this ticket|Read the sign please\!|The apprentice repairman frowns and says|\w+ smiles and says|Lakyan frowns and says, "I don't repair those here\."
+  matchre REPAIRLISTSTOW I will not repair something that isn't broken|I'm sorry, but I don't work on those.|Lucky for you!  That isn't damaged!|Read the sign on the wall!|There isn't a scratch on that,|Read the hide on the wall, please|Please don't lose the ticket|Please don't lose this ticket|Read the sign please\!|The apprentice repairman frowns and says|\w+ smiles and says
+  match RETURN Lakyan frowns and says, "I don't repair those here."
   match REPAIRLIST What is it you're trying to give?
   put give %actualrepairer
   put give %actualrepairer
@@ -7121,12 +6941,12 @@ TICKETLOOPMAIN:
   goto TICKETLOOPMAIN
 
 GIVETICKET:
-  if ($zoneid = 150) then
+  if ("$zoneid" = "150") then
   {
-    if matchre("$roomobjs" "repairman") then var actualrepairer repairman
+    if matchre("$roomobjs", "repairman") then var actualrepairer repairman
     else
     {
-      if matchre("$roomobjs" "Lakyan") then var actualrepairer Lakyan
+      if matchre("$roomobjs", "Lakyan") then var actualrepairer Lakyan
       else
       {
         pause 60
@@ -7203,11 +7023,11 @@ COUNTCONTAINER:
   return
 
 BUNDLESELL:
-  #if (($Time.isDay != 1) && ($zoneid = 150)) then return
+  #if (($Time.isDay != 1) && ("$zoneid" = "150")) then return
   var bundlefindname tight bundle
   gosub BUNDLEFIND
   if (%foundbundle = 0) then return
-  if ((matchre("$roomobjs" "%furrier")) || (matchre("$roomdesc" "%furrier"))) then
+  if ((matchre("$roomobjs", "%furrier")) || (matchre("$roomdesc", "%furrier"))) then
   else
   {
     if (%multizone = 1) then
@@ -7277,10 +7097,10 @@ BUNDLEROPELOGIC:
     var didgetrope 0
     var ropestoget %bundlerope
     math ropestoget subtract %bundropesnum
-    if ((matchre("$roomobjs" "%furrier")) || (matchre("$roomdesc" "%furrier"))) then
+    if ((matchre("$roomobjs", "%furrier")) || (matchre("$roomdesc", "%furrier"))) then
     else
     {
-      #if (($Time.isDay != 1) && ($zoneid = 150)) then return
+      #if (($Time.isDay != 1) && ("$zoneid" = "150")) then return
       if (%multizone = 1) then
       {
         var upkeepzone %furrierzone
@@ -7302,10 +7122,10 @@ CRITUALLOGIC:
     var didgetinc 0
     var inctoget %incense
     math inctoget subtract %incensenum
-    if ((matchre("$roomobjs" "%critual")) || (matchre("$roomdesc" "%critual"))) then
+    if ((matchre("$roomobjs", "%critual")) || (matchre("$roomdesc", "%critual"))) then
     else
     {
-      if (($Time.isDay != 1) && ($zoneid = 150)) then return
+      if (($Time.isDay != 1) && ("$zoneid" = "150")) then return
       if (%multizone = 1) then
       {
         var upkeepzone %critualzone
@@ -7400,7 +7220,7 @@ LOCKPICKBUYLOGIC:
 		gosub UPKEEPZONEMOVE
 	}
 	gosub MOVE %lockpickroom
-  if ($zoneid = 67) then
+  if ("$zoneid" = "67") then
   {
     if ($roomid != 383) then gosub MOVE %lockpickroom
   }
@@ -7469,58 +7289,58 @@ BADLOCKPICKSTACKER:
 
 UPKEEPZONEMOVE:
   if ($zoneid = %upkeepzone) then return
-  if (($zoneid = 1) && (%upkeepzone = 4)) then
+  if (("$zoneid" = "1") && (%upkeepzone = 4)) then
   {
     gosub MOVE w gate
   }
-  if (($zoneid = 4) && (%upkeepzone = 1)) then
+  if (("$zoneid" = "4") && (%upkeepzone = 1)) then
   {
     gosub MOVE crossing
   }
-  if (($zoneid = 40) && (%upkeepzone = 42)) then
+  if (("$zoneid" = "40") && (%upkeepzone = 42)) then
   {
     gosub MOVE theren
   }
-  if (($zoneid = 42) && (%upkeepzone = 40)) then
+  if (("$zoneid" = "42") && (%upkeepzone = 40)) then
   {
     gosub MOVE gate
   }
-  if (($zoneid = 66) && (%upkeepzone = 67)) then
+  if (("$zoneid" = "66") && (%upkeepzone = 67)) then
   {
     gosub MOVE e gate
   }
-  if (($zoneid = 66) && (%upkeepzone = 68)) then
+  if (("$zoneid" = "66") && (%upkeepzone = 68)) then
   {
     gosub MOVE s gate
   }
-  if (($zoneid = 67) && (%upkeepzone = 68)) then
+  if (("$zoneid" = "67") && (%upkeepzone = 68)) then
   {
     gosub MOVE e gate
     gosub MOVE s gate
   }
-  if (($zoneid = 67) && (%upkeepzone = 66)) then
+  if (("$zoneid" = "67") && (%upkeepzone = 66)) then
   {
     gosub MOVE e gate
   }
-  if (($zoneid = 68) && (%upkeepzone = 66)) then
+  if (("$zoneid" = "68") && (%upkeepzone = 66)) then
   {
     gosub MOVE e gate
   }
-  if (($zoneid = 68) && (%upkeepzone = 67)) then
+  if (("$zoneid" = "68") && (%upkeepzone = 67)) then
   {
     gosub MOVE e gate
     gosub MOVE e gate
   }
-  if (($zoneid = 69) && (%upkeepzone = 66)) then
-  {
-    gosub MOVE north gate
-  }
-  if (($zoneid = 69) && (%upkeepzone = 67)) then
+  if (("$zoneid" = "69") && (%upkeepzone = 66)) then
   {
     gosub MOVE north gate
+  }
+  if (("$zoneid" = "69") && (%upkeepzone = 67)) then
+  {
+    gosub MOVE north gate
     gosub MOVE e gate
   }
-  if (($zoneid = 69) && (%upkeepzone = 68)) then
+  if (("$zoneid" = "69") && (%upkeepzone = 68)) then
   {
     gosub MOVE north gate
     gosub MOVE s gate
@@ -7538,7 +7358,7 @@ DIRTSTACKERLOGIC:
 GEMSELLLOGIC:
   #put #echo Yellow Selling gem pouches!
   var soldgem 0
-  if ((matchre("$roomobjs" "%appraiser")) || (matchre("$roomdesc" "%appraiser"))) then
+  if ((matchre("$roomobjs", "%appraiser")) || (matchre("$roomdesc", "%appraiser"))) then
 	else
 	{
 		if (%multizone = 1) then
@@ -7574,7 +7394,7 @@ GEMPOUCHLOGIC:
     var didgetpouch 0
     var pouchestoget %gempouches
     math pouchestoget subtract %gempouchesnum
-    if ((matchre("$roomobjs" "%appraiser")) || (matchre("$roomdesc" "%appraiser"))) then
+    if ((matchre("%roomobjs", "%appraiser")) || (matchre("$roomdesc", "%appraiser"))) then
     else
     {
       if (%multizone = 1) then
@@ -7593,7 +7413,7 @@ GEMPOUCHLOGIC:
 NUGGETSELLLOGIC:
   #put #echo Yellow Selling nuggets!
   var soldnugget 0
-  if ((matchre("$roomobjs" "%appraiser")) || (matchre("$roomdesc" "%appraiser"))) then
+  if ((matchre("%roomobjs", "%appraiser")) || (matchre("$roomdesc", "%appraiser"))) then
 	else
 	{
 		if (%multizone = 1) then
@@ -7625,7 +7445,7 @@ NUGGETSELL:
 BARSELLLOGIC:
   #put #echo Yellow Selling bars!
   var soldbar 0
-  if ((matchre("$roomobjs" "%appraiser")) || (matchre("$roomdesc" "%appraiser"))) then
+  if ((matchre("$roomobjs", "%appraiser")) || (matchre("$roomdesc", "%appraiser"))) then
 	else
 	{
 		if (%multizone = 1) then
@@ -7678,25 +7498,15 @@ TITHELOGIC:
       var upkeepzone %almsboxzone
       gosub UPKEEPZONEMOVE
     }
-    if ($zoneid = 42) then gosub MOVE 201
+    if ("$zoneid" = "42") then gosub MOVE 201
     else gosub MOVE almsbox
   }
   gosub TITHE %currency %almsboxitem
   return
 
 VAULTLOGIC:
-  if matchre("$roomobjs", "uniformed Dwarven attendant") then
-  else
-  {
-    if (%multizone = 1) then
-    {
-      var upkeepzone %vaultzone
-      gosub UPKEEPZONEMOVE
-    }
-    gosub MOVE carousel
-  }
-  if (!matchre("$roomname", "Carousel")) then goto VAULTLOGIC
-  var hasvaultsuccess 0
+  gosub MOVEVAULT
+  var vaultsuccess 0
   gosub ENTERVAULT
   if (%vaultsuccess = 1) then
   {
@@ -8014,9 +7824,10 @@ MTFORGING:
   var material %forgingmaterial
   gosub CRAFTVARLOAD
   gosub AREAVARINIT
-  gosub CRAFTINGSTART
-  if (%workorderbail = 1) then return
-  gosub CRAFTREPAIR
+  #gosub CRAFTINGSTART
+  #if (%workorderbail = 1) then return
+  put #echo Yellow craftstorageget
+  gosub CRAFTSTORAGEGET
   if (%workorderbail = 1) then return
   put #echo Yellow Crafting %difficulty %discipline work order in %material.
   put #echo >$alertwindow Yellow [CRAFT]: Crafting %difficulty %discipline work order in %material.
@@ -8034,6 +7845,7 @@ MTFORGINGLOOP:
   else
   {
     gosub CRAFTINGEND
+    gosub CRAFTSTORAGESTOW
     var noncombatforgingactive 0
     return
   }
@@ -8047,7 +7859,7 @@ MTOUTFITTING:
   #var material %outfittingleather
   gosub CRAFTVARLOAD
   gosub AREAVARINIT
-  gosub CRAFTINGSTART
+  gosub CRAFTSTORAGEGET
   if (%workorderbail = 1) then return
   gosub CRAFTREPAIR
   if (%workorderbail = 1) then return
@@ -8067,6 +7879,7 @@ MTOUTFITTINGLOOP:
   else
   {
     gosub CRAFTINGEND
+    gosub CRAFTSTORAGESTOW
     var noncombatoutfittingactive 0
     return
   }
@@ -8632,15 +8445,15 @@ BURGLEKEEPLISTCHECK:
 
 ARRESTED:
   action (arrest) off
-  if ($zoneid = 1) then var arresttown Crossing
-  #if ($zoneid = 67) then var arresttown Leth
-  #if ($zoneid = 67) then var arresttown Riverhaven
-  if ($zoneid = 42) then var arresttown Therenborough
-  #if ($zoneid = 67) then var arresttown Fornsted
-  #if ($zoneid = 67) then var arresttown Throne City
-  if ($zoneid = 67) then var arresttown Shard
-  if ($zoneid = 116) then var arresttown Hibarnhvidar
-  if ($zoneid = 127) then var arresttown Boar Clan
+  if ("$zoneid" = "1") then var arresttown Crossing
+  #if ("$zoneid" = "67") then var arresttown Leth
+  #if ("$zoneid" = "67") then var arresttown Riverhaven
+  if ("$zoneid" = "42") then var arresttown Therenborough
+  #if ("$zoneid" = "67") then var arresttown Fornsted
+  #if ("$zoneid" = "67") then var arresttown Throne City
+  if ("$zoneid" = "67") then var arresttown Shard
+  if ("$zoneid" = "116") then var arresttown Hibarnhvidar
+  if ("$zoneid" = "127") then var arresttown Boar Clan
   put #echo >$alertwindow Yellow [Justice]: Arrested in %arresttown!
   if ("%arrestaction" = "logout") then
   {
@@ -8895,7 +8708,7 @@ TRADINGSELLLOGIC:
       }
       gosub MOVE carousel
     }
-    var hasvaultsuccess 0
+    var vaultsuccess 0
     gosub ENTERVAULT
     if (%vaultsuccess = 1) then
     {
@@ -8919,7 +8732,7 @@ TRADINGSELLLOGIC:
       }
     }
     gosub EXITVAULT
-    if (($zoneid = 150) && ($roomid = 0)) then move west
+    if (("$zoneid" = "150") && ($roomid = 0)) then move west
   }
   #put #echo >Log [Trading] Attempting to sell bundle or pouch.
   #FINESSE
@@ -8929,7 +8742,7 @@ TRADINGSELLLOGIC:
   {
     if ("%furrier" != "none") then
     {
-      if ((matchre("$roomobjs" "%furrier")) || (matchre("$roomdesc" "%furrier"))) then
+      if ((matchre("$roomobjs", "%furrier")) || (matchre("$roomdesc", "%furrier"))) then
       else
       {
         if (%multizone = 1) then
@@ -8970,7 +8783,7 @@ TRADINGSELLLOGIC:
     {
       put #echo Yellow Selling gem pouches!
       var soldgem 0
-      if ((matchre("$roomobjs" "%appraiser")) || (matchre("$roomdesc" "%appraiser"))) then
+      if ((matchre("$roomobjs", "%appraiser")) || (matchre("$roomdesc", "%appraiser"))) then
       else
       {
         if (%multizone = 1) then
@@ -10357,7 +10170,7 @@ MAINSPELLLOGIC:
       }
     }
     #SIPHON_VITALITY
-    if ((%siphonvit = "YES" && ("$guild" = "Necromancer") && (%buffingonly != 1) && ($monstercount > 0)) then
+    if (("%siphonvit" = "YES") && ("$guild" = "Necromancer") && (%buffingonly != 1) && ($monstercount > 0)) then
     {
       if ("%necrostate" != "redeemed") then
       {
@@ -10396,7 +10209,7 @@ MAINSPELLLOGIC:
       if (%casting = 1) then return
     }
     #REDEEMED_SV
-    if ((%siphonvit = "YES" && ("$guild" = "Necromancer") && (%buffingonly != 1) && ($monstercount > 0)) then
+    if (("%siphonvit" = "YES") && ("$guild" = "Necromancer") && (%buffingonly != 1) && ($monstercount > 0)) then
     {
       if ("%necrostate" = "redeemed") then
       {
@@ -10912,7 +10725,7 @@ SPELLCHOICELOGIC:
           {
             var spellprepping %spelltm
             gosub SPELLSTATCHECK %spellprepping
-            if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell) then
+            if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell")) then
             {
               var prepmana %tattooprepmana
               var tattoocast 1
@@ -10935,7 +10748,7 @@ SPELLCHOICELOGIC:
           var skillname Debilitation
           var spellprepping %spelldebil
           gosub SPELLSTATCHECK %spellprepping
-          if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell) then
+          if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell") then
           {
             var prepmana %tattooprepmana
             var tattoocast 1
@@ -10970,7 +10783,7 @@ SPELLCHOICELOGIC:
           var skill %spell%spellleastskill
           gosub SPELLSKILLTEST %spell%spellleastskill
           gosub SPELLSTATCHECK %spellprepping
-          if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell") then
+          if (("%tattoo" = "YES") && ("%tattootype" = "runic") && ("%spellprepping" = "%tattoospell")) then
           {
             var prepmana %tattooprepmana
             var tattoocast 1
@@ -11322,6 +11135,9 @@ SPELLVARRESET:
       put #var %spellvar.duration 0
     }
   }
+  if ("%noumena" = "YES") then put #var SpellTimer.Noumena.active 0
+  if ("%finesse" = "YES") then put #var SpellTimer.Finesse.active 0
+  if ("%meditatestaunch" = "YES") then put #var SpellTimer.Staunch.active 0
   #CYCLICS
   if ("%cyclic" = "YES") then
   {
@@ -11404,8 +11220,11 @@ SPELLVARRESET:
   }
   if "$guild" = "Moon Mage" then
   {
-    put #var SpellTimer.PiercingGaze.active 0
-    put #var SpellTimer.PiercingGaze.duration 0
+    if ("%piercinggaze" = "YES") then
+    {
+      put #var SpellTimer.PiercingGaze.active 0
+      put #var SpellTimer.PiercingGaze.duration 0
+    }
   }
   if "$guild" = "Necromancer" then
   {
@@ -11419,6 +11238,24 @@ SPELLVARRESET:
       put #var SpellTimer.SiphonVitality.active 0
       put #var SpellTimer.SiphonVitality.duration 0    
     }
+  }
+  if "$guild" = "Trader" then
+  {
+    if ("%noumena" = "YES") then
+    {
+      put #var SpellTimer.Noumena.active 0
+      put #var SpellTimer.Noumena.duration 0
+    }
+    if ("%finesse" = "YES") then
+    {
+      put #var SpellTimer.Finesse.active 0
+      put #var SpellTimer.Finesse.duration 0
+    }
+  }
+  if ("%phk" = "YES") then
+  {
+    put #var SpellTimer.PlatinumHandsofKertigen.active 0
+    put #var SpellTimer.PlatinumHandsofKertigen.duration 0
   }
   return
 
@@ -11739,7 +11576,6 @@ NONCOMBATLOOP:
       gosub STOWALL
       gosub MTFORGING
       gosub STOWALL
-      gosub STORAGECHECKLOGIC
       gosub NONCOMBATCHOOSE
     }
     if ("%currentnoncombat" = "outfitting") then
@@ -11748,7 +11584,6 @@ NONCOMBATLOOP:
       gosub STOWALL
       gosub MTOUTFITTING
       gosub STOWALL
-      gosub STORAGECHECKLOGIC
       gosub NONCOMBATCHOOSE
     }
   }
@@ -11865,7 +11700,11 @@ NONCOMBATMOVEMENT:
     #PERFORMANCE
     if ("%currentnoncombat" = "perform") then
     {
-      gosub NEWTOWNPRESET %performtown perform
+      if ("%performtown" != "none") then
+      {
+        gosub NEWTOWNPRESET %performtown perform
+      }
+      else return
     }
     #STUDY_ART
     if ("%currentnoncombat" = "studyart") then
@@ -11904,26 +11743,6 @@ NONCOMBATMOVEMENT:
         gosub STOWALL
         gosub AWAKE
       }
-    }
-  }
-  return
-  
-  
-STORAGECHECKLOGIC:
-  gosub STOREDEFAULT %storage
-  if (%storedefaultsuccess = 0) then
-  {
-    put #echo Yellow Could not find default storage container %rucksack!  Exiting.
-    put #echo >$alertwindow Yellow [TRAIN]: Could not find default storage container %rucksack!  Exiting.
-    exit
-  }
-  if ("%craftingstoragelocation" = "portal") then
-  {
-    gosub FINDITEM %craftingstorage
-    if (%finditemfound = 1) then
-    {
-      gosub REMITEM %craftingstorage
-      gosub PUTITEM %craftingstorage in my portal
     }
   }
   return
@@ -12480,78 +12299,6 @@ ROOMTRAVELUPKEEP:
       move n
     }
   }
-  return
-
-ROOMTRAVEL:
-  put #echo Yellow rtzone: %rtzone
-  put #echo Yellow rttravel: %rttravel
-  put #echo Yellow rttraveldest: %rttraveldest
-  put #echo Yellow rtmove: %rtmove
-  put #echo Yellow rtmovelist: %rtmovelist
-  put #echo Yellow rttargetroom: %rttargetroom
-  put #echo Yellow rtfindroom: %rtfindroom
-  if (("$zoneid" = "1") && ("$roomid" = "388")) then
-  {
-    gosub MOVE 386
-    gosub MOVE 145
-  }
-  if ("$zoneid" != "%rtzone") then
-  {
-    if (%rtzone != 0) then
-		{
-			if ("%rttravel" = "YES") then
-			{
-			  if ("$zoneid" = "150") then
-			  {
-          #FANGCOVE
-          var fangcovevist 0
-          if ("%premiumring" = "YES") then
-          {
-            gosub LEAVEROOM
-            gosub PREMIUMRINGBACK portal
-            if (%goodring != 1) then
-            {
-              #FANGCOVE_PORTAL
-              gosub MOVE portal
-              move go exit portal
-            }    
-          }
-          else
-          {
-            #FANGCOVE_PORTAL
-            gosub MOVE portal
-            move go exit portal
-          }
-			  }
-				gosub TRAVEL %rttraveldest
-			}
-			if ("%rtmove" = "YES") then
-			{
-				var mlmovetarget 0
-				var mlstring %rtmovelist
-				eval mlcount count("%rtmovelist","|")
-				gosub MOVELOOP 
-			}
-			if ("%rttravel" = "YES") then
-			{
-			  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
-		  }
-		}
-  }
-  #put #echo Yellow Zoneid: $zoneid
-  #put #echo Yellow RTZone: %rtzone
-  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
-  if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then
-  {
-    if (("$zoneid" = "1") && ("%rttargetroom" = "388")) then
-    {
-      gosub MOVE 145
-      gosub MOVE 386
-    }
-    gosub MOVE %rttargetroom
-    #if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then goto ROOMTRAVEL
-  }
-  if ("%rtfindroom" = "YES") then gosub FINDROOMLOGIC
   return
   
 
@@ -13552,18 +13299,21 @@ BUFFINGLOOP:
       }
       if ("%buff%buffloop" = "iots") then
       {
-        gosub WEATHER
-        if (%inside = 1) then
+        if (($concentration >= %minconcentration) && ($mana >= %minmana)) then
         {
-          goto BUFFINGLOOP
+          gosub WEATHER
+          if (%inside = 1) then
+          {
+            goto BUFFINGLOOP
+          }
+          if (%iotsscan = 0) then
+          {
+            gosub FINDBODY
+            gosub TELEOBJECTS
+            var iotsscan 1
+          }
+          if ((%verena = 1) || (%szeldia = 1) || (%dawgolesh = 1) || (%merewalda = 1)) then gosub BUFFINGFUNC
         }
-        if (%iotsscan = 0) then
-        {
-          gosub FINDBODY
-          gosub TELEOBJECTS
-          var iotsscan 1
-        }
-        if ((%verena = 1) || (%szeldia = 1) || (%dawgolesh = 1) || (%merewalda = 1)) then gosub BUFFINGFUNC
         if (%casting = 1) then return
         else goto BUFFINGLOOP
       }
@@ -14512,8 +14262,8 @@ WEAPONGET:
 	}
 	if ("%hand" = "left") then var otherhand right
 	if ("%hand" = "right") then var otherhand left
-	if matchre ("$%otherhandhand", "%weaponname") then gosub SWAP
-	if !matchre ("$%handhand", "%weaponname") then
+	if (matchre("$%otherhandhand", "%weaponname")) then gosub SWAP
+	if (!matchre("$%handhand", "%weaponname")) then
 	{
 		if ("$%handhand" != "Empty") then
 		{
@@ -14532,19 +14282,19 @@ WEAPONGET:
 		else
 		{
 		  gosub WIELD %hand %weaponname
-			if matchre ("$%otherhandhand", "%weaponname") then gosub SWAP
+			if (matchre("$%otherhandhand", "%weaponname")) then gosub SWAP
 			if (%goupkeep = 1) then return
 		}
-		if !matchre ("$%handhand", "%weaponname") then
+		if (!matchre("$%handhand", "%weaponname")) then
 		{
 		  put #echo >$alertwindow Yellow [Weapons] Unable to wield the %weaponname in the desired %hand hand when switching weapons!  Please investigate!  
 		  put #flash
     }
-		if ((%weaponname = "%bastardsworditem") || (%%handhand = "%bastardsworditem")) then gosub SWAPSWORD %weaponname
-		if ((%weaponname = "%barmaceitem") || (%%handhand = "%barmaceitem")) then gosub SWAPBARMACE %weaponname
-		if ((%weaponname = "%holyiconitem") || (%%handhand = "%holyiconitem")) then gosub SWAPICON %weaponname
-		if ((%weaponname = "%risteitem") || (%%handhand = "%risteitem")) then gosub SWAPRISTE %weaponname
-		if ((%weaponname = "%hhristeitem") || (%%handhand = "%hhristeitem")) then gosub SWAPHHRISTE %weaponname
+		if (("%weaponname" = "%bastardsworditem") || ("$%handhand" = "%bastardsworditem")) then gosub SWAPSWORD %weaponname
+		if (("%weaponname" = "%barmaceitem") || ("$%handhand" = "%barmaceitem")) then gosub SWAPBARMACE %weaponname
+		if (("%weaponname" = "%holyiconitem") || ("$%handhand" = "%holyiconitem")) then gosub SWAPICON %weaponname
+		if (("%weaponname" = "%risteitem") || ("$%handhand" = "%risteitem")) then gosub SWAPRISTE %weaponname
+		if (("%weaponname" = "%hhristeitem") || ("$%handhand" = "%hhristeitem")) then gosub SWAPHHRISTE %weaponname
 	}
   return
 
@@ -14666,10 +14416,13 @@ TACTICSEXPERTHANDCHECK:
 		if (matchre("%weapontype", "sb|lb|thb|se|le|the|brawl|pole|stave")) then
 		{
 		  var usingtactics 1
-			if (("$guild" = "Thief") && (%backstab = "YES") && (%backstablock = 0))  then
+			if ("$guild" = "Thief") then
 			{
-			  if ((%weapontype = "se") || (%weapontype = "sb")) then var usingtactics 0
-			}
+        if (("%backstab" = "YES") && (%backstablock = 0)) then
+        {
+          if ((%weapontype = "se") || (%weapontype = "sb")) then var usingtactics 0
+        }
+      }
 		}
   }
   if ((%usingtactics = 1) && ("%hand" = "left")) then var hand right
@@ -14784,13 +14537,16 @@ MOVECHOOSE:
   if ((%usingtactics != 1) && (%usingexpert != 1)) then
   {
     #BACKSTAB
-		if ((%backstab = "YES") && ("$guild" = "Thief") && (%usingstealth = 1)) then
-		{
-			if ((%weapontype = "se") || (%weapontype = "sb")) then 
-			{
-				var usingbackstab 1
-			}
-		}
+    if ("$guild" = "Thief") then
+    {
+      if ((%backstab = "YES") && (%usingstealth = 1)) then
+      {
+        if ((%weapontype = "se") || (%weapontype = "sb")) then 
+        {
+          var usingbackstab 1
+        }
+      }
+    }
 		#ACM's
 		If ((%acms = "YES") && (%usingtactics != 1) && (%usingexpert != 1) && (%usingstealth != 1) && (%usingsmite != 1) && (%usingbackstab != 1)) then
     {
@@ -15138,7 +14894,7 @@ MONTEST:
   if (%t < %nextmontest) then return
   if ("%avoidshock" = "YES") then
   {
-    if matchre ("$roomobjs", "(%absnoshockcritters) ((which|that) appears dead|\(dead\))") then
+    if (matchre("$roomobjs", "(%absnoshockcritters) ((which|that) appears dead|\(dead\))")) then
 	  {
 	    var goodtarget 0
       var shockcritter 1
@@ -15148,19 +14904,19 @@ MONTEST:
   if ((%deadcheck = 1) || (%lootalldead = "YES")) then
   {
     var deadcheck 0
-    if matchre ("$roomobjs", "(%ritualcritters) ((which|that) appears dead|\(dead\))") then
+    if (matchre("$roomobjs", "(%ritualcritters) ((which|that) appears dead|\(dead\))")) then
     {
       if ("$guild" = "Necromancer") then
       {
         gosub NRITUAL
-        if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
+        if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))")) then
         {
           if ("%skinning" = "YES") then gosub SKINNINGLOGIC
         }
       }
       else
       {
-        if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
+        if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))")) then
         {
           if ($First_Aid.LearningRate > 33) then var firstaidlock 1
           if ($First_Aid.LearningRate < 21) then var firstaidlock 0
@@ -15198,13 +14954,13 @@ MONTEST:
     }
     else
     {
-      if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))") then
+      if (matchre("$roomobjs", "(%skinnablecritters) ((which|that) appears dead|\(dead\))")) then
       {
         if ("%skinning" = "YES") then gosub SKINNINGLOGIC
       }
     }
     
-    if matchre("$roomobjs", "(%critters) ((which|that) appears dead|\(dead\))") then
+    if (matchre("$roomobjs", "(%critters) ((which|that) appears dead|\(dead\))")) then
     {
       var killbeforeleave 1
       var goodtarget 0
@@ -15219,7 +14975,7 @@ MONTEST:
 
 DISSECTLOGIC:
   #var dissected 1
-  if matchre ("$roomobjs", "(\w+) ((which|that) appears dead|\(dead\))") then var ritualmonster $1
+  if (matchre("$roomobjs", "(\w+) ((which|that) appears dead|\(dead\))")) then var ritualmonster $1
   gosub DISSECT
   return
 

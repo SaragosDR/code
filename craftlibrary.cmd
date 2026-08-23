@@ -295,14 +295,9 @@ CRAFTINGEND:
   if ("$righthand" != "Empty") then gosub PUTITEM my $righthandnoun in my %craftingstorage
   if ("$lefthand" != "Empty") then gosub PUTITEM my $lefthandnoun in my %craftingstorage
   gosub CLOSEITEM my %craftingstorage
-  if ("%craftingstoragelocation" = "portal") then
-  {
-    gosub REMITEM my %craftingstorage
-    gosub PUTITEM my %craftingstorage in my portal
-  }
   return
   
-CRAFTINGSTART:
+CRAFTSTORAGEGET:
   gosub FINDITEM %craftingstorage
   if (%finditemfound = 0) then
   {
@@ -310,10 +305,49 @@ CRAFTINGSTART:
     {
       if ("%forgingtown" != "%vaulttown") then
       {
-        put #echo >$alertwindow Yellow CraftingStorageLocation is Vault, but VaultTown != ForgingTown!  Ending crafting.
+        gosub NEWTOWNPRESET %vaulttowntown upkeep
+        gosub LEAVEROOM
+        gosub ROOMTRAVEL
+        #put #echo >$alertwindow Yellow [CRAFT]: CraftingStorageLocation is Vault, but VaultTown != ForgingTown!  Ending crafting.
+        #gosub CRAFTINGABORT
+        #return
+      }
+      #GETTING_CRAFT_STORAGE
+      gosub MOVEVAULT
+      var vaultsuccess 0
+      gosub ENTERVAULT
+      if (%vaultsuccess = 1) then
+      {
+        gosub GETITEM %craftingstorage from vault
+        pause 1  
+        if ("$righthand" = "Empty") then
+        {
+          put #echo >$alertwindow Yellow [CRAFT]: CraftingStorageLocation is in vault, but cannot locate!  Ending crafting.
+          gosub EXITVAULT
+          gosub CRAFTINGABORT
+          return
+        }
+        else
+        {
+          var finditemfound 1
+        }
+      }
+      gosub EXITVAULT
+      if (("$zoneid" = "150") && ($roomid = 0)) then move west
+      if ("%forgingtown" != "%vaulttown") then
+      {
+        gosub NEWTOWNPRESET %forgingtown forging
+        gosub LEAVEROOM
+        gosub ROOMTRAVEL
+        gosub STOWALL
+        gosub AWAKE
+      }
+    }
+    if ("%craftingstoragelocation" = "none") then
+    {
+        put #echo >$alertwindow Yellow [CRAFT]: CraftingStorageLocation is on person (none), but cannot locate!  Ending crafting.
         gosub CRAFTINGABORT
         return
-      }
     }
     if ("%craftingstoragelocation" = "portal") then
     {
@@ -321,23 +355,87 @@ CRAFTINGSTART:
       gosub GETITEM %craftingstorage in my portal
       if (matchre("$righthand", "%craftingstorage")) then
       {
-        gosub WEARITEM %craftingstorage
+        var finditemfound 1
       }
       else
       {
         put #echo >$alertwindow Yellow [CRAFT]: Could not find crafting storage.
-        exit
+        gosub CRAFTINGABORT
+        return
       }
     }
-    else
+    if (%finditemfound = 0) then
     {
       put #echo >$alertwindow Yellow [CRAFT]: Could not find crafting storage.
-      exit
+      gosub CRAFTINGABORT
+      return
     }
   }
-  gosub OPENITEM my %craftingstorage
+  else
+  {
+    gosub GETITEM %craftingstorage
+  }
+  gosub WEARITEM %craftingstorage
   put store default %craftingstorage
+  gosub OPENITEM my %craftingstorage  
   return
+
+
+CRAFTSTORAGESTOW:
+  gosub STOREDEFAULT %storage
+  if (%storedefaultsuccess = 0) then
+  {
+    put #echo Yellow Could not find default storage container %rucksack!  Exiting.
+    put #echo >$alertwindow Yellow [TRAIN]: Could not find default storage container %rucksack!  Exiting.
+    exit
+  }
+  gosub FINDITEM %craftingstorage
+  if (%finditemfound = 1) then
+  {
+    if ("%craftingstoragelocation" = "portal") then
+    {
+      gosub REMITEM %craftingstorage
+      gosub PUTITEM %craftingstorage in my portal
+    }
+    if ("%craftingstoragelocation" = "vault") then
+    {
+      gosub NEWTOWNPRESET %vaulttown upkeep
+      if ("$zoneid" != "%upkeepzone") then
+      {
+        #if ("%upkeepzone" = "150") then gosub NEWTOWNPRESET %nearestportaltown upkeep
+        gosub LEAVEROOM
+        gosub ROOMTRAVEL
+        #put #echo >$alertwindow Yellow CraftingStorageLocation is Vault, but VaultTown != ForgingTown!
+        #gosub CRAFTINGABORT
+        #return
+      }
+      #GETTING_CRAFT_STORAGE
+      gosub MOVEVAULT
+      var vaultsuccess 0
+      gosub ENTERVAULT
+      if (%vaultsuccess = 1) then
+      {
+        gosub REMITEM %craftingstorage
+        gosub PUTITEM %craftingstorage in vault
+        pause 1  
+        if ("$righthand" != "Empty") then
+        {
+          put #echo >$alertwindow Yellow [CRAFT]: Could not put crafting storage in vault!
+          gosub EXITVAULT
+          gosub CRAFTINGABORT
+          return
+        }
+        else
+        {
+          var finditemfound 1
+        }
+      }
+      gosub EXITVAULT
+      if (("$zoneid" = "150") && ($roomid = 0)) then move west
+    }
+  }
+  return
+  
 
 WORKORDER:
   #ACQUIRE_TASK
@@ -492,12 +590,16 @@ WORKORDER:
       gosub CASTSPELL nou %noumenamana
     }    
   }
-  
   #CRAFTING
+  gosub AWAKE
   if ("%crafttype" = "forging") then
   {
-    if (%t >= %privateroomuntil) then gosub FINDANVIL
-    else var foundanvil 0
+    if ("%forgingprivateroom" = "YES") then
+    {
+      if (%t >= %privateroomuntil) then gosub FINDANVIL
+      else var foundanvil 0
+    }
+    else gosub FINDANVIL
     if (%foundanvil = 0) then
     {
       if (("%forgingprivateroom" = "YES") && (%privateforge != 0)) then

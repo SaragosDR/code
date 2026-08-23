@@ -255,6 +255,7 @@ SET:
     if tolower("%1") = "retreatdelay" then goto YESNOSET
 
     #COMBAT
+    if tolower("%1") = "combat" then goto YESNOSET
     if tolower("%1") = "weapons" then goto YESNOSET
     if tolower("%1") = "weaponsm2" then goto YESNOSET
     if tolower("%1") = "weaponlist" then
@@ -869,6 +870,8 @@ SET:
         }
       }
     }
+    if tolower("%1") = "noumena" then goto YESNOSET
+    if tolower("%1") = "noumenamana" then goto TEXTSET
     if tolower("%1") = "finesse" then goto YESNOSET
     if tolower("%1") = "finessemana" then goto TEXTSET
     if tolower("%1") = "tradingtasks" then goto YESNOSET
@@ -902,22 +905,6 @@ SET:
     if tolower("%1") = "harnessmax" then goto TEXTSET
     if tolower("%1") = "cambrinth" then goto YESNOSET
     if tolower("%1") = "dedicatedcambrinth" then goto YESNOSET
-    if tolower("%1") = "cambitems" then
-    {
-      if matchre("%2", "\b(0|1|2)\b") then
-      {  
-        var setvar cambitems
-        eval input toupper(%2)  
-        put #var %setvar %input
-        put #var save
-        goto VARDISPLAY
-      }
-      else
-      {
-        put #echo mono Only 0, 1 or 2 cambrinth items are supported!
-        goto END
-      }
-    }
     if tolower("%1") = "cambitem1" then goto TEXTSET
     if tolower("%1") = "cambitem1mana" then goto TEXTSET
     if tolower("%1") = "cambitem1worn" then goto YESNOSET
@@ -2240,7 +2227,6 @@ DISPLAYMAGIC:
     gosub OUTPUT Harnessing (Do you prefer to harness mana for casting if Arcana is locked.)
     gosub OUTPUT Cambrinth (Do you use cambrinth for casting.)
     gosub OUTPUT DedicatedCambrinth (Do you have the Dedicated Cambrinth feat.)
-    gosub OUTPUT CambItems
     gosub OUTPUT CambItem1 CambItem1Mana
     gosub OUTPUT CambItem1Worn
     gosub OUTPUT CambItem2 CambItem2Mana
@@ -2376,6 +2362,8 @@ DISPLAYUPKEEP:
 DISPLAYCOMBAT:
 	var varmatch 1
 	put #echo mono  =================== Combat ====================
+  put #echo
+  gosub OUTPUT Combat
   put #echo
 	gosub OUTPUT Weapons
 	gosub OUTPUT WeaponList
