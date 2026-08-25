@@ -257,7 +257,7 @@ action var fleegood 1 when All that running from the guard may pay off!  You tur
 action var fleegood 1 when Either you're looking really tasty, or you've forgotten to wear your Innocence.  Deciding to abandon the cause, you turn and start running south!
 action var fleegood 1 when You flee like a sniveling mage confronted by a berserking barbarian!
 action send stow feet when ^You notice (?:an?|some).*at your feet, and do not wish to leave it behind\.
-action var stancecheck 1 when ** You realize that you might not be stanced for attacking effectively. **
+action var stancecheck 1 when \*\* You realize that you might not be stanced for attacking effectively. \*\*
 
 #TACTICS_TRIGGERS
 action var tmove1 $1 when can be inflicted by landing an? (\S+)\.

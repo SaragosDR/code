@@ -6993,7 +6993,7 @@ SPLASH:
   matchwait
 
 STANCECHANGE:
-  var stancestring 0
+  var stancestring $0
   goto STANCECHANGEMAIN
 STANCECHANGEP:
   pause
