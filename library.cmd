@@ -3992,6 +3992,13 @@ STATUSCHECK:
       }
     }
   }
+  #STANCE
+  if (%stancecheck = 1) then
+  {
+    if (%usingbow = 1) then gosub STANCECHANGE shield
+    else gosub STANCECHANGE %stancemain
+    var stancecheck 0
+  }
   #STANDING
   if (%scriptmode = 1) then
   {
@@ -6985,15 +6992,19 @@ SPLASH:
   put splash
   matchwait
 
+STANCECHANGE:
+  var stancestring 0
+  goto STANCECHANGEMAIN
 STANCECHANGEP:
   pause
-STANCECHANGE:
+STANCECHANGEMAIN:
+  var stance %stancestring
   matchre STANCECHANGEP %waitstring
   matchre RETURN You are now set|Setting your
-  put stance %stance
+  put stance %stancestring
   matchwait 5
   var timeoutsub STANCECHANGE
-  var timeoutcommand stance %stance
+  var timeoutcommand stance %stancestring
 	goto TIMEOUT
 
 

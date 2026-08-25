@@ -257,6 +257,7 @@ action var fleegood 1 when All that running from the guard may pay off!  You tur
 action var fleegood 1 when Either you're looking really tasty, or you've forgotten to wear your Innocence.  Deciding to abandon the cause, you turn and start running south!
 action var fleegood 1 when You flee like a sniveling mage confronted by a berserking barbarian!
 action send stow feet when ^You notice (?:an?|some).*at your feet, and do not wish to leave it behind\.
+action var stancecheck 1 when ** You realize that you might not be stanced for attacking effectively. **
 
 #TACTICS_TRIGGERS
 action var tmove1 $1 when can be inflicted by landing an? (\S+)\.
@@ -2189,7 +2190,6 @@ HUNTINGVARLOAD:
       if ("%huntingpremium" = "NO") then var findroomlist 6|7|8|9|10|11|20|19|16|11|12|15|18|21|22|17|14|13
       if ("%huntingpremium" = "YES") then var findroomlist 6|7|8|9|10|11|20|19|16|11|12|15|18|21|22|17|14|13|50|51|52|53|54
       if ("%huntingpremium" = "ONLY") then var findroomlist 50|51|52|53|54
-      #if ("$charactername" = "Selmoren") then var findroomlist 6|7|8
       var bugoutroom 1
       var nearestportaltown crossing
     }
@@ -3808,6 +3808,7 @@ STATUSVARLOAD:
   var spellpercent 100
   var splittingmana 0
   var stance 0
+  var stancecheck 0
   var stealthcount 0
   var stealthmax 0
   var tacticsdone 1
@@ -4512,15 +4513,13 @@ COMBATLOOP:
   }
   #STANCE_CHECKING
   gosub BOWSTANCECHECK
-  if (("%stance" != "%stancemain") && (%usingbow = 0)) then
+  if (("%stance" != "%stancemain") && (%usingbow != 1)) then
   {
-    var stance %stancemain
-    gosub STANCECHANGE
+    gosub STANCECHANGE %stancemain
   }
   if (("%stance" != "shield") && (%usingbow = 1)) then
   {
-    var stance shield
-    gosub STANCECHANGE
+    gosub STANCECHANGE shield
   }
   #ALMANAC
   if ("%almanac" = "YES") then
@@ -11272,58 +11271,6 @@ SYMBCLEAR:
   gosub RELSYMBIOSIS
   return
   
-STANCELOGIC:
-  if (%scriptmode = 1) then
-  {
-    gosub BOWSTANCECHECK
-    if (%usingbow != 1) then
-    {
-      if (%stance = 0) then
-      {
-        if ($Shield_Usage.Ranks > $Parry_Ability.Ranks) then
-        {
-          var stance parry
-          gosub STANCECHANGE
-        }
-        else
-        {
-          var stance shield
-          gosub STANCECHANGE
-        }
-      }
-      else
-      {
-        if ($Shield_Usage.LearningRate > $Parry_Ability.LearningRate) then
-        {
-          var stancetest $Shield_Usage.LearningRate
-          math stancetest subtract $Parry_Ability.LearningRate
-          if (%stancetest > 5) then 
-          {
-            if ("%stance" != "parry") then 
-            {
-              var stance parry
-              gosub STANCECHANGE
-            }
-          }
-        }
-        else
-        {
-          var stancetest $Parry_Ability.LearningRate
-          math stancetest subtract $Shield_Usage.LearningRate
-          if (%stancetest > 5) then 
-          {
-            if ("%stance" != "shield") then 
-            {
-              var stance shield
-              gosub STANCECHANGE
-            }
-          }
-        }
-      }
-    }
-    #echo Shield: $Shield_Usage.LearningRate  Parry: $Parry_Ability.LearningRate    Stance Chosen: %stance
-  }
-  return
 
 SUMMWEAPONLOGIC:
   if ($Summoning.LearningRate > 33) then var summlock 1
@@ -12234,8 +12181,7 @@ ROOMTRAVELCOMBAT:
   gosub LEAVEROOM
   gosub ROOMTRAVEL
   gosub AWAKE
-  var stance %stancemain
-  gosub STANCECHANGE
+  gosub STANCECHANGE %stancemain
   var zephyractive 0
   if ("%necrosafety" = "YES") then gosub JUSTICECHECK    
   return
@@ -14315,8 +14261,7 @@ BOWSTANCECHECK:
     if ("%stance" != "shield") then
     {
       #echo Changing stance to shield
-      var stance shield
-      gosub STANCECHANGE
+      gosub STANCECHANGE shield
     }
   }
   return

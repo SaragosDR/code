@@ -1,3 +1,7 @@
+08/24/26
+Updated Scripts: train, library
+Added some extra checks to avoid situations where a character is fighting but not stanced correctly.
+
 08/22/26
 Updated Scripts: train, library, set, craftlibrary, workorder
 AutoMana option added on Train to force the script to set your mana values.  This works on buffs right now, but I will be adding more in the future.
