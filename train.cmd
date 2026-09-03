@@ -257,7 +257,6 @@ action var fleegood 1 when All that running from the guard may pay off!  You tur
 action var fleegood 1 when Either you're looking really tasty, or you've forgotten to wear your Innocence.  Deciding to abandon the cause, you turn and start running south!
 action var fleegood 1 when You flee like a sniveling mage confronted by a berserking barbarian!
 action send stow feet when ^You notice (?:an?|some).*at your feet, and do not wish to leave it behind\.
-action var stancecheck 1 when \*\* You realize that you might not be stanced for attacking effectively. \*\*
 
 #TACTICS_TRIGGERS
 action var tmove1 $1 when can be inflicted by landing an? (\S+)\.
@@ -2190,6 +2189,7 @@ HUNTINGVARLOAD:
       if ("%huntingpremium" = "NO") then var findroomlist 6|7|8|9|10|11|20|19|16|11|12|15|18|21|22|17|14|13
       if ("%huntingpremium" = "YES") then var findroomlist 6|7|8|9|10|11|20|19|16|11|12|15|18|21|22|17|14|13|50|51|52|53|54
       if ("%huntingpremium" = "ONLY") then var findroomlist 50|51|52|53|54
+      #if ("$charactername" = "Selmoren") then var findroomlist 6|7|8
       var bugoutroom 1
       var nearestportaltown crossing
     }
@@ -3808,7 +3808,6 @@ STATUSVARLOAD:
   var spellpercent 100
   var splittingmana 0
   var stance 0
-  var stancecheck 0
   var stealthcount 0
   var stealthmax 0
   var tacticsdone 1
@@ -4513,13 +4512,15 @@ COMBATLOOP:
   }
   #STANCE_CHECKING
   gosub BOWSTANCECHECK
-  if (("%stance" != "%stancemain") && (%usingbow != 1)) then
+  if (("%stance" != "%stancemain") && (%usingbow = 0)) then
   {
-    gosub STANCECHANGE %stancemain
+    var stance %stancemain
+    gosub STANCECHANGE
   }
   if (("%stance" != "shield") && (%usingbow = 1)) then
   {
-    gosub STANCECHANGE shield
+    var stance shield
+    gosub STANCECHANGE
   }
   #ALMANAC
   if ("%almanac" = "YES") then
@@ -4951,8 +4952,8 @@ SCRIPTBEGINCHECKS:
   {
     if ("%crafting" = "YES") then
     {
-      gosub CRAFTSTORAGESTOW
       var firststoragecheck 0
+      gosub CRAFTSTORAGESTOW
     }
   }
   if (("%armorcheck" = "YES") && ("%combat" = "YES") && (%firstarmorcheck = 0)) then
@@ -11271,6 +11272,58 @@ SYMBCLEAR:
   gosub RELSYMBIOSIS
   return
   
+STANCELOGIC:
+  if (%scriptmode = 1) then
+  {
+    gosub BOWSTANCECHECK
+    if (%usingbow != 1) then
+    {
+      if (%stance = 0) then
+      {
+        if ($Shield_Usage.Ranks > $Parry_Ability.Ranks) then
+        {
+          var stance parry
+          gosub STANCECHANGE
+        }
+        else
+        {
+          var stance shield
+          gosub STANCECHANGE
+        }
+      }
+      else
+      {
+        if ($Shield_Usage.LearningRate > $Parry_Ability.LearningRate) then
+        {
+          var stancetest $Shield_Usage.LearningRate
+          math stancetest subtract $Parry_Ability.LearningRate
+          if (%stancetest > 5) then 
+          {
+            if ("%stance" != "parry") then 
+            {
+              var stance parry
+              gosub STANCECHANGE
+            }
+          }
+        }
+        else
+        {
+          var stancetest $Parry_Ability.LearningRate
+          math stancetest subtract $Shield_Usage.LearningRate
+          if (%stancetest > 5) then 
+          {
+            if ("%stance" != "shield") then 
+            {
+              var stance shield
+              gosub STANCECHANGE
+            }
+          }
+        }
+      }
+    }
+    #echo Shield: $Shield_Usage.LearningRate  Parry: $Parry_Ability.LearningRate    Stance Chosen: %stance
+  }
+  return
 
 SUMMWEAPONLOGIC:
   if ($Summoning.LearningRate > 33) then var summlock 1
@@ -12181,7 +12234,8 @@ ROOMTRAVELCOMBAT:
   gosub LEAVEROOM
   gosub ROOMTRAVEL
   gosub AWAKE
-  gosub STANCECHANGE %stancemain
+  var stance %stancemain
+  gosub STANCECHANGE
   var zephyractive 0
   if ("%necrosafety" = "YES") then gosub JUSTICECHECK    
   return
@@ -12245,6 +12299,78 @@ ROOMTRAVELUPKEEP:
       move n
     }
   }
+  return
+
+ROOMTRAVEL:
+  put #echo Yellow rtzone: %rtzone
+  put #echo Yellow rttravel: %rttravel
+  put #echo Yellow rttraveldest: %rttraveldest
+  put #echo Yellow rtmove: %rtmove
+  put #echo Yellow rtmovelist: %rtmovelist
+  put #echo Yellow rttargetroom: %rttargetroom
+  put #echo Yellow rtfindroom: %rtfindroom
+  if (("$zoneid" = "1") && ("$roomid" = "388")) then
+  {
+    gosub MOVE 386
+    gosub MOVE 145
+  }
+  if ("$zoneid" != "%rtzone") then
+  {
+    if (%rtzone != 0) then
+		{
+			if ("%rttravel" = "YES") then
+			{
+			  if ("$zoneid" = "150") then
+			  {
+          #FANGCOVE
+          var fangcovevist 0
+          if ("%premiumring" = "YES") then
+          {
+            gosub LEAVEROOM
+            gosub PREMIUMRINGBACK portal
+            if (%goodring != 1) then
+            {
+              #FANGCOVE_PORTAL
+              gosub MOVE portal
+              move go exit portal
+            }    
+          }
+          else
+          {
+            #FANGCOVE_PORTAL
+            gosub MOVE portal
+            move go exit portal
+          }
+			  }
+				gosub TRAVEL %rttraveldest
+			}
+			if ("%rtmove" = "YES") then
+			{
+				var mlmovetarget 0
+				var mlstring %rtmovelist
+				eval mlcount count("%rtmovelist","|")
+				gosub MOVELOOP 
+			}
+			if ("%rttravel" = "YES") then
+			{
+			  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
+		  }
+		}
+  }
+  #put #echo Yellow Zoneid: $zoneid
+  #put #echo Yellow RTZone: %rtzone
+  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
+  if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then
+  {
+    if (("$zoneid" = "1") && ("%rttargetroom" = "388")) then
+    {
+      gosub MOVE 145
+      gosub MOVE 386
+    }
+    gosub MOVE %rttargetroom
+    #if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then goto ROOMTRAVEL
+  }
+  if ("%rtfindroom" = "YES") then gosub FINDROOMLOGIC
   return
   
 
@@ -14261,7 +14387,8 @@ BOWSTANCECHECK:
     if ("%stance" != "shield") then
     {
       #echo Changing stance to shield
-      gosub STANCECHANGE shield
+      var stance shield
+      gosub STANCECHANGE
     }
   }
   return

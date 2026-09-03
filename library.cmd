@@ -3992,13 +3992,6 @@ STATUSCHECK:
       }
     }
   }
-  #STANCE
-  if (%stancecheck = 1) then
-  {
-    if (%usingbow = 1) then gosub STANCECHANGE shield
-    else gosub STANCECHANGE %stancemain
-    var stancecheck 0
-  }
   #STANDING
   if (%scriptmode = 1) then
   {
@@ -6992,19 +6985,15 @@ SPLASH:
   put splash
   matchwait
 
-STANCECHANGE:
-  var stancestring $0
-  goto STANCECHANGEMAIN
 STANCECHANGEP:
   pause
-STANCECHANGEMAIN:
-  var stance %stancestring
+STANCECHANGE:
   matchre STANCECHANGEP %waitstring
   matchre RETURN You are now set|Setting your
-  put stance %stancestring
+  put stance %stance
   matchwait 5
   var timeoutsub STANCECHANGE
-  var timeoutcommand stance %stancestring
+  var timeoutcommand stance %stance
 	goto TIMEOUT
 
 
@@ -7103,79 +7092,6 @@ LIE:
 	var timeoutsub LIE
   var timeoutcommand lie
 	goto TIMEOUT
-
-
-ROOMTRAVEL:
-  put #echo Yellow rtzone: %rtzone
-  put #echo Yellow rttravel: %rttravel
-  put #echo Yellow rttraveldest: %rttraveldest
-  put #echo Yellow rtmove: %rtmove
-  put #echo Yellow rtmovelist: %rtmovelist
-  put #echo Yellow rttargetroom: %rttargetroom
-  put #echo Yellow rtfindroom: %rtfindroom
-  if (("$zoneid" = "1") && ("$roomid" = "388")) then
-  {
-    gosub MOVE 386
-    gosub MOVE 145
-  }
-  if ("$zoneid" != "%rtzone") then
-  {
-    if (%rtzone != 0) then
-		{
-			if ("%rttravel" = "YES") then
-			{
-			  if ("$zoneid" = "150") then
-			  {
-          #FANGCOVE
-          var fangcovevist 0
-          if ("%premiumring" = "YES") then
-          {
-            gosub LEAVEROOM
-            gosub PREMIUMRINGBACK portal
-            if (%goodring != 1) then
-            {
-              #FANGCOVE_PORTAL
-              gosub MOVE portal
-              move go exit portal
-            }    
-          }
-          else
-          {
-            #FANGCOVE_PORTAL
-            gosub MOVE portal
-            move go exit portal
-          }
-			  }
-				gosub TRAVEL %rttraveldest
-			}
-			if ("%rtmove" = "YES") then
-			{
-				var mlmovetarget 0
-				var mlstring %rtmovelist
-				eval mlcount count("%rtmovelist","|")
-				gosub MOVELOOP 
-			}
-			if ("%rttravel" = "YES") then
-			{
-			  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
-		  }
-		}
-  }
-  #put #echo Yellow Zoneid: $zoneid
-  #put #echo Yellow RTZone: %rtzone
-  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
-  if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then
-  {
-    if (("$zoneid" = "1") && ("%rttargetroom" = "388")) then
-    {
-      gosub MOVE 145
-      gosub MOVE 386
-    }
-    gosub MOVE %rttargetroom
-    #if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then goto ROOMTRAVEL
-  }
-  if ("%rtfindroom" = "YES") then gosub FINDROOMLOGIC
-  return
 
 
 MOVE:
@@ -7829,9 +7745,6 @@ CASTINGLOGIC:
     if (%spellpreptest >= %spellpercent) then
     {
       var ready 1
-      var spellpreptestmod %spellpreptest
-      math spellpreptestmod modulus 1
-      math spellpreptest subtract %spellpreptestmod
       put #echo Yellow Ready due to being %spellpreptest% done vs %spellpercent% for the difficulty!
     }
   }
@@ -14130,6 +14043,7 @@ PREMIUMRINGBAD:
   return
 
 PREMIUMRINGBACK:
+  var premringleaving $0
   goto PREMIUMRINGBACKMAIN
 PREMIUMRINGBACKP:
   pause
@@ -14137,7 +14051,7 @@ PREMIUMRINGBACKMAIN:
   matchre PREMIUMRINGBACKP %waitstring
   matchre RETURN The world grows blurry and indistinct for a moment.  You look around and find yourself at...
   match RETURN You need to be in Fang Cove to do that!
-  matchre RETURN The .* pulses weakly, but nothing else happens\.
+  match RETURN The metal band pulses weakly, but nothing else happens.
   matchre PREMBADRETURN cannot do that again yet\.
   put pull %premiumringitem
   matchwait
