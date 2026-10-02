@@ -229,7 +229,6 @@ SET:
     if tolower("%1") = "lockpickstacker" then goto TEXTSET
     if tolower("%1") = "lockpickitem" then goto TEXTSET
     if tolower("%1") = "boxpopping" then goto YESNOSET
-    if tolower("%1") = "skeletonkey" then goto YESNOSET
     if tolower("%1") = "bucketitem" then goto TEXTSET
     if tolower("%1") = "dismantletype" then goto TEXTSET
     if tolower("%1") = "boxpopbuff" then
@@ -1291,6 +1290,7 @@ SET:
         goto END
       }
     }
+    if tolower("%1") = "skeletonkey" then gosub YESNOSET
     if tolower("%1") = "skinning" then
     {
       eval input toupper(%2)
@@ -2343,7 +2343,6 @@ DISPLAYUPKEEP:
   gosub OUTPUT LockpickStacker (Required to have one to use lockpicking.)
   gosub OUTPUT LockpickItem
   gosub OUTPUT BoxPopping
-  gosub OUTPUT SkeletonKey
   gosub OUTPUT BucketItem
   gosub OUTPUT DismantleType
   if (("$guild" != "Barbarian") && ("$guild" != "Thief")) then
@@ -2396,10 +2395,9 @@ DISPLAYCOMBAT:
 	put #echo mono ========== Loot Variables ==========
   put #echo
 	gosub OUTPUT LootType (treasure|boxes|equipment|goods|all)
-  gosub OUTPUT Skinning (yes|no)
-	gosub OUTPUT Arrange
-  gosub OUTPUT ArrangeForPart
-  gosub OUTPUT Dissect
+  gosub OUTPUT SkeletonKey
+  gosub OUTPUT Skinning Dissect
+	gosub OUTPUT Arrange ArrangeForPart
   put #echo
   gosub OUTPUT LootAlerts
 	gosub OUTPUT LootAllDead (not group-hunting friendly)  

@@ -1,4 +1,4 @@
-var lastupdated 08/13/2026
+var lastupdated 10/02/2026
 
 var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mef|meg|mis|mo|mof|mon|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|staw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|visage|voi|will|ws|worm|wotp|ys|zephyr|
 var craftingbuffs |art|mt|phk|rei|wotm|
@@ -310,6 +310,8 @@ VARCHECKS:
   if !matchre("$dropskins", "\b(YES|NO)\b") then put #var dropskins NO
 
   if !matchre("$loottype", "\b(treasure|boxes|equipment|goods|all)\b") then put #var loottype treasure
+  if !matchre("$skeletonkey", "\b(YES|NO)\b") then put #var skeletonkey NO
+  
   if !matchre("$skinning", "\b(YES|NO|AUTO)\b") then put #var skinning YES
   if !matchre("$arrange", "\b(0|1|2|3|4|5)\b") then put #var arrange 0
   if !matchre("$arrangeforpart", "\b(YES|NO)\b") then put #var arrangeforpart NO
@@ -577,12 +579,12 @@ VARCHECKS:
     put #unvar cambitems
     put #var cambitem2 none
   }
-  if !def(cambitem1) then put #var cambitem1 armband
+  if !def(cambitem1) then put #var cambitem1 none
   if (!def(cambitem1mana)) then put #var cambitem1mana 1
   if ($cambitem1mana >= 1) then
   else put #var cambitem1mana 1
   if !matchre("$cambitem1worn", "\b(YES|NO)\b") then put #var cambitem1worn YES
-  if !def(cambitem2) then put #var cambitem2 armband
+  if !def(cambitem2) then put #var cambitem2 none
   if (!def(cambitem2mana)) then put #var cambitem2mana 1
   if ($cambitem2mana >= 1) then
   else put #var cambitem2mana 1
@@ -1391,7 +1393,7 @@ NEWTOWNPRESET:
 		var rttraveldest dirge
 		var rtmove NO
 		if (%towntype = "upkeep") then var upkeepzone 13
-		if (%towntype = "burgle") then var rttargetroom 0
+		if (%towntype = "burgle") then var rttargetroom 52
 		if (%towntype = "perform") then var rttargetroom 55
 		if (%towntype = "forging") then
 		{
@@ -3991,6 +3993,13 @@ STATUSCHECK:
         }
       }
     }
+  }
+  #STANCE
+  if (%stancecheck = 1) then
+  {
+    if (%usingbow = 1) then gosub STANCECHANGE shield
+    else gosub STANCECHANGE %stancemain
+    var stancecheck 0
   }
   #STANDING
   if (%scriptmode = 1) then
@@ -6985,15 +6994,19 @@ SPLASH:
   put splash
   matchwait
 
+STANCECHANGE:
+  var stancestring $0
+  goto STANCECHANGEMAIN
 STANCECHANGEP:
   pause
-STANCECHANGE:
+STANCECHANGEMAIN:
+  var stance %stancestring
   matchre STANCECHANGEP %waitstring
   matchre RETURN You are now set|Setting your
-  put stance %stance
+  put stance %stancestring
   matchwait 5
   var timeoutsub STANCECHANGE
-  var timeoutcommand stance %stance
+  var timeoutcommand stance %stancestring
 	goto TIMEOUT
 
 
@@ -7092,6 +7105,79 @@ LIE:
 	var timeoutsub LIE
   var timeoutcommand lie
 	goto TIMEOUT
+
+
+ROOMTRAVEL:
+  put #echo Yellow rtzone: %rtzone
+  put #echo Yellow rttravel: %rttravel
+  put #echo Yellow rttraveldest: %rttraveldest
+  put #echo Yellow rtmove: %rtmove
+  put #echo Yellow rtmovelist: %rtmovelist
+  put #echo Yellow rttargetroom: %rttargetroom
+  put #echo Yellow rtfindroom: %rtfindroom
+  if (("$zoneid" = "1") && ("$roomid" = "388")) then
+  {
+    gosub MOVE 386
+    gosub MOVE 145
+  }
+  if ("$zoneid" != "%rtzone") then
+  {
+    if (%rtzone != 0) then
+		{
+			if ("%rttravel" = "YES") then
+			{
+			  if ("$zoneid" = "150") then
+			  {
+          #FANGCOVE
+          var fangcovevist 0
+          if ("%premiumring" = "YES") then
+          {
+            gosub LEAVEROOM
+            gosub PREMIUMRINGBACK portal
+            if (%goodring != 1) then
+            {
+              #FANGCOVE_PORTAL
+              gosub MOVE portal
+              move go exit portal
+            }    
+          }
+          else
+          {
+            #FANGCOVE_PORTAL
+            gosub MOVE portal
+            move go exit portal
+          }
+			  }
+				gosub TRAVEL %rttraveldest
+			}
+			if ("%rtmove" = "YES") then
+			{
+				var mlmovetarget 0
+				var mlstring %rtmovelist
+				eval mlcount count("%rtmovelist","|")
+				gosub MOVELOOP 
+			}
+			if ("%rttravel" = "YES") then
+			{
+			  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
+		  }
+		}
+  }
+  #put #echo Yellow Zoneid: $zoneid
+  #put #echo Yellow RTZone: %rtzone
+  if ("$zoneid" != "%rtzone") then goto ROOMTRAVEL
+  if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then
+  {
+    if (("$zoneid" = "1") && ("%rttargetroom" = "388")) then
+    {
+      gosub MOVE 145
+      gosub MOVE 386
+    }
+    gosub MOVE %rttargetroom
+    #if (("$roomid" != "%rttargetroom") && ("%rttargetroom" != "0")) then goto ROOMTRAVEL
+  }
+  if ("%rtfindroom" = "YES") then gosub FINDROOMLOGIC
+  return
 
 
 MOVE:
@@ -7745,6 +7831,9 @@ CASTINGLOGIC:
     if (%spellpreptest >= %spellpercent) then
     {
       var ready 1
+      var spellpreptestmod %spellpreptest
+      math spellpreptestmod modulus 1
+      math spellpreptest subtract %spellpreptestmod
       put #echo Yellow Ready due to being %spellpreptest% done vs %spellpercent% for the difficulty!
     }
   }
@@ -7949,7 +8038,6 @@ CASTCLEANUP:
 CASTCLEANUPSIMPLE:
   if ("%spellprepping" = "shadowling") then
   {
-    put release shadowling
     gosub INVOKESHADOW
   }
   if ("%spellprepping" = "iots") then put invoke circle
@@ -8076,7 +8164,6 @@ CASTCLEANUPMAIN:
 	if ("%spellprepping" = "iots") then put invoke circle
   if ("%spellprepping" = "shadowling") then
   {
-    put release shadowling
     gosub INVOKESHADOW
 	}
 	if (("%spellprepping" = "tkt") || ("%spellprepping" = "tks")) then
@@ -8426,7 +8513,6 @@ CAST:
   if ("%spellprepping" = "om") then var casttarget orb
   if ("%spellprepping" = "resection") then gosub PERFORMCUT
   if ("%spellprepping" = "rits") then var casttarget %ritstype
-  #if ("%spellprepping" = "shadowling") then put release shadowling
   if ("%spellprepping" = "tks") then
 	{
 	  if matchre("$roomobjs", "%tktitem") then
@@ -9085,6 +9171,7 @@ PREP:
     gosub PREPTAR
     return
   }
+  if (("%spellprepping" = "shadowling") && ($SpellTimer.Shadowling.active = 1)) then gosub RELNSPELL shadowling
   gosub PREPSPELL
   return
 
@@ -9324,7 +9411,7 @@ RELNSPELLP:
   pause
 RELNSPELLMAIN:
 	matchre RELNSPELLP %waitstring
-  matchre RETURN Your body is no longer imbued with Fire\.|The Earth energy flows from your body, returning to its rightful place in the ground beneath your feet\.|You feel the energy of|The warm feeling in your hand goes away\.|The refractive field surrounding you fades away.|Your corruption fades, revealing you to the world once more\.|Release what?|An unpleasant sensation jolts through your body as your synthetic reinforcement becomes unthreaded, leaving you feeling weakened as well as slower\.
+  matchre RETURN Your body is no longer imbued with Fire\.|The Earth energy flows from your body, returning to its rightful place in the ground beneath your feet\.|You feel the energy of|The warm feeling in your hand goes away\.|The refractive field surrounding you fades away.|Your corruption fades, revealing you to the world once more\.|Release what?|An unpleasant sensation jolts through your body as your synthetic reinforcement becomes unthreaded, leaving you feeling weakened as well as slower\.|A faint growl echoes from the depths of your shadow as|You gesture, completing the pattern to unravel the mystical bonds binding the
   put release %relnspellstring
   matchwait 5
 	var timeoutsub RELNSPELL
@@ -10385,32 +10472,64 @@ GWETHGET:
   }
   return
 
+
 BOXGET:
   if matchre("$roomobjs", "\b(%boxtype) (%boxes)\b(,|\.| and)") then
   {
     var boxitem $1 $2
-    gosub GETITEM %boxitem
-    #if ("%lootalerts" = "YES") then put #echo >$alertwindow [Treasure]: Found a box!
-    gosub PUTITEM my %boxitem in my %boxstorage
-    if (%putsucceed = 0) then
+    if ("%skeletonkey" = "YES") then
     {
-      if ("%auonboxes" = "YES") then
+      gosub STOWALL
+      gosub GETITEM %boxitem
+      gosub GETITEM my skeleton key
+      gosub TAPSHORTEN $righthand
+      gosub TURNSKELETONKEY %shorttap
+      gosub STOWITEM my skeleton key
+      gosub OPENITEM my %boxitem
+      gosub BOXCOINGET
+      gosub BOXFILLPOUCH
+      gosub BOXLOOTCHECK
+      if matchre ("$roomobjs", "(bucket|large stone turtle|disposal bin|waste bin|tree hollow|oak crate|firewood bin|ivory urn|trash receptacle|marble statue|pit)") then
       {
-        var goupkeep 1
-        var autype boxes
-        gosub DUMPITEM %boxitem
+        gosub PUTITEM my %boxitem in $1
       }
       else
       {
-        put #echo >$alertwindow Yellow [Treasure]: Failed to put %boxitem in box storage!  Turning off box collecting and revering loot type to 'treasure'.
-        gosub DUMPITEM %boxitem
-        var loottype treasure
-        put #var m%varsetloottype treasure
-        var collectboxes NO
-        put #var m%varsetcollectboxes NO
-        put #var save
+        if ("%bucketitem" != "none") then
+        {
+          gosub PUTITEM my %boxitem in my %bucketitem
+          gosub PULLBUCKET
+        }
+        else gosub DISMANTLE
       }
-      return
+      math boxespoppedtotal add 1
+      put #echo >$alertwindow Yellow Popped a box with a skeleton key.  Total this session: %boxespoppedtotal.
+    }
+    else
+    {
+      gosub GETITEM %boxitem
+    
+      gosub PUTITEM my %boxitem in my %boxstorage
+      if (%putsucceed = 0) then
+      {
+        if ("%auonboxes" = "YES") then
+        {
+          var goupkeep 1
+          var autype boxes
+          gosub DUMPITEM %boxitem
+        }
+        else
+        {
+          put #echo >$alertwindow Yellow [Treasure]: Failed to put %boxitem in box storage!  Turning off box collecting and revering loot type to 'treasure'.
+          gosub DUMPITEM %boxitem
+          var loottype treasure
+          put #var m%varsetloottype treasure
+          var collectboxes NO
+          put #var m%varsetcollectboxes NO
+          put #var save
+        }
+        return
+      }
     }
   }
   if matchre("$roomobjs", "(%boxtype) (%boxes)") then goto BOXGET
@@ -10440,7 +10559,6 @@ LOOTCHECK:
   if ("%savegwethstones" = "YES") then gosub GWETHGET
   #put #echo Yellow gem
   if ("%collectgem" = "YES") then gosub GEMGET
-  #put #echo Yellow boxes
   if ("%collectboxes" = "YES") then gosub BOXGET
   #put #echo Yellow scroll
   if ("%collectscroll" = "YES") then gosub SCROLLGET
@@ -14043,7 +14161,6 @@ PREMIUMRINGBAD:
   return
 
 PREMIUMRINGBACK:
-  var premringleaving $0
   goto PREMIUMRINGBACKMAIN
 PREMIUMRINGBACKP:
   pause
@@ -14051,7 +14168,7 @@ PREMIUMRINGBACKMAIN:
   matchre PREMIUMRINGBACKP %waitstring
   matchre RETURN The world grows blurry and indistinct for a moment.  You look around and find yourself at...
   match RETURN You need to be in Fang Cove to do that!
-  match RETURN The metal band pulses weakly, but nothing else happens.
+  matchre RETURN The .* pulses weakly, but nothing else happens\.
   matchre PREMBADRETURN cannot do that again yet\.
   put pull %premiumringitem
   matchwait
