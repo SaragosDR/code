@@ -596,7 +596,6 @@ SET:
     if tolower("%1") = "forgingm2" then goto YESNOSET
     if tolower("%1") = "outfittingm2" then goto YESNOSET
     
-    if tolower("%1") = "burglestorage" then goto TEXTSET
     if tolower("%1") = "burgletool" then goto TEXTSET
     if tolower("%1") = "burglepickitem" then goto TEXTSET
     if tolower("%1") = "burglepickworn" then goto YESNOSET
@@ -989,9 +988,11 @@ SET:
    
     if tolower("%1") = "storage" then goto TEXTSET
     if tolower("%1") = "boxstorage" then goto TEXTSET
+    if tolower("%1") = "lootstorage" then goto TEXTSET
     if tolower("%1") = "collectboxes" then goto YESNOSET
     if tolower("%1") = "collectcoin" then goto YESNOSET
     if tolower("%1") = "collectscroll" then goto YESNOSET
+    if tolower("%1") = "collectrune" then goto YESNOSET
     if tolower("%1") = "collectmaps" then goto YESNOSET
     if tolower("%1") = "collectnuggets" then goto YESNOSET
     if tolower("%1") = "collectbars" then goto YESNOSET
@@ -2134,6 +2135,7 @@ DISPLAYITEM:
 	put #echo
   gosub OUTPUT Storage
   gosub OUTPUT BoxStorage
+  gosub OUTPUT LootStorage (bars, nuggets, maps, runes, scrolls, burgling)
 	put #echo
   put #echo mono ========== Weapons ==========
   put #echo
@@ -2403,9 +2405,9 @@ DISPLAYCOMBAT:
 	gosub OUTPUT LootAllDead (not group-hunting friendly)  
 	gosub OUTPUT CollectBoxes CollectCoin	
 	gosub OUTPUT CollectGem CollectNuggets
-  gosub OUTPUT SaveGwethStones
   gosub OUTPUT CollectBars CollectMaterials
 	gosub OUTPUT CollectMaps CollectScroll
+	gosub OUTPUT CollectRune SaveGwethStones
 	gosub OUTPUT MiscKeepList (list of loot items to be kept, separated by the | character)
 	gosub OUTPUT SkinAfterLock
   gosub OUTPUT DropSkins
@@ -2420,7 +2422,6 @@ DISPLAYNONCOMBAT:
   gosub OUTPUT NonCombat
   gosub OUTPUT PreferOutdoors (if enabled, will prefer to train noncombat skills outdoors instead of indoors)
 	put #echo
-  gosub OUTPUT Burgle BurgleStorage (Should be a large container that ideally contains no other items)
 	gosub OUTPUT BurgleTool (pick, rope, or both, which chooses tool based on learningrates)  
   gosub OUTPUT BurglePickItem BurglePickWorn
   gosub OUTPUT BurgleRopeItem
@@ -2540,7 +2541,7 @@ DISPLAYGBUFFLOOP:
  
 DISPLAYGUILD:
   var varmatch 1
-  if %buffloop = 0 then
+  if (%buffloop = 0) then
   {
     put #echo
     put #echo mono  =================== Guild ====================
@@ -2789,9 +2790,9 @@ DISPLAYGUILD:
     }
     math buffloop add 1
   }
-  if %buffloop >= 1 then
+  if (%buffloop >= 1) then
   {  
-    if %buffloop > $ombuffnum then return
+    if (%buffloop > $ombuffnum) then return
     gosub OUTPUT OMBuff%buffloop
     math buffloop add 1
     goto DISPLAYGUILD

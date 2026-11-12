@@ -1,3 +1,22 @@
+Finding items in boxes.
+
+11/11/2026
+Updated Scripts: train, library, set, transfer, helibrary, hezasele, hegortik
+Regular:
+Tactics has a longer leash before it turns off.
+New variable: LootStorage.  If set to something other than none, this is where bars, nuggets, burgle loot, maps, runestones, scrolls, and special materials are placed.  If not, it uses your main storage.
+New variable: CollectRune.  Collects found runestones.  Defaults to YES.
+Rune and scroll findings from boxes now properly respect the CollectScroll and CollectRune variables, and properly report based on LootAlerts as well.
+Script will now keep runestones found in boxes.
+Transfer script now has new options to transfer a single type of item only to another container.
+
+HE:
+HE library is updated to use the new zone name for the latest HE map.
+HEZasele is now set to use the new LootStorage variable to decide where it puts the treasure that you find.  Crafting materials will come from the CraftStorage variable.  These variables must be set to properly use the script.
+Improved HEGortik item processing for edge cases.
+HEGortik will now attempt to open each item to report if something is inside.
+
+
 10/02/26
 Updated Scripts: train, library, set
 Bugfixes to burgling in Dirge.

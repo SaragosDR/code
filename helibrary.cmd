@@ -11,6 +11,9 @@ var savedyes NO
 var deedmaterials NO
 
 var craftingstorage $craftingstorage
+var lootstorage $lootstorage
+
+
 var awl $awl
 var knittingneedles $knittingneedles
 var scissors $scissors
@@ -18,7 +21,8 @@ var sewingneedles $sewingneedles
 var slickstone $slickstone
 var yardstick $yardstick
 
-if {"$charactername" = "Saragos") then
+
+if ("$charactername" = "Saragos") then
 {
   var healbot YES
   var healbotroom 204
@@ -28,7 +32,7 @@ if {"$charactername" = "Saragos") then
   var workroom 264
   var deedmaterials YES
 }
-if {"$charactername" = "Sorhhn") then
+if ("$charactername" = "Sorhhn") then
 {
   var healbot YES
   var healbotroom 204
@@ -38,13 +42,23 @@ if {"$charactername" = "Sorhhn") then
   var workroom 264
   var deedmaterials YES
 }
-if {"$charactername" = "Isrenar") then
+if ("$charactername" = "Selmoren") then
+{
+  var healbot YES
+  var healbotroom 204
+  var healbotname Maorn
+
+  var workroom 264
+  var storage tote
+  var deedmaterials YES
+}
+if ("$charactername" = "Isrenar") then
 {
   var workroom 292
   var storage haversack
   var deedmaterials YES
 }
-if {"$charactername" = "Navesi") then
+if ("$charactername" = "Navesi") then
 {
   var workroom 264
   var storage haversack
@@ -57,7 +71,7 @@ if {"$charactername" = "Navesi") then
   var yardstick yardstick
   var deedmaterials YES
 }
-if {"$charactername" = "Itusumera") then
+if =("$charactername" = "Itusumera") then
 {
   var workroom 291
   var storage lootsack
@@ -70,7 +84,7 @@ if {"$charactername" = "Itusumera") then
   var yardstick yardstick
   var deedmaterials YES
 }
-if {"$charactername" = "Eyuve") then
+if ("$charactername" = "Eyuve") then
 {
   var workroom 292
   var storage lootsack
@@ -83,7 +97,7 @@ if {"$charactername" = "Eyuve") then
   var yardstick yardstick
   var deedmaterials YES
 }
-if {"$charactername" = "Ysei") then
+if ("$charactername" = "Ysei") then
 {
   var workroom 292
   var storage lootsack
@@ -96,7 +110,7 @@ if {"$charactername" = "Ysei") then
   var yardstick yardstick
   var deedmaterials YES
 }
-if {"$charactername" = "Chyral") then
+if ("$charactername" = "Chyral") then
 {
   var storage satchel
   var workroom 524
@@ -124,11 +138,15 @@ else
 var sacknouns lump|shard|tear|nugget|bar|leather|cloth|dye|deed|stack|fragment
 var commonbones badger-bone|barghest-bone|bear-bone|bison-bone|bobcat-bone|cougar-bone|crocodile-bone|deer-bone|frog-bone|ghoul-bone|goblin-bone|jackal-bone|kobold-bone|lava drake-bone|leucro-bone|prereni-bone|rat-bone|reaver-bone|rotting-bone|serpent-bone|sluagh-bone|snow goblin-bone|stalker-bone|troll-bone|wolf-bone|zombie-bone
 var commoncloths burlap|cotton|felt|linen|silk|wool
-var commonleathers amber-scale|antelope-skin|azure-scale|badger-pelt|bison-hide|ape-pelt|black goblin-skin|black leucro pelt|black-hide|blood wolf-pelt|boar hide|bobcat-pelt|bronze leucro-hide|brown poloh'izh-hide|caracal-pelt|cave-troll|clouded arzumos pelt|cougar-pelt|crimson-scale|crocodile-skin|damaska boar hide|dark-scale|deer-skin|eel-skin|frog-skin|ghoul-skin|goblin-hide|goblin-skin|gargoyle-hide|hound-pelt|green-scale|grey-scale|gryphon-pelt|horse-hide|jackal-pelt|kobold-skin|la'tami-hide|lava drake-hide|hound-pelt|blue-scale|marble-hide|ogre-skin|pivuh-skin|prereni-skin|quartz-hide|rat-pelt|rat-skin|reaver-pelt|red-leucro|red-scale|salt-encrusted|serpent-skin|salswar-hide|sharkskin|sheepskin|silver-leucro|sluagh-hide|snow goblin-hide|stalker-pelt|storm-bull|troll-skin|trollkin-hide|viper-skin|warcat-pelt|white-pelt|wolf-pelt|zombie-skin
+var commonleathers amber-scale|antelope-skin|azure-scale|badger-pelt|bison-hide|ape-pelt|bear-pelt leather|black goblin-skin|black-leucro leather|black-hide|blood wolf-pelt|boar hide|bobcat-pelt|bronze leucro-hide|brown poloh'izh-hide|caracal-pelt|cave-troll|clouded arzumos pelt|cougar-pelt|crimson-scale|crocodile-skin|damaska boar hide|dark-scale|deer-skin|eel-skin|frog-skin|ghoul-skin|goblin-hide|goblin-skin|gargoyle-hide|hound-pelt|green-scale|grey-scale|gryphon-pelt|horse-hide|jackal-pelt|kobold-skin|la'tami-hide|lava drake-hide|hound-pelt|blue-scale|marble-hide|ogre-skin|pivuh-skin|prereni-skin|quartz-hide|rat-pelt|rat-skin|reaver-pelt|red-leucro|red-scale|salt-encrusted|serpent-skin|salswar-hide|sharkskin|sheepskin|silver-leucro|sluagh-hide|snow goblin-hide|stalker-pelt|storm-bull|troll-skin|trollkin-hide|viper-skin|warcat-pelt|white-pelt|wolf-pelt|zombie-skin
 var commonmetals brass|bronze|coal|copper|covellite|highsteel|iron|lead|nickel|oravir|pewter|platinum|silver|steel|tin|gold|zinc
 var commonstones alabaster|andesite|basalt|breccia|dolomite|gabbro|granite|jade|limestone|marble|obsidian|onyx|pumice|quartzite|sandstone|schist|serpentine|soapstone|travertine
 var commonwoods alder|apple|ash|aspen|balsa|bamboo|birch|cedar|cypress|elm|fir|hemlock|larch|mahogany|mangrove|maple|moabi|oak|pine|spruce|teak|walnut|willow
-var commonmats |%commonbones|%commoncloths|%commonleathers|%commonmetals|%commonstones|%commonwoods|
+var commonmats |%commonbones|%commoncloths|%commonleathers|%commonmetals|%commonstones|%commonwoods|%raremetalsbad|%rarewoodsbad|%rarestonesbad
+
+var rarewoodsbad ebony|lelori
+var rarestonesbad
+var raremetalsbad darkstone|electrum|lumium|niniam|muracite
 
 action var winpercentage %totalprizes; math winpercentage / %totalattempts; math winpercentage * 100; var keptpercentage %prizeskept; math keptpercentage / %totalattempts; math keptpercentage * 100; var costperkeptprize %totalspent; math costperkeptprize / %prizeskept; put #echo >Log Yellow [%scripttag] TotalAttempts: %totalattempts -- TotalPrizes: %totalprizes -- PrizesKept: %prizeskept.  TotalSpent: %totalspent // WinPercentage: %winpercentage% -- KeptPercentage: %keptpercentage% -- Cost/Kept Prize: %costperkeptprize. when A good positive attitude never hurts\.
 action var lodgedstring $0 when You have a .* lodged
@@ -143,9 +161,9 @@ eval savedyes toupper(%savedyes)
 goto HELIBEND
 
 LOCATIONCHECK:
-	if (($zoneid != 610) && ($zoneid != 612) && ($zoneid != 62022)) then
+	if (("$zoneid" != "610") && ("$zoneid" != "612") && ("$zoneid" != "612f") && ("$zoneid" != "62022")) then
 	{
-	  if ($zoneid = 1) then
+	  if ("$zoneid" = "1") then
 	  {
 	    gosub MOVE docks
 	    gosub WHISTLEDOLPHIN
@@ -251,7 +269,7 @@ HANDLELOOT:
     }
     else
     {
-      if (%storage != 0) then gosub PUTITEM %shorttap in my %storage
+      if (%lootstorage != 0) then gosub PUTITEM %shorttap in my %lootstorage
       else gosub STOWITEM my %shorttap    
     }
     if ($righthand != "Empty") then
@@ -304,7 +322,7 @@ GETHEALED:
   {
     gosub MOVE %healbotroom
     put tap %healbotname
-    waitfor %healbotname shakes your hand.
+    waitfor %healbotname whispers, "All clean."
   }
   var needshealing 0
   gosub MOVE docks
@@ -394,7 +412,7 @@ PROCESSSACK:
   if ("$lefthandnoun" = "sack") then gosub SWAP
   if ("$lefthand" != "Empty") then
   {
-    if (%storage != 0) then gosub PUTITEM $lefthand in my %storage
+    if (%lootstorage != 0) then gosub PUTITEM $lefthand in my %lootstorage
     else gosub STOWITEM my $lefthand
   }
   if ("$lefthand" != "Empty") then
@@ -416,7 +434,7 @@ PROCESSSACK:
   else
   {
     put #echo >Log Yellow [%scripttag] Could not identify main sack reward.  Stowing sack for later inspection.
-    if (%storage != 0) then gosub PUTITEM my %sackname in my %storage
+    if (%lootstorage != 0) then gosub PUTITEM my %sackname in my %lootstorage
     else gosub STOWITEM my %sackname
   }
   return
@@ -462,11 +480,11 @@ SACKLOOTMATS:
     put #echo >Log Yellow [%scripttag] Found $lefthand!
     if (("deedmaterials" = "YES") && (matchre("%lootreceived", "%lootdeedlist"))) then
     {
-      gosub PUTITEM my %sackname in my %storage
+      gosub PUTITEM my %sackname in my %lootstorage
       gosub GETITEM my packet
       
     }
-    gosub PUTITEM my %shorttap in my %storage
+    gosub PUTITEM my %shorttap in my %lootstorage
   }
   goto SACKLOOT
 

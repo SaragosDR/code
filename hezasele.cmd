@@ -19,12 +19,13 @@ timer start
 gosub STOWALL
 
 MAIN:  
-  if (($zoneid != 1) && ($zoneid != 612) && ($zoneid != 610) && ($zoneid != 62022)) then
+  if (("$zoneid" != "1") && ("$zoneid" != "612") && ("$zoneid" != "610") && ("$zoneid" != "62022") && ("$zoneid" != "612f")) then
   {
     put #echo Yellow Not in Crossing or Andreshlew!  Exiting!
     exit
   }
   gosub TASKCHECK
+  pause 1
   #checking_task_status
   if (%goodtask = 1) then
   {
@@ -39,17 +40,22 @@ MAIN:
 
     if (%taskremaining > 0) then
     {
-      if ($zoneid = 612) then
+      if ("$zoneid" = "612") then
       {
         gosub MOVE dolphin
         gosub GOCORRAL
       }
-      if ($zoneid = 610) then
+      if ("$zoneid" = "612f") then
       {
         gosub MOVE dolphin
         gosub GOCORRAL
       }
-      if ($zoneid = 62022) then
+      if ("$zoneid" = "610") then
+      {
+        gosub MOVE dolphin
+        gosub GOCORRAL
+      }
+      if ("$zoneid" = "62022") then
       {
         gosub MOVE dolphin
         gosub GOCORRAL
@@ -195,14 +201,14 @@ MAIN:
 COUNTPRODUCTS:
   matchre GOODCOUNT You see nothing unusual.
   matchre DONECOUNT I could not find what you were referring to.
-  if %countloop = 0 then send look first %tasknoun in %craftingstorage
-  if %countloop = 1 then send look second %tasknoun in %craftingstorage
-  if %countloop = 2 then send look third %tasknoun in %craftingstorage
-  if %countloop = 3 then send look fourth %tasknoun in %craftingstorage
-  if %countloop = 4 then send look fifth %tasknoun in %craftingstorage
-  if %countloop = 5 then send look sixth %tasknoun in %craftingstorage
-  if %countloop = 6 then send look seventh %tasknoun in %craftingstorage
-  if %countloop = 7 then send look eighth %tasknoun in %craftingstorage
+  if %countloop = 0 then put look first %tasknoun in %craftingstorage
+  if %countloop = 1 then put look second %tasknoun in %craftingstorage
+  if %countloop = 2 then put look third %tasknoun in %craftingstorage
+  if %countloop = 3 then put look fourth %tasknoun in %craftingstorage
+  if %countloop = 4 then put look fifth %tasknoun in %craftingstorage
+  if %countloop = 5 then put look sixth %tasknoun in %craftingstorage
+  if %countloop = 6 then put look seventh %tasknoun in %craftingstorage
+  if %countloop = 7 then put look eighth %tasknoun in %craftingstorage
   matchwait
   
 GOODCOUNT:

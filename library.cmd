@@ -2,7 +2,7 @@ var lastupdated 10/02/2026
 
 var buffs |aa|ab|aeg|ags|art|as|aus|auspice|awaken|bc|benediction|bloodthorns|blur|botf|bg|bs|bue|care|centering|ch|clarity|cv|col|cotc|courage|da|dig|dc|db|dr|drum|echo|ease|ecry|eli|em|emc|enrichment|es|etc|etf|ey|fin|fotf|gf|gg|gi|ghoulflesh|gol|harm|hes|hol|ic|inst|iots|ivm|ks|lgv|lw|maf|mef|meg|mis|mo|mof|mon|name|nexus|non|nou|oath|obfuscation|pfe|pg|phk|php|pom|pop|psy|rage|refresh|rei|repr|rits|rm|rw|sap|seer|shadowling|shadows|sk|sks|sol|solace|sos|sott|soul|sp|sr|stw|staw|substratum|suf|sw|tk|tksh|tranquility|trc|turi|tw|vigor|visage|voi|will|ws|worm|wotp|ys|zephyr|
 var craftingbuffs |art|mt|phk|rei|wotm|
-var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mf|pfe|pom|sl|sol|staw|visage|word|
+var ombuffs |auspice|benediction|bless|centering|dr|gg|halo|mf|pfe|pom|sl|sol|sos|staw|visage|word|
 var abuffs |etf|nexus|rm|zephyr
 var cyctms |aban|ars|fr|gs|iz|pyre|rim|ros|sa|sls|usol|
 var cycdbs |alb|dalu|dema|ee|hyh|shw|
@@ -294,10 +294,13 @@ VARCHECKS:
   #LOOT
   if !def(storage) then put #var storage backpack
   if !matchre("$boxstorage", "\b(YES|NO)\b") then put #var boxstorage portal
+  if (def(burglestorage)) then put #unvar burglestorage
+  if (!def(lootstorage)) then put #var lootstorage none
   if !matchre("$lootalerts", "\b(YES|NO)\b") then put #var lootalerts YES
   if !matchre("$lootalldead", "\b(YES|NO)\b") then put #var lootalldead NO
   if !matchre("$collectcoin", "\b(YES|NO)\b") then put #var collectcoin YES
   if !matchre("$collectscroll", "\b(YES|NO)\b") then put #var collectscroll YES
+  if (!matchre("$collectrune", "\b(YES|NO)\b")) then put #var collectrune YES
   if !matchre("$collectmaps", "\b(YES|NO)\b") then put #var collectmaps YES
   if !matchre("$collectnuggets", "\b(YES|NO)\b") then put #var collectnuggets YES
   if !matchre("$collectbars", "\b(YES|NO)\b") then put #var collectbars YES
@@ -439,17 +442,16 @@ VARCHECKS:
   if !matchre("$burglem2", "\b(YES|NO)\b") then put #var burglem2 NO
   if !matchre("$performm2", "\b(YES|NO)\b") then put #var performm2 NO
   
-  if !def(burglestorage) then put #var burglestorage haversack
   if !matchre("$burgletool", "\b(pick|rope|both)\b") then put #var burgletool both
   if !def(burglepickitem) then put #var burglepickitem lockpick
   if !matchre("$burglepickworn", "\b(YES|NO)\b") then put #var burglepickworn NO
   if !def(burgleropeitem) then put #var burgleropeitem heavy rope
   if !matchre("$burglehide", "\b(YES|NO)\b") then put #var burglehide NO
   if !matchre("$burglemaxgrabs", "\b(0|1|2|3|4|5|6)\b") then put #var burglemaxgrabs 6
-  if !matchre("$burgleloot", "\b(YES|NO)\b") then put #var burgleloot NO
+  if (def(burgleloot)) then put #unvar burgleloot
   if ("$burglekeeplist" = "%burglekeeplist") then put #var burglekeeplist none
   if !def(burglekeeplist) then put #var burglekeeplist none
-  if !matchre("$burglepawn", "\b(YES|NO)\b") then put #var burglepawn NO
+  if !matchre("$burglepawn", "\b(YES|NO)\b") then put #var burglepawn YES
   
   if !matchre("$performcyclic", "\b(YES|NO)\b") then put #var performcyclic NO
   if ((!def(instrument)) && (def(m1instrument))) then put #var instrument $m1instrument
@@ -473,7 +475,7 @@ VARCHECKS:
   #CRAFTING
   if !matchre("$crafting", "\b(YES|NO)\b") then put #var crafting NO
   if !matchre("$craftingm2", "\b(YES|NO)\b") then put #var craftingm2 NO
-  if !def(craftingstorage) then put #var craftingstorage crafting satchel
+  if !def(craftingstorage) then put #var craftingstorage crafting none
   if !matchre("$craftingstoragelocation", "\b(none|portal|vault)\b") then put #var craftingstoragelocation none
   if !matchre("$phk", "\b(YES|NO)\b") then put #var phk NO
   if (!def(phkmana)) then put #var phkmana 15
@@ -1332,6 +1334,16 @@ BOOSTCRAFTING:
 BOOSTCRAFTINGSTOW:
   gosub STOWITEM canvas sack
   goto BOOSTCRAFTING  
+
+TOWNIDENTIFY:
+  var currenttown 0
+  if ("$zoneid" = "1") then var currenttown crossing
+  if ("$zoneid" = "67") then var currenttown shard
+  if ("$zoneid" = "116") then var currenttown hibarnhvidar
+  if ("$zoneid" = "127") then var currenttown boarclan
+  if ("$zoneid" = "150") then var currenttown fangcove
+  return
+
 
 NEWTOWNPRESET:
   var towncheck $1
@@ -4912,7 +4924,8 @@ PUTITEMP:
 	pause
 PUTITEMMAIN:
 	matchre PUTITEMP %waitstring
-	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.|That is far too hot to touch\!|As you attempt to place your|You can't put that there!|You can't do that!
+	matchre RETURN What were you referring to?|Perhaps you should be holding that first.|There doesn't seem to be any more room left|is too long, even after stuffing it, to fit in the|There isn't any more room in|But that's closed\.|You just can't get the .* to fit in the \w*, no matter how you arrange it\.|Perhaps you should be holding that first\.|is too long to fit in the|already has as many lockpicks in it as you can get to fit\.|That is far too hot to touch\!|As you attempt to place your|You can't put that there!|You can't do that!|You reverently place|As you start to place your .* orb on the altar it leaps from your hand and suddenly glows brightly, hovering just above the altar before it bursts into a flash of excruciatingly beautiful light which instead of dissipating, streaks around the area as tendrils of light representing every color of the rainbow\.
+
 	matchre PUTRETURN You put|You drop|You briefly twist the top off of|Raffle Attendant Tizzeg examines your ticket and exclaims|A bored-looking Human boy says|You briefly twist the top off of your
 	match PUTITEMSTOW There's no room in the
 	match RETURN That's too heavy to go in there!
@@ -10562,6 +10575,8 @@ LOOTCHECK:
   if ("%collectboxes" = "YES") then gosub BOXGET
   #put #echo Yellow scroll
   if ("%collectscroll" = "YES") then gosub SCROLLGET
+  #put #echo Yellow runestone
+  if ("%collectrune" = "YES") then gosub RUNEGET
   #put #echo Yellow maps
   if ("%collectmaps" = "YES") then gosub MAPGET
   #put #echo Yellow nuggets
@@ -10585,7 +10600,7 @@ MAPGET:
   {
     gosub GETITEM map
     if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a treasure map!
-    gosub STOWITEM map
+    gosub PUTITEM my map in my %lootstorage
   }
   if matchre("$roomobjs", "\b(%treasuremaps)\b(,|\.| and)") then goto MAPGET
   return
@@ -10597,7 +10612,7 @@ MATERIALSGET:
     var materialnoun $2
     gosub GETITEM %materialnoun
     if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a %materialadj %materialnoun rare material!
-    gosub STOWITEM %materialnoun
+    gosub STOWITEM my %materialnoun in my %lootstorage
   }
   if matchre("$roomobjs", "\b(%materials) (%materialsnouns)\b(,|\.| and)") then goto MATERIALSGET
   return
@@ -10612,7 +10627,7 @@ MISCGET:
   {
     if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a misc item - %misckeeplist(%miscgetcounter)!
     gosub GETITEM %misckeeplist(%miscgetcounter)
-    gosub STOWITEM %misckeeplist(%miscgetcounter)
+    gosub PUTITEM %misckeeplist(%miscgetcounter) in my %lootstorage
   }
   math miscgetcounter add 1
   goto MISCGET    
@@ -10624,7 +10639,7 @@ NUGGETSGET:
     var nuggetadj $1
     gosub GETITEM nugget
     #if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a %nuggetadj nugget
-    gosub STOWITEM nugget
+    gosub PUTITEM my nugget in my %lootstorage
   }
   if matchre("$roomobjs", "\b(%nuggetmaterials) nugget\b(,|\.| and)") then goto NUGGETSGET
   return
@@ -10636,22 +10651,39 @@ BARSGET:
     var baradj $1
     gosub GETITEM bar
     #if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a %baradj bar!
-    gosub STOWITEM my bar
+    gosub PUTITEM my bar in my %lootstorage
   }
   if matchre("$roomobjs", "\b(%nuggetmaterials) bar\b(,|\.| and)") then goto BARSGET
   return
 
 
 SCROLLGET:
-  if matchre("$roomobjs", ".*(?<!page of )(?<!fetid antelope )\b(%scrolls)\b(,|\.| and)") then
+  if matchre("$roomobjs", "(\w+ )(?<!page of )(?<!fetid antelope )\b(%scrolls)\b(,|\.| and)") then
   {
-    var foundscroll $1
+    var foundscroll $1$2
+    echo foundscroll: %foundscroll
+    gosub GETITEM %foundscroll
     if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a scroll - %foundscroll! 
-    gosub STOWITEM %foundscroll
+    gosub PUTITEM my %foundscroll in my %lootstorage
   }
   if matchre("$roomobjs", ".*(?<!page of )(?<!fetid antelope )\b(%scrolls)\b(,|\.| and)") then goto SCROLLGET
   return
 
+RUNEGET:
+  if (matchre("$roomobjs", "(\brunestone\b)(,|\.| and| marked with)")) then
+  {
+    var foundrune $1
+    echo foundrune: %foundrune
+    gosub GETITEM %foundrune
+    if (matchre("$righthand", "runestone") then var foundrune $righthand
+    if (matchre("$lefthand", "runestone") then var foundrune $lefthand
+    gosub TAPSHORTEN %foundrune
+    var foundrune %shorttap
+    if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a runestone - %foundrune! 
+    gosub PUTITEM my %foundrune in my %lootstorage
+  }
+  if matchre("$roomobjs", ".*(?<!page of )(?<!fetid antelope )\b(%scrolls)\b(,|\.| and)") then goto SCROLLGET
+  return
 
 SKINNINGP:
 	pause
@@ -10927,18 +10959,70 @@ BOXLOOTCHECKP:
 BOXLOOTCHECK:
 	matchre BOXLOOTCHECKP \.\.\.wait|type ahead|stunned|while entangled in a web\.
 	#matchre stow_Gear (gear|\bbolt\b|\bnut\b|glarmencoupler|spangleflange|rackensprocket|flarmencrank)
-	matchre BOXLOOTGETMISC (map|treasure map|Treasure map)
-  matchre BOXLOOTGETMISC (nugget|ingot|(?!bar of)\bbar\b|jadeite|kyanite|bark|parchment|\bdira\b|papyrus|papyrus roll|tablet|vellum|\bscroll\b|\broll\b|ostracon|leaf|\brune\b)
-  matchre RETURN In the|nothing|What
+	matchre BOXLOOTGETMAP (map|treasure map|Treasure map)
+  matchre BOXLOOTGETMISC (nugget|ingot|(?!bar of)\bbar\b|jadeite|kyanite)
+  if ("%collectscroll" = "YES") then matchre BOXLOOTGETSCROLL (bark|parchment|\bdira\b|papyrus|papyrus roll|tablet|vellum|\bscroll\b|\broll\b|ostracon|leaf|\brune\b)
+  if ("%collectrune" = "YES") then matchre BOXLOOTGETRUNE (\brunestone\b)
+  #matchre BOXLOOTFINAL In the .* you see (.*)\.
+  matchre RETURN In the .* you see (.*)\.
+  matchre RETURN There is nothing in there\.|I could not find what you were referring to\.
+  #What
 	put look in my %boxitem
 	matchwait
+
+BOXLOOTGETMAP:
+  var itemtoget $1
+  gosub GETITEM %itemtoget in my %boxitem
+  gosub PUTITEM my %itemtoget in my %lootstorage
+  #put #echo >Log Yellow Found a %itemtoget!
+  goto BOXLOOTCHECK
+  
+BOXLOOTGETSCROLL:
+  var itemtoget $1
+  gosub GETITEM %itemtoget in my %boxitem
+  gosub PUTITEM my %itemtoget in my %lootstorage
+  if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a scroll - %itemtoget! 
+  goto BOXLOOTCHECK
+  
+BOXLOOTGETRUNE:
+  var itemtoget $1
+  gosub GETITEM %itemtoget in my %boxitem
+  gosub PUTITEM my %itemtoget in my %lootstorage
+  if ("%lootalerts" = "YES") then put #echo >$alertwindow Yellow [Treasure]: Found a runestone - %itemtoget!  
+  goto BOXLOOTCHECK
 
 BOXLOOTGETMISC:
   var itemtoget $1
   gosub GETITEM %itemtoget in my %boxitem
-  gosub STOWITEM %itemtoget
+  gosub PUTITEM MY %itemtoget in my %lootstorage
   #put #echo >Log Yellow Found a %itemtoget!
   goto BOXLOOTCHECK
+
+BOXLOOTFINAL:
+  var boxtext $0
+  eval boxtext replacere("%boxtext", "In the .* you see ", "")
+  eval boxtext replace("%boxtext", ".", "")
+  eval boxtext replace("%boxtext", "a ", "")
+  eval boxtext replace("%boxtext", "an ", "")
+  eval boxtext replace("%boxtext", "some ", "")
+  eval boxtext replace("%boxtext", ", ", "|")
+  eval boxtext replace("%boxtext", " and ", "|")
+  echo boxtext: %boxtext
+  gosub BOXLOOTFINALLOOP
+  goto BOXLOOTCHECK
+
+BOXLOOTFINALLOOP:
+  var boxlootfinalcount 0
+  eval boxtextlength count("%boxtext", "|")
+BOXLOOTFINALLOOPMAIN:
+  if (%boxlootfinalcount > %boxtextlength) then return
+  gosub NOUNSHORTEN %boxtext(%boxlootfinalcount)
+  gosub GETITEM %nounonly from my %boxitem
+  #gosub TAPSHORTEN $lefthand
+  gosub STOWITEM my %nounonly
+  put #echo >Log Yellow Found %shorttap in a box!
+  math boxlootfinalcount add 1
+  goto BOXLOOTFINALLOOPMAIN
 
 
 BOXSTORAGECHECKP:
@@ -11081,6 +11165,7 @@ TURNSKELETONKEYMAIN:
   matchre TURNSKELETONKEYP %waitstring
   matchre RETURN You turn a vardite skeleton key at .* and a soft glow surrounds it\.
   matchre RETURN You attempt to turn .*, but that doesn't seem to do much\.
+  matchre RETURN You turn .* at .*, but nothing unusual happens\.
   put turn my skeleton key at my %skelkeystring
   matchwait
 
@@ -14113,15 +14198,26 @@ TAPNOUN:
 
 TAPSHORTEN:
   var tap $0
+  eval tap replace("%tap", "a flask of ", "")
   eval tap replace("%tap", " ", "|")
   eval tap replacere("%tap", "\ba\b\|", "")
   eval tap replacere("%tap", "\ban\b\|", "")
   eval tap replacere("%tap", "\bsome\b\|", "")
   eval taplength count("%tap","|")
-  #echo taplength: %taplength
   if (%taplength > 0) then var shorttap %tap(0) %tap(%taplength)
   else var shorttap %tap(0)
   return
+
+NOUNSHORTEN:
+  var tap $0
+  eval tap replace("%tap", "a flask of ", "")
+  eval tap replace("%tap", " ", "|")
+  eval tap replacere("%tap", "\ba\b\|", "")
+  eval tap replacere("%tap", "\ban\b\|", "")
+  eval tap replacere("%tap", "\bsome\b\|", "")
+  eval taplength count("%tap","|")
+  var nounonly %tap(%taplength)
+  return  
   
 TAPSHORTENMAT:
   var tap $0

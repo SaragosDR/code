@@ -3811,6 +3811,7 @@ STATUSVARLOAD:
   var stancecheck 0
   var stealthcount 0
   var stealthmax 0
+  var tacticsbadcount 0
   var tacticsdone 1
   var tacticsmove 0
   var tacticsmax 0
@@ -4065,11 +4066,14 @@ MAINVARLOAD:
   #LOOT
   var storage $storage
   var boxstorage $boxstorage
+  if ("$lootstorage" = "none") then var lootstorage $storage
+  else var lootstorage $lootstorage
   var lootalerts $lootalerts
   var lootalldead $lootalldead
   var collectboxes $collectboxes
   var collectcoin $collectcoin
   var collectscroll $collectscroll
+  var collectrune $collectrune
   var collectmaps $collectmaps
   var collectnuggets $collectnuggets
   var collectbars $collectbars
@@ -4344,14 +4348,12 @@ MAINVARLOAD:
   if (%varset = 1) then var research $research
   else var research $researchm2
   
-  var burglestorage $burglestorage
   var burgletool $burgletool
   var burglepickitem $burglepickitem
   var burglepickworn $burglepickworn
   var burgleropeitem $burgleropeitem
   var burglehide $burglehide
   var burglemaxgrabs $burglemaxgrabs
-  var burgleloot $burgleloot
   var burglekeeplist $burglekeeplist
   var burglepawn $burglepawn
   
@@ -4434,7 +4436,15 @@ SWITCHBOARD:
   }
   if (%scriptmode = 4) then
   {
-    gosub NEWTOWNPRESET %burgletown burgle
+    gosub TOWNIDENTIFY
+    if ("%currentown" != "0") then
+    {
+      gosub NEWTOWNPRESET %currenttown burgle
+    }
+    else
+    {
+      gosub NEWTOWNPRESET %burgletown burgle
+    }
     var noncombatactive 1
     gosub NONCOMBATMOVEMENT
     if (%onfire != 1) then
@@ -8165,7 +8175,7 @@ BURGLEPAWNLOGIC:
 
 BURGLEPAWN:
   if (%pawncounter > %burglelootlistnum) then return
-  gosub GETITEM %burglelootlist(%pawncounter) from %burglestorage
+  gosub GETITEM %burglelootlist(%pawncounter) from %lootstorage
   if ("$righthand" != "Empty") then
   {
     gosub SELLITEM %burglelootlist(%pawncounter)
@@ -8192,28 +8202,25 @@ BURGLEEND:
     return
   }
   var burgletext Burgled using a %burgletoolchosen for %grabs searches
-  if ("%burgleloot" = "YES") then
+  if ("%burglepawn" = "YES") then
   {
     if ("%burglelootlist" != "0") then
     {
-      if ("%burglepawn" = "YES") then gosub BURGLEPAWNLOGIC
+      gosub BURGLEPAWNLOGIC
       eval finds count("%burglelootlist", "|")
       math finds add 1
       var burgletext %burgletext and %finds finds.
       var burgletext %burgletext  Found %burglelootlist.
       echo burglepawn: %burglepawn
-      if ("%burglepawn" = "YES") then
+      echo burglepawnsold: %burglepawnsold
+      if (%burglepawnsold = 1) then
       {
-        echo burglepawnsold: %burglepawnsold
-        if (%burglepawnsold = 1) then
-        {
-          math totalburgle add %pawntotal
-          var burgletext %burgletext  Pawned for %pawntotal, with a total of %totalburgle this session. 
-        }
-        if (%burglepawnsold = 0) then var burgletext %burgletext  Failed to pawn for an unknown reason.
-        if (%burglepawnsold = -1) then var burgletext %burgletext  No loot to pawn.
-        if (%burglepawnsold = -2) then var burgletext %burgletext  No pawn shop present in this zone to sell at.
-      }        
+        math totalburgle add %pawntotal
+        var burgletext %burgletext  Pawned for %pawntotal, with a total of %totalburgle this session. 
+      }
+      if (%burglepawnsold = 0) then var burgletext %burgletext  Failed to pawn for an unknown reason.
+      if (%burglepawnsold = -1) then var burgletext %burgletext  No loot to pawn.
+      if (%burglepawnsold = -2) then var burgletext %burgletext  No pawn shop present in this zone to sell at. 
     }
     else
     {
@@ -8410,12 +8417,12 @@ BURGLELEAVE:
 
 BURGLESEARCH:
   gosub BURGLESTEAL
-  if ("%burgleloot" = "YES") then
+  if ("%burglepawn" = "YES") then
   {
     if ("$righthand" != "Empty") then
     {
       gosub TAPSHORTEN $righthand
-      gosub PUTITEM my %shorttap in my %burglestorage
+      gosub PUTITEM my %shorttap in my %lootstorage
       if ("$righthand" = "Empty") then var
       {
         if ("%burglelootlist" = "0") then var burglelootlist %shorttap
@@ -9231,9 +9238,11 @@ NVTACTICSLOGIC:
 OMLOGIC:
   if (($SpellTimer.OsrelMeraud.active != 1) || ($SpellTimer.OsrelMeraud.duration <= 20)) then
   {
+    gosub SPELLSTATCHECK om
     var spellprepping om
-    var prepmana %omprepmana
-    var addmana %omaddmana
+    var prepmana %spellminmana
+    var addmana %ommana
+    math addmana subtract %prepmana
     var spellsymb 0
     var casting 1
     var scancel 0
@@ -14460,6 +14469,7 @@ MOVECHOOSE:
       #put #echo Yellow TacticsTotal: %tacticstotal
       if (%tacticstotal >= 1) then
       {
+        var tacticsbadcount 0
         if ($Tactics.LearningRate > 33) then var tacticslock 1
         if ($Tactics.LearningRate < 20) then var tacticslock 0
         if (%tacticslock = 1) then
@@ -14470,10 +14480,14 @@ MOVECHOOSE:
       }
       else
       {
-        put #echo >$alertwindow Yellow [Combat]: Tactics isn't learning well enough in this area.  Turning it off.
-        var tactics NO
-        var usingtactics 0
-        goto MOVECHOOSE
+        math tacticsbadcount add 1
+        if (%tacticsbadcount > 2) then
+        {
+          put #echo >$alertwindow Yellow [Combat]: Tactics isn't learning well enough in this area.  Turning it off.
+          var tactics NO
+          var usingtactics 0
+          goto MOVECHOOSE
+        }
       }
     }
     if (%tacticsmax = 0) then gosub TACTICSSET
